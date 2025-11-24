@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saun Sweets - Premium Hero Slider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* HERO SLIDER CONTAINER */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* BASE SLIDE - ALWAYS VISIBLE */
+        .slide-base {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        /* FRAGMENT OVERLAY - BUILDS THE NEXT IMAGE */
+        .fragment-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* INDIVIDUAL FRAGMENT - NO GAPS, NO ROTATION */
+        .fragment {
+            position: absolute;
+            overflow: hidden;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .fragment-inner {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* FRAGMENT REVEAL ANIMATION - PUZZLE PIECES COMING TOGETHER */
+        @keyframes fragmentReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateZ(0);
+            }
+            60% {
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1.05) translateZ(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateZ(0);
+            }
+        }
+
+        .fragment.animating {
+            animation: fragmentReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* CONTENT OVERLAY */
+        .slide-content {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content-wrapper {
+            max-width: 700px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-wrapper.fade-out {
+            opacity: 0;
+            transform: translateX(-80px) scale(0.95);
+        }
+
+        /* PREMIUM BADGE */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .badge-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* MAIN HEADING */
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5);
+            letter-spacing: -2px;
+        }
+
+        .slide-title .highlight {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* SUBTITLE */
+        .slide-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            font-style: italic;
+        }
+
+        /* CTA BUTTONS */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
+            color: #fff;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #FFD700 0%, #F7931E 50%, #FF6B35 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+        }
+
+        /* NAVIGATION ARROWS */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .nav-arrow.prev {
+            left: 40px;
+        }
+
+        .nav-arrow.next {
+            right: 40px;
+        }
+
+        .nav-arrow svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 3;
+        }
+
+        /* SLIDE INDICATORS */
+        .slide-indicators {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .indicator.active {
+            width: 45px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .indicator:not(.active):hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.3);
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 0 20px;
+            }
+
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .premium-badge {
+                padding: 10px 20px;
+                margin-bottom: 20px;
+            }
+
+            .badge-text {
+                font-size: 11px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 16px 35px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nav-arrow.prev {
+                left: 15px;
+            }
+
+            .nav-arrow.next {
+                right: 15px;
+            }
+
+            .nav-arrow svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .slide-indicators {
+                bottom: 30px;
+                padding: 12px 20px;
+                gap: 10px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+
+            .indicator.active {
+                width: 30px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* PERFORMANCE OPTIMIZATIONS */
+        .hero-slider,
+        .fragment,
+        .slide-base,
+        .nav-arrow,
+        .btn {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-slider" id="heroSlider">
+        <!-- Base slide -->
+        <div class="slide-base" id="slideBase"></div>
+
+        <!-- Fragment container -->
+        <div class="fragment-container" id="fragmentContainer"></div>
+
+        <!-- Content overlay -->
+        <div class="slide-content">
+            <div class="content-wrapper" id="contentWrapper">
+                <div class="premium-badge">
+                    <div class="pulse-dot"></div>
+                    <span class="badge-text">Premium Collection</span>
+                </div>
+                
+                <h1 class="slide-title" id="slideTitle"></h1>
+                <p class="slide-subtitle" id="slideSubtitle"></p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span id="ctaText">Shop Now</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <span>Explore Menu</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Indicators -->
+        <div class="slide-indicators" id="indicators"></div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // 📱 DESKTOP SLIDES (1920x1080 recommended)
+        // ============================================
+        const desktopSlides = [
+            {
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Quality Snacking</span>',
+                subtitle: 'Pure Refreshment',
+                cta: 'Shop Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Crafted Tradition</span>',
+                subtitle: 'Timeless Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Savory Delights</span>',
+                subtitle: 'Unforgettable Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Sweet Traditions</span>',
+                subtitle: 'Pure Indulgence',
+                cta: 'Explore'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Authentic Flavors</span>',
+                subtitle: 'Heritage Recipes',
+                cta: 'Discover'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Premium Selection</span>',
+                subtitle: 'Curated Excellence',
+                cta: 'View Menu'
+            }
+        ];
+
+        // ============================================
+        // 📱 MOBILE SLIDES (768x1024 recommended)
+        // ============================================
+        const mobileSlides = [
+            {
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Quality Snacking</span>',
+                subtitle: 'Pure Refreshment',
+                cta: 'Shop Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Crafted Tradition</span>',
+                subtitle: 'Timeless Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Savory Delights</span>',
+                subtitle: 'Unforgettable Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Sweet Traditions</span>',
+                subtitle: 'Pure Indulgence',
+                cta: 'Explore'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Authentic Flavors</span>',
+                subtitle: 'Heritage Recipes',
+                cta: 'Discover'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Premium Selection</span>',
+                subtitle: 'Curated Excellence',
+                cta: 'View Menu'
+            }
+        ];
+
+        // Detect device and select appropriate slides
+        const isMobile = window.innerWidth <= 768;
+        const slides = isMobile ? mobileSlides : desktopSlides;
+
+        // Configuration
+        const GRID_ROWS = 4;
+        const GRID_COLS = 5;
+        const TOTAL_FRAGMENTS = GRID_ROWS * GRID_COLS; // 20 fragments
+        const AUTO_PLAY_INTERVAL = 5000;
+
+        let currentSlide = 0;
+        let isAnimating = false;
+        let autoPlayTimer = null;
+
+        // DOM Elements
+        const slideBase = document.getElementById('slideBase');
+        const fragmentContainer = document.getElementById('fragmentContainer');
+        const contentWrapper = document.getElementById('contentWrapper');
+        const slideTitle = document.getElementById('slideTitle');
+        const slideSubtitle = document.getElementById('slideSubtitle');
+        const ctaText = document.getElementById('ctaText');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+
+        // Initialize
+        function init() {
+            // Create indicators
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            // Set initial slide
+            slideBase.style.backgroundImage = `url(${slides[0].image})`;
+            updateContent(0);
+
+            // Start autoplay immediately
+            startAutoPlay();
+        }
+
+        // Navigate to specific slide
+        function goToSlide(index) {
+            if (isAnimating || index === currentSlide) return;
+
+            isAnimating = true;
+            const nextSlideData = slides[index];
+
+            // Fade out content
+            contentWrapper.classList.add('fade-out');
+
+            // Create and animate fragments
+            setTimeout(() => {
+                createFragments(nextSlideData.image);
+            }, 300);
+
+            // Update after animation completes
+            setTimeout(() => {
+                slideBase.style.backgroundImage = `url(${nextSlideData.image})`;
+                currentSlide = index;
+                updateIndicators();
+                updateContent(index);
+                
+                // Clear fragments
+                fragmentContainer.innerHTML = '';
+                
+                // Fade in content
+                contentWrapper.classList.remove('fade-out');
+                
+                isAnimating = false;
+                resetAutoPlay();
+            }, 1600);
+        }
+
+        // Create fragments that complete the image (NO GAPS, NO ROTATION)
+        function createFragments(imageUrl) {
+            fragmentContainer.innerHTML = '';
+            
+            const widthPercent = 100 / GRID_COLS;
+            const heightPercent = 100 / GRID_ROWS;
+            
+            // Create all fragments
+            for (let i = 0; i < TOTAL_FRAGMENTS; i++) {
+                const row = Math.floor(i / GRID_COLS);
+                const col = i % GRID_COLS;
+                
+                const fragment = document.createElement('div');
+                fragment.className = 'fragment';
+                
+                // Position exactly - NO GAPS
+                fragment.style.left = `${col * widthPercent}%`;
+                fragment.style.top = `${row * heightPercent}%`;
+                fragment.style.width = `${widthPercent}%`;
+                fragment.style.height = `${heightPercent}%`;
+                
+                // Random delay for staggered effect
+                const delay = Math.random() * 700;
+                fragment.style.animationDelay = `${delay}ms`;
+
+                // Fragment inner with exact background positioning
+                const inner = document.createElement('div');
+                inner.className = 'fragment-inner';
+                inner.style.backgroundImage = `url(${imageUrl})`;
+                
+                // Calculate exact position to complete the image
+                const bgX = col * widthPercent;
+                const bgY = row * heightPercent;
+                inner.style.backgroundPosition = `${bgX}% ${bgY}%`;
+                inner.style.backgroundSize = `${GRID_COLS * 100}% ${GRID_ROWS * 100}%`;
+
+                fragment.appendChild(inner);
+                fragmentContainer.appendChild(fragment);
+
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    fragment.classList.add('animating');
+                });
+            }
+        }
+
+        // Update content
+        function updateContent(index) {
+            const slide = slides[index];
+            slideTitle.innerHTML = slide.title;
+            slideSubtitle.textContent = slide.subtitle;
+            ctaText.textContent = slide.cta;
+        }
+
+        // Update indicators
+        function updateIndicators() {
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto play functions
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                goToSlide(nextIndex);
+            }, AUTO_PLAY_INTERVAL);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            if (!isAnimating) {
+                const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                goToSlide(prevIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (!isAnimating) {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                goToSlide(nextIndex);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (isAnimating) return;
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+        });
+
+        // Touch gestures
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextBtn.click() : prevBtn.click();
+            }
+        }, { passive: true });
+
+        // Pause autoplay on hover
+        document.getElementById('heroSlider').addEventListener('mouseenter', () => {
+            clearInterval(autoPlayTimer);
+        });
+
+        document.getElementById('heroSlider').addEventListener('mouseleave', () => {
+            startAutoPlay();
+        });
+
+        // Initialize on load
+        init();
+
+        console.log('%c🎉 SLIDER READY!', 'color: #FFD700; font-size: 20px; font-weight: bold;');
+        console.log('%c✅ Auto-play: ENABLED', 'color: #4CAF50; font-size: 14px;');
+        console.log('%c✅ Mobile detection: ' + (isMobile ? 'MOBILE' : 'DESKTOP'), 'color: #2196F3; font-size: 14px;');
+        console.log('%c✅ Fragments: ' + TOTAL_FRAGMENTS + ' pieces', 'color: #FF9800; font-size: 14px;');
+    </script>
+</body>
+</html>

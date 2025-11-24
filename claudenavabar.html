@@ -1,0 +1,3851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sublime Sweets - Premium Navbar</title>
+    <style>
+        /* RESET & BASE - Scoped to navbar only */
+        .sublime-navbar * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .sublime-navbar {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        /* LIGHT MODE (Default) */
+        .sublime-navbar {
+            --nav-bg: #ffffff;
+            --nav-text: #1a1a1a;
+            --nav-text-secondary: #666666;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --hover-bg: #f5f5f5;
+            --dropdown-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --accent: #ff6b6b;
+            --accent-hover: #ff5252;
+            --overlay: rgba(0, 0, 0, 0.5);
+            --menu-bg: #ffffff;
+        }
+
+        /* DARK MODE */
+        .sublime-navbar.dark-mode {
+            --nav-bg: #1a1a1a;
+            --nav-text: #ffffff;
+            --nav-text-secondary: #b0b0b0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-bg: #2a2a2a;
+            --dropdown-bg: #252525;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --accent: #ff6b6b;
+            --accent-hover: #ff5252;
+            --overlay: rgba(0, 0, 0, 0.7);
+            --menu-bg: #1a1a1a;
+        }
+
+        .sublime-navbar.scrolled {
+            box-shadow: var(--shadow);
+        }
+
+        /* MAIN NAVBAR CONTAINER */
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        /* LOGO */
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        /* MOBILE LEFT SECTION */
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* MOBILE RIGHT SECTION */
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* ICON BUTTONS */
+        .icon-btn {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--nav-text);
+        }
+
+        .icon-btn:hover {
+            background: var(--hover-bg);
+            transform: scale(1.1);
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        .icon-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* BADGE */
+        .badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* HAMBURGER MENU */
+        .hamburger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: var(--hover-bg);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--nav-text);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* MOBILE MENU OVERLAY - SOLID COLOR */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9998;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* MOBILE MENU - SOLID PREMIUM BACKGROUND */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--menu-bg);
+            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 9999;
+            overflow-y: auto;
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: var(--menu-bg);
+            z-index: 10;
+        }
+
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--nav-text);
+        }
+
+        .close-btn:hover {
+            background: var(--hover-bg);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-content {
+            padding: 20px;
+            background: var(--menu-bg);
+        }
+
+        /* MOBILE MENU ITEMS */
+        .mobile-menu-item {
+            margin-bottom: 8px;
+        }
+
+
+        .menu-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        .arrow-icon {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+            color: var(--nav-text-secondary);
+        }
+
+        .mobile-submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding-left: 20px;
+        }
+
+        .mobile-submenu.active {
+            max-height: 2000px;
+        }
+
+
+        /* DARK MODE TOGGLE */
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--hover-bg);
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .dark-mode-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--nav-text);
+            font-weight: 500;
+        }
+
+       .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: #d0d0d0;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu .toggle-switch {
+    background: #3a3a3a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu .toggle-switch.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+}
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
+        /* DESKTOP MENU (Hidden on mobile) */
+        .desktop-menu {
+            display: none;
+        }
+
+        /* SEARCH MODAL - SOLID BACKGROUND */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+        .search-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+     
+        .search-modal.active .search-modal-content {
+            transform: translateY(0);
+        }
+   /* REPLACE existing .search-input-wrapper, .search-input, .search-icon-inside */
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.search-input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;                    /* important so padding won't grow the element wider */
+  padding: 12px 44px 12px 16px;              /* smaller vertical padding and controlled right padding for icon */
+  border: 2px solid var(--border-color);
+  border-radius: 12px;                       /* slightly smaller radius for compactness */
+  font-size: 15px;
+  background: var(--hover-bg);
+  color: var(--nav-text);
+  outline: none;
+  transition: box-shadow .2s ease, border-color .15s ease;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+}
+
+/* icon inside */
+.search-icon-inside {
+  position: absolute;
+  right: 14px;                               /* move icon inwards so it doesn't push width */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--nav-text-secondary);
+  pointer-events: none;
+}
+
+/* REPLACE existing .search-modal-content */
+.search-modal-content {
+  box-sizing: border-box;                    /* ensure padding is included in width */
+  background: var(--menu-bg);
+  padding: 20px;
+  border-radius: 20px;
+  width: 94%;
+  max-width: 640px;                          /* slightly smaller max width */
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+  transform: translateY(-40px);
+  transition: transform 0.25s ease;
+  position: relative;
+  border: 1px solid var(--border-color);
+  overflow: visible;                         /* keep suggestions visible */
+}
+
+
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    color: var(--nav-text);
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input {
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.5) !important;
+}
+.search-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    color: var(--nav-text-secondary);
+    z-index: 10;
+}
+
+.search-close-btn:hover {
+    background: var(--hover-bg);
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.search-close-btn:active {
+    transform: scale(0.95);
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+}
+.search-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.search-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--nav-text);
+    letter-spacing: -0.5px;
+}
+.search-suggestions-label {
+    margin-bottom: 12px;
+    color: var(--nav-text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-title {
+    color: var(--nav-text);
+}
+
+       
+        .search-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+    .search-tag {
+    padding: 8px 16px;
+    background: var(--hover-bg);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--nav-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-tag:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+}
+
+        /* CART SIDEBAR - SOLID BACKGROUND */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 90%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--menu-bg);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10001;
+            box-shadow: -4px 0 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--menu-bg);
+        }
+
+        .cart-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--nav-text);
+        }
+
+        .cart-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: var(--menu-bg);
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: var(--hover-bg);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8585 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--nav-text);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border-color);
+            background: var(--nav-bg);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--nav-text);
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background: var(--menu-bg);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--nav-text);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8585 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+
+        /* DESKTOP STYLES */
+       /* TABLET/SMALL LAPTOP - Show desktop menu but keep mobile search */
+@media (min-width: 1200px) {
+    .hamburger {
+        display: none;
+    }
+
+    .navbar-container {
+        height: 80px;
+    }
+
+    .navbar-logo {
+        font-size: 28px;
+    }
+
+    .desktop-menu {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex: 1;
+        margin: 0 40px;
+    }
+
+    .desktop-menu-item {
+        position: relative;
+    }
+
+    /* MEGA DROPDOWN */
+.mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dropdown-bg);
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    padding: 35px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    min-width: 650px;
+    border: 1px solid var(--border-color);
+    z-index: 1000;
+    margin-top: 5px;
+}
+
+.sublime-navbar.dark-mode .mega-dropdown {
+    background: #252525;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.desktop-menu-item::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 20px;
+    display: block;
+}
+
+.desktop-menu-item:hover .mega-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-dropdown-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.mega-dropdown-column {
+    padding: 0;
+}
+
+.mega-dropdown-title {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 18px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.sublime-navbar.dark-mode .mega-dropdown-title {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.mega-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mega-dropdown-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.mega-dropdown-item:hover {
+    background: var(--hover-bg);
+    transform: translateX(8px);
+    color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mega-dropdown-item:hover::before {
+    transform: scaleY(1);
+}
+
+.sublime-navbar.dark-mode .mega-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+    .navbar-right {
+        gap: 10px;
+    }
+
+    /* Keep mobile search icon visible until 1465px */
+    .icon-btn.mobile-search-only {
+        display: flex !important;
+    }
+}
+
+/* LARGE LAPTOP - Show desktop search bar */
+@media (min-width: 1465px) {
+    .desktop-search {
+        display: flex !important;
+        align-items: center;
+        background: var(--hover-bg);
+        border-radius: 50px;
+        padding: 10px 20px;
+        gap: 10px;
+        min-width: 250px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .desktop-search:hover,
+    .desktop-search:focus-within {
+        background: var(--nav-bg);
+        border-color: var(--accent);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+    }
+
+    .sublime-navbar.dark-mode .desktop-search {
+        background: #2a2a2a;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sublime-navbar.dark-mode .desktop-search:hover,
+    .sublime-navbar.dark-mode .desktop-search:focus-within {
+        background: #333;
+        border-color: var(--accent);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+
+    .sublime-navbar.dark-mode .desktop-search svg {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .desktop-search input {
+        border: none;
+        background: transparent;
+        outline: none;
+        color: var(--nav-text);
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .desktop-search input::placeholder {
+        color: var(--nav-text-secondary);
+    }
+
+    .desktop-search svg {
+        flex-shrink: 0;
+    }
+
+    /* Hide mobile search button on large screens */
+    .icon-btn.mobile-search-only {
+        display: none !important;
+    }
+}
+        /* TABLET ADJUSTMENTS */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .navbar-logo {
+                font-size: 26px;
+            }
+
+            .icon-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .icon-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        /* SCROLLBAR STYLING */
+        .mobile-menu::-webkit-scrollbar,
+        .cart-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .mobile-menu::-webkit-scrollbar-track,
+        .cart-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .mobile-menu::-webkit-scrollbar-thumb,
+        .cart-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .mobile-menu::-webkit-scrollbar-thumb:hover,
+        .cart-content::-webkit-scrollbar-thumb:hover {
+            background: var(--nav-text-secondary);
+        }
+/* ========== SOLID BACKGROUND FIX ========== */
+.mobile-menu,
+.mobile-menu-header,
+.mobile-menu-content,
+.cart-sidebar,
+.cart-header,
+.cart-content,
+.cart-footer,
+.search-modal-content {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu,
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-header,
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-content,
+.sublime-navbar.dark-mode ~ .cart-sidebar,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-header,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer,
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+/* ========== TEXT VISIBILITY FIX ========== */
+/* Active link in mobile menu */
+.mobile-menu .mobile-menu-link.active,
+.mobile-menu .mobile-menu-link.active span,
+.mobile-menu .mobile-menu-link.active .menu-icon {
+  background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Checkout button */
+.cart-sidebar .checkout-btn {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8585 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Cart total */
+.cart-sidebar .cart-total span:last-child {
+  color: #ff6b6b !important;
+  font-weight: 800 !important;
+}
+
+/* Dark mode text fixes */
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-link,
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-item-name,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-title,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-total span:first-child {
+  color: #ffffff !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+/* ========== SPACING & SCROLLING FIX ========== */
+/* Fix gap between Services and Dark Mode toggle */
+.dark-mode-toggle {
+  margin-top: 8px !important;
+}
+
+/* Make mobile menu properly scrollable */
+.mobile-menu {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu-content {
+  padding-bottom: 100px !important; /* Extra space at bottom for scrolling */
+}
+
+/* Ensure cart fits on all screen sizes */
+.cart-sidebar {
+  max-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+.cart-content {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 200px) !important; /* Account for header and footer */
+}
+
+.cart-header {
+  flex-shrink: 0 !important;
+}
+
+.cart-footer {
+  flex-shrink: 0 !important;
+}
+
+/* Better scrollbar for mobile */
+.mobile-menu::-webkit-scrollbar,
+.cart-content::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb,
+.cart-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2) !important;
+  border-radius: 2px !important;
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu::-webkit-scrollbar-thumb,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2) !important;
+}
+/* EXTRA SMALL SCREENS */
+@media (max-width: 375px) {
+    .navbar-container {
+        padding: 0 12px;
+        height: 65px;
+    }
+    
+    .navbar-logo {
+        font-size: 20px;
+    }
+    
+    .logo-icon {
+        font-size: 24px;
+    }
+    
+    .navbar-left,
+    .navbar-right {
+        gap: 8px;
+    }
+    
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .icon-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .hamburger {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .hamburger span {
+        width: 20px;
+    }
+    
+    .badge {
+        font-size: 9px;
+        min-width: 16px;
+        height: 16px;
+        top: 2px;
+        right: 2px;
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar-container {
+        padding: 0 10px;
+        height: 60px;
+    }
+    
+    .navbar-logo {
+        font-size: 18px;
+    }
+    
+    .logo-icon {
+        font-size: 22px;
+    }
+    
+    .navbar-left,
+    .navbar-right {
+        gap: 6px;
+    }
+    
+    .icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .icon-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+/* SEARCH MODAL RESPONSIVE */
+@media (max-width: 480px) {
+ .search-modal-content {
+    padding: 18px;
+    width: 96%;
+    max-width: none;
+    border-radius: 16px;
+  }
+    
+    .search-modal-title {
+        font-size: 18px;
+    }
+    
+    .search-close-btn {
+        width: 36px;
+        height: 36px;
+        top: 16px;
+        right: 16px;
+    }
+    
+    .search-input {
+    padding: 10px 40px 10px 12px;            /* compact padding for tiny screens */
+    font-size: 14px;
+  }
+    
+    .search-tag {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+     .search-icon-inside { right: 12px; }
+
+}
+.mobile-submenu-item {
+    padding: 14px 18px;
+    color: var(--nav-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    margin: 6px 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-submenu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent) 0%, #ff8585 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.mobile-submenu-item:hover {
+    background: var(--hover-bg);
+    color: var(--accent);
+    transform: translateX(8px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-submenu-item:hover::before {
+    transform: scaleY(1);
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item {
+    color: #e0e0e0;
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.submenu-emoji {
+    font-size: 18px;
+    display: inline-block;
+    min-width: 24px;
+}
+.desktop-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+}
+
+.desktop-menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.desktop-menu-link:hover {
+    background: var(--hover-bg);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.desktop-menu-link:hover::after {
+    transform: scaleX(1);
+}
+
+.desktop-menu-link.active {
+    background: linear-gradient(135deg, var(--accent) 0%, #ff5252 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.desktop-menu-link.active::after {
+    display: none;
+}
+
+.sublime-navbar.dark-mode .desktop-menu-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+.mobile-menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent) 0%, #ff8585 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-link:hover {
+    background: var(--hover-bg);
+    transform: translateX(6px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-menu-link:hover::before {
+    transform: scaleY(1);
+}
+
+.mobile-menu-link.active {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.mobile-menu-link.active::before {
+    display: none;
+}
+
+.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* HERO SLIDER CONTAINER */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* BASE SLIDE - ALWAYS VISIBLE */
+        .slide-base {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        /* FRAGMENT OVERLAY - BUILDS THE NEXT IMAGE */
+        .fragment-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* INDIVIDUAL FRAGMENT - NO GAPS, NO ROTATION */
+        .fragment {
+            position: absolute;
+            overflow: hidden;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .fragment-inner {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* FRAGMENT REVEAL ANIMATION - PUZZLE PIECES COMING TOGETHER */
+        @keyframes fragmentReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateZ(0);
+            }
+            60% {
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1.05) translateZ(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateZ(0);
+            }
+        }
+
+        .fragment.animating {
+            animation: fragmentReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* CONTENT OVERLAY */
+        .slide-content {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content-wrapper {
+            max-width: 700px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-wrapper.fade-out {
+            opacity: 0;
+            transform: translateX(-80px) scale(0.95);
+        }
+
+        /* PREMIUM BADGE */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .badge-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* MAIN HEADING */
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5);
+            letter-spacing: -2px;
+        }
+
+        .slide-title .highlight {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* SUBTITLE */
+        .slide-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            font-style: italic;
+        }
+
+        /* CTA BUTTONS */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
+            color: #fff;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #FFD700 0%, #F7931E 50%, #FF6B35 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+        }
+
+        /* NAVIGATION ARROWS */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .nav-arrow.prev {
+            left: 40px;
+        }
+
+        .nav-arrow.next {
+            right: 40px;
+        }
+
+        .nav-arrow svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 3;
+        }
+
+        /* SLIDE INDICATORS */
+        .slide-indicators {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .indicator.active {
+            width: 45px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .indicator:not(.active):hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.3);
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+             
+        .hero-slider {
+        height: 450px !important;
+    }
+            .slide-content {
+                padding: 0 20px;
+            }
+
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .premium-badge {
+                padding: 10px 20px;
+                margin-bottom: 20px;
+            }
+
+            .badge-text {
+                font-size: 11px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 16px 35px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nav-arrow.prev {
+                left: 15px;
+            }
+
+            .nav-arrow.next {
+                right: 15px;
+            }
+
+            .nav-arrow svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .slide-indicators {
+                bottom: 30px;
+                padding: 12px 20px;
+                gap: 10px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+
+            .indicator.active {
+                width: 30px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* PERFORMANCE OPTIMIZATIONS */
+        .hero-slider,
+        .fragment,
+        .slide-base,
+        .nav-arrow,
+        .btn {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+     /* ============================================
+   🌟 PREMIUM BESTSELLERS SECTION
+   The most jealousy-inducing section ever!
+   ============================================ */
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.6); }
+}
+
+.categories-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.categories-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.categories-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    background-size: 400% 400%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::before {
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::after {
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
+}
+
+/* ============================================
+   🎨 PREMIUM SECTION TITLE
+   ============================================ */
+.section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.section-title::before {
+    content: '✨';
+    position: absolute;
+    left: -50px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.section-title::after {
+    content: '✨';
+    position: absolute;
+    right: -50px;
+    animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .section-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 30px rgba(255, 107, 107, 0.5);
+}
+
+/* ============================================
+   📦 CATEGORIES GRID - 2 ROWS × 3 COLUMNS
+   ============================================ */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   💎 PREMIUM CATEGORY CARD
+   ============================================ */
+.category-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+    opacity: 0;
+}
+
+.category-card:nth-child(1) { --index: 0; }
+.category-card:nth-child(2) { --index: 1; }
+.category-card:nth-child(3) { --index: 2; }
+.category-card:nth-child(4) { --index: 3; }
+.category-card:nth-child(5) { --index: 4; }
+.category-card:nth-child(6) { --index: 5; }
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card {
+    background: rgba(42, 42, 42, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b6b, #ffa500, #667eea, #764ba2);
+    background-size: 400% 400%;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: gradientShift 3s ease infinite;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover {
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+}
+
+/* ============================================
+   🖼️ PRODUCT IMAGES GRID WITH PREMIUM EFFECTS
+   ============================================ */
+.category-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(102, 126, 234, 0.1));
+    padding: 3px;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s ease;
+}
+
+.category-card:hover .category-products::before {
+    left: 100%;
+}
+
+.product-item {
+    aspect-ratio: 1;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+}
+
+.product-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.category-card:hover .product-item::before {
+    opacity: 1;
+}
+
+.product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .product-item img {
+    transform: scale(1.15);
+}
+
+/* Mobile: 2x2 grid */
+@media (max-width: 768px) {
+    .category-products {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    
+    .product-item:nth-child(5),
+    .product-item:nth-child(6) {
+        display: none;
+    }
+}
+
+/* ============================================
+   🎯 PREMIUM GLASSMORPHISM FOOTER
+   ============================================ */
+.category-footer {
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 107, 107, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .category-footer::before {
+    width: 100%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-footer {
+    background: rgba(42, 42, 42, 0.8);
+    border-top: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* ============================================
+   ✨ PREMIUM TITLE WITH GRADIENT
+   ============================================ */
+.category-title {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateX(5px);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-title {
+    background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   🚀 PREMIUM ANIMATED BUTTON (Replaces "more")
+   ============================================ */
+.view-all-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-all-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-all-btn:hover::before {
+    left: 100%;
+}
+
+.view-all-btn:hover {
+    transform: translateX(5px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+}
+
+.view-all-btn:active {
+    transform: translateX(5px) scale(0.98);
+}
+
+.view-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* ============================================
+   📱 RESPONSIVE - MOBILE OPTIMIZATION
+   ============================================ */
+@media (max-width: 768px) {
+    .categories-section {
+        padding: 50px 15px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .category-card {
+        border-radius: 16px;
+    }
+    
+    .category-footer {
+        padding: 12px 14px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+    }
+    
+    .view-all-btn {
+        padding: 8px 14px;
+        font-size: 10px;
+        gap: 4px;
+    }
+    
+    .view-all-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        gap: 10px;
+    }
+    
+    .category-footer {
+        padding: 10px 12px;
+    }
+    
+    .category-title {
+        font-size: 12px;
+    }
+    
+    .view-all-btn {
+        padding: 6px 12px;
+        font-size: 9px;
+    }
+    
+    /* ============================================
+   📱 MOBILE COMPACT BUTTON - Below 600px
+   Small, slim button that doesn't bloat cards
+   ============================================ */
+@media (max-width: 600px) {
+    .category-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px 12px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+        text-align: left;
+        width: 100%;
+    }
+    
+    .view-all-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 6px 12px;  /* Much smaller padding */
+        font-size: 10px;     /* Smaller text */
+        border-radius: 6px;  /* Tighter radius */
+        gap: 4px;
+    }
+    
+    .view-all-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-footer {
+        padding: 10px 10px;
+        gap: 6px;
+    }
+    
+    .category-title {
+        font-size: 12px;
+    }
+    
+    .view-all-btn {
+        padding: 5px 10px;   /* Even smaller */
+        font-size: 9px;
+    }
+    
+    .view-all-btn svg {
+        width: 10px;
+        height: 10px;
+    }
+}
+/* ============================================
+   🔧 FIX SPACING - Reduce Gap Between Sections
+   ============================================ */
+
+/* Reduce hero slider height on mobile */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 450px !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Reduce bestsellers section padding */
+.categories-section {
+    padding: 60px 20px; /* Reduced from 80px */
+}
+
+@media (max-width: 768px) {
+    .categories-section {
+        padding: 30px 15px; /* Much smaller on mobile */
+    }
+    
+    .section-title {
+        margin-bottom: 25px; /* Reduced from 50px */
+    }
+}
+
+@media (max-width: 600px) {
+    .categories-section {
+        padding: 20px 15px; /* Even tighter on small screens */
+    }
+    
+    .section-title {
+        margin-bottom: 20px;
+    }
+}
+}
+/* ============================================
+   🌙 COMPLETE DARK MODE - FULL BODY COVERAGE
+   ============================================ */
+
+/* Body background in dark mode */
+body.dark-mode {
+    background: #1a1a1a !important;
+    color: #ffffff;
+}
+
+/* Demo content section dark mode */
+body.dark-mode .demo-content,
+body.dark-mode div[style*="padding: 40px"] {
+    background: #1a1a1a !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #ffffff !important;
+}
+
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode span {
+    color: #e0e0e0 !important;
+}
+
+/* Fix demo boxes */
+body.dark-mode div[style*="background: #f5f5f5"] {
+    background: #2a2a2a !important;
+}
+
+body.dark-mode div[style*="color: #666"] {
+    color: #b0b0b0 !important;
+}
+
+body.dark-mode div[style*="color: #1a1a1a"] {
+    color: #ffffff !important;
+}
+
+/* Hero slider content in dark mode */
+body.dark-mode .slide-title,
+body.dark-mode .slide-subtitle,
+body.dark-mode .premium-badge {
+    /* Already has proper dark styling, just ensure visibility */
+    filter: none !important;
+}
+
+/* Scroll indicator */
+body.dark-mode .scroll-indicator {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .scroll-line {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+}
+
+/* Navigation arrows */
+body.dark-mode .nav-arrow {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode .nav-arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Slide indicators */
+body.dark-mode .slide-indicators {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .indicator {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode .indicator:not(.active):hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* Any white sections */
+body.dark-mode section,
+body.dark-mode main,
+body.dark-mode article {
+    background: transparent;
+}
+    </style>
+</head>
+<body style="padding-top: 70px; background: #f5f5f5;">
+    <!-- MAIN NAVBAR -->
+    <nav class="sublime-navbar" id="navbar">
+        <div class="navbar-container">
+            <!-- LEFT SECTION -->
+            <div class="navbar-left">
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="/" class="navbar-logo">
+                    <span class="logo-icon">🍰</span>
+                    <span>Sublime Sweets</span>
+                </a>
+            </div>
+
+          <!-- DESKTOP MENU -->
+<div class="desktop-menu">
+    <div class="desktop-menu-item">
+        <a href="/claudenavabar.html" class="desktop-menu-link active">
+            Home
+        </a>
+    </div>
+
+    <!-- FOOD CATEGORY -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Food
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍕 Street Food</div>
+                    <a href="/category/food/street-food" class="mega-dropdown-item">View All Street Food</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍛 Main Course</div>
+                    <a href="/category/food/main-course" class="mega-dropdown-item">View All Main Course</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍽️ Meals / Thalis</div>
+                    <a href="/category/food/meals" class="mega-dropdown-item">View All Meals</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍨 Fresh Desserts</div>
+                    <a href="/category/food/desserts" class="mega-dropdown-item">View All Desserts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACKS & DRINKS -->
+    <div class="desktop-menu-item">
+        <a href="/category/snacks-drinks" class="desktop-menu-link">
+            Snacks & Drinks
+        </a>
+    </div>
+
+    <!-- MITHAI -->
+    <div class="desktop-menu-item">
+        <a href="/category/mithai" class="desktop-menu-link">
+            Mithai
+        </a>
+    </div>
+
+    <!-- BAKERY & CAKES -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Bakery & Cakes
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🎂 Cakes - Eggless</div>
+                    <a href="/category/bakery/cakes-eggless" class="mega-dropdown-item">View All Eggless Cakes</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍰 Cakes - With Egg</div>
+                    <a href="/category/bakery/cakes-with-egg" class="mega-dropdown-item">View All Egg Cakes</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🥐 Pastries</div>
+                    <a href="/category/bakery/pastries" class="mega-dropdown-item">View All Pastries</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍞 Bread & Buns</div>
+                    <a href="/category/bakery/bread-buns" class="mega-dropdown-item">View All Bread</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍪 Cookies</div>
+                    <a href="/category/bakery/cookies" class="mega-dropdown-item">View All Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAIRY -->
+    <div class="desktop-menu-item">
+        <a href="/category/dairy" class="desktop-menu-link">
+            Dairy
+        </a>
+    </div>
+
+    <!-- DRY FRUITS -->
+    <div class="desktop-menu-item">
+        <a href="/category/dry-fruits" class="desktop-menu-link">
+            Dry Fruits
+        </a>
+    </div>
+</div>
+
+            <!-- RIGHT SECTION -->
+            <div class="navbar-right">
+                <!-- DESKTOP SEARCH BAR -->
+                <div class="desktop-search" style="display: none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" placeholder="Search products..." id="desktopSearchInput">
+                </div>
+
+                <!-- DARK MODE TOGGLE (Desktop) -->
+                <button class="icon-btn" id="darkModeBtn" aria-label="Toggle Dark Mode" style="display: none;">
+                    <svg class="sun-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- WISHLIST -->
+                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="badge">3</span>
+                </button>
+
+                <!-- SEARCH (Mobile Only) -->
+                <button class="icon-btn mobile-search-only" id="searchBtn" aria-label="Search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+
+                <!-- CART -->
+                <button class="icon-btn" id="cartBtn" aria-label="Cart">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="badge">5</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="/" class="navbar-logo">
+                <span class="logo-icon">🍰</span>
+                <span>Sublime Sweets</span>
+            </a>
+            <button class="close-btn" id="closeMenu" aria-label="Close Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-menu-content">
+            <!-- HOME -->
+            <div class="mobile-menu-item">
+                <a href="claudenavabar.html" class="mobile-menu-link active">
+                    <span><span class="menu-icon">🏠</span> Home</span>
+                </a>
+            </div>
+
+            <!-- ALL PRODUCTS -->
+            <div class="mobile-menu-item">
+                <a href="/products" class="mobile-menu-link">
+                    <span><span class="menu-icon">📦</span> All Products</span>
+                </a>
+            </div>
+<!-- CATEGORIES -->
+<div class="mobile-menu-item">
+    <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('categories'); return false;">
+        <span><span class="menu-icon">📂</span> Categories</span>
+        <span class="arrow-icon">▼</span>
+    </a>
+    <div class="mobile-submenu" id="categories">
+        
+        <!-- FOOD -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('food'); return false;" style="margin: 8px 0;">
+            <span>🍕 Food</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="food">
+            <a href="/category/food/street-food" class="mobile-submenu-item">
+                <span class="submenu-emoji">🌮</span> Street Food
+            </a>
+            <a href="/category/food/main-course" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍛</span> Main Course
+            </a>
+            <a href="/category/food/meals" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍽️</span> Meals / Thalis
+            </a>
+            <a href="/category/food/desserts" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍨</span> Fresh Desserts
+            </a>
+        </div>
+
+        <!-- SNACKS & DRINKS -->
+        <a href="/category/snacks-drinks" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🍿 Snacks & Drinks</span>
+        </a>
+
+        <!-- MITHAI -->
+        <a href="/category/mithai" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🍬 Mithai (Indian Sweets)</span>
+        </a>
+
+        <!-- BAKERY & CAKES -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('bakery'); return false;" style="margin: 8px 0;">
+            <span>🎂 Bakery & Cakes</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="bakery">
+            <a href="/category/bakery/cakes-eggless" class="mobile-submenu-item">
+                <span class="submenu-emoji">🎂</span> Cakes - Eggless
+            </a>
+            <a href="/category/bakery/cakes-with-egg" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍰</span> Cakes - With Egg
+            </a>
+            <a href="/category/bakery/pastries" class="mobile-submenu-item">
+                <span class="submenu-emoji">🥐</span> Pastries
+            </a>
+            <a href="/category/bakery/bread-buns" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍞</span> Bread & Buns
+            </a>
+            <a href="/category/bakery/cookies" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍪</span> Cookies
+            </a>
+        </div>
+
+        <!-- DAIRY -->
+        <a href="/category/dairy" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🥛 Dairy</span>
+        </a>
+
+        <!-- DRY FRUITS -->
+        <a href="/category/dry-fruits" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🌰 Dry Fruits</span>
+        </a>
+    </div>
+</div>
+            <!-- YOUR ORDERS -->
+            <div class="mobile-menu-item">
+                <a href="/orders" class="mobile-menu-link">
+                    <span><span class="menu-icon">📋</span> Your Orders</span>
+                </a>
+            </div>
+
+            <!-- ABOUT US -->
+            <div class="mobile-menu-item">
+                <a href="/about" class="mobile-menu-link">
+                    <span><span class="menu-icon">ℹ️</span> About Us</span>
+                </a>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="mobile-menu-item">
+                <a href="/services" class="mobile-menu-link">
+                    <span><span class="menu-icon">⚙️</span> Services</span>
+                </a>
+            </div>
+
+            <!-- DARK MODE TOGGLE -->
+            <div class="dark-mode-toggle">
+                <div class="dark-mode-label">
+                    <span style="font-size: 20px;">🌙</span>
+                    <span>Dark Mode</span>
+                </div>
+                <div class="toggle-switch" id="mobileDarkToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-content">
+        <div class="search-modal-header">
+            <h3 class="search-modal-title">🔍 Search Products</h3>
+            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-input-wrapper">
+            <input type="text" class="search-input" placeholder="Search for products, categories..." id="searchInput" autofocus>
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        </div>
+        <div class="search-suggestions-label">Popular Searches</div>
+        <div class="search-suggestions">
+  <span class="search-tag">Samosa</span>
+                <span class="search-tag">Chocolate Cake</span>
+                <span class="search-tag">Mithai</span>
+                <span class="search-tag">Momo</span>
+                <span class="search-tag">Gulab Jamun</span>
+                <span class="search-tag">Bread</span>
+                <span class="search-tag">Dry Fruits</span>
+                <span class="search-tag">Milk</span>
+            </div>
+        </div>
+    </div>
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Shopping Cart</h3>
+            <button class="close-btn" id="closeCart" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="cart-content" id="cartContent">
+            <!-- Sample Cart Items -->
+            <div class="cart-item">
+                <div class="cart-item-image">🥟</div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">Veg Momo (8 pcs)</div>
+                    <div class="cart-item-price">₹120</div>
+                    <div class="cart-item-quantity">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span style="color: var(--nav-text); font-weight: 600;">2</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-item-image">🎂</div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">Chocolate Cake (1kg)</div>
+                    <div class="cart-item-price">₹450</div>
+                    <div class="cart-item-quantity">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span style="color: var(--nav-text); font-weight: 600;">1</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-item">
+                <div class="cart-item-image">🍬</div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">Gulab Jamun (12 pcs)</div>
+                    <div class="cart-item-price">₹180</div>
+                    <div class="cart-item-quantity">
+                        <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                        <span style="color: var(--nav-text); font-weight: 600;">2</span>
+                        <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span style="color: var(--accent);">₹930</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+ <div class="hero-slider" id="heroSlider">
+        <!-- Base slide -->
+        <div class="slide-base" id="slideBase"></div>
+
+        <!-- Fragment container -->
+        <div class="fragment-container" id="fragmentContainer"></div>
+
+        <!-- Content overlay -->
+        <div class="slide-content">
+            <div class="content-wrapper" id="contentWrapper">
+                <div class="premium-badge">
+                    <div class="pulse-dot"></div>
+                    <span class="badge-text">Premium Collection</span>
+                </div>
+                
+                <h1 class="slide-title" id="slideTitle"></h1>
+                <p class="slide-subtitle" id="slideSubtitle"></p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span id="ctaText">Shop Now</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <span>Explore Menu</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Indicators -->
+        <div class="slide-indicators" id="indicators"></div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </div>
+
+ <!-- ============================================
+     🌟 PREMIUM BESTSELLERS SECTION
+     The most jealousy-inducing section ever!
+     ============================================ -->
+    
+<div class="categories-section">
+    <h2 class="section-title">Bestsellers</h2>
+    
+    <div class="categories-grid">
+        <!-- Mithai (Indian Sweets) -->
+        <div class="category-card" onclick="location.href='/category/mithai'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop" alt="Mithai 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=400&h=400&fit=crop" alt="Mithai 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" alt="Mithai 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Mithai 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1610404923595-97ee4cee3b9d?w=400&h=400&fit=crop" alt="Mithai 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=400&h=400&fit=crop" alt="Mithai 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Mithai</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/mithai'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Snacks & Drinks -->
+        <div class="category-card" onclick="location.href='/category/snacks-drinks'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop" alt="Snack 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Snack 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1604431697735-95f8c4d6fc9a?w=400&h=400&fit=crop" alt="Snack 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop" alt="Snack 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1625937329935-325e6c49d7a4?w=400&h=400&fit=crop" alt="Snack 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=400&fit=crop" alt="Snack 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Snacks/Drinks</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/snacks-drinks'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dairy -->
+        <div class="category-card" onclick="location.href='/category/dairy'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=400&fit=crop" alt="Dairy 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop" alt="Dairy 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=400&fit=crop" alt="Dairy 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=400&h=400&fit=crop" alt="Dairy 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=400&fit=crop" alt="Dairy 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=400&fit=crop" alt="Dairy 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Dairy</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/dairy'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Street Foods -->
+        <div class="category-card" onclick="location.href='/category/street-foods'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=400&fit=crop" alt="Street Food 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626074353765-517a65eeafb3?w=400&h=400&fit=crop" alt="Street Food 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=400&fit=crop" alt="Street Food 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1630409346038-e25337c5be50?w=400&h=400&fit=crop" alt="Street Food 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=400&fit=crop" alt="Street Food 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1625937329935-325e6c49d7a4?w=400&h=400&fit=crop" alt="Street Food 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Street Foods</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/street-foods'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Course -->
+        <div class="category-card" onclick="location.href='/category/main-course'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=400&h=400&fit=crop" alt="Main Course 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" alt="Main Course 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626074353765-517a65eeafb3?w=400&h=400&fit=crop" alt="Main Course 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=400&h=400&fit=crop" alt="Main Course 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&h=400&fit=crop" alt="Main Course 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=400&h=400&fit=crop" alt="Main Course 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Main Course</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/main-course'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dry Fruits -->
+        <div class="category-card" onclick="location.href='/category/dry-fruits'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=400&h=400&fit=crop" alt="Dry Fruit 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop" alt="Dry Fruit 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Dry Fruit 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1508736793122-f516e3ba5569?w=400&h=400&fit=crop" alt="Dry Fruit 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1590777516502-0ef97f8e5a4b?w=400&h=400&fit=crop" alt="Dry Fruit 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1613743983303-b3e89f8a7b82?w=400&h=400&fit=crop" alt="Dry Fruit 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Dry Fruits</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/dry-fruits'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+     <!-- Cakes -->
+        <div class="category-card" onclick="location.href='/category/bakery/cakes'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop" alt="Cake 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop" alt="Cake 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e5b35c7f?w=400&h=400&fit=crop" alt="Cake 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1557925923-cd4648e211a0?w=400&h=400&fit=crop" alt="Cake 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&h=400&fit=crop" alt="Cake 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a5a9f3b3?w=400&h=400&fit=crop" alt="Cake 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Cakes</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/bakery/cakes'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pastries -->
+        <div class="category-card" onclick="location.href='/category/bakery/pastries'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop" alt="Pastry 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop" alt="Pastry 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?w=400&h=400&fit=crop" alt="Pastry 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=400&fit=crop" alt="Pastry 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?w=400&h=400&fit=crop" alt="Pastry 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1587241321921-91a834d82fea?w=400&h=400&fit=crop" alt="Pastry 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Pastries</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/bakery/pastries'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Cookies -->
+        <div class="category-card" onclick="location.href='/category/bakery/cookies'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop" alt="Cookie 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=400&fit=crop" alt="Cookie 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1590080876407-a719dbb1f641?w=400&h=400&fit=crop" alt="Cookie 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=400&h=400&fit=crop" alt="Cookie 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=400&fit=crop" alt="Cookie 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1618923850107-d2ccab9f8758?w=400&h=400&fit=crop" alt="Cookie 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Cookies</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/bakery/cookies'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- DEMO CONTENT -->
+    <div style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-size: 36px; margin-bottom: 20px; color: #1a1a1a;">🎉 ALL ISSUES FIXED - PERFECT NAVBAR!</h1>
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 16px; color: white; margin-bottom: 30px;">
+            <h2 style="font-size: 28px; margin-bottom: 15px;">✅ What's Been Fixed:</h2>
+            <ul style="font-size: 16px; line-height: 2; margin-left: 20px;">
+                <li>✅ <strong>SOLID Backgrounds</strong> - No more blur/transparency issues!</li>
+                <li>✅ <strong>Sub-categories are Clickable</strong> - All links work perfectly</li>
+                <li>✅ <strong>Single Close Button</strong> - Removed hamburger animation confusion</li>
+                <li>✅ <strong>Desktop Dropdown Fixed</strong> - Hover bridge prevents disappearing!</li>
+                <li>✅ <strong>Premium Color Scheme</strong> - Solid white/dark backgrounds</li>
+                <li>✅ <strong>All Functional</strong> - Search, cart, wishlist, dark mode work!</li>
+            </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
+                <h3 style="color: #ff6b6b; margin-bottom: 10px;">📱 Mobile Features</h3>
+                <p style="color: #666;">• Solid white/dark background<br>• Clickable sub-categories<br>• Smooth animations<br>• Touch gestures</p>
+            </div>
+            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
+                <h3 style="color: #ff6b6b; margin-bottom: 10px;">💻 Desktop Features</h3>
+                <p style="color: #666;">• Hover-friendly dropdowns<br>• Working search bar<br>• Premium mega-menu<br>• No disappearing menus!</p>
+            </div>
+            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
+                <h3 style="color: #ff6b6b; margin-bottom: 10px;">🎨 Premium Design</h3>
+                <p style="color: #666;">• Jealousy-inducing UI<br>• Smooth transitions<br>• Perfect contrast<br>• Professional look</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NAVBAR SCROLL EFFECT
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE MENU TOGGLE
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenu = document.getElementById('closeMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.add('active');
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // SUBMENU TOGGLE
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            const link = submenu.previousElementSibling;
+            const arrow = link.querySelector('.arrow-icon');
+            
+            submenu.classList.toggle('active');
+            if (arrow) {
+                arrow.style.transform = submenu.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        }
+
+        // SEARCH MODAL
+        const searchBtn = document.getElementById('searchBtn');
+        const searchModal = document.getElementById('searchModal');
+        const searchInput = document.getElementById('searchInput');
+
+        searchBtn.addEventListener('click', function() {
+            searchModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => searchInput.focus(), 300);
+        });
+   const searchCloseBtn = document.getElementById('searchCloseBtn');
+if (searchCloseBtn) {
+    searchCloseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+        searchInput.value = '';
+    });
+}
+        searchModal.addEventListener('click', function(e) {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Search tags
+        document.querySelectorAll('.search-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                searchInput.value = this.textContent;
+                console.log('Searching for:', this.textContent);
+            });
+        });
+
+        // DESKTOP SEARCH
+        const desktopSearchInput = document.getElementById('desktopSearchInput');
+        if (desktopSearchInput) {
+            desktopSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    console.log('Desktop search:', this.value);
+                    alert('Searching for: ' + this.value);
+                }
+            });
+        }
+
+        // MOBILE SEARCH
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                console.log('Mobile search:', this.value);
+                alert('Searching for: ' + this.value);
+                searchModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // CART SIDEBAR
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+
+        cartBtn.addEventListener('click', function() {
+            cartSidebar.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCart.addEventListener('click', closeCartSidebar);
+        
+        mobileMenuOverlay.addEventListener('click', function() {
+            if (cartSidebar.classList.contains('active')) {
+                closeCartSidebar();
+            }
+        });
+
+        function closeCartSidebar() {
+            cartSidebar.classList.remove('active');
+            if (!mobileMenu.classList.contains('active')) {
+                mobileMenuOverlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+
+        // QUANTITY UPDATE
+        function updateQty(btn, change) {
+            const qtySpan = btn.parentElement.querySelector('span');
+            let qty = parseInt(qtySpan.textContent);
+            qty = Math.max(1, qty + change);
+            qtySpan.textContent = qty;
+            
+            qtySpan.style.transform = 'scale(1.2)';
+            setTimeout(() => qtySpan.style.transform = 'scale(1)', 200);
+            
+            updateCartTotal();
+        }
+
+       // DARK MODE TOGGLE
+const navbar = document.getElementById('navbar');
+const mobileDarkToggle = document.getElementById('mobileDarkToggle');
+const darkModeBtn = document.getElementById('darkModeBtn');
+
+// Check saved theme on page load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    navbar.classList.add('dark-mode');
+    document.body.classList.add('dark-mode');
+    mobileDarkToggle.classList.add('active');
+    updateDarkModeIcon(true);
+}
+
+// Mobile dark mode toggle
+mobileDarkToggle.addEventListener('click', function() {
+    navbar.classList.toggle('dark-mode');
+    document.body.classList.toggle('dark-mode');
+    this.classList.toggle('active');
+    const isDark = navbar.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateDarkModeIcon(isDark);
+});
+
+// Desktop dark mode button
+if (darkModeBtn) {
+    darkModeBtn.addEventListener('click', function() {
+        navbar.classList.toggle('dark-mode');
+        document.body.classList.toggle('dark-mode');
+        mobileDarkToggle.classList.toggle('active');
+        const isDark = navbar.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateDarkModeIcon(isDark);
+    });
+}
+
+// Update dark mode icon
+function updateDarkModeIcon(isDark) {
+    if (darkModeBtn) {
+        const sunIcon = darkModeBtn.querySelector('.sun-icon');
+        const moonIcon = darkModeBtn.querySelector('.moon-icon');
+        if (isDark) {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+    }
+}
+        // WISHLIST
+        const wishlistBtn = document.getElementById('wishlistBtn');
+        wishlistBtn.addEventListener('click', function() {
+            console.log('Wishlist clicked');
+            alert('Wishlist feature - You have 3 items saved!');
+        });
+
+        // DESKTOP RESPONSIVE
+       function handleResize() {
+    if (window.innerWidth >= 1465) {
+        document.querySelector('.desktop-search').style.display = 'flex';
+        if (darkModeBtn) darkModeBtn.style.display = 'flex';
+    } else if (window.innerWidth >= 1200) {
+        document.querySelector('.desktop-search').style.display = 'none';
+        if (darkModeBtn) darkModeBtn.style.display = 'flex';
+    } else {
+        document.querySelector('.desktop-search').style.display = 'none';
+        if (darkModeBtn) darkModeBtn.style.display = 'none';
+    }
+    
+    if (window.innerWidth >= 1200) {
+        closeMobileMenu();
+        closeCartSidebar();
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        // KEYBOARD
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+                closeCartSidebar();
+                searchModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // CART TOTAL
+        function updateCartTotal() {
+            const cartItems = document.querySelectorAll('.cart-item');
+            let total = 0;
+            
+            cartItems.forEach(item => {
+                const price = parseInt(item.querySelector('.cart-item-price').textContent.replace('₹', ''));
+                const qty = parseInt(item.querySelector('.cart-item-quantity span').textContent);
+                total += price * qty;
+            });
+            
+            document.querySelector('.cart-total span:last-child').textContent = '₹' + total;
+        }
+
+        // TOUCH GESTURES
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 100;
+            
+            if (touchEndX - touchStartX > swipeThreshold && touchStartX < 50) {
+                hamburger.click();
+            }
+            
+            if (touchStartX - touchEndX > swipeThreshold) {
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+                if (cartSidebar.classList.contains('active')) {
+                    closeCartSidebar();
+                }
+            }
+        }
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // INITIALIZE
+        updateCartTotal();
+
+        // SUCCESS MESSAGE
+        console.log('%c🎉 PERFECT NAVBAR LOADED! 🎉', 'color: #ff6b6b; font-size: 20px; font-weight: bold; background: #fff; padding: 10px;');
+        console.log('%c✅ ALL FIXES APPLIED:', 'color: #28a745; font-size: 16px; font-weight: bold;');
+        console.log('%c  ✅ Solid backgrounds (no blur issues)', 'color: #28a745; font-size: 12px;');
+        console.log('%c  ✅ All sub-categories are clickable', 'color: #28a745; font-size: 12px;');
+        console.log('%c  ✅ Single close button (no confusion)', 'color: #28a745; font-size: 12px;');
+        console.log('%c  ✅ Desktop dropdowns work perfectly', 'color: #28a745; font-size: 12px;');
+        console.log('%c  ✅ Hover bridge prevents disappearing', 'color: #28a745; font-size: 12px;');
+        console.log('%c  ✅ Premium color scheme applied', 'color: #28a745; font-size: 12px;');
+        console.log('%c🔥 JEALOUSY-INDUCING PREMIUM DESIGN! 🔥', 'color: #ff6b6b; font-size: 14px; font-weight: bold;');
+    </script> <script>
+        // ============================================
+        // 📱 DESKTOP SLIDES (1920x1080 recommended)
+        // ============================================
+        const desktopSlides = [
+            {
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Quality Snacking</span>',
+                subtitle: 'Pure Refreshment',
+                cta: 'Shop Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Crafted Tradition</span>',
+                subtitle: 'Timeless Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Savory Delights</span>',
+                subtitle: 'Unforgettable Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Sweet Traditions</span>',
+                subtitle: 'Pure Indulgence',
+                cta: 'Explore'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Authentic Flavors</span>',
+                subtitle: 'Heritage Recipes',
+                cta: 'Discover'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=1920&h=1080&fit=crop',
+                title: '<span class="highlight">Premium Selection</span>',
+                subtitle: 'Curated Excellence',
+                cta: 'View Menu'
+            }
+        ];
+
+        // ============================================
+        // 📱 MOBILE SLIDES (768x1024 recommended)
+        // ============================================
+        const mobileSlides = [
+            {
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Quality Snacking</span>',
+                subtitle: 'Pure Refreshment',
+                cta: 'Shop Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Crafted Tradition</span>',
+                subtitle: 'Timeless Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Savory Delights</span>',
+                subtitle: 'Unforgettable Taste',
+                cta: 'Order Now'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Sweet Traditions</span>',
+                subtitle: 'Pure Indulgence',
+                cta: 'Explore'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Authentic Flavors</span>',
+                subtitle: 'Heritage Recipes',
+                cta: 'Discover'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=768&h=1024&fit=crop',
+                title: '<span class="highlight">Premium Selection</span>',
+                subtitle: 'Curated Excellence',
+                cta: 'View Menu'
+            }
+        ];
+
+        // Detect device and select appropriate slides
+        const isMobile = window.innerWidth <= 768;
+        const slides = isMobile ? mobileSlides : desktopSlides;
+
+        // Configuration
+        const GRID_ROWS = 4;
+        const GRID_COLS = 5;
+        const TOTAL_FRAGMENTS = GRID_ROWS * GRID_COLS; // 20 fragments
+        const AUTO_PLAY_INTERVAL = 5000;
+
+        let currentSlide = 0;
+        let isAnimating = false;
+        let autoPlayTimer = null;
+
+        // DOM Elements
+        const slideBase = document.getElementById('slideBase');
+        const fragmentContainer = document.getElementById('fragmentContainer');
+        const contentWrapper = document.getElementById('contentWrapper');
+        const slideTitle = document.getElementById('slideTitle');
+        const slideSubtitle = document.getElementById('slideSubtitle');
+        const ctaText = document.getElementById('ctaText');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+
+        // Initialize
+        function init() {
+            // Create indicators
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+
+            // Set initial slide
+            slideBase.style.backgroundImage = `url(${slides[0].image})`;
+            updateContent(0);
+
+            // Start autoplay immediately
+            startAutoPlay();
+        }
+
+        // Navigate to specific slide
+        function goToSlide(index) {
+            if (isAnimating || index === currentSlide) return;
+
+            isAnimating = true;
+            const nextSlideData = slides[index];
+
+            // Fade out content
+            contentWrapper.classList.add('fade-out');
+
+            // Create and animate fragments
+            setTimeout(() => {
+                createFragments(nextSlideData.image);
+            }, 300);
+
+            // Update after animation completes
+            setTimeout(() => {
+                slideBase.style.backgroundImage = `url(${nextSlideData.image})`;
+                currentSlide = index;
+                updateIndicators();
+                updateContent(index);
+                
+                // Clear fragments
+                fragmentContainer.innerHTML = '';
+                
+                // Fade in content
+                contentWrapper.classList.remove('fade-out');
+                
+                isAnimating = false;
+                resetAutoPlay();
+            }, 1600);
+        }
+
+        // Create fragments that complete the image (NO GAPS, NO ROTATION)
+        function createFragments(imageUrl) {
+            fragmentContainer.innerHTML = '';
+            
+            const widthPercent = 100 / GRID_COLS;
+            const heightPercent = 100 / GRID_ROWS;
+            
+            // Create all fragments
+            for (let i = 0; i < TOTAL_FRAGMENTS; i++) {
+                const row = Math.floor(i / GRID_COLS);
+                const col = i % GRID_COLS;
+                
+                const fragment = document.createElement('div');
+                fragment.className = 'fragment';
+                
+                // Position exactly - NO GAPS
+                fragment.style.left = `${col * widthPercent}%`;
+                fragment.style.top = `${row * heightPercent}%`;
+                fragment.style.width = `${widthPercent}%`;
+                fragment.style.height = `${heightPercent}%`;
+                
+                // Random delay for staggered effect
+                const delay = Math.random() * 700;
+                fragment.style.animationDelay = `${delay}ms`;
+
+                // Fragment inner with exact background positioning
+                const inner = document.createElement('div');
+                inner.className = 'fragment-inner';
+                inner.style.backgroundImage = `url(${imageUrl})`;
+                
+                // Calculate exact position to complete the image
+                const bgX = col * widthPercent;
+                const bgY = row * heightPercent;
+                inner.style.backgroundPosition = `${bgX}% ${bgY}%`;
+                inner.style.backgroundSize = `${GRID_COLS * 100}% ${GRID_ROWS * 100}%`;
+
+                fragment.appendChild(inner);
+                fragmentContainer.appendChild(fragment);
+
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    fragment.classList.add('animating');
+                });
+            }
+        }
+
+        // Update content
+        function updateContent(index) {
+            const slide = slides[index];
+            slideTitle.innerHTML = slide.title;
+            slideSubtitle.textContent = slide.subtitle;
+            ctaText.textContent = slide.cta;
+        }
+
+        // Update indicators
+        function updateIndicators() {
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto play functions
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(() => {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                goToSlide(nextIndex);
+            }, AUTO_PLAY_INTERVAL);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            if (!isAnimating) {
+                const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                goToSlide(prevIndex);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (!isAnimating) {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                goToSlide(nextIndex);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (isAnimating) return;
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+        });
+
+     
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextBtn.click() : prevBtn.click();
+            }
+        }, { passive: true });
+
+        // Pause autoplay on hover
+        document.getElementById('heroSlider').addEventListener('mouseenter', () => {
+            clearInterval(autoPlayTimer);
+        });
+
+        document.getElementById('heroSlider').addEventListener('mouseleave', () => {
+            startAutoPlay();
+        });
+
+        // Initialize on load
+        init();
+
+        console.log('%c🎉 SLIDER READY!', 'color: #FFD700; font-size: 20px; font-weight: bold;');
+        console.log('%c✅ Auto-play: ENABLED', 'color: #4CAF50; font-size: 14px;');
+        console.log('%c✅ Mobile detection: ' + (isMobile ? 'MOBILE' : 'DESKTOP'), 'color: #2196F3; font-size: 14px;');
+        console.log('%c✅ Fragments: ' + TOTAL_FRAGMENTS + ' pieces', 'color: #FF9800; font-size: 14px;');
+    </script>
+</body>
+</html>

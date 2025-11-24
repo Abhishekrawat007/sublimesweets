@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sublime — Refined Premium Navbar</title>
+  <meta name="description" content="Refined premium navbar for Sublime store — responsive, accessible, performant." />
+  <style>
+    /* ---------- ROOT & THEME ---------- */
+    :root{
+      --nav-h:72px;
+      --max-w:1200px;
+      --radius:14px;
+      --accent:#ff6b6b;
+      --accent-2:#ff5252;
+      --muted:#8a8a8a;
+      --glass:rgba(255,255,255,0.7);
+      --glass-dark:rgba(20,20,20,0.7);
+      --shadow:0 8px 30px rgba(15,15,15,0.08);
+      --border:rgba(0,0,0,0.06);
+      --bg:#ffffff;
+      --fg:#111114;
+      --focus:rgba(255,107,107,0.18);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    @media(prefers-color-scheme:dark){
+      :root{
+        --bg:#0f1112;
+        --fg:#eef0f2;
+        --glass:var(--glass-dark);
+        --border:rgba(255,255,255,0.05);
+        --shadow:0 10px 30px rgba(0,0,0,0.6);
+        --muted:#b8b8b8;
+        --focus:rgba(255,82,82,0.12);
+      }
+    }
+
+    /* scoped namespace so styles don't leak */
+    .sublime-nav *{box-sizing:border-box}
+    .sublime-nav{
+      position:fixed;inset:0 auto auto 0;z-index:9999;
+      width:100%;backdrop-filter:blur(6px);
+      background:linear-gradient(180deg, var(--glass), transparent);
+      border-bottom:1px solid var(--border);
+      transition:transform 350ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease, background 220ms ease;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .sublime-inner{
+      max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;gap:20px;height:var(--nav-h);padding:0 20px;
+    }
+
+    /* logo */
+    .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--fg);font-weight:700;font-size:20px}
+    .logo .mark{width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;box-shadow:var(--shadow);font-size:20px}
+    .logo .name{letter-spacing:0.4px}
+
+    /* left and right */
+    .nav-left{display:flex;align-items:center;gap:12px}
+    .nav-right{display:flex;align-items:center;gap:8px;margin-left:auto}
+
+    /* desktop menu */
+    .desktop-menu{display:none;gap:6px;align-items:center}
+    .nav-link{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;color:var(--fg);text-decoration:none;font-weight:600;font-size:15px}
+    .nav-link:focus{outline:none;box-shadow:0 0 0 4px var(--focus)}
+    .nav-link:hover{background:rgba(0,0,0,0.03);color:var(--accent)}
+
+    /* subtle caret */
+    .caret{font-size:11px;color:var(--muted)}
+
+    /* search */
+    .search-inline{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,0.03);padding:8px 14px;border-radius:999px;min-width:220px}
+    .search-inline input{border:0;background:transparent;outline:none;color:var(--fg);font-size:14px}
+    .search-inline svg{opacity:.7}
+
+    /* icon button */
+    .icon-btn{width:44px;height:44px;border-radius:10px;border:0;background:transparent;display:inline-grid;place-items:center;cursor:pointer;transition:transform 170ms ease, background 170ms ease}
+    .icon-btn:active{transform:scale(.97)}
+    .icon-btn:focus{outline:none;box-shadow:0 0 0 4px var(--focus)}
+
+    .badge{position:absolute;top:6px;right:6px;background:var(--accent);color:#fff;font-size:11px;padding:3px 6px;border-radius:20px;font-weight:700}
+
+    /* hamburger */
+    .hamb{width:46px;height:46px;border-radius:12px;display:grid;place-items:center}
+    .hamb svg{width:20px;height:20px}
+
+    /* mobile menu */
+    .mobile-panel{position:fixed;left:0;top:0;bottom:0;width:86%;max-width:420px;background:var(--bg);box-shadow:6px 0 30px rgba(0,0,0,0.18);transform:translateX(-110%);transition:transform 360ms cubic-bezier(.2,.9,.2,1);z-index:10001;padding:22px;overflow:auto}
+    .mobile-panel.open{transform:translateX(0)}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);opacity:0;visibility:hidden;transition:opacity 200ms ease;z-index:10000}
+    .overlay.show{opacity:1;visibility:visible}
+
+    .mobile-section{margin-top:18px}
+    .mobile-link{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;color:var(--fg);text-decoration:none}
+    .mobile-link:hover{background:rgba(0,0,0,0.04)}
+
+    /* mega menu */
+    .mega{position:absolute;left:0;top:100%;transform:translateY(8px);min-width:520px;background:var(--bg);border-radius:12px;padding:18px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transition:opacity 200ms ease, transform 200ms ease}
+    .desktop-item{position:relative}
+    .desktop-item:focus-within .mega,.desktop-item:hover .mega{opacity:1;visibility:visible;transform:translateY(6px)}
+
+    .mega-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .mega-title{font-weight:700;color:var(--accent);font-size:13px;margin-bottom:8px;text-transform:uppercase}
+    .mega-link{display:block;padding:8px;border-radius:8px;color:var(--fg);text-decoration:none}
+    .mega-link:hover{background:rgba(0,0,0,0.03);color:var(--accent)}
+
+    /* cart panel */
+    .cart-panel{position:fixed;right:0;top:0;bottom:0;width:360px;background:var(--bg);box-shadow:-10px 0 30px rgba(0,0,0,0.12);transform:translateX(110%);transition:transform 320ms cubic-bezier(.2,.9,.2,1);z-index:10002;display:flex;flex-direction:column}
+    .cart-panel.open{transform:translateX(0)}
+
+    /* responsive */
+    @media(min-width:1024px){
+      .desktop-menu{display:flex}
+      .hamburger-wrap{display:none}
+      .search-inline{min-width:360px}
+    }
+
+    @media(max-width:1023px){
+      .desktop-menu{display:none}
+    }
+
+    /* small polish */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* focus visible (keyboard) */
+    :focus-visible{outline:transparent;box-shadow:0 0 0 5px var(--focus)}
+  </style>
+</head>
+<body style="padding-top:var(--nav-h);background:#f7f8fb;">
+  <nav class="sublime-nav" aria-label="Primary">
+    <div class="sublime-inner">
+      <div class="nav-left">
+        <button class="icon-btn hamb hamburger-wrap" id="openMobile" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <a class="logo" href="/">
+          <span class="mark" aria-hidden>🍰</span>
+          <span class="name">Sublime <span style="font-weight:500;color:var(--muted);">Sweets</span></span>
+        </a>
+
+        <!-- desktop menu -->
+        <div class="desktop-menu" role="menubar" aria-label="Main menu">
+          <div class="desktop-item" role="none">
+            <a class="nav-link" href="/" role="menuitem">Home</a>
+          </div>
+
+          <div class="desktop-item" role="none">
+            <a class="nav-link" href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">Food <span class="caret">▾</span></a>
+            <div class="mega" role="menu">
+              <div class="mega-grid">
+                <div>
+                  <div class="mega-title">Street Food</div>
+                  <a class="mega-link" href="#">Samosa</a>
+                  <a class="mega-link" href="#">Momo</a>
+                  <a class="mega-link" href="#">Chowmein</a>
+                  <a class="mega-link" href="#">Rolls</a>
+                </div>
+                <div>
+                  <div class="mega-title">Main Course</div>
+                  <a class="mega-link" href="#">Paneer Dishes</a>
+                  <a class="mega-link" href="#">Chicken Gravies</a>
+                  <a class="mega-link" href="#">Meals / Thalis</a>
+                  <div style="height:6px"></div>
+                  <div class="mega-title">Tandoori</div>
+                  <a class="mega-link" href="#">Chicken Tandoori</a>
+                  <a class="mega-link" href="#">Kebabs</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="desktop-item">
+            <a class="nav-link" href="#" role="menuitem">Snacks & Drinks <span class="caret">▾</span></a>
+            <div class="mega" role="menu">
+              <div class="mega-grid">
+                <div>
+                  <div class="mega-title">Sweet Treats</div>
+                  <a class="mega-link" href="#">Chocolates</a>
+                  <a class="mega-link" href="#">Biscuits</a>
+                </div>
+                <div>
+                  <div class="mega-title">Packaged</div>
+                  <a class="mega-link" href="#">Packaged Cakes</a>
+                  <a class="mega-link" href="#">Instant Noodles</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a class="nav-link" href="/mithai">Mithai</a>
+          <a class="nav-link" href="/bakery">Bakery & Cakes</a>
+          <a class="nav-link" href="/dairy">Dairy</a>
+          <a class="nav-link" href="/dry-fruits">Dry Fruits</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- inline search for desktop and quick access on mobile -->
+        <div class="search-inline" role="search" aria-label="Search products">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7" stroke-linecap="round" stroke-linejoin="round"></circle><path d="M21 21l-4.3-4.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <input id="q" placeholder="Search products, cakes, mithai..." aria-label="Search" />
+        </div>
+
+        <button class="icon-btn" id="wishlist" aria-label="Wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 6.5a5.6 5.6 0 0 0-7.9 0L12 7.4l-0.9-0.9a5.6 5.6 0 1 0-7.9 7.9L12 21.1l8.8-6.7a5.6 5.6 0 0 0 0-7.9z"></path></svg>
+          <span class="badge" id="wishBadge">3</span>
+        </button>
+
+        <button class="icon-btn" id="openSearch" aria-label="Open search on mobile">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7" stroke-linecap="round" stroke-linejoin="round"></circle><path d="M21 21l-4.3-4.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+
+        <div style="position:relative;">
+          <button class="icon-btn" id="openCart" aria-label="Open cart">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="20" r="1"></circle><circle cx="20" cy="20" r="1"></circle><path d="M1 1h4l2.6 13.2a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"></path></svg>
+            <span class="badge" id="cartBadge">5</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- mobile panel & overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <aside class="mobile-panel" id="mobilePanel" aria-hidden="true" aria-label="Mobile menu">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <a class="logo" href="/"><span class="mark">🍰</span><span class="name">Sublime <span style="font-weight:500;color:var(--muted)">Sweets</span></span></a>
+      <button class="icon-btn" id="closeMobile" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+
+    <nav style="margin-top:18px">
+      <a class="mobile-link" href="/">🏠 Home</a>
+      <a class="mobile-link" href="/products">📦 All Products</a>
+
+      <details class="mobile-section" style="border-radius:10px;padding:6px 0">
+        <summary class="mobile-link" style="cursor:pointer">📂 Categories</summary>
+        <div style="padding-left:12px">
+          <details>
+            <summary class="mobile-link">🍕 Food</summary>
+            <div style="padding-left:12px">
+              <a class="mobile-link" href="#">Samosa</a>
+              <a class="mobile-link" href="#">Momo</a>
+              <a class="mobile-link" href="#">Chowmein</a>
+            </div>
+          </details>
+
+          <a class="mobile-link" href="/mithai">🍬 Mithai</a>
+          <a class="mobile-link" href="/bakery">🎂 Bakery & Cakes</a>
+          <a class="mobile-link" href="/dairy">🥛 Dairy</a>
+          <a class="mobile-link" href="/dry-fruits">🌰 Dry Fruits</a>
+        </div>
+      </details>
+
+      <a class="mobile-link" href="/orders">📋 Your Orders</a>
+      <a class="mobile-link" href="/about">ℹ️ About Us</a>
+    </nav>
+
+    <div style="margin-top:18px;display:flex;gap:8px;align-items:center;justify-content:space-between">
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="icon-btn" id="mobileWishlist" aria-label="Wishlist mobile">❤️</button>
+        <button class="icon-btn" id="mobileCartBtn" aria-label="Cart mobile">🛒</button>
+      </div>
+      <div>
+        <label style="display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.03);padding:8px;border-radius:999px">
+          <input type="checkbox" id="themeToggle" aria-label="Toggle dark mode" />
+          <span style="font-size:14px">Dark</span>
+        </label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- cart panel -->
+  <aside class="cart-panel" id="cartPanel" aria-hidden="true" aria-label="Shopping cart">
+    <div style="padding:18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <strong>Shopping Cart</strong>
+      <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+    </div>
+    <div style="padding:18px;flex:1;overflow:auto" id="cartList">
+      <div style="color:var(--muted);">Your cart has items — demo content below</div>
+      <!-- sample item -->
+      <div style="display:flex;gap:12px;margin-top:12px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.03)">
+        <div style="width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white">🥟</div>
+        <div style="flex:1">
+          <div style="font-weight:700">Veg Momo (8 pcs)</div>
+          <div style="color:var(--muted);margin-top:6px">₹120</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+          <button class="icon-btn qty">−</button>
+          <div>2</div>
+          <button class="icon-btn qty">＋</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:18px;border-top:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-weight:700">Total</div>
+        <div style="color:var(--accent);font-weight:800">₹930</div>
+      </div>
+      <button style="width:100%;padding:12px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;color:white;font-weight:700;cursor:pointer">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- demo page content -->
+  <main style="max-width:1200px;margin:36px auto;padding:0 20px">
+    <h1 style="font-size:28px">Refined Navbar — Preview</h1>
+    <p style="color:var(--muted)">This version focuses on: performance, accessibility, polished visuals and smaller, maintainable JS surface.</p>
+  </main>
+
+  <script>
+    // Minimal, well-scoped JS for interactivity (no heavy listeners)
+    (function(){
+      const overlay = document.getElementById('overlay');
+      const mobilePanel = document.getElementById('mobilePanel');
+      const openMobile = document.getElementById('openMobile');
+      const closeMobile = document.getElementById('closeMobile');
+      const openCart = document.getElementById('openCart');
+      const cartPanel = document.getElementById('cartPanel');
+      const closeCart = document.getElementById('closeCart');
+      const q = document.getElementById('q');
+      const openSearch = document.getElementById('openSearch');
+      const themeToggle = document.getElementById('themeToggle');
+
+      // utility
+      function showOverlay(show){
+        overlay.classList.toggle('show', show);
+        document.body.style.overflow = show ? 'hidden' : '';
+      }
+
+      // mobile panel
+      openMobile && openMobile.addEventListener('click',()=>{mobilePanel.classList.add('open');showOverlay(true);mobilePanel.setAttribute('aria-hidden','false')});
+      closeMobile && closeMobile.addEventListener('click',()=>{mobilePanel.classList.remove('open');showOverlay(false);mobilePanel.setAttribute('aria-hidden','true')});
+
+      overlay.addEventListener('click',()=>{mobilePanel.classList.remove('open');cartPanel.classList.remove('open');showOverlay(false);cartPanel.setAttribute('aria-hidden','true')});
+
+      // cart
+      openCart && openCart.addEventListener('click',()=>{cartPanel.classList.add('open');showOverlay(true);cartPanel.setAttribute('aria-hidden','false')});
+      closeCart && closeCart.addEventListener('click',()=>{cartPanel.classList.remove('open');showOverlay(false);cartPanel.setAttribute('aria-hidden','true')});
+
+      // search input - debounce and keyboard
+      let timeout;
+      q && q.addEventListener('input', (e)=>{
+        clearTimeout(timeout);
+        timeout = setTimeout(()=>{
+          const val = q.value.trim();
+          if(val.length>1) console.log('searching:', val);
+        },250);
+      });
+
+      openSearch && openSearch.addEventListener('click', ()=>{ q.focus(); q.scrollIntoView({behavior:'smooth',block:'center'}); });
+
+      // theme toggle (light/dark)
+      const saved = localStorage.getItem('sublime_theme');
+      if(saved==='dark') document.documentElement.style.setProperty('--bg','#0f1112');
+
+      themeToggle && themeToggle.addEventListener('change', ()=>{
+        if(themeToggle.checked){
+          document.documentElement.style.setProperty('--bg','#0f1112');
+          localStorage.setItem('sublime_theme','dark');
+        } else {
+          document.documentElement.style.setProperty('--bg','#ffffff');
+          localStorage.setItem('sublime_theme','light');
+        }
+      });
+
+      // accessible escape handling
+      document.addEventListener('keydown', (e)=>{
+        if(e.key==='Escape'){
+          mobilePanel.classList.remove('open');cartPanel.classList.remove('open');showOverlay(false);
+        }
+      });
+
+      // optimized scroll: hide on scroll down, show on up
+      let last = 0; const nav = document.querySelector('.sublime-nav');
+      window.addEventListener('scroll', ()=>{
+        const cur = window.pageYOffset;
+        if(cur>last && cur>80) nav.style.transform='translateY(-100%)';
+        else nav.style.transform='translateY(0)';
+        last = cur;
+      }, {passive:true});
+
+      // progressive enhancement: reduce motion for prefers-reduced-motion
+      if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+        document.querySelectorAll('*').forEach(n=>n.style.transition='none');
+      }
+
+    })();
+  </script>
+</body>
+</html>
