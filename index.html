@@ -2270,6 +2270,10 @@
    📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
    Bigger images, premium text, no button clutter
    ============================================ */
+/* ============================================
+   📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
+   4 BIGGER images that FIT PERFECTLY in the card
+   ============================================ */
 
 @media (max-width: 600px) {
     /* Section spacing optimization */
@@ -2283,13 +2287,13 @@
         letter-spacing: -1.5px;
     }
     
-    /* Grid: Still 3 columns but more breathing room */
+    /* Grid: 3 columns with tight spacing */
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
     
-    /* CARD: Taller to accommodate bigger images */
+    /* CARD: Compact but premium */
     .category-card {
         border-radius: 18px;
         cursor: pointer;
@@ -2297,14 +2301,14 @@
         overflow: hidden;
     }
     
-    /* IMAGES: Much bigger - 2x3 grid with better aspect ratio */
+    /* IMAGES: 2x2 GRID - FITS PERFECTLY */
     .category-products {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
         gap: 2px;
         padding: 2px;
         border-radius: 18px 18px 0 0;
-        min-height: 180px; /* Ensures good size even on small screens */
+        aspect-ratio: 1; /* THIS IS KEY - makes it square and compact */
     }
     
     .product-item {
@@ -2312,15 +2316,26 @@
         border-radius: 6px;
     }
     
-    /* Show all 6 items on mobile */
-    .product-item:nth-child(5),
-    .product-item:nth-child(6) {
-        display: flex !important;
+    /* Hide items 5 and 6 on mobile - show only 4 */
+    .product-item:nth-child(n+5) {
+        display: none !important;
+    }
+    
+    /* Make the 4 visible images bigger with better quality */
+    .product-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .category-card:active .product-item img {
+        transform: scale(1.08);
     }
     
     /* FOOTER: Premium text only, no button */
     .category-footer {
-        padding: 14px 12px;
+        padding: 14px 10px;
         flex-direction: column;
         align-items: center;
         gap: 0;
@@ -2345,8 +2360,10 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        padding: 3px 0;
+        padding: 2px 0;
         transition: all 0.3s ease;
+        text-transform: capitalize;
+        line-height: 1.2;
     }
     
     /* Dark mode title */
@@ -2357,9 +2374,10 @@
         background-clip: text;
     }
     
-    /* Card hover effect - subtle lift */
+    /* Card tap effect - subtle and premium */
     .category-card:active {
-        transform: scale(0.97);
+        transform: scale(0.98);
+        transition: transform 0.15s ease;
     }
     
     /* Footer hover effect */
@@ -2379,16 +2397,58 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
+    
+    /* Add subtle card hover state */
+    .category-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 165, 0, 0.1));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        border-radius: 18px;
+    }
+    
+    .category-card:active::after {
+        opacity: 1;
+    }
 }
 
 /* ============================================
-   📱 EXTRA SMALL SCREENS - BELOW 400PX
-   Even more compact but still premium
+   📱 SMALL SCREENS - 480-600PX
+   ============================================ */
+
+@media (max-width: 480px) {
+    .categories-section {
+        padding: 32px 10px 38px 10px;
+    }
+    
+    .section-title {
+        font-size: 30px;
+        margin-bottom: 26px;
+    }
+    
+    .categories-grid {
+        gap: 9px;
+    }
+    
+    .category-footer {
+        padding: 13px 10px;
+    }
+    
+    .category-footer .category-title {
+        font-size: 14px;
+    }
+}
+
+/* ============================================
+   📱 EXTRA SMALL SCREENS - 400-480PX
    ============================================ */
 
 @media (max-width: 400px) {
     .categories-section {
-        padding: 30px 10px 35px 10px;
+        padding: 30px 8px 35px 8px;
     }
     
     .section-title {
@@ -2405,18 +2465,24 @@
     }
     
     .category-products {
-        min-height: 160px;
         border-radius: 16px 16px 0 0;
     }
     
+    .product-item {
+        border-radius: 5px;
+    }
+    
     .category-footer {
-        padding: 12px 10px;
+        padding: 12px 8px;
         border-radius: 0 0 16px 16px;
     }
     
     .category-footer .category-title {
-        font-size: 14px;
-        font-weight: 800;
+        font-size: 13px;
+    }
+    
+    .category-card::after {
+        border-radius: 16px;
     }
 }
 
@@ -2427,12 +2493,12 @@
 
 @media (max-width: 360px) {
     .categories-section {
-        padding: 25px 8px 30px 8px;
+        padding: 28px 8px 32px 8px;
     }
     
     .section-title {
         font-size: 26px;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
     }
     
     .categories-grid {
@@ -2440,11 +2506,20 @@
     }
     
     .category-products {
-        min-height: 145px;
+        gap: 2px;
+        padding: 2px;
+    }
+    
+    .product-item {
+        border-radius: 5px;
+    }
+    
+    .category-footer {
+        padding: 11px 8px;
     }
     
     .category-footer .category-title {
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 /* Reduce hero slider height on mobile */
