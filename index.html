@@ -2272,74 +2272,94 @@
    ============================================ */
 /* ============================================
    📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
-   4 BIGGER images that FIT PERFECTLY in the card
+   ONE BIG HERO IMAGE - MAXIMUM SIZE & IMPACT
    ============================================ */
 
 @media (max-width: 600px) {
     /* Section spacing optimization */
     .categories-section {
-        padding: 35px 12px 40px 12px;
+        padding: 40px 12px 45px 12px;
     }
     
     .section-title {
-        font-size: 32px;
-        margin-bottom: 28px;
+        font-size: 34px;
+        margin-bottom: 30px;
         letter-spacing: -1.5px;
     }
     
-    /* Grid: 3 columns with tight spacing */
+    /* Grid: 3 columns with good spacing */
     .categories-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 12px;
     }
     
-    /* CARD: Compact but premium */
+    /* CARD: Taller and more premium */
     .category-card {
-        border-radius: 18px;
+        border-radius: 20px;
         cursor: pointer;
         position: relative;
         overflow: hidden;
     }
     
-    /* IMAGES: 2x2 GRID - FITS PERFECTLY */
+    /* SINGLE IMAGE CONTAINER - BIGGER & TALLER */
     .category-products {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 2px;
-        padding: 2px;
-        border-radius: 18px 18px 0 0;
-        aspect-ratio: 1; /* THIS IS KEY - makes it square and compact */
+        display: block;
+        padding: 0;
+        border-radius: 20px 20px 0 0;
+        aspect-ratio: 0.65; /* Taller rectangle instead of square */
+        overflow: hidden;
+        position: relative;
+        min-height: 140px; /* Ensures good minimum size */
     }
     
-    .product-item {
-        aspect-ratio: 1;
-        border-radius: 6px;
+    /* Show ONLY the first image */
+    .product-item:first-child {
+        display: flex !important;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
     
-    /* Hide items 5 and 6 on mobile - show only 4 */
-    .product-item:nth-child(n+5) {
+    /* Hide all other images */
+    .product-item:not(:first-child) {
         display: none !important;
     }
     
-    /* Make the 4 visible images bigger with better quality */
-    .product-item img {
+    /* The single image - full size, perfect fit */
+    .product-item:first-child img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    .category-card:active .product-item img {
-        transform: scale(1.08);
+    /* Zoom effect on tap */
+    .category-card:active .product-item:first-child img {
+        transform: scale(1.12);
     }
     
-    /* FOOTER: Premium text only, no button */
+    /* Gradient overlay for depth */
+    .product-item:first-child::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+    
+    .category-card:active .product-item:first-child::before {
+        opacity: 1;
+    }
+    
+    /* FOOTER: Bigger and more prominent */
     .category-footer {
-        padding: 14px 10px;
+        padding: 16px 12px;
         flex-direction: column;
         align-items: center;
         gap: 0;
-        border-radius: 0 0 18px 18px;
+        border-radius: 0 0 20px 20px;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -2349,21 +2369,21 @@
         display: none !important;
     }
     
-    /* PREMIUM TITLE: Bigger, centered, gradient */
+    /* PREMIUM TITLE: BIGGER & BOLDER */
     .category-footer .category-title {
-        font-size: 15px;
-        font-weight: 800;
+        font-size: 16px;
+        font-weight: 900;
         text-align: center;
         width: 100%;
-        letter-spacing: -0.3px;
+        letter-spacing: -0.4px;
         background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        padding: 2px 0;
+        padding: 3px 0;
         transition: all 0.3s ease;
         text-transform: capitalize;
-        line-height: 1.2;
+        line-height: 1.3;
     }
     
     /* Dark mode title */
@@ -2376,7 +2396,7 @@
     
     /* Card tap effect - subtle and premium */
     .category-card:active {
-        transform: scale(0.98);
+        transform: scale(0.97);
         transition: transform 0.15s ease;
     }
     
@@ -2387,7 +2407,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        transform: scale(1.05);
+        transform: scale(1.08);
     }
     
     .sublime-navbar.dark-mode ~ .categories-section .category-footer:hover .category-title,
@@ -2403,11 +2423,11 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 165, 0, 0.1));
+        background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 165, 0, 0.12));
         opacity: 0;
         transition: opacity 0.3s ease;
         pointer-events: none;
-        border-radius: 18px;
+        border-radius: 20px;
     }
     
     .category-card:active::after {
@@ -2417,11 +2437,44 @@
 
 /* ============================================
    📱 SMALL SCREENS - 480-600PX
+   Still big and prominent
    ============================================ */
 
 @media (max-width: 480px) {
     .categories-section {
-        padding: 32px 10px 38px 10px;
+        padding: 38px 10px 42px 10px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 28px;
+    }
+    
+    .categories-grid {
+        gap: 11px;
+    }
+    
+    .category-products {
+        min-height: 130px;
+    }
+    
+    .category-footer {
+        padding: 15px 10px;
+    }
+    
+    .category-footer .category-title {
+        font-size: 15px;
+    }
+}
+
+/* ============================================
+   📱 EXTRA SMALL SCREENS - 400-480PX
+   Optimized but still prominent
+   ============================================ */
+
+@media (max-width: 400px) {
+    .categories-section {
+        padding: 35px 10px 40px 10px;
     }
     
     .section-title {
@@ -2430,25 +2483,41 @@
     }
     
     .categories-grid {
-        gap: 9px;
+        gap: 10px;
+    }
+    
+    .category-card {
+        border-radius: 18px;
+    }
+    
+    .category-products {
+        border-radius: 18px 18px 0 0;
+        min-height: 120px;
     }
     
     .category-footer {
-        padding: 13px 10px;
+        padding: 14px 10px;
+        border-radius: 0 0 18px 18px;
     }
     
     .category-footer .category-title {
         font-size: 14px;
+        font-weight: 800;
+    }
+    
+    .category-card::after {
+        border-radius: 18px;
     }
 }
 
 /* ============================================
-   📱 EXTRA SMALL SCREENS - 400-480PX
+   📱 TINY SCREENS - 360-400PX
+   Compact but still impactful
    ============================================ */
 
-@media (max-width: 400px) {
+@media (max-width: 360px) {
     .categories-section {
-        padding: 30px 8px 35px 8px;
+        padding: 32px 8px 38px 8px;
     }
     
     .section-title {
@@ -2457,7 +2526,7 @@
     }
     
     .categories-grid {
-        gap: 8px;
+        gap: 9px;
     }
     
     .category-card {
@@ -2466,14 +2535,11 @@
     
     .category-products {
         border-radius: 16px 16px 0 0;
-    }
-    
-    .product-item {
-        border-radius: 5px;
+        min-height: 110px;
     }
     
     .category-footer {
-        padding: 12px 8px;
+        padding: 13px 8px;
         border-radius: 0 0 16px 16px;
     }
     
@@ -2487,13 +2553,13 @@
 }
 
 /* ============================================
-   📱 TINY SCREENS - BELOW 360PX
-   iPhone SE and smaller
+   📱 ULTRA TINY SCREENS - BELOW 360PX
+   iPhone SE 1st gen and similar
    ============================================ */
 
-@media (max-width: 360px) {
+@media (max-width: 340px) {
     .categories-section {
-        padding: 28px 8px 32px 8px;
+        padding: 30px 8px 35px 8px;
     }
     
     .section-title {
@@ -2502,20 +2568,15 @@
     }
     
     .categories-grid {
-        gap: 7px;
+        gap: 8px;
     }
     
     .category-products {
-        gap: 2px;
-        padding: 2px;
-    }
-    
-    .product-item {
-        border-radius: 5px;
+        min-height: 105px;
     }
     
     .category-footer {
-        padding: 11px 8px;
+        padding: 12px 8px;
     }
     
     .category-footer .category-title {
@@ -3121,7 +3182,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/mithai'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop" alt="Mithai 1">
+                    <img src="images/gpt4.png" alt="Mithai 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=400&h=400&fit=crop" alt="Mithai 2">
@@ -3155,7 +3216,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/snacks-drinks'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop" alt="Snack 1">
+                    <img src="images/gpt2.png" alt="Snack 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Snack 2">
@@ -3223,7 +3284,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/street-foods'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=400&fit=crop" alt="Street Food 1">
+                    <img src="images/gpt3.png" alt="Street Food 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1626074353765-517a65eeafb3?w=400&h=400&fit=crop" alt="Street Food 2">
@@ -3257,7 +3318,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/main-course'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=400&h=400&fit=crop" alt="Main Course 1">
+                    <img src="images/gpt1.png" alt="Main Course 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" alt="Main Course 2">
@@ -3324,7 +3385,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/bakery/cakes'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop" alt="Cake 1">
+                    <img src="images/gpt8.png" alt="Cake 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&h=400&fit=crop" alt="Cake 2">
@@ -3358,7 +3419,7 @@ body.dark-mode article {
         <div class="category-card" onclick="location.href='/category/bakery/pastries'">
             <div class="category-products">
                 <div class="product-item">
-                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop" alt="Pastry 1">
+                    <img src="images/gpt6.png" alt="Pastry 1">
                 </div>
                 <div class="product-item">
                     <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop" alt="Pastry 2">
