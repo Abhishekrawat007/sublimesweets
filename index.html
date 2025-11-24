@@ -2266,63 +2266,187 @@
         font-size: 9px;
     }
     
-    /* ============================================
-   📱 MOBILE COMPACT BUTTON - Below 600px
-   Small, slim button that doesn't bloat cards
+  /* ============================================
+   📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
+   Bigger images, premium text, no button clutter
    ============================================ */
+
 @media (max-width: 600px) {
+    /* Section spacing optimization */
+    .categories-section {
+        padding: 35px 12px 40px 12px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 28px;
+        letter-spacing: -1.5px;
+    }
+    
+    /* Grid: Still 3 columns but more breathing room */
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    /* CARD: Taller to accommodate bigger images */
+    .category-card {
+        border-radius: 18px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* IMAGES: Much bigger - 2x3 grid with better aspect ratio */
+    .category-products {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 2px;
+        padding: 2px;
+        border-radius: 18px 18px 0 0;
+        min-height: 180px; /* Ensures good size even on small screens */
+    }
+    
+    .product-item {
+        aspect-ratio: 1;
+        border-radius: 6px;
+    }
+    
+    /* Show all 6 items on mobile */
+    .product-item:nth-child(5),
+    .product-item:nth-child(6) {
+        display: flex !important;
+    }
+    
+    /* FOOTER: Premium text only, no button */
     .category-footer {
+        padding: 14px 12px;
         flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        padding: 12px 12px;
+        align-items: center;
+        gap: 0;
+        border-radius: 0 0 18px 18px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    .category-title {
-        font-size: 13px;
-        text-align: left;
+    /* Hide the View All button on mobile */
+    .category-footer .view-all-btn {
+        display: none !important;
+    }
+    
+    /* PREMIUM TITLE: Bigger, centered, gradient */
+    .category-footer .category-title {
+        font-size: 15px;
+        font-weight: 800;
+        text-align: center;
         width: 100%;
+        letter-spacing: -0.3px;
+        background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding: 3px 0;
+        transition: all 0.3s ease;
     }
     
-    .view-all-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 6px 12px;  /* Much smaller padding */
-        font-size: 10px;     /* Smaller text */
-        border-radius: 6px;  /* Tighter radius */
-        gap: 4px;
+    /* Dark mode title */
+    .sublime-navbar.dark-mode ~ .categories-section .category-footer .category-title {
+        background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
-    .view-all-btn svg {
-        width: 12px;
-        height: 12px;
+    /* Card hover effect - subtle lift */
+    .category-card:active {
+        transform: scale(0.97);
+    }
+    
+    /* Footer hover effect */
+    .category-footer:hover .category-title,
+    .category-card:hover .category-footer .category-title {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transform: scale(1.05);
+    }
+    
+    .sublime-navbar.dark-mode ~ .categories-section .category-footer:hover .category-title,
+    .sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-footer .category-title {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 }
+
+/* ============================================
+   📱 EXTRA SMALL SCREENS - BELOW 400PX
+   Even more compact but still premium
+   ============================================ */
 
 @media (max-width: 400px) {
+    .categories-section {
+        padding: 30px 10px 35px 10px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+    
+    .categories-grid {
+        gap: 8px;
+    }
+    
+    .category-card {
+        border-radius: 16px;
+    }
+    
+    .category-products {
+        min-height: 160px;
+        border-radius: 16px 16px 0 0;
+    }
+    
     .category-footer {
-        padding: 10px 10px;
-        gap: 6px;
+        padding: 12px 10px;
+        border-radius: 0 0 16px 16px;
     }
     
-    .category-title {
-        font-size: 12px;
-    }
-    
-    .view-all-btn {
-        padding: 5px 10px;   /* Even smaller */
-        font-size: 9px;
-    }
-    
-    .view-all-btn svg {
-        width: 10px;
-        height: 10px;
+    .category-footer .category-title {
+        font-size: 14px;
+        font-weight: 800;
     }
 }
+
 /* ============================================
-   🔧 FIX SPACING - Reduce Gap Between Sections
+   📱 TINY SCREENS - BELOW 360PX
+   iPhone SE and smaller
    ============================================ */
 
+@media (max-width: 360px) {
+    .categories-section {
+        padding: 25px 8px 30px 8px;
+    }
+    
+    .section-title {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+    
+    .categories-grid {
+        gap: 7px;
+    }
+    
+    .category-products {
+        min-height: 145px;
+    }
+    
+    .category-footer .category-title {
+        font-size: 13px;
+    }
+}
 /* Reduce hero slider height on mobile */
 @media (max-width: 768px) {
     .hero-slider {
@@ -2915,7 +3039,7 @@ body.dark-mode article {
      ============================================ -->
     
 <div class="categories-section">
-    <h2 class="section-title">Bestsellers</h2>
+    <h2 class="section-title">Categories</h2>
     
     <div class="categories-grid">
         <!-- Mithai (Indian Sweets) -->
@@ -2975,7 +3099,7 @@ body.dark-mode article {
                 </div>
             </div>
             <div class="category-footer">
-                <span class="category-title">Snacks/Drinks</span>
+                <span class="category-title">Snacks</span>
                 <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/snacks-drinks'">
                     View All
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
