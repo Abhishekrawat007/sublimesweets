@@ -1,0 +1,3 @@
+[build]
+  publish = "public"   # change if your built files are in a different folder
+  command = ""
