@@ -4,1336 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sublime Sweets - Premium Navbar</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/autoslideshow.css">
+    <link rel="stylesheet" href="css/category.css">
+    <link rel="stylesheet" href="css/ice-cream.css">
+    <link rel="stylesheet" href="css/main-course.css">
+    <link rel="stylesheet" href="css/filter-section.css">
+    <link rel="stylesheet" href="css/mobilefilter-section.css">
     <style>
-        /* RESET & BASE - Scoped to navbar only */
-        .sublime-navbar * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .sublime-navbar {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 9999;
-            background: var(--nav-bg);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        /* LIGHT MODE (Default) */
-        .sublime-navbar {
-            --nav-bg: #ffffff;
-            --nav-text: #1a1a1a;
-            --nav-text-secondary: #666666;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --hover-bg: #f5f5f5;
-            --dropdown-bg: #ffffff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --accent: #ff6b6b;
-            --accent-hover: #ff5252;
-            --overlay: rgba(0, 0, 0, 0.5);
-            --menu-bg: #ffffff;
-        }
-
-        /* DARK MODE */
-        .sublime-navbar.dark-mode {
-            --nav-bg: #1a1a1a;
-            --nav-text: #ffffff;
-            --nav-text-secondary: #b0b0b0;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --hover-bg: #2a2a2a;
-            --dropdown-bg: #252525;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            --accent: #ff6b6b;
-            --accent-hover: #ff5252;
-            --overlay: rgba(0, 0, 0, 0.7);
-            --menu-bg: #1a1a1a;
-        }
-
-        .sublime-navbar.scrolled {
-            box-shadow: var(--shadow);
-        }
-
-        /* MAIN NAVBAR CONTAINER */
-        .navbar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-
-        /* LOGO */
-        .navbar-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent);
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .navbar-logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-icon {
-            font-size: 28px;
-        }
-
-        /* MOBILE LEFT SECTION */
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* MOBILE RIGHT SECTION */
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* ICON BUTTONS */
-        .icon-btn {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            color: var(--nav-text);
-        }
-
-        .icon-btn:hover {
-            background: var(--hover-bg);
-            transform: scale(1.1);
-        }
-
-        .icon-btn:active {
-            transform: scale(0.95);
-        }
-
-        .icon-btn svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        /* BADGE */
-        .badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: var(--accent);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 5px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* HAMBURGER MENU */
-        .hamburger {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .hamburger:hover {
-            background: var(--hover-bg);
-        }
-
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--nav-text);
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        /* MOBILE MENU OVERLAY - SOLID COLOR */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 9998;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* MOBILE MENU - SOLID PREMIUM BACKGROUND */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 85%;
-            max-width: 400px;
-            height: 100vh;
-            background: var(--menu-bg);
-            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 9999;
-            overflow-y: auto;
-            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        .mobile-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background: var(--menu-bg);
-            z-index: 10;
-        }
-
-        .close-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            color: var(--nav-text);
-        }
-
-        .close-btn:hover {
-            background: var(--hover-bg);
-            transform: rotate(90deg);
-        }
-
-        .mobile-menu-content {
-            padding: 20px;
-            background: var(--menu-bg);
-        }
-
-        /* MOBILE MENU ITEMS */
-        .mobile-menu-item {
-            margin-bottom: 8px;
-        }
-
-
-        .menu-icon {
-            margin-right: 12px;
-            font-size: 20px;
-        }
-
-        .arrow-icon {
-            transition: transform 0.3s ease;
-            font-size: 14px;
-            color: var(--nav-text-secondary);
-        }
-
-        .mobile-submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            padding-left: 20px;
-        }
-
-        .mobile-submenu.active {
-            max-height: 2000px;
-        }
-
-
-        /* DARK MODE TOGGLE */
-        .dark-mode-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px;
-            background: var(--hover-bg);
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-
-        .dark-mode-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--nav-text);
-            font-weight: 500;
-        }
-
-       .toggle-switch {
-    position: relative;
-    width: 50px;
-    height: 26px;
-    background: #d0d0d0;
-    border-radius: 13px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.toggle-switch.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-color: #667eea;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu .toggle-switch {
-    background: #3a3a3a;
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu .toggle-switch.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-color: #667eea;
-}
-
-        .toggle-slider {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-switch.active .toggle-slider {
-            transform: translateX(24px);
-        }
-
-        /* DESKTOP MENU (Hidden on mobile) */
-        .desktop-menu {
-            display: none;
-        }
-
-        /* SEARCH MODAL - SOLID BACKGROUND */
-        .search-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 10000;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 100px;
-        }
-
-        .search-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-     
-        .search-modal.active .search-modal-content {
-            transform: translateY(0);
-        }
-   /* REPLACE existing .search-input-wrapper, .search-input, .search-icon-inside */
-.search-input-wrapper {
-  position: relative;
-  margin-bottom: 18px;
-  margin-top: 8px;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  display: block;
-}
-
-.search-input {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;                    /* important so padding won't grow the element wider */
-  padding: 12px 44px 12px 16px;              /* smaller vertical padding and controlled right padding for icon */
-  border: 2px solid var(--border-color);
-  border-radius: 12px;                       /* slightly smaller radius for compactness */
-  font-size: 15px;
-  background: var(--hover-bg);
-  color: var(--nav-text);
-  outline: none;
-  transition: box-shadow .2s ease, border-color .15s ease;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
-}
-
-.search-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-}
-
-/* icon inside */
-.search-icon-inside {
-  position: absolute;
-  right: 14px;                               /* move icon inwards so it doesn't push width */
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--nav-text-secondary);
-  pointer-events: none;
-}
-
-/* REPLACE existing .search-modal-content */
-.search-modal-content {
-  box-sizing: border-box;                    /* ensure padding is included in width */
-  background: var(--menu-bg);
-  padding: 20px;
-  border-radius: 20px;
-  width: 94%;
-  max-width: 640px;                          /* slightly smaller max width */
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
-  transform: translateY(-40px);
-  transition: transform 0.25s ease;
-  position: relative;
-  border: 1px solid var(--border-color);
-  overflow: visible;                         /* keep suggestions visible */
-}
-
-
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
-    border-color: rgba(255, 255, 255, 0.1);
-
-    color: var(--nav-text);
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.search-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-input {
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-input:focus {
-    border-color: var(--accent) !important;
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.5) !important;
-}
-.search-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    color: var(--nav-text-secondary);
-    z-index: 10;
-}
-
-.search-close-btn:hover {
-    background: var(--hover-bg);
-    color: var(--accent);
-    transform: scale(1.1);
-}
-
-.search-close-btn:active {
-    transform: scale(0.95);
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--accent);
-}
-.search-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.search-modal-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--nav-text);
-    letter-spacing: -0.5px;
-}
-.search-suggestions-label {
-    margin-bottom: 12px;
-    color: var(--nav-text-secondary);
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-title {
-    color: var(--nav-text);
-}
-
-       
-        .search-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-    .search-tag {
-    padding: 8px 16px;
-    background: var(--hover-bg);
-    border-radius: 20px;
-    font-size: 14px;
-    color: var(--nav-text);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.search-tag:hover {
-    background: var(--accent);
-    color: white;
-    transform: translateY(-2px);
-}
-
-        /* CART SIDEBAR - SOLID BACKGROUND */
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 90%;
-            max-width: 400px;
-            height: 100vh;
-            background: var(--menu-bg);
-            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 10001;
-            box-shadow: -4px 0 30px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-sidebar.active {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            background: var(--menu-bg);
-        }
-
-        .cart-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--nav-text);
-        }
-
-        .cart-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background: var(--menu-bg);
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 15px;
-            padding: 15px;
-            background: var(--hover-bg);
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .cart-item-image {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent) 0%, #ff8585 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-name {
-            font-weight: 600;
-            color: var(--nav-text);
-            margin-bottom: 5px;
-        }
-
-        .cart-item-price {
-            color: var(--accent);
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qty-btn {
-            width: 28px;
-            height: 28px;
-            border: 1px solid var(--border-color);
-            background: var(--nav-bg);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--nav-text);
-            transition: all 0.3s ease;
-        }
-
-        .qty-btn:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            background: var(--menu-bg);
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--nav-text);
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--accent) 0%, #ff8585 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
-        }
-
-        /* DESKTOP STYLES */
-       /* TABLET/SMALL LAPTOP - Show desktop menu but keep mobile search */
-@media (min-width: 1200px) {
-    .hamburger {
-        display: none;
-    }
-
-    .navbar-container {
-        height: 80px;
-    }
-
-    .navbar-logo {
-        font-size: 28px;
-    }
-
-    .desktop-menu {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        flex: 1;
-        margin: 0 40px;
-    }
-
-    .desktop-menu-item {
-        position: relative;
-    }
-
-    /* MEGA DROPDOWN */
-.mega-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--dropdown-bg);
-    border-radius: 20px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-    padding: 35px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    min-width: 650px;
-    border: 1px solid var(--border-color);
-    z-index: 1000;
-    margin-top: 5px;
-}
-
-.sublime-navbar.dark-mode .mega-dropdown {
-    background: #252525;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.desktop-menu-item::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: 20px;
-    display: block;
-}
-
-.desktop-menu-item:hover .mega-dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-}
-
-.mega-dropdown-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
-
-.mega-dropdown-column {
-    padding: 0;
-}
-
-.mega-dropdown-title {
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 18px;
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.sublime-navbar.dark-mode .mega-dropdown-title {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-.mega-dropdown-item {
-    display: flex;
-    align-items: center;
-    padding: 14px 16px;
-    color: var(--nav-text);
-    text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    position: relative;
-    overflow: hidden;
-}
-
-.mega-dropdown-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.mega-dropdown-item:hover {
-    background: var(--hover-bg);
-    transform: translateX(8px);
-    color: var(--accent);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.mega-dropdown-item:hover::before {
-    transform: scaleY(1);
-}
-
-.sublime-navbar.dark-mode .mega-dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-    .navbar-right {
-        gap: 10px;
-    }
-
-    /* Keep mobile search icon visible until 1465px */
-    .icon-btn.mobile-search-only {
-        display: flex !important;
-    }
-}
-
-/* LARGE LAPTOP - Show desktop search bar */
-@media (min-width: 1465px) {
-    .desktop-search {
-        display: flex !important;
-        align-items: center;
-        background: var(--hover-bg);
-        border-radius: 50px;
-        padding: 10px 20px;
-        gap: 10px;
-        min-width: 250px;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-    }
-
-    .desktop-search:hover,
-    .desktop-search:focus-within {
-        background: var(--nav-bg);
-        border-color: var(--accent);
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
-    }
-
-    .sublime-navbar.dark-mode .desktop-search {
-        background: #2a2a2a;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .sublime-navbar.dark-mode .desktop-search:hover,
-    .sublime-navbar.dark-mode .desktop-search:focus-within {
-        background: #333;
-        border-color: var(--accent);
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-    }
-
-    .sublime-navbar.dark-mode .desktop-search svg {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    .desktop-search input {
-        border: none;
-        background: transparent;
-        outline: none;
-        color: var(--nav-text);
-        font-size: 14px;
-        width: 100%;
-    }
-
-    .desktop-search input::placeholder {
-        color: var(--nav-text-secondary);
-    }
-
-    .desktop-search svg {
-        flex-shrink: 0;
-    }
-
-    /* Hide mobile search button on large screens */
-    .icon-btn.mobile-search-only {
-        display: none !important;
-    }
-}
-        /* TABLET ADJUSTMENTS */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .navbar-logo {
-                font-size: 26px;
-            }
-
-            .icon-btn {
-                width: 44px;
-                height: 44px;
-            }
-
-            .icon-btn svg {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
-        /* SCROLLBAR STYLING */
-        .mobile-menu::-webkit-scrollbar,
-        .cart-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .mobile-menu::-webkit-scrollbar-track,
-        .cart-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .mobile-menu::-webkit-scrollbar-thumb,
-        .cart-content::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 3px;
-        }
-
-        .mobile-menu::-webkit-scrollbar-thumb:hover,
-        .cart-content::-webkit-scrollbar-thumb:hover {
-            background: var(--nav-text-secondary);
-        }
-/* ========== SOLID BACKGROUND FIX ========== */
-.mobile-menu,
-.mobile-menu-header,
-.mobile-menu-content,
-.cart-sidebar,
-.cart-header,
-.cart-content,
-.cart-footer,
-.search-modal-content {
-  background: #ffffff !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu,
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-header,
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-content,
-.sublime-navbar.dark-mode ~ .cart-sidebar,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-header,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer,
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-  background: #1a1a1a !important;
-  color: #ffffff !important;
-}
-/* ========== TEXT VISIBILITY FIX ========== */
-/* Active link in mobile menu */
-.mobile-menu .mobile-menu-link.active,
-.mobile-menu .mobile-menu-link.active span,
-.mobile-menu .mobile-menu-link.active .menu-icon {
-  background: linear-gradient(90deg, #ff6b6b 0%, #ff5252 100%) !important;
-  color: #ffffff !important;
-}
-
-/* Checkout button */
-.cart-sidebar .checkout-btn {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ff8585 100%) !important;
-  color: #ffffff !important;
-  border: none !important;
-}
-
-/* Cart total */
-.cart-sidebar .cart-total span:last-child {
-  color: #ff6b6b !important;
-  font-weight: 800 !important;
-}
-
-/* Dark mode text fixes */
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-link,
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-item-name,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-title,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-total span:first-child {
-  color: #ffffff !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-input {
-  background: #2a2a2a !important;
-  color: #ffffff !important;
-  border-color: rgba(255,255,255,0.1) !important;
-}
-/* ========== SPACING & SCROLLING FIX ========== */
-/* Fix gap between Services and Dark Mode toggle */
-.dark-mode-toggle {
-  margin-top: 8px !important;
-}
-
-/* Make mobile menu properly scrollable */
-.mobile-menu {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-.mobile-menu-content {
-  padding-bottom: 100px !important; /* Extra space at bottom for scrolling */
-}
-
-/* Ensure cart fits on all screen sizes */
-.cart-sidebar {
-  max-height: 100vh !important;
-  overflow: hidden !important;
-}
-
-.cart-content {
-  flex: 1 !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-  max-height: calc(100vh - 200px) !important; /* Account for header and footer */
-}
-
-.cart-header {
-  flex-shrink: 0 !important;
-}
-
-.cart-footer {
-  flex-shrink: 0 !important;
-}
-
-/* Better scrollbar for mobile */
-.mobile-menu::-webkit-scrollbar,
-.cart-content::-webkit-scrollbar {
-  width: 4px !important;
-}
-
-.mobile-menu::-webkit-scrollbar-thumb,
-.cart-content::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.2) !important;
-  border-radius: 2px !important;
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu::-webkit-scrollbar-thumb,
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.2) !important;
-}
-/* EXTRA SMALL SCREENS */
-@media (max-width: 375px) {
-    .navbar-container {
-        padding: 0 12px;
-        height: 65px;
-    }
-    
-    .navbar-logo {
-        font-size: 20px;
-    }
-    
-    .logo-icon {
-        font-size: 24px;
-    }
-    
-    .navbar-left,
-    .navbar-right {
-        gap: 8px;
-    }
-    
-    .icon-btn {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .icon-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .hamburger {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .hamburger span {
-        width: 20px;
-    }
-    
-    .badge {
-        font-size: 9px;
-        min-width: 16px;
-        height: 16px;
-        top: 2px;
-        right: 2px;
-    }
-}
-
-@media (max-width: 320px) {
-    .navbar-container {
-        padding: 0 10px;
-        height: 60px;
-    }
-    
-    .navbar-logo {
-        font-size: 18px;
-    }
-    
-    .logo-icon {
-        font-size: 22px;
-    }
-    
-    .navbar-left,
-    .navbar-right {
-        gap: 6px;
-    }
-    
-    .icon-btn {
-        width: 34px;
-        height: 34px;
-    }
-    
-    .icon-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-}
-/* SEARCH MODAL RESPONSIVE */
-@media (max-width: 480px) {
- .search-modal-content {
-    padding: 18px;
-    width: 96%;
-    max-width: none;
-    border-radius: 16px;
-  }
-    
-    .search-modal-title {
-        font-size: 18px;
-    }
-    
-    .search-close-btn {
-        width: 36px;
-        height: 36px;
-        top: 16px;
-        right: 16px;
-    }
-    
-    .search-input {
-    padding: 10px 40px 10px 12px;            /* compact padding for tiny screens */
-    font-size: 14px;
-  }
-    
-    .search-tag {
-        padding: 8px 14px;
-        font-size: 13px;
-    }
-     .search-icon-inside { right: 12px; }
-
-}
-.mobile-submenu-item {
-    padding: 14px 18px;
-    color: var(--nav-text);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    margin: 6px 0;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.mobile-submenu-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--accent) 0%, #ff8585 100%);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.mobile-submenu-item:hover {
-    background: var(--hover-bg);
-    color: var(--accent);
-    transform: translateX(8px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-submenu-item:hover::before {
-    transform: scaleY(1);
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item {
-    color: #e0e0e0;
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-submenu-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--accent);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.submenu-emoji {
-    font-size: 18px;
-    display: inline-block;
-    min-width: 24px;
-}
-.desktop-menu-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 20px;
-    color: var(--nav-text);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    cursor: pointer;
-    position: relative;
-}
-
-.desktop-menu-link::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 20px;
-    right: 20px;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.desktop-menu-link:hover {
-    background: var(--hover-bg);
-    color: var(--accent);
-    transform: translateY(-2px);
-}
-
-.desktop-menu-link:hover::after {
-    transform: scaleX(1);
-}
-
-.desktop-menu-link.active {
-    background: linear-gradient(135deg, var(--accent) 0%, #ff5252 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-}
-
-.desktop-menu-link.active::after {
-    display: none;
-}
-
-.sublime-navbar.dark-mode .desktop-menu-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-}
-.mobile-menu-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 18px;
-    color: var(--nav-text);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 14px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.mobile-menu-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--accent) 0%, #ff8585 100%);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.mobile-menu-link:hover {
-    background: var(--hover-bg);
-    transform: translateX(6px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.mobile-menu-link:hover::before {
-    transform: scaleY(1);
-}
-
-.mobile-menu-link.active {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-    color: white;
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-}
-
-.mobile-menu-link.active::before {
-    display: none;
-}
-
-.sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+      
    * {
             margin: 0;
             padding: 0;
@@ -1345,1287 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* HERO SLIDER CONTAINER */
-        .hero-slider {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background: #000;
-        }
-
-        /* BASE SLIDE - ALWAYS VISIBLE */
-        .slide-base {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .slide-base::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
-        }
-
-        /* FRAGMENT OVERLAY - BUILDS THE NEXT IMAGE */
-        .fragment-container {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* INDIVIDUAL FRAGMENT - NO GAPS, NO ROTATION */
-        .fragment {
-            position: absolute;
-            overflow: hidden;
-            opacity: 0;
-            will-change: transform, opacity;
-        }
-
-        .fragment-inner {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* FRAGMENT REVEAL ANIMATION - PUZZLE PIECES COMING TOGETHER */
-        @keyframes fragmentReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.3) translateZ(0);
-            }
-            60% {
-                opacity: 1;
-            }
-            80% {
-                transform: scale(1.05) translateZ(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateZ(0);
-            }
-        }
-
-        .fragment.animating {
-            animation: fragmentReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        /* CONTENT OVERLAY */
-        .slide-content {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            max-width: 1600px;
-            margin: 0 auto;
-            width: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .content-wrapper {
-            max-width: 700px;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .content-wrapper.fade-out {
-            opacity: 0;
-            transform: translateX(-80px) scale(0.95);
-        }
-
-        /* PREMIUM BADGE */
-        .premium-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            animation: badgePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.7; }
-        }
-
-        .badge-text {
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        /* MAIN HEADING */
-        .slide-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 900;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 30px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5);
-            letter-spacing: -2px;
-        }
-
-        .slide-title .highlight {
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-        }
-
-        /* SUBTITLE */
-        .slide-subtitle {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 40px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-            font-style: italic;
-        }
-
-        /* CTA BUTTONS */
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            position: relative;
-            padding: 18px 45px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
-            color: #fff;
-            border: 2px solid transparent;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #FFD700 0%, #F7931E 50%, #FF6B35 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.6);
-        }
-
-        .btn-primary:hover::before {
-            opacity: 1;
-        }
-
-        .btn-primary span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.7);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
-        }
-
-        /* NAVIGATION ARROWS */
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #fff;
-        }
-
-        .nav-arrow:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-50%) scale(1.15);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .nav-arrow.disabled {
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .nav-arrow.prev {
-            left: 40px;
-        }
-
-        .nav-arrow.next {
-            right: 40px;
-        }
-
-        .nav-arrow svg {
-            width: 28px;
-            height: 28px;
-            stroke-width: 3;
-        }
-
-        /* SLIDE INDICATORS */
-        .slide-indicators {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            display: flex;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .indicator.active {
-            width: 45px;
-            border-radius: 6px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .indicator:not(.active):hover {
-            background: rgba(255, 255, 255, 0.7);
-            transform: scale(1.3);
-        }
-
-        /* SCROLL INDICATOR */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 50px;
-            right: 50px;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            color: rgba(255, 255, 255, 0.8);
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .scroll-text {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
-
-        .scroll-line {
-            width: 2px;
-            height: 80px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
-        }
-
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-             
-        .hero-slider {
-        height: 450px !important;
-    }
-            .slide-content {
-                padding: 0 20px;
-            }
-
-            .slide-title {
-                font-size: 2.5rem;
-            }
-
-            .slide-subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 30px;
-            }
-
-            .premium-badge {
-                padding: 10px 20px;
-                margin-bottom: 20px;
-            }
-
-            .badge-text {
-                font-size: 11px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .btn {
-                padding: 16px 35px;
-                font-size: 14px;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .nav-arrow {
-                width: 50px;
-                height: 50px;
-            }
-
-            .nav-arrow.prev {
-                left: 15px;
-            }
-
-            .nav-arrow.next {
-                right: 15px;
-            }
-
-            .nav-arrow svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .slide-indicators {
-                bottom: 30px;
-                padding: 12px 20px;
-                gap: 10px;
-            }
-
-            .indicator {
-                width: 8px;
-                height: 8px;
-            }
-
-            .indicator.active {
-                width: 30px;
-            }
-
-            .scroll-indicator {
-                display: none;
-            }
-        }
-
-        /* PERFORMANCE OPTIMIZATIONS */
-        .hero-slider,
-        .fragment,
-        .slide-base,
-        .nav-arrow,
-        .btn {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-     /* ============================================
-   🌟 PREMIUM BESTSELLERS SECTION
-   The most jealousy-inducing section ever!
-   ============================================ */
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.6); }
-}
-
-.categories-section {
-    padding: 60px 20px 40px 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.categories-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: float 8s ease-in-out infinite;
-}
-
-.categories-section::after {
-    content: '';
-    position: absolute;
-    bottom: -50%;
-    left: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: float 10s ease-in-out infinite reverse;
-}
-
-.sublime-navbar.dark-mode ~ .categories-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
-    background-size: 400% 400%;
-}
-
-.sublime-navbar.dark-mode ~ .categories-section::before {
-    background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
-}
-
-.sublime-navbar.dark-mode ~ .categories-section::after {
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
-}
-
-/* ============================================
-   🎨 PREMIUM SECTION TITLE
-   ============================================ */
-.section-title {
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 900;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #ff6b6b 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 8s ease infinite;
-    margin-bottom: 50px;
-    text-align: center;
-    letter-spacing: -1px;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
-}
-
-.section-title::before {
-    content: '✨';
-    position: absolute;
-    left: -50px;
-    animation: float 3s ease-in-out infinite;
-}
-
-.section-title::after {
-    content: '✨';
-    position: absolute;
-    right: -50px;
-    animation: float 3s ease-in-out infinite 1.5s;
-}
-
-.sublime-navbar.dark-mode ~ .categories-section .section-title {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 50%, #ff6b6b 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 30px rgba(255, 107, 107, 0.5);
-}
-
-/* ============================================
-   📦 CATEGORIES GRID - 2 ROWS × 3 COLUMNS
-   ============================================ */
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    position: relative;
-    z-index: 1;
-}
-
-/* ============================================
-   💎 PREMIUM CATEGORY CARD
-   ============================================ */
-.category-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 0.6s ease forwards;
-    animation-delay: calc(var(--index) * 0.1s);
-    opacity: 0;
-}
-
-.category-card:nth-child(1) { --index: 0; }
-.category-card:nth-child(2) { --index: 1; }
-.category-card:nth-child(3) { --index: 2; }
-.category-card:nth-child(4) { --index: 3; }
-.category-card:nth-child(5) { --index: 4; }
-.category-card:nth-child(6) { --index: 5; }
-
-.sublime-navbar.dark-mode ~ .categories-section .category-card {
-    background: rgba(42, 42, 42, 0.95);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.category-card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #ff6b6b, #ffa500, #667eea, #764ba2);
-    background-size: 400% 400%;
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: gradientShift 3s ease infinite;
-}
-
-.category-card:hover::before {
-    opacity: 1;
-}
-
-.category-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
-}
-
-.sublime-navbar.dark-mode ~ .categories-section .category-card:hover {
-    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
-}
-
-/* ============================================
-   🖼️ PRODUCT IMAGES GRID WITH PREMIUM EFFECTS
-   ============================================ */
-/* ============================================
-   🖼️ PRODUCT IMAGES - ONE IMAGE FOR DESKTOP
-   ============================================ */
-
-/* DESKTOP: Show only IMAGE #2 */
-@media (min-width: 601px) {
-    .category-products {
-        display: block; /* Change from grid to block */
-        padding: 0;
-        border-radius: 20px 20px 0 0;
-        aspect-ratio: 1; /* Square container */
-        overflow: hidden;
-        position: relative;
-        background: transparent;
-    }
-    
-    /* Hide all product items by default */
-    .product-item {
-        display: none !important;
-    }
-    
-    /* Show ONLY the second image on desktop */
-    .product-item:nth-child(2) {
-        display: flex !important;
-        width: 100%;
-        height: 100%;
-        aspect-ratio: 1;
-        border-radius: 0;
-    }
-    
-    .product-item:nth-child(2) img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .category-card:hover .product-item:nth-child(2) img {
-        transform: scale(1.08);
-    }
-    
-    /* Gradient overlay on hover */
-    .product-item:nth-child(2)::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 1;
-    }
-    
-    .category-card:hover .product-item:nth-child(2)::before {
-        opacity: 1;
-    }
-}
-
-/* TABLET/MOBILE: Keep original grid for now, mobile handles itself below */
-@media (max-width: 600px) {
-    .category-products {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 3px;
-        background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(102, 126, 234, 0.1));
-        padding: 3px;
-        border-radius: 20px 20px 0 0;
-        position: relative;
-        overflow: hidden;
-    }
-}
-
-
-/* Mobile: 2x2 grid */
-@media (max-width: 768px) {
-    .category-products {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-    }
-    
-    .product-item:nth-child(5),
-    .product-item:nth-child(6) {
-        display: none;
-    }
-}
-
-/* ============================================
-   🎯 PREMIUM GLASSMORPHISM FOOTER
-   ============================================ */
-.category-footer {
-    padding: 20px 24px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 0 0 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 107, 107, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.category-footer::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa500);
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.category-card:hover .category-footer::before {
-    width: 100%;
-}
-
-.sublime-navbar.dark-mode ~ .categories-section .category-footer {
-    background: rgba(42, 42, 42, 0.8);
-    border-top: 1px solid rgba(255, 107, 107, 0.3);
-}
-
-/* ============================================
-   ✨ PREMIUM TITLE WITH GRADIENT
-   ============================================ */
-.category-title {
-    font-size: 18px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
-    transition: all 0.3s ease;
-}
-
-.category-card:hover .category-title {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: translateX(5px);
-}
-
-.sublime-navbar.dark-mode ~ .categories-section .category-title {
-    background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-title {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ============================================
-   🚀 PREMIUM ANIMATED BUTTON (Replaces "more")
-   ============================================ */
-.view-all-btn {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.view-all-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
-}
-
-.view-all-btn:hover::before {
-    left: 100%;
-}
-
-.view-all-btn:hover {
-    transform: translateX(5px) scale(1.05);
-    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
-}
-
-.view-all-btn:active {
-    transform: translateX(5px) scale(0.98);
-}
-
-.view-all-btn svg {
-    transition: transform 0.3s ease;
-}
-
-.view-all-btn:hover svg {
-    transform: translateX(5px);
-}
-
-/* ============================================
-   📱 RESPONSIVE - MOBILE OPTIMIZATION
-   ============================================ */
-@media (max-width: 768px) {
-    .categories-section {
-        padding: 50px 15px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-        margin-bottom: 30px;
-    }
-    
-    .section-title::before,
-    .section-title::after {
-        display: none;
-    }
-    
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-    }
-    
-    .category-card {
-        border-radius: 16px;
-    }
-    
-    .category-footer {
-        padding: 12px 14px;
-    }
-    
-    .category-title {
-        font-size: 13px;
-    }
-    
-    .view-all-btn {
-        padding: 8px 14px;
-        font-size: 10px;
-        gap: 4px;
-    }
-    
-    .view-all-btn svg {
-        width: 12px;
-        height: 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .categories-grid {
-        gap: 10px;
-    }
-    
-    .category-footer {
-        padding: 10px 12px;
-    }
-    
-    .category-title {
-        font-size: 12px;
-    }
-    
-    .view-all-btn {
-        padding: 6px 12px;
-        font-size: 9px;
-    }
-    
-  /* ============================================
-   📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
-   Bigger images, premium text, no button clutter
-   ============================================ */
-/* ============================================
-   📱 ULTRA-PREMIUM MOBILE - BELOW 600PX
-   ONE BIG HERO IMAGE - MAXIMUM SIZE & IMPACT
-   ============================================ */
-
-@media (max-width: 600px) {
-    /* Section spacing optimization */
-    .categories-section {
-        padding: 40px 12px 45px 12px;
-    }
-    
-    .section-title {
-        font-size: 34px;
-        margin-bottom: 30px;
-        letter-spacing: -1.5px;
-    }
-    
-    /* Grid: 3 columns with good spacing */
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-    }
-    
-    /* CARD: Taller and more premium */
-    .category-card {
-        border-radius: 20px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    /* SINGLE IMAGE CONTAINER - BIGGER & TALLER */
-    .category-products {
-        display: block;
-        padding: 0;
-        border-radius: 20px 20px 0 0;
-        aspect-ratio: 0.65; /* Taller rectangle instead of square */
-        overflow: hidden;
-        position: relative;
-        min-height: 140px; /* Ensures good minimum size */
-    }
-    
-    /* Show ONLY the first image */
-    .product-item:first-child {
-        display: flex !important;
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-    
-    /* Hide all other images */
-    .product-item:not(:first-child) {
-        display: none !important;
-    }
-    
-    /* The single image - full size, perfect fit */
-    .product-item:first-child img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* Zoom effect on tap */
-    .category-card:active .product-item:first-child img {
-        transform: scale(1.12);
-    }
-    
-    /* Gradient overlay for depth */
-    .product-item:first-child::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 1;
-    }
-    
-    .category-card:active .product-item:first-child::before {
-        opacity: 1;
-    }
-    
-    /* FOOTER: Bigger and more prominent */
-    .category-footer {
-        padding: 16px 12px;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        border-radius: 0 0 20px 20px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* Hide the View All button on mobile */
-    .category-footer .view-all-btn {
-        display: none !important;
-    }
-    
-    /* PREMIUM TITLE: BIGGER & BOLDER */
-    .category-footer .category-title {
-        font-size: 16px;
-        font-weight: 900;
-        text-align: center;
-        width: 100%;
-        letter-spacing: -0.4px;
-        background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        padding: 3px 0;
-        transition: all 0.3s ease;
-        text-transform: capitalize;
-        line-height: 1.3;
-    }
-    
-    /* Dark mode title */
-    .sublime-navbar.dark-mode ~ .categories-section .category-footer .category-title {
-        background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    /* Card tap effect - subtle and premium */
-    .category-card:active {
-        transform: scale(0.97);
-        transition: transform 0.15s ease;
-    }
-    
-    /* Footer hover effect */
-    .category-footer:hover .category-title,
-    .category-card:hover .category-footer .category-title {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        transform: scale(1.08);
-    }
-    
-    .sublime-navbar.dark-mode ~ .categories-section .category-footer:hover .category-title,
-    .sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-footer .category-title {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    /* Add subtle card hover state */
-    .category-card::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 165, 0, 0.12));
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        border-radius: 20px;
-    }
-    
-    .category-card:active::after {
-        opacity: 1;
-    }
-}
-
-/* ============================================
-   📱 SMALL SCREENS - 480-600PX
-   Still big and prominent
-   ============================================ */
-
-@media (max-width: 480px) {
-    .categories-section {
-        padding: 38px 10px 42px 10px;
-    }
-    
-    .section-title {
-        font-size: 32px;
-        margin-bottom: 28px;
-    }
-    
-    .categories-grid {
-        gap: 11px;
-    }
-    
-    .category-products {
-        min-height: 130px;
-    }
-    
-    .category-footer {
-        padding: 15px 10px;
-    }
-    
-    .category-footer .category-title {
-        font-size: 15px;
-    }
-}
-
-/* ============================================
-   📱 EXTRA SMALL SCREENS - 400-480PX
-   Optimized but still prominent
-   ============================================ */
-
-@media (max-width: 400px) {
-    .categories-section {
-        padding: 35px 10px 40px 10px;
-    }
-    
-    .section-title {
-        font-size: 30px;
-        margin-bottom: 26px;
-    }
-    
-    .categories-grid {
-        gap: 10px;
-    }
-    
-    .category-card {
-        border-radius: 18px;
-    }
-    
-    .category-products {
-        border-radius: 18px 18px 0 0;
-        min-height: 120px;
-    }
-    
-    .category-footer {
-        padding: 14px 10px;
-        border-radius: 0 0 18px 18px;
-    }
-    
-    .category-footer .category-title {
-        font-size: 14px;
-        font-weight: 800;
-    }
-    
-    .category-card::after {
-        border-radius: 18px;
-    }
-}
-
-/* ============================================
-   📱 TINY SCREENS - 360-400PX
-   Compact but still impactful
-   ============================================ */
-
-@media (max-width: 360px) {
-    .categories-section {
-        padding: 32px 8px 38px 8px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-        margin-bottom: 24px;
-    }
-    
-    .categories-grid {
-        gap: 9px;
-    }
-    
-    .category-card {
-        border-radius: 16px;
-    }
-    
-    .category-products {
-        border-radius: 16px 16px 0 0;
-        min-height: 110px;
-    }
-    
-    .category-footer {
-        padding: 13px 8px;
-        border-radius: 0 0 16px 16px;
-    }
-    
-    .category-footer .category-title {
-        font-size: 13px;
-    }
-    
-    .category-card::after {
-        border-radius: 16px;
-    }
-}
-
-/* ============================================
-   📱 ULTRA TINY SCREENS - BELOW 360PX
-   iPhone SE 1st gen and similar
-   ============================================ */
-
-@media (max-width: 340px) {
-    .categories-section {
-        padding: 30px 8px 35px 8px;
-    }
-    
-    .section-title {
-        font-size: 26px;
-        margin-bottom: 22px;
-    }
-    
-    .categories-grid {
-        gap: 8px;
-    }
-    
-    .category-products {
-        min-height: 105px;
-    }
-    
-    .category-footer {
-        padding: 12px 8px;
-    }
-    
-    .category-footer .category-title {
-        font-size: 12px;
-    }
-}
-/* Reduce hero slider height on mobile */
-@media (max-width: 768px) {
-    .hero-slider {
-        height: 450px !important;
-        margin-bottom: 0 !important;
-    }
-}
-
-/* Reduce bestsellers section padding */
-.categories-section {
-    padding: 60px 20px; /* Reduced from 80px */
-}
-
-@media (max-width: 768px) {
-    .categories-section {
-        padding: 30px 15px; /* Much smaller on mobile */
-    }
-    
-    .section-title {
-        margin-bottom: 25px; /* Reduced from 50px */
-    }
-}
-
-@media (max-width: 600px) {
-    .categories-section {
-        padding: 20px 15px 15px 15px; /* Even tighter on small screens */
-    }
-    
-    .section-title {
-        margin-bottom: 20px;
-    }
-}
-}
 /* ============================================
    🌙 COMPLETE DARK MODE - FULL BODY COVERAGE
    ============================================ */
@@ -2636,11 +34,6 @@ body.dark-mode {
     color: #ffffff;
 }
 
-/* Demo content section dark mode */
-body.dark-mode .demo-content,
-body.dark-mode div[style*="padding: 40px"] {
-    background: #1a1a1a !important;
-}
 
 body.dark-mode h1,
 body.dark-mode h2,
@@ -2657,60 +50,7 @@ body.dark-mode span {
     color: #e0e0e0 !important;
 }
 
-/* Fix demo boxes */
-body.dark-mode div[style*="background: #f5f5f5"] {
-    background: #2a2a2a !important;
-}
 
-body.dark-mode div[style*="color: #666"] {
-    color: #b0b0b0 !important;
-}
-
-body.dark-mode div[style*="color: #1a1a1a"] {
-    color: #ffffff !important;
-}
-
-/* Hero slider content in dark mode */
-body.dark-mode .slide-title,
-body.dark-mode .slide-subtitle,
-body.dark-mode .premium-badge {
-    /* Already has proper dark styling, just ensure visibility */
-    filter: none !important;
-}
-
-/* Scroll indicator */
-body.dark-mode .scroll-indicator {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-body.dark-mode .scroll-line {
-    background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
-}
-
-/* Navigation arrows */
-body.dark-mode .nav-arrow {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
-}
-
-body.dark-mode .nav-arrow:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Slide indicators */
-body.dark-mode .slide-indicators {
-    background: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-body.dark-mode .indicator {
-    background: rgba(255, 255, 255, 0.4);
-}
-
-body.dark-mode .indicator:not(.active):hover {
-    background: rgba(255, 255, 255, 0.7);
-}
 
 /* Any white sections */
 body.dark-mode section,
@@ -2718,964 +58,19 @@ body.dark-mode main,
 body.dark-mode article {
     background: transparent;
 }
-/* ============================================
-   🍦 ULTRA-PREMIUM ICE-CREAM SECTION
-   Luxury horizontal scroll showcase
-   ============================================ */
-
-.ice-cream-section {
-    padding: 20px 20px 40px 20px;
-    background: linear-gradient(135deg, #fef5f9 0%, #ffffff 50%, #f0f8ff 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section {
-    background: linear-gradient(135deg, #1a1520 0%, #1a1a1a 50%, #151a20 100%);
-    background-size: 400% 400%;
-}
-
-/* ============================================
-   🎨 SECTION HEADER
-   ============================================ */
-
-.ice-cream-header {
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-}
-.header-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-.ice-cream-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 900;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 8s ease infinite;
-    letter-spacing: -1px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-title {
-    background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 50%, #ffb6c1 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* DELETE .ice-cream-subtitle completely - we removed it from HTML */
-
-/* ============================================
-   📦 SCROLL CONTAINER
-   ============================================ */
-
-.ice-cream-container {
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.ice-cream-scroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 107, 157, 0.3) transparent;
-    padding: 20px 0 30px 0;
-    margin: 0 60px; /* Space for arrows on desktop */
-}
-
-/* Custom Scrollbar Styling */
-.ice-cream-scroll::-webkit-scrollbar {
-    height: 8px;
-}
-
-.ice-cream-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 182, 193, 0.1);
-    border-radius: 10px;
-}
-
-.ice-cream-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #ff6b9d, #c44569);
-    border-radius: 10px;
-    transition: background 0.3s ease;
-}
-
-.ice-cream-scroll::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, #c44569, #ff6b9d);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 182, 193, 0.05);
-}
-
-/* ============================================
-   🎴 PRODUCT TRACK
-   ============================================ */
-
-.ice-cream-track {
-    display: flex;
-    gap: 20px;
-    padding: 0 20px;
-}
-
-/* ============================================
-   💎 PREMIUM PRODUCT CARD
-   ============================================ */
-
-.ice-cream-card {
-    flex: 0 0 180px;
-    width: 180px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    border: 2px solid rgba(255, 182, 193, 0.3);
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
-    overflow: hidden;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-card {
-    background: rgba(42, 35, 42, 0.95);
-    border-color: rgba(255, 182, 193, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* Gradient Border Animation */
-.ice-cream-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, #ff6b9d, #c44569, #ffd700, #ff6b9d);
-    background-size: 400% 400%;
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: gradientShift 3s ease infinite;
-}
-
-.ice-cream-card:hover::before {
-    opacity: 1;
-}
-
-/* 3D Hover Effect */
-.ice-cream-card:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 0 20px 60px rgba(255, 107, 157, 0.35);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-card:hover {
-    box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
-}
-
-/* Active/Tap Effect */
-.ice-cream-card:active {
-    transform: translateY(-8px) scale(1.02);
-}
-
-/* ============================================
-   🏷️ PRODUCT BADGE
-   ============================================ */
-
-.product-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    z-index: 2;
-    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
-}
-
-.new-badge {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-/* ============================================
-   🖼️ PRODUCT IMAGE
-   ============================================ */
-
-.product-image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 255, 255, 0.1));
-}
-
-.product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
-}
-
-.ice-cream-card:hover .product-image {
-    transform: scale(1.15);
-}
-
-/* Image Glow Effects - Flavor Based */
-.image-glow {
-    position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 0;
-    filter: blur(20px);
-}
-
-.ice-cream-card:hover .image-glow {
-    opacity: 1;
-}
-
-.chocolate-glow {
-    background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
-}
-
-.strawberry-glow {
-    background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%);
-}
-
-.mango-glow {
-    background: radial-gradient(circle, rgba(255, 165, 0, 0.6) 0%, transparent 70%);
-}
-
-.pistachio-glow {
-    background: radial-gradient(circle, rgba(147, 197, 114, 0.6) 0%, transparent 70%);
-}
-
-.butterscotch-glow {
-    background: radial-gradient(circle, rgba(218, 165, 32, 0.6) 0%, transparent 70%);
-}
-
-.mint-glow {
-    background: radial-gradient(circle, rgba(152, 255, 152, 0.6) 0%, transparent 70%);
-}
-
-.cookies-glow {
-    background: radial-gradient(circle, rgba(70, 70, 70, 0.6) 0%, transparent 70%);
-}
-
-.caramel-glow {
-    background: radial-gradient(circle, rgba(193, 154, 107, 0.6) 0%, transparent 70%);
-}
-
-.belgian-glow {
-    background: radial-gradient(circle, rgba(101, 67, 33, 0.6) 0%, transparent 70%);
-}
-
-/* ============================================
-   📝 PRODUCT INFO
-   ============================================ */
-
-.product-info {
-    text-align: center;
-}
-
-.product-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #2c1a2c;
-    margin: 0 0 8px 0;
-    line-height: 1.3;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #2c1a2c 0%, #5c4a5c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .product-name {
-    background: linear-gradient(135deg, #ffffff 0%, #d0c0d0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.ice-cream-card:hover .product-name {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: scale(1.05);
-}
-
-.product-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-}
-
-.product-rating {
-    font-size: 10px;
-    letter-spacing: -1px;
-}
-
-.product-price {
-    font-weight: 700;
-    color: #ff6b9d;
-    font-size: 14px;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .product-price {
-    color: #ffb6c1;
-}
-
-/* ============================================
-   ⬅️➡️ NAVIGATION ARROWS (Desktop Only)
-   ============================================ */
-
-.scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 182, 193, 0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10;
-    color: #ff6b9d;
-    opacity: 0;
-    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .scroll-arrow {
-    background: rgba(42, 35, 42, 0.9);
-    border-color: rgba(255, 182, 193, 0.2);
-    color: #ffb6c1;
-}
-
-.ice-cream-container:hover .scroll-arrow {
-    opacity: 1;
-}
-
-.scroll-arrow:hover {
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    color: white;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.4);
-}
-
-.scroll-arrow:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-.scroll-arrow-left {
-    left: 0;
-}
-
-.scroll-arrow-right {
-    right: 0;
-}
-
-.scroll-arrow svg {
-    width: 24px;
-    height: 24px;
-}
-
-/* ============================================
-   🔗 SEE ALL BUTTON
-   ============================================ */
-
-.see-all-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.see-all-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 32px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 182, 193, 0.4);
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #c44569;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .see-all-btn {
-    background: rgba(42, 35, 42, 0.8);
-    border-color: rgba(255, 182, 193, 0.3);
-    color: #ffb6c1;
-}
-
-.see-all-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.see-all-btn:hover::before {
-    opacity: 1;
-}
-
-.see-all-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
-}
-
-.see-all-btn span,
-.see-all-btn svg {
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.see-all-btn:hover svg {
-    transform: translateX(5px);
-}
-
-/* ============================================
-   📱 MOBILE RESPONSIVE
-   ============================================ */
-
-@media (max-width: 1200px) {
-    .scroll-arrow {
-        display: none; /* Hide arrows on tablet/mobile */
-    }
-    
-    .ice-cream-scroll {
-        margin: 0; /* Remove arrow space */
-    }
-}
-  @media (max-width: 768px) {
-    .ice-cream-section {
-        padding: 15px 15px 30px 15px;  /* Ultra-tight */
-    }
-    
-    .ice-cream-header {
-        margin-bottom: 15px;  /* Minimal */
-    }
-    
-    .ice-cream-title {
-        font-size: 24px;
-    }
-    
-    .ice-cream-card {
-        flex: 0 0 140px;
-        width: 140px;
-        padding: 12px;
-    }
-    
-    .product-badge {
-        font-size: 9px;
-        padding: 3px 8px;
-    }
-    
-    .product-name {
-        font-size: 14px;
-    }
-    
-    .product-price {
-        font-size: 12px;
-    }
-    
-    .see-all-btn {
-        padding: 14px 28px;
-        font-size: 14px;
-    }
-    
-    .ice-cream-track {
-        gap: 15px;
-        padding: 0 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .ice-cream-section {
-        padding: 50px 10px 40px 10px;
-    }
-    
-    .ice-cream-card {
-        flex: 0 0 130px;
-        width: 130px;
-        padding: 10px;
-        border-radius: 20px;
-    }
-    
-    .product-name {
-        font-size: 13px;
-    }
-    
-    .ice-cream-track {
-        gap: 12px;
-    }
-}
-
-@media (max-width: 360px) {
-    .ice-cream-card {
-        flex: 0 0 120px;
-        width: 120px;
-    }
-    
-    .see-all-btn {
-        padding: 12px 24px;
-        font-size: 13px;
-    }
-}
-/* ============================================
-   🍛 ULTRA-PREMIUM MAIN COURSE SECTION
-   Luxury horizontal scroll showcase - Warm Colors
-   ============================================ */
-
-.main-course-section {
-    padding: 20px 20px 40px 20px;
-    background: linear-gradient(135deg, #fff9f5 0%, #ffffff 50%, #fffaf0 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section {
-    background: linear-gradient(135deg, #1a1815 0%, #1a1a1a 50%, #1a1a15 100%);
-    background-size: 400% 400%;
-}
-
-/* ============================================
-   🎨 SECTION HEADER
-   ============================================ */
-
-.main-course-header {
-    text-align: center;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.main-course-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 900;
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 8s ease infinite;
-    letter-spacing: -1px;
-    margin: 0;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-title {
-    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 50%, #ffa500 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* ============================================
-   📦 SCROLL CONTAINER
-   ============================================ */
-
-.main-course-container {
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.main-course-scroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 107, 53, 0.3) transparent;
-    padding: 20px 0 30px 0;
-    margin: 0 60px;
-}
-
-/* Custom Scrollbar */
-.main-course-scroll::-webkit-scrollbar {
-    height: 8px;
-}
-
-.main-course-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 165, 0, 0.1);
-    border-radius: 10px;
-}
-
-.main-course-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #ff6b35, #f7931e);
-    border-radius: 10px;
-    transition: background 0.3s ease;
-}
-
-.main-course-scroll::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, #f7931e, #ff6b35);
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 165, 0, 0.05);
-}
-
-/* ============================================
-   🎴 PRODUCT TRACK
-   ============================================ */
-
-.main-course-track {
-    display: flex;
-    gap: 20px;
-    padding: 0 20px;
-}
-
-/* ============================================
-   💎 PREMIUM PRODUCT CARD
-   ============================================ */
-
-.main-course-card {
-    flex: 0 0 180px;
-    width: 180px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    border: 2px solid rgba(255, 165, 0, 0.3);
-    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
-    overflow: hidden;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card {
-    background: rgba(42, 38, 35, 0.95);
-    border-color: rgba(255, 165, 0, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* Gradient Border Animation */
-.main-course-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, #ff6b35, #f7931e, #ffd700, #ff6b35);
-    background-size: 400% 400%;
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: gradientShift 3s ease infinite;
-}
-
-.main-course-card:hover::before {
-    opacity: 1;
-}
-
-/* 3D Hover Effect */
-.main-course-card:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.35);
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card:hover {
-    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.5);
-}
-
-/* Active/Tap Effect */
-.main-course-card:active {
-    transform: translateY(-8px) scale(1.02);
-}
-
-/* ============================================
-   🖼️ PRODUCT IMAGE - Main Course Glow Colors
-   ============================================ */
-
-.main-course-card .product-image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 255, 255, 0.1));
-}
-
-.main-course-card .product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
-}
-
-.main-course-card:hover .product-image {
-    transform: scale(1.15);
-}
-
-/* Dish-specific Glow Effects */
-.butter-glow {
-    background: radial-gradient(circle, rgba(255, 140, 0, 0.6) 0%, transparent 70%);
-}
-
-.paneer-glow {
-    background: radial-gradient(circle, rgba(255, 228, 181, 0.6) 0%, transparent 70%);
-}
-
-.dal-glow {
-    background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
-}
-
-.biryani-glow {
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
-}
-
-.chole-glow {
-    background: radial-gradient(circle, rgba(210, 105, 30, 0.6) 0%, transparent 70%);
-}
-
-.kadai-glow {
-    background: radial-gradient(circle, rgba(255, 99, 71, 0.6) 0%, transparent 70%);
-}
-
-.palak-glow {
-    background: radial-gradient(circle, rgba(107, 142, 35, 0.6) 0%, transparent 70%);
-}
-
-.rajma-glow {
-    background: radial-gradient(circle, rgba(165, 42, 42, 0.6) 0%, transparent 70%);
-}
-
-.malai-glow {
-    background: radial-gradient(circle, rgba(245, 222, 179, 0.6) 0%, transparent 70%);
-}
-
-.tandoori-glow {
-    background: radial-gradient(circle, rgba(255, 69, 0, 0.6) 0%, transparent 70%);
-}
-
-/* ============================================
-   📝 PRODUCT INFO
-   ============================================ */
-
-.main-course-card .product-info {
-    text-align: center;
-}
-
-.main-course-card .product-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #2c1a0c;
-    margin: 0 0 8px 0;
-    line-height: 1.3;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #2c1a0c 0%, #5c4a3c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-name {
-    background: linear-gradient(135deg, #ffffff 0%, #d0c0b0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.main-course-card:hover .product-name {
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: scale(1.05);
-}
-
-.main-course-card .product-price {
-    color: #ff6b35;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-price {
-    color: #ffa500;
-}
-
-/* ============================================
-   ⬅️➡️ NAVIGATION ARROWS
-   ============================================ */
-
-.main-course-container .scroll-arrow {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(255, 165, 0, 0.3);
-    color: #ff6b35;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .scroll-arrow {
-    background: rgba(42, 38, 35, 0.9);
-    border-color: rgba(255, 165, 0, 0.2);
-    color: #ffa500;
-}
-
-.main-course-container:hover .scroll-arrow {
-    opacity: 1;
-}
-
-.main-course-container .scroll-arrow:hover {
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
-    color: white;
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
-}
-
-/* ============================================
-   🔗 SEE ALL BUTTON
-   ============================================ */
-
-.main-course-section .see-all-btn {
-    background: rgba(255, 255, 255, 0.8);
-    border: 2px solid rgba(255, 165, 0, 0.4);
-    color: #f7931e;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .see-all-btn {
-    background: rgba(42, 38, 35, 0.8);
-    border-color: rgba(255, 165, 0, 0.3);
-    color: #ffa500;
-}
-
-.main-course-section .see-all-btn::before {
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
-}
-
-.main-course-section .see-all-btn:hover {
-    box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
-}
-
-/* ============================================
-   📱 MOBILE RESPONSIVE
-   ============================================ */
-
-@media (max-width: 1200px) {
-    .main-course-container .scroll-arrow {
-        display: none;
-    }
-    
-    .main-course-scroll {
-        margin: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-course-section {
-        padding: 15px 15px 30px 15px;
-    }
-    
-    .main-course-header {
-        margin-bottom: 15px;
-    }
-    
-    .main-course-title {
-        font-size: 24px;
-    }
-    
-    .main-course-card {
-        flex: 0 0 140px;
-        width: 140px;
-        padding: 12px;
-    }
-    
-    .main-course-track {
-        gap: 15px;
-        padding: 0 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-course-section {
-        padding: 15px 10px 30px 10px;
-    }
-    
-    .main-course-card {
-        flex: 0 0 130px;
-        width: 130px;
-        padding: 10px;
-        border-radius: 20px;
-    }
-    
-    .main-course-card .product-name {
-        font-size: 13px;
-    }
-    
-    .main-course-track {
-        gap: 12px;
-    }
-}
-
-@media (max-width: 360px) {
-    .main-course-card {
-        flex: 0 0 120px;
-        width: 120px;
-    }
-}
+/* Loading indicator */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            color: #ff6b6b;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body style="padding-top: 70px; background: #f5f5f5;">
-    <!-- MAIN NAVBAR -->
+  <!-- MAIN NAVBAR -->
     <nav class="sublime-navbar" id="navbar">
         <div class="navbar-container">
             <!-- LEFT SECTION -->
@@ -4078,6 +473,8 @@ body.dark-mode article {
             <button class="checkout-btn">Proceed to Checkout</button>
         </div>
     </div>
+
+      
  <div class="hero-slider" id="heroSlider">
         <!-- Base slide -->
         <div class="slide-base" id="slideBase"></div>
@@ -4133,6 +530,7 @@ body.dark-mode article {
         </div>
     </div>
 
+    
  <!-- ============================================
      🌟 PREMIUM BESTSELLERS SECTION
      The most jealousy-inducing section ever!
@@ -4360,7 +758,7 @@ body.dark-mode article {
     </div>
 </div>
 
-<!-- ============================================
+ <!-- ============================================
      🍦 PREMIUM ICE-CREAM GALLERY SECTION
      Ultra-luxury horizontal scroll showcase
      ============================================ -->
@@ -4562,6 +960,8 @@ body.dark-mode article {
         </a>
     </div>
 </div>
+
+
 <!-- ============================================
      🍛 PREMIUM MAIN COURSE SECTION
      Ultra-luxury horizontal scroll showcase
@@ -4764,801 +1164,680 @@ body.dark-mode article {
         </a>
     </div>
 </div>
-    <!-- DEMO CONTENT -->
-    <div style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
-        <h1 style="font-size: 36px; margin-bottom: 20px; color: #1a1a1a;">🎉 ALL ISSUES FIXED - PERFECT NAVBAR!</h1>
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 16px; color: white; margin-bottom: 30px;">
-            <h2 style="font-size: 28px; margin-bottom: 15px;">✅ What's Been Fixed:</h2>
-            <ul style="font-size: 16px; line-height: 2; margin-left: 20px;">
-                <li>✅ <strong>SOLID Backgrounds</strong> - No more blur/transparency issues!</li>
-                <li>✅ <strong>Sub-categories are Clickable</strong> - All links work perfectly</li>
-                <li>✅ <strong>Single Close Button</strong> - Removed hamburger animation confusion</li>
-                <li>✅ <strong>Desktop Dropdown Fixed</strong> - Hover bridge prevents disappearing!</li>
-                <li>✅ <strong>Premium Color Scheme</strong> - Solid white/dark backgrounds</li>
-                <li>✅ <strong>All Functional</strong> - Search, cart, wishlist, dark mode work!</li>
-            </ul>
-        </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
-                <h3 style="color: #ff6b6b; margin-bottom: 10px;">📱 Mobile Features</h3>
-                <p style="color: #666;">• Solid white/dark background<br>• Clickable sub-categories<br>• Smooth animations<br>• Touch gestures</p>
-            </div>
-            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
-                <h3 style="color: #ff6b6b; margin-bottom: 10px;">💻 Desktop Features</h3>
-                <p style="color: #666;">• Hover-friendly dropdowns<br>• Working search bar<br>• Premium mega-menu<br>• No disappearing menus!</p>
-            </div>
-            <div style="padding: 20px; background: #f5f5f5; border-radius: 12px;">
-                <h3 style="color: #ff6b6b; margin-bottom: 10px;">🎨 Premium Design</h3>
-                <p style="color: #666;">• Jealousy-inducing UI<br>• Smooth transitions<br>• Perfect contrast<br>• Professional look</p>
-            </div>
+ 
+
+    <!-- ============================================
+         📱 MOBILE STICKY FILTER BAR
+         Shows only on mobile (<700px)
+         ============================================ -->
+    
+    <div class="mobile-filter-bar" id="mobileFilterBar">
+        <!-- Sort Button -->
+        <button class="filter-btn" id="sortBtn">
+            <span class="sort-icon">↑<br>↓</span>
+            <span>Sort</span>
+        </button>
+
+        <!-- Category Button -->
+        <button class="filter-btn" id="categoryBtn">
+            <span>Category</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Price Button -->
+        <button class="filter-btn" id="priceBtn">
+            <span>Price</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Filters Button -->
+        <button class="filter-btn" id="filtersBtn">
+            <span class="filters-icon">≡</span>
+            <span>Filters</span>
+        </button>
+    </div>
+
+    <!-- ============================================
+         MODAL OVERLAY (Dark background)
+         ============================================ -->
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- ============================================
+         1️⃣ SORT MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="sortModal">
+        <div class="modal-header">
+            <h3>SORT BY</h3>
+            <button class="close-modal" data-modal="sortModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="relevance" data-sort="none" checked>
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Relevance</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="discount" data-sort="discount">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Discount</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-high" data-sort="price-desc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (High to Low)</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-low" data-sort="price-asc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (Low to High)</span>
+            </label>
         </div>
     </div>
 
-    <script>
-        // NAVBAR SCROLL EFFECT
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // MOBILE MENU TOGGLE
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const closeMenu = document.getElementById('closeMenu');
-
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.add('active');
-            mobileMenu.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeMenu.addEventListener('click', closeMobileMenu);
-        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-
-        function closeMobileMenu() {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // SUBMENU TOGGLE
-        function toggleSubmenu(id) {
-            const submenu = document.getElementById(id);
-            const link = submenu.previousElementSibling;
-            const arrow = link.querySelector('.arrow-icon');
+    <!-- ============================================
+         2️⃣ CATEGORY MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="categoryModal">
+        <div class="modal-header">
+            <h3>CATEGORY</h3>
+            <button class="close-modal" data-modal="categoryModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <!-- Search Box -->
+            <div class="category-search-wrapper-mobile">
+                <span class="search-icon-mobile">🔍</span>
+                <input type="text" class="category-search-mobile" placeholder="Search" id="categorySearchMobile">
+            </div>
             
-            submenu.classList.toggle('active');
-            if (arrow) {
-                arrow.style.transform = submenu.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-        }
+            <!-- Category List -->
+            <div class="category-list-mobile" id="categoryListMobile">
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="street-food">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌮 Street Food</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="main-course">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍛 Main Course</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="meals">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍽️ Meals / Thalis</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="desserts">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍨 Fresh Desserts</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="snacks-drinks">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍿 Snacks & Drinks</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="mithai">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍬 Mithai (Indian Sweets)</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-eggless">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🎂 Cakes - Eggless</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-with-egg">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍰 Cakes - With Egg</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="pastries">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥐 Pastries</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="bread-buns">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍞 Bread & Buns</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cookies">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍪 Cookies</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dairy">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥛 Dairy</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dry-fruits">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌰 Dry Fruits</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="product-count-mobile">
+                <span id="categoryProductCount">12 Products</span>
+            </div>
+            <button class="done-btn" data-modal="categoryModal">Done</button>
+        </div>
+    </div>
 
-        // SEARCH MODAL
-        const searchBtn = document.getElementById('searchBtn');
-        const searchModal = document.getElementById('searchModal');
-        const searchInput = document.getElementById('searchInput');
+    <!-- ============================================
+         3️⃣ PRICE MODAL (With Steppers + Inputs)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="priceModal">
+        <div class="modal-header">
+            <h3>PRICE</h3>
+            <button class="close-modal" data-modal="priceModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <!-- Min Price Stepper -->
+            <div class="price-control">
+                <label>Min Price</label>
+                <div class="stepper-control">
+                    <button class="stepper-btn" id="minDecrease">−</button>
+                    <span class="stepper-value" id="minPriceValue">₹0</span>
+                    <button class="stepper-btn" id="minIncrease">+</button>
+                </div>
+            </div>
 
-        searchBtn.addEventListener('click', function() {
-            searchModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => searchInput.focus(), 300);
-        });
-   const searchCloseBtn = document.getElementById('searchCloseBtn');
-if (searchCloseBtn) {
-    searchCloseBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        searchModal.classList.remove('active');
-        document.body.style.overflow = '';
-        searchInput.value = '';
-    });
-}
-        searchModal.addEventListener('click', function(e) {
-            if (e.target === searchModal) {
-                searchModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+            <!-- Max Price Stepper -->
+            <div class="price-control">
+                <label>Max Price</label>
+                <div class="stepper-control">
+                    <button class="stepper-btn" id="maxDecrease">−</button>
+                    <span class="stepper-value" id="maxPriceValue">₹10000</span>
+                    <button class="stepper-btn" id="maxIncrease">+</button>
+                </div>
+            </div>
 
-        // Search tags
-        document.querySelectorAll('.search-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                searchInput.value = this.textContent;
-                console.log('Searching for:', this.textContent);
-            });
-        });
+            <!-- Manual Input Fields -->
+            <div class="manual-price-inputs">
+                <p class="or-text">Or manually enter:</p>
+                <div class="input-row">
+                    <div class="price-input-group">
+                        <label>Min</label>
+                        <input type="number" id="minPriceInput" placeholder="₹ 0" value="0">
+                    </div>
+                    <div class="price-input-group">
+                        <label>Max</label>
+                        <input type="number" id="maxPriceInput" placeholder="₹ 10000" value="10000">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearPrice">Clear All</button>
+            <button class="done-btn apply-btn" id="applyPrice">Apply</button>
+        </div>
+    </div>
 
-        // DESKTOP SEARCH
-        const desktopSearchInput = document.getElementById('desktopSearchInput');
-        if (desktopSearchInput) {
-            desktopSearchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && this.value.trim()) {
-                    console.log('Desktop search:', this.value);
-                    alert('Searching for: ' + this.value);
-                }
-            });
-        }
-
-        // MOBILE SEARCH
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value.trim()) {
-                console.log('Mobile search:', this.value);
-                alert('Searching for: ' + this.value);
-                searchModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // CART SIDEBAR
-        const cartBtn = document.getElementById('cartBtn');
-        const cartSidebar = document.getElementById('cartSidebar');
-        const closeCart = document.getElementById('closeCart');
-
-        cartBtn.addEventListener('click', function() {
-            cartSidebar.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeCart.addEventListener('click', closeCartSidebar);
+    <!-- ============================================
+         4️⃣ FILTERS MODAL (Price Ranges)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="filtersModal">
+        <div class="modal-header">
+            <h3>FILTERS</h3>
+            <button class="close-modal" data-modal="filtersModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <h4 class="filter-section-title">Price Range</h4>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="all" data-min="0" data-max="999999" checked>
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">All Prices</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="0-100" data-min="0" data-max="100">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹0 - ₹100</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="100-200" data-min="100" data-max="200">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹100 - ₹200</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="200-300" data-min="200" data-max="300">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹200 - ₹300</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="300-400" data-min="300" data-max="400">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹300 - ₹400</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="400-500" data-min="400" data-max="500">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹400 - ₹500</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="500-600" data-min="500" data-max="600">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹500 - ₹600</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="600-700" data-min="600" data-max="700">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹600 - ₹700</span>
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearFilters">Clear All</button>
+            <button class="done-btn apply-btn" id="applyFilters">Apply</button>
+        </div>
+    </div>
+    <!-- ============================================
+         🎯 FILTER + PRODUCTS SECTION
+         ============================================ -->
+    
+    <div class="filter-products-wrapper">
         
-        mobileMenuOverlay.addEventListener('click', function() {
-            if (cartSidebar.classList.contains('active')) {
-                closeCartSidebar();
-            }
-        });
-
-        function closeCartSidebar() {
-            cartSidebar.classList.remove('active');
-            if (!mobileMenu.classList.contains('active')) {
-                mobileMenuOverlay.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-        }
-
-        // QUANTITY UPDATE
-        function updateQty(btn, change) {
-            const qtySpan = btn.parentElement.querySelector('span');
-            let qty = parseInt(qtySpan.textContent);
-            qty = Math.max(1, qty + change);
-            qtySpan.textContent = qty;
-            
-            qtySpan.style.transform = 'scale(1.2)';
-            setTimeout(() => qtySpan.style.transform = 'scale(1)', 200);
-            
-            updateCartTotal();
-        }
-
-       // DARK MODE TOGGLE
-const navbar = document.getElementById('navbar');
-const mobileDarkToggle = document.getElementById('mobileDarkToggle');
-const darkModeBtn = document.getElementById('darkModeBtn');
-
-// Check saved theme on page load
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    navbar.classList.add('dark-mode');
-    document.body.classList.add('dark-mode');
-    mobileDarkToggle.classList.add('active');
-    updateDarkModeIcon(true);
-}
-
-// Mobile dark mode toggle
-mobileDarkToggle.addEventListener('click', function() {
-    navbar.classList.toggle('dark-mode');
-    document.body.classList.toggle('dark-mode');
-    this.classList.toggle('active');
-    const isDark = navbar.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateDarkModeIcon(isDark);
-});
-
-// Desktop dark mode button
-if (darkModeBtn) {
-    darkModeBtn.addEventListener('click', function() {
-        navbar.classList.toggle('dark-mode');
-        document.body.classList.toggle('dark-mode');
-        mobileDarkToggle.classList.toggle('active');
-        const isDark = navbar.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateDarkModeIcon(isDark);
-    });
-}
-
-// Update dark mode icon
-function updateDarkModeIcon(isDark) {
-    if (darkModeBtn) {
-        const sunIcon = darkModeBtn.querySelector('.sun-icon');
-        const moonIcon = darkModeBtn.querySelector('.moon-icon');
-        if (isDark) {
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
-    }
-}
-        // WISHLIST
-        const wishlistBtn = document.getElementById('wishlistBtn');
-        wishlistBtn.addEventListener('click', function() {
-            console.log('Wishlist clicked');
-            alert('Wishlist feature - You have 3 items saved!');
-        });
-
-        // DESKTOP RESPONSIVE
-       function handleResize() {
-    if (window.innerWidth >= 1465) {
-        document.querySelector('.desktop-search').style.display = 'flex';
-        if (darkModeBtn) darkModeBtn.style.display = 'flex';
-    } else if (window.innerWidth >= 1200) {
-        document.querySelector('.desktop-search').style.display = 'none';
-        if (darkModeBtn) darkModeBtn.style.display = 'flex';
-    } else {
-        document.querySelector('.desktop-search').style.display = 'none';
-        if (darkModeBtn) darkModeBtn.style.display = 'none';
-    }
-    
-    if (window.innerWidth >= 1200) {
-        closeMobileMenu();
-        closeCartSidebar();
-        searchModal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        // KEYBOARD
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeMobileMenu();
-                closeCartSidebar();
-                searchModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // CART TOTAL
-        function updateCartTotal() {
-            const cartItems = document.querySelectorAll('.cart-item');
-            let total = 0;
-            
-            cartItems.forEach(item => {
-                const price = parseInt(item.querySelector('.cart-item-price').textContent.replace('₹', ''));
-                const qty = parseInt(item.querySelector('.cart-item-quantity span').textContent);
-                total += price * qty;
-            });
-            
-            document.querySelector('.cart-total span:last-child').textContent = '₹' + total;
-        }
-
-        // TOUCH GESTURES
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 100;
-            
-            if (touchEndX - touchStartX > swipeThreshold && touchStartX < 50) {
-                hamburger.click();
-            }
-            
-            if (touchStartX - touchEndX > swipeThreshold) {
-                if (mobileMenu.classList.contains('active')) {
-                    closeMobileMenu();
-                }
-                if (cartSidebar.classList.contains('active')) {
-                    closeCartSidebar();
-                }
-            }
-        }
-
-        // SMOOTH SCROLL
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && document.querySelector(href)) {
-                    e.preventDefault();
-                    document.querySelector(href).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    closeMobileMenu();
-                }
-            });
-        });
-
-        // INITIALIZE
-        updateCartTotal();
-
-        // SUCCESS MESSAGE
-        console.log('%c🎉 PERFECT NAVBAR LOADED! 🎉', 'color: #ff6b6b; font-size: 20px; font-weight: bold; background: #fff; padding: 10px;');
-        console.log('%c✅ ALL FIXES APPLIED:', 'color: #28a745; font-size: 16px; font-weight: bold;');
-        console.log('%c  ✅ Solid backgrounds (no blur issues)', 'color: #28a745; font-size: 12px;');
-        console.log('%c  ✅ All sub-categories are clickable', 'color: #28a745; font-size: 12px;');
-        console.log('%c  ✅ Single close button (no confusion)', 'color: #28a745; font-size: 12px;');
-        console.log('%c  ✅ Desktop dropdowns work perfectly', 'color: #28a745; font-size: 12px;');
-        console.log('%c  ✅ Hover bridge prevents disappearing', 'color: #28a745; font-size: 12px;');
-        console.log('%c  ✅ Premium color scheme applied', 'color: #28a745; font-size: 12px;');
-        console.log('%c🔥 JEALOUSY-INDUCING PREMIUM DESIGN! 🔥', 'color: #ff6b6b; font-size: 14px; font-weight: bold;');
-    </script> <script>
-        // ============================================
-        // 📱 DESKTOP SLIDES (1920x1080 recommended)
-        // ============================================
-        const desktopSlides = [
-            {
-                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Quality Snacking</span>',
-                subtitle: 'Pure Refreshment',
-                cta: 'Shop Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Crafted Tradition</span>',
-                subtitle: 'Timeless Taste',
-                cta: 'Order Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Savory Delights</span>',
-                subtitle: 'Unforgettable Taste',
-                cta: 'Order Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Sweet Traditions</span>',
-                subtitle: 'Pure Indulgence',
-                cta: 'Explore'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Authentic Flavors</span>',
-                subtitle: 'Heritage Recipes',
-                cta: 'Discover'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Premium Selection</span>',
-                subtitle: 'Curated Excellence',
-                cta: 'View Menu'
-            }
-        ];
-
-        // ============================================
-        // 📱 MOBILE SLIDES (768x1024 recommended)
-        // ============================================
-        const mobileSlides = [
-            {
-                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Quality Snacking</span>',
-                subtitle: 'Pure Refreshment',
-                cta: 'Shop Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Crafted Tradition</span>',
-                subtitle: 'Timeless Taste',
-                cta: 'Order Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Savory Delights</span>',
-                subtitle: 'Unforgettable Taste',
-                cta: 'Order Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Sweet Traditions</span>',
-                subtitle: 'Pure Indulgence',
-                cta: 'Explore'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Authentic Flavors</span>',
-                subtitle: 'Heritage Recipes',
-                cta: 'Discover'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Premium Selection</span>',
-                subtitle: 'Curated Excellence',
-                cta: 'View Menu'
-            }
-        ];
-
-        // Detect device and select appropriate slides
-        const isMobile = window.innerWidth <= 768;
-        const slides = isMobile ? mobileSlides : desktopSlides;
-
-        // Configuration
-        const GRID_ROWS = 4;
-        const GRID_COLS = 5;
-        const TOTAL_FRAGMENTS = GRID_ROWS * GRID_COLS; // 20 fragments
-        const AUTO_PLAY_INTERVAL = 5000;
-
-        let currentSlide = 0;
-        let isAnimating = false;
-        let autoPlayTimer = null;
-
-        // DOM Elements
-        const slideBase = document.getElementById('slideBase');
-        const fragmentContainer = document.getElementById('fragmentContainer');
-        const contentWrapper = document.getElementById('contentWrapper');
-        const slideTitle = document.getElementById('slideTitle');
-        const slideSubtitle = document.getElementById('slideSubtitle');
-        const ctaText = document.getElementById('ctaText');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const indicatorsContainer = document.getElementById('indicators');
-
-        // Initialize
-        function init() {
-            // Create indicators
-            slides.forEach((_, index) => {
-                const indicator = document.createElement('div');
-                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-                indicator.addEventListener('click', () => goToSlide(index));
-                indicatorsContainer.appendChild(indicator);
-            });
-
-            // Set initial slide
-            slideBase.style.backgroundImage = `url(${slides[0].image})`;
-            updateContent(0);
-
-            // Start autoplay immediately
-            startAutoPlay();
-        }
-
-        // Navigate to specific slide
-        function goToSlide(index) {
-            if (isAnimating || index === currentSlide) return;
-
-            isAnimating = true;
-            const nextSlideData = slides[index];
-
-            // Fade out content
-            contentWrapper.classList.add('fade-out');
-
-            // Create and animate fragments
-            setTimeout(() => {
-                createFragments(nextSlideData.image);
-            }, 300);
-
-            // Update after animation completes
-            setTimeout(() => {
-                slideBase.style.backgroundImage = `url(${nextSlideData.image})`;
-                currentSlide = index;
-                updateIndicators();
-                updateContent(index);
+        <!-- ============================================
+             LEFT SIDEBAR - FILTERS (Sticky)
+             ============================================ -->
+        <aside class="filter-sidebar">
+            <div class="filter-content">
                 
-                // Clear fragments
-                fragmentContainer.innerHTML = '';
-                
-                // Fade in content
-                contentWrapper.classList.remove('fade-out');
-                
-                isAnimating = false;
-                resetAutoPlay();
-            }, 1600);
-        }
+                <!-- FILTER & SORT -->
+                <div class="filter-section">
+                    <h3 class="section-title">FILTER & SORT</h3>
+                </div>
 
-        // Create fragments that complete the image (NO GAPS, NO ROTATION)
-        function createFragments(imageUrl) {
-            fragmentContainer.innerHTML = '';
+                <!-- SORT BY (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="sort-content">
+                        <h4 class="subsection-title">Sort by</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="sort-content">
+                        <div class="sort-options">
+                            <label class="radio-option">
+            <input type="radio" name="sort" value="all" data-sort="none" checked>
+            <span class="radio-custom"></span>
+            <span class="radio-label">All</span>
+        </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="discounts" data-sort="discount">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Discounts</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="high-price" data-sort="price-desc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">High Price</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="low-price" data-sort="price-asc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Low Price</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRICE FILTER (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="price-content">
+                        <h4 class="subsection-title">Price</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="price-content">
+                          <label class="radio-option">
+        <input type="radio" name="price" value="all" data-min="0" data-max="999999" checked>
+        <span class="radio-custom"></span>
+        <span class="radio-label">All Prices</span>
+    </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="0-100" data-min="0" data-max="100">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹0 - ₹100</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="100-200" data-min="100" data-max="200">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹100 - ₹200</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="200-300" data-min="200" data-max="300">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹200 - ₹300</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="300-400" data-min="300" data-max="400">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹300 - ₹400</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="400-500" data-min="400" data-max="500">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹400 - ₹500</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="500-600" data-min="500" data-max="600">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹500 - ₹600</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="600-700" data-min="600" data-max="700">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹600 - ₹700</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CATEGORY FILTER (Always Open - No Toggle) -->
+                <div class="filter-section active-no-toggle">
+                    <h4 class="subsection-title">Category</h4>
+                    <div class="section-content-always-open">
+                        <!-- Clear All Button -->
+    <button class="clear-categories-btn" id="clearCategories">
+        <span>✕</span> Clear All
+    </button>
+                    
+                        <!-- Search Box -->
+                        <div class="category-search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="category-search" placeholder="Search" id="categorySearch">
+                        </div>
+                        
+                        <!-- Category List -->
+                        <div class="category-list" id="categoryList">
+                            <label class="checkbox-option" data-category="street-food">
+                                <input type="checkbox" value="street-food">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌮 Street Food</span>
+                            </label>
+                            <label class="checkbox-option" data-category="main-course">
+                                <input type="checkbox" value="main-course">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍛 Main Course</span>
+                            </label>
+                            <label class="checkbox-option" data-category="meals">
+                                <input type="checkbox" value="meals">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍽️ Meals / Thalis</span>
+                            </label>
+                            <label class="checkbox-option" data-category="desserts">
+                                <input type="checkbox" value="desserts">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍨 Fresh Desserts</span>
+                            </label>
+                            <label class="checkbox-option" data-category="snacks-drinks">
+                                <input type="checkbox" value="snacks-drinks">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍿 Snacks & Drinks</span>
+                            </label>
+                            <label class="checkbox-option" data-category="mithai">
+                                <input type="checkbox" value="mithai">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍬 Mithai (Indian Sweets)</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-eggless">
+                                <input type="checkbox" value="cakes-eggless">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🎂 Cakes - Eggless</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-with-egg">
+                                <input type="checkbox" value="cakes-with-egg">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍰 Cakes - With Egg</span>
+                            </label>
+                            <label class="checkbox-option" data-category="pastries">
+                                <input type="checkbox" value="pastries">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥐 Pastries</span>
+                            </label>
+                            <label class="checkbox-option" data-category="bread-buns">
+                                <input type="checkbox" value="bread-buns">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍞 Bread & Buns</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cookies">
+                                <input type="checkbox" value="cookies">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍪 Cookies</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dairy">
+                                <input type="checkbox" value="dairy">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥛 Dairy</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dry-fruits">
+                                <input type="checkbox" value="dry-fruits">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌰 Dry Fruits</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- ============================================
+             RIGHT SIDE - PRODUCTS GRID
+             ============================================ -->
+        <main class="products-section">
             
-            const widthPercent = 100 / GRID_COLS;
-            const heightPercent = 100 / GRID_ROWS;
-            
-            // Create all fragments
-            for (let i = 0; i < TOTAL_FRAGMENTS; i++) {
-                const row = Math.floor(i / GRID_COLS);
-                const col = i % GRID_COLS;
+            <!-- Products Header -->
+            <div class="products-header">
+                <h2 class="products-title">All Products</h2>
+                <p class="products-count"><span id="productCount">24</span> products</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
                 
-                const fragment = document.createElement('div');
-                fragment.className = 'fragment';
+                <!-- SAMPLE PRODUCT CARDS (Will be dynamically filtered) -->
                 
-                // Position exactly - NO GAPS
-                fragment.style.left = `${col * widthPercent}%`;
-                fragment.style.top = `${row * heightPercent}%`;
-                fragment.style.width = `${widthPercent}%`;
-                fragment.style.height = `${heightPercent}%`;
-                
-                // Random delay for staggered effect
-                const delay = Math.random() * 700;
-                fragment.style.animationDelay = `${delay}ms`;
+                <!-- Product 1 -->
+                <div class="product-card" data-category="street-food" data-price="50" data-discount="20">
+                    <div class="product-badge discount-badge">20% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFB6C1/FFFFFF?text=Pani+Puri" alt="Pani Puri" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pani Puri Special</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹50</div>
+                        </div>
+                    </div>
+                </div>
 
-                // Fragment inner with exact background positioning
-                const inner = document.createElement('div');
-                inner.className = 'fragment-inner';
-                inner.style.backgroundImage = `url(${imageUrl})`;
-                
-                // Calculate exact position to complete the image
-                const bgX = col * widthPercent;
-                const bgY = row * heightPercent;
-                inner.style.backgroundPosition = `${bgX}% ${bgY}%`;
-                inner.style.backgroundSize = `${GRID_COLS * 100}% ${GRID_ROWS * 100}%`;
+                <!-- Product 2 -->
+                <div class="product-card" data-category="main-course" data-price="250" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFA500/FFFFFF?text=Butter+Paneer" alt="Butter Paneer" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Butter Paneer Masala</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹250</div>
+                        </div>
+                    </div>
+                </div>
 
-                fragment.appendChild(inner);
-                fragmentContainer.appendChild(fragment);
+                <!-- Product 3 -->
+                <div class="product-card" data-category="mithai" data-price="150" data-discount="15">
+                    <div class="product-badge discount-badge">15% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Gulab+Jamun" alt="Gulab Jamun" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gulab Jamun Box</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹150</div>
+                        </div>
+                    </div>
+                </div>
 
-                // Trigger animation
-                requestAnimationFrame(() => {
-                    fragment.classList.add('animating');
-                });
-            }
-        }
+                <!-- Product 4 -->
+                <div class="product-card" data-category="cakes-eggless" data-price="450" data-discount="10">
+                    <div class="product-badge discount-badge">10% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/667EEA/FFFFFF?text=Chocolate+Cake" alt="Chocolate Cake" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chocolate Truffle Cake</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹450</div>
+                        </div>
+                    </div>
+                </div>
 
-        // Update content
-        function updateContent(index) {
-            const slide = slides[index];
-            slideTitle.innerHTML = slide.title;
-            slideSubtitle.textContent = slide.subtitle;
-            ctaText.textContent = slide.cta;
-        }
+                <!-- Product 5 -->
+                <div class="product-card" data-category="dairy" data-price="80" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/98D8C8/FFFFFF?text=Fresh+Paneer" alt="Paneer" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Paneer (500g)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹80</div>
+                        </div>
+                    </div>
+                </div>
 
-        // Update indicators
-        function updateIndicators() {
-            document.querySelectorAll('.indicator').forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
-            });
-        }
+                <!-- Product 6 -->
+                <div class="product-card" data-category="dry-fruits" data-price="350" data-discount="25">
+                    <div class="product-badge discount-badge">25% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/DAA520/FFFFFF?text=Almonds" alt="Almonds" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Almonds (250g)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹350</div>
+                        </div>
+                    </div>
+                </div>
 
-        // Auto play functions
-        function startAutoPlay() {
-            autoPlayTimer = setInterval(() => {
-                const nextIndex = (currentSlide + 1) % slides.length;
-                goToSlide(nextIndex);
-            }, AUTO_PLAY_INTERVAL);
-        }
+                <!-- Product 7 -->
+                <div class="product-card" data-category="desserts" data-price="120" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFB6D9/FFFFFF?text=Rabri" alt="Rabri" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rabri Special</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹120</div>
+                        </div>
+                    </div>
+                </div>
 
-        function resetAutoPlay() {
-            clearInterval(autoPlayTimer);
-            startAutoPlay();
-        }
+                <!-- Product 8 -->
+                <div class="product-card" data-category="snacks-drinks" data-price="30" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFA07A/FFFFFF?text=Masala+Chai" alt="Chai" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Masala Chai</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹30</div>
+                        </div>
+                    </div>
+                </div>
 
-        // Navigation
-        prevBtn.addEventListener('click', () => {
-            if (!isAnimating) {
-                const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
-                goToSlide(prevIndex);
-            }
-        });
+                <!-- Product 9 -->
+                <div class="product-card" data-category="pastries" data-price="90" data-discount="5">
+                    <div class="product-badge discount-badge">5% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/F0E68C/000000?text=Black+Forest" alt="Black Forest" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Black Forest Pastry</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹90</div>
+                        </div>
+                    </div>
+                </div>
 
-        nextBtn.addEventListener('click', () => {
-            if (!isAnimating) {
-                const nextIndex = (currentSlide + 1) % slides.length;
-                goToSlide(nextIndex);
-            }
-        });
+                <!-- Product 10 -->
+                <div class="product-card" data-category="cookies" data-price="180" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/DEB887/FFFFFF?text=Butter+Cookies" alt="Cookies" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Butter Cookies Box</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹180</div>
+                        </div>
+                    </div>
+                </div>
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (isAnimating) return;
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'ArrowRight') nextBtn.click();
-        });
+                <!-- Product 11 -->
+                <div class="product-card" data-category="meals" data-price="280" data-discount="10">
+                    <div class="product-badge discount-badge">10% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FF7F50/FFFFFF?text=Thali+Special" alt="Thali" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Royal Thali</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹280</div>
+                        </div>
+                    </div>
+                </div>
 
-     
+                <!-- Product 12 -->
+                <div class="product-card" data-category="bread-buns" data-price="40" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/F5DEB3/000000?text=Pav+Buns" alt="Pav" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Pav (6 pcs)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹40</div>
+                        </div>
+                    </div>
+                </div>
 
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+            </div>
 
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                diff > 0 ? nextBtn.click() : prevBtn.click();
-            }
-        }, { passive: true });
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search criteria</p>
+            </div>
 
-        // Pause autoplay on hover
-        document.getElementById('heroSlider').addEventListener('mouseenter', () => {
-            clearInterval(autoPlayTimer);
-        });
+        </main>
 
-        document.getElementById('heroSlider').addEventListener('mouseleave', () => {
-            startAutoPlay();
-        });
+    </div>
 
-        // Initialize on load
-        init();
 
-        console.log('%c🎉 SLIDER READY!', 'color: #FFD700; font-size: 20px; font-weight: bold;');
-        console.log('%c✅ Auto-play: ENABLED', 'color: #4CAF50; font-size: 14px;');
-        console.log('%c✅ Mobile detection: ' + (isMobile ? 'MOBILE' : 'DESKTOP'), 'color: #2196F3; font-size: 14px;');
-        console.log('%c✅ Fragments: ' + TOTAL_FRAGMENTS + ' pieces', 'color: #FF9800; font-size: 14px;');
-        // ============================================
-// 🍦 ICE CREAM SECTION - SMOOTH SCROLL
-// ============================================
+  
 
-(function() {
-    const scrollContainer = document.getElementById('iceCreamScroll');
-    const scrollLeftBtn = document.getElementById('scrollLeft');
-    const scrollRightBtn = document.getElementById('scrollRight');
-    
-    if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) return;
-    
-    const scrollAmount = 400; // Pixels to scroll per click
-    
-    // Smooth scroll left
-    scrollLeftBtn.addEventListener('click', function() {
-        scrollContainer.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Smooth scroll right
-    scrollRightBtn.addEventListener('click', function() {
-        scrollContainer.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Show/hide arrows based on scroll position
-    function updateArrows() {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        
-        // Hide left arrow at start
-        if (scrollLeft <= 10) {
-            scrollLeftBtn.style.opacity = '0';
-            scrollLeftBtn.style.pointerEvents = 'none';
-        } else {
-            scrollLeftBtn.style.opacity = '1';
-            scrollLeftBtn.style.pointerEvents = 'auto';
-        }
-        
-        // Hide right arrow at end
-        if (scrollLeft >= maxScroll - 10) {
-            scrollRightBtn.style.opacity = '0';
-            scrollRightBtn.style.pointerEvents = 'none';
-        } else {
-            scrollRightBtn.style.opacity = '1';
-            scrollRightBtn.style.pointerEvents = 'auto';
-        }
-    }
-    
-    // Update on scroll
-    scrollContainer.addEventListener('scroll', updateArrows);
-    
-    // Initial check
-    updateArrows();
-    
-    // Momentum scrolling for touch devices
-    let isDown = false;
-    let startX;
-    let scrollLeftPos;
-    
-    scrollContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        scrollContainer.style.cursor = 'grabbing';
-        startX = e.pageX - scrollContainer.offsetLeft;
-        scrollLeftPos = scrollContainer.scrollLeft;
-    });
-    
-    scrollContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mouseup', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        scrollContainer.scrollLeft = scrollLeftPos - walk;
-    });
-    
-    console.log('🍦 Ice Cream Gallery Initialized!');
-})();
-// ============================================
-// 🍛 MAIN COURSE SECTION - SMOOTH SCROLL
-// ============================================
 
-(function() {
-    const scrollContainer = document.getElementById('mainCourseScroll');
-    const scrollLeftBtn = document.getElementById('scrollLeftMainCourse');
-    const scrollRightBtn = document.getElementById('scrollRightMainCourse');
-    
-    if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) return;
-    
-    const scrollAmount = 400;
-    
-    scrollLeftBtn.addEventListener('click', function() {
-        scrollContainer.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    scrollRightBtn.addEventListener('click', function() {
-        scrollContainer.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    function updateArrows() {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-        
-        if (scrollLeft <= 10) {
-            scrollLeftBtn.style.opacity = '0';
-            scrollLeftBtn.style.pointerEvents = 'none';
-        } else {
-            scrollLeftBtn.style.opacity = '1';
-            scrollLeftBtn.style.pointerEvents = 'auto';
-        }
-        
-        if (scrollLeft >= maxScroll - 10) {
-            scrollRightBtn.style.opacity = '0';
-            scrollRightBtn.style.pointerEvents = 'none';
-        } else {
-            scrollRightBtn.style.opacity = '1';
-            scrollRightBtn.style.pointerEvents = 'auto';
-        }
-    }
-    
-    scrollContainer.addEventListener('scroll', updateArrows);
-    updateArrows();
-    
-    // Momentum scrolling
-    let isDown = false;
-    let startX;
-    let scrollLeftPos;
-    
-    scrollContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        scrollContainer.style.cursor = 'grabbing';
-        startX = e.pageX - scrollContainer.offsetLeft;
-        scrollLeftPos = scrollContainer.scrollLeft;
-    });
-    
-    scrollContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mouseup', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        scrollContainer.scrollLeft = scrollLeftPos - walk;
-    });
-    
-    console.log('🍛 Main Course Gallery Initialized!');
-})();
-    </script>
+    <script src="js/navbar.js" defer></script>
+    <script src="js/autoslideshow.js" defer></script>
+    <script src="js/ice-cream.js" defer></script>
+    <script src="js/main-course.js" defer></script>
+    <script src="js/filter-section.js" defer></script>
+    <script src="js/mobilefilter-section.js" defer></script>
 </body>
 </html>

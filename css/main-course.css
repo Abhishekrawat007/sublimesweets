@@ -1,0 +1,450 @@
+
+/* ============================================
+   🍛 ULTRA-PREMIUM MAIN COURSE SECTION
+   Luxury horizontal scroll showcase - Warm Colors
+   ============================================ */
+
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: linear-gradient(135deg, #fff9f5 0%, #ffffff 50%, #fffaf0 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section {
+    background: linear-gradient(135deg, #1a1815 0%, #1a1a1a 50%, #1a1a15 100%);
+    background-size: 400% 400%;
+}
+
+/* ============================================
+   🎨 SECTION HEADER
+   ============================================ */
+
+.main-course-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.main-course-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-title {
+    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 50%, #ffa500 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   📦 SCROLL CONTAINER
+   ============================================ */
+
+.main-course-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-course-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 107, 53, 0.3) transparent;
+    padding: 20px 0 30px 0;
+    margin: 0 60px;
+}
+
+/* Custom Scrollbar */
+.main-course-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.main-course-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 165, 0, 0.1);
+    border-radius: 10px;
+}
+
+.main-course-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.main-course-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #f7931e, #ff6b35);
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 165, 0, 0.05);
+}
+
+/* ============================================
+   🎴 PRODUCT TRACK
+   ============================================ */
+
+.main-course-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   💎 PREMIUM PRODUCT CARD
+   ============================================ */
+
+.main-course-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid rgba(255, 165, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
+    overflow: hidden;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-card {
+    background: rgba(42, 38, 35, 0.95);
+    border-color: rgba(255, 165, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient Border Animation */
+.main-course-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #ff6b35, #f7931e, #ffd700, #ff6b35);
+    background-size: 400% 400%;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: gradientShift 3s ease infinite;
+}
+
+.main-course-card:hover::before {
+    opacity: 1;
+}
+
+/* 3D Hover Effect */
+.main-course-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.35);
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-card:hover {
+    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.5);
+}
+
+/* Active/Tap Effect */
+.main-course-card:active {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* ============================================
+   🖼️ PRODUCT IMAGE - Main Course Glow Colors
+   ============================================ */
+
+.main-course-card .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.main-course-card .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.main-course-card:hover .product-image {
+    transform: scale(1.15);
+}
+
+/* Dish-specific Glow Effects */
+.butter-glow {
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.6) 0%, transparent 70%);
+}
+
+.paneer-glow {
+    background: radial-gradient(circle, rgba(255, 228, 181, 0.6) 0%, transparent 70%);
+}
+
+.dal-glow {
+    background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
+}
+
+.biryani-glow {
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
+}
+
+.chole-glow {
+    background: radial-gradient(circle, rgba(210, 105, 30, 0.6) 0%, transparent 70%);
+}
+
+.kadai-glow {
+    background: radial-gradient(circle, rgba(255, 99, 71, 0.6) 0%, transparent 70%);
+}
+
+.palak-glow {
+    background: radial-gradient(circle, rgba(107, 142, 35, 0.6) 0%, transparent 70%);
+}
+
+.rajma-glow {
+    background: radial-gradient(circle, rgba(165, 42, 42, 0.6) 0%, transparent 70%);
+}
+
+.malai-glow {
+    background: radial-gradient(circle, rgba(245, 222, 179, 0.6) 0%, transparent 70%);
+}
+
+.tandoori-glow {
+    background: radial-gradient(circle, rgba(255, 69, 0, 0.6) 0%, transparent 70%);
+}
+
+/* ============================================
+   📝 PRODUCT INFO
+   ============================================ */
+
+.main-course-card .product-info {
+    text-align: center;
+}
+
+.main-course-card .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c1a0c;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #2c1a0c 0%, #5c4a3c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-name {
+    background: linear-gradient(135deg, #ffffff 0%, #d0c0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.main-course-card:hover .product-name {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: scale(1.05);
+}
+
+.main-course-card .product-price {
+    color: #ff6b35;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-price {
+    color: #ffa500;
+}
+
+/* ============================================
+   ⬅️➡️ NAVIGATION ARROWS
+   ============================================ */
+
+.main-course-container .scroll-arrow {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 165, 0, 0.3);
+    color: #ff6b35;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .scroll-arrow {
+    background: rgba(42, 38, 35, 0.9);
+    border-color: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+}
+
+.main-course-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.main-course-container .scroll-arrow:hover {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    color: white;
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+}
+
+/* ============================================
+   🔗 SEE ALL BUTTON
+   ============================================ */
+
+.main-course-section .see-all-btn {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 165, 0, 0.4);
+    color: #f7931e;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section .see-all-btn {
+    background: rgba(42, 38, 35, 0.8);
+    border-color: rgba(255, 165, 0, 0.3);
+    color: #ffa500;
+}
+
+.main-course-section .see-all-btn::before {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+}
+
+
+.main-course-section .see-all-btn:hover {
+    color: #ffffff; /* WHITE TEXT ON HOVER - now visible! */
+    box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
+}
+/* ============================================
+   📱 MOBILE RESPONSIVE - ULTRA-TIGHT
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .main-course-container .scroll-arrow {
+        display: none;
+    }
+    
+    .main-course-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-course-section {
+        padding: 20px 15px 25px 15px; /* Tighter */
+    }
+    
+    .main-course-header {
+        margin-bottom: 15px;
+    }
+    
+    .main-course-title {
+        font-size: 28px; /* Smaller */
+    }
+    
+    .main-course-card {
+        flex: 0 0 140px;
+        width: 140px;
+        padding: 12px;
+    }
+    
+    .main-course-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .main-course-section .see-all-container {
+        margin-top: 15px; /* Reduced */
+    }
+}
+
+@media (max-width: 480px) {
+    .main-course-section {
+        padding: 15px 10px 20px 10px; /* Much tighter! */
+    }
+    
+    .main-course-header {
+        margin-bottom: 12px; /* Reduced */
+    }
+    
+    .main-course-title {
+        font-size: 26px; /* Smaller */
+    }
+    
+    .main-course-scroll {
+        padding: 15px 0 20px 0; /* Reduced */
+    }
+    
+    .main-course-card {
+        flex: 0 0 130px;
+        width: 130px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+    
+    .main-course-card .product-name {
+        font-size: 13px;
+    }
+    
+    .main-course-track {
+        gap: 12px;
+    }
+    
+    .main-course-section .see-all-container {
+        margin-top: 10px; /* Reduced */
+    }
+    
+    .main-course-section .see-all-btn {
+        padding: 12px 24px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-course-section {
+        padding: 12px 8px 18px 8px; /* Even tighter */
+    }
+    
+    .main-course-header {
+        margin-bottom: 10px; /* Reduced */
+    }
+    
+    .main-course-title {
+        font-size: 24px;
+    }
+    
+    .main-course-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .main-course-section .see-all-container {
+        margin-top: 8px; /* Minimal */
+    }
+    
+    .main-course-section .see-all-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}

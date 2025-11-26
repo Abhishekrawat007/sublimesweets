@@ -1,0 +1,720 @@
+/* ============================================
+   🌟 PREMIUM BESTSELLERS SECTION
+   The most jealousy-inducing section ever!
+   ============================================ */
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.6); }
+}
+
+.categories-section {
+    padding: 60px 20px 40px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.categories-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.categories-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    background-size: 400% 400%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::before {
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::after {
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
+}
+
+/* ============================================
+   🎨 PREMIUM SECTION TITLE
+   ============================================ */
+.section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.section-title::before {
+    content: '✨';
+    position: absolute;
+    left: -50px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.section-title::after {
+    content: '✨';
+    position: absolute;
+    right: -50px;
+    animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .section-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 30px rgba(255, 107, 107, 0.5);
+}
+
+/* ============================================
+   📦 CATEGORIES GRID - DEFAULT: 2 ROWS × 3 COLUMNS
+   ============================================ */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   💎 PREMIUM CATEGORY CARD
+   ============================================ */
+.category-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+    opacity: 0;
+}
+
+.category-card:nth-child(1) { --index: 0; }
+.category-card:nth-child(2) { --index: 1; }
+.category-card:nth-child(3) { --index: 2; }
+.category-card:nth-child(4) { --index: 3; }
+.category-card:nth-child(5) { --index: 4; }
+.category-card:nth-child(6) { --index: 5; }
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card {
+    background: rgba(42, 42, 42, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b6b, #ffa500, #667eea, #764ba2);
+    background-size: 400% 400%;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: gradientShift 3s ease infinite;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover {
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+}
+
+/* ============================================
+   🖼️ PRODUCT IMAGES - DESKTOP (601px+)
+   Show only ONE image (the second one)
+   ============================================ */
+
+.category-products {
+    display: block;
+    padding: 0;
+    border-radius: 20px 20px 0 0;
+    aspect-ratio: 1;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+}
+
+/* Hide all product items by default */
+.product-item {
+    display: none !important;
+}
+
+/* Show ONLY the second image */
+.product-item:nth-child(2) {
+    display: flex !important;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 0;
+}
+
+.product-item:nth-child(2) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .product-item:nth-child(2) img {
+    transform: scale(1.08);
+}
+
+/* Gradient overlay on hover */
+.product-item:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.category-card:hover .product-item:nth-child(2)::before {
+    opacity: 1;
+}
+
+/* ============================================
+   🎯 PREMIUM GLASSMORPHISM FOOTER
+   ============================================ */
+.category-footer {
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 107, 107, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .category-footer::before {
+    width: 100%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-footer {
+    background: rgba(42, 42, 42, 0.8);
+    border-top: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* ============================================
+   ✨ PREMIUM TITLE WITH GRADIENT
+   ============================================ */
+.category-title {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateX(5px);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-title {
+    background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   🚀 PREMIUM ANIMATED BUTTON
+   ============================================ */
+.view-all-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-all-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-all-btn:hover::before {
+    left: 100%;
+}
+
+.view-all-btn:hover {
+    transform: translateX(5px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+}
+
+.view-all-btn:active {
+    transform: translateX(5px) scale(0.98);
+}
+
+.view-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* ============================================
+   📱 RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* ============================================
+   💻 TABLET RANGE: 601px - 900px
+   Keep desktop layout (3 columns, single image)
+   ============================================ */
+@media (min-width: 601px) and (max-width: 900px) {
+    .categories-section {
+        padding: 50px 18px 35px 18px;
+    }
+    
+    .section-title {
+        font-size: 38px;
+        margin-bottom: 40px;
+    }
+    
+    .categories-grid {
+        gap: 20px;
+    }
+    
+    .category-card {
+        border-radius: 20px;
+    }
+    
+    .category-footer {
+        padding: 16px 18px;
+    }
+    
+    .category-title {
+        font-size: 16px;
+    }
+    
+    .view-all-btn {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+}
+
+/* ============================================
+   📱 MOBILE: 481px - 600px
+   FIXED: Follow desktop design (single image)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 600px) {
+    .categories-section {
+        padding: 45px 15px 30px 15px;
+    }
+    
+    .section-title {
+        font-size: 34px;
+        margin-bottom: 35px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+    
+    .category-card {
+        border-radius: 18px;
+    }
+    
+    /* CRITICAL: Keep single image layout */
+    .category-products {
+        display: block;
+        aspect-ratio: 1;
+        border-radius: 18px 18px 0 0;
+    }
+    
+    .product-item {
+        display: none !important;
+    }
+    
+    .product-item:nth-child(2) {
+        display: flex !important;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .product-item:nth-child(2) img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .category-footer {
+        padding: 14px 14px;
+        border-radius: 0 0 18px 18px;
+    }
+    
+    .category-title {
+        font-size: 14px;
+    }
+    
+    .view-all-btn {
+        padding: 7px 14px;
+        font-size: 10px;
+        gap: 5px;
+    }
+    
+    .view-all-btn svg {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+/* ============================================
+   📱 MOBILE: Below 480px - ULTRA-TIGHT SPACING
+   ============================================ */
+@media (max-width: 480px) {
+    .categories-section {
+        padding: 25px 12px 20px 12px; /* Much tighter! */
+    }
+    
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 18px; /* Reduced from 30px */
+        letter-spacing: -1.5px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .category-card {
+        border-radius: 20px;
+    }
+    
+    /* SINGLE BIG IMAGE */
+    .category-products {
+        display: block;
+        padding: 0;
+        border-radius: 20px 20px 0 0;
+        aspect-ratio: 0.65;
+        overflow: hidden;
+        position: relative;
+        min-height: 140px;
+    }
+    
+    .product-item {
+        display: none !important;
+    }
+    
+    .product-item:first-child {
+        display: flex !important;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .product-item:first-child img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .category-card:active .product-item:first-child img {
+        transform: scale(1.12);
+    }
+    
+    .product-item:first-child::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+    
+    .category-card:active .product-item:first-child::before {
+        opacity: 1;
+    }
+    
+    .category-footer {
+        padding: 16px 12px;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .view-all-btn {
+        display: none !important;
+    }
+    
+    .category-title {
+        font-size: 16px;
+        font-weight: 900;
+        text-align: center;
+        width: 100%;
+        letter-spacing: -0.4px;
+        line-height: 1.3;
+    }
+    
+    .category-card:active {
+        transform: scale(0.97);
+    }
+    
+    .category-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 165, 0, 0.12));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        border-radius: 20px;
+    }
+    
+    .category-card:active::after {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   📱 SMALLER MOBILE: 400-480px
+   ============================================ */
+@media (max-width: 400px) {
+    .categories-section {
+        padding: 22px 10px 18px 10px; /* Even tighter */
+    }
+    
+    .section-title {
+        font-size: 30px;
+        margin-bottom: 16px; /* Reduced */
+    }
+    
+    .categories-grid {
+        gap: 10px;
+    }
+    
+    .category-card {
+        border-radius: 18px;
+    }
+    
+    .category-products {
+        border-radius: 18px 18px 0 0;
+        min-height: 120px;
+    }
+    
+    .category-footer {
+        padding: 14px 10px;
+        border-radius: 0 0 18px 18px;
+    }
+    
+    .category-title {
+        font-size: 14px;
+        font-weight: 800;
+    }
+    
+    .category-card::after {
+        border-radius: 18px;
+    }
+}
+
+/* ============================================
+   📱 TINY SCREENS: 360-400px
+   ============================================ */
+@media (max-width: 360px) {
+    .categories-section {
+        padding: 20px 8px 16px 8px; /* Super tight */
+    }
+    
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 14px; /* Reduced */
+    }
+    
+    .categories-grid {
+        gap: 9px;
+    }
+    
+    .category-card {
+        border-radius: 16px;
+    }
+    
+    .category-products {
+        border-radius: 16px 16px 0 0;
+        min-height: 110px;
+    }
+    
+    .category-footer {
+        padding: 13px 8px;
+        border-radius: 0 0 16px 16px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+    }
+    
+    .category-card::after {
+        border-radius: 16px;
+    }
+}
+
+/* ============================================
+   📱 ULTRA TINY: Below 340px
+   ============================================ */
+@media (max-width: 340px) {
+    .categories-section {
+        padding: 18px 8px 14px 8px; /* Minimal */
+    }
+    
+    .section-title {
+        font-size: 26px;
+        margin-bottom: 12px; /* Reduced */
+    }
+    
+    .categories-grid {
+        gap: 8px;
+    }
+    
+    .category-products {
+        min-height: 105px;
+    }
+    
+    .category-footer {
+        padding: 12px 8px;
+    }
+    
+    .category-title {
+        font-size: 12px;
+    }
+}

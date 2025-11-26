@@ -1,0 +1,390 @@
+ <!-- ============================================
+         🎯 FILTER + PRODUCTS SECTION
+         ============================================ -->
+    
+    <div class="filter-products-wrapper">
+        
+        <!-- ============================================
+             LEFT SIDEBAR - FILTERS (Sticky)
+             ============================================ -->
+        <aside class="filter-sidebar">
+            <div class="filter-content">
+                
+                <!-- FILTER & SORT -->
+                <div class="filter-section">
+                    <h3 class="section-title">FILTER & SORT</h3>
+                </div>
+
+                <!-- SORT BY (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="sort-content">
+                        <h4 class="subsection-title">Sort by</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="sort-content">
+                        <div class="sort-options">
+                            <label class="radio-option">
+            <input type="radio" name="sort" value="all" data-sort="none" checked>
+            <span class="radio-custom"></span>
+            <span class="radio-label">All</span>
+        </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="discounts" data-sort="discount">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Discounts</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="high-price" data-sort="price-desc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">High Price</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="low-price" data-sort="price-asc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Low Price</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRICE FILTER (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="price-content">
+                        <h4 class="subsection-title">Price</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="price-content">
+                          <label class="radio-option">
+        <input type="radio" name="price" value="all" data-min="0" data-max="999999" checked>
+        <span class="radio-custom"></span>
+        <span class="radio-label">All Prices</span>
+    </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="0-100" data-min="0" data-max="100">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹0 - ₹100</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="100-200" data-min="100" data-max="200">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹100 - ₹200</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="200-300" data-min="200" data-max="300">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹200 - ₹300</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="300-400" data-min="300" data-max="400">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹300 - ₹400</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="400-500" data-min="400" data-max="500">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹400 - ₹500</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="500-600" data-min="500" data-max="600">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹500 - ₹600</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="600-700" data-min="600" data-max="700">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹600 - ₹700</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CATEGORY FILTER (Always Open - No Toggle) -->
+                <div class="filter-section active-no-toggle">
+                    <h4 class="subsection-title">Category</h4>
+                    <div class="section-content-always-open">
+                        <!-- Clear All Button -->
+    <button class="clear-categories-btn" id="clearCategories">
+        <span>✕</span> Clear All
+    </button>
+                    
+                        <!-- Search Box -->
+                        <div class="category-search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="category-search" placeholder="Search" id="categorySearch">
+                        </div>
+                        
+                        <!-- Category List -->
+                        <div class="category-list" id="categoryList">
+                            <label class="checkbox-option" data-category="street-food">
+                                <input type="checkbox" value="street-food">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌮 Street Food</span>
+                            </label>
+                            <label class="checkbox-option" data-category="main-course">
+                                <input type="checkbox" value="main-course">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍛 Main Course</span>
+                            </label>
+                            <label class="checkbox-option" data-category="meals">
+                                <input type="checkbox" value="meals">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍽️ Meals / Thalis</span>
+                            </label>
+                            <label class="checkbox-option" data-category="desserts">
+                                <input type="checkbox" value="desserts">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍨 Fresh Desserts</span>
+                            </label>
+                            <label class="checkbox-option" data-category="snacks-drinks">
+                                <input type="checkbox" value="snacks-drinks">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍿 Snacks & Drinks</span>
+                            </label>
+                            <label class="checkbox-option" data-category="mithai">
+                                <input type="checkbox" value="mithai">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍬 Mithai (Indian Sweets)</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-eggless">
+                                <input type="checkbox" value="cakes-eggless">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🎂 Cakes - Eggless</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-with-egg">
+                                <input type="checkbox" value="cakes-with-egg">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍰 Cakes - With Egg</span>
+                            </label>
+                            <label class="checkbox-option" data-category="pastries">
+                                <input type="checkbox" value="pastries">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥐 Pastries</span>
+                            </label>
+                            <label class="checkbox-option" data-category="bread-buns">
+                                <input type="checkbox" value="bread-buns">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍞 Bread & Buns</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cookies">
+                                <input type="checkbox" value="cookies">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍪 Cookies</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dairy">
+                                <input type="checkbox" value="dairy">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥛 Dairy</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dry-fruits">
+                                <input type="checkbox" value="dry-fruits">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌰 Dry Fruits</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- ============================================
+             RIGHT SIDE - PRODUCTS GRID
+             ============================================ -->
+        <main class="products-section">
+            
+            <!-- Products Header -->
+            <div class="products-header">
+                <h2 class="products-title">All Products</h2>
+                <p class="products-count"><span id="productCount">24</span> products</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                
+                <!-- SAMPLE PRODUCT CARDS (Will be dynamically filtered) -->
+                
+                <!-- Product 1 -->
+                <div class="product-card" data-category="street-food" data-price="50" data-discount="20">
+                    <div class="product-badge discount-badge">20% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFB6C1/FFFFFF?text=Pani+Puri" alt="Pani Puri" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Pani Puri Special</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="main-course" data-price="250" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFA500/FFFFFF?text=Butter+Paneer" alt="Butter Paneer" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Butter Paneer Masala</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹250</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="mithai" data-price="150" data-discount="15">
+                    <div class="product-badge discount-badge">15% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Gulab+Jamun" alt="Gulab Jamun" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Gulab Jamun Box</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹150</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="cakes-eggless" data-price="450" data-discount="10">
+                    <div class="product-badge discount-badge">10% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/667EEA/FFFFFF?text=Chocolate+Cake" alt="Chocolate Cake" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chocolate Truffle Cake</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹450</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-category="dairy" data-price="80" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/98D8C8/FFFFFF?text=Fresh+Paneer" alt="Paneer" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Paneer (500g)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹80</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-category="dry-fruits" data-price="350" data-discount="25">
+                    <div class="product-badge discount-badge">25% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/DAA520/FFFFFF?text=Almonds" alt="Almonds" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Almonds (250g)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹350</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card" data-category="desserts" data-price="120" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFB6D9/FFFFFF?text=Rabri" alt="Rabri" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rabri Special</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹120</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card" data-category="snacks-drinks" data-price="30" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FFA07A/FFFFFF?text=Masala+Chai" alt="Chai" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Masala Chai</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹30</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-card" data-category="pastries" data-price="90" data-discount="5">
+                    <div class="product-badge discount-badge">5% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/F0E68C/000000?text=Black+Forest" alt="Black Forest" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Black Forest Pastry</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹90</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="product-card" data-category="cookies" data-price="180" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/DEB887/FFFFFF?text=Butter+Cookies" alt="Cookies" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Butter Cookies Box</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹180</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="product-card" data-category="meals" data-price="280" data-discount="10">
+                    <div class="product-badge discount-badge">10% OFF</div>
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/FF7F50/FFFFFF?text=Thali+Special" alt="Thali" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Royal Thali</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                            <div class="product-price">₹280</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 12 -->
+                <div class="product-card" data-category="bread-buns" data-price="40" data-discount="0">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/300x300/F5DEB3/000000?text=Pav+Buns" alt="Pav" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Pav (6 pcs)</h3>
+                        <div class="product-meta">
+                            <div class="product-rating">⭐⭐⭐⭐</div>
+                            <div class="product-price">₹40</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search criteria</p>
+            </div>
+
+        </main>
+
+    </div>
