@@ -27,7 +27,7 @@ body.dark-mode {
 
 .mobile-filter-bar {
     position: sticky;
-    top: 60px; /* Adjust this to your navbar height */
+    top: 70px; /* Default navbar height */
     left: 0;
     right: 0;
     height: 48px;
@@ -35,6 +35,19 @@ body.dark-mode {
     border-bottom: 1px solid #e5e5e5;
     display: none; /* Hidden by default */
     z-index: 998; /* Below navbar (navbar should be 999) */
+}
+
+/* Match navbar height changes on small screens */
+@media (max-width: 375px) {
+    .mobile-filter-bar {
+        top: 65px; /* Match navbar height at this breakpoint */
+    }
+}
+
+@media (max-width: 320px) {
+    .mobile-filter-bar {
+        top: 60px; /* Match navbar height at this breakpoint */
+    }
 }
 
 body.dark-mode .mobile-filter-bar {
