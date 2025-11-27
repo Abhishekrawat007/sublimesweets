@@ -27,14 +27,23 @@ body.dark-mode {
 
 .mobile-filter-bar {
     position: sticky;
-    top: 70px; /* Default navbar height */
+    top: 70px;
     left: 0;
     right: 0;
-    height: 48px;
+    height: 56px; /* Larger - was 48px */
     background: #ffffff;
+    border-top: 1px solid #e5e5e5; /* ADD top border */
     border-bottom: 1px solid #e5e5e5;
-    display: none; /* Hidden by default */
-    z-index: 998; /* Below navbar (navbar should be 999) */
+    display: none;
+    z-index: 998;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); /* Subtle shadow */
+}
+
+body.dark-mode .mobile-filter-bar {
+    background: #2a2a2a !important;
+    border-top-color: #3a3a3a !important; /* ADD */
+    border-bottom-color: #3a3a3a !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Match navbar height changes on small screens */
@@ -78,16 +87,17 @@ body.dark-mode .mobile-filter-bar {
     }
 }
 /* Filter Buttons */
+/* Filter Buttons */
 .filter-btn {
     flex: 1;
-    height: 48px;
+    height: 56px; /* Match new bar height */
     border: none;
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    font-size: 13px;
+    gap: 5px;
+    font-size: 14px; /* Slightly larger */
     font-weight: 600;
     color: #1a1a1a;
     cursor: pointer;
@@ -95,7 +105,6 @@ body.dark-mode .mobile-filter-bar {
     transition: all 0.2s ease;
     font-family: inherit;
 }
-
 body.dark-mode .filter-btn {
     color: #e0e0e0 !important;
     border-right-color: #3a3a3a !important;
@@ -114,11 +123,19 @@ body.dark-mode .filter-btn:active {
 }
 
 /* Sort Icon (Stacked Arrows) */
+/* Sort Icon (Two Separate Arrows) */
 .sort-icon {
-    display: inline-block;
-    line-height: 0.55;
-    font-size: 11px;
-    letter-spacing: -1px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.7;
+    font-size: 15px;
+    color: #000;
+}
+
+body.dark-mode .sort-icon {
+    color: #f0f0f0 !important;
 }
 
 /* Arrow Down */
@@ -241,12 +258,12 @@ body.dark-mode .close-modal:active {
 }
 
 /* Modal Content (Scrollable) */
+/* Modal Content (Scrollable) */
 .modal-content {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 24px 20px; /* More top/bottom padding */
 }
-
 .modal-content::-webkit-scrollbar {
     width: 4px;
 }
@@ -467,139 +484,111 @@ body.dark-mode .category-search-mobile {
 }
 
 /* ============================================
-   💰 PRICE CONTROLS (Stepper + Manual)
+   💰 PREMIUM PRICE INPUT
    ============================================ */
 
-.price-control {
-    margin-bottom: 20px;
+.premium-price-input {
+    padding: 8px 0;
 }
 
-.price-control label {
+.premium-label {
     display: block;
     font-size: 13px;
     font-weight: 600;
-    color: #666;
-    margin-bottom: 8px;
-}
-
-body.dark-mode .price-control label {
-    color: #999 !important;
-}
-
-/* Stepper Control */
-.stepper-control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fafafa;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 8px 12px;
-}
-
-body.dark-mode .stepper-control {
-    background: #333 !important;
-    border-color: #444 !important;
-}
-
-.stepper-btn {
-    width: 36px;
-    height: 36px;
-    border: 1px solid #d0d0d0;
-    border-radius: 6px;
-    background: #ffffff;
-    font-size: 20px;
-    font-weight: 600;
-    color: #667eea;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-body.dark-mode .stepper-btn {
-    background: #2a2a2a !important;
-    border-color: #555 !important;
-    color: #667eea !important;
-}
-
-.stepper-btn:active {
-    background: #f5f5f5;
-    transform: scale(0.95);
-}
-
-body.dark-mode .stepper-btn:active {
-    background: #3a3a3a !important;
-}
-
-.stepper-value {
-    font-size: 16px;
-    font-weight: 700;
     color: #1a1a1a;
-    min-width: 80px;
-    text-align: center;
+    margin-bottom: 16px;
 }
 
-body.dark-mode .stepper-value {
+body.dark-mode .premium-label {
     color: #ffffff !important;
 }
 
-/* Manual Inputs */
-.manual-price-inputs {
-    margin-top: 24px;
-}
-
-.or-text {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 12px;
-    text-align: center;
-}
-
-.input-row {
+.price-range-inputs {
     display: flex;
+    align-items: center;
     gap: 12px;
 }
 
-.price-input-group {
+.price-input-wrapper {
     flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fafafa;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: all 0.2s ease;
 }
 
-.price-input-group label {
-    display: block;
-    font-size: 12px;
+body.dark-mode .price-input-wrapper {
+    background: #333 !important;
+    border-color: #444 !important;
+}
+
+.price-input-wrapper:focus-within {
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+body.dark-mode .price-input-wrapper:focus-within {
+    background: #3a3a3a !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+.currency-symbol {
+    font-size: 16px;
     font-weight: 600;
     color: #666;
-    margin-bottom: 6px;
+    margin-right: 6px;
 }
 
-body.dark-mode .price-input-group label {
+body.dark-mode .currency-symbol {
     color: #999 !important;
 }
 
-.price-input-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fafafa;
+.price-input-wrapper input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
     color: #1a1a1a;
-}
-
-body.dark-mode .price-input-group input {
-    background: #333 !important;
-    border-color: #444 !important;
-    color: #e0e0e0 !important;
-}
-
-.price-input-group input:focus {
     outline: none;
-    border-color: #667eea;
+    width: 100%;
 }
 
+body.dark-mode .price-input-wrapper input {
+    color: #ffffff !important;
+}
+
+.price-input-wrapper input::placeholder {
+    color: #999;
+    font-weight: 500;
+}
+
+.range-separator {
+    font-size: 18px;
+    font-weight: 300;
+    color: #999;
+}
+
+body.dark-mode .range-separator {
+    color: #666 !important;
+}
+
+/* Remove number input arrows */
+.price-input-wrapper input[type="number"]::-webkit-inner-spin-button,
+.price-input-wrapper input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.price-input-wrapper input[type="number"] {
+    -moz-appearance: textfield;
+}
 /* ============================================
    🔘 BUTTONS (Done, Clear, Apply)
    ============================================ */

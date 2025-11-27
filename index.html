@@ -1175,7 +1175,8 @@ body.dark-mode article {
     <div class="mobile-filter-bar" id="mobileFilterBar">
         <!-- Sort Button -->
         <button class="filter-btn" id="sortBtn">
-            <span class="sort-icon">↑<br>↓</span>
+            <span class="sort-icon">↓↑</span>
+        
             <span>Sort</span>
         </button>
 
@@ -1214,11 +1215,11 @@ body.dark-mode article {
             <button class="close-modal" data-modal="sortModal">✕</button>
         </div>
         <div class="modal-content">
-            <label class="radio-option-mobile">
-                <input type="radio" name="mobile-sort" value="relevance" data-sort="none" checked>
-                <span class="radio-custom-mobile"></span>
-                <span class="radio-label-mobile">Relevance</span>
-            </label>
+           <label class="radio-option-mobile">
+    <input type="radio" name="mobile-sort" value="all" data-sort="none" checked>
+    <span class="radio-custom-mobile"></span>
+    <span class="radio-label-mobile">All</span>
+</label>
             <label class="radio-option-mobile">
                 <input type="radio" name="mobile-sort" value="discount" data-sort="discount">
                 <span class="radio-custom-mobile"></span>
@@ -1322,13 +1323,10 @@ body.dark-mode article {
                 </label>
             </div>
         </div>
-        <div class="modal-footer">
-            <div class="product-count-mobile">
-                <span id="categoryProductCount">12 Products</span>
-            </div>
-            <button class="done-btn" data-modal="categoryModal">Done</button>
-        </div>
-    </div>
+      <div class="modal-footer">
+    <button class="clear-btn" id="clearCategoriesMobile">Clear All</button>
+    <button class="done-btn" data-modal="categoryModal">Done</button>
+</div></div>
 
     <!-- ============================================
          3️⃣ PRICE MODAL (With Steppers + Inputs)
@@ -1340,41 +1338,22 @@ body.dark-mode article {
             <button class="close-modal" data-modal="priceModal">✕</button>
         </div>
         <div class="modal-content">
-            <!-- Min Price Stepper -->
-            <div class="price-control">
-                <label>Min Price</label>
-                <div class="stepper-control">
-                    <button class="stepper-btn" id="minDecrease">−</button>
-                    <span class="stepper-value" id="minPriceValue">₹0</span>
-                    <button class="stepper-btn" id="minIncrease">+</button>
-                </div>
-            </div>
-
-            <!-- Max Price Stepper -->
-            <div class="price-control">
-                <label>Max Price</label>
-                <div class="stepper-control">
-                    <button class="stepper-btn" id="maxDecrease">−</button>
-                    <span class="stepper-value" id="maxPriceValue">₹10000</span>
-                    <button class="stepper-btn" id="maxIncrease">+</button>
-                </div>
-            </div>
-
-            <!-- Manual Input Fields -->
-            <div class="manual-price-inputs">
-                <p class="or-text">Or manually enter:</p>
-                <div class="input-row">
-                    <div class="price-input-group">
-                        <label>Min</label>
-                        <input type="number" id="minPriceInput" placeholder="₹ 0" value="0">
-                    </div>
-                    <div class="price-input-group">
-                        <label>Max</label>
-                        <input type="number" id="maxPriceInput" placeholder="₹ 10000" value="10000">
-                    </div>
-                </div>
-            </div>
+    <!-- Premium Price Range Input -->
+   <div class="premium-price-input">
+    <label class="premium-label">Enter Price Range</label>
+    <div class="price-range-inputs">
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="minPriceInput" placeholder="Min" value="">
         </div>
+        <span class="range-separator">—</span>
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="maxPriceInput" placeholder="Max" value="">
+        </div>
+    </div>
+</div>
+</div>
         <div class="modal-footer">
             <button class="clear-btn" id="clearPrice">Clear All</button>
             <button class="done-btn apply-btn" id="applyPrice">Apply</button>
@@ -1543,7 +1522,7 @@ body.dark-mode article {
                     <div class="section-content-always-open">
                         <!-- Clear All Button -->
     <button class="clear-categories-btn" id="clearCategories">
-        <span>✕</span> Clear All
+        Clear All
     </button>
                     
                         <!-- Search Box -->

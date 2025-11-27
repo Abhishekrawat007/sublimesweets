@@ -140,121 +140,115 @@ class MobileFilter {
     // 📂 CATEGORY FILTER
     // ============================================
     
-    setupCategoryFilter() {
-        document.querySelectorAll('.checkbox-option-mobile input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                const category = e.target.value;
-                
-                if (e.target.checked) {
-                    this.filters.categories.push(category);
-                } else {
-                    this.filters.categories = this.filters.categories.filter(c => c !== category);
-                }
-                
-                // Update button state
-                if (this.filters.categories.length > 0) {
-                    this.categoryBtn.classList.add('active');
-                    this.categoryBtn.querySelector('span:first-child').textContent = 
-                        `Category (${this.filters.categories.length})`;
-                } else {
-                    this.categoryBtn.classList.remove('active');
-                    this.categoryBtn.querySelector('span:first-child').textContent = 'Category';
-                }
-                
-                // Update product count
-                this.updateProductCount();
-            });
+   setupCategoryFilter() {
+    document.querySelectorAll('.checkbox-option-mobile input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const category = e.target.value;
+            
+            if (e.target.checked) {
+                this.filters.categories.push(category);
+            } else {
+                this.filters.categories = this.filters.categories.filter(c => c !== category);
+            }
+            
+            // Update button state
+            if (this.filters.categories.length > 0) {
+                this.categoryBtn.classList.add('active');
+                this.categoryBtn.querySelector('span:first-child').textContent = 
+                    `Category (${this.filters.categories.length})`;
+            } else {
+                this.categoryBtn.classList.remove('active');
+                this.categoryBtn.querySelector('span:first-child').textContent = 'Category';
+            }
         });
-        
-        // Done button applies filter
-        const categoryDoneBtn = this.categoryModal.querySelector('.done-btn');
-        categoryDoneBtn.addEventListener('click', () => {
-            this.applyFilters();
+    });
+    
+    // Clear All Button (Mobile)
+    const clearCategoriesMobile = document.getElementById('clearCategoriesMobile');
+    if (clearCategoriesMobile) {
+        clearCategoriesMobile.addEventListener('click', () => {
+            // Uncheck all category checkboxes
+            document.querySelectorAll('.checkbox-option-mobile input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Clear categories filter
+            this.filters.categories = [];
+            
+            // Update button state
+            this.categoryBtn.classList.remove('active');
+            this.categoryBtn.querySelector('span:first-child').textContent = 'Category';
+            
+            // Visual feedback
+            clearCategoriesMobile.textContent = '✓ Cleared!';
+            setTimeout(() => {
+                clearCategoriesMobile.textContent = 'Clear All';
+            }, 1000);
         });
     }
     
+    // Done button applies filter
+    const categoryDoneBtn = this.categoryModal.querySelector('.done-btn');
+    categoryDoneBtn.addEventListener('click', () => {
+        this.applyFilters();
+    });
+}
     // ============================================
     // 💰 PRICE CONTROLS (Steppers + Manual)
     // ============================================
     
-    setupPriceControls() {
-        const minDecrease = document.getElementById('minDecrease');
-        const minIncrease = document.getElementById('minIncrease');
-        const maxDecrease = document.getElementById('maxDecrease');
-        const maxIncrease = document.getElementById('maxIncrease');
-        
-        const minPriceValue = document.getElementById('minPriceValue');
-        const maxPriceValue = document.getElementById('maxPriceValue');
-        
-        const minPriceInput = document.getElementById('minPriceInput');
-        const maxPriceInput = document.getElementById('maxPriceInput');
-        
-        // Min Price Stepper
-        minDecrease.addEventListener('click', () => {
-            this.minPrice = Math.max(0, this.minPrice - 100);
-            this.updatePriceDisplay();
-        });
-        
-        minIncrease.addEventListener('click', () => {
-            this.minPrice = Math.min(this.maxPrice - 100, this.minPrice + 100);
-            this.updatePriceDisplay();
-        });
-        
-        // Max Price Stepper
-        maxDecrease.addEventListener('click', () => {
-            this.maxPrice = Math.max(this.minPrice + 100, this.maxPrice - 100);
-            this.updatePriceDisplay();
-        });
-        
-        maxIncrease.addEventListener('click', () => {
-            this.maxPrice = Math.min(50000, this.maxPrice + 100);
-            this.updatePriceDisplay();
-        });
-        
-        // Manual Input Sync
-        minPriceInput.addEventListener('change', (e) => {
-            const value = parseInt(e.target.value) || 0;
-            this.minPrice = Math.max(0, Math.min(value, this.maxPrice - 100));
-            this.updatePriceDisplay();
-        });
-        
-        maxPriceInput.addEventListener('change', (e) => {
-            const value = parseInt(e.target.value) || 10000;
-            this.maxPrice = Math.max(this.minPrice + 100, Math.min(value, 50000));
-            this.updatePriceDisplay();
-        });
-        
-        // Clear Button
-        document.getElementById('clearPrice').addEventListener('click', () => {
+  setupPriceControls() {
+    const minPriceInput = document.getElementById('minPriceInput');
+    const maxPriceInput = document.getElementById('maxPriceInput');
+    
+    // Update initial values
+    this.minPrice = 0;
+    this.maxPrice = 10000;
+    
+    // Manual Input Sync
+    minPriceInput.addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        if (!isNaN(value)) {
+            this.minPrice = Math.max(0, value);
+        } else {
             this.minPrice = 0;
+        }
+    });
+    
+    maxPriceInput.addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        if (!isNaN(value)) {
+            this.maxPrice = Math.max(this.minPrice, value);
+        } else {
             this.maxPrice = 10000;
-            this.updatePriceDisplay();
-            this.filters.priceRange = { min: 0, max: 999999 };
-            this.priceBtn.classList.remove('active');
-            this.priceBtn.querySelector('span:first-child').textContent = 'Price';
-        });
+        }
+    });
+    
+   // Clear Button
+document.getElementById('clearPrice').addEventListener('click', () => {
+    this.minPrice = 0;
+    this.maxPrice = 10000;
+    minPriceInput.value = ''; // Empty
+    maxPriceInput.value = ''; // Empty
+    this.filters.priceRange = { min: 0, max: 999999 };
+    this.priceBtn.classList.remove('active');
+    this.priceBtn.querySelector('span:first-child').textContent = 'Price';
+});
+    
+    // Apply Button
+    document.getElementById('applyPrice').addEventListener('click', () => {
+        this.filters.priceRange = { min: this.minPrice, max: this.maxPrice };
         
-        // Apply Button
-        document.getElementById('applyPrice').addEventListener('click', () => {
-            this.filters.priceRange = { min: this.minPrice, max: this.maxPrice };
-            
-            // Update button state
-            this.priceBtn.classList.add('active');
-            this.priceBtn.querySelector('span:first-child').textContent = 
-                `₹${this.minPrice}-₹${this.maxPrice}`;
-            
-            this.applyFilters();
-            this.closeModal(this.priceModal);
-        });
-    }
-    
-    updatePriceDisplay() {
-        document.getElementById('minPriceValue').textContent = `₹${this.minPrice}`;
-        document.getElementById('maxPriceValue').textContent = `₹${this.maxPrice}`;
-        document.getElementById('minPriceInput').value = this.minPrice;
-        document.getElementById('maxPriceInput').value = this.maxPrice;
-    }
-    
+        // Update button state
+        this.priceBtn.classList.add('active');
+        this.priceBtn.querySelector('span:first-child').textContent = 
+            `₹${this.minPrice}-₹${this.maxPrice}`;
+        
+        this.applyFilters();
+        this.closeModal(this.priceModal);
+    });
+}
+
     // ============================================
     // 🎯 FILTERS MODAL (Price Ranges)
     // ============================================
