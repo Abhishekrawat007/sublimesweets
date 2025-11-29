@@ -1,9 +1,9 @@
 const products = [
   {
     "id": 1,
-    "name": "Kaju Katli",
-    "category": "mithai",
-    "categories": ["mithai", "sweets", "bestseller"],
+    "name": "Paneer Do Pyaza",
+    "category": "Main Course",
+    "categories": ["food", "main course", "bestseller"],
     "images": [
       "images/Paneer-Tikka-Masala-Recipe-Step-By-Step-Instructions.jpg",
       "images/kaju-katli-2.jpg"
@@ -41,9 +41,9 @@ const products = [
   },
   {
     "id": 2,
-    "name": "Gulab Jamun",
-    "category": "mithai",
-    "categories": ["mithai", "sweets", "trending"],
+    "name": "Shahi Paneer",
+    "category": "",
+    "categories": ["main course", "", "trending"],
     "images": [
       "images/butter-chicken-.jpg",
       "images/gulab-jamun-2.jpg"
@@ -73,11 +73,11 @@ const products = [
   },
   {
     "id": 3,
-    "name": "Kurkure Masala Munch",
+    "name": "Kurkure",
     "category": "snacks",
     "categories": ["snacks", "street-food", "bestseller"],
     "images": [
-      "images/kurkure-1.jpg",
+      "images/kurkure.jpg",
       "images/kurkure-2.jpg"
     ],
     "rating": 4.5,
@@ -110,11 +110,11 @@ const products = [
   },
   {
     "id": 4,
-    "name": "Rasgulla",
+    "name": "Gulab Jamun",
     "category": "mithai",
     "categories": ["mithai", "sweets"],
     "images": [
-      "images/rasgulla-1.jpg",
+      "images/gulabjamun.jpeg",
       "images/rasgulla-2.jpg"
     ],
     "rating": 4.5,
@@ -146,7 +146,7 @@ const products = [
     "category": "street-food",
     "categories": ["street-food", "snacks", "bestseller"],
     "images": [
-      "images/samosa-1.jpg",
+      "images/samosa.webp",
       "images/samosa-2.jpg"
     ],
     "rating": 5.0,
@@ -178,7 +178,7 @@ const products = [
     "category": "main-course",
     "categories": ["main-course", "street-food"],
     "images": [
-      "images/paneer-tikka-1.jpg",
+      "images/paneertikka.jpg",
       "images/paneer-tikka-2.jpg"
     ],
     "rating": 4.5,
@@ -210,7 +210,7 @@ const products = [
     "category": "snacks",
     "categories": ["snacks", "bestseller"],
     "images": [
-      "images/lays-1.jpg",
+      "images/laychips.webp",
       "images/lays-2.jpg"
     ],
     "rating": 4.0,
@@ -246,7 +246,7 @@ const products = [
     "category": "dairy",
     "categories": ["dairy", "drinks"],
     "images": [
-      "images/milk-1.jpg",
+      "images/milk.jpg",
       "images/milk-2.jpg"
     ],
     "rating": 5.0,
@@ -278,7 +278,7 @@ const products = [
     "category": "dry-fruits",
     "categories": ["dry-fruits", "trending"],
     "images": [
-      "images/cashew-1.jpg",
+      "images/kaju.jpg",
       "images/cashew-2.jpg"
     ],
     "rating": 4.5,
@@ -318,7 +318,7 @@ const products = [
     "category": "bakery",
     "categories": ["bakery", "breakfast"],
     "images": [
-      "images/bread-1.jpg",
+      "images/brownbread.webp",
       "images/bread-2.jpg"
     ],
     "rating": 4.0,
@@ -329,12 +329,12 @@ const products = [
         "oldPrice": 45,
         "newPrice": 40,
         "discount": "11%",
-        "inStock": true
+        "inStock": false
       }
     ],
     "flavors": [],
     "defaultVariant": 0,
-    "inStock": true
+    "inStock": false
   }
 ];
 

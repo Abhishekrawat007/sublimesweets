@@ -43,60 +43,110 @@
             }
         }
 
-        // SEARCH MODAL
-        const searchBtn = document.getElementById('searchBtn');
-        const searchModal = document.getElementById('searchModal');
-        const searchInput = document.getElementById('searchInput');
+       // ============================================
+// 🔍 SEARCH MODAL + PRODUCT SEARCH
+// ============================================
 
-        searchBtn.addEventListener('click', function() {
-            searchModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => searchInput.focus(), 300);
-        });
-   const searchCloseBtn = document.getElementById('searchCloseBtn');
-if (searchCloseBtn) {
-    searchCloseBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        searchModal.classList.remove('active');
-        document.body.style.overflow = '';
-        searchInput.value = '';
-    });
+const searchBtn = document.getElementById('searchBtn');
+const searchModal = document.getElementById('searchModal');
+const searchInput = document.getElementById('searchInput');
+const searchCloseBtn = document.getElementById('searchCloseBtn');
+
+function closeSearchModal() {
+  if (searchModal) {
+    searchModal.classList.remove('active');
+  }
+  document.body.style.overflow = '';
 }
-        searchModal.addEventListener('click', function(e) {
-            if (e.target === searchModal) {
-                searchModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
 
-        // Search tags
-        document.querySelectorAll('.search-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                searchInput.value = this.textContent;
-                console.log('Searching for:', this.textContent);
-            });
-        });
+// Open modal
+if (searchBtn && searchModal && searchInput) {
+  searchBtn.addEventListener('click', function () {
+    searchModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => searchInput && searchInput.focus(), 150);
+  });
+}
 
-        // DESKTOP SEARCH
-        const desktopSearchInput = document.getElementById('desktopSearchInput');
-        if (desktopSearchInput) {
-            desktopSearchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && this.value.trim()) {
-                    console.log('Desktop search:', this.value);
-                    alert('Searching for: ' + this.value);
-                }
-            });
-        }
+// Close button
+if (searchCloseBtn) {
+  searchCloseBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    closeSearchModal();
+    if (searchInput) searchInput.value = '';
+  });
+}
 
-        // MOBILE SEARCH
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value.trim()) {
-                console.log('Mobile search:', this.value);
-                alert('Searching for: ' + this.value);
-                searchModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+// Click outside content → close
+if (searchModal) {
+  searchModal.addEventListener('click', function (e) {
+    if (e.target === searchModal) {
+      closeSearchModal();
+    }
+  });
+}
+
+// Search tags → set value + trigger search
+document.querySelectorAll('.search-tag').forEach(tag => {
+  tag.addEventListener('click', function () {
+    if (!searchInput) return;
+    searchInput.value = this.textContent;
+    triggerProductSearch();
+    // Optional: close modal after choosing a tag
+    closeSearchModal();
+  });
+});
+
+// Live product search on typing
+if (searchInput) {
+  searchInput.addEventListener('input', function () {
+    triggerProductSearch();
+  });
+
+  // Press Enter → search + close modal
+  searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      triggerProductSearch();
+      closeSearchModal();
+    }
+  });
+}
+
+// 🔍 Actual search logic
+function triggerProductSearch() {
+  const input = document.getElementById('searchInput');
+  if (!input) return;
+
+  const query = input.value.toLowerCase().trim();
+  console.log('Search query:', query);
+
+  if (!window.productManager || !Array.isArray(window.productManager.products)) {
+    console.log('productManager not ready, skipping search');
+    return;
+  }
+
+  const allProducts = window.productManager.products;
+
+  let filtered;
+  if (!query) {
+    // Empty search → show all products
+    filtered = allProducts;
+  } else {
+    filtered = allProducts.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      (p.category && p.category.toLowerCase().includes(query)) ||
+      (p.categories && p.categories.some(c => c.toLowerCase().includes(query)))
+    );
+  }
+
+  // Re-render cards
+  window.productManager.renderProducts(filtered);
+
+  // Update product count if element exists
+  const countEl = document.getElementById('productCount');
+  if (countEl) countEl.textContent = filtered.length;
+}
+
 
         // CART SIDEBAR
         const cartBtn = document.getElementById('cartBtn');
@@ -125,19 +175,7 @@ if (searchCloseBtn) {
             document.body.style.overflow = '';
         }
 
-        // QUANTITY UPDATE
-        function updateQty(btn, change) {
-            const qtySpan = btn.parentElement.querySelector('span');
-            let qty = parseInt(qtySpan.textContent);
-            qty = Math.max(1, qty + change);
-            qtySpan.textContent = qty;
-            
-            qtySpan.style.transform = 'scale(1.2)';
-            setTimeout(() => qtySpan.style.transform = 'scale(1)', 200);
-            
-            updateCartTotal();
-        }
-        
+     
        // DARK MODE TOGGLE
 const navbar = document.getElementById('navbar');
 const mobileDarkToggle = document.getElementById('mobileDarkToggle');
@@ -188,12 +226,48 @@ function updateDarkModeIcon(isDark) {
         }
     }
 }
-        // WISHLIST
-        const wishlistBtn = document.getElementById('wishlistBtn');
-        wishlistBtn.addEventListener('click', function() {
-            console.log('Wishlist clicked');
-            alert('Wishlist feature - You have 3 items saved!');
-        });
+       // WISHLIST
+const wishlistBtn = document.getElementById('wishlistBtn');
+const wishlistCountBadge = document.getElementById('wishlistCount');
+
+function syncWishlistBadgeFromStorage() {
+    if (!wishlistCountBadge) return;
+
+    let wishlist = [];
+    try {
+        const data = localStorage.getItem('wishlist');
+        wishlist = data ? JSON.parse(data) : [];
+        if (!Array.isArray(wishlist)) {
+            wishlist = [];
+        }
+    } catch (e) {
+        wishlist = [];
+    }
+
+    const count = wishlist.length;
+
+    if (count > 0) {
+        wishlistCountBadge.textContent = count;
+        wishlistCountBadge.style.display = 'flex';
+    } else {
+        wishlistCountBadge.textContent = '';
+        wishlistCountBadge.style.display = 'none';
+    }
+}
+
+// Expose globally so product-card.js can call it
+window.updateWishlistBadge = syncWishlistBadgeFromStorage;
+
+// Initialize on page load
+syncWishlistBadgeFromStorage();
+
+if (wishlistBtn) {
+    wishlistBtn.addEventListener('click', function () {
+        // For now just log or later navigate to a wishlist page
+        console.log('Wishlist clicked');
+        // Example later: window.location.href = 'wishlist.html';
+    });
+}
 
         // DESKTOP RESPONSIVE
        function handleResize() {
@@ -229,20 +303,7 @@ function updateDarkModeIcon(isDark) {
             }
         });
 
-        // CART TOTAL
-        function updateCartTotal() {
-            const cartItems = document.querySelectorAll('.cart-item');
-            let total = 0;
-            
-            cartItems.forEach(item => {
-                const price = parseInt(item.querySelector('.cart-item-price').textContent.replace('₹', ''));
-                const qty = parseInt(item.querySelector('.cart-item-quantity span').textContent);
-                total += price * qty;
-            });
-            
-            document.querySelector('.cart-total span:last-child').textContent = '₹' + total;
-        }
-
+       
         // TOUCH GESTURES
         let touchStartX = 0;
         let touchEndX = 0;
@@ -287,5 +348,9 @@ function updateDarkModeIcon(isDark) {
             });
         });
 
-        // INITIALIZE
-        updateCartTotal();
+       // ============================================
+// 🔍 PRODUCT SEARCH
+// ============================================
+
+
+

@@ -47,7 +47,8 @@ class ProductCardManager {
       wishlist: this.wishlist.length
     });
     
-    this.init();
+     this.init();
+  this.syncCartUI();
   }
 
   init() {
@@ -56,77 +57,109 @@ class ProductCardManager {
   }
 
   // Generate single product card
-  generateProductCard(product) {
-    const defaultVariant = product.variants[product.defaultVariant || 0];
-    const isInWishlist = this.wishlist.includes(product.id);
-    const cartItem = this.cart.find(item => 
-      item.productId === product.id && 
-      item.variantIndex === (product.defaultVariant || 0) &&
-      item.flavor === (product.flavors.length > 0 ? product.flavors[0] : null)
-    );
+ generateProductCard(product) {
+  const defaultVariant = product.variants[product.defaultVariant || 0];
+  const isOutOfStock = defaultVariant.inStock === false; // ✅ DEFINE THIS FIRST
+  
+  const isInWishlist = this.wishlist.includes(product.id);
+  const cartItem = this.cart.find(item => 
+    item.productId === product.id && 
+    item.variantIndex === (product.defaultVariant || 0) &&
+    item.flavor === (product.flavors.length > 0 ? product.flavors[0] : null)
+  );
 
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.dataset.productId = product.id;
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.dataset.productId = product.id;
+  
+  // Build badge row HTML
+  let badgeRowHTML = `
+    <div class="badge-row">
+      <span class="info-badge size-badge">${defaultVariant.size}</span>`;
+  
+  // Add flavor badge if available and in stock
+  if (product.flavors && product.flavors.length > 0 && !isOutOfStock) {
+    badgeRowHTML += `<span class="info-badge flavor-badge">${product.flavors[0]}</span>`;
+  }
+  
+  // Generate star rating
+  const fullStars = Math.floor(product.rating);
+  const hasHalfStar = product.rating % 1 >= 0.5;
+  let starsHTML = '★'.repeat(fullStars);
+  if (hasHalfStar) starsHTML += '⯨';
+  
+  badgeRowHTML += `<span class="info-badge rating-badge">${starsHTML}</span>
+    </div>`;
+  
+  card.innerHTML = `
+    <div class="product-card-image" data-product-id="${product.id}">
+      <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
+      <div class="discount-badge">${defaultVariant.discount} OFF</div>
+      <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
+        <svg viewBox="0 0 24 24" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
     
-    // Build badge row HTML
-    let badgeRowHTML = `
-      <div class="badge-row">
-        <span class="info-badge size-badge">${defaultVariant.size}</span>`;
-    
-    // Add flavor badge if available
-    if (product.flavors && product.flavors.length > 0) {
-      badgeRowHTML += `<span class="info-badge flavor-badge">${product.flavors[0]}</span>`;
-    }
-    
-    // Add rating badge
-    badgeRowHTML += `<span class="info-badge rating-badge">${product.rating}★</span>
-      </div>`;
-    
-    card.innerHTML = `
-      <div class="product-card-image" data-product-id="${product.id}">
-        <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
-        <div class="discount-badge">${defaultVariant.discount} OFF</div>
-        <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
-          <svg viewBox="0 0 24 24" stroke-width="2">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </button>
-      </div>
+    <div class="product-card-info">
+      <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
       
-      <div class="product-card-info">
-        <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
-        
-        ${badgeRowHTML}
-        
-        <div class="product-price-section">
-          <span class="price-new">₹${defaultVariant.newPrice}</span>
-          <span class="price-old">₹${defaultVariant.oldPrice}</span>
-          <span class="price-discount">${defaultVariant.discount} off</span>
-        </div>
-        
+      ${badgeRowHTML}
+      
+      <div class="product-price-section">
+        <span class="price-new">₹${defaultVariant.newPrice}</span>
+        <span class="price-old">₹${defaultVariant.oldPrice}</span>
+        <span class="price-discount">${defaultVariant.discount} off</span>
+      </div>
+          ${isOutOfStock ? '' : `
         <button class="size-select-btn" data-product-id="${product.id}">
           <span>${defaultVariant.size}</span>
           <span class="arrow-down">▼</span>
         </button>
-        
-        ${cartItem ? `
-          <div class="quantity-controls active" data-product-id="${product.id}" data-variant="${product.defaultVariant || 0}" data-flavor="${product.flavors.length > 0 ? product.flavors[0] : ''}">
+      `}
+
+      ${isOutOfStock ? `
+        <button class="out-of-stock-btn" disabled>
+          Out of Stock
+        </button>
+      ` : (() => {
+        const variantIndex = product.defaultVariant || 0;
+        const flavor = (product.flavors && product.flavors.length > 0) ? product.flavors[0] : '';
+        const cartQty = cartItem ? cartItem.quantity : 0;
+        const showQty = cartQty > 0;
+
+        return `
+          <div 
+            class="quantity-controls ${showQty ? 'active' : ''}" 
+            data-product-id="${product.id}" 
+            data-variant="${variantIndex}" 
+            data-flavor="${flavor}"
+            style="display: ${showQty ? 'flex' : 'none'}"
+          >
             <button class="qty-btn minus">−</button>
-            <span class="qty-count">${cartItem.quantity}</span>
+            <span class="qty-count">${cartQty || 1}</span>
             <button class="qty-btn plus">+</button>
           </div>
-        ` : `
-          <button class="add-to-cart-btn" data-product-id="${product.id}" data-variant="${product.defaultVariant || 0}" data-flavor="${product.flavors.length > 0 ? product.flavors[0] : ''}">
+
+          <button 
+            class="add-to-cart-btn" 
+            data-product-id="${product.id}" 
+            data-variant="${variantIndex}" 
+            data-flavor="${flavor}"
+            style="display: ${showQty ? 'none' : 'block'}"
+          >
             Add to Cart
           </button>
-        `}
-      </div>
-    `;
-    
-    this.attachCardListeners(card, product);
-    return card;
-  }
+        `;
+      })()}
+
+    </div>
+  `;
+  
+  this.attachCardListeners(card, product);
+  return card;
+}
 
   // Attach event listeners to card
   attachCardListeners(card, product) {
@@ -152,11 +185,13 @@ class ProductCardManager {
     });
 
     // Size select button - open modal
-    const sizeBtn = card.querySelector('.size-select-btn');
-    sizeBtn.addEventListener('click', () => {
-      this.openSizeFlavorModal(product);
-    });
-
+   // Size select button - open modal (only if exists)
+const sizeBtn = card.querySelector('.size-select-btn');
+if (sizeBtn) {
+  sizeBtn.addEventListener('click', () => {
+    this.openSizeFlavorModal(product);
+  });
+}
     // Add to cart button
     const addBtn = card.querySelector('.add-to-cart-btn');
     if (addBtn) {
@@ -202,8 +237,11 @@ class ProductCardManager {
     }
     
     localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
+       // 🔴 NEW: update navbar badge if function exists
+    if (typeof window.updateWishlistBadge === 'function') {
+        window.updateWishlistBadge();
   }
-
+  }
   // Open size/flavor modal
   openSizeFlavorModal(product) {
     this.currentProduct = product;
@@ -357,6 +395,13 @@ class ProductCardManager {
     // Update size button
     const sizeBtn = card.querySelector('.size-select-btn span:first-child');
     sizeBtn.textContent = variant.size;
+    // Update flavor badge if product has flavors
+if (this.selectedFlavor) {
+  const flavorBadge = card.querySelector('.flavor-badge');
+  if (flavorBadge) {
+    flavorBadge.textContent = this.selectedFlavor;
+  }
+}
   }
 
   // Add to cart
@@ -377,9 +422,9 @@ class ProductCardManager {
         quantity: 1
       });
     }
+localStorage.setItem('cart', JSON.stringify(this.cart));
+this.syncCartUI();
 
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.updateCartCount();
   }
 
   // Update card after adding to cart
@@ -416,8 +461,9 @@ class ProductCardManager {
     if (cartItem) {
       cartItem.quantity++;
       qtyCountElement.textContent = cartItem.quantity;
-      localStorage.setItem('cart', JSON.stringify(this.cart));
-      this.updateCartCount();
+     localStorage.setItem('cart', JSON.stringify(this.cart));
+this.updateCartCount();
+
     }
   }
 
@@ -453,19 +499,182 @@ class ProductCardManager {
         qtyCountElement.textContent = cartItem.quantity;
       }
       
-      localStorage.setItem('cart', JSON.stringify(this.cart));
-      this.updateCartCount();
+     localStorage.setItem('cart', JSON.stringify(this.cart));
+this.updateCartCount();
     }
   }
 
   // Update cart count (if you have a cart counter in navbar)
-  updateCartCount() {
-    const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCountElement = document.getElementById('cartCount');
-    if (cartCountElement) {
-      cartCountElement.textContent = totalItems;
+// Update only the navbar cart badge
+// Update only the navbar cart badge and control visibility
+updateCartCount() {
+  const totalItems = this.cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+  // Prefer #cartCount, fallback to any .badge inside #cartBtn
+  let cartCountElement = document.getElementById('cartCount');
+  if (!cartCountElement) {
+    cartCountElement = document.querySelector('#cartBtn .badge');
+  }
+
+  if (!cartCountElement) return;
+
+  if (totalItems > 0) {
+    cartCountElement.textContent = totalItems;
+    cartCountElement.style.display = 'flex';  // show badge
+  } else {
+    cartCountElement.textContent = '';
+    cartCountElement.style.display = 'none';  // completely hide badge
+  }
+}
+
+
+// Render the cart sidebar content from this.cart
+renderCartSidebar() {
+  const cartContent = document.getElementById('cartContent');
+  const totalEl = document.querySelector('.cart-total span:last-child');
+
+  if (!cartContent || !totalEl) return;
+
+  cartContent.innerHTML = '';
+
+  if (!this.cart.length) {
+    cartContent.innerHTML = `
+      <div class="empty-cart-message">
+        Your cart is empty.
+      </div>
+    `;
+    totalEl.textContent = '₹0';
+    return;
+  }
+
+  let total = 0;
+
+  this.cart.forEach(item => {
+    const product = this.products.find(p => String(p.id) === String(item.productId));
+    if (!product) return;
+
+    const variant = product.variants[item.variantIndex] || product.variants[0];
+    const price = Number(variant.newPrice) || 0;
+    const qty = item.quantity || 0;
+    const lineTotal = price * qty;
+    total += lineTotal;
+
+    const cartItemDiv = document.createElement('div');
+    cartItemDiv.className = 'cart-item';
+    cartItemDiv.dataset.productId = product.id;
+    cartItemDiv.dataset.variantIndex = item.variantIndex;
+    cartItemDiv.dataset.flavor = item.flavor || '';
+
+    cartItemDiv.innerHTML = `
+      <div class="cart-item-image">
+        <img src="${product.images[0]}" alt="${product.name}">
+      </div>
+      <div class="cart-item-details">
+        <div class="cart-item-name">
+          ${product.name}
+          ${variant.size ? ` (${variant.size})` : ''}
+          ${item.flavor ? ` - ${item.flavor}` : ''}
+        </div>
+        <div class="cart-item-price">₹${price}</div>
+        <div class="cart-item-quantity">
+          <button class="qty-btn cart-minus">-</button>
+          <span class="cart-qty" style="color: var(--nav-text); font-weight: 600;">${qty}</span>
+          <button class="qty-btn cart-plus">+</button>
+        </div>
+      </div>
+    `;
+
+    cartContent.appendChild(cartItemDiv);
+  });
+
+  totalEl.textContent = '₹' + total;
+
+  // Attach plus/minus handlers for sidebar items
+  cartContent.querySelectorAll('.cart-item').forEach(cartItemDiv => {
+    const productId = cartItemDiv.dataset.productId;
+    const variantIndex = parseInt(cartItemDiv.dataset.variantIndex);
+    const flavor = cartItemDiv.dataset.flavor || null;
+
+    const qtySpan = cartItemDiv.querySelector('.cart-qty');
+    const minusBtn = cartItemDiv.querySelector('.cart-minus');
+    const plusBtn = cartItemDiv.querySelector('.cart-plus');
+
+    minusBtn.addEventListener('click', () => {
+      this.adjustQuantityFromSidebar(productId, variantIndex, flavor, -1);
+    });
+
+    plusBtn.addEventListener('click', () => {
+      this.adjustQuantityFromSidebar(productId, variantIndex, flavor, +1);
+    });
+  });
+}
+// Change quantity from sidebar and sync with product cards
+adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
+  const item = this.cart.find(i =>
+    String(i.productId) === String(productId) &&
+    i.variantIndex === variantIndex &&
+    i.flavor === flavor
+  );
+
+  if (!item && delta > 0) {
+    this.cart.push({
+      productId,
+      variantIndex,
+      flavor,
+      quantity: 1
+    });
+  } else if (item) {
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+      // remove from cart
+      this.cart = this.cart.filter(i =>
+        !(String(i.productId) === String(productId) &&
+          i.variantIndex === variantIndex &&
+          i.flavor === flavor)
+      );
     }
   }
+
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+
+  // Sync product card UI
+  const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+  if (card) {
+    const qtyControls = card.querySelector('.quantity-controls');
+    const addBtn = card.querySelector('.add-to-cart-btn');
+
+    const cartItem = this.cart.find(i =>
+      String(i.productId) === String(productId) &&
+      i.variantIndex === variantIndex &&
+      i.flavor === flavor
+    );
+
+    if (cartItem && cartItem.quantity > 0) {
+      if (qtyControls && addBtn) {
+        addBtn.style.display = 'none';
+        qtyControls.classList.add('active');
+        qtyControls.style.display = 'flex';
+        const qtyCount = qtyControls.querySelector('.qty-count');
+        if (qtyCount) qtyCount.textContent = cartItem.quantity;
+      }
+    } else {
+      if (qtyControls && addBtn) {
+        qtyControls.classList.remove('active');
+        qtyControls.style.display = 'none';
+        addBtn.style.display = 'block';
+      }
+    }
+  }
+
+  this.syncCartUI();
+}
+
+// Helper: update badge + sidebar together
+syncCartUI() {
+  this.updateCartCount();
+  this.renderCartSidebar();
+}
+
 
   // Render all products
   renderProducts(productsToRender = this.products) {

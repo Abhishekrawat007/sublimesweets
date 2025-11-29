@@ -311,82 +311,72 @@ document.getElementById('clearPrice').addEventListener('click', () => {
     // ============================================
     // 🎯 APPLY FILTERS
     // ============================================
-    
+       // ============================================
+    // 🎯 APPLY FILTERS (uses ProductCardManager)
+    // ============================================
+
     applyFilters() {
-        let filteredProducts = this.filterProducts();
-        
-        if (this.filters.sort) {
-            filteredProducts = this.sortProducts(filteredProducts);
+        const manager = window.productManager;
+        if (!manager) {
+            console.warn('ProductCardManager not ready for mobile filters');
+            return;
         }
-        
-        this.displayProducts(filteredProducts);
-        this.updateProductCount(filteredProducts.length);
-    }
-    
-    filterProducts() {
-        return this.allProducts.filter(product => {
-            const price = parseInt(product.dataset.price);
-            const category = product.dataset.category;
-            
-            // Price filter
-            const priceMatch = price >= this.filters.priceRange.min && 
-                              price <= this.filters.priceRange.max;
-            
-            // Category filter
-            const categoryMatch = this.filters.categories.length === 0 || 
-                                 this.filters.categories.includes(category);
-            
-            return priceMatch && categoryMatch;
-        });
-    }
-    
-    sortProducts(products) {
-        const sorted = [...products];
-        
-        switch(this.filters.sort) {
-            case 'price-asc':
-                return sorted.sort((a, b) => 
-                    parseInt(a.dataset.price) - parseInt(b.dataset.price)
-                );
-            
-            case 'price-desc':
-                return sorted.sort((a, b) => 
-                    parseInt(b.dataset.price) - parseInt(a.dataset.price)
-                );
-            
-            case 'discount':
-                return sorted.sort((a, b) => 
-                    parseInt(b.dataset.discount || 0) - parseInt(a.dataset.discount || 0)
-                );
-            
-            default:
-                return sorted;
+
+        let filtered = [...manager.products];
+
+        // 1) CATEGORY FILTER
+        if (this.filters.categories.length > 0) {
+            filtered = filtered.filter(p =>
+                this.filters.categories.some(cat =>
+                    p.category === cat || (p.categories && p.categories.includes(cat))
+                )
+            );
         }
+
+        // 2) PRICE FILTER
+        const { min, max } = this.filters.priceRange;
+
+        if (!(min === 0 && max === 999999)) {
+            // Use manager.filterByPriceRange so variants are respected
+            const priceFiltered = manager.filterByPriceRange(min, max);
+
+            // If categories also selected, intersect both
+            if (this.filters.categories.length > 0) {
+                const idsAllowed = new Set(priceFiltered.map(p => p.id));
+                filtered = filtered.filter(p => idsAllowed.has(p.id));
+            } else {
+                filtered = priceFiltered;
+            }
+        }
+
+        // 3) SORT
+        if (this.filters.sort === 'price-asc') {
+            filtered.sort((a, b) => a.variants[0].newPrice - b.variants[0].newPrice);
+        } else if (this.filters.sort === 'price-desc') {
+            filtered.sort((a, b) => b.variants[0].newPrice - a.variants[0].newPrice);
+        } else if (this.filters.sort === 'discount') {
+            filtered.sort((a, b) => {
+                const aDisc = parseFloat(a.variants[0].discount) || 0;
+                const bDisc = parseFloat(b.variants[0].discount) || 0;
+                return bDisc - aDisc;
+            });
+        }
+
+        // 4) RENDER + COUNT
+        manager.renderProducts(filtered);
+        this.updateProductCount(filtered.length);
     }
-    
-    displayProducts(products) {
-        // Hide all products
-        this.allProducts.forEach(product => {
-            product.style.display = 'none';
-        });
-        
-        // Show filtered products
-        products.forEach(product => {
-            product.style.display = 'block';
-        });
-        
-        // Reorder in DOM
-        products.forEach(product => {
-            this.productsGrid.appendChild(product);
-        });
-    }
-    
-    updateProductCount(count = this.allProducts.length) {
-        const countElement = document.getElementById('categoryProductCount');
+
+    updateProductCount(count) {
+        const countElement =
+            document.getElementById('productCount') ||
+            document.getElementById('categoryProductCount');
+
         if (countElement) {
-            countElement.textContent = `${count} Products`;
+            countElement.textContent = count;
         }
     }
+
 }
 
 // ============================================
