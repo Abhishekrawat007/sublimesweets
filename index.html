@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sublime Sweets - Premium Navbar</title>
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/autoslideshow.css">
-    <link rel="stylesheet" href="css/category.css">
-    <link rel="stylesheet" href="css/ice-cream.css">
-    <link rel="stylesheet" href="css/main-course.css">
-    <link rel="stylesheet" href="css/filter-section.css">
-    <link rel="stylesheet" href="css/mobilefilter-section.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/autoslideshow.css">
+<link rel="stylesheet" href="css/category.css">
+<link rel="stylesheet" href="css/ice-cream.css">
+<link rel="stylesheet" href="css/main-course.css">
+<link rel="stylesheet" href="css/filter-section.css">
+<link rel="stylesheet" href="css/mobilefilter-section.css">
+<link rel="stylesheet" href="css/product-card.css">  <!-- MOVED TO LAST -->
+
     <style>
       
    * {
@@ -1610,210 +1612,69 @@ body.dark-mode article {
              ============================================ -->
         <main class="products-section">
             
-            <!-- Products Header -->
-            <div class="products-header">
-                <h2 class="products-title">All Products</h2>
-                <p class="products-count"><span id="productCount">24</span> products</p>
-            </div>
+          
+        
 
-            <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
-                
-                <!-- SAMPLE PRODUCT CARDS (Will be dynamically filtered) -->
-                
-                <!-- Product 1 -->
-                <div class="product-card" data-category="street-food" data-price="50" data-discount="20">
-                    <div class="product-badge discount-badge">20% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFB6C1/FFFFFF?text=Pani+Puri" alt="Pani Puri" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Pani Puri Special</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹50</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card" data-category="main-course" data-price="250" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFA500/FFFFFF?text=Butter+Paneer" alt="Butter Paneer" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butter Paneer Masala</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹250</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card" data-category="mithai" data-price="150" data-discount="15">
-                    <div class="product-badge discount-badge">15% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Gulab+Jamun" alt="Gulab Jamun" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Gulab Jamun Box</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹150</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card" data-category="cakes-eggless" data-price="450" data-discount="10">
-                    <div class="product-badge discount-badge">10% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/667EEA/FFFFFF?text=Chocolate+Cake" alt="Chocolate Cake" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Chocolate Truffle Cake</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹450</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="product-card" data-category="dairy" data-price="80" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/98D8C8/FFFFFF?text=Fresh+Paneer" alt="Paneer" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Fresh Paneer (500g)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹80</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="product-card" data-category="dry-fruits" data-price="350" data-discount="25">
-                    <div class="product-badge discount-badge">25% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/DAA520/FFFFFF?text=Almonds" alt="Almonds" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Premium Almonds (250g)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹350</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 7 -->
-                <div class="product-card" data-category="desserts" data-price="120" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFB6D9/FFFFFF?text=Rabri" alt="Rabri" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Rabri Special</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹120</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 8 -->
-                <div class="product-card" data-category="snacks-drinks" data-price="30" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFA07A/FFFFFF?text=Masala+Chai" alt="Chai" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Masala Chai</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹30</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 9 -->
-                <div class="product-card" data-category="pastries" data-price="90" data-discount="5">
-                    <div class="product-badge discount-badge">5% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/F0E68C/000000?text=Black+Forest" alt="Black Forest" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Black Forest Pastry</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹90</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 10 -->
-                <div class="product-card" data-category="cookies" data-price="180" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/DEB887/FFFFFF?text=Butter+Cookies" alt="Cookies" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butter Cookies Box</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹180</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 11 -->
-                <div class="product-card" data-category="meals" data-price="280" data-discount="10">
-                    <div class="product-badge discount-badge">10% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FF7F50/FFFFFF?text=Thali+Special" alt="Thali" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Royal Thali</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹280</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 12 -->
-                <div class="product-card" data-category="bread-buns" data-price="40" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/F5DEB3/000000?text=Pav+Buns" alt="Pav" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Fresh Pav (6 pcs)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹40</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- No Results Message -->
-            <div class="no-results" id="noResults" style="display: none;">
-                <div class="no-results-icon">🔍</div>
-                <h3>No products found</h3>
-                <p>Try adjusting your filters or search criteria</p>
-            </div>
-
-        </main>
-
+    <!-- ✅ ADD THIS: Products Grid for Filter Section -->
+    <div class="products-grid" id="productsGrid">
+        <!-- Products will render here -->
     </div>
 
+    <!-- No Results -->
+    <div class="no-results" id="noResults" style="display: none;">
+        <div class="no-results-icon">🔍</div>
+        <h3>No products found</h3>
+        <p>Try adjusting your filters or search criteria</p>
+    </div>
 
-  
+</main>
+    <!-- Size/Flavor Selection Modal -->
+    <div class="modal-overlay" id="sizeFlavorOverlay"></div>
+    
+    <div class="size-flavor-modal" id="sizeFlavorModal">
+        <!-- Modal Header -->
+        <div class="modal-header-product">
+            <h3 class="modal-title-product" id="modalProductName">Select Options</h3>
+            <button class="modal-close-btn" id="closeModalBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
 
+        <!-- Modal Body -->
+        <div class="modal-body-product" id="modalBody">
+            <!-- Size Section (Always Present) -->
+            <div class="size-section">
+                <div class="section-label">Select Size/Weight</div>
+                <div class="size-options" id="sizeOptions">
+                    <!-- Size options will be dynamically generated -->
+                </div>
+            </div>
 
+            <!-- Flavor Section (Only for snacks with flavors) -->
+            <div class="flavor-section" id="flavorSection" style="display: none;">
+                <div class="section-label">Select Flavor</div>
+                <div class="flavor-options" id="flavorOptions">
+                    <!-- Flavor options will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer-product">
+            <button class="modal-cancel-btn" id="cancelBtn">Cancel</button>
+            <button class="modal-apply-btn" id="applyBtn">Apply</button>
+        </div>
+    </div>
+
+</main>
+
+    <script src="js/product.js" defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/autoslideshow.js" defer></script>
+    <script src="js/product-card.js" defer></script>
+    <script src="js/filter-integration.js" defer></script>
     <script src="js/ice-cream.js" defer></script>
     <script src="js/main-course.js" defer></script>
     <script src="js/filter-section.js" defer></script>

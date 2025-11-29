@@ -1,4 +1,254 @@
- <!-- ============================================
+   <!-- ============================================
+         📱 MOBILE STICKY FILTER BAR
+         Shows only on mobile (<700px)
+         ============================================ -->
+    
+    <div class="mobile-filter-bar" id="mobileFilterBar">
+        <!-- Sort Button -->
+        <button class="filter-btn" id="sortBtn">
+            <span class="sort-icon">↓↑</span>
+        
+            <span>Sort</span>
+        </button>
+
+        <!-- Category Button -->
+        <button class="filter-btn" id="categoryBtn">
+            <span>Category</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Price Button -->
+        <button class="filter-btn" id="priceBtn">
+            <span>Price</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Filters Button -->
+        <button class="filter-btn" id="filtersBtn">
+            <span class="filters-icon">≡</span>
+            <span>Filters</span>
+        </button>
+    </div>
+
+    <!-- ============================================
+         MODAL OVERLAY (Dark background)
+         ============================================ -->
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- ============================================
+         1️⃣ SORT MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="sortModal">
+        <div class="modal-header">
+            <h3>SORT BY</h3>
+            <button class="close-modal" data-modal="sortModal">✕</button>
+        </div>
+        <div class="modal-content">
+           <label class="radio-option-mobile">
+    <input type="radio" name="mobile-sort" value="all" data-sort="none" checked>
+    <span class="radio-custom-mobile"></span>
+    <span class="radio-label-mobile">All</span>
+</label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="discount" data-sort="discount">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Discount</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-high" data-sort="price-desc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (High to Low)</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-low" data-sort="price-asc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (Low to High)</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- ============================================
+         2️⃣ CATEGORY MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="categoryModal">
+        <div class="modal-header">
+            <h3>CATEGORY</h3>
+            <button class="close-modal" data-modal="categoryModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <!-- Search Box -->
+            <div class="category-search-wrapper-mobile">
+                <span class="search-icon-mobile">🔍</span>
+                <input type="text" class="category-search-mobile" placeholder="Search" id="categorySearchMobile">
+            </div>
+            
+            <!-- Category List -->
+            <div class="category-list-mobile" id="categoryListMobile">
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="street-food">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌮 Street Food</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="main-course">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍛 Main Course</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="meals">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍽️ Meals / Thalis</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="desserts">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍨 Fresh Desserts</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="snacks-drinks">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍿 Snacks & Drinks</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="mithai">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍬 Mithai (Indian Sweets)</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-eggless">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🎂 Cakes - Eggless</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-with-egg">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍰 Cakes - With Egg</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="pastries">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥐 Pastries</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="bread-buns">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍞 Bread & Buns</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cookies">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍪 Cookies</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dairy">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥛 Dairy</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dry-fruits">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌰 Dry Fruits</span>
+                </label>
+            </div>
+        </div>
+      <div class="modal-footer">
+    <button class="clear-btn" id="clearCategoriesMobile">Clear All</button>
+    <button class="done-btn" data-modal="categoryModal">Done</button>
+</div></div>
+
+    <!-- ============================================
+         3️⃣ PRICE MODAL (With Steppers + Inputs)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="priceModal">
+        <div class="modal-header">
+            <h3>PRICE</h3>
+            <button class="close-modal" data-modal="priceModal">✕</button>
+        </div>
+        <div class="modal-content">
+    <!-- Premium Price Range Input -->
+   <div class="premium-price-input">
+    <label class="premium-label">Enter Price Range</label>
+    <div class="price-range-inputs">
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="minPriceInput" placeholder="Min" value="">
+        </div>
+        <span class="range-separator">—</span>
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="maxPriceInput" placeholder="Max" value="">
+        </div>
+    </div>
+</div>
+</div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearPrice">Clear All</button>
+            <button class="done-btn apply-btn" id="applyPrice">Apply</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         4️⃣ FILTERS MODAL (Price Ranges)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="filtersModal">
+        <div class="modal-header">
+            <h3>FILTERS</h3>
+            <button class="close-modal" data-modal="filtersModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <h4 class="filter-section-title">Price Range</h4>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="all" data-min="0" data-max="999999" checked>
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">All Prices</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="0-100" data-min="0" data-max="100">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹0 - ₹100</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="100-200" data-min="100" data-max="200">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹100 - ₹200</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="200-300" data-min="200" data-max="300">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹200 - ₹300</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="300-400" data-min="300" data-max="400">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹300 - ₹400</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="400-500" data-min="400" data-max="500">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹400 - ₹500</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="500-600" data-min="500" data-max="600">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹500 - ₹600</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="600-700" data-min="600" data-max="700">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹600 - ₹700</span>
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearFilters">Clear All</button>
+            <button class="done-btn apply-btn" id="applyFilters">Apply</button>
+        </div>
+    </div>
+    <!-- ============================================
          🎯 FILTER + PRODUCTS SECTION
          ============================================ -->
     
@@ -103,7 +353,7 @@
                     <div class="section-content-always-open">
                         <!-- Clear All Button -->
     <button class="clear-categories-btn" id="clearCategories">
-        <span>✕</span> Clear All
+        Clear All
     </button>
                     
                         <!-- Search Box -->
@@ -185,206 +435,3 @@
 
             </div>
         </aside>
-
-        <!-- ============================================
-             RIGHT SIDE - PRODUCTS GRID
-             ============================================ -->
-        <main class="products-section">
-            
-            <!-- Products Header -->
-            <div class="products-header">
-                <h2 class="products-title">All Products</h2>
-                <p class="products-count"><span id="productCount">24</span> products</p>
-            </div>
-
-            <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
-                
-                <!-- SAMPLE PRODUCT CARDS (Will be dynamically filtered) -->
-                
-                <!-- Product 1 -->
-                <div class="product-card" data-category="street-food" data-price="50" data-discount="20">
-                    <div class="product-badge discount-badge">20% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFB6C1/FFFFFF?text=Pani+Puri" alt="Pani Puri" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Pani Puri Special</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹50</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card" data-category="main-course" data-price="250" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFA500/FFFFFF?text=Butter+Paneer" alt="Butter Paneer" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butter Paneer Masala</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹250</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card" data-category="mithai" data-price="150" data-discount="15">
-                    <div class="product-badge discount-badge">15% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Gulab+Jamun" alt="Gulab Jamun" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Gulab Jamun Box</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹150</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card" data-category="cakes-eggless" data-price="450" data-discount="10">
-                    <div class="product-badge discount-badge">10% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/667EEA/FFFFFF?text=Chocolate+Cake" alt="Chocolate Cake" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Chocolate Truffle Cake</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹450</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="product-card" data-category="dairy" data-price="80" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/98D8C8/FFFFFF?text=Fresh+Paneer" alt="Paneer" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Fresh Paneer (500g)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹80</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="product-card" data-category="dry-fruits" data-price="350" data-discount="25">
-                    <div class="product-badge discount-badge">25% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/DAA520/FFFFFF?text=Almonds" alt="Almonds" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Premium Almonds (250g)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹350</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 7 -->
-                <div class="product-card" data-category="desserts" data-price="120" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFB6D9/FFFFFF?text=Rabri" alt="Rabri" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Rabri Special</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹120</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 8 -->
-                <div class="product-card" data-category="snacks-drinks" data-price="30" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FFA07A/FFFFFF?text=Masala+Chai" alt="Chai" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Masala Chai</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹30</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 9 -->
-                <div class="product-card" data-category="pastries" data-price="90" data-discount="5">
-                    <div class="product-badge discount-badge">5% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/F0E68C/000000?text=Black+Forest" alt="Black Forest" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Black Forest Pastry</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹90</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 10 -->
-                <div class="product-card" data-category="cookies" data-price="180" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/DEB887/FFFFFF?text=Butter+Cookies" alt="Cookies" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butter Cookies Box</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹180</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 11 -->
-                <div class="product-card" data-category="meals" data-price="280" data-discount="10">
-                    <div class="product-badge discount-badge">10% OFF</div>
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/FF7F50/FFFFFF?text=Thali+Special" alt="Thali" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Royal Thali</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐⭐</div>
-                            <div class="product-price">₹280</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 12 -->
-                <div class="product-card" data-category="bread-buns" data-price="40" data-discount="0">
-                    <div class="product-image-wrapper">
-                        <img src="https://via.placeholder.com/300x300/F5DEB3/000000?text=Pav+Buns" alt="Pav" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Fresh Pav (6 pcs)</h3>
-                        <div class="product-meta">
-                            <div class="product-rating">⭐⭐⭐⭐</div>
-                            <div class="product-price">₹40</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- No Results Message -->
-            <div class="no-results" id="noResults" style="display: none;">
-                <div class="no-results-icon">🔍</div>
-                <h3>No products found</h3>
-                <p>Try adjusting your filters or search criteria</p>
-            </div>
-
-        </main>
-
-    </div>

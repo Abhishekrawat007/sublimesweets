@@ -1,0 +1,56 @@
+
+    <!-- Product Grid Container -->
+    <div class="product-grid" id="productGrid">
+        <!-- Product cards will be dynamically generated here -->
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResultsMessage" style="display: none;">
+        😔 No products found.
+    </div>
+
+    <!-- Size/Flavor Selection Modal -->
+    <div class="modal-overlay" id="sizeFlavorOverlay"></div>
+    
+    <div class="size-flavor-modal" id="sizeFlavorModal">
+        <!-- Modal Header -->
+        <div class="modal-header-product">
+            <h3 class="modal-title-product" id="modalProductName">Select Options</h3>
+            <button class="modal-close-btn" id="closeModalBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body-product" id="modalBody">
+            <!-- Size Section (Always Present) -->
+            <div class="size-section">
+                <div class="section-label">Select Size/Weight</div>
+                <div class="size-options" id="sizeOptions">
+                    <!-- Size options will be dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Flavor Section (Only for snacks with flavors) -->
+            <div class="flavor-section" id="flavorSection" style="display: none;">
+                <div class="section-label">Select Flavor</div>
+                <div class="flavor-options" id="flavorOptions">
+                    <!-- Flavor options will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer-product">
+            <button class="modal-cancel-btn" id="cancelBtn">Cancel</button>
+            <button class="modal-apply-btn" id="applyBtn">Apply</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="product-card.js"></script>
+</body>
+</html>
