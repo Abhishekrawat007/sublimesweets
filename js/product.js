@@ -11,16 +11,16 @@ const products = [
     "rating": 4.5,
     "variants": [
       {
-        "size": "250g",
-        "weight": "250g",
+        "size": "half",
+        "weight": "half",
         "oldPrice": 450,
         "newPrice": 380,
         "discount": "16%",
         "inStock": true
       },
       {
-        "size": "500g",
-        "weight": "500g",
+        "size": "full",
+        "weight": "full",
         "oldPrice": 880,
         "newPrice": 740,
         "discount": "16%",
@@ -51,16 +51,16 @@ const products = [
     "rating": 5.0,
     "variants": [
       {
-        "size": "500g",
-        "weight": "500g",
+        "size": "half",
+        "weight": "half",
         "oldPrice": 280,
         "newPrice": 220,
         "discount": "21%",
         "inStock": true
       },
       {
-        "size": "1kg",
-        "weight": "1kg",
+        "size": "full",
+        "weight": "full",
         "oldPrice": 520,
         "newPrice": 420,
         "discount": "19%",

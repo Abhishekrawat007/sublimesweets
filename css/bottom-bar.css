@@ -1,0 +1,424 @@
+   /* ============================================
+           🔥 ULTRA PREMIUM BOTTOM NAVIGATION BAR
+           The most stunning bottom bar ever created!
+           ============================================ */
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 -4px 20px rgba(255, 107, 107, 0.3); }
+            50% { box-shadow: 0 -4px 30px rgba(255, 107, 107, 0.5); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 107, 107, 0.2);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Animated gradient border on top */
+        .bottom-nav-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ffa500 25%, 
+                #667eea 50%, 
+                #ffa500 75%, 
+                #ff6b6b 100%
+            );
+            background-size: 200% 100%;
+            animation: shine 3s linear infinite;
+        }
+
+        /* Floating orb decoration */
+        .bottom-nav-container::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .bottom-nav {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5px 12px;
+            position: relative;
+        }
+
+        /* ============================================
+           💎 PREMIUM NAV ITEM
+           ============================================ */
+        .bottom-nav-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Ripple effect on click */
+        .bottom-nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .bottom-nav-item.ripple::before {
+            animation: ripple 0.6s ease-out;
+        }
+
+        /* Icon container with gradient background */
+        .nav-icon-wrapper {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Shimmer effect inside icon */
+        .nav-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-nav-item:hover .nav-icon-wrapper::before {
+            opacity: 1;
+            animation: shine 1.5s ease infinite;
+        }
+
+        .nav-icon-wrapper svg {
+            width: 18px;
+            height: 18px;
+            color: #666;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        /* Label */
+        .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        /* Active indicator dot */
+        .nav-indicator {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+        }
+
+        /* ============================================
+           ✨ ACTIVE STATE - The Magic!
+           ============================================ */
+        .bottom-nav-item.active {
+            transform: translateY(0px);
+        }
+
+        .bottom-nav-item.active .nav-icon-wrapper {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transform: scale(1.1);
+        }
+
+        .bottom-nav-item.active .nav-icon-wrapper svg {
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .bottom-nav-item.active .nav-label {
+            color: #ff6b6b;
+            font-weight: 700;
+            transform: scale(1.05);
+        }
+
+        .bottom-nav-item.active .nav-indicator {
+            opacity: 1;
+            transform: scale(1);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           🎯 HOVER STATE - Smooth Interactions
+           ============================================ */
+        .bottom-nav-item:hover:not(.active) {
+            transform: translateY(-4px);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-label {
+            color: #ff6b6b;
+        }
+
+        /* ============================================
+           🌙 DARK MODE - Premium Edition
+           ============================================ */
+        body.dark-mode .bottom-nav-container {
+            background: rgba(26, 26, 26, 0.95);
+            border-top: 1px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-mode .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%);
+        }
+
+        body.dark-mode .nav-icon-wrapper svg {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .nav-label {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.25) 0%, rgba(255, 165, 0, 0.25) 100%);
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+            color: #ffa500;
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-label {
+            color: #ffa500;
+        }
+
+        body.dark-mode .bottom-nav-item.active .nav-label {
+            color: #ffa500;
+        }
+
+        /* ============================================
+           📱 RESPONSIVE - Mobile Optimization
+           ============================================ */
+      @media (max-width: 480px) {
+    .bottom-nav {
+        padding: 4px 7px;
+    }
+
+    .bottom-nav-item {
+        padding: 4px 6px;
+    }
+
+    .nav-icon-wrapper {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav-icon-wrapper svg {
+        width: 20px;
+        height: 20px;
+    }
+
+
+            .nav-label {
+                font-size: 10px;
+            }
+
+            .bottom-nav-item.active {
+                transform: translateY(0px);
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-icon-wrapper {
+                width: 34px;
+                height: 34px;
+            }
+
+            .nav-icon-wrapper svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .nav-label {
+                font-size: 9px;
+            }
+        }
+
+        /* ============================================
+           🎨 DEMO STYLES
+           ============================================ */
+        .demo-header {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .demo-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .toggle-dark-mode {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .toggle-dark-mode:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+        }
+
+        body.dark-mode .demo-subtitle {
+            color: #b0b0b0;
+        }
+        .back-to-top{
+        position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;}
+
+    .back-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+.back-to-top {
+    bottom: 90px !important; /* 10px above bottom nav (80px height + 10px gap) */
+    z-index: 9998 !important; /* Below bottom nav (9999) */
+}
+
+/* Adjust for mobile if needed */
+@media (max-width: 480px) {
+   
+    .back-to-top {
+        bottom: 85px !important;
+    }
+}
+    /* ============================================
+   🖥️ HIDE BOTTOM NAV ON DESKTOP (Above 930px)
+   ============================================ */
+@media (min-width: 931px) {
+    .bottom-nav-container {
+        display: none !important;
+    }
+    
+    /* Remove bottom padding from body on desktop */
+    body {
+        padding-bottom: 0 !important;
+    }
+}
+
+/* Show only on mobile/tablet (below 930px) */
+@media (max-width: 930px) {
+    .bottom-nav-container {
+        display: block;
+    }
+    
+    body {
+        padding-bottom: 80px; /* Space for bottom nav */
+    }
+}

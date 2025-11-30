@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Premium Bottom Bar - Sublime Sweets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding-bottom: 80px; /* Space for fixed bottom bar */
+        }
+
+        /* Demo content */
+        .demo-content {
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           🔥 ULTRA PREMIUM BOTTOM NAVIGATION BAR
+           The most stunning bottom bar ever created!
+           ============================================ */
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 -4px 20px rgba(255, 107, 107, 0.3); }
+            50% { box-shadow: 0 -4px 30px rgba(255, 107, 107, 0.5); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 107, 107, 0.2);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Animated gradient border on top */
+        .bottom-nav-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ffa500 25%, 
+                #667eea 50%, 
+                #ffa500 75%, 
+                #ff6b6b 100%
+            );
+            background-size: 200% 100%;
+            animation: shine 3s linear infinite;
+        }
+
+        /* Floating orb decoration */
+        .bottom-nav-container::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .bottom-nav {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 20px;
+            position: relative;
+        }
+
+        /* ============================================
+           💎 PREMIUM NAV ITEM
+           ============================================ */
+        .bottom-nav-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Ripple effect on click */
+        .bottom-nav-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .bottom-nav-item.ripple::before {
+            animation: ripple 0.6s ease-out;
+        }
+
+        /* Icon container with gradient background */
+        .nav-icon-wrapper {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Shimmer effect inside icon */
+        .nav-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-nav-item:hover .nav-icon-wrapper::before {
+            opacity: 1;
+            animation: shine 1.5s ease infinite;
+        }
+
+        .nav-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            color: #666;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        /* Label */
+        .nav-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        /* Active indicator dot */
+        .nav-indicator {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+        }
+
+        /* ============================================
+           ✨ ACTIVE STATE - The Magic!
+           ============================================ */
+        .bottom-nav-item.active {
+            transform: translateY(-8px);
+        }
+
+        .bottom-nav-item.active .nav-icon-wrapper {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transform: scale(1.1);
+        }
+
+        .bottom-nav-item.active .nav-icon-wrapper svg {
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .bottom-nav-item.active .nav-label {
+            color: #ff6b6b;
+            font-weight: 700;
+            transform: scale(1.05);
+        }
+
+        .bottom-nav-item.active .nav-indicator {
+            opacity: 1;
+            transform: scale(1);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           🎯 HOVER STATE - Smooth Interactions
+           ============================================ */
+        .bottom-nav-item:hover:not(.active) {
+            transform: translateY(-4px);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 165, 0, 0.2) 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .bottom-nav-item:hover:not(.active) .nav-label {
+            color: #ff6b6b;
+        }
+
+        /* ============================================
+           🌙 DARK MODE - Premium Edition
+           ============================================ */
+        body.dark-mode .bottom-nav-container {
+            background: rgba(26, 26, 26, 0.95);
+            border-top: 1px solid rgba(255, 107, 107, 0.3);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        body.dark-mode .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(255, 165, 0, 0.15) 100%);
+        }
+
+        body.dark-mode .nav-icon-wrapper svg {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .nav-label {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.25) 0%, rgba(255, 165, 0, 0.25) 100%);
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+            color: #ffa500;
+        }
+
+        body.dark-mode .bottom-nav-item:hover:not(.active) .nav-label {
+            color: #ffa500;
+        }
+
+        body.dark-mode .bottom-nav-item.active .nav-label {
+            color: #ffa500;
+        }
+
+        /* ============================================
+           📱 RESPONSIVE - Mobile Optimization
+           ============================================ */
+        @media (max-width: 480px) {
+            .bottom-nav {
+                padding: 6px 10px;
+            }
+
+            .bottom-nav-item {
+                padding: 6px 8px;
+            }
+
+            .nav-icon-wrapper {
+                width: 44px;
+                height: 44px;
+            }
+
+            .nav-icon-wrapper svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .nav-label {
+                font-size: 10px;
+            }
+
+            .bottom-nav-item.active {
+                transform: translateY(-6px);
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-icon-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-icon-wrapper svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .nav-label {
+                font-size: 9px;
+            }
+        }
+
+        /* ============================================
+           🎨 DEMO STYLES
+           ============================================ */
+        .demo-header {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .demo-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .toggle-dark-mode {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .toggle-dark-mode:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+        }
+
+        body.dark-mode .demo-subtitle {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <h1 class="demo-header">🔥 Ultra Premium Bottom Navigation</h1>
+        <p class="demo-subtitle">The most stunning bottom bar that puts WordPress & Shopify to shame!</p>
+        <button class="toggle-dark-mode" onclick="toggleDarkMode()">Toggle Dark Mode 🌙</button>
+        
+        <div style="margin-top: 60px; padding: 30px; background: rgba(255, 107, 107, 0.1); border-radius: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #ff6b6b; margin-bottom: 15px;">✨ Premium Features:</h3>
+            <ul style="text-align: left; color: #666; line-height: 2;">
+                <li>🎨 Animated gradient border on top</li>
+                <li>💎 Glassmorphism with backdrop blur</li>
+                <li>🌊 Ripple effect on click</li>
+                <li>✨ Shimmer animation on hover</li>
+                <li>🎯 Active state with 3D float effect</li>
+                <li>🔔 Animated indicator dot</li>
+                <li>🌙 Beautiful dark mode support</li>
+                <li>📱 Fully responsive (works on any device)</li>
+                <li>🚀 Smooth transitions everywhere</li>
+                <li>🎭 Floating orb decorations</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 40px; color: #999; font-size: 14px;">
+            <p>👇 Check out the bottom navigation bar below!</p>
+            <p style="margin-top: 10px;">Try clicking different items and hovering over them 🎉</p>
+        </div>
+    </div>
+
+    <!-- ============================================
+         🔥 ULTRA PREMIUM BOTTOM NAVIGATION BAR
+         ============================================ -->
+    <div class="bottom-nav-container">
+        <nav class="bottom-nav">
+            <!-- HOME -->
+            <a href="/home" class="bottom-nav-item active" data-page="home">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <span class="nav-label">Home</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- CATEGORIES -->
+            <a href="/categories" class="bottom-nav-item" data-page="categories">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <span class="nav-label">Categories</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- SERVICES -->
+            <a href="/services" class="bottom-nav-item" data-page="services">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m5.656-13.656l-4.243 4.243m0 6l-4.243 4.243M23 12h-6m-6 0H1m17.656 5.656l-4.243-4.243m0-6l-4.243-4.243"></path>
+                    </svg>
+                </div>
+                <span class="nav-label">Services</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- ABOUT -->
+            <a href="/about" class="bottom-nav-item" data-page="about">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">About</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- HELP -->
+            <a href="/help" class="bottom-nav-item" data-page="help">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">Help</span>
+                <div class="nav-indicator"></div>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // ============================================
+        // 🎯 BOTTOM NAV INTERACTIONS
+        // ============================================
+        
+        const navItems = document.querySelectorAll('.bottom-nav-item');
+
+        navItems.forEach(item => {
+            // Click handler - Active state
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active from all items
+                navItems.forEach(nav => nav.classList.remove('active'));
+                
+                // Add active to clicked item
+                this.classList.add('active');
+                
+                // Add ripple effect
+                this.classList.add('ripple');
+                setTimeout(() => {
+                    this.classList.remove('ripple');
+                }, 600);
+                
+                // Log for demo purposes
+                const page = this.getAttribute('data-page');
+                console.log(`Navigating to: ${page}`);
+            });
+
+            // Touch feedback for mobile
+            item.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+
+            item.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+
+        // ============================================
+        // 🌙 DARK MODE TOGGLE
+        // ============================================
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Save preference
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // ============================================
+        // ✨ ENTRANCE ANIMATION
+        // ============================================
+        
+        window.addEventListener('load', () => {
+            const bottomNav = document.querySelector('.bottom-nav-container');
+            bottomNav.style.transform = 'translateY(100%)';
+            bottomNav.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            setTimeout(() => {
+                bottomNav.style.transform = 'translateY(0)';
+            }, 100);
+        });
+
+        // ============================================
+        // 🎪 STAGGERED ITEM ANIMATION
+        // ============================================
+        
+        navItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 200 + (index * 100));
+        });
+
+        console.log('%c🔥 ULTRA PREMIUM BOTTOM NAV LOADED!', 'color: #ff6b6b; font-size: 20px; font-weight: bold;');
+        console.log('%c✨ Features: Glassmorphism, Ripple Effects, Shimmer, 3D Float, Dark Mode', 'color: #ffa500; font-size: 14px;');
+    </script>
+
+</body>
+</html>

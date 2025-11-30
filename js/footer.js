@@ -184,26 +184,6 @@ function addBackToTopButton() {
   backToTop.innerHTML = '↑';
   backToTop.setAttribute('aria-label', 'Back to top');
   
-  backToTop.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    z-index: 9999;
-    transition: all 0.3s ease;
-  `;
-  
   document.body.appendChild(backToTop);
   
   // Show/hide based on scroll
