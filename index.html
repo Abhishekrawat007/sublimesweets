@@ -1570,6 +1570,28 @@ body.dark-mode article {
 
             </div>
         </aside>
+        <div id="themeTester" style="display:flex; flex-wrap:wrap; gap:10px; margin:20px; justify-content:center;">
+  <button id="themeOption1" class="theme-button">Theme 1</button>
+  <button id="themeOption2" class="theme-button">Theme 2</button>
+  <button id="themeOption3" class="theme-button">Theme 3</button>
+  <button id="themeOption4" class="theme-button">Theme 4</button>
+  <button id="themeOption5" class="theme-button">Theme 5</button>
+  <button id="themeOption6" class="theme-button">Theme 6</button>
+  <button id="themeOption7" class="theme-button">Theme 7</button>
+  <button id="themeOption8" class="theme-button">Theme 8</button>
+  <button id="themeOption9" class="theme-button">Theme 9</button>
+  <button id="themeOption10" class="theme-button">Theme 10</button>
+  <button id="themeOption11" class="theme-button">Theme 11</button>
+  <button id="themeOption12" class="theme-button">Theme 12</button>
+  <button id="themeOption13" class="theme-button">Theme 13</button>
+  <button id="themeOption14" class="theme-button">Theme 14</button>
+  <button id="themeOption15" class="theme-button">Theme 15</button>
+  <button id="themeOption16" class="theme-button">Theme 16</button>
+  <button id="themeOption17" class="theme-button">Theme 17</button>
+  <button id="themeOption18" class="theme-button">Theme 18</button>
+  <button id="themeOption19" class="theme-button">Theme 19</button>
+  <button id="themeOption20" class="theme-button">Theme 20</button>
+</div>
 
         <!-- ============================================
              RIGHT SIDE - PRODUCTS GRID
@@ -1645,5 +1667,29 @@ body.dark-mode article {
     <script src="js/filter-section.js" defer></script>
     <script src="js/mobilefilter-section.js" defer></script>
     <!-- <script src="js/footer.js" defer></script> -->
+  <script>// Theme Buttons
+const themeButtons = document.querySelectorAll("#themeTester button");
+
+function applyTheme(themeNum) {
+  for (let i = 1; i <= 20; i++) {
+    document.body.classList.remove(`theme-${i}`);
+  }
+  document.body.classList.add(`theme-${themeNum}`);
+  localStorage.setItem("activeTheme", themeNum);
+}
+
+// Set event listeners 1 → 20
+themeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const num = btn.id.replace("themeOption", "");
+    applyTheme(num);
+  });
+});
+
+// Load saved theme on refresh
+const saved = localStorage.getItem("activeTheme");
+if (saved) applyTheme(saved);
+</script>
+</script>
 </body>
 </html>
