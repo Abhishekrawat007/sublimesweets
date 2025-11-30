@@ -568,3 +568,62 @@ body.dark-mode .footer-main {
     justify-content: center;
   }
 }
+ /* ============================================
+   🔝 BACK TO TOP BUTTON - WITH MODAL HIDE
+   ============================================ */
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Position above bottom nav on mobile */
+@media (max-width: 930px) {
+    .back-to-top {
+        bottom: 80px !important; /* Above 75px bottom bar + some gap */
+        z-index: 998 !important; /* Below bottom nav (9999) */
+    }
+}
+
+/* ============================================
+   🚫 HIDE WHEN MOBILE MODALS ARE ACTIVE
+   ============================================ */
+
+/* Hide when modal overlay is active */
+.modal-overlay.active ~ .back-to-top,
+body.modal-open .back-to-top {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Alternative: Hide when ANY modal is open */
+.bottom-modal.active ~ .back-to-top {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* If back-to-top is inside body, use this approach */
+body.modal-open .back-to-top {
+    display: none !important;
+}

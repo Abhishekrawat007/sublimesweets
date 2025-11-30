@@ -93,26 +93,27 @@ class MobileFilter {
         });
     }
     
-    openModal(modal) {
-        this.overlay.classList.add('active');
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+   openModal(modal) {
+    this.overlay.classList.add('active');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open'); // ← ADD THIS LINE
+}
+   closeModal(modal) {
+    this.overlay.classList.remove('active');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open'); // ← ADD THIS LINE
+}
     
-    closeModal(modal) {
-        this.overlay.classList.remove('active');
+   closeAllModals() {
+    document.querySelectorAll('.bottom-modal').forEach(modal => {
         modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    closeAllModals() {
-        document.querySelectorAll('.bottom-modal').forEach(modal => {
-            modal.classList.remove('active');
-        });
-        this.overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
+    });
+    this.overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open'); // ← ADD THIS LINE
+}
     // ============================================
     // 📊 SORT FILTER
     // ============================================
