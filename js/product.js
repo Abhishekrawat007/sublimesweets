@@ -347,3 +347,5 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined') {
   module.exports = products;
 }
+console.log('🔥 Final products length inside product.js:', products.length);
+console.log('🔥 Last product object:', products[products.length - 1]);
