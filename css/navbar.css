@@ -1072,23 +1072,24 @@
   padding-bottom: 100px !important; /* Extra space at bottom for scrolling */
 }
 
-/* Ensure cart fits on all screen sizes */
+/* Ensure cart fits on all screen sizes (proper full-height layout) */
 .cart-sidebar {
+  height: 100vh !important;          /* 🔥 force full viewport height */
   max-height: 100vh !important;
-  overflow: hidden !important;
+  overflow: hidden;                  /* no need for !important here */
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-content {
-  flex: 1 !important;
+  flex: 1 1 auto !important;
+  min-height: 0;                     /* important for flex scrolling */
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;
-  max-height: calc(100vh - 200px) !important; /* Account for header and footer */
+  max-height: none !important;       /* let flex control height */
 }
 
-.cart-header {
-  flex-shrink: 0 !important;
-}
-
+.cart-header,
 .cart-footer {
   flex-shrink: 0 !important;
 }

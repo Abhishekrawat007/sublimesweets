@@ -449,15 +449,15 @@ function attachEventListeners() {
 }
 
 
-
 function toggleDetailWishlist() {
   if (!currentProduct) return;
 
   // Use the central wishlist logic from ProductCardManager
   if (window.productManager && typeof window.productManager.toggleWishlist === 'function') {
+    // ✅ Just call it - productManager handles everything including toast
     window.productManager.toggleWishlist(currentProduct.id);
   } else {
-    // Fallback (in case productManager isn't available for some reason)
+    // Fallback (in case productManager isn't available)
     let wishlist = [];
     try {
       const data = localStorage.getItem('wishlist');
@@ -471,7 +471,7 @@ function toggleDetailWishlist() {
     const index = wishlist.indexOf(productId);
     const detailBtn = document.getElementById('detailWishlistBtn');
 
-    let isNowSaved;
+    let isNowSaved; // ✅ DECLARE IT HERE
     if (index > -1) {
       wishlist.splice(index, 1);
       isNowSaved = false;
@@ -486,17 +486,20 @@ function toggleDetailWishlist() {
     }
 
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    
     if (typeof window.updateWishlistBadge === 'function') {
       window.updateWishlistBadge();
     }
+
+    // ✅ Toast inside fallback block
+    if (currentProduct && window.showToast) {
+      if (isNowSaved) {
+        window.showToast(`${currentProduct.name} saved to wishlist`, 'success');
+      } else {
+        window.showToast(`${currentProduct.name} removed from wishlist`, 'info');
+      }
+    }
   }
-  if (currentProduct && window.showToast) {
-  if (isNowSaved) {
-    window.showToast(`${currentProduct.name} saved to wishlist`, 'success');
-  } else {
-    window.showToast(`${currentProduct.name} removed from wishlist`, 'info');
-  }
-}
 }
 
 

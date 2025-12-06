@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/product-card.css">
+   
 
     <style>
         :root {
@@ -924,14 +925,13 @@ body.dark-mode .flavor-btn.active {
                     </svg>
                 </button>
 
-                <!-- WISHLIST -->
-                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                        <span class="badge" id="wishlistCount" style="display: none;"></span>
-                </button>
-
+               <!-- WISHLIST -->
+<button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="window.location.href='wishlist.html'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+    <span class="badge" id="wishlistCount" style="display: none;"></span>
+</button>
                 <!-- SEARCH (Mobile Only) -->
                 <button class="icon-btn mobile-search-only" id="searchBtn" aria-label="Search">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

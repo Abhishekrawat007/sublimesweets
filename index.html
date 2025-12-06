@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sublime Sweets - Premium Navbar</title>
 <link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/wishlist.css">
 <link rel="stylesheet" href="css/toast.css">
 <link rel="stylesheet" href="css/autoslideshow.css">
 <link rel="stylesheet" href="css/category.css">
@@ -428,13 +429,14 @@ body.search-active .products-section {
                     </svg>
                 </button>
 
-                <!-- WISHLIST -->
-                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                        <span class="badge" id="wishlistCount" style="display: none;"></span>
-                </button>
+                
+            <!-- WISHLIST -->
+<button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="window.location.href='wishlist.html'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+    <span class="badge" id="wishlistCount" style="display: none;"></span>
+</button>
 
                 <!-- SEARCH (Mobile Only) -->
                 <button class="icon-btn mobile-search-only" id="searchBtn" aria-label="Search">
@@ -957,165 +959,9 @@ body.search-active .products-section {
 
         <!-- Ice Cream Products Scroll Area -->
         <div class="ice-cream-scroll" id="iceCreamScroll">
-            <div class="ice-cream-track">
-                
-                <!-- Product 1 -->
-                <a href="/product/vanilla-dream" class="ice-cream-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/vanilladream.jpg" alt="Vanilla Dream" class="product-image">
-                        <div class="image-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Vanilla Dream</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹120</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 2 -->
-                <a href="/product/chocolate-fudge" class="ice-cream-card">
-                    <div class="product-badge new-badge">New</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/chocalatefudge.webp" alt="Chocolate Fudge" class="product-image">
-                        <div class="image-glow chocolate-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Chocolate Fudge</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹140</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 3 -->
-                <a href="/product/strawberry-bliss" class="ice-cream-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/strawberrybliss.webp" alt="Strawberry Bliss" class="product-image">
-                        <div class="image-glow strawberry-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Strawberry Bliss</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹130</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 4 -->
-                <a href="/product/mango-burst" class="ice-cream-card">
-                    <div class="product-badge">Chef's Special</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/mangoburst.jpg" alt="Mango Burst" class="product-image">
-                        <div class="image-glow mango-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Mango Burst</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹135</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 5 -->
-                <a href="/product/pistachio-delight" class="ice-cream-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/Pistachio-Ice-cream1691.webp" alt="Pistachio Delight" class="product-image">
-                        <div class="image-glow pistachio-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Pistachio Delight</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹150</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 6 -->
-                <a href="/product/butterscotch-heaven" class="ice-cream-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/Butterscotch-Ice-Cream-8.jpg" alt="Butterscotch Heaven" class="product-image">
-                        <div class="image-glow butterscotch-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butterscotch Heaven</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹125</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 7 -->
-                <a href="/product/mint-chocolate-chip" class="ice-cream-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/icecream7.png" alt="Mint Chocolate Chip" class="product-image">
-                        <div class="image-glow mint-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Mint Chocolate</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹145</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 8 -->
-                <a href="/product/cookies-cream" class="ice-cream-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/icecream8.png" alt="Cookies & Cream" class="product-image">
-                        <div class="image-glow cookies-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Cookies & Cream</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹140</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 9 -->
-                <a href="/product/caramel-swirl" class="ice-cream-card">
-                    <div class="product-badge new-badge">New</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/icecream9.png" alt="Caramel Swirl" class="product-image">
-                        <div class="image-glow caramel-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Caramel Swirl</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹155</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 10 -->
-                <a href="/product/belgian-chocolate" class="ice-cream-card">
-                    <div class="product-badge">Chef's Special</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/icecream10.png" alt="Belgian Chocolate" class="product-image">
-                        <div class="image-glow belgian-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Belgian Chocolate</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹160</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+         <div class="ice-cream-track" id="iceCreamTrack">
+    <!-- Filled by JS using products[] -->
+</div>
         </div>
 
         <!-- Right Navigation Arrow (Desktop Only) -->
@@ -1128,7 +974,7 @@ body.search-active .products-section {
 
     <!-- See All Button -->
     <div class="see-all-container">
-        <a href="/products/ice-cream" class="see-all-btn">
+        <a href="icecreams.html" class="see-all-btn">
             <span>Explore All Ice Creams</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1161,165 +1007,9 @@ body.search-active .products-section {
 
         <!-- Main Course Products Scroll Area -->
         <div class="main-course-scroll" id="mainCourseScroll">
-            <div class="main-course-track">
-                
-                <!-- Product 1 -->
-                <a href="/product/butter-chicken" class="main-course-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/butter-chicken-.jpg" alt="Butter Chicken" class="product-image">
-                        <div class="image-glow butter-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Butter Chicken</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹280</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 2 -->
-                <a href="/product/paneer-tikka-masala" class="main-course-card">
-                    <div class="product-badge new-badge">New</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/Paneer-Tikka-Masala-Recipe-Step-By-Step-Instructions.jpg" alt="Paneer Tikka Masala" class="product-image">
-                        <div class="image-glow paneer-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Paneer Tikka Masala</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹250</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 3 -->
-                <a href="/product/dal-makhani" class="main-course-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/dal-makhani-feature.jpg" alt="Dal Makhani" class="product-image">
-                        <div class="image-glow dal-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Dal Makhani</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹220</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 4 -->
-                <a href="/product/biryani" class="main-course-card">
-                    <div class="product-badge">Chef's Special</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/briyani.jpg" alt="Biryani" class="product-image">
-                        <div class="image-glow biryani-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Biryani</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹300</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 5 -->
-                <a href="/product/chole-bhature" class="main-course-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/cholebhature.jpg" alt="Chole Bhature" class="product-image">
-                        <div class="image-glow chole-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Chole Bhature</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹180</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 6 -->
-                <a href="/product/kadai-paneer" class="main-course-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/kadaipaneer.jpg" alt="Kadai Paneer" class="product-image">
-                        <div class="image-glow kadai-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Kadai Paneer</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹240</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 7 -->
-                <a href="/product/palak-paneer" class="main-course-card">
-                    <div class="product-badge">Popular</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/maincourse7.png" alt="Palak Paneer" class="product-image">
-                        <div class="image-glow palak-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Palak Paneer</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹230</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 8 -->
-                <a href="/product/rajma-chawal" class="main-course-card">
-                    <div class="product-image-wrapper">
-                        <img src="images/maincourse8.png" alt="Rajma Chawal" class="product-image">
-                        <div class="image-glow rajma-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Rajma Chawal</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹200</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 9 -->
-                <a href="/product/malai-kofta" class="main-course-card">
-                    <div class="product-badge new-badge">New</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/maincourse9.png" alt="Malai Kofta" class="product-image">
-                        <div class="image-glow malai-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Malai Kofta</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹260</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Product 10 -->
-                <a href="/product/tandoori-roti-combo" class="main-course-card">
-                    <div class="product-badge">Chef's Special</div>
-                    <div class="product-image-wrapper">
-                        <img src="images/maincourse10.png" alt="Tandoori Roti Combo" class="product-image">
-                        <div class="image-glow tandoori-glow"></div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Tandoori Roti Combo</h3>
-                        <div class="product-meta">
-                            <span class="product-rating">⭐⭐⭐⭐⭐</span>
-                            <span class="product-price">₹320</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+           <div class="main-course-track" id="mainCourseTrack">
+    <!-- Filled by JS using products[] -->
+</div>
         </div>
 
         <!-- Right Navigation Arrow (Desktop Only) -->
@@ -1332,7 +1022,7 @@ body.search-active .products-section {
 
     <!-- See All Button -->
     <div class="see-all-container">
-        <a href="/products/main-course" class="see-all-btn">
+        <a href="maincourse.html" class="see-all-btn">
             <span>Explore All Main Course</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1710,28 +1400,24 @@ body.search-active .products-section {
                         
                         <!-- Category List -->
                         <div class="category-list" id="categoryList">
-                            <label class="checkbox-option" data-category="street-food">
-                                <input type="checkbox" value="street-food">
+                            <label class="checkbox-option" data-category="streetfood">
+                                <input type="checkbox" value="streetfood">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🌮 Street Food</span>
                             </label>
-                            <label class="checkbox-option" data-category="main-course">
-                                <input type="checkbox" value="main-course">
+                            <label class="checkbox-option" data-category="maincourse">
+                                <input type="checkbox" value="maincourse">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍛 Main Course</span>
                             </label>
-                            <label class="checkbox-option" data-category="meals">
-                                <input type="checkbox" value="meals">
-                                <span class="checkbox-custom"></span>
-                                <span class="checkbox-label">🍽️ Meals / Thalis</span>
-                            </label>
-                            <label class="checkbox-option" data-category="desserts">
-                                <input type="checkbox" value="desserts">
+                           
+                            <label class="checkbox-option" data-category="pastries">
+                                <input type="checkbox" value="pastries">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍨 Fresh Desserts</span>
                             </label>
-                            <label class="checkbox-option" data-category="snacks-drinks">
-                                <input type="checkbox" value="snacks-drinks">
+                            <label class="checkbox-option" data-category="snacks">
+                                <input type="checkbox" value="snacks">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍿 Snacks & Drinks</span>
                             </label>
@@ -1740,28 +1426,24 @@ body.search-active .products-section {
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍬 Mithai (Indian Sweets)</span>
                             </label>
-                            <label class="checkbox-option" data-category="cakes-eggless">
-                                <input type="checkbox" value="cakes-eggless">
+                            <label class="checkbox-option" data-category="cakes">
+                                <input type="checkbox" value="cakes">
                                 <span class="checkbox-custom"></span>
-                                <span class="checkbox-label">🎂 Cakes - Eggless</span>
+                                <span class="checkbox-label">🎂 Cakes</span>
                             </label>
-                            <label class="checkbox-option" data-category="cakes-with-egg">
-                                <input type="checkbox" value="cakes-with-egg">
-                                <span class="checkbox-custom"></span>
-                                <span class="checkbox-label">🍰 Cakes - With Egg</span>
-                            </label>
+                            
                             <label class="checkbox-option" data-category="pastries">
                                 <input type="checkbox" value="pastries">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🥐 Pastries</span>
                             </label>
-                            <label class="checkbox-option" data-category="bread-buns">
-                                <input type="checkbox" value="bread-buns">
+                            <label class="checkbox-option" data-category="dairy">
+                                <input type="checkbox" value="dairy">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍞 Bread & Buns</span>
                             </label>
-                            <label class="checkbox-option" data-category="cookies">
-                                <input type="checkbox" value="cookies">
+                            <label class="checkbox-option" data-category="pastries">
+                                <input type="checkbox" value="pastries">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🍪 Cookies</span>
                             </label>
@@ -1770,8 +1452,8 @@ body.search-active .products-section {
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🥛 Dairy</span>
                             </label>
-                            <label class="checkbox-option" data-category="dry-fruits">
-                                <input type="checkbox" value="dry-fruits">
+                            <label class="checkbox-option" data-category="dryfruits">
+                                <input type="checkbox" value="dryfruits">
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-label">🌰 Dry Fruits</span>
                             </label>
@@ -2307,6 +1989,9 @@ body.search-active .products-section {
 </div>
     <script src="js/product.js" defer></script>
     <script src="js/navbar.js" defer></script>
+    <script src="js/wishlist-page.js"></script>
+    <script src="js/ice-cream.js" defer></script>
+    <script src="js/main-course.js" defer></script>
     <script src="js/autoslideshow.js" defer></script>
     <script src="js/product-card.js" defer></script>
     <script src="js/filter-integration.js" defer></script>

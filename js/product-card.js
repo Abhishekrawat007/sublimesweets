@@ -281,6 +281,9 @@ toggleWishlist(productId, btn) {
   if (typeof window.updateWishlistBadge === 'function') {
     window.updateWishlistBadge();
   }
+    if (typeof window.refreshWishlistPage === 'function') {
+        window.refreshWishlistPage();
+    }
 }
 
   // Open size/flavor modal
