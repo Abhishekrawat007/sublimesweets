@@ -1,61 +1,66 @@
-
 /* ============================================
-   🍛 ULTRA-PREMIUM MAIN COURSE SECTION
-   Luxury horizontal scroll showcase - Warm Colors
+   🍛 LIGHTWEIGHT MAIN COURSE SECTION
+   Optimized for blazing-fast performance
    ============================================ */
 
-.main-course-section {
-    padding: 20px 20px 40px 20px;
-    background: linear-gradient(135deg, #fff9f5 0%, #ffffff 50%, #fffaf0 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
+/* CSS VARIABLES */
+:root {
+    --main-section-bg: #fff9f5;
+    --main-card-bg: rgba(255, 255, 255, 0.95);
+    --main-card-border: rgba(255, 165, 0, 0.3);
+    --main-card-shadow: rgba(255, 107, 53, 0.15);
+    --main-primary: #ff6b35;
+    --main-secondary: #f7931e;
+    --main-text: #2c1a0c;
+    --main-scrollbar-track: rgba(255, 165, 0, 0.1);
+    --main-btn-bg: rgba(255, 255, 255, 0.8);
 }
 
 .sublime-navbar.dark-mode ~ .main-course-section {
-    background: linear-gradient(135deg, #1a1815 0%, #1a1a1a 50%, #1a1a15 100%);
-    background-size: 400% 400%;
+    --main-section-bg: #1a1815;
+    --main-card-bg: rgba(42, 38, 35, 0.95);
+    --main-card-border: rgba(255, 165, 0, 0.2);
+    --main-card-shadow: rgba(0, 0, 0, 0.4);
+    --main-primary: #ffa500;
+    --main-secondary: #ff8c00;
+    --main-text: #ffffff;
+    --main-scrollbar-track: rgba(255, 165, 0, 0.05);
+    --main-btn-bg: rgba(42, 38, 35, 0.8);
 }
 
 /* ============================================
-   🎨 SECTION HEADER
+   MAIN SECTION
    ============================================ */
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--main-section-bg);
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
+/* ============================================
+   HEADER
+   ============================================ */
 .main-course-header {
     text-align: center;
     margin-bottom: 20px;
-    position: relative;
 }
 
 .main-course-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 900;
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff6b35 100%);
-    background-size: 200% 200%;
+    background: linear-gradient(135deg, var(--main-primary) 0%, var(--main-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 8s ease infinite;
     letter-spacing: -1px;
     margin: 0;
 }
 
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-title {
-    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 50%, #ffa500 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 /* ============================================
-   📦 SCROLL CONTAINER
+   SCROLL CONTAINER
    ============================================ */
-
 .main-course-container {
     position: relative;
     max-width: 1400px;
@@ -68,7 +73,7 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 107, 53, 0.3) transparent;
+    scrollbar-color: var(--main-primary) transparent;
     padding: 20px 0 30px 0;
     margin: 0 60px;
 }
@@ -79,28 +84,22 @@
 }
 
 .main-course-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 165, 0, 0.1);
+    background: var(--main-scrollbar-track);
     border-radius: 10px;
 }
 
 .main-course-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    background: linear-gradient(90deg, var(--main-primary), var(--main-secondary));
     border-radius: 10px;
-    transition: background 0.3s ease;
 }
 
 .main-course-scroll::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, #f7931e, #ff6b35);
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 165, 0, 0.05);
+    background: linear-gradient(90deg, var(--main-secondary), var(--main-primary));
 }
 
 /* ============================================
-   🎴 PRODUCT TRACK
+   PRODUCT TRACK
    ============================================ */
-
 .main-course-track {
     display: flex;
     gap: 20px;
@@ -108,51 +107,23 @@
 }
 
 /* ============================================
-   💎 PREMIUM PRODUCT CARD
+   PRODUCT CARD
    ============================================ */
-
 .main-course-card {
     flex: 0 0 180px;
     width: 180px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--main-card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
     padding: 16px;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    border: 2px solid rgba(255, 165, 0, 0.3);
-    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
-    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--main-card-border);
+    box-shadow: 0 8px 32px var(--main-card-shadow);
 }
 
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card {
-    background: rgba(42, 38, 35, 0.95);
-    border-color: rgba(255, 165, 0, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* Gradient Border Animation */
-.main-course-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, #ff6b35, #f7931e, #ffd700, #ff6b35);
-    background-size: 400% 400%;
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: gradientShift 3s ease infinite;
-}
-
-.main-course-card:hover::before {
-    opacity: 1;
-}
-
-/* 3D Hover Effect */
 .main-course-card:hover {
     transform: translateY(-12px) scale(1.05);
     box-shadow: 0 20px 60px rgba(255, 107, 53, 0.35);
@@ -162,15 +133,13 @@
     box-shadow: 0 20px 60px rgba(255, 107, 53, 0.5);
 }
 
-/* Active/Tap Effect */
 .main-course-card:active {
     transform: translateY(-8px) scale(1.02);
 }
 
 /* ============================================
-   🖼️ PRODUCT IMAGE - Main Course Glow Colors
+   PRODUCT IMAGE
    ============================================ */
-
 .main-course-card .product-image-wrapper {
     position: relative;
     width: 100%;
@@ -185,60 +154,31 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-course-card:hover .product-image {
     transform: scale(1.15);
 }
 
-/* Dish-specific Glow Effects */
-.butter-glow {
-    background: radial-gradient(circle, rgba(255, 140, 0, 0.6) 0%, transparent 70%);
+/* Simplified Glow - Single Unified Effect */
+.image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(255, 165, 0, 0.6) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    filter: blur(15px);
 }
 
-.paneer-glow {
-    background: radial-gradient(circle, rgba(255, 228, 181, 0.6) 0%, transparent 70%);
-}
-
-.dal-glow {
-    background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
-}
-
-.biryani-glow {
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%);
-}
-
-.chole-glow {
-    background: radial-gradient(circle, rgba(210, 105, 30, 0.6) 0%, transparent 70%);
-}
-
-.kadai-glow {
-    background: radial-gradient(circle, rgba(255, 99, 71, 0.6) 0%, transparent 70%);
-}
-
-.palak-glow {
-    background: radial-gradient(circle, rgba(107, 142, 35, 0.6) 0%, transparent 70%);
-}
-
-.rajma-glow {
-    background: radial-gradient(circle, rgba(165, 42, 42, 0.6) 0%, transparent 70%);
-}
-
-.malai-glow {
-    background: radial-gradient(circle, rgba(245, 222, 179, 0.6) 0%, transparent 70%);
-}
-
-.tandoori-glow {
-    background: radial-gradient(circle, rgba(255, 69, 0, 0.6) 0%, transparent 70%);
+.main-course-card:hover .image-glow {
+    opacity: 1;
 }
 
 /* ============================================
-   📝 PRODUCT INFO
+   PRODUCT INFO
    ============================================ */
-
 .main-course-card .product-info {
     text-align: center;
 }
@@ -247,53 +187,57 @@
     font-family: 'Playfair Display', serif;
     font-size: 16px;
     font-weight: 700;
-    color: #2c1a0c;
+    color: var(--main-text);
     margin: 0 0 8px 0;
     line-height: 1.3;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #2c1a0c 0%, #5c4a3c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-name {
-    background: linear-gradient(135deg, #ffffff 0%, #d0c0b0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    transition: color 0.3s ease;
 }
 
 .main-course-card:hover .product-name {
-    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: scale(1.05);
+    color: var(--main-primary);
+}
+
+.main-course-card .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.main-course-card .product-rating {
+    font-size: 10px;
+    letter-spacing: -1px;
 }
 
 .main-course-card .product-price {
-    color: #ff6b35;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .main-course-card .product-price {
-    color: #ffa500;
+    font-weight: 700;
+    color: var(--main-primary);
+    font-size: 14px;
 }
 
 /* ============================================
-   ⬅️➡️ NAVIGATION ARROWS
+   NAVIGATION ARROWS (Desktop Only)
    ============================================ */
-
 .main-course-container .scroll-arrow {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(255, 165, 0, 0.3);
-    color: #ff6b35;
-}
-
-.sublime-navbar.dark-mode ~ .main-course-section .scroll-arrow {
-    background: rgba(42, 38, 35, 0.9);
-    border-color: rgba(255, 165, 0, 0.2);
-    color: #ffa500;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--main-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--main-card-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: var(--main-primary);
+    opacity: 0;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
 }
 
 .main-course-container:hover .scroll-arrow {
@@ -301,41 +245,74 @@
 }
 
 .main-course-container .scroll-arrow:hover {
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    background: linear-gradient(135deg, var(--main-primary), var(--main-secondary));
     color: white;
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.main-course-container .scroll-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* ============================================
-   🔗 SEE ALL BUTTON
+   SEE ALL BUTTON
    ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 
 .main-course-section .see-all-btn {
-    background: rgba(255, 255, 255, 0.8);
-    border: 2px solid rgba(255, 165, 0, 0.4);
-    color: #f7931e;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--main-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--main-card-border);
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--main-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
 }
 
-.sublime-navbar.dark-mode ~ .main-course-section .see-all-btn {
-    background: rgba(42, 38, 35, 0.8);
-    border-color: rgba(255, 165, 0, 0.3);
-    color: #ffa500;
-}
-
-.main-course-section .see-all-btn::before {
-    background: linear-gradient(135deg, #ff6b35, #f7931e);
-}
-
-
 .main-course-section .see-all-btn:hover {
-    color: #ffffff; /* WHITE TEXT ON HOVER - now visible! */
+    background: linear-gradient(135deg, var(--main-primary), var(--main-secondary));
+    transform: translateY(-3px) scale(1.05);
+    color: white;
+    border-color: transparent;
     box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4);
 }
-/* ============================================
-   📱 MOBILE RESPONSIVE - ULTRA-TIGHT
-   ============================================ */
 
+.main-course-section .see-all-btn:hover svg {
+    transform: translateX(5px);
+}
+
+.main-course-section .see-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
 @media (max-width: 1200px) {
     .main-course-container .scroll-arrow {
         display: none;
@@ -348,7 +325,7 @@
 
 @media (max-width: 768px) {
     .main-course-section {
-        padding: 20px 15px 25px 15px; /* Tighter */
+        padding: 20px 15px 25px 15px;
     }
     
     .main-course-header {
@@ -356,7 +333,7 @@
     }
     
     .main-course-title {
-        font-size: 28px; /* Smaller */
+        font-size: 28px;
     }
     
     .main-course-card {
@@ -371,25 +348,25 @@
     }
     
     .main-course-section .see-all-container {
-        margin-top: 15px; /* Reduced */
+        margin-top: 15px;
     }
 }
 
 @media (max-width: 480px) {
     .main-course-section {
-        padding: 15px 10px 20px 10px; /* Much tighter! */
+        padding: 15px 10px 20px 10px;
     }
     
     .main-course-header {
-        margin-bottom: 12px; /* Reduced */
+        margin-bottom: 12px;
     }
     
     .main-course-title {
-        font-size: 26px; /* Smaller */
+        font-size: 26px;
     }
     
     .main-course-scroll {
-        padding: 15px 0 20px 0; /* Reduced */
+        padding: 15px 0 20px 0;
     }
     
     .main-course-card {
@@ -408,7 +385,7 @@
     }
     
     .main-course-section .see-all-container {
-        margin-top: 10px; /* Reduced */
+        margin-top: 10px;
     }
     
     .main-course-section .see-all-btn {
@@ -419,11 +396,11 @@
 
 @media (max-width: 360px) {
     .main-course-section {
-        padding: 12px 8px 18px 8px; /* Even tighter */
+        padding: 12px 8px 18px 8px;
     }
     
     .main-course-header {
-        margin-bottom: 10px; /* Reduced */
+        margin-bottom: 10px;
     }
     
     .main-course-title {
@@ -440,7 +417,7 @@
     }
     
     .main-course-section .see-all-container {
-        margin-top: 8px; /* Minimal */
+        margin-top: 8px;
     }
     
     .main-course-section .see-all-btn {

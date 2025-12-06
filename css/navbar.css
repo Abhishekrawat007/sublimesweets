@@ -145,10 +145,12 @@
             padding: 0 5px;
             animation: pulse 2s infinite;
         }
-/* Hide ONLY the cart badge until JS sets the correct value */
+/* Default: badge hidden via display, but NOT transparent */
 #cartBtn .badge {
-  opacity: 0;
+  display: none;   /* JS will set to flex when needed */
+  opacity: 1;      /* always visible when shown */
 }
+
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
@@ -208,7 +210,8 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 9998;
+            z-index: 10001;
+
         }
 
         .mobile-menu-overlay.active {
@@ -216,24 +219,28 @@
             visibility: visible;
         }
 
-        /* MOBILE MENU - SOLID PREMIUM BACKGROUND */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 85%;
-            max-width: 400px;
-            height: 100vh;
-            background: var(--menu-bg);
-            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 9999;
-            overflow-y: auto;
-            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
-        }
+      /* MOBILE MENU - smooth GPU-accelerated slide */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;                       /* always anchored to left edge */
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--menu-bg);
+    z-index: 10002;
+    overflow-y: auto;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
+    /* 🔥 use transform instead of left for smooth slide */
+    transform: translateX(-100%);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
 
-        .mobile-menu.active {
-            left: 0;
-        }
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
 
         .mobile-menu-header {
             display: flex;
@@ -426,14 +433,31 @@
   box-shadow: 0 6px 24px rgba(0,0,0,0.12);
 }
 
-/* icon inside */
+/* Wrapper is already there, we just make sure it's positioned properly */
+.search-input-wrapper {
+    position: relative;
+}
+
+/* Premium icon style inside input */
 .search-icon-inside {
-  position: absolute;
-  right: 14px;                               /* move icon inwards so it doesn't push width */
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--nav-text-secondary);
-  pointer-events: none;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0.85;
+    transition:
+        transform 0.18s ease,
+        opacity 0.18s ease,
+        filter 0.18s ease;
+}
+
+/* Hover effect – subtle zoom + glow */
+.search-icon-inside:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+    filter: drop-shadow(0 0 6px rgba(255, 111, 145, 0.55));
 }
 
 /* REPLACE existing .search-modal-content */
@@ -1351,4 +1375,53 @@
 .sublime-navbar.dark-mode ~ .mobile-menu .mobile-menu-link:hover {
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+/* 💎 Lightweight premium animation for mobile menu items */
+.mobile-menu-item,
+.dark-mode-toggle {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+}
+
+/* When JS adds .menu-item-show, items fade + slide in */
+.mobile-menu.active .mobile-menu-item.menu-item-show,
+.mobile-menu.active .dark-mode-toggle.menu-item-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Fix navbar overflow between 374px–380px */
+@media (max-width: 388px) and (min-width:374px){
+    .navbar-container {
+        padding: 0 10px; /* reduce left-right padding */
+    }
+
+    .navbar-logo span:last-child {
+        font-size: 15px; /* smaller Sublime Sweets text */
+        letter-spacing: -0.5px;
+    }
+}
+/* Fix navbar overflow between 374px–380px */
+@media (max-width: 325px) {
+    .navbar-container {
+        padding: 0 7px; /* reduce left-right padding */
+    }
+
+    .navbar-logo span:last-child {
+        font-size: 15px; /* smaller Sublime Sweets text */
+        letter-spacing: -0.5px;
+    }
+
+    .navbar-left .hamburger {
+        transform: scale(0.85);  /* shrink hamburger */
+    }
+
+    .navbar-right .icon-btn {
+        transform: scale(0.85); /* shrink icons slightly */
+        margin-left: 3px;  /* tighten spacing */
+    }
+
+    .mobile-search-only {
+        transform: scale(0.85);
+    }
 }

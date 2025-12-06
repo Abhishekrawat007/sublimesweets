@@ -1,0 +1,497 @@
+/* ============================================
+   💎 PREMIUM CONTACT PAGE - LIGHTWEIGHT
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a1a;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+.container-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* ============================================
+   🎯 HERO SECTION
+   ============================================ */
+
+.contact-hero {
+    padding: 140px 32px 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    text-align: center;
+}
+
+.hero-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+}
+
+.hero-badge svg {
+    width: 18px;
+    height: 18px;
+}
+
+.hero-title {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+/* ============================================
+   📧 MAIN CONTACT SECTION
+   ============================================ */
+
+.main-contact-section {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+}
+
+/* Contact Info Side */
+.info-heading {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.info-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 48px;
+    line-height: 1.7;
+}
+
+.info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.info-card {
+    display: flex;
+    gap: 20px;
+    padding: 28px;
+    background: #f9f9f9;
+    border-radius: 16px;
+    border-left: 4px solid #667eea;
+}
+
+.info-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #667eea;
+}
+
+.info-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.info-detail {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Social Section */
+.social-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-link {
+    width: 44px;
+    height: 44px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: #667eea;
+    color: #ffffff;
+    transform: translateY(-4px);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Contact Form Side */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.field-input {
+    padding: 14px 18px;
+    background: #f9f9f9;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.field-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #ffffff;
+}
+
+.field-textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+select.field-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231a1a1a' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+}
+
+select.field-input option {
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 12px;
+}
+
+.submit-btn {
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   🗺️ MAP SECTION
+   ============================================ */
+
+.map-section {
+    background: #f9f9f9;
+}
+
+.map-container {
+    width: 100%;
+    height: 450px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.map-container iframe {
+    display: block;
+    filter: grayscale(0.3);
+}
+
+/* ============================================
+   💬 FAQ SECTION
+   ============================================ */
+
+.faq-section {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.faq-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.faq-title {
+    font-size: 40px;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+}
+
+.faq-subtitle {
+    font-size: 17px;
+    color: #666;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.faq-item {
+    padding: 32px;
+    background: #f9f9f9;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: #667eea;
+    background: #ffffff;
+}
+
+.faq-question {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.faq-answer {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* ============================================
+   🌙 DARK MODE
+   ============================================ */
+
+body.dark-mode {
+    background: #0a0a0a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .main-contact-section,
+body.dark-mode .faq-section {
+    background: #0a0a0a;
+}
+
+body.dark-mode .map-section {
+    background: #0f0f0f;
+}
+
+body.dark-mode .info-heading,
+body.dark-mode .info-title,
+body.dark-mode .social-heading,
+body.dark-mode .field-label,
+body.dark-mode .faq-title,
+body.dark-mode .faq-question {
+    color: #ffffff;
+}
+
+body.dark-mode .info-description,
+body.dark-mode .info-detail,
+body.dark-mode .faq-subtitle,
+body.dark-mode .faq-answer {
+    color: #b0b0b0;
+}
+
+body.dark-mode .info-card,
+body.dark-mode .faq-item {
+    background: #1a1a1a;
+    border-left-color: #667eea;
+}
+
+body.dark-mode .faq-item:hover {
+    background: #2a2a2a;
+}
+
+body.dark-mode .info-icon {
+    background: rgba(102, 126, 234, 0.2);
+}
+
+body.dark-mode .social-link {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .social-link:hover {
+    background: #667eea;
+    color: #ffffff;
+}
+
+body.dark-mode .field-input {
+    background: #1a1a1a;
+    border-color: #2a2a2a;
+    color: #ffffff;
+}
+
+body.dark-mode .field-input:focus {
+    background: #2a2a2a;
+    border-color: #667eea;
+}
+
+body.dark-mode select.field-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+body.dark-mode select.field-input option {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+body.dark-mode .map-container iframe {
+    filter: grayscale(0.5) invert(0.9);
+}
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 120px 20px 60px;
+    }
+    
+    .main-contact-section,
+    .faq-section {
+        padding: 100px 0;
+    }
+    
+    .container-main {
+        padding: 0 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-card {
+        padding: 24px;
+    }
+    
+    .map-container {
+        height: 350px;
+    }
+    
+    .faq-item {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-badge {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+    
+    .info-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .faq-question {
+        font-size: 16px;
+    }
+}

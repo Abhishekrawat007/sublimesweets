@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - Sublime Sweets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #1a1a1a;
+            padding-top: 80px;
+        }
+
+        /* ============================================
+           🎨 PREMIUM PRODUCT DETAIL LAYOUT
+           ============================================ */
+
+        .product-detail-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #ff5252;
+        }
+
+        /* Main Product Section */
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* ============================================
+           🖼️ IMAGE GALLERY - LEFT SIDE
+           ============================================ */
+
+        .image-gallery {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            cursor: zoom-in;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .main-image-container:hover .main-image {
+            transform: scale(1.1);
+        }
+
+        .discount-badge-detail {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .wishlist-btn-detail {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .wishlist-btn-detail:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .wishlist-btn-detail svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ff6b6b;
+            fill: none;
+        }
+
+        .wishlist-btn-detail.saved svg {
+            fill: #ff6b6b;
+        }
+
+        /* Thumbnail Gallery */
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-4px);
+        }
+
+        .thumbnail.active {
+            border-color: #ff6b6b;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* ============================================
+           📦 PRODUCT INFO - RIGHT SIDE
+           ============================================ */
+
+        .product-info {
+            padding-top: 20px;
+        }
+
+        .product-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #1a1a1a 0%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        /* Star Rating */
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .rating-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Price Section */
+        .price-section {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 165, 0, 0.1));
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            border: 2px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .current-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ff6b6b;
+            line-height: 1;
+        }
+
+        .original-price {
+            font-size: 24px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 12px;
+        }
+
+        .you-save {
+            display: block;
+            margin-top: 8px;
+            color: #28a745;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Size/Flavor Selector */
+        .option-section {
+            margin-bottom: 32px;
+        }
+
+        .option-label {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .option-btn:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .option-btn.active {
+            border-color: #ff6b6b;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .option-size {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .option-price {
+            display: block;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        /* Stock Status */
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            padding: 12px 20px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .stock-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .stock-text {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Description Section */
+        .description-section {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .description-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .description-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* ============================================
+           🔄 RELATED PRODUCTS SECTION
+           ============================================ */
+
+        .related-section {
+            margin-top: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        /* Related Product Card */
+        .related-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .related-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(255, 107, 107, 0.2);
+        }
+
+        .related-card-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .related-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .related-card:hover .related-card-image img {
+            transform: scale(1.1);
+        }
+
+        .related-card-info {
+            padding: 20px;
+        }
+
+        .related-card-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .related-card-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .related-price-new {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+
+        .related-price-old {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        /* ============================================
+           📱 RESPONSIVE DESIGN
+           ============================================ */
+
+        @media (max-width: 768px) {
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .image-gallery {
+                position: static;
+            }
+
+            .product-title {
+                font-size: 28px;
+            }
+
+            .current-price {
+                font-size: 36px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .thumbnail-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-detail-container {
+                padding: 20px 12px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           🌙 DARK MODE SUPPORT
+           ============================================ */
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        body.dark-mode .main-image-container,
+        body.dark-mode .option-btn,
+        body.dark-mode .description-section,
+        body.dark-mode .related-card {
+            background: #2a2a2a;
+        }
+
+        body.dark-mode .product-title {
+            background: linear-gradient(135deg, #fff 0%, #b0b0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark-mode .option-btn {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        body.dark-mode .description-content {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div class="product-detail-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="#" id="breadcrumbCategory">Category</a>
+            <span>›</span>
+            <span id="breadcrumbProduct">Product Name</span>
+        </div>
+
+        <!-- Main Product Section -->
+        <div class="product-main">
+            <!-- LEFT: Image Gallery -->
+            <div class="image-gallery">
+                <div class="main-image-container">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&h=600&fit=crop" alt="Product" class="main-image" id="mainImage">
+                    <div class="discount-badge-detail">25% OFF</div>
+                    <button class="wishlist-btn-detail">
+                        <svg viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Thumbnails -->
+                <div class="thumbnail-gallery" id="thumbnailGallery">
+                    <div class="thumbnail active">
+                        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=200&h=200&fit=crop" alt="Thumbnail 1">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=200&h=200&fit=crop" alt="Thumbnail 2">
+                    </div>
+                    <div class="thumbnail">
+                        <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&h=200&fit=crop" alt="Thumbnail 3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Product Info -->
+            <div class="product-info">
+                <h1 class="product-title" id="productTitle">Gulab Jamun Premium</h1>
+
+                <!-- Rating -->
+                <div class="product-rating">
+                    <span class="stars" id="productStars">★★★★★</span>
+                    <span class="rating-count">(4.8 rating)</span>
+                </div>
+
+                <!-- Price -->
+                <div class="price-section">
+                    <span class="current-price" id="currentPrice">₹320</span>
+                    <span class="original-price" id="originalPrice">₹380</span>
+                    <span class="you-save">You save: ₹60 (16% off)</span>
+                </div>
+
+                <!-- Size Selector -->
+                <div class="option-section" id="sizeSection">
+                    <div class="option-label">Select Size:</div>
+                    <div class="option-grid" id="sizeGrid">
+                        <button class="option-btn active">
+                            <span class="option-size">500g</span>
+                            <span class="option-price">₹165</span>
+                        </button>
+                        <button class="option-btn">
+                            <span class="option-size">1kg</span>
+                            <span class="option-price">₹320</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Flavor Selector -->
+                <div class="option-section" id="flavorSection" style="display: none;">
+                    <div class="option-label">Select Flavor:</div>
+                    <div class="option-grid" id="flavorGrid">
+                        <!-- Flavors will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="stock-status">
+                    <div class="stock-dot"></div>
+                    <span class="stock-text">In Stock</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary" id="addToCartBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Add to Cart
+                    </button>
+                    <button class="btn-secondary" id="buyNowBtn">Buy Now →</button>
+                </div>
+
+                <!-- Description -->
+                <div class="description-section">
+                    <h3 class="description-title">📝 Description</h3>
+                    <div class="description-content" id="productDescription">
+                        Premium quality Gulab Jamun made with authentic ingredients. Soft, melt-in-mouth texture with the perfect sweetness. Perfect for celebrations and special occasions.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-section">
+            <div class="section-header">
+                <h2 class="section-title">Related Products</h2>
+            </div>
+
+            <div class="related-grid" id="relatedGrid">
+                <!-- Related products will be inserted here -->
+                <div class="related-card">
+                    <div class="related-card-image">
+                        <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Related Product">
+                    </div>
+                    <div class="related-card-info">
+                        <h3 class="related-card-name">Kaju Katli</h3>
+                        <div class="related-card-price">
+                            <span class="related-price-new">₹450</span>
+                            <span class="related-price-old">₹520</span>
+                        </div>
+                        <button class="btn-primary" style="width: 100%; font-size: 14px; padding: 12px;">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo product data
+        const demoProduct = {
+            id: 4,
+            name: "Gulab Jamun Premium",
+            categories: ["mithai", "sweets", "bestseller"],
+            images: [
+                "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=600&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=600&fit=crop"
+            ],
+            rating: 4.8,
+            variants: [
+                { size: "500g", oldPrice: 200, newPrice: 165, discount: "18%", inStock: true },
+                { size: "1kg", oldPrice: 380, newPrice: 320, discount: "16%", inStock: true }
+            ],
+            flavors: [],
+            defaultVariant: 0,
+            description: "Premium quality Gulab Jamun made with authentic ingredients. Soft, melt-in-mouth texture with the perfect sweetness. Perfect for celebrations and special occasions.",
+            inStock: true
+        };
+
+        // Thumbnail gallery functionality
+        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                document.getElementById('mainImage').src = demoProduct.images[index];
+            });
+        });
+
+        // Size selector functionality
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Wishlist button
+        document.querySelector('.wishlist-btn-detail').addEventListener('click', function() {
+            this.classList.toggle('saved');
+        });
+
+        console.log('✨ Ultra-Premium Product Detail Page Loaded!');
+    </script>
+
+</body>
+</html>

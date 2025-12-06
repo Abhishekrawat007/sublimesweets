@@ -10,7 +10,15 @@ class ProductCardManager {
     // Safe cart loading with validation
     try {
       const cartData = localStorage.getItem('cart');
-      this.cart = cartData ? JSON.parse(cartData) : [];
+     this.cart = cartData ? JSON.parse(cartData) : [];
+  this.cart = this.cart.filter(item =>
+    item &&
+    item.productId &&
+    typeof item.quantity === 'number' &&
+    item.quantity > 0
+  );
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+
       if (!Array.isArray(this.cart)) {
         console.warn('Cart was not an array, resetting to empty array');
         this.cart = [];
@@ -224,24 +232,57 @@ if (sizeBtn) {
     }
   }
 
-  // Toggle wishlist
-  toggleWishlist(productId, btn) {
-    const index = this.wishlist.indexOf(productId);
-    
-    if (index > -1) {
-      this.wishlist.splice(index, 1);
-      btn.classList.remove('saved');
-    } else {
-      this.wishlist.push(productId);
-      btn.classList.add('saved');
+  
+// Toggle wishlist from ANYWHERE (cards or product-detail)
+toggleWishlist(productId, btn) {
+  const index = this.wishlist.indexOf(productId);
+  let isNowSaved;
+
+  if (index > -1) {
+    // remove from wishlist
+    this.wishlist.splice(index, 1);
+    isNowSaved = false;
+  } else {
+    // add to wishlist
+    this.wishlist.push(productId);
+    isNowSaved = true;
+  }
+
+  // 🔁 Update ALL product-card hearts for this product
+  const allCardButtons = document.querySelectorAll(
+    `.wishlist-btn[data-product-id="${productId}"]`
+  );
+  allCardButtons.forEach(b => {
+    if (isNowSaved) b.classList.add('saved');
+    else b.classList.remove('saved');
+  });
+
+  // ❤️ Update product-detail heart ONLY if it's for the same product
+  const detailBtn = document.getElementById('detailWishlistBtn');
+  if (detailBtn) {
+    const detailId = detailBtn.dataset.productId;
+    if (String(detailId) === String(productId)) {
+      if (isNowSaved) detailBtn.classList.add('saved');
+      else detailBtn.classList.remove('saved');
     }
-    
-    localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
-       // 🔴 NEW: update navbar badge if function exists
-    if (typeof window.updateWishlistBadge === 'function') {
-        window.updateWishlistBadge();
+      const product = this.products.find(p => String(p.id) === String(productId));
+  if (product && window.showToast) {
+    if (isNowSaved) {
+      window.showToast(`${product.name} saved to wishlist`, 'success');
+    } else {
+      window.showToast(`${product.name} removed from wishlist`, 'info');
+    }
   }
+}
+ 
+
+  // ✅ Save + update navbar badge
+  localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
+  if (typeof window.updateWishlistBadge === 'function') {
+    window.updateWishlistBadge();
   }
+}
+
   // Open size/flavor modal
   openSizeFlavorModal(product) {
     this.currentProduct = product;
@@ -405,27 +446,44 @@ if (this.selectedFlavor) {
   }
 
   // Add to cart
-  addToCart(productId, variantIndex, flavor) {
-    const existingItem = this.cart.find(item => 
-      item.productId === productId && 
-      item.variantIndex === variantIndex &&
-      item.flavor === flavor
-    );
+addToCart(productId, variantIndex, flavor) {
+  const existingItem = this.cart.find(item => 
+    item.productId === productId && 
+    item.variantIndex === variantIndex &&
+    item.flavor === flavor
+  );
 
-    if (existingItem) {
-      existingItem.quantity++;
-    } else {
-      this.cart.push({
-        productId,
-        variantIndex,
-        flavor,
-        quantity: 1
-      });
-    }
-localStorage.setItem('cart', JSON.stringify(this.cart));
-this.syncCartUI();
-
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    this.cart.push({
+      productId,
+      variantIndex,
+      flavor,
+      quantity: 1
+    });
   }
+
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.syncCartUI();
+
+  // 🔁 Tell product-detail page to refresh (if it's open)
+  if (typeof window.syncDetailQuantityFromCart === 'function') {
+    window.syncDetailQuantityFromCart();
+  }
+
+  // 💬 Toast feedback on add
+  const product = this.products.find(p => String(p.id) === String(productId));
+  if (product && window.showToast) {
+    const variant = product.variants[variantIndex];
+    const parts = [];
+    if (variant && variant.size) parts.push(variant.size);
+    if (flavor) parts.push(flavor);
+    const detail = parts.length ? ` (${parts.join(' • ')})` : '';
+    window.showToast(`${product.name}${detail} added to cart`, 'success');
+  }
+}
+
 
   // Update card after adding to cart
   updateCardAfterAdd(card, productId, variantIndex, flavor) {
@@ -450,59 +508,80 @@ this.syncCartUI();
     }
   }
 
-  // Increase quantity
-  increaseQuantity(productId, variantIndex, flavor, qtyCountElement) {
-    const cartItem = this.cart.find(item => 
-      item.productId === productId && 
-      item.variantIndex === variantIndex &&
-      item.flavor === flavor
-    );
+increaseQuantity(productId, variantIndex, flavor, qtyCountElement) {
+  const cartItem = this.cart.find(item => 
+    item.productId === productId && 
+    item.variantIndex === variantIndex &&
+    item.flavor === flavor
+  );
 
-    if (cartItem) {
-      cartItem.quantity++;
-      qtyCountElement.textContent = cartItem.quantity;
-     localStorage.setItem('cart', JSON.stringify(this.cart));
-this.updateCartCount();
-
-    }
+  if (cartItem) {
+    cartItem.quantity++;
+    qtyCountElement.textContent = cartItem.quantity;
   }
 
-  // Decrease quantity
-  decreaseQuantity(productId, variantIndex, flavor, qtyCountElement, card) {
-    const cartItem = this.cart.find(item => 
-      item.productId === productId && 
-      item.variantIndex === variantIndex &&
-      item.flavor === flavor
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.syncCartUI();
+
+  // 🔁 Also sync product-detail if we're on that page
+  if (typeof window.syncDetailQuantityFromCart === 'function') {
+    window.syncDetailQuantityFromCart();
+  }
+}
+
+
+decreaseQuantity(productId, variantIndex, flavor, qtyCountElement, card) {
+  const cartItem = this.cart.find(item =>
+    item.productId === productId &&
+    item.variantIndex === variantIndex &&
+    item.flavor === flavor
+  );
+
+  if (!cartItem) return;
+
+  cartItem.quantity--;
+
+  const product = this.products.find(p => String(p.id) === String(productId));
+
+  if (cartItem.quantity <= 0) {
+    this.cart = this.cart.filter(item =>
+      !(item.productId === productId &&
+        item.variantIndex === variantIndex &&
+        item.flavor === flavor)
     );
 
-    if (cartItem) {
-      cartItem.quantity--;
-      
-      if (cartItem.quantity === 0) {
-        // Remove from cart
-        this.cart = this.cart.filter(item => 
-          !(item.productId === productId && 
-            item.variantIndex === variantIndex &&
-            item.flavor === flavor)
-        );
-        
-        // Show add to cart button again
-        const qtyControls = card.querySelector('.quantity-controls');
-        const addBtn = card.querySelector('.add-to-cart-btn');
-        
-        if (qtyControls && addBtn) {
-          qtyControls.classList.remove('active');
-          qtyControls.style.display = 'none';
-          addBtn.style.display = 'block';
-        }
-      } else {
-        qtyCountElement.textContent = cartItem.quantity;
-      }
-      
-     localStorage.setItem('cart', JSON.stringify(this.cart));
-this.updateCartCount();
+    const qtyControls = card.querySelector('.quantity-controls');
+    const addBtn = card.querySelector('.add-to-cart-btn');
+    if (qtyControls && addBtn) {
+      qtyControls.classList.remove('active');
+      qtyControls.style.display = 'none';
+      addBtn.style.display = 'block';
     }
+
+    if (product && window.showToast) {
+      const variant = product.variants[variantIndex];
+      const parts = [];
+      if (variant && variant.size) parts.push(variant.size);
+      if (flavor) parts.push(flavor);
+      const detail = parts.length ? ` (${parts.join(' • ')})` : '';
+      window.showToast(`${product.name}${detail} removed from cart`, 'info');
+    }
+  } else {
+    qtyCountElement.textContent = cartItem.quantity;
   }
+
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+  this.syncCartUI();
+
+  // 🔁 Sync product-detail too
+  if (typeof window.syncDetailQuantityFromCart === 'function') {
+    window.syncDetailQuantityFromCart();
+  }
+}
+
+
+
+
 
   // Update cart count (if you have a cart counter in navbar)
 // Update only the navbar cart badge
@@ -537,6 +616,14 @@ renderCartSidebar() {
 
   cartContent.innerHTML = '';
 
+  // 🔴 Clean any 0/negative quantity items before rendering
+  this.cart = this.cart.filter(item =>
+    item &&
+    item.productId &&
+    typeof item.quantity === 'number' &&
+    item.quantity > 0
+  );
+  localStorage.setItem('cart', JSON.stringify(this.cart));
   if (!this.cart.length) {
     cartContent.innerHTML = `
       <div class="empty-cart-message">
@@ -608,7 +695,6 @@ renderCartSidebar() {
     });
   });
 }
-// Change quantity from sidebar and sync with product cards
 adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
   const item = this.cart.find(i =>
     String(i.productId) === String(productId) &&
@@ -616,28 +702,57 @@ adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
     i.flavor === flavor
   );
 
+  const product = this.products.find(p => String(p.id) === String(productId));
+
   if (!item && delta > 0) {
+    // new item from sidebar
     this.cart.push({
       productId,
       variantIndex,
       flavor,
       quantity: 1
     });
+
+    if (product && window.showToast) {
+      const variant = product.variants[variantIndex];
+      const parts = [];
+      if (variant && variant.size) parts.push(variant.size);
+      if (flavor) parts.push(flavor);
+      const detail = parts.length ? ` (${parts.join(' • ')})` : '';
+      window.showToast(`${product.name}${detail} added to cart`, 'success');
+    }
   } else if (item) {
     item.quantity += delta;
+
     if (item.quantity <= 0) {
-      // remove from cart
       this.cart = this.cart.filter(i =>
         !(String(i.productId) === String(productId) &&
           i.variantIndex === variantIndex &&
           i.flavor === flavor)
       );
+
+      if (product && window.showToast) {
+        const variant = product.variants[variantIndex];
+        const parts = [];
+        if (variant && variant.size) parts.push(variant.size);
+        if (flavor) parts.push(flavor);
+        const detail = parts.length ? ` (${parts.join(' • ')})` : '';
+        window.showToast(`${product.name}${detail} removed from cart`, 'info');
+      }
     }
   }
 
   localStorage.setItem('cart', JSON.stringify(this.cart));
 
-  // Sync product card UI
+  // 🔁 Navbar badge + sidebar UI
+  this.syncCartUI();
+
+  // 🔁 Sync product-detail main section (THIS is what was missing)
+  if (typeof window.syncDetailQuantityFromCart === 'function') {
+    window.syncDetailQuantityFromCart();
+  }
+
+  // Sync product-card UI on grid
   const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
   if (card) {
     const qtyControls = card.querySelector('.quantity-controls');
@@ -665,14 +780,16 @@ adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
       }
     }
   }
-
-  this.syncCartUI();
 }
 
 // Helper: update badge + sidebar together
 syncCartUI() {
   this.updateCartCount();
   this.renderCartSidebar();
+    // 🔁 Also notify navbar's global badge helper, if it exists
+  if (typeof window.updateCartBadge === 'function') {
+    window.updateCartBadge();
+  }
 }
 
 
@@ -729,16 +846,16 @@ syncCartUI() {
   }
 
   // Filter by category
-  filterByCategory(category) {
-    if (category === 'all') {
-      return this.products;
-    }
-    
-    return this.products.filter(p => 
-      p.category === category || 
-      (p.categories && p.categories.includes(category))
-    );
+  // Filter by category (only using `categories` array now)
+filterByCategory(category) {
+  if (category === 'all') {
+    return this.products;
   }
+
+  return this.products.filter(p =>
+    Array.isArray(p.categories) && p.categories.includes(category)
+  );
+}
 }
 
 // Initialize on DOM ready

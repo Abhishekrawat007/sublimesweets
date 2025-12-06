@@ -6,25 +6,23 @@
 
         navItems.forEach(item => {
             // Click handler - Active state
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active from all items
-                navItems.forEach(nav => nav.classList.remove('active'));
-                
-                // Add active to clicked item
-                this.classList.add('active');
-                
-                // Add ripple effect
-                this.classList.add('ripple');
-                setTimeout(() => {
-                    this.classList.remove('ripple');
-                }, 600);
-                
-                // Log for demo purposes
-                const page = this.getAttribute('data-page');
-                console.log(`Navigating to: ${page}`);
-            });
+           item.addEventListener('click', function () {
+    // Remove active from all items
+    navItems.forEach(nav => nav.classList.remove('active'));
+    
+    // Add active to clicked item
+    this.classList.add('active');
+    
+    // Add ripple effect
+    this.classList.add('ripple');
+    setTimeout(() => {
+        this.classList.remove('ripple');
+    }, 600);
+    
+    const page = this.getAttribute('data-page');
+    console.log(`Navigating to: ${page}`);
+});
+
 
             // Touch feedback for mobile
             item.addEventListener('touchstart', function() {
@@ -86,3 +84,66 @@
         });
 
        
+(function () {
+  const body = document.body;
+  const sizeSelect = document.getElementById('sizeThemeSelect');
+  const cartSelect = document.getElementById('cartThemeSelect');
+
+  if (!sizeSelect || !cartSelect) return;
+
+  function clearTheme(prefix) {
+    // remove only classes like size-theme-X / cart-theme-X
+    body.className = body.className
+      .split(' ')
+      .filter(cls => !cls.startsWith(prefix))
+      .join(' ');
+  }
+
+  sizeSelect.addEventListener('change', (e) => {
+    const value = e.target.value;
+    clearTheme('size-theme-');
+    if (value) {
+      body.classList.add(`size-theme-${value}`);
+    }
+  });
+
+  cartSelect.addEventListener('change', (e) => {
+    const value = e.target.value;
+    clearTheme('cart-theme-');
+    if (value) {
+      body.classList.add(`cart-theme-${value}`);
+    }
+  });
+})();
+// Categories Modal
+const categoriesBtn = document.querySelector('.bottom-nav-item[data-page="categories"]');
+const categoriesModal = document.getElementById('categoriesModal');
+const categoriesOverlay = document.getElementById('categoriesModalOverlay');
+const closeCategoriesBtn = document.getElementById('closeCategoriesModal');
+
+function openCategoriesModal() {
+  categoriesModal.classList.add('active');
+  categoriesOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCategoriesModal() {
+  categoriesModal.classList.remove('active');
+  categoriesOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+if (categoriesBtn) {
+  categoriesBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openCategoriesModal();
+  });
+}
+
+if (closeCategoriesBtn) {
+  closeCategoriesBtn.addEventListener('click', closeCategoriesModal);
+}
+
+if (categoriesOverlay) {
+  categoriesOverlay.addEventListener('click', closeCategoriesModal);
+}

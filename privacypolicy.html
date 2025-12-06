@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Sublime Sweets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #d4af37;
+            --primary-dark: #b8941f;
+            --primary-light: #f4e4a6;
+            --success: #10b981;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+            --bg-dark: #0a0a0a;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #808080;
+            --border: rgba(212, 175, 55, 0.1);
+            --glass-bg: rgba(26, 26, 26, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .data-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: dataFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes dataFloat {
+            0%, 100% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-100vh) scale(1); }
+        }
+
+        .floating-shield {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: floatShield 25s infinite ease-in-out;
+        }
+
+        .shield-1 {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shield-2 {
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -8s;
+        }
+
+        .shield-3 {
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: -16s;
+        }
+
+        @keyframes floatShield {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -60px) scale(1.2); }
+            66% { transform: translate(-40px, 40px) scale(0.8); }
+        }
+
+        /* Hero Section with Animated Shield */
+        .hero {
+            position: relative;
+            padding: 100px 20px 80px;
+            text-align: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shield-animation {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+        }
+
+        .shield-outer {
+            position: absolute;
+            inset: 0;
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            animation: rotateShield 10s linear infinite;
+        }
+
+        .shield-middle {
+            position: absolute;
+            inset: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            animation: rotateShield 8s linear infinite reverse;
+        }
+
+        .shield-inner {
+            position: absolute;
+            inset: 40px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            animation: rotateShield 6s linear infinite;
+        }
+
+        @keyframes rotateShield {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .shield-icon-wrapper {
+            position: absolute;
+            inset: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--info));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.6);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .shield-icon {
+            font-size: 48px;
+            color: white;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .lock-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .lock-particle {
+            position: absolute;
+            font-size: 16px;
+            color: var(--primary);
+            opacity: 0;
+            animation: particleOrbit 4s ease-in-out infinite;
+        }
+
+        .lock-particle:nth-child(1) { animation-delay: 0s; }
+        .lock-particle:nth-child(2) { animation-delay: 1s; }
+        .lock-particle:nth-child(3) { animation-delay: 2s; }
+        .lock-particle:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes particleOrbit {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translate(-50%, -50%) rotate(180deg) translateX(120px) rotate(-180deg); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-badge i {
+            color: var(--purple);
+            font-size: 18px;
+        }
+
+        .hero-badge span {
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--purple), var(--primary), var(--info));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.2s both, shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .meta-item i {
+            color: var(--purple);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            max-width: 1200px;
+            margin: -40px auto 80px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .trust-badge {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .trust-badge:hover::before {
+            left: 100%;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-10px);
+            border-color: var(--purple);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .trust-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--purple);
+        }
+
+        .trust-badge h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .trust-badge p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            color: var(--purple);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Data Flow Visualization */
+        .data-flow-section {
+            margin-bottom: 100px;
+        }
+
+        .data-flow {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-flow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--info), var(--primary));
+            animation: flowBar 3s ease-in-out infinite;
+        }
+
+        @keyframes flowBar {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        .flow-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            right: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--info), var(--success), var(--primary));
+            z-index: 0;
+        }
+
+        .flow-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--purple), var(--info));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            animation: flowPulse 3s ease-in-out infinite;
+        }
+
+        .flow-step:nth-child(1) .flow-icon { animation-delay: 0s; }
+        .flow-step:nth-child(2) .flow-icon { animation-delay: 0.75s; }
+        .flow-step:nth-child(3) .flow-icon { animation-delay: 1.5s; }
+        .flow-step:nth-child(4) .flow-icon { animation-delay: 2.25s; }
+
+        @keyframes flowPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(139, 92, 246, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(139, 92, 246, 0.8); }
+        }
+
+        .flow-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .flow-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Privacy Cards */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .privacy-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .privacy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--purple), var(--info), var(--success));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .privacy-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .privacy-card:hover {
+            border-color: var(--purple);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 70px rgba(139, 92, 246, 0.3);
+        }
+
+        .privacy-card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--purple), var(--info));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .privacy-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .privacy-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .privacy-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .privacy-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .privacy-list li:last-child {
+            border-bottom: none;
+        }
+
+        .privacy-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-size: 16px;
+        }
+
+        /* Rights Cards */
+        .rights-section {
+            margin: 100px 0;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .right-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .right-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .right-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .right-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .right-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Security Features */
+        .security-section {
+            margin: 100px 0;
+        }
+
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .security-feature {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .security-feature:hover {
+            transform: translateY(-8px);
+            border-color: var(--purple);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.3);
+        }
+
+        .security-icon {
+            font-size: 48px;
+            color: var(--purple);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .security-feature h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .security-feature p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Alert Boxes */
+        .alert-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
+            border: 1px solid var(--purple);
+            border-left: 5px solid var(--purple);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .alert-box.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+            border-color: var(--success);
+            border-left-color: var(--success);
+        }
+
+        .alert-box.warning {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border-color: var(--warning);
+            border-left-color: var(--warning);
+        }
+
+        .alert-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--purple);
+            flex-shrink: 0;
+        }
+
+        .alert-box.success .alert-icon {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .alert-box.warning .alert-icon {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .alert-content h4 {
+            color: var(--purple);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .alert-box.success .alert-content h4 {
+            color: var(--success);
+        }
+
+        .alert-box.warning .alert-content h4 {
+            color: var(--warning);
+        }
+
+        .alert-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+            border: 2px solid var(--purple);
+            border-radius: 35px;
+            padding: 70px 40px;
+            text-align: center;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--info));
+            color: white;
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--purple);
+            border: 2px solid var(--purple);
+        }
+
+        .btn-secondary:hover {
+            background: var(--purple);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            padding: 70px 40px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--purple);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3);
+        }
+
+        .contact-card-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--purple), var(--info));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+
+        .contact-card a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            word-break: break-all;
+            display: block;
+        }
+
+        .contact-card a:hover {
+            color: var(--info);
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .flow-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px 60px;
+            }
+
+            .shield-animation {
+                width: 150px;
+                height: 150px;
+            }
+
+            .shield-icon-wrapper {
+                inset: 35px;
+            }
+
+            .shield-icon {
+                font-size: 36px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-meta {
+                gap: 15px;
+            }
+
+            .meta-item {
+                font-size: 0.85rem;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .privacy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .flow-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-features {
+                grid-template-columns: 1fr;
+            }
+
+            .alert-box {
+                flex-direction: column;
+                padding: 25px;
+            }
+
+            .cta-section {
+                padding: 50px 25px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+
+            .contact-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .contact-card a {
+                font-size: 0.95rem;
+            }
+
+            .contact-card p {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
+        /* Selection */
+        ::selection {
+            background: var(--purple);
+            color: white;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Generate particles */
+        .data-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .data-particle:nth-child(2) { left: 25%; animation-delay: 1s; }
+        .data-particle:nth-child(3) { left: 40%; animation-delay: 2s; }
+        .data-particle:nth-child(4) { left: 55%; animation-delay: 3s; }
+        .data-particle:nth-child(5) { left: 70%; animation-delay: 4s; }
+        .data-particle:nth-child(6) { left: 85%; animation-delay: 5s; }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shield shield-1"></div>
+        <div class="floating-shield shield-2"></div>
+        <div class="floating-shield shield-3"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle"></div>
+        <div class="data-particle"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fas fa-user-shield"></i>
+            <span>Your Privacy, Our Commitment</span>
+        </div>
+
+        <!-- Animated Shield -->
+        <div class="shield-animation">
+            <div class="shield-outer"></div>
+            <div class="shield-middle"></div>
+            <div class="shield-inner"></div>
+            <div class="shield-icon-wrapper">
+                <i class="fas fa-shield-alt shield-icon"></i>
+            </div>
+            <div class="lock-particles">
+                <i class="fas fa-lock lock-particle" style="left: 50%; top: 0%;"></i>
+                <i class="fas fa-lock lock-particle" style="left: 100%; top: 50%;"></i>
+                <i class="fas fa-lock lock-particle" style="left: 50%; top: 100%;"></i>
+                <i class="fas fa-lock lock-particle" style="left: 0%; top: 50%;"></i>
+            </div>
+        </div>
+
+        <h1>Privacy Policy</h1>
+        <p class="hero-subtitle">We value your trust and are committed to protecting your personal information with industry-leading security measures</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>Last Updated: December 2024</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-shield-check"></i>
+                <span>GDPR Compliant</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-lock"></i>
+                <span>256-bit Encryption</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-badge fade-in delay-1">
+                <div class="trust-icon">
+                    <i class="fas fa-shield-virus"></i>
+                </div>
+                <h4>SSL Encrypted</h4>
+                <p>Bank-level security</p>
+            </div>
+            <div class="trust-badge fade-in delay-2">
+                <div class="trust-icon">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h4>Data Protected</h4>
+                <p>Never sold or shared</p>
+            </div>
+            <div class="trust-badge fade-in delay-3">
+                <div class="trust-icon">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <h4>GDPR Compliant</h4>
+                <p>International standards</p>
+            </div>
+            <div class="trust-badge fade-in delay-4">
+                <div class="trust-icon">
+                    <i class="fas fa-eye-slash"></i>
+                </div>
+                <h4>Anonymous Options</h4>
+                <p>Browse privately</p>
+            </div>
+            <div class="trust-badge fade-in delay-5">
+                <div class="trust-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h4>Regular Audits</h4>
+                <p>Third-party verified</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Data Flow Visualization -->
+        <section class="data-flow-section">
+            <div class="section-header">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title">Your Data Journey</h2>
+                <p class="section-description">Transparent process showing how we collect, use, protect, and manage your information.</p>
+            </div>
+
+            <div class="data-flow">
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-icon">
+                            <i class="fas fa-hand-pointer"></i>
+                        </div>
+                        <div class="flow-label">Collection</div>
+                        <div class="flow-description">You provide info when ordering or browsing</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="flow-label">Encryption</div>
+                        <div class="flow-description">All data encrypted with 256-bit SSL</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="flow-label">Storage</div>
+                        <div class="flow-description">Secured in protected servers</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="flow-label">Your Control</div>
+                        <div class="flow-description">Access, modify, or delete anytime</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-box success">
+                <div class="alert-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Transparency Commitment</h4>
+                    <p>We believe in complete transparency about data usage. Every piece of information we collect has a clear purpose, and you have full control over your data at all times.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Cards -->
+        <section>
+            <div class="section-header">
+                <span class="section-badge">Information We Collect</span>
+                <h2 class="section-title">What Data We Gather</h2>
+                <p class="section-description">Understanding the types of information we collect and why we need them.</p>
+            </div>
+
+            <div class="privacy-grid">
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Personal Information</h3>
+                    <p>Basic details needed to provide our services and communicate with you effectively.</p>
+                    <ul class="privacy-list">
+                        <li>Full name and contact details</li>
+                        <li>Email address and phone number</li>
+                        <li>Delivery addresses</li>
+                        <li>Date of birth (for age verification)</li>
+                        <li>Account credentials (encrypted)</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Payment Information</h3>
+                    <p>Securely processed through certified payment gateways with PCI DSS compliance.</p>
+                    <ul class="privacy-list">
+                        <li>Payment method preferences</li>
+                        <li>Billing address</li>
+                        <li>Transaction history</li>
+                        <li>Card details (tokenized only)</li>
+                        <li>Payment gateway receipts</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Order & Usage Data</h3>
+                    <p>Information about your purchases and platform usage to improve your experience.</p>
+                    <ul class="privacy-list">
+                        <li>Order history and preferences</li>
+                        <li>Product reviews and ratings</li>
+                        <li>Wishlist and favorites</li>
+                        <li>Browsing behavior</li>
+                        <li>Search queries</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Device & Technical Data</h3>
+                    <p>Automatically collected information to optimize performance and security.</p>
+                    <ul class="privacy-list">
+                        <li>IP address and location</li>
+                        <li>Device type and browser</li>
+                        <li>Operating system</li>
+                        <li>Cookies and tracking pixels</li>
+                        <li>Session duration and timestamps</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Communication Data</h3>
+                    <p>Records of our interactions to provide better customer support and service.</p>
+                    <ul class="privacy-list">
+                        <li>Customer support messages</li>
+                        <li>Email correspondence</li>
+                        <li>Chat transcripts</li>
+                        <li>Feedback and surveys</li>
+                        <li>Marketing preferences</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-card fade-in">
+                    <div class="privacy-card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location Data</h3>
+                    <p>Geographic information to provide accurate delivery and location-based services.</p>
+                    <ul class="privacy-list">
+                        <li>GPS coordinates (with permission)</li>
+                        <li>Delivery zone identification</li>
+                        <li>Nearby store locations</li>
+                        <li>Regional preferences</li>
+                        <li>Time zone settings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- How We Use Data -->
+        <section style="margin-top: 100px;">
+            <div class="section-header">
+                <span class="section-badge">Data Usage</span>
+                <h2 class="section-title">How We Use Your Information</h2>
+                <p class="section-description">Clear purposes for every piece of data we collect from you.</p>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Purpose-Driven Collection</h4>
+                    <p>We collect only the data necessary to provide our services. Your information is used to process orders, improve your experience, communicate important updates, ensure platform security, comply with legal requirements, and provide customer support. We never sell your personal data to third parties.</p>
+                </div>
+            </div>
+
+            <div class="alert-box warning">
+                <div class="alert-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Third-Party Sharing</h4>
+                    <p>We share limited information only with trusted partners essential to our services: payment processors (Razorpay), delivery partners, cloud storage providers (Firebase), analytics tools (Google Analytics), and email service providers. All partners are contractually bound to protect your data and use it only for specified purposes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Rights -->
+        <section class="rights-section">
+            <div class="section-header">
+                <span class="section-badge">Your Rights</span>
+                <h2 class="section-title">Control Over Your Data</h2>
+                <p class="section-description">You have complete control over your personal information at all times.</p>
+            </div>
+
+            <div class="rights-grid">
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h4>Right to Access</h4>
+                    <p>Request a copy of all personal data we hold about you in a portable format</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h4>Right to Rectify</h4>
+                    <p>Correct any inaccurate or incomplete information in your profile</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <h4>Right to Delete</h4>
+                    <p>Request permanent deletion of your account and associated data</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h4>Right to Restrict</h4>
+                    <p>Limit how we process your data while maintaining your account</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h4>Data Portability</h4>
+                    <p>Export your data in machine-readable format for transfer</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <h4>Right to Object</h4>
+                    <p>Opt-out of marketing communications and data processing</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-user-times"></i>
+                    </div>
+                    <h4>Withdraw Consent</h4>
+                    <p>Revoke previously given permissions at any time</p>
+                </div>
+
+                <div class="right-card fade-in">
+                    <div class="right-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h4>Lodge Complaint</h4>
+                    <p>File complaints with data protection authorities if concerned</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Features -->
+        <section class="security-section">
+            <div class="section-header">
+                <span class="section-badge">Security Measures</span>
+                <h2 class="section-title">How We Protect Your Data</h2>
+                <p class="section-description">Industry-leading security practices to keep your information safe.</p>
+            </div>
+
+            <div class="security-features">
+                <div class="security-feature fade-in">
+                    <i class="fas fa-lock security-icon"></i>
+                    <h4>256-bit SSL Encryption</h4>
+                    <p>All data transmitted between your device and our servers is encrypted</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-server security-icon"></i>
+                    <h4>Secure Servers</h4>
+                    <p>Data stored in certified cloud infrastructure with redundancy</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-shield-virus security-icon"></i>
+                    <h4>Firewall Protection</h4>
+                    <p>Advanced firewalls prevent unauthorized access attempts</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-user-shield security-icon"></i>
+                    <h4>Access Control</h4>
+                    <p>Strict employee access policies with audit trails</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-sync-alt security-icon"></i>
+                    <h4>Regular Backups</h4>
+                    <p>Automated daily backups ensure data recovery capability</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-search security-icon"></i>
+                    <h4>Security Audits</h4>
+                    <p>Third-party penetration testing and vulnerability assessments</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-key security-icon"></i>
+                    <h4>Two-Factor Auth</h4>
+                    <p>Optional 2FA adds extra layer of account security</p>
+                </div>
+
+                <div class="security-feature fade-in">
+                    <i class="fas fa-bell security-icon"></i>
+                    <h4>Breach Notification</h4>
+                    <p>Immediate alerts in case of any security incidents</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cookies & Tracking -->
+        <section>
+            <div class="section-header">
+                <span class="section-badge">Cookies & Tracking</span>
+                <h2 class="section-title">Understanding Cookies</h2>
+                <p class="section-description">How we use cookies to improve your browsing experience.</p>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-icon">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Cookie Policy</h4>
+                    <p>We use cookies to remember your preferences, keep you logged in, analyze site usage, and deliver personalized content. You can control cookie settings through your browser. Essential cookies are required for the site to function, while analytics and marketing cookies require your consent.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Retention -->
+        <section style="margin-top: 80px;">
+            <div class="section-header">
+                <span class="section-badge">Data Retention</span>
+                <h2 class="section-title">How Long We Keep Your Data</h2>
+                <p class="section-description">Clear timelines for data storage and deletion.</p>
+            </div>
+
+            <div class="alert-box warning">
+                <div class="alert-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Retention Periods</h4>
+                    <p>Active account data is retained as long as your account exists. After account deletion, personal data is removed within 30 days, except for legally required records (tax, orders) kept for 7 years. Anonymous analytics data may be retained indefinitely. You can request immediate deletion by contacting our privacy team.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Children's Privacy -->
+        <section style="margin-top: 80px;">
+            <div class="section-header">
+                <span class="section-badge">Children's Privacy</span>
+                <h2 class="section-title">Protecting Minors</h2>
+                <p class="section-description">Our commitment to safeguarding children's information.</p>
+            </div>
+
+            <div class="alert-box warning">
+                <div class="alert-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Age Restrictions</h4>
+                    <p>Our services are intended for users aged 18 and above. We do not knowingly collect personal information from children under 18. If you believe a minor has provided us with personal information, please contact us immediately, and we will delete it promptly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Policy Updates -->
+        <section style="margin-top: 80px;">
+            <div class="section-header">
+                <span class="section-badge">Policy Updates</span>
+                <h2 class="section-title">Changes to This Policy</h2>
+                <p class="section-description">How we communicate policy modifications.</p>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Notification of Changes</h4>
+                    <p>We may update this privacy policy periodically to reflect changes in our practices or legal requirements. We will notify you of material changes via email and prominent notice on our website at least 30 days before they take effect. Your continued use after changes constitute acceptance of the updated policy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Questions About Your Privacy?</h2>
+                <p>Our dedicated privacy team is here to address your concerns and help you exercise your data rights.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Contact Privacy Team
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-download"></i>
+                        Download My Data
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="section-header">
+                <span class="section-badge">Get In Touch</span>
+                <h2 class="section-title">Privacy Support Channels</h2>
+                <p class="section-description">Multiple ways to reach our privacy and data protection team.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4>Data Protection Officer</h4>
+                    <a href="mailto:privacy@sublimesweets.com">privacy@sublimesweets.com</a>
+                    <p>Response within 48 hours</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h4>Privacy Helpline</h4>
+                    <a href="tel:+911234567890">+91 123 456 7890</a>
+                    <p>Mon-Fri: 9 AM - 6 PM</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Postal Address</h4>
+                    <a href="#">123 Sweet Street<br>City 400001, India</a>
+                    <p>For formal requests</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4>Data Request Form</h4>
+                    <a href="#">Submit Online</a>
+                    <p>Quick processing</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Parallax effect for background
+        document.addEventListener('mousemove', (e) => {
+            const shields = document.querySelectorAll('.floating-shield');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            shields.forEach((shield, index) => {
+                const speed = (index + 1) * 20;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                shield.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Performance optimization
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Animate lock particles on load
+        window.addEventListener('load', () => {
+            const lockParticles = document.querySelectorAll('.lock-particle');
+            lockParticles.forEach((particle, index) => {
+                setTimeout(() => {
+                    particle.style.left = '50%';
+                    particle.style.top = '50%';
+                }, index * 1000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -183,7 +183,7 @@ body.dark-mode .filter-btn.active {
 
 .bottom-modal {
     position: fixed;
-    bottom: 68px; /* Space for bottom bar */
+    bottom: 0px;
     left: 0;
     right: 0;
     max-height: calc(80vh - 75px); /* Subtract bottom bar height */
@@ -191,7 +191,7 @@ body.dark-mode .filter-btn.active {
     border-radius: 16px 16px 0 0;
     transform: translateY(calc(100% + 75px));
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1100; /* Above bottom bar */
+    z-index: 9999; /* Above bottom bar */
     display: flex;
     flex-direction: column;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);

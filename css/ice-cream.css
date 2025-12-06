@@ -1,71 +1,72 @@
 /* ============================================
-   🍦 ULTRA-PREMIUM ICE-CREAM SECTION
-   Luxury horizontal scroll showcase
+   🍦 LIGHTWEIGHT ICE-CREAM SECTION
+   Optimized for blazing-fast performance
    ============================================ */
 
-.ice-cream-section {
-    padding: 20px 20px 40px 20px;
-    background: linear-gradient(135deg, #fef5f9 0%, #ffffff 50%, #f0f8ff 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    max-width: 1600px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
+/* CSS VARIABLES */
+:root {
+    --ice-section-bg: #fef5f9;
+    --ice-card-bg: rgba(255, 255, 255, 0.95);
+    --ice-card-border: rgba(255, 182, 193, 0.3);
+    --ice-card-shadow: rgba(255, 107, 157, 0.15);
+    --ice-primary: #ff6b9d;
+    --ice-secondary: #c44569;
+    --ice-text: #2c1a2c;
+    --ice-scrollbar-track: rgba(255, 182, 193, 0.1);
+    --ice-btn-bg: rgba(255, 255, 255, 0.8);
 }
 
 .sublime-navbar.dark-mode ~ .ice-cream-section {
-    background: linear-gradient(135deg, #1a1520 0%, #1a1a1a 50%, #151a20 100%);
-    background-size: 400% 400%;
+    --ice-section-bg: #1a1520;
+    --ice-card-bg: rgba(42, 35, 42, 0.95);
+    --ice-card-border: rgba(255, 182, 193, 0.2);
+    --ice-card-shadow: rgba(0, 0, 0, 0.4);
+    --ice-primary: #ffb6c1;
+    --ice-secondary: #ff69b4;
+    --ice-text: #ffffff;
+    --ice-scrollbar-track: rgba(255, 182, 193, 0.05);
+    --ice-btn-bg: rgba(42, 35, 42, 0.8);
 }
 
 /* ============================================
-   🎨 SECTION HEADER
+   MAIN SECTION
    ============================================ */
+.ice-cream-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--ice-section-bg);
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
+/* ============================================
+   HEADER
+   ============================================ */
 .ice-cream-header {
     text-align: center;
     margin-bottom: 20px;
-    position: relative;
 }
+
 .header-content {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-
 .ice-cream-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 900;
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ff6b9d 100%);
-    background-size: 200% 200%;
+    background: linear-gradient(135deg, var(--ice-primary) 0%, var(--ice-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradientShift 8s ease infinite;
     letter-spacing: -1px;
     margin: 0;
-    display: flex;
-    align-items: center;
 }
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-title {
-    background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 50%, #ffb6c1 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* DELETE .ice-cream-subtitle completely - we removed it from HTML */
 
 /* ============================================
-   📦 SCROLL CONTAINER
+   SCROLL CONTAINER
    ============================================ */
-
 .ice-cream-container {
     position: relative;
     max-width: 1400px;
@@ -78,39 +79,33 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 107, 157, 0.3) transparent;
+    scrollbar-color: var(--ice-primary) transparent;
     padding: 20px 0 30px 0;
-    margin: 0 60px; /* Space for arrows on desktop */
+    margin: 0 60px;
 }
 
-/* Custom Scrollbar Styling */
+/* Custom Scrollbar */
 .ice-cream-scroll::-webkit-scrollbar {
     height: 8px;
 }
 
 .ice-cream-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 182, 193, 0.1);
+    background: var(--ice-scrollbar-track);
     border-radius: 10px;
 }
 
 .ice-cream-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #ff6b9d, #c44569);
+    background: linear-gradient(90deg, var(--ice-primary), var(--ice-secondary));
     border-radius: 10px;
-    transition: background 0.3s ease;
 }
 
 .ice-cream-scroll::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(90deg, #c44569, #ff6b9d);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 182, 193, 0.05);
+    background: linear-gradient(90deg, var(--ice-secondary), var(--ice-primary));
 }
 
 /* ============================================
-   🎴 PRODUCT TRACK
+   PRODUCT TRACK
    ============================================ */
-
 .ice-cream-track {
     display: flex;
     gap: 20px;
@@ -118,51 +113,23 @@
 }
 
 /* ============================================
-   💎 PREMIUM PRODUCT CARD
+   PRODUCT CARD
    ============================================ */
-
 .ice-cream-card {
     flex: 0 0 180px;
     width: 180px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--ice-card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
     padding: 16px;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    border: 2px solid rgba(255, 182, 193, 0.3);
-    box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15);
-    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--ice-card-border);
+    box-shadow: 0 8px 32px var(--ice-card-shadow);
 }
 
-.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-card {
-    background: rgba(42, 35, 42, 0.95);
-    border-color: rgba(255, 182, 193, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* Gradient Border Animation */
-.ice-cream-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, #ff6b9d, #c44569, #ffd700, #ff6b9d);
-    background-size: 400% 400%;
-    border-radius: 24px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: gradientShift 3s ease infinite;
-}
-
-.ice-cream-card:hover::before {
-    opacity: 1;
-}
-
-/* 3D Hover Effect */
 .ice-cream-card:hover {
     transform: translateY(-12px) scale(1.05);
     box-shadow: 0 20px 60px rgba(255, 107, 157, 0.35);
@@ -172,20 +139,18 @@
     box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
 }
 
-/* Active/Tap Effect */
 .ice-cream-card:active {
     transform: translateY(-8px) scale(1.02);
 }
 
 /* ============================================
-   🏷️ PRODUCT BADGE
+   PRODUCT BADGE
    ============================================ */
-
 .product-badge {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
     color: white;
     padding: 4px 10px;
     border-radius: 20px;
@@ -203,9 +168,8 @@
 }
 
 /* ============================================
-   🖼️ PRODUCT IMAGE
+   PRODUCT IMAGE
    ============================================ */
-
 .product-image-wrapper {
     position: relative;
     width: 100%;
@@ -220,70 +184,31 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ice-cream-card:hover .product-image {
     transform: scale(1.15);
 }
 
-/* Image Glow Effects - Flavor Based */
+/* Simplified Image Glow - Single Approach */
 .image-glow {
     position: absolute;
     inset: -20px;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
     z-index: 0;
-    filter: blur(20px);
+    filter: blur(15px);
 }
 
 .ice-cream-card:hover .image-glow {
     opacity: 1;
 }
 
-.chocolate-glow {
-    background: radial-gradient(circle, rgba(139, 69, 19, 0.6) 0%, transparent 70%);
-}
-
-.strawberry-glow {
-    background: radial-gradient(circle, rgba(255, 105, 180, 0.6) 0%, transparent 70%);
-}
-
-.mango-glow {
-    background: radial-gradient(circle, rgba(255, 165, 0, 0.6) 0%, transparent 70%);
-}
-
-.pistachio-glow {
-    background: radial-gradient(circle, rgba(147, 197, 114, 0.6) 0%, transparent 70%);
-}
-
-.butterscotch-glow {
-    background: radial-gradient(circle, rgba(218, 165, 32, 0.6) 0%, transparent 70%);
-}
-
-.mint-glow {
-    background: radial-gradient(circle, rgba(152, 255, 152, 0.6) 0%, transparent 70%);
-}
-
-.cookies-glow {
-    background: radial-gradient(circle, rgba(70, 70, 70, 0.6) 0%, transparent 70%);
-}
-
-.caramel-glow {
-    background: radial-gradient(circle, rgba(193, 154, 107, 0.6) 0%, transparent 70%);
-}
-
-.belgian-glow {
-    background: radial-gradient(circle, rgba(101, 67, 33, 0.6) 0%, transparent 70%);
-}
-
 /* ============================================
-   📝 PRODUCT INFO
+   PRODUCT INFO
    ============================================ */
-
 .product-info {
     text-align: center;
 }
@@ -292,29 +217,14 @@
     font-family: 'Playfair Display', serif;
     font-size: 16px;
     font-weight: 700;
-    color: #2c1a2c;
+    color: var(--ice-text);
     margin: 0 0 8px 0;
     line-height: 1.3;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #2c1a2c 0%, #5c4a5c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .product-name {
-    background: linear-gradient(135deg, #ffffff 0%, #d0c0d0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    transition: color 0.3s ease;
 }
 
 .ice-cream-card:hover .product-name {
-    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: scale(1.05);
+    color: var(--ice-primary);
 }
 
 .product-meta {
@@ -331,44 +241,33 @@
 
 .product-price {
     font-weight: 700;
-    color: #ff6b9d;
+    color: var(--ice-primary);
     font-size: 14px;
 }
 
-.sublime-navbar.dark-mode ~ .ice-cream-section .product-price {
-    color: #ffb6c1;
-}
-
 /* ============================================
-   ⬅️➡️ NAVIGATION ARROWS (Desktop Only)
+   NAVIGATION ARROWS (Desktop Only)
    ============================================ */
-
 .scroll-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 182, 193, 0.3);
+    background: var(--ice-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--ice-card-border);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     z-index: 10;
-    color: #ff6b9d;
+    color: var(--ice-primary);
     opacity: 0;
     box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .ice-cream-section .scroll-arrow {
-    background: rgba(42, 35, 42, 0.9);
-    border-color: rgba(255, 182, 193, 0.2);
-    color: #ffb6c1;
 }
 
 .ice-cream-container:hover .scroll-arrow {
@@ -376,10 +275,9 @@
 }
 
 .scroll-arrow:hover {
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
     color: white;
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.4);
 }
 
 .scroll-arrow:active {
@@ -400,9 +298,8 @@
 }
 
 /* ============================================
-   🔗 SEE ALL BUTTON
+   SEE ALL BUTTON
    ============================================ */
-
 .see-all-container {
     display: flex;
     justify-content: center;
@@ -414,62 +311,38 @@
     align-items: center;
     gap: 12px;
     padding: 16px 32px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 182, 193, 0.4);
+    background: var(--ice-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--ice-card-border);
     border-radius: 50px;
     font-size: 15px;
     font-weight: 700;
-    color: #c44569;
+    color: var(--ice-secondary);
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
 }
 
-.sublime-navbar.dark-mode ~ .ice-cream-section .see-all-btn {
-    background: rgba(42, 35, 42, 0.8);
-    border-color: rgba(255, 182, 193, 0.3);
-    color: #ffb6c1;
-}
-
-.see-all-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #ff6b9d, #c44569);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.see-all-btn:hover::before {
-    opacity: 1;
-}
-
 .see-all-btn:hover {
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
     transform: translateY(-3px) scale(1.05);
     color: white;
     border-color: transparent;
     box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
 }
 
-.see-all-btn span,
-.see-all-btn svg {
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
 .see-all-btn:hover svg {
     transform: translateX(5px);
 }
 
-/* ============================================
-   📱 MOBILE RESPONSIVE - ULTRA-TIGHT
-   ============================================ */
+.see-all-btn svg {
+    transition: transform 0.3s ease;
+}
 
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
 @media (max-width: 1200px) {
     .scroll-arrow {
         display: none;
@@ -482,7 +355,7 @@
 
 @media (max-width: 768px) {
     .ice-cream-section {
-        padding: 20px 15px 25px 15px; /* Tighter */
+        padding: 20px 15px 25px 15px;
     }
     
     .ice-cream-header {
@@ -490,7 +363,7 @@
     }
     
     .ice-cream-title {
-        font-size: 28px; /* Smaller */
+        font-size: 28px;
     }
     
     .ice-cream-card {
@@ -523,25 +396,25 @@
     }
     
     .see-all-container {
-        margin-top: 15px; /* Reduced */
+        margin-top: 15px;
     }
 }
 
 @media (max-width: 480px) {
     .ice-cream-section {
-        padding: 15px 10px 20px 10px; /* Much tighter! */
+        padding: 15px 10px 20px 10px;
     }
     
     .ice-cream-header {
-        margin-bottom: 12px; /* Reduced from 15px */
+        margin-bottom: 12px;
     }
     
     .ice-cream-title {
-        font-size: 26px; /* Smaller */
+        font-size: 26px;
     }
     
     .ice-cream-scroll {
-        padding: 15px 0 20px 0; /* Reduced */
+        padding: 15px 0 20px 0;
     }
     
     .ice-cream-card {
@@ -560,7 +433,7 @@
     }
     
     .see-all-container {
-        margin-top: 10px; /* Reduced */
+        margin-top: 10px;
     }
     
     .see-all-btn {
@@ -571,11 +444,11 @@
 
 @media (max-width: 360px) {
     .ice-cream-section {
-        padding: 12px 8px 18px 8px; /* Even tighter */
+        padding: 12px 8px 18px 8px;
     }
     
     .ice-cream-header {
-        margin-bottom: 10px; /* Reduced */
+        margin-bottom: 10px;
     }
     
     .ice-cream-title {
@@ -592,7 +465,7 @@
     }
     
     .see-all-container {
-        margin-top: 8px; /* Minimal */
+        margin-top: 8px;
     }
     
     .see-all-btn {
