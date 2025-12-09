@@ -13,6 +13,9 @@ const products = [
       "images/kaju-katli-2.jpg"
     ],
     "rating": 4.5,
+      // ✅ NEW FIELDS (LOCAL VIDEO + YOUTUBE – OPTIONAL)
+  "videoFile": "videos/paneer-do-pyaza-720p.mp4", 
+  "video": "https://www.youtube.com/watch?v=YOUR_PANEER_VIDEO_ID",
     "variants": [
       {
         "size": "half",
@@ -164,6 +167,7 @@ const products = [
       "images/samosa-7.jpg"
     ],
     "rating": 5,
+    "videoFile": "videos/samosa-720p.mp4",
     "variants": [
       {
         "size": "4 pieces",
@@ -742,6 +746,8 @@ const products = [
       "images/pav-bhaji-2.jpg"
     ],
     "rating": 4.6,
+      // ✅ Only YouTube
+  "video": "https://www.youtube.com/watch?v=YOUR_PAVBHAJI_VIDEO_ID",
     "variants": [
       {
         "size": "1 piece",
