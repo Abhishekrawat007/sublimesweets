@@ -1073,12 +1073,22 @@
 }
 
 /* Ensure cart fits on all screen sizes (proper full-height layout) */
+/* Ensure cart fits on all screen sizes (proper full-height layout) */
 .cart-sidebar {
-  height: 100vh !important;          /* 🔥 force full viewport height */
-  max-height: 100vh !important;
-  overflow: hidden;                  /* no need for !important here */
+  /* fallback for older browsers */
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* ✅ Modern browsers (Chrome, etc.) – avoid going under URL + bottom bar */
+@supports (height: 100svh) {
+  .cart-sidebar {
+    height: 100svh;
+    max-height: 100svh;
+  }
 }
 
 .cart-content {
