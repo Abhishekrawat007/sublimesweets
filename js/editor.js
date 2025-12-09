@@ -170,7 +170,7 @@ const previewImages = (product.images || []).map((img, imageIndex) =>
     </div>
   </div>
 
-  <div class="image-section">
+    <div class="image-section">
     <label>Product Images</label>
     <div class="upload-zone">
       <label for="upload-btn-${actualIndex}" class="upload-btn">
@@ -184,6 +184,52 @@ const previewImages = (product.images || []).map((img, imageIndex) =>
     </div>
     <div class="preview-images" id="sortable-${actualIndex}">${previewImages}</div>
   </div>
+
+    <div class="video-section">
+    <label>Product Video (optional)</label>
+    <p class="field-hint">
+      Paste YouTube link or upload a short compressed video (.mp4). Leave blank if no video.
+    </p>
+
+    <!-- Manual URL input -->
+    <input 
+      type="text" 
+      placeholder="https://youtu.be/your-video OR https://.../video.mp4"
+      value="${product.video || ''}" 
+      onchange="updateField(${actualIndex}, 'video', this.value.trim())"
+    />
+
+    <!-- Upload button just like images -->
+   <div class="upload-zone" style="margin-top: 12px;">
+  <label for="upload-video-${actualIndex}" class="upload-btn" style="display:inline-flex; width:auto;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="color:white; width:18px; height:18px;">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <path d="M17 8l-5-5-5 5"/>
+      <path d="M12 3v12"/>
+    </svg>
+    <span style="color:white;">${product.video ? 'Replace Video' : 'Upload Video'}</span>
+  </label>
+
+  <input 
+    type="file" 
+    accept="video/*" 
+    id="upload-video-${actualIndex}" 
+    style="display:none;"
+    onchange="handleVideoUpload(this.files, ${actualIndex})"
+  />
+
+  <span id="upload-video-spinner-${actualIndex}" class="spinner" style="display:none;">⏳</span>
+</div>
+
+
+    ${product.video ? `
+      <div class="video-preview-hint">
+        <span>Current video:&nbsp;</span>
+        <a href="${product.video}" target="_blank" rel="noopener">Preview in new tab</a>
+      </div>
+    ` : ''}
+  </div>
+
 
   <div class="variants-section">
     <label>Variants & Pricing</label>
@@ -204,7 +250,8 @@ const previewImages = (product.images || []).map((img, imageIndex) =>
   <div class="flavors-section">
     <label>Flavors (Optional)</label>
     <input type="text" value="${(product.flavors || []).join(', ')}" onchange="updateFlavors(${actualIndex}, this.value)" placeholder="e.g. Masala Munch, Green Chutney" />
-  </div>`;
+  </div>
+`;
 
     productList.appendChild(card);
 
@@ -333,6 +380,63 @@ async function handleImageUpload(files, index) {
   spinner.style.display = "none";
   renderProducts();
 }
+
+async function handleVideoUpload(files, index) {
+  if (!files || !files.length) return;
+
+  const fileInput = document.querySelector(`#upload-video-${index}`);
+  const spinner = document.querySelector(`#upload-video-spinner-${index}`);
+
+  if (fileInput) fileInput.disabled = true;
+  if (spinner) spinner.style.display = "inline-block";
+
+  try {
+    const file = files[0];
+
+    // Convert video to base64
+    const reader = new FileReader();
+    const base64Promise = new Promise((resolve, reject) => {
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const videoData = await base64Promise;
+
+    const token = sessionStorage.getItem("adminToken");
+    const res = await fetch("/.netlify/functions/uploadImage", {   // 👈 reuse same function
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + (token || "")
+      },
+      body: JSON.stringify({
+        imageData: videoData,
+        type: "video"   // 👈 optional hint for backend
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.secure_url) {
+      if (!productHistory.has(index)) {
+        productHistory.set(index, { ...products[index] });
+      }
+      // 🔥 Save URL into product.video
+      products[index].video = data.secure_url;
+    } else {
+      throw new Error(data.error || "Upload failed");
+    }
+  } catch (err) {
+    console.error("❌ Video upload error:", err);
+    alert("Video upload failed: " + err.message);
+  } finally {
+    if (fileInput) fileInput.disabled = false;
+    if (spinner) spinner.style.display = "none";
+    renderProducts();
+  }
+}
+
 function deleteProduct(index) {
   showModal({
     title: "Delete Product?",
@@ -440,19 +544,6 @@ function exitEditor() {
   });
 }
 
-window.addProduct = addProduct;
-window.exportProducts = exportProducts;
-window.undoChanges = undoChanges;
-window.logout = logout;
-window.exitEditor = exitEditor;
-window.updateField = updateField;
-window.updateImages = updateImages;
-window.updateTags = updateTags;
-window.handleImageUpload = handleImageUpload;
-window.deleteProduct = deleteProduct;
-window.debouncedSearch = debouncedSearch;
-
-window.onload = () => renderProducts();
 
 async function submitChanges(products) {
   // ✅ ADD THIS COOLDOWN CHECK
@@ -1312,3 +1403,8 @@ window.updateFlavors = updateFlavors;
 window.toggleMobileMenu = toggleMobileMenu;
 window.openOrdersSection = openOrdersSection;
 window.showProductsSection = showProductsSection;
+window.handleVideoUpload = handleVideoUpload;
+
+window.addEventListener('load', () => {
+  renderProducts();
+});

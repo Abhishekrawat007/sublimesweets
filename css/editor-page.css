@@ -681,3 +681,85 @@ body.dark-mode .custom-modal-content {
   background: #0A84FF !important;   /* same blue as desktop */
   color: #fff !important;            /* white text */
 }
+/* ============================================
+   🎥 VIDEO SECTION (MATCHES IMAGE / VARIANTS STYLE)
+   ============================================ */
+
+.video-section {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.video-section label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6e6e73;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.video-section .field-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 4px 0 10px;
+}
+
+.video-section input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid #e5e5e7;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.video-section input[type="text"]:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.video-preview-hint {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.video-preview-hint a {
+  color: #667eea;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Dark mode */
+body.dark-mode .video-section {
+  background: #1d1d1f;
+}
+
+body.dark-mode .video-section input[type="text"] {
+  background: #1d1d1f;
+  border-color: #3a3a3c;
+  color: #f5f5f7;
+}
+
+body.dark-mode .video-section input[type="text"]:focus {
+  background: #2d2d2f;
+}
+
+body.dark-mode .video-preview-hint {
+  color: #d1d5db;
+}
+
+body.dark-mode .video-preview-hint a {
+  color: #a5b4fc;
+}
+.video-section .upload-btn {
+  margin-top: 8px;
+}
+

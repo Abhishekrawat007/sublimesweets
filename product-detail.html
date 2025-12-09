@@ -811,10 +811,13 @@ body.dark-mode .flavor-btn.active {
     flex-wrap: wrap; /* so on mobile it can wrap nicely */
 }
 
-/* remove extra bottom margin from the pill now that it's in a row */
 .stock-status {
-    margin-bottom: 10;
+    margin-bottom: 10px;
 }
+#watchVideoBtn {
+    flex-shrink: 0;  /* don't let it shrink too much on small screens */
+}
+
 
     </style>
 </head>
@@ -1243,14 +1246,17 @@ body.dark-mode .flavor-btn.active {
     <div class="option-grid" id="flavorGrid"></div>
 </div>
 
-                <div class="stock-status" id="stockStatus">
-                    <div class="stock-dot"></div>
-                    <span>In Stock</span>
-                     <button class="btn-secondary" id="watchVideoBtn" style="display:none;">
+             <div class="stock-row">
+    <div class="stock-status" id="stockStatus">
+        <div class="stock-dot"></div>
+        <span>In Stock</span>
+    </div>
+
+    <button class="btn-secondary" id="watchVideoBtn" style="display:none;">
         ▶ Watch Video
     </button>
-                </div>
-    
+</div>
+
 
     <!-- Quantity Selector -->
 <div class="action-buttons">

@@ -225,9 +225,6 @@ function renderProduct() {
         }
     }
 
-    // Mobile-only "Watch Full Video" button (if any video)
-    const videoSrc = getPreferredVideoSource();
-    injectWatchVideoButton(videoSrc);
 }
 
 // -------------------------------------
@@ -411,34 +408,7 @@ function initSlideshowControls() {
     }
 }
 
-// Mobile-only "Watch Full Video" button
-function injectWatchVideoButton(videoSrc) {
-    const existing = document.getElementById('watchVideoBtnMobile');
-    if (existing) existing.remove();
 
-    if (!videoSrc || !isMobile()) return;
-
-    const actionButtons = document.querySelector('.action-buttons');
-    if (!actionButtons) return;
-
-    const btn = document.createElement('a');
-    btn.id = 'watchVideoBtnMobile';
-    btn.className = 'btn-secondary';
-    btn.style.marginTop = '12px';
-    btn.textContent = '▶ Watch Full Video';
-
-    if (videoSrc.type === 'youtube') {
-        btn.href = `https://www.youtube.com/watch?v=${vidId(videoSrc.url)}`;
-    } else {
-        // local file – open raw mp4 in new tab
-        btn.href = videoSrc.url;
-    }
-
-    btn.target = '_blank';
-    btn.rel = 'noopener noreferrer';
-
-    actionButtons.parentNode.insertBefore(btn, actionButtons.nextSibling);
-}
 
 // -------------------------------------
 // PRICE / VARIANTS
