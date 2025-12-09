@@ -48,13 +48,62 @@ function getTotalSlides() {
     return imgCount + (hasVideoSlide() ? 1 : 0);
 }
 
+
 // -------------------------------------
 // INIT
 // -------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
+    initVideoModalClose();
     loadProduct();
-    initSlideshowControls(); // prev / next
+    initSlideshowControls(); // prev / next image
 });
+
+function openProductVideo(product) {
+    const modal   = document.getElementById('videoModal');
+    const videoEl = document.getElementById('productVideoPlayer');
+    if (!modal || !videoEl || !product) return;
+
+    // Prefer local compressed file if available
+    if (product.videoFile) {
+        videoEl.src = product.videoFile;
+    } else if (product.video) {
+        // If only YouTube link is there, open in new tab (lighter)
+        window.open(product.video, '_blank');
+        return;
+    } else {
+        return;
+    }
+
+    modal.classList.add('active');
+    // Try autoplay (may be blocked on some devices but harmless)
+    videoEl.play().catch(() => {});
+}
+
+function initVideoModalClose() {
+    const modal    = document.getElementById('videoModal');
+    const videoEl  = document.getElementById('productVideoPlayer');
+    const closeBtn = document.getElementById('closeVideoModal');
+    const backdrop = document.getElementById('closeVideoBackdrop');
+
+    if (!modal || !videoEl) return;
+
+    function closeModal() {
+        modal.classList.remove('active');
+        videoEl.pause();
+        videoEl.currentTime = 0;
+        videoEl.removeAttribute('src');
+    }
+
+    if (closeBtn)   closeBtn.addEventListener('click', closeModal);
+    if (backdrop)   backdrop.addEventListener('click', closeModal);
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
 
 // -------------------------------------
 // STORAGE HELPERS (old leftover, but safe)
@@ -154,6 +203,27 @@ function renderProduct() {
 
     updateStockAndActions(variant);
     attachEventListeners();
+ // ✅ WATCH VIDEO BUTTON (near In Stock)
+    const watchBtn = document.getElementById('watchVideoBtn');
+    if (watchBtn) {
+        const hasLocalVideo = !!product.videoFile;
+        const hasYoutube    = !!product.video;
+
+        if (!hasLocalVideo && !hasYoutube) {
+            // No video → hide button completely
+            watchBtn.style.display = 'none';
+            watchBtn.disabled = true;
+        } else {
+            // Video exists → show and enable
+            watchBtn.style.display = 'inline-flex';
+            watchBtn.disabled = false;
+
+            // Rebind click each time product changes
+            watchBtn.onclick = () => {
+                openProductVideo(product);
+            };
+        }
+    }
 
     // Mobile-only "Watch Full Video" button (if any video)
     const videoSrc = getPreferredVideoSource();
