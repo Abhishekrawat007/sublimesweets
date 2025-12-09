@@ -734,7 +734,7 @@
             width: 100%;
             padding: 16px;
           /* EMERALD ELEGANCE */
-background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+/* background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); */
 
 /* ROYAL PURPLE */
 /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
@@ -1613,10 +1613,11 @@ background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     border-color: rgba(255, 107, 107, 0.3);
 }
 
-/* Cart Footer - Premium Elevated Base */
+/* ========== COMPACT PREMIUM CART FOOTER ========== */
+
 .cart-footer {
-    padding: 20px;
-    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    padding: 16px 20px; /* Reduced from 20px */
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* Tighter bottom */
     border-top: 1px solid var(--border-color);
     position: relative;
     
@@ -1631,21 +1632,6 @@ background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Subtle top shine for footer */
-.cart-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 20px;
-    right: 20px;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 107, 107, 0.3) 50%, 
-        transparent 100%);
-}
-
-/* Dark mode cart footer */
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer {
     background: linear-gradient(180deg, 
         rgba(26, 26, 26, 0.98) 0%,
@@ -1656,131 +1642,85 @@ background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         0 -1px 4px rgba(255, 107, 107, 0.1);
 }
 
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer::before {
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 107, 107, 0.4) 50%, 
-        transparent 100%);
-}
-
-@media (max-width: 600px) {
-    .cart-footer {
-        padding-bottom: calc(32px + env(safe-area-inset-bottom));
-        margin-bottom: 10px;
-        box-shadow: 
-            0 -10px 30px rgba(0, 0, 0, 0.08),
-            0 -2px 8px rgba(255, 107, 107, 0.05);
-        border-radius: 16px 16px 0 0;
-    }
-    
-    .sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer {
-        box-shadow: 
-            0 -10px 35px rgba(0, 0, 0, 0.6),
-            0 -2px 10px rgba(255, 107, 107, 0.15);
-    }
-}
-
-/* Enhanced Checkout Button */
-.checkout-btn {
-    width: 100%;
-    padding: 16px;
-    /* background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%) !important; */
-    color: white !important;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 
-        0 4px 15px rgba(255, 107, 107, 0.3),
-        0 2px 4px rgba(255, 107, 107, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Shimmer effect on hover */
-.checkout-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        transparent 100%);
-    transition: left 0.5s ease;
-}
-
-.checkout-btn:hover::before {
-    left: 100%;
-}
-
-.checkout-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 8px 25px rgba(255, 107, 107, 0.5),
-        0 4px 8px rgba(255, 107, 107, 0.3);
-}
-
-.checkout-btn:active {
-    transform: translateY(0);
-}
-
-/* Cart Total - Enhanced Typography */
+/* Compact Cart Total */
 .cart-total {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    font-size: 18px;
+    margin-bottom: 14px; /* Reduced from 20px */
+    font-size: 17px; /* Slightly smaller */
     font-weight: 700;
     color: var(--nav-text);
-    padding: 12px 0;
+    padding: 10px 0; /* Reduced from 12px */
     border-bottom: 2px solid rgba(255, 107, 107, 0.1);
 }
 
 .cart-total span:last-child {
     color: #ff6b6b !important;
     font-weight: 800 !important;
-    font-size: 22px;
+    font-size: 20px; /* Reduced from 22px */
     text-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
 }
 
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-total {
-    border-bottom-color: rgba(255, 107, 107, 0.2);
-}
-
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-total span:last-child {
-    text-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
-}
-
-/* ========== EMERALD LUXURY CHECKOUT WITH SHIMMER WAVE ========== */
-
+/* Compact Checkout Button */
 .checkout-btn {
     width: 100%;
-    padding: 16px;
-    /* 🔥 EMERALD ELEGANCE GRADIENT */
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+    padding: 14px; /* Reduced from 16px */
+    font-size: 15px; /* Slightly smaller */
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+    .cart-footer {
+        padding: 14px 18px; /* Even more compact on mobile */
+        padding-bottom: calc(10px + env(safe-area-inset-bottom));
+        box-shadow: 
+            0 -10px 30px rgba(0, 0, 0, 0.08),
+            0 -2px 8px rgba(255, 107, 107, 0.05);
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .cart-total {
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+    
+    .cart-total span:last-child {
+        font-size: 19px;
+    }
+    
+    .checkout-btn {
+        padding: 13px;
+        font-size: 14.5px;
+    }
+}
+.checkout-btn {
+    width: 100%;
+    padding: 14px;
+    /* 🔥 ROYAL PURPLE GRADIENT */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     color: white !important;
     border: none;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.4s ease;
     box-shadow: 
-        0 4px 20px rgba(17, 153, 142, 0.5),
-        0 2px 8px rgba(56, 239, 125, 0.3),
+        0 4px 20px rgba(102, 126, 234, 0.5),
+        0 2px 8px rgba(118, 75, 162, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
     letter-spacing: 0.5px;
 }
 
-/* Shimmer wave effect */
 .checkout-btn::before {
     content: '';
     position: absolute;
@@ -1802,14 +1742,13 @@ background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     100% { left: 150%; }
 }
 
-/* "Proceed" word glow on hover */
 .checkout-btn:hover {
     transform: translateY(-3px);
     box-shadow: 
-        0 8px 30px rgba(17, 153, 142, 0.7),
-        0 4px 12px rgba(56, 239, 125, 0.5),
+        0 8px 30px rgba(102, 126, 234, 0.7),
+        0 4px 12px rgba(118, 75, 162, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    background: linear-gradient(135deg, #13b39e 0%, #40ff8d 100%) !important;
+    background: linear-gradient(135deg, #7c8fff 0%, #8b5fc7 100%) !important;
     text-shadow: 
         0 0 10px rgba(255, 255, 255, 0.8),
         0 0 20px rgba(255, 255, 255, 0.4);
@@ -1817,13 +1756,8 @@ background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
 
 .checkout-btn:active {
     transform: translateY(-1px);
-    box-shadow: 
-        0 4px 15px rgba(17, 153, 142, 0.6),
-        0 2px 6px rgba(56, 239, 125, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Optional: Add a subtle bottom shine */
 .checkout-btn::after {
     content: '';
     position: absolute;
