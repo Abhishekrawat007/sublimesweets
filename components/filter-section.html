@@ -1,0 +1,437 @@
+   <!-- ============================================
+         📱 MOBILE STICKY FILTER BAR
+         Shows only on mobile (<700px)
+         ============================================ -->
+    
+    <div class="mobile-filter-bar" id="mobileFilterBar">
+        <!-- Sort Button -->
+        <button class="filter-btn" id="sortBtn">
+            <span class="sort-icon">↓↑</span>
+        
+            <span>Sort</span>
+        </button>
+
+        <!-- Category Button -->
+        <button class="filter-btn" id="categoryBtn">
+            <span>Category</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Price Button -->
+        <button class="filter-btn" id="priceBtn">
+            <span>Price</span>
+            <span class="arrow-down">▼</span>
+        </button>
+
+        <!-- Filters Button -->
+        <button class="filter-btn" id="filtersBtn">
+            <span class="filters-icon">≡</span>
+            <span>Filters</span>
+        </button>
+    </div>
+
+    <!-- ============================================
+         MODAL OVERLAY (Dark background)
+         ============================================ -->
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- ============================================
+         1️⃣ SORT MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="sortModal">
+        <div class="modal-header">
+            <h3>SORT BY</h3>
+            <button class="close-modal" data-modal="sortModal">✕</button>
+        </div>
+        <div class="modal-content">
+           <label class="radio-option-mobile">
+    <input type="radio" name="mobile-sort" value="all" data-sort="none" checked>
+    <span class="radio-custom-mobile"></span>
+    <span class="radio-label-mobile">All</span>
+</label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="discount" data-sort="discount">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Discount</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-high" data-sort="price-desc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (High to Low)</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-sort" value="price-low" data-sort="price-asc">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">Price (Low to High)</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- ============================================
+         2️⃣ CATEGORY MODAL
+         ============================================ -->
+    
+    <div class="bottom-modal" id="categoryModal">
+        <div class="modal-header">
+            <h3>CATEGORY</h3>
+            <button class="close-modal" data-modal="categoryModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <!-- Search Box -->
+            <div class="category-search-wrapper-mobile">
+                <span class="search-icon-mobile">🔍</span>
+                <input type="text" class="category-search-mobile" placeholder="Search" id="categorySearchMobile">
+            </div>
+            
+            <!-- Category List -->
+            <div class="category-list-mobile" id="categoryListMobile">
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="street-food">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌮 Street Food</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="main-course">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍛 Main Course</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="meals">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍽️ Meals / Thalis</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="desserts">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍨 Fresh Desserts</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="snacks-drinks">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍿 Snacks & Drinks</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="mithai">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍬 Mithai (Indian Sweets)</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-eggless">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🎂 Cakes - Eggless</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cakes-with-egg">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍰 Cakes - With Egg</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="pastries">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥐 Pastries</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="bread-buns">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍞 Bread & Buns</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="cookies">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🍪 Cookies</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dairy">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🥛 Dairy</span>
+                </label>
+                <label class="checkbox-option-mobile">
+                    <input type="checkbox" value="dry-fruits">
+                    <span class="checkbox-custom-mobile"></span>
+                    <span class="checkbox-label-mobile">🌰 Dry Fruits</span>
+                </label>
+            </div>
+        </div>
+      <div class="modal-footer">
+    <button class="clear-btn" id="clearCategoriesMobile">Clear All</button>
+    <button class="done-btn" data-modal="categoryModal">Done</button>
+</div></div>
+
+    <!-- ============================================
+         3️⃣ PRICE MODAL (With Steppers + Inputs)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="priceModal">
+        <div class="modal-header">
+            <h3>PRICE</h3>
+            <button class="close-modal" data-modal="priceModal">✕</button>
+        </div>
+        <div class="modal-content">
+    <!-- Premium Price Range Input -->
+   <div class="premium-price-input">
+    <label class="premium-label">Enter Price Range</label>
+    <div class="price-range-inputs">
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="minPriceInput" placeholder="Min" value="">
+        </div>
+        <span class="range-separator">—</span>
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="maxPriceInput" placeholder="Max" value="">
+        </div>
+    </div>
+</div>
+</div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearPrice">Clear All</button>
+            <button class="done-btn apply-btn" id="applyPrice">Apply</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         4️⃣ FILTERS MODAL (Price Ranges)
+         ============================================ -->
+    
+    <div class="bottom-modal" id="filtersModal">
+        <div class="modal-header">
+            <h3>FILTERS</h3>
+            <button class="close-modal" data-modal="filtersModal">✕</button>
+        </div>
+        <div class="modal-content">
+            <h4 class="filter-section-title">Price Range</h4>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="all" data-min="0" data-max="999999" checked>
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">All Prices</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="0-100" data-min="0" data-max="100">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹0 - ₹100</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="100-200" data-min="100" data-max="200">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹100 - ₹200</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="200-300" data-min="200" data-max="300">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹200 - ₹300</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="300-400" data-min="300" data-max="400">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹300 - ₹400</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="400-500" data-min="400" data-max="500">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹400 - ₹500</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="500-600" data-min="500" data-max="600">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹500 - ₹600</span>
+            </label>
+            <label class="radio-option-mobile">
+                <input type="radio" name="mobile-filter-price" value="600-700" data-min="600" data-max="700">
+                <span class="radio-custom-mobile"></span>
+                <span class="radio-label-mobile">₹600 - ₹700</span>
+            </label>
+        </div>
+        <div class="modal-footer">
+            <button class="clear-btn" id="clearFilters">Clear All</button>
+            <button class="done-btn apply-btn" id="applyFilters">Apply</button>
+        </div>
+    </div>
+    <!-- ============================================
+         🎯 FILTER + PRODUCTS SECTION
+         ============================================ -->
+    
+    <div class="filter-products-wrapper">
+        
+        <!-- ============================================
+             LEFT SIDEBAR - FILTERS (Sticky)
+             ============================================ -->
+        <aside class="filter-sidebar">
+            <div class="filter-content">
+                
+                <!-- FILTER & SORT -->
+                <div class="filter-section">
+                    <h3 class="section-title">FILTER & SORT</h3>
+                </div>
+
+                <!-- SORT BY (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="sort-content">
+                        <h4 class="subsection-title">Sort by</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="sort-content">
+                        <div class="sort-options">
+                            <label class="radio-option">
+            <input type="radio" name="sort" value="all" data-sort="none" checked>
+            <span class="radio-custom"></span>
+            <span class="radio-label">All</span>
+        </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="discounts" data-sort="discount">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Discounts</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="high-price" data-sort="price-desc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">High Price</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="sort" value="low-price" data-sort="price-asc">
+                                <span class="radio-custom"></span>
+                                <span class="radio-label">Low Price</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRICE FILTER (Expandable) -->
+                <div class="filter-section expandable">
+                    <div class="section-header" data-target="price-content">
+                        <h4 class="subsection-title">Price</h4>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="section-content" id="price-content">
+                          <label class="radio-option">
+        <input type="radio" name="price" value="all" data-min="0" data-max="999999" checked>
+        <span class="radio-custom"></span>
+        <span class="radio-label">All Prices</span>
+    </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="0-100" data-min="0" data-max="100">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹0 - ₹100</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="100-200" data-min="100" data-max="200">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹100 - ₹200</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="200-300" data-min="200" data-max="300">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹200 - ₹300</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="300-400" data-min="300" data-max="400">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹300 - ₹400</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="400-500" data-min="400" data-max="500">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹400 - ₹500</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="500-600" data-min="500" data-max="600">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹500 - ₹600</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="600-700" data-min="600" data-max="700">
+                            <span class="radio-custom"></span>
+                            <span class="radio-label">₹600 - ₹700</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CATEGORY FILTER (Always Open - No Toggle) -->
+                <div class="filter-section active-no-toggle">
+                    <h4 class="subsection-title">Category</h4>
+                    <div class="section-content-always-open">
+                        <!-- Clear All Button -->
+    <button class="clear-categories-btn" id="clearCategories">
+        Clear All
+    </button>
+                    
+                        <!-- Search Box -->
+                        <div class="category-search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="category-search" placeholder="Search" id="categorySearch">
+                        </div>
+                        
+                        <!-- Category List -->
+                        <div class="category-list" id="categoryList">
+                            <label class="checkbox-option" data-category="street-food">
+                                <input type="checkbox" value="street-food">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌮 Street Food</span>
+                            </label>
+                            <label class="checkbox-option" data-category="main-course">
+                                <input type="checkbox" value="main-course">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍛 Main Course</span>
+                            </label>
+                            <label class="checkbox-option" data-category="meals">
+                                <input type="checkbox" value="meals">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍽️ Meals / Thalis</span>
+                            </label>
+                            <label class="checkbox-option" data-category="desserts">
+                                <input type="checkbox" value="desserts">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍨 Fresh Desserts</span>
+                            </label>
+                            <label class="checkbox-option" data-category="snacks-drinks">
+                                <input type="checkbox" value="snacks-drinks">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍿 Snacks & Drinks</span>
+                            </label>
+                            <label class="checkbox-option" data-category="mithai">
+                                <input type="checkbox" value="mithai">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍬 Mithai (Indian Sweets)</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-eggless">
+                                <input type="checkbox" value="cakes-eggless">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🎂 Cakes - Eggless</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cakes-with-egg">
+                                <input type="checkbox" value="cakes-with-egg">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍰 Cakes - With Egg</span>
+                            </label>
+                            <label class="checkbox-option" data-category="pastries">
+                                <input type="checkbox" value="pastries">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥐 Pastries</span>
+                            </label>
+                            <label class="checkbox-option" data-category="bread-buns">
+                                <input type="checkbox" value="bread-buns">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍞 Bread & Buns</span>
+                            </label>
+                            <label class="checkbox-option" data-category="cookies">
+                                <input type="checkbox" value="cookies">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🍪 Cookies</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dairy">
+                                <input type="checkbox" value="dairy">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🥛 Dairy</span>
+                            </label>
+                            <label class="checkbox-option" data-category="dry-fruits">
+                                <input type="checkbox" value="dry-fruits">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-label">🌰 Dry Fruits</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>

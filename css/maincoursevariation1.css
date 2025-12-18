@@ -1,0 +1,509 @@
+/* ============================================
+   💎 VARIATION 1: LUXURY MAIN COURSE
+   Premium restaurant aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --main-section-bg: #fff9f5;
+    --main-card-bg: #ffffff;
+    --main-card-shadow: rgba(0, 0, 0, 0.08);
+    --main-primary: #d2691e;
+    --main-secondary: #8b4513;
+    --main-text: #2b2520;
+    --main-text-light: #6b6560;
+    --main-accent: #cd853f;
+    --main-border: rgba(210, 105, 30, 0.2);
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section {
+    --main-section-bg: #1a1614;
+    --main-card-bg: #2b2520;
+    --main-card-shadow: rgba(0, 0, 0, 0.4);
+    --main-primary: #cd853f;
+    --main-secondary: #d2691e;
+    --main-text: #f8f6f3;
+    --main-text-light: #b8b3ae;
+    --main-border: rgba(205, 133, 63, 0.3);
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--main-section-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-course-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--main-primary), transparent);
+    opacity: 0.3;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.main-course-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-accent {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--main-primary);
+    opacity: 0.8;
+}
+
+.main-course-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 300;
+    color: var(--main-text);
+    margin: 0;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.header-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--main-text-light);
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.main-course-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-course-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 20px 0 30px;
+    margin: 0 60px;
+}
+
+.main-course-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.main-course-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   PRODUCT CARD - LUXURY STYLE
+   ============================================ */
+.main-course-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: var(--main-card-bg);
+    border-radius: 2px;
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid var(--main-border);
+    box-shadow: 
+        0 4px 20px var(--main-card-shadow),
+        0 0 0 1px var(--main-border);
+    position: relative;
+}
+
+.main-course-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 
+        0 24px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px var(--main-primary);
+    z-index: 100;
+    border-color: var(--main-primary);
+}
+
+/* ============================================
+   PRODUCT BADGE
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--main-primary);
+    color: var(--main-card-bg);
+    padding: 6px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    z-index: 2;
+}
+
+.new-badge {
+    background: var(--main-secondary);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(210, 105, 30, 0.1), rgba(255, 255, 255, 0.1));
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: grayscale(0.1);
+}
+
+.main-course-card:hover .product-image {
+    transform: scale(1.08);
+    filter: grayscale(0);
+}
+
+.image-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--main-primary) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    mix-blend-mode: overlay;
+}
+
+.main-course-card:hover .image-glow {
+    opacity: 0.15;
+}
+
+/* ============================================
+   PRODUCT INFO
+   ============================================ */
+.product-info {
+    text-align: left;
+}
+
+.product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--main-text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.main-course-card:hover .product-name {
+    color: var(--main-primary);
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--main-border);
+    font-size: 11px;
+}
+
+.product-rating {
+    font-size: 10px;
+    letter-spacing: -1px;
+    opacity: 0.6;
+}
+
+.product-price {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--main-primary);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--main-card-bg);
+    border: 1px solid var(--main-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    z-index: 10;
+    color: var(--main-primary);
+    opacity: 0;
+}
+
+.main-course-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--main-primary);
+    color: var(--main-card-bg);
+    border-color: var(--main-primary);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   SEE ALL BUTTON
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: transparent;
+    border: 1px solid var(--main-primary);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--main-primary);
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.see-all-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--main-primary);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.see-all-btn:hover {
+    color: var(--main-card-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(210, 105, 30, 0.3);
+}
+
+.see-all-btn:hover::before {
+    left: 0;
+}
+
+.see-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.see-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .main-course-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-course-section {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 15px;
+    }
+    
+    .main-course-title {
+        font-size: 28px;
+    }
+    
+    .main-course-card {
+        flex: 0 0 140px;
+        width: 140px;
+        padding: 12px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 8px;
+    }
+    
+    .product-name {
+        font-size: 15px;
+    }
+    
+    .main-course-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .see-all-container {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-course-section {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .header-accent {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 12px;
+    }
+    
+    .main-course-title {
+        font-size: 26px;
+    }
+    
+    .header-subtitle {
+        font-size: 11px;
+    }
+    
+    .main-course-scroll {
+        padding: 15px 0 20px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 130px;
+        width: 130px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .product-name {
+        font-size: 13px;
+    }
+    
+    .product-price {
+        font-size: 13px;
+    }
+    
+    .main-course-track {
+        gap: 12px;
+    }
+    
+    .see-all-container {
+        margin-top: 10px;
+    }
+    
+    .see-all-btn {
+        padding: 12px 24px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-course-section {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 10px;
+    }
+    
+    .main-course-title {
+        font-size: 24px;
+    }
+    
+    .main-course-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .see-all-container {
+        margin-top: 8px;
+    }
+    
+    .see-all-btn {
+        padding: 10px 20px;
+        font-size: 9px;
+    }
+}

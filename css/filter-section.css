@@ -1,0 +1,806 @@
+/* ============================================
+   🎯 ULTRA-PREMIUM FILTER SECTION
+   TRUE PREMIUM: Clean, minimal, perfect execution
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* ============================================
+   🌙 DARK MODE - SIMPLE & FAST
+   ============================================ */
+/* ============================================
+   🌙 DARK MODE - MORE SPECIFIC (Overrides body)
+   ============================================ */
+
+body.dark-mode .filter-sidebar {
+    background: #2a2a2a !important;
+    border-color: #3a3a3a !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .filter-section {
+    border-bottom-color: #3a3a3a !important;
+}
+
+body.dark-mode .section-title {
+    color: #999 !important;
+}
+
+body.dark-mode .subsection-title {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .radio-option {
+    background: #333 !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .radio-option:hover {
+    border-color: #555 !important;
+    background: #3a3a3a !important;
+}
+
+body.dark-mode .radio-option:has(input[type="radio"]:checked) {
+    border-color: #667eea !important;
+    background: #2a2d4a !important;
+}
+
+body.dark-mode .radio-custom {
+    border-color: #666 !important;
+}
+
+body.dark-mode .radio-label {
+    color: #d0d0d0 !important;
+}
+
+body.dark-mode .checkbox-custom {
+    border-color: #666 !important;
+}
+
+body.dark-mode .checkbox-label {
+    color: #d0d0d0 !important;
+}
+
+body.dark-mode .category-search {
+    background: #333 !important;
+    border-color: #444 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .category-search:focus {
+    background: #3a3a3a !important;
+}
+
+body.dark-mode .category-search::placeholder {
+    color: #888 !important;
+}
+
+body.dark-mode .search-icon {
+    color: #888 !important;
+}
+
+body.dark-mode .products-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .products-count {
+    color: #999 !important;
+}
+
+body.dark-mode .product-card {
+    background: #2a2a2a !important;
+    border-color: #3a3a3a !important;
+}
+
+body.dark-mode .product-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+    border-color: #4a4a4a !important;
+}
+
+body.dark-mode .product-image-wrapper {
+    background: #333 !important;
+}
+
+body.dark-mode .product-name {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .no-results h3 {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .no-results p {
+    color: #888 !important;
+}
+/* ============================================
+   📦 MAIN WRAPPER
+   ============================================ */
+
+.filter-products-wrapper {
+    display: flex;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ============================================
+   🎨 LEFT SIDEBAR - FILTERS (Sticky)
+   ============================================ */
+
+.filter-sidebar {
+    position: sticky;
+    top: 100px;
+    width: 280px;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Custom Scrollbar - WIDER */
+.filter-sidebar {
+    overflow-y: auto;
+    overflow-x: hidden; /* No horizontal scroll */
+}
+
+.filter-sidebar::-webkit-scrollbar {
+    width: 8px; /* Wider - was 5px */
+}
+
+.filter-sidebar::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 4px;
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+/* ============================================
+   🎯 FILTER SECTIONS - MINIMAL SPACING
+   ============================================ */
+
+.filter-content {
+    padding: 20px;
+}
+
+.filter-section {
+    margin-bottom: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.filter-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.filter-section:first-child {
+    padding-top: 0;
+}
+
+.section-title {
+    font-size: 16px; /* Bigger - was 12px */
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #1a1a1a; /* Black in light mode */
+    margin-bottom: 14px;
+}
+
+body.dark-mode .section-title {
+    color: #ffffff !important; /* White in dark mode */
+}
+
+
+/* Subsection Title */
+.subsection-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+
+
+/* ============================================
+   📻 RADIO BUTTONS - RECTANGULAR (Premium)
+   ============================================ */
+
+.radio-option {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.radio-option:last-child {
+    margin-bottom: 0;
+}
+
+/* Hide default radio */
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+/* Custom Radio - Rectangular Style */
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+
+.radio-option:hover {
+    border-color: #d0d0d0;
+    background: #f5f5f5;
+}
+
+
+.radio-option input[type="radio"]:checked + .radio-custom + .radio-label {
+    font-weight: 600;
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+    border-color: #667eea;
+    background: #f0f3ff;
+}
+
+
+/* Custom Radio Circle */
+.radio-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d0d0d0;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+
+.radio-option input[type="radio"]:checked + .radio-custom {
+    border-color: #667eea;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+}
+
+/* Radio Label */
+.radio-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a4a4a;
+    flex: 1;
+}
+
+
+.radio-option input[type="radio"]:checked ~ .radio-label {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* ============================================
+   ☑️ CHECKBOXES (Category) - Clean Style
+   ============================================ */
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    padding: 9px 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.checkbox-option:hover {
+    padding-left: 4px;
+}
+
+/* Hide default checkbox */
+.checkbox-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Custom Checkbox */
+.checkbox-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d0d0d0;
+    border-radius: 3px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-custom {
+    border-color: #667eea;
+    background: #667eea;
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Checkbox Label */
+.checkbox-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a4a4a;
+    flex: 1;
+}
+
+
+
+.checkbox-option input[type="checkbox"]:checked ~ .checkbox-label {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* ============================================
+   🔽 EXPANDABLE SECTIONS - Sort & Price
+   ============================================ */
+
+.expandable .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 14px;
+    transition: all 0.2s ease;
+}
+
+.expandable .section-header:hover .subsection-title {
+    color: #667eea;
+}
+
+.toggle-icon {
+    font-size: 16px;
+    font-weight: 600;
+    color: #999;
+    transition: transform 0.25s ease, color 0.2s ease;
+    user-select: none;
+}
+
+.expandable.active .toggle-icon {
+    transform: rotate(45deg);
+    color: #667eea;
+}
+
+/* Section Content (Collapsible) */
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.expandable.active .section-content {
+    max-height: 600px;
+}
+
+/* Sort Options Container */
+.sort-options {
+    margin-top: 0;
+}
+
+/* ============================================
+   📂 CATEGORY SECTION - ALWAYS OPEN
+   ============================================ */
+
+.active-no-toggle .subsection-title {
+    margin-bottom: 14px;
+}
+
+.section-content-always-open {
+    /* Always visible - no collapse */
+    display: block;
+}
+
+
+/* ============================================
+   🔍 CATEGORY SEARCH - PREMIUM DESIGN
+   ============================================ */
+
+.category-search-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.category-search {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
+    background: #fafafa;
+    color: #1a1a1a;
+}
+
+
+
+.category-search:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #ffffff;
+}
+
+
+
+.category-search::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+    color: #999;
+}
+
+/* Category List */
+.category-list {
+    max-height: none; /* Remove height limit */
+    overflow: visible; /* No scroll */
+    padding-right: 0;
+}
+/* ============================================
+   🗑️ CLEAR CATEGORIES BUTTON
+   ============================================ */
+
+.clear-categories-btn {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+}
+
+.clear-categories-btn span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.clear-categories-btn:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: #ffffff;
+}
+
+.clear-categories-btn:active {
+    transform: scale(0.98);
+}
+
+body.dark-mode .clear-categories-btn {
+    background: #333 !important;
+    border-color: #444 !important;
+    color: #999 !important;
+}
+
+body.dark-mode .clear-categories-btn:hover {
+    background: #667eea !important;
+    border-color: #667eea !important;
+    color: #ffffff !important;
+}
+/* ============================================
+   📦 PRODUCTS SECTION
+   ============================================ */
+
+.products-section {
+    flex: 1;
+}
+
+/* Products Header */
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.products-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+
+
+.products-count {
+    font-size: 13px;
+    color: #888;
+    font-weight: 500;
+}
+
+
+
+/* ============================================
+   🎴 PRODUCTS GRID
+   ============================================ */
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* ============================================
+   💎 PRODUCT CARD - CLEAN & MINIMAL
+   ============================================ */
+
+.product-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border-color: #d0d0d0;
+}
+
+
+/* Product Badge */
+.product-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #667eea;
+    color: white;
+    padding: 4px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
+/* Product Image */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #f5f5f5;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Product Info */
+.product-info {
+    text-align: center;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.product-rating {
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+
+.product-price {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 14px;
+}
+
+/* ============================================
+   🚫 NO RESULTS
+   ============================================ */
+
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.no-results-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    font-size: 20px;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+
+
+.no-results p {
+    font-size: 13px;
+    color: #888;
+}
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
+
+@media (max-width: 700px) {
+    .filter-sidebar {
+        display: none;
+    }
+    
+    .filter-products-wrapper {
+        padding: 20px 15px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .products-title {
+        font-size: 24px;
+    }
+    
+    .product-card {
+        padding: 12px;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+    .filter-sidebar {
+        width: 260px;
+    }
+    
+    .filter-products-wrapper {
+        gap: 20px;
+        padding: 24px 15px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    }
+}
+/* ============================================
+   📱 HIDE DESKTOP PRODUCTS ON MOBILE
+   ============================================ */
+/* ============================================
+   📱 MOBILE RESPONSIVE - SHARE PRODUCTS
+   ============================================ */
+
+@media (max-width: 700px) {
+    /* Hide desktop sidebar only */
+    .filter-sidebar {
+        display: none !important;
+    }
+    
+    /* Show products section at full width */
+    .filter-products-wrapper {
+        display: block !important;
+        padding: 16px !important;
+    }
+    
+    .products-section {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Adjust grid for mobile - 2 columns */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    
+    /* Smaller cards on mobile */
+    .product-card {
+        padding: 10px !important;
+        border-radius: 8px !important;
+    }
+    
+    .product-name {
+        font-size: 13px !important;
+    }
+    
+    .product-price {
+        font-size: 13px !important;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 8px !important;
+    }
+}

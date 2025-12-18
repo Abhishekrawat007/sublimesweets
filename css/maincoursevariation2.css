@@ -1,0 +1,486 @@
+/* ============================================
+   ⚡ VARIATION 2: MINIMAL GLASS MAIN COURSE
+   Modern tech aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --main-section-bg: #fff9f5;
+    --main-card-bg: rgba(255, 255, 255, 0.7);
+    --main-card-shadow: rgba(0, 0, 0, 0.06);
+    --main-primary: #ff6b35;
+    --main-secondary: #f7931e;
+    --main-text: #1a1d29;
+    --main-text-light: #6b7280;
+    --main-border: rgba(255, 255, 255, 0.8);
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section {
+    --main-section-bg: #0a0b0f;
+    --main-card-bg: rgba(26, 29, 41, 0.5);
+    --main-card-shadow: rgba(0, 0, 0, 0.3);
+    --main-primary: #ff8c42;
+    --main-secondary: #ffa94d;
+    --main-text: #f9fafb;
+    --main-text-light: #9ca3af;
+    --main-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--main-section-bg);
+    position: relative;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.main-course-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-course-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--main-text);
+    margin: 0;
+    letter-spacing: -2px;
+    position: relative;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.main-course-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-course-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 20px 0 30px;
+    margin: 0 60px;
+}
+
+.main-course-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.main-course-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   PRODUCT CARD - GLASS MORPHISM
+   ============================================ */
+.main-course-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: var(--main-card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--main-border);
+    box-shadow: 
+        0 8px 32px var(--main-card-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+.main-course-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--main-primary), var(--main-secondary));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.main-course-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 
+        0 20px 60px rgba(255, 107, 53, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.main-course-card:hover::before {
+    opacity: 1;
+}
+
+/* ============================================
+   PRODUCT BADGE
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--main-primary);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+.new-badge {
+    background: var(--main-secondary);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(247, 147, 30, 0.05));
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-course-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+.image-glow {
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle, var(--main-primary) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    filter: blur(30px);
+}
+
+.main-course-card:hover .image-glow {
+    opacity: 0.3;
+}
+
+/* ============================================
+   PRODUCT INFO
+   ============================================ */
+.product-info {
+    text-align: center;
+}
+
+.product-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main-text);
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.main-course-card:hover .product-name {
+    color: var(--main-primary);
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    padding-top: 8px;
+    border-top: 1px solid var(--main-border);
+}
+
+.product-rating {
+    font-size: 10px;
+    letter-spacing: -1px;
+    opacity: 0.6;
+}
+
+.product-price {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: var(--main-primary);
+    font-size: 14px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--main-card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--main-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: var(--main-primary);
+    opacity: 0;
+}
+
+.main-course-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--main-primary);
+    color: white;
+    border-color: var(--main-primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   SEE ALL BUTTON
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--main-card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--main-border);
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--main-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.see-all-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--main-primary), var(--main-secondary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.see-all-btn:hover {
+    color: white;
+    border-color: var(--main-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(255, 107, 53, 0.3);
+}
+
+.see-all-btn:hover::before {
+    opacity: 1;
+}
+
+.see-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.see-all-btn span,
+.see-all-btn svg {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .main-course-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-course-section {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 15px;
+    }
+    
+    .main-course-title {
+        font-size: 28px;
+    }
+    
+    .main-course-card {
+        flex: 0 0 140px;
+        width: 140px;
+        padding: 12px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 8px;
+    }
+    
+    .product-name {
+        font-size: 15px;
+    }
+    
+    .main-course-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .see-all-container {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-course-section {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 12px;
+    }
+    
+    .main-course-title {
+        font-size: 26px;
+    }
+    
+    .main-course-scroll {
+        padding: 15px 0 20px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 130px;
+        width: 130px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .product-name {
+        font-size: 13px;
+    }
+    
+    .product-price {
+        font-size: 13px;
+    }
+    
+    .main-course-track {
+        gap: 12px;
+    }
+    
+    .see-all-container {
+        margin-top: 10px;
+    }
+    
+    .see-all-btn {
+        padding: 12px 24px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-course-section {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 10px;
+    }
+    
+    .main-course-title {
+        font-size: 24px;
+    }
+    
+    .main-course-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .see-all-container {
+        margin-top: 8px;
+    }
+    
+    .see-all-btn {
+        padding: 10px 20px;
+        font-size: 11px;
+    }
+}

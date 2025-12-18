@@ -1,0 +1,475 @@
+/* ============================================
+   🍦 LIGHTWEIGHT ICE-CREAM SECTION
+   Optimized for blazing-fast performance
+   ============================================ */
+
+/* CSS VARIABLES */
+:root {
+    --ice-section-bg: #fef5f9;
+    --ice-card-bg: rgba(255, 255, 255, 0.95);
+    --ice-card-border: rgba(255, 182, 193, 0.3);
+    --ice-card-shadow: rgba(255, 107, 157, 0.15);
+    --ice-primary: #ff6b9d;
+    --ice-secondary: #c44569;
+    --ice-text: #2c1a2c;
+    --ice-scrollbar-track: rgba(255, 182, 193, 0.1);
+    --ice-btn-bg: rgba(255, 255, 255, 0.8);
+}
+
+.sublime-navbar.dark-mode ~ .ice-cream-section {
+    --ice-section-bg: #1a1520;
+    --ice-card-bg: rgba(42, 35, 42, 0.95);
+    --ice-card-border: rgba(255, 182, 193, 0.2);
+    --ice-card-shadow: rgba(0, 0, 0, 0.4);
+    --ice-primary: #ffb6c1;
+    --ice-secondary: #ff69b4;
+    --ice-text: #ffffff;
+    --ice-scrollbar-track: rgba(255, 182, 193, 0.05);
+    --ice-btn-bg: rgba(42, 35, 42, 0.8);
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.ice-cream-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--ice-section-bg);
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.ice-cream-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ice-cream-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--ice-primary) 0%, var(--ice-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.ice-cream-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ice-cream-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ice-primary) transparent;
+    padding: 20px 0 30px 0;
+    margin: 0 60px;
+}
+
+/* Custom Scrollbar */
+.ice-cream-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.ice-cream-scroll::-webkit-scrollbar-track {
+    background: var(--ice-scrollbar-track);
+    border-radius: 10px;
+}
+
+.ice-cream-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, var(--ice-primary), var(--ice-secondary));
+    border-radius: 10px;
+}
+
+.ice-cream-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, var(--ice-secondary), var(--ice-primary));
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.ice-cream-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   PRODUCT CARD
+   ============================================ */
+.ice-cream-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: var(--ice-card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--ice-card-border);
+    box-shadow: 0 8px 32px var(--ice-card-shadow);
+}
+
+.ice-cream-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 20px 60px rgba(255, 107, 157, 0.35);
+}
+
+.sublime-navbar.dark-mode ~ .ice-cream-section .ice-cream-card:hover {
+    box-shadow: 0 20px 60px rgba(255, 107, 157, 0.5);
+}
+
+.ice-cream-card:active {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* ============================================
+   PRODUCT BADGE
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+}
+
+.new-badge {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ice-cream-card:hover .product-image {
+    transform: scale(1.15);
+}
+
+/* Simplified Image Glow - Single Approach */
+.image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    filter: blur(15px);
+}
+
+.ice-cream-card:hover .image-glow {
+    opacity: 1;
+}
+
+/* ============================================
+   PRODUCT INFO
+   ============================================ */
+.product-info {
+    text-align: center;
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ice-text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.ice-cream-card:hover .product-name {
+    color: var(--ice-primary);
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.product-rating {
+    font-size: 10px;
+    letter-spacing: -1px;
+}
+
+.product-price {
+    font-weight: 700;
+    color: var(--ice-primary);
+    font-size: 14px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS (Desktop Only)
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--ice-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--ice-card-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: var(--ice-primary);
+    opacity: 0;
+    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
+}
+
+.ice-cream-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   SEE ALL BUTTON
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--ice-btn-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--ice-card-border);
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ice-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.2);
+}
+
+.see-all-btn:hover {
+    background: linear-gradient(135deg, var(--ice-primary), var(--ice-secondary));
+    transform: translateY(-3px) scale(1.05);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
+}
+
+.see-all-btn:hover svg {
+    transform: translateX(5px);
+}
+
+.see-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .ice-cream-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .ice-cream-section {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .ice-cream-header {
+        margin-bottom: 15px;
+    }
+    
+    .ice-cream-title {
+        font-size: 28px;
+    }
+    
+    .ice-cream-card {
+        flex: 0 0 140px;
+        width: 140px;
+        padding: 12px;
+    }
+    
+    .product-badge {
+        font-size: 9px;
+        padding: 3px 8px;
+    }
+    
+    .product-name {
+        font-size: 14px;
+    }
+    
+    .product-price {
+        font-size: 12px;
+    }
+    
+    .see-all-btn {
+        padding: 14px 28px;
+        font-size: 14px;
+    }
+    
+    .ice-cream-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .see-all-container {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ice-cream-section {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .ice-cream-header {
+        margin-bottom: 12px;
+    }
+    
+    .ice-cream-title {
+        font-size: 26px;
+    }
+    
+    .ice-cream-scroll {
+        padding: 15px 0 20px 0;
+    }
+    
+    .ice-cream-card {
+        flex: 0 0 130px;
+        width: 130px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+    
+    .product-name {
+        font-size: 13px;
+    }
+    
+    .ice-cream-track {
+        gap: 12px;
+    }
+    
+    .see-all-container {
+        margin-top: 10px;
+    }
+    
+    .see-all-btn {
+        padding: 12px 24px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ice-cream-section {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .ice-cream-header {
+        margin-bottom: 10px;
+    }
+    
+    .ice-cream-title {
+        font-size: 24px;
+    }
+    
+    .ice-cream-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .ice-cream-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .see-all-container {
+        margin-top: 8px;
+    }
+    
+    .see-all-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}

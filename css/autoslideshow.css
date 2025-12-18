@@ -1,0 +1,531 @@
+/* HERO SLIDER CONTAINER */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* BASE SLIDE - ALWAYS VISIBLE */
+        .slide-base {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide-base::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        /* FRAGMENT OVERLAY - BUILDS THE NEXT IMAGE */
+        .fragment-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* INDIVIDUAL FRAGMENT - NO GAPS, NO ROTATION */
+       .fragment {
+    position: absolute;
+    overflow: hidden;
+    opacity: 0;
+    will-change: opacity;  /* ← Remove transform from here */
+}
+
+       .fragment-inner {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+        /* FRAGMENT REVEAL ANIMATION - FADE IN ONLY, NO ZOOM */
+/* ANIMATION 1: Slide From Edges */
+@keyframes slideFromEdges {
+    from {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty));
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+/* ANIMATION 2: Float From Distance */
+@keyframes floatFromDistance {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateZ(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+}
+
+/* ANIMATION 3: Rotate Flip */
+@keyframes rotateFlip {
+    from {
+        opacity: 0;
+        transform: rotateY(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: rotateY(0deg);
+    }
+}
+
+/* Apply based on class */
+.fragment.slide-from-edges {
+    animation: slideFromEdges 1.8s ease-out forwards;
+}
+
+.fragment.float-from-distance {
+    animation: floatFromDistance 1.8s ease-out forwards;
+    transform-style: preserve-3d;
+}
+
+.fragment.rotate-flip {
+    animation: rotateFlip 1.8s ease-out forwards;
+    transform-style: preserve-3d;
+}
+
+/* Add perspective for 3D effects */
+.fragment-container {
+    perspective: 1000px;
+}
+
+        /* CONTENT OVERLAY */
+        .slide-content {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content-wrapper {
+            max-width: 700px;
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-wrapper.fade-out {
+            opacity: 0;
+            transform: translateX(-80px) scale(0.95);
+        }
+
+        /* PREMIUM BADGE */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .badge-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* MAIN HEADING */
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5);
+            letter-spacing: -2px;
+        }
+
+        .slide-title .highlight {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        /* SUBTITLE */
+        .slide-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            font-style: italic;
+        }
+
+        /* CTA BUTTONS */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
+            color: #fff;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #FFD700 0%, #F7931E 50%, #FF6B35 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.7);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+        }
+
+        /* NAVIGATION ARROWS */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-50%) scale(1.15);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-arrow.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .nav-arrow.prev {
+            left: 40px;
+        }
+
+        .nav-arrow.next {
+            right: 40px;
+        }
+
+        .nav-arrow svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 3;
+        }
+
+        /* SLIDE INDICATORS */
+        .slide-indicators {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .indicator.active {
+            width: 45px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .indicator:not(.active):hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.3);
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+             
+        .hero-slider {
+        height: 450px !important;
+    }
+            .slide-content {
+                padding: 0 20px;
+            }
+
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .premium-badge {
+                padding: 10px 20px;
+                margin-bottom: 20px;
+            }
+
+            .badge-text {
+                font-size: 11px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 16px 35px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nav-arrow.prev {
+                left: 15px;
+            }
+
+            .nav-arrow.next {
+                right: 15px;
+            }
+
+            .nav-arrow svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .slide-indicators {
+                bottom: 30px;
+                padding: 12px 20px;
+                gap: 10px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+
+            .indicator.active {
+                width: 30px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* PERFORMANCE OPTIMIZATIONS */
+        .hero-slider,
+        .slide-base,
+        .nav-arrow,
+        .btn {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce hero slider height on mobile */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 450px !important;
+        margin-bottom: 0 !important;
+    }
+}
+        /* Hero slider content in dark mode */
+body.dark-mode .slide-title,
+body.dark-mode .slide-subtitle,
+body.dark-mode .premium-badge {
+    /* Already has proper dark styling, just ensure visibility */
+    filter: none !important;
+}
+
+/* Scroll indicator */
+body.dark-mode .scroll-indicator {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .scroll-line {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+}
+
+/* Navigation arrows */
+body.dark-mode .nav-arrow {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode .nav-arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Slide indicators */
+body.dark-mode .slide-indicators {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .indicator {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode .indicator:not(.active):hover {
+    background: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>/* ============================================
+   🌟 PREMIUM BESTSELLERS SECTION
+   The most jealousy-inducing section ever!
+   ============================================ */
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.6); }
+}
+
+.categories-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.categories-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.categories-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    background-size: 400% 400%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::before {
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section::after {
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
+}
+
+/* ============================================
+   🎨 PREMIUM SECTION TITLE
+   ============================================ */
+.section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+}
+
+.section-title::before {
+    content: '✨';
+    position: absolute;
+    left: -50px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.section-title::after {
+    content: '✨';
+    position: absolute;
+    right: -50px;
+    animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .section-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 50%, #ff6b6b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 30px rgba(255, 107, 107, 0.5);
+}
+
+/* ============================================
+   📦 CATEGORIES GRID - 2 ROWS × 3 COLUMNS
+   ============================================ */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   💎 PREMIUM CATEGORY CARD
+   ============================================ */
+.category-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--index) * 0.1s);
+    opacity: 0;
+}
+
+.category-card:nth-child(1) { --index: 0; }
+.category-card:nth-child(2) { --index: 1; }
+.category-card:nth-child(3) { --index: 2; }
+.category-card:nth-child(4) { --index: 3; }
+.category-card:nth-child(5) { --index: 4; }
+.category-card:nth-child(6) { --index: 5; }
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card {
+    background: rgba(42, 42, 42, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff6b6b, #ffa500, #667eea, #764ba2);
+    background-size: 400% 400%;
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: gradientShift 3s ease infinite;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover {
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+}
+
+/* ============================================
+   🖼️ PRODUCT IMAGES GRID WITH PREMIUM EFFECTS
+   ============================================ */
+.category-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(102, 126, 234, 0.1));
+    padding: 3px;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s ease;
+}
+
+.category-card:hover .category-products::before {
+    left: 100%;
+}
+
+.product-item {
+    aspect-ratio: 1;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+}
+
+.product-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.category-card:hover .product-item::before {
+    opacity: 1;
+}
+
+.product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .product-item img {
+    transform: scale(1.15);
+}
+
+/* Mobile: 2x2 grid */
+@media (max-width: 768px) {
+    .category-products {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    
+    .product-item:nth-child(5),
+    .product-item:nth-child(6) {
+        display: none;
+    }
+}
+
+/* ============================================
+   🎯 PREMIUM GLASSMORPHISM FOOTER
+   ============================================ */
+.category-footer {
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 107, 107, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .category-footer::before {
+    width: 100%;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-footer {
+    background: rgba(42, 42, 42, 0.8);
+    border-top: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+/* ============================================
+   ✨ PREMIUM TITLE WITH GRADIENT
+   ============================================ */
+.category-title {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateX(5px);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-title {
+    background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sublime-navbar.dark-mode ~ .categories-section .category-card:hover .category-title {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   🚀 PREMIUM ANIMATED BUTTON (Replaces "more")
+   ============================================ */
+.view-all-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-all-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-all-btn:hover::before {
+    left: 100%;
+}
+
+.view-all-btn:hover {
+    transform: translateX(5px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+}
+
+.view-all-btn:active {
+    transform: translateX(5px) scale(0.98);
+}
+
+.view-all-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.view-all-btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* ============================================
+   📱 RESPONSIVE - MOBILE OPTIMIZATION
+   ============================================ */
+@media (max-width: 768px) {
+    .categories-section {
+        padding: 50px 15px;
+    }
+    
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .category-card {
+        border-radius: 16px;
+    }
+    
+    .category-footer {
+        padding: 12px 14px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+    }
+    
+    .view-all-btn {
+        padding: 8px 14px;
+        font-size: 10px;
+        gap: 4px;
+    }
+    
+    .view-all-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        gap: 10px;
+    }
+    
+    .category-footer {
+        padding: 10px 12px;
+    }
+    
+    .category-title {
+        font-size: 12px;
+    }
+    
+    .view-all-btn {
+        padding: 6px 12px;
+        font-size: 9px;
+    }
+    
+    /* ============================================
+   📱 MOBILE COMPACT BUTTON - Below 600px
+   Small, slim button that doesn't bloat cards
+   ============================================ */
+@media (max-width: 600px) {
+    .category-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px 12px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+        text-align: left;
+        width: 100%;
+    }
+    
+    .view-all-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 6px 12px;  /* Much smaller padding */
+        font-size: 10px;     /* Smaller text */
+        border-radius: 6px;  /* Tighter radius */
+        gap: 4px;
+    }
+    
+    .view-all-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-footer {
+        padding: 10px 10px;
+        gap: 6px;
+    }
+    
+    .category-title {
+        font-size: 12px;
+    }
+    
+    .view-all-btn {
+        padding: 5px 10px;   /* Even smaller */
+        font-size: 9px;
+    }
+    
+    .view-all-btn svg {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+
+}</style>
+</head>
+<body>
+    <!-- ============================================
+     🌟 PREMIUM BESTSELLERS SECTION
+     The most jealousy-inducing section ever!
+     ============================================ -->
+<div class="categories-section">
+    <h2 class="section-title">Bestsellers</h2>
+    
+    <div class="categories-grid">
+        <!-- Mithai (Indian Sweets) -->
+        <div class="category-card" onclick="location.href='/category/mithai'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop" alt="Mithai 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1618897996318-5a901fa6ca71?w=400&h=400&fit=crop" alt="Mithai 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" alt="Mithai 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Mithai 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1610404923595-97ee4cee3b9d?w=400&h=400&fit=crop" alt="Mithai 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=400&h=400&fit=crop" alt="Mithai 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Mithai</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/mithai'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Snacks & Drinks -->
+        <div class="category-card" onclick="location.href='/category/snacks-drinks'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400&h=400&fit=crop" alt="Snack 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Snack 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1604431697735-95f8c4d6fc9a?w=400&h=400&fit=crop" alt="Snack 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&h=400&fit=crop" alt="Snack 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1625937329935-325e6c49d7a4?w=400&h=400&fit=crop" alt="Snack 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=400&fit=crop" alt="Snack 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Snacks</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/snacks-drinks'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dairy -->
+        <div class="category-card" onclick="location.href='/category/dairy'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=400&fit=crop" alt="Dairy 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop" alt="Dairy 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=400&h=400&fit=crop" alt="Dairy 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=400&h=400&fit=crop" alt="Dairy 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=400&fit=crop" alt="Dairy 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=400&fit=crop" alt="Dairy 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Dairy</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/dairy'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Street Foods -->
+        <div class="category-card" onclick="location.href='/category/street-foods'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=400&fit=crop" alt="Street Food 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626074353765-517a65eeafb3?w=400&h=400&fit=crop" alt="Street Food 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=400&fit=crop" alt="Street Food 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1630409346038-e25337c5be50?w=400&h=400&fit=crop" alt="Street Food 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=400&fit=crop" alt="Street Food 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1625937329935-325e6c49d7a4?w=400&h=400&fit=crop" alt="Street Food 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Street Foods</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/street-foods'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Course -->
+        <div class="category-card" onclick="location.href='/category/main-course'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=400&h=400&fit=crop" alt="Main Course 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=400&fit=crop" alt="Main Course 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1626074353765-517a65eeafb3?w=400&h=400&fit=crop" alt="Main Course 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=400&h=400&fit=crop" alt="Main Course 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&h=400&fit=crop" alt="Main Course 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=400&h=400&fit=crop" alt="Main Course 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Main Course</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/main-course'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dry Fruits -->
+        <div class="category-card" onclick="location.href='/category/dry-fruits'">
+            <div class="category-products">
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=400&h=400&fit=crop" alt="Dry Fruit 1">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop" alt="Dry Fruit 2">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop" alt="Dry Fruit 3">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1508736793122-f516e3ba5569?w=400&h=400&fit=crop" alt="Dry Fruit 4">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1590777516502-0ef97f8e5a4b?w=400&h=400&fit=crop" alt="Dry Fruit 5">
+                </div>
+                <div class="product-item">
+                    <img src="https://images.unsplash.com/photo-1613743983303-b3e89f8a7b82?w=400&h=400&fit=crop" alt="Dry Fruit 6">
+                </div>
+            </div>
+            <div class="category-footer">
+                <span class="category-title">Dry Fruits</span>
+                <button class="view-all-btn" onclick="event.stopPropagation(); location.href='/category/dry-fruits'">
+                    View All
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+/* ============================================
+   ✨ ULTRA-PREMIUM CATEGORIES - NEW DESIGN
+   Lightweight & Elegant - Performance First!
+   ============================================ */
+
+/* ============================================
+   ESSENTIAL ANIMATIONS ONLY
+   ============================================ */
+   .category-card,
+.category-products,
+.product-item,
+.product-item img {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+    --section-bg: #fafafa;
+    --card-bg: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --border-light: rgba(0, 0, 0, 0.06);
+    --hover-glow: rgba(255, 107, 107, 0.15);
+    --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+}
+
+.sublime-navbar.dark-mode ~ .categories-section {
+    --section-bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    --border-light: rgba(255, 255, 255, 0.08);
+    --hover-glow: rgba(255, 107, 107, 0.2);
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.categories-section {
+    padding: 70px 20px 50px;
+    background: var(--section-bg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   SECTION TITLE
+   ============================================ */
+.section-title {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: -2px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent-gradient);
+    border-radius: 10px;
+}
+
+/* ============================================
+   CATEGORIES GRID
+   ============================================ */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* ============================================
+   CATEGORY CARD - NEW FLOATING DESIGN
+   ============================================ */
+.category-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--border-light);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: calc(var(--index) * 0.08s);
+    opacity: 0;
+}
+
+.category-card:nth-child(1) { --index: 0; }
+.category-card:nth-child(2) { --index: 1; }
+.category-card:nth-child(3) { --index: 2; }
+.category-card:nth-child(4) { --index: 3; }
+.category-card:nth-child(5) { --index: 4; }
+.category-card:nth-child(6) { --index: 5; }
+.category-card:nth-child(7) { --index: 6; }
+.category-card:nth-child(8) { --index: 7; }
+.category-card:nth-child(9) { --index: 8; }
+
+/* Elegant Border Glow Effect */
+.category-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: var(--accent-gradient);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+    animation: borderGlow 2s ease-in-out infinite;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px var(--hover-glow);
+}
+
+/* ============================================
+   IMAGE CONTAINER
+   ============================================ */
+.category-products {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Show only SECOND image */
+.product-item {
+    display: none !important;
+}
+
+.product-item:nth-child(2) {
+    display: flex !important;
+    width: 100%;
+    height: 100%;
+}
+
+.product-item:nth-child(2) img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95);
+}
+
+.category-card:hover .product-item:nth-child(2) img {
+    transform: scale(1.1);
+    filter: brightness(1);
+}
+
+/* Subtle gradient overlay */
+.product-item:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
+}
+
+/* ============================================
+   CARD FOOTER
+   ============================================ */
+.category-footer {
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: var(--card-bg);
+}
+
+/* ============================================
+   CATEGORY TITLE
+   ============================================ */
+.category-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-title {
+    color: #ff6b6b;
+    transform: translateX(4px);
+}
+
+/* ============================================
+   VIEW ALL BUTTON
+   ============================================ */
+.view-all-btn {
+    padding: 10px 22px;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
+}
+
+.view-all-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.view-all-btn:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   📱 RESPONSIVE - TABLET (601px - 900px)
+   ============================================ */
+@media (min-width: 601px) and (max-width: 900px) {
+    .categories-section {
+        padding: 60px 18px 40px;
+    }
+    
+    .section-title {
+        font-size: 42px;
+        margin-bottom: 40px;
+    }
+    
+    .categories-grid {
+        gap: 22px;
+    }
+    
+    .category-footer {
+        padding: 18px 20px;
+    }
+    
+    .category-title {
+        font-size: 16px;
+    }
+    
+    .view-all-btn {
+        padding: 9px 18px;
+        font-size: 12px;
+    }
+}
+
+/* ============================================
+   📱 RESPONSIVE - MOBILE (481px - 600px)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 600px) {
+    .categories-section {
+        padding: 50px 15px 35px;
+    }
+    
+    .section-title {
+        font-size: 38px;
+        margin-bottom: 35px;
+    }
+    
+    .section-title::after {
+        width: 50px;
+        height: 3px;
+    }
+    
+    .categories-grid {
+        gap: 16px;
+    }
+    
+    .category-card {
+        border-radius: 18px;
+    }
+    
+    .category-card::before {
+        border-radius: 18px;
+    }
+    
+    .category-footer {
+        padding: 16px 16px;
+    }
+    
+    .category-title {
+        font-size: 15px;
+    }
+    
+    .view-all-btn {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+}
+
+/* ============================================
+   📱 RESPONSIVE - MOBILE (Below 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    .categories-section {
+        padding: 40px 12px 30px;
+    }
+    
+    .section-title {
+        font-size: 34px;
+        margin-bottom: 25px;
+        letter-spacing: -1.5px;
+    }
+    
+    .section-title::after {
+        width: 45px;
+        height: 3px;
+        bottom: -10px;
+    }
+    
+    .categories-grid {
+        gap: 14px;
+    }
+    
+    .category-card {
+        border-radius: 16px;
+    }
+    
+    .category-card::before {
+        border-radius: 16px;
+    }
+    
+    /* Mobile: Show FIRST image */
+    .category-products {
+        aspect-ratio: 0.7;
+    }
+    
+    .product-item:first-child {
+        display: flex !important;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .product-item:first-child img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        filter: brightness(0.95);
+    }
+    
+    .category-card:active .product-item:first-child img {
+        transform: scale(1.08);
+        filter: brightness(1);
+    }
+    
+    .product-item:first-child::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.2) 100%);
+    }
+    
+    .category-footer {
+        padding: 16px 14px;
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .view-all-btn {
+        display: none !important;
+    }
+    
+    .category-title {
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Mobile tap effect */
+    .category-card:active {
+        transform: scale(0.98);
+    }
+    
+    .category-card:active::before {
+        opacity: 0.6;
+    }
+}
+
+/* ============================================
+   📱 RESPONSIVE - SMALL MOBILE (361px - 400px)
+   ============================================ */
+@media (max-width: 400px) {
+    .categories-section {
+        padding: 35px 10px 25px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+        margin-bottom: 22px;
+    }
+    
+    .categories-grid {
+        gap: 12px;
+    }
+    
+    .category-card {
+        border-radius: 15px;
+    }
+    
+    .category-card::before {
+        border-radius: 15px;
+    }
+    
+    .category-footer {
+        padding: 14px 12px;
+    }
+    
+    .category-title {
+        font-size: 14px;
+    }
+}
+
+/* ============================================
+   📱 RESPONSIVE - TINY MOBILE (Below 360px)
+   ============================================ */
+@media (max-width: 360px) {
+    .categories-section {
+        padding: 30px 8px 22px;
+    }
+    
+    .section-title {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    
+    .section-title::after {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .categories-grid {
+        gap: 10px;
+    }
+    
+    .category-card {
+        border-radius: 14px;
+    }
+    
+    .category-card::before {
+        border-radius: 14px;
+    }
+    
+    .category-footer {
+        padding: 13px 10px;
+    }
+    
+    .category-title {
+        font-size: 13px;
+    }
+}
+
+/* ============================================
+   💻 LAPTOP/DESKTOP OPTIMIZATION (1024px+)
+   ============================================ */
+@media (min-width: 1024px) {
+    .categories-section {
+        max-width: 1200px;
+        padding: 50px 20px 40px;
+    }
+
+    .section-title {
+        font-size: clamp(32px, 3vw, 42px);
+        margin-bottom: 40px;
+    }
+
+    .categories-grid {
+        gap: 24px;
+    }
+
+    .category-card {
+        border-radius: 18px;
+    }
+
+    .category-card::before {
+        border-radius: 18px;
+    }
+
+    .category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 32px var(--hover-glow);
+    }
+
+    .category-products {
+        aspect-ratio: 0.9;
+    }
+
+    .category-footer {
+        padding: 18px 20px;
+    }
+
+    .category-title {
+        font-size: 17px;
+    }
+
+    .view-all-btn {
+        padding: 9px 20px;
+        font-size: 12px;
+    }
+}

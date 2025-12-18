@@ -1,0 +1,102 @@
+/* ===========================
+   GLOBAL TOAST / SNACKBAR UI
+   =========================== */
+
+.toast-container {
+    position: fixed;
+    right: 16px;
+    bottom: 90px;            /* 🟢 MOBILE: just above bottom bar */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+/* 💻 On larger screens, move closer to bottom-right corner */
+@media (min-width: 768px) {
+    .toast-container {
+        bottom: 30px;
+        right: 180px;
+    }
+}
+
+
+.toast {
+    min-width: 220px;
+    max-width: 320px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    background: rgba(17, 24, 39, 0.96);
+    color: #ffffff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translateY(8px);    /* ⬅️ start slightly lower */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    backdrop-filter: blur(10px);
+}
+
+.toast.visible {
+    opacity: 1;
+    transform: translateY(0);      /* ⬅️ slide upward into place */
+}
+/* 💻 Desktop / Laptop: bigger toast, top-right, slides down */
+@media (min-width: 1024px) {
+    .toast-container {
+        top: 90px;          /* near top navbar / cart */
+        bottom: auto;
+        right: 24px;
+        align-items: flex-end;
+    }
+
+    .toast {
+        min-width: 260px;
+        max-width: 380px;
+        padding: 12px 18px;
+        font-size: 15px;
+        border-radius: 14px;
+        transform: translateY(-10px);  /* 🔽 start slightly ABOVE */
+    }
+
+    .toast.visible {
+        transform: translateY(0);       /* 🔽 slide DOWN into place */
+    }
+}
+
+
+/* Variants */
+.toast-success {
+    border: 1px solid #22c55e; /* green */
+}
+
+.toast-error {
+    border: 1px solid #ef4444; /* red */
+}
+
+.toast-info {
+    border: 1px solid #3b82f6; /* blue */
+}
+
+/* Icon bubble */
+.toast::before {
+    content: "✓";
+    font-size: 14px;
+}
+
+.toast-error::before {
+    content: "✕";
+}
+
+.toast-info::before {
+    content: "ℹ";
+}
+
+/* Dark mode tweak if you want */
+body.dark-mode .toast {
+    background: rgba(15, 23, 42, 0.98);
+}

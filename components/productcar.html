@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - Sublime Store</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --primary-dark: #ff5252;
+            --secondary: #ffa500;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --success: #28a745;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 40px rgba(255,107,107,0.2);
+        }
+
+        body.dark-mode {
+            --bg: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --border: rgba(255,255,255,0.1);
+            --shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding-top: 80px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+
+        /* Main Layout */
+        .product-main {
+            display: grid;
+            grid-template-columns: 600px 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* LEFT: Image Gallery */
+        .image-gallery {
+            display: flex;
+            gap: 16px;
+        }
+
+        .thumbnail-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .thumbnail-column::-webkit-scrollbar { width: 4px; }
+        .thumbnail-column::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .thumbnail:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        .thumbnail.active {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .main-image-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .main-image-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 2;
+        }
+
+        .wishlist-btn-detail {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            z-index: 2;
+        }
+        .wishlist-btn-detail:hover {
+            transform: scale(1.1);
+        }
+        .wishlist-btn-detail svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary);
+            fill: none;
+        }
+        .wishlist-btn-detail.saved svg {
+            fill: var(--primary);
+        }
+
+        /* Manual Slideshow Controls */
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .slide-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text);
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+        .slide-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* RIGHT: Product Info */
+        .product-info { padding-top: 0; }
+
+        .product-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stars {
+            color: #ffc107;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .rating-text {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .price-section {
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,165,0,0.1));
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            border: 2px solid rgba(255,107,107,0.2);
+        }
+        .current-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .original-price {
+            font-size: 24px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            margin-left: 12px;
+        }
+        .you-save {
+            display: block;
+            margin-top: 8px;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Options */
+        .option-section {
+            margin-bottom: 32px;
+        }
+        .option-label {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .option-btn {
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 600;
+        }
+        .option-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .option-btn.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        .option-size {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .option-price {
+            display: block;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            padding: 12px 20px;
+            background: rgba(40,167,69,0.1);
+            border-radius: 12px;
+            width: fit-content;
+        }
+        .stock-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 45px rgba(255,107,107,0.5);
+        }
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .description-section {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        .description-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .description-content {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* Related Products */
+        .related-section { margin-top: 80px; }
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .related-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        .related-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .related-card-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+        .related-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .related-card:hover img {
+            transform: scale(1.1);
+        }
+        .related-card-info { padding: 20px; }
+        .related-card-name {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .related-card-price {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .related-price-new {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .related-price-old {
+            font-size: 14px;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .image-gallery {
+                flex-direction: column-reverse;
+            }
+            .thumbnail-column {
+                flex-direction: row;
+                max-height: none;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            .main-image-container {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px 12px; }
+            .product-title { font-size: 24px; }
+            .current-price { font-size: 36px; }
+            .action-buttons { flex-direction: column; }
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .main-image-container { height: 400px; }
+        }
+
+        @media (max-width: 480px) {
+            .related-grid { grid-template-columns: 1fr; }
+            .thumbnail { width: 60px; height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar placeholder -->
+    <div id="navbar"></div>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <span id="breadcrumbCategory">Category</span>
+            <span>›</span>
+            <span id="breadcrumbProduct">Product</span>
+        </div>
+
+        <div class="product-main">
+            <!-- Image Gallery -->
+            <div class="image-gallery">
+                <div class="thumbnail-column" id="thumbnailColumn"></div>
+                
+                <div class="main-image-wrapper">
+                    <div class="main-image-container">
+                        <img src="" alt="Product" class="main-image" id="mainImage">
+                        <div class="discount-badge" id="discountBadge">25% OFF</div>
+                        <button class="wishlist-btn-detail" id="wishlistBtn">
+                            <svg viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                        <div class="slideshow-controls">
+                            <button class="slide-btn" id="prevBtn">❮</button>
+                            <button class="slide-btn" id="nextBtn">❯</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-info">
+                <h1 class="product-title" id="productTitle">Loading...</h1>
+                <div class="product-rating">
+                    <span class="stars" id="productStars">★★★★★</span>
+                    <span class="rating-text" id="ratingText">(4.8 rating)</span>
+                </div>
+
+                <div class="price-section">
+                    <span class="current-price" id="currentPrice">₹0</span>
+                    <span class="original-price" id="originalPrice">₹0</span>
+                    <span class="you-save" id="youSave">You save: ₹0</span>
+                </div>
+
+                <div class="option-section" id="sizeSection">
+                    <div class="option-label">Select Size:</div>
+                    <div class="option-grid" id="sizeGrid"></div>
+                </div>
+
+                <div class="option-section" id="flavorSection" style="display: none;">
+                    <div class="option-label">Select Flavor:</div>
+                    <div class="option-grid" id="flavorGrid"></div>
+                </div>
+
+                <div class="stock-status" id="stockStatus">
+                    <div class="stock-dot"></div>
+                    <span>In Stock</span>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-primary" id="addToCartBtn">Add to Cart</button>
+                    <button class="btn-secondary" id="buyNowBtn">Buy Now →</button>
+                </div>
+
+                <div class="description-section" id="descriptionSection">
+                    <h3 class="description-title">📝 Description</h3>
+                    <div class="description-content" id="productDescription">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-section">
+            <h2 class="section-title">Related Products</h2>
+            <div class="related-grid" id="relatedGrid"></div>
+        </div>
+    </div>
+
+    <script src="js/product.js"></script>
+    <script src="js/product-detail-script.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // Load navbar
+        fetch('navbar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                if (typeof bindNavbarEvents === 'function') bindNavbarEvents();
+            });
+    </script>
+    
+</body>
+</html>

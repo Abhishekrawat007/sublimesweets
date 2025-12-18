@@ -1,0 +1,25 @@
+{
+  "name": "chatgpt-vs-claude",
+  "version": "1.0.0",
+  "description": "",
+  "main": "category8.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abhishekrawat007/sublimesweets.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abhishekrawat007/sublimesweets/issues"
+  },
+  "homepage": "https://github.com/Abhishekrawat007/sublimesweets#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "firebase-admin": "^13.6.0",
+    "nodemailer": "^7.0.11"
+  }
+}

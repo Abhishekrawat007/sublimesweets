@@ -1,0 +1,682 @@
+/* ============================================
+   📱 MOBILE FILTER SECTION
+   Premium, Clean, Meesho-style
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+/* ============================================
+   📱 MOBILE STICKY FILTER BAR
+   ============================================ */
+
+.mobile-filter-bar {
+    position: sticky;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 56px; /* Larger - was 48px */
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5; /* ADD top border */
+    border-bottom: 1px solid #e5e5e5;
+    display: none;
+    z-index: 998;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); /* Subtle shadow */
+}
+
+body.dark-mode .mobile-filter-bar {
+    background: #2a2a2a !important;
+    border-top-color: #3a3a3a !important; /* ADD */
+    border-bottom-color: #3a3a3a !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Match navbar height changes on small screens */
+@media (max-width: 375px) {
+    .mobile-filter-bar {
+        top: 65px; /* Match navbar height at this breakpoint */
+    }
+}
+
+@media (max-width: 320px) {
+    .mobile-filter-bar {
+        top: 60px; /* Match navbar height at this breakpoint */
+    }
+}
+
+body.dark-mode .mobile-filter-bar {
+    background: #2a2a2a !important;
+    border-bottom-color: #3a3a3a !important;
+}
+
+/* Show only on mobile */
+@media (max-width: 700px) {
+    .mobile-filter-bar {
+        display: flex;
+    }
+    
+    /* Remove body padding - filter bar is now sticky, not fixed */
+}
+/* Desktop: hide bar + modals, remove bottom padding */
+@media (min-width: 701px) {
+    .mobile-filter-bar {
+        display: none !important;
+    }
+
+    .bottom-modal {
+        display: none !important;
+    }
+
+    body {
+        padding-bottom: 0 !important;
+    }
+}
+/* Filter Buttons */
+/* Filter Buttons */
+.filter-btn {
+    flex: 1;
+    height: 56px; /* Match new bar height */
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px; /* Slightly larger */
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    border-right: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+body.dark-mode .filter-btn {
+    color: #e0e0e0 !important;
+    border-right-color: #3a3a3a !important;
+}
+
+.filter-btn:last-child {
+    border-right: none;
+}
+
+.filter-btn:active {
+    background: #f5f5f5;
+}
+
+body.dark-mode .filter-btn:active {
+    background: #333 !important;
+}
+
+/* Sort Icon (Stacked Arrows) */
+/* Sort Icon (Two Separate Arrows) */
+.sort-icon {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.7;
+    font-size: 15px;
+    color: #000;
+}
+
+body.dark-mode .sort-icon {
+    color: #f0f0f0 !important;
+}
+
+/* Arrow Down */
+.arrow-down {
+    font-size: 10px;
+    margin-left: 2px;
+}
+
+/* Filters Icon */
+.filters-icon {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Active State */
+.filter-btn.active {
+    color: #667eea;
+}
+
+body.dark-mode .filter-btn.active {
+    color: #667eea !important;
+}
+
+/* ============================================
+   🌑 MODAL OVERLAY
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1090;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1099; /* Above bottom bar */
+}
+/* ============================================
+   📱 BOTTOM MODAL (Slides Up)
+   ============================================ */
+
+.bottom-modal {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    max-height: calc(80vh - 75px); /* Subtract bottom bar height */
+    background: #ffffff;
+    border-radius: 16px 16px 0 0;
+    transform: translateY(calc(100% + 75px));
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999; /* Above bottom bar */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .bottom-modal {
+    background: #2a2a2a !important;
+}
+
+.bottom-modal.active {
+    transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+body.dark-mode .modal-header {
+    border-bottom-color: #3a3a3a !important;
+}
+
+.modal-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.3px;
+}
+
+body.dark-mode .modal-header h3 {
+    color: #ffffff !important;
+}
+
+.close-modal {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-modal:active {
+    background: #f5f5f5;
+}
+
+body.dark-mode .close-modal {
+    color: #999 !important;
+}
+
+body.dark-mode .close-modal:active {
+    background: #333 !important;
+}
+
+/* Modal Content (Scrollable) */
+/* Modal Content (Scrollable) */
+.modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 20px; /* More top/bottom padding */
+}
+.modal-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #d0d0d0;
+    border-radius: 4px;
+}
+
+body.dark-mode .modal-content::-webkit-scrollbar-thumb {
+    background: #4a4a4a !important;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-top: 1px solid #f0f0f0;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: #3a3a3a !important;
+}
+
+/* ============================================
+   📻 RADIO BUTTONS (Mobile)
+   ============================================ */
+
+.radio-option-mobile {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+body.dark-mode .radio-option-mobile {
+    border-bottom-color: #333 !important;
+}
+
+.radio-option-mobile:last-child {
+    border-bottom: none;
+}
+
+.radio-option-mobile input[type="radio"] {
+    display: none;
+}
+
+.radio-custom-mobile {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d0d0d0;
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+body.dark-mode .radio-custom-mobile {
+    border-color: #666 !important;
+}
+
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile {
+    border-color: #667eea;
+}
+
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #667eea;
+    border-radius: 50%;
+}
+
+.radio-label-mobile {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a4a4a;
+    flex: 1;
+}
+
+body.dark-mode .radio-label-mobile {
+    color: #d0d0d0 !important;
+}
+
+.radio-option-mobile input[type="radio"]:checked ~ .radio-label-mobile {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* ============================================
+   ☑️ CHECKBOXES (Mobile Category)
+   ============================================ */
+
+.checkbox-option-mobile {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+body.dark-mode .checkbox-option-mobile {
+    border-bottom-color: #333 !important;
+}
+
+.checkbox-option-mobile:last-child {
+    border-bottom: none;
+}
+
+.checkbox-option-mobile input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom-mobile {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d0d0d0;
+    border-radius: 3px;
+    margin-right: 12px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+body.dark-mode .checkbox-custom-mobile {
+    border-color: #666 !important;
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile {
+    border-color: #667eea;
+    background: #667eea;
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.checkbox-label-mobile {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a4a4a;
+    flex: 1;
+}
+
+body.dark-mode .checkbox-label-mobile {
+    color: #d0d0d0 !important;
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked ~ .checkbox-label-mobile {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* ============================================
+   🔍 CATEGORY SEARCH (Mobile)
+   ============================================ */
+
+.category-search-wrapper-mobile {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search-icon-mobile {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+.category-search-mobile {
+    width: 100%;
+    padding: 10px 12px 10px 38px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fafafa;
+    color: #1a1a1a;
+}
+
+body.dark-mode .category-search-mobile {
+    background: #333 !important;
+    border-color: #444 !important;
+    color: #e0e0e0 !important;
+}
+
+.category-search-mobile:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.category-search-mobile::placeholder {
+    color: #999;
+}
+
+/* Category List */
+.category-list-mobile {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ============================================
+   💰 PREMIUM PRICE INPUT
+   ============================================ */
+
+.premium-price-input {
+    padding: 8px 0;
+}
+
+.premium-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+body.dark-mode .premium-label {
+    color: #ffffff !important;
+}
+
+.price-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.price-input-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fafafa;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .price-input-wrapper {
+    background: #333 !important;
+    border-color: #444 !important;
+}
+
+.price-input-wrapper:focus-within {
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+body.dark-mode .price-input-wrapper:focus-within {
+    background: #3a3a3a !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+.currency-symbol {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin-right: 6px;
+}
+
+body.dark-mode .currency-symbol {
+    color: #999 !important;
+}
+
+.price-input-wrapper input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    outline: none;
+    width: 100%;
+}
+
+body.dark-mode .price-input-wrapper input {
+    color: #ffffff !important;
+}
+
+.price-input-wrapper input::placeholder {
+    color: #999;
+    font-weight: 500;
+}
+
+.range-separator {
+    font-size: 18px;
+    font-weight: 300;
+    color: #999;
+}
+
+body.dark-mode .range-separator {
+    color: #666 !important;
+}
+
+/* Remove number input arrows */
+.price-input-wrapper input[type="number"]::-webkit-inner-spin-button,
+.price-input-wrapper input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.price-input-wrapper input[type="number"] {
+    -moz-appearance: textfield;
+}
+/* ============================================
+   🔘 BUTTONS (Done, Clear, Apply)
+   ============================================ */
+
+.done-btn {
+    flex: 1;
+    padding: 12px 24px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.done-btn:active {
+    transform: scale(0.98);
+    background: #5568d3;
+}
+
+.clear-btn {
+    flex: 1;
+    padding: 12px 24px;
+    background: transparent;
+    color: #667eea;
+    border: 1px solid #667eea;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.clear-btn:active {
+    transform: scale(0.98);
+    background: #f5f5f5;
+}
+
+body.dark-mode .clear-btn:active {
+    background: #333 !important;
+}
+
+.apply-btn {
+    /* Same as done-btn */
+}
+
+/* Product Count */
+.product-count-mobile {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+body.dark-mode .product-count-mobile {
+    color: #999 !important;
+}
+
+/* Filter Section Title */
+.filter-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+body.dark-mode .filter-section-title {
+    color: #ffffff !important;
+}
+
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
+
+@media (min-width: 701px) {
+    .mobile-filter-bar {
+        display: none !important;
+    }
+    
+    .bottom-modal {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+    }
+}

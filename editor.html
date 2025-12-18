@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🛍 Product Editor - SublimeStore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<link rel="stylesheet" href="css/editor-page.css">
+  
+ 
+
+ 
+
+
+
+</head>
+<body>
+<script>
+// (async function verifyAuthOnLoad(){
+//   const token = sessionStorage.getItem("adminToken");
+//   if (!token) {
+//     alert("Unauthorized. Please login.");
+//     window.location.href = "kunnu.html"; // or admin.html
+//     return;
+//   }
+//   try {
+//     const res = await fetch("/.netlify/functions/verify", {
+//       method: "GET",
+//       headers: { Authorization: "Bearer " + token }
+//     });
+//     const data = await res.json();
+//     if (!res.ok || !data.ok) {
+//       sessionStorage.removeItem("adminToken");
+//       alert("Session expired or invalid. Please login.");
+//       window.location.href = "kunnu.html";
+//       return;
+//     }
+//     // authenticated — you're good to continue
+//   } catch (err) {
+//     console.error("Auth check failed:", err);
+//     alert("Network error while verifying authentication.");
+//     window.location.href = "kunnu.html";
+//   }
+// })();
+function decodeJwt(token) {
+  // JWT parts: header.payload.signature
+  const payload = token.split('.')[1];
+  // JWT payload is base64url encoded, replace URL-safe chars and decode
+  const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+  return JSON.parse(jsonPayload);
+}
+
+function setupTokenExpiryWarning(token) {
+  const payload = decodeJwt(token);
+  if (!payload.exp) {
+    console.warn("Token has no expiry");
+    return;
+  }
+
+  const expiryTime = payload.exp * 1000; // convert to ms
+  const now = Date.now();
+  const warningTime = expiryTime - 5 * 60 * 1000; // 5 minutes before expiry
+
+  if (now > expiryTime) {
+    alert("Your session has already expired. Please login again.");
+    sessionStorage.removeItem("adminToken");
+    window.location.href = "kunnu.html";
+    return;
+  }
+
+  if (now > warningTime) {
+    // If less than 5 minutes remain, show warning immediately
+    showExpiryWarning(expiryTime);
+  } else {
+    // Otherwise, set a timeout to warn at warningTime
+    setTimeout(() => showExpiryWarning(expiryTime), warningTime - now);
+  }
+}
+
+function showExpiryWarning(expiryTime) {
+  const timeLeft = Math.round((expiryTime - Date.now()) / 1000 / 60);
+  if (confirm(`⚠️ Your session will expire in about ${timeLeft} minutes.\nDo you want to stay logged in?`)) {
+    // User wants to stay logged in - redirect to login or refresh token
+    window.location.href = "kunnu.html";
+  } else {
+    // User ignores or cancels - do nothing or log out after expiry
+    // Optional: you can auto-logout after expiry time here if you want
+  }
+}
+
+// // Run this after successful token verification on editor page load
+// const token = sessionStorage.getItem("adminToken");
+// if (token) {
+//   setupTokenExpiryWarning(token);
+// }
+
+</script>
+
+
+  <h1 class="page-heading">Product Editor Page</h1>
+
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="add" onclick="addProduct(); toggleMobileMenu();">➕ Add New Product</button>
+  <button class="export" onclick="exportProducts(); toggleMobileMenu();">💾 Export product.js</button>
+  <button class="undo" onclick="undoChanges(); toggleMobileMenu();">↩️ Undo Changes</button>
+  <button class="exit" onclick="exitEditor(); toggleMobileMenu();">🚪 Exit Editor</button>
+  <button class="dark-toggle" onclick="toggleDarkMode();">🌙 Toggle Dark Mode</button>
+  <button class="logout" onclick="logout(); toggleMobileMenu();">🔐 Logout</button>
+  <button class="orders" onclick="openOrdersSection(); toggleMobileMenu();">📦 Orders</button>
+  <button class="broadcast" onclick="document.getElementById('btn-broadcast').click(); toggleMobileMenu();">🔔 Broadcast</button>
+    
+
+ 
+</div>
+<div class="controls">
+    <button class="add" onclick="addProduct()">➕ Add New Product</button>
+    <button class="export" onclick="exportProducts()">💾 Export product.js</button>
+    <button class="undo" onclick="undoChanges()">↩️ Undo Changes</button>
+    <button class="exit" onclick="exitEditor()">🚪 Exit Editor</button>
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+    <button class="logout" onclick="logout()">🔐 Logout</button>
+      <button class="export" onclick="openOrdersSection()">📦 Orders</button>
+    <button id="btn-broadcast" class="broadcast" style="background:#6f42c1;">🔔 Broadcast</button>
+      
+
+    
+
+  </div>
+<div class="search-box">
+  <input type="text" id="searchInput" class="animated-search" placeholder="🔍 Search by name, category, or tag..." oninput="debouncedSearch()" />
+</div>
+
+  <section id="productsSection">
+  <div class="product-list" id="productList">
+  </div>
+</section>
+
+
+<section id="ordersSection" style="display:none; margin-top:1rem;">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+    <h2 style="margin:0;">Orders</h2>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <button class="exit" onclick="showProductsSection()">⬅ Back to Products</button>
+      <button id="refreshOrdersBtn" class="export">🔁 Refresh</button>
+    </div>
+  </div>
+
+  <p id="ordersStatusText" style="margin-bottom:0.75rem; color:#6b7280; font-size:0.85rem;">
+    Orders not loaded yet.
+  </p>
+<div id="ordersList"></div>
+
+</section>
+
+ 
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title">Title</h2>
+      <p id="modal-message">Message</p>
+      <div class="modal-buttons">
+        <button id="modal-cancel">Cancel</button>
+        <button id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+ 
+<div id="confirmModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <p>Are you sure you want to <strong>submit and publish the new updates</strong>? This will make the changes live on your website.</p>
+    <button id="confirmYes" class="btn btn-yes">Yes</button>
+    <button id="confirmNo" class="btn btn-cancel">Cancel</button>
+  </div>
+</div>
+
+
+
+<div style="position: sticky; bottom: 10px; text-align: center; margin-top: 2rem;">
+ <div class="submit-wrapper">
+  <button id="submitBtn" class="submit-btn">🚀 Submit & Publish</button>
+</div>
+</div>
+
+
+<div id="successModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="successClose" style="position:absolute; top:10px; right:15px; font-size:22px; cursor:pointer;">&times;</span>
+    <h2>✅ Success</h2>
+    <p>Product list updated successfully!</p>
+    <div class="modal-buttons">
+      <button id="successOk" style="background: #28a745; color: white;">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:1000;">
+  <span id="modalCloseBtn" style="position:absolute; top:20px; right:30px; font-size:2rem; color:white; cursor:pointer;">✖</span>
+  <img id="modalImage" src="" style="max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 0 20px black;" />
+</div>
+</div>
+
+<button id="scrollToTopBtn" title="Go to top">↑</button>
+
+<div id="broadcast-backdrop" class="broadcast-backdrop hidden" aria-hidden="true"></div>
+
+<div id="broadcast-modal" class="broadcast-modal hidden" role="dialog" aria-modal="true" aria-labelledby="broadcast-title" aria-hidden="true">
+  <div class="broadcast-modal-inner">
+    <h3 id="broadcast-title">Send push to all subscribers</h3>
+
+    <label style="display:block; margin-top:10px; font-weight:600;">Title
+      <input id="broadcast-input-title" type="text" maxlength="90" style="width:100%; padding:8px; border-radius:6px; margin-top:6px;" />
+    </label>
+
+    <label style="display:block; margin-top:10px; font-weight:600;">Message
+      <textarea id="broadcast-input-body" rows="3" maxlength="240" style="width:100%; padding:8px; border-radius:6px; margin-top:6px;"></textarea>
+    </label>
+
+    <label style="display:block; margin-top:10px; font-weight:600;">Link (optional)
+      <input id="broadcast-input-url" type="text" placeholder="/" style="width:100%; padding:8px; border-radius:6px; margin-top:6px;" />
+    </label>
+
+    <div class="broadcast-actions" style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px;">
+      <button id="broadcast-cancel" class="btn-ghost" style="padding:8px 12px; border-radius:8px; border:none; background:#eee; cursor:pointer;">Cancel</button>
+      <button id="broadcast-send" class="btn-primary" style="padding:8px 12px; border-radius:8px; border:none; background:#0A84FF; color:#fff; cursor:pointer;">Send to all</button>
+    </div>
+
+    <div id="broadcast-result" class="broadcast-result" aria-live="polite" style="margin-top:10px; font-size:13px;"></div>
+  </div>
+</div>
+
+<style>
+/* Broadcast modal styles (add with the HTML block) */
+.broadcast-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1200; display:block; }
+.broadcast-modal { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:1201; width:94%; max-width:560px; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.25); }
+.broadcast-modal.hidden, .broadcast-backdrop.hidden { display:none; }
+.broadcast-modal-inner { background:#fff; padding:18px; border-radius:12px; }
+.broadcast-modal-inner h3 { margin:0 0 6px; font-size:18px; color:#222; }
+
+/* result message colors */
+.broadcast-result.success { color: #2e7d32; }
+.broadcast-result.error { color: #c62828; }
+
+/* Dark mode */
+body.dark-mode .broadcast-modal-inner { background:#1e1e1e; color:#eaeaea; border: 1px solid rgba(255,255,255,0.04); }
+body.dark-mode .btn-ghost { background:#2b2b2b; color:#eee; border:none; }
+body.dark-mode input, body.dark-mode textarea { background:#2b2b2b; color:#eee; border:1px solid #444; }
+
+
+ 
+</style>
+
+<div id="newarrival-backdrop" class="broadcast-backdrop hidden" aria-hidden="true"></div>
+
+<div id="newarrival-modal" class="broadcast-modal hidden" role="dialog" aria-modal="true" aria-labelledby="newarrival-title" aria-hidden="true">
+  <div class="broadcast-modal-inner">
+    <h3 id="newarrival-title">🆕 Add New Arrivals</h3>
+
+    <label style="display:block; margin-top:10px; font-weight:600;">Enter Product IDs</label>
+    <input id="newarrival-input" type="text" placeholder="e.g. 223,225,224,227" 
+           style="width:100%; padding:8px; border-radius:6px; margin-top:6px;" />
+
+    <p style="font-size:13px; color:#666; margin-top:5px;">Enter comma-separated product IDs you want to appear on the <b>New Arrivals</b> page.</p>
+
+    <div class="broadcast-actions" style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px;">
+      <button id="newarrival-cancel" class="btn-ghost" style="padding:8px 12px; border-radius:8px; border:none; background:#eee; cursor:pointer;">Cancel</button>
+      <button id="newarrival-save" class="btn-primary" style="padding:8px 12px; border-radius:8px; border:none; background:#0A84FF; color:#fff; cursor:pointer;">Save</button>
+      <button id="newarrival-publish" class="btn-primary" style="padding:8px 12px; border-radius:8px; border:none; background:#28a745; color:#fff; cursor:pointer;">Submit & Publish</button>
+    </div>
+
+    <div id="newarrival-result" class="broadcast-result" aria-live="polite" style="margin-top:10px; font-size:13px;"></div>
+  </div>
+</div>
+<div id="orderDetailModal" class="modal hidden">
+  <div class="modal-content">
+    <button class="order-close" onclick="closeOrderDetail()">✖ Close</button>
+    <div id="orderDetailBody"></div>
+  </div>
+</div>
+
+<script>
+    const typingPlaceholder = [
+    "🔍 Search by name...",
+    "🔍 Search by category...",
+    "🔍 Search by tag...",
+    "🔍 Find your product..."
+  ];
+
+  let typeIndex = 0;
+  let charIndex = 0;
+  let currentPlaceholder = "";
+  let isDeleting = false;
+  const searchInput = document.getElementById("searchInput");
+
+  function typeEffect() {
+    const fullText = typingPlaceholder[typeIndex];
+
+    if (isDeleting) {
+      currentPlaceholder = fullText.substring(0, charIndex--);
+    } else {
+      currentPlaceholder = fullText.substring(0, charIndex++);
+    }
+
+    searchInput.setAttribute("placeholder", currentPlaceholder);
+
+    if (!isDeleting && charIndex === fullText.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      typeIndex = (typeIndex + 1) % typingPlaceholder.length;
+      setTimeout(typeEffect, 500);
+    } else {
+      setTimeout(typeEffect, isDeleting ? 50 : 100);
+    }
+  }
+
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+  }
+
+  // Auto-load theme on page load
+ window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+  typeEffect(); // start animation once DOM is ready
+});
+   // Scroll to top functionality
+  const scrollBtn = document.getElementById("scrollToTopBtn");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  };
+
+  scrollBtn.onclick = function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  
+</script> 
+<script src="js/product.js"></script>
+<script  src="js/editor.js"> </script>
+</body>
+</html>

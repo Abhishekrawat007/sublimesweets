@@ -1,0 +1,164 @@
+ <!-- ============================================
+         🔥 ULTRA PREMIUM BOTTOM NAVIGATION BAR
+         ============================================ -->
+    <div class="bottom-nav-container">
+        <nav class="bottom-nav">
+            <!-- HOME -->
+            <a href="/index.html" class="bottom-nav-item active" data-page="home" onclick="setActiveCategory('home')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <span class="nav-label">Home</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- CATEGORIES -->
+            <a href="/categories.html" class="bottom-nav-item" data-page="categories"
+               onclick="setActiveCategory('categories'); openCategoriesModal(); return false;">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <span class="nav-label">Categories</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- SERVICES -->
+            <a href="/services.html" class="bottom-nav-item" data-page="services" onclick="setActiveCategory('services')">
+                <div class="nav-icon-wrapper">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+        </svg>
+                </div>
+                <span class="nav-label">Services</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- ABOUT -->
+            <a href="/about.html" class="bottom-nav-item" data-page="about" onclick="setActiveCategory('about')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">About</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- HELP -->
+            <a href="/contact.html" class="bottom-nav-item" data-page="help" onclick="setActiveCategory('contact')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">Help</span>
+                <div class="nav-indicator"></div>
+            </a>
+        </nav>
+    </div>
+
+<!-- Categories Modal -->
+<div class="categories-modal-overlay" id="categoriesModalOverlay"></div>
+<div class="categories-modal" id="categoriesModal">
+  <div class="modal-handle"></div>
+
+  <div class="modal-header">
+    <h2>Shop by Category</h2>
+    <button class="modal-close-btn" id="closeCategoriesModal" onclick="closeCategoriesModal()">
+      <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="categories-modal-grid">
+      <!-- Mithai -->
+      <a href="/mithai.html" class="category-modal-item" onclick="setActiveCategory('mithai')">
+        <div class="category-modal-image">
+          <img src="images/gpt4.webp" alt="Mithai">
+        </div>
+        <span class="category-modal-name">Mithai</span>
+      </a>
+
+      <!-- Snacks -->
+      <a href="/snacks.webp" class="category-modal-item" onclick="setActiveCategory('snacks')">
+        <div class="category-modal-image">
+          <img src="images/gpt2.webp" alt="Snacks">
+        </div>
+        <span class="category-modal-name">Snacks</span>
+      </a>
+
+      <!-- Dairy -->
+      <a href="/dairy.html" class="category-modal-item" onclick="setActiveCategory('dairy')">
+        <div class="category-modal-image">
+          <img src="images/dairy.webp" alt="Dairy">
+        </div>
+        <span class="category-modal-name">Dairy</span>
+      </a>
+
+      <!-- Street Foods -->
+      <a href="/streetfood.html" class="category-modal-item" onclick="setActiveCategory('streetfood')">
+        <div class="category-modal-image">
+          <img src="images/gpt3.webp" alt="Street Food">
+        </div>
+        <span class="category-modal-name">Street Foods</span>
+      </a>
+
+      <!-- Main Course -->
+      <a href="/maincourse.html" class="category-modal-item" onclick="setActiveCategory('maincourse')">
+        <div class="category-modal-image">
+          <img src="images/gpt1.webp" alt="Main Course">
+        </div>
+        <span class="category-modal-name">Main Course</span>
+      </a>
+
+      <!-- Dry Fruits -->
+      <a href="/dryfruits.html" class="category-modal-item" onclick="setActiveCategory('dryfruits')">
+        <div class="category-modal-image">
+          <img src="images/dryfruits.webp" alt="Dry Fruits">
+        </div>
+        <span class="category-modal-name">Dry Fruits</span>
+      </a>
+
+      <!-- Cakes -->
+      <a href="/cakes.html" class="category-modal-item" onclick="setActiveCategory('cakes')">
+        <div class="category-modal-image">
+          <img src="images/gpt8.webp" alt="Cakes">
+        </div>
+        <span class="category-modal-name">Cakes</span>
+      </a>
+
+      <!-- Pastries -->
+      <a href="/pastry.html" class="category-modal-item" onclick="setActiveCategory('pastries')">
+        <div class="category-modal-image">
+          <img src="images/gpt6.webp" alt="Pastries">
+        </div>
+        <span class="category-modal-name">Pastries</span>
+      </a>
+
+      <!-- Ice Cream -->
+      <a href="/icecreams.html" class="category-modal-item" onclick="setActiveCategory('icecreams')">
+        <div class="category-modal-image">
+          <img src="images/Butterscotch-Ice-Cream-8.webp" alt="Ice Cream">
+        </div>
+        <span class="category-modal-name">Ice Creams</span>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,462 @@
+/* ============================================
+   🔥 VARIATION 4: NEO-BRUTALISM BOLD
+   Streetwear/bold brands aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+
+:root {
+    --ice-section-bg: #ffff00;
+    --ice-card-bg: #ffffff;
+    --ice-card-shadow: 6px 6px 0 rgba(0, 0, 0, 1);
+    --ice-primary: #000000;
+    --ice-secondary: #ff3366;
+    --ice-accent: #00ff88;
+    --ice-text: #000000;
+    --ice-text-light: #666666;
+    --ice-border: 4px solid #000000;
+}
+/* ADD THIS TO VARIATION 4 - Right after the light mode :root section */
+
+.sublime-navbar.dark-mode ~ .ice-cream-section {
+    --ice-section-bg: #000000;
+    --ice-card-bg: #1a1a1a;
+    --ice-card-shadow: 6px 6px 0 rgba(255, 255, 0, 1);
+    --ice-primary: #ffff00;
+    --ice-secondary: #ff3366;
+    --ice-accent: #00ff88;
+    --ice-text: #ffffff;
+    --ice-text-light: #cccccc;
+    --ice-border: 4px solid #ffff00;
+}
+
+.sublime-navbar.dark-mode ~ .ice-cream-section {
+    --ice-section-bg: #000000;
+    --ice-card-bg: #1a1a1a;
+    --ice-card-shadow: 6px 6px 0 rgba(255, 255, 0, 1);
+    --ice-primary: #ffff00;
+    --ice-secondary: #ff3366;
+    --ice-accent: #00ff88;
+    --ice-text: #ffffff;
+    --ice-text-light: #cccccc;
+    --ice-border: 4px solid #ffff00;
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.ice-cream-section {
+    padding: 60px 20px;
+    background: var(--ice-section-bg);
+    position: relative;
+}
+
+/* ============================================
+   HEADER - BRUTAL & BOLD
+   ============================================ */
+.ice-cream-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--ice-text);
+    background: var(--ice-accent);
+    padding: 8px 20px;
+    border: 3px solid var(--ice-primary);
+    box-shadow: 4px 4px 0 var(--ice-primary);
+    transform: rotate(-2deg);
+}
+
+.ice-cream-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 9vw, 108px);
+    font-weight: 400;
+    color: var(--ice-text);
+    margin: 0;
+    letter-spacing: 4px;
+    text-shadow: 4px 4px 0 var(--ice-secondary);
+    line-height: 0.9;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.ice-cream-container {
+    position: relative;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.ice-cream-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 30px 0 40px;
+    margin: 0 90px;
+}
+
+.ice-cream-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.ice-cream-track {
+    display: flex;
+    gap: 30px;
+    padding: 0 30px;
+}
+
+/* ============================================
+   PRODUCT CARD - BRUTAL STYLE
+   ============================================ */
+.ice-cream-card {
+    flex: 0 0 240px;
+    width: 240px;
+    background: var(--ice-card-bg);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: var(--ice-border);
+    box-shadow: var(--ice-card-shadow);
+    position: relative;
+    transform: rotate(0deg);
+}
+
+.ice-cream-card:nth-child(even) {
+    transform: rotate(1deg);
+}
+
+.ice-cream-card:nth-child(odd) {
+    transform: rotate(-1deg);
+}
+
+.ice-cream-card:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.05);
+    box-shadow: 8px 8px 0 var(--ice-primary);
+}
+
+/* ============================================
+   PRODUCT BADGE - LOUD & PROUD
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: var(--ice-secondary);
+    color: white;
+    padding: 8px 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid var(--ice-primary);
+    box-shadow: 4px 4px 0 var(--ice-primary);
+    z-index: 2;
+    transform: rotate(8deg);
+}
+
+.new-badge {
+    background: var(--ice-accent);
+    color: var(--ice-primary);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-bottom: var(--ice-border);
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    filter: contrast(1.1) saturate(1.2);
+}
+
+.ice-cream-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+.image-glow {
+    display: none;
+}
+
+/* ============================================
+   PRODUCT INFO - BOLD TEXT
+   ============================================ */
+.product-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.product-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ice-text);
+    margin: 0 0 14px 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 3px solid var(--ice-primary);
+}
+
+.product-rating {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ice-text-light);
+    letter-spacing: 2px;
+}
+
+.product-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    color: var(--ice-secondary);
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS - BRUTAL
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: var(--ice-accent);
+    border: var(--ice-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    color: var(--ice-primary);
+    box-shadow: 6px 6px 0 var(--ice-primary);
+    opacity: 0;
+}
+
+.ice-cream-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--ice-secondary);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow:active {
+    box-shadow: 3px 3px 0 var(--ice-primary);
+    transform: translateY(-50%) translate(3px, 3px);
+}
+
+.scroll-arrow-left {
+    left: 10px;
+}
+
+.scroll-arrow-right {
+    right: 10px;
+}
+
+.scroll-arrow svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* ============================================
+   SEE ALL BUTTON - BRUTAL CTA
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 40px;
+    background: var(--ice-primary);
+    border: 4px solid var(--ice-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ice-card-bg);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 6px 6px 0 var(--ice-secondary);
+    position: relative;
+}
+
+.see-all-btn:hover {
+    background: var(--ice-secondary);
+    border-color: var(--ice-primary);
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 var(--ice-primary);
+}
+
+.see-all-btn:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0 0 0 var(--ice-primary);
+}
+
+.see-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.see-all-btn svg {
+    transition: transform 0.2s ease;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .ice-cream-scroll {
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ice-cream-section {
+        padding: 40px 15px;
+    }
+    
+    .ice-cream-header {
+        margin-bottom: 40px;
+    }
+    
+    .header-tag {
+        font-size: 12px;
+        padding: 6px 16px;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 var(--ice-primary);
+    }
+    
+    .ice-cream-title {
+        font-size: 52px;
+        text-shadow: 3px 3px 0 var(--ice-secondary);
+    }
+    
+    .ice-cream-card {
+        flex: 0 0 200px;
+        width: 200px;
+        border-width: 3px;
+        box-shadow: 4px 4px 0 var(--ice-primary);
+    }
+    
+    .product-badge {
+        top: -10px;
+        right: -10px;
+        padding: 6px 12px;
+        font-size: 10px;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 var(--ice-primary);
+    }
+    
+    .product-info {
+        padding: 16px;
+    }
+    
+    .product-name {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .product-price {
+        font-size: 20px;
+    }
+    
+    .product-meta {
+        border-top-width: 2px;
+    }
+    
+    .ice-cream-track {
+        gap: 24px;
+        padding: 0 20px;
+    }
+    
+    .see-all-btn {
+        padding: 16px 32px;
+        font-size: 12px;
+        border-width: 3px;
+        box-shadow: 4px 4px 0 var(--ice-secondary);
+    }
+}
+
+@media (max-width: 480px) {
+    .ice-cream-section {
+        padding: 30px 10px;
+    }
+    
+    .ice-cream-title {
+        font-size: 44px;
+    }
+    
+    .ice-cream-card {
+        flex: 0 0 170px;
+        width: 170px;
+    }
+    
+    .product-info {
+        padding: 14px;
+    }
+    
+    .product-name {
+        font-size: 14px;
+    }
+    
+    .product-price {
+        font-size: 18px;
+    }
+    
+    .ice-cream-track {
+        gap: 20px;
+    }
+    
+    .see-all-btn {
+        padding: 14px 28px;
+        font-size: 11px;
+    }
+}

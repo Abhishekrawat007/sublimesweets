@@ -1,0 +1,366 @@
+ <!-- MAIN NAVBAR -->
+    <nav class="sublime-navbar" id="navbar">
+        <div class="navbar-container">
+            <!-- LEFT SECTION -->
+            <div class="navbar-left">
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="/" class="navbar-logo">
+                    <span class="logo-icon">🍰</span>
+                    <span>Sublime Sweets</span>
+                </a>
+            </div>
+
+          <!-- DESKTOP MENU -->
+<div class="desktop-menu">
+    <div class="desktop-menu-item">
+        <a href="/claudenavabar.html" class="desktop-menu-link active">
+            Home
+        </a>
+    </div>
+
+    <!-- FOOD CATEGORY -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Food
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍕 Street Food</div>
+                    <a href="/category/food/street-food" class="mega-dropdown-item">View All Street Food</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍛 Main Course</div>
+                    <a href="/category/food/main-course" class="mega-dropdown-item">View All Main Course</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍽️ Meals / Thalis</div>
+                    <a href="/category/food/meals" class="mega-dropdown-item">View All Meals</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍨 Fresh Desserts</div>
+                    <a href="/category/food/desserts" class="mega-dropdown-item">View All Desserts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACKS & DRINKS -->
+    <div class="desktop-menu-item">
+        <a href="/category/snacks-drinks" class="desktop-menu-link">
+            Snacks & Drinks
+        </a>
+    </div>
+
+    <!-- MITHAI -->
+    <div class="desktop-menu-item">
+        <a href="/category/mithai" class="desktop-menu-link">
+            Mithai
+        </a>
+    </div>
+
+    <!-- BAKERY & CAKES -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Bakery & Cakes
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🎂 Cakes - Eggless</div>
+                    <a href="/category/bakery/cakes-eggless" class="mega-dropdown-item">View All Eggless Cakes</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍰 Cakes - With Egg</div>
+                    <a href="/category/bakery/cakes-with-egg" class="mega-dropdown-item">View All Egg Cakes</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🥐 Pastries</div>
+                    <a href="/category/bakery/pastries" class="mega-dropdown-item">View All Pastries</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍞 Bread & Buns</div>
+                    <a href="/category/bakery/bread-buns" class="mega-dropdown-item">View All Bread</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍪 Cookies</div>
+                    <a href="/category/bakery/cookies" class="mega-dropdown-item">View All Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAIRY -->
+    <div class="desktop-menu-item">
+        <a href="/category/dairy" class="desktop-menu-link">
+            Dairy
+        </a>
+    </div>
+
+    <!-- DRY FRUITS -->
+    <div class="desktop-menu-item">
+        <a href="/category/dry-fruits" class="desktop-menu-link">
+            Dry Fruits
+        </a>
+    </div>
+</div>
+
+            <!-- RIGHT SECTION -->
+            <div class="navbar-right">
+                <!-- DESKTOP SEARCH BAR -->
+                <div class="desktop-search" style="display: none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" placeholder="Search products..." id="desktopSearchInput">
+                </div>
+
+                <!-- DARK MODE TOGGLE (Desktop) -->
+                <button class="icon-btn" id="darkModeBtn" aria-label="Toggle Dark Mode" style="display: none;">
+                    <svg class="sun-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- WISHLIST -->
+                <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="badge">3</span>
+                </button>
+
+                <!-- SEARCH (Mobile Only) -->
+                <button class="icon-btn mobile-search-only" id="searchBtn" aria-label="Search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+
+                <!-- CART -->
+                <button class="icon-btn" id="cartBtn" aria-label="Cart">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                 <span class="badge" id="cartCount" style="display: none;"></span>
+
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="/" class="navbar-logo">
+                <span class="logo-icon">🍰</span>
+                <span>Sublime Sweets</span>
+            </a>
+            <button class="close-btn" id="closeMenu" aria-label="Close Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-menu-content">
+            <!-- HOME -->
+            <div class="mobile-menu-item">
+                <a href="claudenavabar.html" class="mobile-menu-link active">
+                    <span><span class="menu-icon">🏠</span> Home</span>
+                </a>
+            </div>
+
+            <!-- ALL PRODUCTS -->
+            <div class="mobile-menu-item">
+                <a href="/products" class="mobile-menu-link">
+                    <span><span class="menu-icon">📦</span> All Products</span>
+                </a>
+            </div>
+<!-- CATEGORIES -->
+<div class="mobile-menu-item">
+    <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('categories'); return false;">
+        <span><span class="menu-icon">📂</span> Categories</span>
+        <span class="arrow-icon">▼</span>
+    </a>
+    <div class="mobile-submenu" id="categories">
+        
+        <!-- FOOD -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('food'); return false;" style="margin: 8px 0;">
+            <span>🍕 Food</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="food">
+            <a href="/category/food/street-food" class="mobile-submenu-item">
+                <span class="submenu-emoji">🌮</span> Street Food
+            </a>
+            <a href="/category/food/main-course" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍛</span> Main Course
+            </a>
+            <a href="/category/food/meals" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍽️</span> Meals / Thalis
+            </a>
+            <a href="/category/food/desserts" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍨</span> Fresh Desserts
+            </a>
+        </div>
+
+        <!-- SNACKS & DRINKS -->
+        <a href="/category/snacks-drinks" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🍿 Snacks & Drinks</span>
+        </a>
+
+        <!-- MITHAI -->
+        <a href="/category/mithai" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🍬 Mithai (Indian Sweets)</span>
+        </a>
+
+        <!-- BAKERY & CAKES -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('bakery'); return false;" style="margin: 8px 0;">
+            <span>🎂 Bakery & Cakes</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="bakery">
+            <a href="/category/bakery/cakes-eggless" class="mobile-submenu-item">
+                <span class="submenu-emoji">🎂</span> Cakes - Eggless
+            </a>
+            <a href="/category/bakery/cakes-with-egg" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍰</span> Cakes - With Egg
+            </a>
+            <a href="/category/bakery/pastries" class="mobile-submenu-item">
+                <span class="submenu-emoji">🥐</span> Pastries
+            </a>
+            <a href="/category/bakery/bread-buns" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍞</span> Bread & Buns
+            </a>
+            <a href="/category/bakery/cookies" class="mobile-submenu-item">
+                <span class="submenu-emoji">🍪</span> Cookies
+            </a>
+        </div>
+
+        <!-- DAIRY -->
+        <a href="/category/dairy" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🥛 Dairy</span>
+        </a>
+
+        <!-- DRY FRUITS -->
+        <a href="/category/dry-fruits" class="mobile-menu-link" style="margin: 8px 0;">
+            <span>🌰 Dry Fruits</span>
+        </a>
+    </div>
+</div>
+            <!-- YOUR ORDERS -->
+            <div class="mobile-menu-item">
+                <a href="/orders" class="mobile-menu-link">
+                    <span><span class="menu-icon">📋</span> Your Orders</span>
+                </a>
+            </div>
+
+            <!-- ABOUT US -->
+            <div class="mobile-menu-item">
+                <a href="/about" class="mobile-menu-link">
+                    <span><span class="menu-icon">ℹ️</span> About Us</span>
+                </a>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="mobile-menu-item">
+                <a href="/services" class="mobile-menu-link">
+                    <span><span class="menu-icon">⚙️</span> Services</span>
+                </a>
+            </div>
+
+            <!-- DARK MODE TOGGLE -->
+            <div class="dark-mode-toggle">
+                <div class="dark-mode-label">
+                    <span style="font-size: 20px;">🌙</span>
+                    <span>Dark Mode</span>
+                </div>
+                <div class="toggle-switch" id="mobileDarkToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-content">
+        <div class="search-modal-header">
+            <h3 class="search-modal-title">🔍 Search Products</h3>
+            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-input-wrapper">
+            <input type="text" class="search-input" placeholder="Search for products, categories..." id="searchInput" autofocus>
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        </div>
+        <div class="search-suggestions-label">Popular Searches</div>
+        <div class="search-suggestions">
+  <span class="search-tag">Samosa</span>
+                <span class="search-tag">Chocolate Cake</span>
+                <span class="search-tag">Mithai</span>
+                <span class="search-tag">Momo</span>
+                <span class="search-tag">Gulab Jamun</span>
+                <span class="search-tag">Bread</span>
+                <span class="search-tag">Dry Fruits</span>
+                <span class="search-tag">Milk</span>
+            </div>
+        </div>
+    </div>
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Shopping Cart</h3>
+            <button class="close-btn" id="closeCart" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="cart-content" id="cartContent">
+            <!-- Sample Cart Items -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span style="color: var(--accent);">₹0</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
