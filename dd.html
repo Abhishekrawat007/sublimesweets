@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Orders – Sublime Store</title>
+  <meta name="description" content="Track and view your past orders from Sublime Store.">
+  <meta name="theme-color" content="#1e88e5"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/bottom-bar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg: #ffffff;
+      --bg-secondary: #f9fafb;
+      --border: #e5e7eb;
+      --success: #10b981;
+      --shadow: rgba(0, 0, 0, 0.05);
+      --shadow-lg: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--bg);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .page-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all 0.15s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--border);
+      transform: rotate(15deg);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .phone-section {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      box-shadow: 0 1px 3px var(--shadow);
+      text-align: center;
+    }
+
+    .phone-section h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .phone-section .subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    #phoneError {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .button-primary {
+      width: 100%;
+      max-width: 400px;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .button-primary:active {
+      transform: translateY(0);
+    }
+
+    .phone-section small {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+
+    #orderList {
+      margin-top: 2rem;
+    }
+
+    .orders-header {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .order-card {
+      background: var(--bg);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px var(--shadow);
+      display: flex;
+      gap: 1.25rem;
+      align-items: start;
+      transition: all 0.2s ease;
+    }
+
+    .order-card:hover {
+      box-shadow: 0 4px 12px var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .order-card img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      flex-shrink: 0;
+    }
+
+    .order-info {
+      flex: 1;
+    }
+
+    .order-info h4 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .order-info p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin: 0.25rem 0;
+    }
+
+    .order-info .order-total {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    .order-info .order-date {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    .order-info button {
+      margin-top: 1rem;
+      padding: 0.625rem 1.25rem;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .order-info button:hover {
+      background: #059669;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .order-info button:active {
+      transform: translateY(0);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--bg);
+      border-radius: 16px;
+      margin-top: 2rem;
+    }
+
+    .empty-state .icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    body.dark-mode {
+      --text: #f9fafb;
+      --text-light: #9ca3af;
+      --bg: #1f2937;
+      --bg-secondary: #111827;
+      --border: #374151;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow-lg: rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-mode .page-header {
+      background: rgba(31, 41, 55, 0.95);
+    }
+
+    @media (max-width: 640px) {
+      .page-header {
+        padding: 1rem 0;
+      }
+
+      .header-content {
+        padding: 0 1rem;
+      }
+
+      .page-title {
+        font-size: 1.25rem;
+      }
+
+      .container {
+        margin: 1rem auto;
+        padding: 0 1rem;
+      }
+
+      .phone-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .phone-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .order-card {
+        flex-direction: column;
+        padding: 1.25rem;
+      }
+
+      .order-card img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .back-btn span {
+        display: none;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .order-card {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @media (max-width: 1235px) {
+      .top-banner {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+      }
+      
+      .page-header {
+        border-bottom: none;
+      }
+      
+      .header-content {
+        padding: 0 0.75rem;
+      }
+      
+      .back-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+      }
+      
+      .page-title {
+        font-size: 1rem;
+      }
+      
+      .theme-toggle-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+ 
+
+</head>
+
+<body>
+  <!-- NAVBAR, BOTTOM-BAR, FOOTER - Keep all your existing markup -->
+  <!-- ... (Include all navbar/footer HTML from your document) ... -->
+
+  <header class="page-header">
+    <div class="header-content">
+      <button class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+      </button>
+      
+      <h1 class="page-title">Your Orders</h1>
+      
+      <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="phone-section" id="phoneSection">
+      <h2>Track Your Orders</h2>
+      <p class="subtitle">Enter your mobile number to view your order history</p>
+      
+      <div class="form-group">
+        <label for="phone">Mobile Number</label>
+        <input type="tel" id="phone" placeholder="Enter your 10-digit number" maxlength="10">
+        <div id="phoneError">Please enter a valid 10-digit Indian phone number.</div>
+      </div>
+      
+      <button class="button-primary" onclick="searchOrders()">Show Orders</button>
+      <small><i class="fas fa-lock"></i> We'll never share your number</small>
+    </div>
+
+    <div id="orderList"></div>
+  </main>
+
+  <script>
+  function searchOrders() {
+    const phone = document.getElementById("phone").value.trim();
+    const errorMsg = document.getElementById("phoneError");
+
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      errorMsg.style.display = "block";
+      return;
+    }
+
+    errorMsg.style.display = "none";
+    document.getElementById("phoneSection").style.display = "none";
+
+    // Use getOrders.js function
+    fetch("/.netlify/functions/getOrders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (!data.orders || data.orders.length === 0) {
+        document.getElementById("orderList").innerHTML = `
+          <div class="empty-state">
+            <div class="icon">📦</div>
+            <h3>No Orders Found</h3>
+            <p>You haven't placed any orders yet</p>
+          </div>
+        `;
+        return;
+      }
+
+      const ordersArray = data.orders;
+      document.getElementById("orderList").innerHTML = 
+        `<h2 class="orders-header">Your Orders</h2>` +
+        ordersArray.map(order => {
+          const dateTime = new Date(order.timestamp).toLocaleString("en-IN", {
+            dateStyle: "medium",
+            timeStyle: "short"
+          });
+          
+          // Check both cart and items (for old orders)
+          const orderItems = order.cart || order.items;
+          
+          if (!orderItems || !Array.isArray(orderItems)) {
+            return `<div class="order-card"><p>Order data incomplete</p></div>`;
+          }
+          
+          return orderItems.map(item => 
+            `<div class="order-card">
+              <img src="${item.image}" alt="${item.title}">
+              <div class="order-info">
+                <h4>${item.title}</h4>
+                <p>Quantity: ${item.qty}</p>
+                <p class="order-total">₹${item.price * item.qty}</p>
+                <p class="order-date"><i class="far fa-calendar"></i> ${dateTime}</p>
+                <button onclick="location.href='buynow.html?id=${item.id}'">
+                  <i class="fas fa-redo"></i> Buy Again
+                </button>
+              </div>
+            </div>`
+          ).join("");
+        }).join("");
+    })
+    .catch(err => {
+      document.getElementById("orderList").innerHTML = `
+        <div class="empty-state">
+          <div class="icon">⚠️</div>
+          <h3>Error Loading Orders</h3>
+          <p>Please try again later</p>
+        </div>
+      `;
+      console.error("Error fetching orders:", err);
+    });
+  }
+
+  const toggleBtn = document.getElementById('themeToggle');
+
+  function applyTheme(mode) {
+    if (mode === 'dark') {
+      document.body.classList.add('dark-mode');
+      toggleBtn.textContent = '☀️';
+    } else {
+      document.body.classList.remove('dark-mode');
+      toggleBtn.textContent = '🌙';
+    }
+    localStorage.setItem('theme', mode);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedMode = localStorage.getItem('theme') || 'light';
+    applyTheme(savedMode);
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('dark-mode');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  });
+
+  function goBack() {
+    if (document.referrer && document.referrer.includes(location.hostname)) {
+      history.back();
+    } else {
+      location.href = "index.html";
+    }
+  }
+  </script>
+
+  <script src="js/product.js" defer></script>
+  <script src="js/product-card.js" defer></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/search-router.js"></script>
+  <script src="js/bottom-bar.js"></script>
+  <script src="js/nav-sync.js"></script>
+  <script src="js/footer.js" defer></script>
+</body>
+</html>
