@@ -2042,8 +2042,8 @@ body.cart-theme-35 .add-to-cart-btn:hover {
 }
 
 .star-icon {
-    width: 14px !important;
-    height: 14px !important;
+    width: 18px !important;
+    height: 18px !important;
     display: inline-block !important;
     flex-shrink: 0 !important;
 }
@@ -2107,7 +2107,7 @@ body.dark-mode .star-icon.empty {
 /* Mobile sizing */
 @media (max-width: 550px) {
     .star-icon {
-        width: 12px !important;
-        height: 12px !important;
+        width: 16px !important;
+        height: 16px !important;
     }
 }
