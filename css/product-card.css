@@ -2032,3 +2032,54 @@ body.cart-theme-35 .add-to-cart-btn:hover {
   border: 1px solid #ccc;
   font-size: 0.85rem;
 }
+/* ============================================
+   STAR RATING FIX - CRITICAL
+   ============================================ */
+.rating-stars {
+    display: inline-flex !important;
+    gap: 4px !important;
+    align-items: center !important;
+}
+
+.star-icon {
+    width: 14px !important;
+    height: 14px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+}
+
+.star-icon.full {
+    fill: #FFA500 !important; /* Orange */
+}
+
+.star-icon.half {
+    fill: url(#half-gradient) !important;
+}
+
+.star-icon.empty {
+    fill: none !important;
+    stroke: #FFA500 !important;
+    stroke-width: 1.5 !important;
+}
+
+/* Fix the badge container */
+.info-badge.rating-badge {
+    background: transparent !important;
+    color: #FFA500 !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+body.dark-mode .info-badge.rating-badge {
+    color: #FFB52E !important;
+}
+
+body.dark-mode .star-icon.full {
+    fill: #FFB52E !important;
+}
+
+body.dark-mode .star-icon.empty {
+    stroke: #FFB52E !important;
+}

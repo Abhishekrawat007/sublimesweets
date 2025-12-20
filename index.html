@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="css/toast.css">
 <link rel="stylesheet" href="css/autoslideshow.css">
 <link rel="stylesheet" href="css/category8.css">
-<link rel="stylesheet" href="css/fixed/variation2.css">
+<link rel="stylesheet" href="css/ice-cream.css">
 <link rel="stylesheet" href="css/main-course.css">
-<link rel="stylesheet" href="css/filter-section.css">
-<link rel="stylesheet" href="css/mobilefilter-section.css">
+<link rel="stylesheet" href="css/filter-variation3.css">
+<!-- <link rel="stylesheet" href="css/filter-section.css"> -->
+<!-- <link rel="stylesheet" href="css/mobilefilter-section.css"> -->
 <link rel="stylesheet" href="css/product-card.css">  
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/bottom-bar.css">
@@ -106,7 +107,49 @@ body.search-active .products-section {
         padding-top: 0 !important;
     }
 }
+/* ============================================
+   🔧 DESKTOP LAYOUT FIX
+   Ensures products sit BESIDE filter sidebar
+   Add this to your main CSS or variation CSS
+   ============================================ */
 
+/* Wrapper for Desktop Filters + Products */
+.filter-products-wrapper {
+    display: flex;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Products Section sits on the RIGHT */
+.products-section {
+    flex: 1;
+    min-width: 0; /* Prevents flex overflow */
+}
+
+/* Desktop Only */
+@media (min-width: 701px) {
+    .filter-products-wrapper {
+        display: flex;
+    }
+}
+
+/* Mobile: Stack vertically (products full width) */
+@media (max-width: 700px) {
+    .filter-products-wrapper {
+        display: block;
+        padding: 0;
+    }
+    
+    .filter-sidebar {
+        display: none !important;
+    }
+    
+    .products-section {
+        width: 100%;
+    }
+}
 </style>
 </head>
 <body style="padding-top: 70px; background: #f5f5f5;">
@@ -716,39 +759,33 @@ body.search-active .products-section {
      🍦 PREMIUM ICE-CREAM GALLERY SECTION
      Ultra-luxury horizontal scroll showcase
      ============================================ -->
-<!-- ============================================
-     🔥 VARIATION 4: NEO-BRUTALISM BOLD
-     Streetwear/bold brands aesthetic
-     Sharp edges, bold borders, high contrast
-     ============================================ -->
 
 <div class="ice-cream-section">
     <div class="ice-cream-header">
-        <div class="header-content">
-            <div class="header-tag">#TRENDING</div>
-            <h2 class="ice-cream-title">ICE CREAMS</h2>
-        </div>
+     <div class="header-content">
+    <h2 class="ice-cream-title">Ice Creams</h2>
+</div>
     </div>
 
     <div class="ice-cream-container">
-        <!-- Left Navigation Arrow -->
-        <button class="scroll-arrow scroll-arrow-left" id="scrollLeft" aria-label="Scroll left">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        <!-- Left Navigation Arrow (Desktop Only) -->
+        <button class="scroll-arrow scroll-arrow-left" id="scrollLeft">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
         </button>
 
-        <!-- Products Scroll Area -->
+        <!-- Ice Cream Products Scroll Area -->
         <div class="ice-cream-scroll" id="iceCreamScroll">
-            <div class="ice-cream-track" id="iceCreamTrack">
-                <!-- Filled by JS using products[] -->
-            </div>
+         <div class="ice-cream-track" id="iceCreamTrack">
+    <!-- Filled by JS using products[] -->
+</div>
         </div>
 
-        <!-- Right Navigation Arrow -->
-        <button class="scroll-arrow scroll-arrow-right" id="scrollRight" aria-label="Scroll right">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        <!-- Right Navigation Arrow (Desktop Only) -->
+        <button class="scroll-arrow scroll-arrow-right" id="scrollRight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
         </button>
     </div>
@@ -756,17 +793,18 @@ body.search-active .products-section {
     <!-- See All Button -->
     <div class="see-all-container">
         <a href="icecreams.html" class="see-all-btn">
-            <span>SEE ALL PRODUCTS</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+            <span>Explore All Ice Creams</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
         </a>
     </div>
 </div>
+
 <!-- ============================================
-     ⚡ VARIATION 2: MINIMAL GLASS MAIN COURSE
-     Modern tech aesthetic
-     Clean glassmorphic design
+     🍛 PREMIUM MAIN COURSE SECTION
+     Ultra-luxury horizontal scroll showcase
      ============================================ -->
 
 <div class="main-course-section">
@@ -777,24 +815,24 @@ body.search-active .products-section {
     </div>
 
     <div class="main-course-container">
-        <!-- Left Navigation Arrow -->
-        <button class="scroll-arrow scroll-arrow-left" id="scrollLeftMainCourse" aria-label="Scroll left">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                <path d="M15 6l-6 6 6 6"/>
+        <!-- Left Navigation Arrow (Desktop Only) -->
+        <button class="scroll-arrow scroll-arrow-left" id="scrollLeftMainCourse">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
         </button>
 
-        <!-- Products Scroll Area -->
+        <!-- Main Course Products Scroll Area -->
         <div class="main-course-scroll" id="mainCourseScroll">
-            <div class="main-course-track" id="mainCourseTrack">
-                <!-- Filled by JS using products[] -->
-            </div>
+           <div class="main-course-track" id="mainCourseTrack">
+    <!-- Filled by JS using products[] -->
+</div>
         </div>
 
-        <!-- Right Navigation Arrow -->
-        <button class="scroll-arrow scroll-arrow-right" id="scrollRightMainCourse" aria-label="Scroll right">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                <path d="M9 6l6 6-6 6"/>
+        <!-- Right Navigation Arrow (Desktop Only) -->
+        <button class="scroll-arrow scroll-arrow-right" id="scrollRightMainCourse">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
         </button>
     </div>
@@ -802,13 +840,15 @@ body.search-active .products-section {
     <!-- See All Button -->
     <div class="see-all-container">
         <a href="maincourse.html" class="see-all-btn">
-            <span>Explore All</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+            <span>Explore All Main Course</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
         </a>
     </div>
 </div>
+
     <!-- ============================================
          📱 MOBILE STICKY FILTER BAR
          Shows only on mobile (<700px)
@@ -877,6 +917,20 @@ body.search-active .products-section {
                 <span class="radio-custom-mobile"></span>
                 <span class="radio-label-mobile">Price (Low to High)</span>
             </label>
+            <!-- SIZE OPTIONS (in Sort Modal) -->
+<h4 class="filter-section-title">Size</h4>
+<label class="radio-option-mobile">
+    <input type="radio" name="mobile-size" value="all" checked>
+    <span class="radio-custom-mobile"></span>
+    <span class="radio-label-mobile">All Sizes</span>
+</label>
+<!-- Bot adds: 90g, 160g, etc. -->
+
+<!-- FLAVOR OPTIONS (Row-wise Grid) -->
+<h4 class="filter-section-title">Flavor</h4>
+<div class="flavor-grid-mobile">
+    <!-- Bot adds flavor chips in 2-3 per row -->
+</div>
         </div>
     </div>
 
@@ -976,17 +1030,22 @@ body.search-active .products-section {
     <!-- Premium Price Range Input -->
    <div class="premium-price-input">
     <label class="premium-label">Enter Price Range</label>
-    <div class="price-range-inputs">
+   <div class="price-range-inputs">
+    <div class="price-input-group">
+        <label class="price-label">Min Price</label>
         <div class="price-input-wrapper">
             <span class="currency-symbol">₹</span>
-            <input type="number" id="minPriceInput" placeholder="Min" value="">
-        </div>
-        <span class="range-separator">—</span>
-        <div class="price-input-wrapper">
-            <span class="currency-symbol">₹</span>
-            <input type="number" id="maxPriceInput" placeholder="Max" value="">
+            <input type="number" id="minPriceInput" placeholder="0">
         </div>
     </div>
+    <div class="price-input-group">
+        <label class="price-label">Max Price</label>
+        <div class="price-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input type="number" id="maxPriceInput" placeholder="10000">
+        </div>
+    </div>
+</div>
 </div>
 </div>
         <div class="modal-footer">
@@ -1150,7 +1209,36 @@ body.search-active .products-section {
                         </label>
                     </div>
                 </div>
+                 <!-- SIZE FILTER (Expandable) -->
+<div class="filter-section expandable">
+    <div class="section-header" data-target="size-content">
+        <h4 class="subsection-title">Size</h4>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="size-content">
+        <!-- Auto-populated from products.js -->
+        <label class="radio-option">
+            <input type="radio" name="size" value="all" data-size="all" checked>
+            <span class="radio-custom"></span>
+            <span class="radio-label">All Sizes</span>
+        </label>
+        <!-- Bot will add: 90g, 160g, 250g, 500g, 1kg dynamically -->
+    </div>
+</div>
 
+<!-- FLAVOR FILTER (Expandable) -->
+<div class="filter-section expandable">
+    <div class="section-header" data-target="flavor-content">
+        <h4 class="subsection-title">Flavor</h4>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="flavor-content">
+        <div class="flavor-grid">
+            <!-- Auto-populated from products.js -->
+            <!-- Bot will add flavors in 3-per-row grid -->
+        </div>
+    </div>
+</div>
                 <!-- CATEGORY FILTER (Always Open - No Toggle) -->
                 <div class="filter-section active-no-toggle">
                     <h4 class="subsection-title">Category</h4>
@@ -1763,7 +1851,7 @@ body.search-active .products-section {
     <script src="js/ice-cream.js" defer></script>
     <script src="js/main-course.js" defer></script>
     <script src="js/autoslideshow.js" defer></script>
-    <script src="js/product-card.js" defer></script>
+    <script src="js/product-card1.js" defer></script>
     <script src="js/filter-integration.js" defer></script>
     <script src="js/ice-cream.js" defer></script>
     <script src="js/main-course.js" defer></script>
@@ -1772,55 +1860,43 @@ body.search-active .products-section {
     <script src="js/footer.js" defer></script>
     <script src="js/bottom-bar.js" defer></script>
     <script src="js/nav-sync.js"></script>
-    <script>
-// Magical Scroll-Triggered Animation
-const observerOptions = {
-    threshold: 0.2,
-    rootMargin: '0px',
-      threshold: window.innerWidth <= 480 ? 0.5 : 0.2,
-    rootMargin: '0px'
-};
+
+  <script>
+    let lastScrollY = window.scrollY;
+let hasAnimated = false;
 
 const animateOnScroll = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         const cards = entry.target.querySelectorAll('.category-card');
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
         
-        if (entry.isIntersecting) {
-            // Remove class first to reset
-            cards.forEach(card => {
-                card.classList.remove('animate-in');
-                // Force reflow
-                void card.offsetWidth;
-            });
-            
-            // Add class back to trigger animation
-            setTimeout(() => {
+        // If already in view on page load, show immediately
+        if (entry.isIntersecting && !hasAnimated) {
+            if (scrollingDown || window.scrollY < 100) {
+                cards.forEach(card => card.classList.add('animate-in'));
+            } else {
+                // Already scrolled past - just show
                 cards.forEach(card => {
-                    card.classList.add('animate-in');
+                    card.style.opacity = '1';
+                    card.style.transform = 'rotate(0deg) scale(1)';
+                     card.classList.add('animate-in');
                 });
-            }, 50);
-        } else {
-            // Remove when out of view (so it can animate again)
-            cards.forEach(card => {
-                card.classList.remove('animate-in');
-            });
+            }
+            hasAnimated = true;
+        } else if (!entry.isIntersecting) {
+            hasAnimated = false;
         }
+        
+        lastScrollY = currentScrollY;
     });
-}, observerOptions);
+}, {threshold: window.innerWidth <= 480 ? 0.5 : 0.2});
 
-// Observe the categories section
 const categorySection = document.querySelector('.categories-section');
 if (categorySection) {
     animateOnScroll.observe(categorySection);
 }
-
 </script>
 
-  <script>// =======================
-// BUTTON THEME PICKER
-// =======================
-
-</script>
-</script>
 </body>
 </html>

@@ -1,0 +1,513 @@
+/* ============================================
+   🔥 VARIATION 4: NEO-BRUTALISM MAIN COURSE
+   Streetwear/bold aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+
+:root {
+    --main-section-bg: #ff8c42;
+    --main-card-bg: #ffffff;
+    --main-card-shadow: 6px 6px 0 rgba(0, 0, 0, 1);
+    --main-primary: #000000;
+    --main-secondary: #ff3366;
+    --main-accent: #00ff88;
+    --main-text: #000000;
+    --main-text-light: #666666;
+    --main-border: 4px solid #000000;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section {
+    --main-section-bg: #000000;
+    --main-card-bg: #1a1a1a;
+    --main-card-shadow: 6px 6px 0 rgba(255, 140, 66, 1);
+    --main-primary: #ff8c42;
+    --main-secondary: #ff3366;
+    --main-accent: #00ff88;
+    --main-text: #ffffff;
+    --main-text-light: #cccccc;
+    --main-border: 4px solid #ff8c42;
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--main-section-bg);
+    position: relative;
+}
+
+/* ============================================
+   HEADER - BRUTAL & BOLD
+   ============================================ */
+.main-course-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--main-text);
+    background: var(--main-accent);
+    padding: 6px 16px;
+    border: 3px solid var(--main-primary);
+    box-shadow: 4px 4px 0 var(--main-primary);
+    transform: rotate(-2deg);
+}
+
+.main-course-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 400;
+    color: var(--main-text);
+    margin: 0;
+    letter-spacing: 4px;
+    text-shadow: 4px 4px 0 var(--main-secondary);
+    line-height: 0.9;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.main-course-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-course-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 20px 0 30px;
+    margin: 0 60px;
+}
+
+.main-course-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.main-course-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   PRODUCT CARD - BRUTAL STYLE
+   ============================================ */
+.main-course-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: var(--main-card-bg);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: var(--main-border);
+    box-shadow: var(--main-card-shadow);
+    position: relative;
+    transform: rotate(0deg);
+    padding: 16px;
+}
+
+.main-course-card:nth-child(even) {
+    transform: rotate(1deg);
+}
+
+.main-course-card:nth-child(odd) {
+    transform: rotate(-1deg);
+}
+
+.main-course-card:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.05);
+    box-shadow: 8px 8px 0 var(--main-primary);
+}
+
+/* ============================================
+   PRODUCT BADGE - LOUD & PROUD
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--main-secondary);
+    color: white;
+    padding: 6px 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid var(--main-primary);
+    box-shadow: 4px 4px 0 var(--main-primary);
+    z-index: 2;
+    transform: rotate(8deg);
+}
+
+.new-badge {
+    background: var(--main-accent);
+    color: var(--main-primary);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.main-course-card .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.main-course-card .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-course-card:hover .product-image {
+    transform: scale(1.15);
+}
+
+/* Simplified Glow - Single Unified Effect */
+.image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(255, 140, 66, 0.6) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    filter: blur(15px);
+}
+
+.main-course-card:hover .image-glow {
+    opacity: 1;
+}
+
+/* ============================================
+   PRODUCT INFO - BOLD TEXT
+   ============================================ */
+.main-course-card .product-info {
+    text-align: center;
+}
+
+.main-course-card .product-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--main-text);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.main-course-card .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.main-course-card .product-rating {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--main-text-light);
+    letter-spacing: -1px;
+}
+
+.main-course-card .product-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    color: var(--main-secondary);
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS - BRUTAL
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--main-accent);
+    border: var(--main-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    color: var(--main-primary);
+    box-shadow: 6px 6px 0 var(--main-primary);
+    opacity: 0;
+}
+
+.main-course-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--main-secondary);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow:active {
+    box-shadow: 3px 3px 0 var(--main-primary);
+    transform: translateY(-50%) translate(3px, 3px);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   SEE ALL BUTTON - BRUTAL CTA
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: var(--main-primary);
+    border: 4px solid var(--main-primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--main-card-bg);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 6px 6px 0 var(--main-secondary);
+    position: relative;
+}
+
+.see-all-btn:hover {
+    background: var(--main-secondary);
+    border-color: var(--main-primary);
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 var(--main-primary);
+}
+
+.see-all-btn:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0 0 0 var(--main-primary);
+}
+
+.see-all-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.see-all-btn svg {
+    transition: transform 0.2s ease;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .main-course-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-course-section {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 15px;
+    }
+    
+    .header-tag {
+        font-size: 10px;
+        padding: 5px 14px;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 var(--main-primary);
+    }
+    
+    .main-course-title {
+        font-size: 28px;
+        text-shadow: 3px 3px 0 var(--main-secondary);
+    }
+    
+    .main-course-card {
+        flex: 0 0 140px;
+        width: 140px;
+        padding: 12px;
+        border-width: 3px;
+        box-shadow: 4px 4px 0 var(--main-primary);
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 8px;
+    }
+    
+    .product-badge {
+        top: -6px;
+        right: -6px;
+        padding: 5px 10px;
+        font-size: 8px;
+        border-width: 2px;
+        box-shadow: 3px 3px 0 var(--main-primary);
+    }
+    
+    .main-course-card .product-name {
+        font-size: 13px;
+    }
+    
+    .main-course-card .product-price {
+        font-size: 16px;
+    }
+    
+    .main-course-card .product-meta {
+        border-top-width: 2px;
+    }
+    
+    .main-course-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .see-all-container {
+        margin-top: 15px;
+    }
+    
+    .see-all-btn {
+        padding: 14px 28px;
+        font-size: 11px;
+        border-width: 3px;
+        box-shadow: 4px 4px 0 var(--main-secondary);
+    }
+}
+
+@media (max-width: 480px) {
+    .main-course-section {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 12px;
+    }
+    
+    .main-course-title {
+        font-size: 26px;
+    }
+    
+    .main-course-scroll {
+        padding: 15px 0 20px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 130px;
+        width: 130px;
+        padding: 10px;
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .main-course-card .product-name {
+        font-size: 12px;
+    }
+    
+    .main-course-card .product-price {
+        font-size: 14px;
+    }
+    
+    .main-course-track {
+        gap: 12px;
+    }
+    
+    .see-all-container {
+        margin-top: 10px;
+    }
+    
+    .see-all-btn {
+        padding: 12px 24px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-course-section {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 10px;
+    }
+    
+    .main-course-title {
+        font-size: 24px;
+    }
+    
+    .main-course-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .see-all-container {
+        margin-top: 8px;
+    }
+    
+    .see-all-btn {
+        padding: 10px 20px;
+        font-size: 9px;
+    }
+}

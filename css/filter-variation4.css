@@ -17,7 +17,11 @@
     --v4-shadow-light: #ffffff;
 }
 
-/* Global resets removed - only affects filter elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Body styles moved to .filter-variation-4 wrapper */
 
@@ -100,17 +104,19 @@
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(224, 229, 236, 0.9);
+    background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s ease;
-    z-index: 1090;
+    display: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 990;
 }
 
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
-    z-index: 1099;
+    display: block;
+    z-index: 997;
 }
 
 /* ============================================
@@ -119,9 +125,10 @@
 
 .bottom-modal {
     position: fixed;
-    bottom: 0;
+     bottom: -100vh;
     left: 0;
     right: 0;
+    display: none;
     max-height: 82vh;
     background: var(--v4-surface);
     border-radius: 28px 28px 0 0;
@@ -137,6 +144,8 @@
 
 .bottom-modal.active {
     transform: translateY(0);
+     bottom: 0;
+      display: flex; 
 }
 
 /* Modal Header - Variation 4 */
@@ -810,6 +819,7 @@
 .clear-categories-btn {
     width: 100%;
     padding: 10px 14px;
+     margin-top: 14px;
     margin-bottom: 14px;
     background: var(--v4-surface);
     border: none;
@@ -888,4 +898,15 @@
     .filter-sidebar {
         display: none !important;
     }
+}
+.price-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
 }

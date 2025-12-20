@@ -1,0 +1,823 @@
+/* ============================================
+   🎨 VARIATION 5: MINIMALIST BRUTALIST
+   Sharp edges, stark contrasts, bold typography
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap');
+
+:root {
+    /* Variation 5 Colors - Can be overridden by bot */
+    --v5-black: #000000;
+    --v5-white: #FFFFFF;
+    --v5-gray: #F5F5F5;
+    --v5-accent: #FF0000;
+    --v5-border: #000000;
+    --v5-text: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--v5-white);
+    color: var(--v5-text);
+}
+
+/* ============================================
+   📱 MOBILE FILTER BAR - VARIATION 5
+   ============================================ */
+
+.mobile-filter-bar {
+    position: sticky;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: var(--v5-black);
+    display: none;
+    z-index: 998;
+    border-bottom: 4px solid var(--v5-black);
+}
+
+@media (max-width: 700px) {
+    .mobile-filter-bar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.filter-btn {
+    height: 56px;
+    border: none;
+    background: transparent;
+    border-right: 2px solid var(--v5-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--v5-white);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn:last-child {
+    border-right: none;
+}
+
+.filter-btn:active {
+    background: var(--v5-white);
+    color: var(--v5-black);
+}
+
+.filter-btn.active {
+    background: var(--v5-accent);
+    color: var(--v5-white);
+}
+
+.sort-icon,
+.filters-icon {
+    font-size: 16px;
+}
+
+.arrow-down {
+    font-size: 7px;
+}
+
+/* ============================================
+   🌑 MODAL OVERLAY - VARIATION 5
+   ============================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 1090;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1099;
+}
+
+/* ============================================
+   📱 BRUTALIST MODAL (Sharp Slide)
+   ============================================ */
+
+.bottom-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 90vh;
+    background: var(--v5-white);
+    border-top: 4px solid var(--v5-black);
+    transform: translateY(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 1, 1);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-modal.active {
+    transform: translateY(0);
+}
+
+/* Modal Header - Variation 5 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 3px solid var(--v5-black);
+    flex-shrink: 0;
+    background: var(--v5-white);
+}
+
+.modal-header h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--v5-black);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.close-modal {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--v5-black);
+    background: var(--v5-white);
+    font-size: 20px;
+    color: var(--v5-black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+}
+
+.close-modal:active {
+    background: var(--v5-black);
+    color: var(--v5-white);
+}
+
+/* Modal Content - Variation 5 */
+.modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 20px;
+    background: var(--v5-white);
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 12px;
+    background: var(--v5-white);
+    border-left: 2px solid var(--v5-black);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--v5-black);
+    border: 2px solid var(--v5-white);
+}
+
+/* Modal Footer - Variation 5 */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-top: 3px solid var(--v5-black);
+    gap: 12px;
+    flex-shrink: 0;
+    background: var(--v5-white);
+}
+
+/* ============================================
+   📻 RADIO BUTTONS - VARIATION 5 (Brutalist)
+   ============================================ */
+
+.radio-option-mobile {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    border: 2px solid var(--v5-black);
+    margin-bottom: 8px;
+    transition: all 0.1s ease;
+    background: var(--v5-white);
+}
+
+.radio-option-mobile:active {
+    background: var(--v5-black);
+}
+
+.radio-option-mobile:active .radio-label-mobile {
+    color: var(--v5-white);
+}
+
+.radio-option-mobile input[type="radio"] {
+    display: none;
+}
+
+.radio-custom-mobile {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--v5-black);
+    margin-right: 14px;
+    position: relative;
+    transition: all 0.1s ease;
+    flex-shrink: 0;
+    background: var(--v5-white);
+}
+
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile {
+    background: var(--v5-black);
+}
+
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: var(--v5-white);
+}
+
+.radio-label-mobile {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--v5-black);
+    flex: 1;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.radio-option-mobile input[type="radio"]:checked ~ .radio-label-mobile {
+    font-weight: 700;
+}
+
+/* ============================================
+   ☑️ CHECKBOXES - VARIATION 5 (Brutalist)
+   ============================================ */
+
+.checkbox-option-mobile {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border: 2px solid var(--v5-black);
+    margin-bottom: 6px;
+    transition: all 0.1s ease;
+    background: var(--v5-white);
+}
+
+.checkbox-option-mobile:active {
+    background: var(--v5-gray);
+}
+
+.checkbox-option-mobile input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom-mobile {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--v5-black);
+    margin-right: 14px;
+    position: relative;
+    transition: all 0.1s ease;
+    flex-shrink: 0;
+    background: var(--v5-white);
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile {
+    background: var(--v5-black);
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile::after {
+    content: '✕';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--v5-white);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+
+.checkbox-label-mobile {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--v5-black);
+    flex: 1;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked ~ .checkbox-label-mobile {
+    font-weight: 700;
+}
+
+/* ============================================
+   🔍 CATEGORY SEARCH - VARIATION 5
+   ============================================ */
+
+.category-search-wrapper-mobile {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search-icon-mobile {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--v5-black);
+}
+
+.category-search-mobile {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 2px solid var(--v5-black);
+    font-size: 14px;
+    font-family: 'Space Mono', monospace;
+    background: var(--v5-white);
+    color: var(--v5-black);
+    font-weight: 400;
+    transition: all 0.1s ease;
+}
+
+.category-search-mobile:focus {
+    outline: none;
+    background: var(--v5-gray);
+    border-width: 3px;
+}
+
+.category-search-mobile::placeholder {
+    color: #666666;
+}
+
+/* ============================================
+   💰 PRICE INPUT - VARIATION 5 (Brutalist)
+   ============================================ */
+
+.premium-price-input {
+    padding: 8px 0;
+}
+
+.premium-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--v5-black);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+}
+
+.price-range-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.price-input-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--v5-white);
+    border: 2px solid var(--v5-black);
+    padding: 14px 16px;
+    transition: all 0.1s ease;
+}
+
+.price-input-wrapper:focus-within {
+    border-width: 3px;
+    background: var(--v5-gray);
+}
+
+.currency-symbol {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--v5-black);
+    margin-right: 6px;
+    font-family: 'Space Mono', monospace;
+}
+
+.price-input-wrapper input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--v5-black);
+    outline: none;
+    font-family: 'Space Mono', monospace;
+}
+
+.price-input-wrapper input::placeholder {
+    color: #666666;
+    font-weight: 400;
+}
+
+/* Separator removed - vertical layout */
+
+/* ============================================
+   🔘 BUTTONS - VARIATION 5 (Brutalist)
+   ============================================ */
+
+.done-btn {
+    flex: 1;
+    padding: 14px 24px;
+    background: var(--v5-black);
+    color: var(--v5-white);
+    border: 2px solid var(--v5-black);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.done-btn:active {
+    background: var(--v5-white);
+    color: var(--v5-black);
+}
+
+.clear-btn {
+    flex: 1;
+    padding: 14px 24px;
+    background: var(--v5-white);
+    color: var(--v5-black);
+    border: 2px solid var(--v5-black);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.clear-btn:active {
+    background: var(--v5-black);
+    color: var(--v5-white);
+}
+
+.filter-section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--v5-black);
+    margin: 20px 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 16px;
+    border-top: 2px solid var(--v5-black);
+}
+
+.filter-section-title:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+/* ============================================
+   🎯 DESKTOP SIDEBAR - VARIATION 5
+   ============================================ */
+
+.filter-sidebar {
+    position: sticky;
+    top: 100px;
+    width: 280px;
+    height: fit-content;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    background: var(--v5-white);
+    border: 3px solid var(--v5-black);
+}
+
+.filter-sidebar::-webkit-scrollbar {
+    width: 12px;
+    background: var(--v5-white);
+}
+
+.filter-sidebar::-webkit-scrollbar-thumb {
+    background: var(--v5-black);
+    border: 2px solid var(--v5-white);
+}
+
+.filter-content {
+    padding: 24px;
+}
+
+.filter-section {
+    margin-bottom: 0;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--v5-black);
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--v5-black);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.subsection-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--v5-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Expandable Sections */
+.expandable .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+.toggle-icon {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--v5-black);
+    transition: transform 0.2s ease;
+    font-family: 'Space Mono', monospace;
+}
+
+.expandable.active .toggle-icon {
+    transform: rotate(45deg);
+}
+
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.expandable.active .section-content {
+    max-height: 800px;
+}
+
+/* Radio Options - Desktop */
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border: 2px solid var(--v5-black);
+    cursor: pointer;
+    transition: all 0.1s ease;
+    background: var(--v5-white);
+}
+
+.radio-option:active {
+    background: var(--v5-gray);
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+    background: var(--v5-black);
+}
+
+.radio-option:has(input[type="radio"]:checked) .radio-label {
+    color: var(--v5-white);
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--v5-black);
+    margin-right: 10px;
+    transition: all 0.1s ease;
+    position: relative;
+    background: var(--v5-white);
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom {
+    background: var(--v5-white);
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--v5-black);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.radio-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--v5-black);
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Checkboxes - Desktop */
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.checkbox-option:active {
+    padding-left: 4px;
+}
+
+.checkbox-option input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--v5-black);
+    margin-right: 10px;
+    transition: all 0.1s ease;
+    position: relative;
+    background: var(--v5-white);
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-custom {
+    background: var(--v5-black);
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '✕';
+    position: absolute;
+    color: var(--v5-white);
+    font-size: 11px;
+    font-weight: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Mono', monospace;
+}
+
+.checkbox-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--v5-black);
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.checkbox-option input[type="checkbox"]:checked ~ .checkbox-label {
+    font-weight: 700;
+}
+
+/* Category Search - Desktop */
+.category-search-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--v5-black);
+}
+
+.category-search {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    border: 2px solid var(--v5-black);
+    font-size: 12px;
+    font-family: 'Space Mono', monospace;
+    background: var(--v5-white);
+    font-weight: 400;
+}
+
+.category-search:focus {
+    outline: none;
+    background: var(--v5-gray);
+    border-width: 3px;
+}
+
+.clear-categories-btn {
+    width: 100%;
+    padding: 8px 12px;
+     margin-top: 12px;
+    margin-bottom: 12px;
+    background: var(--v5-black);
+    border: 2px solid var(--v5-black);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--v5-white);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s ease;
+    font-family: 'Space Mono', monospace;
+}
+
+.clear-categories-btn:active {
+    background: var(--v5-white);
+    color: var(--v5-black);
+}
+
+/* Flavor Grid */
+.flavor-grid,
+.flavor-grid-mobile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.flavor-chip,
+.flavor-chip-mobile {
+    padding: 8px 6px;
+    border: 2px solid var(--v5-black);
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    background: var(--v5-white);
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+}
+
+.flavor-chip:active,
+.flavor-chip-mobile:active {
+    background: var(--v5-gray);
+}
+
+.flavor-chip.active,
+.flavor-chip-mobile.active {
+    background: var(--v5-black);
+    color: var(--v5-white);
+}
+
+/* ============================================
+   📱 RESPONSIVE
+   ============================================ */
+
+@media (min-width: 701px) {
+    .mobile-filter-bar,
+    .bottom-modal {
+        display: none !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .filter-sidebar {
+        display: none !important;
+    }
+}.price-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}

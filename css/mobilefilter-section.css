@@ -680,3 +680,14 @@ body.dark-mode .filter-section-title {
         padding-top: 0 !important;
     }
 }
+.price-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}

@@ -1,0 +1,481 @@
+/* ============================================
+   📰 VARIATION 3: MAGAZINE EDITORIAL MAIN COURSE
+   Lifestyle aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+    --main-section-bg: #fff9f5;
+    --main-card-bg: #ffffff;
+    --main-card-shadow: rgba(0, 0, 0, 0.05);
+    --main-primary: #2d2d2d;
+    --main-secondary: #6b6b6b;
+    --main-accent: #f5e6d3;
+    --main-text: #1a1a1a;
+    --main-text-light: #7a7a7a;
+    --main-border: #e5ddd0;
+}
+
+.sublime-navbar.dark-mode ~ .main-course-section {
+    --main-section-bg: #1a1a1a;
+    --main-card-bg: #242424;
+    --main-card-shadow: rgba(0, 0, 0, 0.3);
+    --main-primary: #f5e6d3;
+    --main-secondary: #b8b4ae;
+    --main-accent: #2d2d2d;
+    --main-text: #f5f5f5;
+    --main-text-light: #a8a8a8;
+    --main-border: #3a3a3a;
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+.main-course-section {
+    padding: 20px 20px 40px 20px;
+    background: var(--main-section-bg);
+    position: relative;
+}
+
+/* ============================================
+   HEADER - EDITORIAL STYLE
+   ============================================ */
+.main-course-header {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--main-secondary);
+}
+
+.main-course-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--main-text);
+    margin: 0;
+    line-height: 0.95;
+    letter-spacing: -1px;
+}
+
+.header-line {
+    width: 60px;
+    height: 3px;
+    background: var(--main-primary);
+    margin-top: 4px;
+}
+
+/* ============================================
+   SCROLL CONTAINER
+   ============================================ */
+.main-course-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-course-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--main-primary) var(--main-accent);
+    padding: 20px 0 30px;
+    margin: 0 60px;
+}
+
+.main-course-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.main-course-scroll::-webkit-scrollbar-track {
+    background: var(--main-accent);
+}
+
+.main-course-scroll::-webkit-scrollbar-thumb {
+    background: var(--main-primary);
+}
+
+/* ============================================
+   PRODUCT TRACK
+   ============================================ */
+.main-course-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* ============================================
+   PRODUCT CARD - EDITORIAL LAYOUT
+   ============================================ */
+.main-course-card {
+    flex: 0 0 180px;
+    width: 180px;
+    background: var(--main-card-bg);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 1px solid var(--main-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px var(--main-card-shadow);
+    border-color: var(--main-primary);
+}
+
+/* ============================================
+   PRODUCT BADGE - CORNER RIBBON
+   ============================================ */
+.product-badge {
+    position: absolute;
+    top: 16px;
+    left: -24px;
+    background: var(--main-primary);
+    color: var(--main-card-bg);
+    padding: 6px 32px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(-45deg);
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.new-badge {
+    background: var(--main-secondary);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+.main-course-card .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(245, 230, 211, 0.3), rgba(255, 255, 255, 0.1));
+}
+
+.main-course-card .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-course-card:hover .product-image {
+    transform: scale(1.15);
+}
+
+/* Simplified Glow - Single Unified Effect */
+.image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(245, 230, 211, 0.6) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    filter: blur(15px);
+}
+
+.main-course-card:hover .image-glow {
+    opacity: 1;
+}
+
+/* ============================================
+   PRODUCT INFO - EDITORIAL TEXT
+   ============================================ */
+.main-course-card .product-info {
+    text-align: center;
+}
+
+.main-course-card .product-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--main-text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.main-course-card:hover .product-name {
+    color: var(--main-secondary);
+}
+
+.main-course-card .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+}
+
+.main-course-card .product-rating {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: -1px;
+    color: var(--main-text-light);
+}
+
+.main-course-card .product-price {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    color: var(--main-primary);
+    font-size: 14px;
+}
+
+/* ============================================
+   NAVIGATION ARROWS - MINIMAL
+   ============================================ */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--main-card-bg);
+    border: 1px solid var(--main-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: var(--main-primary);
+    opacity: 0;
+}
+
+.main-course-container:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--main-primary);
+    color: var(--main-card-bg);
+    border-color: var(--main-primary);
+}
+
+.scroll-arrow-left {
+    left: 0;
+}
+
+.scroll-arrow-right {
+    right: 0;
+}
+
+.scroll-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================
+   SEE ALL BUTTON - EDITORIAL STYLE
+   ============================================ */
+.see-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--main-primary);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--main-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.see-all-btn:hover {
+    padding-right: 10px;
+    border-bottom-width: 3px;
+}
+
+.see-all-btn:hover .btn-arrow {
+    transform: translateX(8px);
+}
+
+.btn-arrow {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1200px) {
+    .scroll-arrow {
+        display: none;
+    }
+    
+    .main-course-scroll {
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-course-section {
+        padding: 20px 15px 25px 15px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+    
+    .header-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+    
+    .main-course-title {
+        font-size: 28px;
+    }
+    
+    .main-course-card {
+        flex: 0 0 140px;
+        width: 140px;
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 8px;
+    }
+    
+    .main-course-card .product-name {
+        font-size: 15px;
+    }
+    
+    .main-course-track {
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .see-all-container {
+        margin-top: 15px;
+    }
+    
+    .see-all-btn {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-course-section {
+        padding: 15px 10px 20px 10px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 12px;
+        padding: 0 10px;
+    }
+    
+    .main-course-title {
+        font-size: 26px;
+    }
+    
+    .header-line {
+        width: 50px;
+        height: 2px;
+    }
+    
+    .main-course-scroll {
+        padding: 15px 0 20px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 130px;
+        width: 130px;
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .main-course-card .product-name {
+        font-size: 13px;
+    }
+    
+    .main-course-card .product-price {
+        font-size: 13px;
+    }
+    
+    .main-course-track {
+        gap: 12px;
+    }
+    
+    .see-all-container {
+        margin-top: 10px;
+    }
+    
+    .see-all-btn {
+        padding: 12px 0;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-course-section {
+        padding: 12px 8px 18px 8px;
+    }
+    
+    .main-course-header {
+        margin-bottom: 10px;
+    }
+    
+    .main-course-title {
+        font-size: 24px;
+    }
+    
+    .main-course-scroll {
+        padding: 12px 0 18px 0;
+    }
+    
+    .main-course-card {
+        flex: 0 0 120px;
+        width: 120px;
+    }
+    
+    .main-course-card .product-image-wrapper {
+        margin-bottom: 6px;
+    }
+    
+    .see-all-container {
+        margin-top: 8px;
+    }
+    
+    .see-all-btn {
+        padding: 10px 0;
+        font-size: 9px;
+    }
+}

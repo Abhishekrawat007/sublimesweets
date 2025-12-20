@@ -1,0 +1,480 @@
+<!-- ============================================
+     PRODUCT CARD DESIGN SELECTOR BOT
+     Add this to your admin/settings page
+     ============================================ -->
+
+<div class="design-selector-container">
+    <div class="design-selector-card">
+        <div class="selector-header">
+            <h2 class="selector-title">🎨 Product Card Design Selector</h2>
+            <p class="selector-subtitle">Choose your premium design variation</p>
+        </div>
+
+        <div class="design-options-grid">
+            <!-- Glassmorphism Luxury -->
+            <div class="design-option" data-design="glass">
+                <div class="design-preview glass-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Product Name</div>
+                            <div class="preview-stars">★★★★☆</div>
+                            <div class="preview-price">₹380</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">💎</span>
+                    <h3 class="design-name">Glassmorphism Luxury</h3>
+                    <p class="design-desc">Frosted glass, blur, premium transparency</p>
+                </div>
+            </div>
+
+            <!-- Neo-Brutalism Bold -->
+            <div class="design-option" data-design="brutal">
+                <div class="design-preview brutal-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">PRODUCT</div>
+                            <div class="preview-stars">★★★★★</div>
+                            <div class="preview-price">₹220</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">⚡</span>
+                    <h3 class="design-name">Neo-Brutalism Bold</h3>
+                    <p class="design-desc">Thick borders, bold shadows, vibrant</p>
+                </div>
+            </div>
+
+            <!-- Minimal Elegant -->
+            <div class="design-option" data-design="minimal">
+                <div class="design-preview minimal-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Product Name</div>
+                            <div class="preview-stars">★★★★</div>
+                            <div class="preview-price">₹42</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">✨</span>
+                    <h3 class="design-name">Minimal Elegant</h3>
+                    <p class="design-desc">Clean lines, refined typography</p>
+                </div>
+            </div>
+
+            <!-- Magazine Editorial -->
+            <div class="design-option" data-design="editorial">
+                <div class="design-preview editorial-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Product Name</div>
+                            <div class="preview-stars">★★★★☆</div>
+                            <div class="preview-price">₹380</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">📰</span>
+                    <h3 class="design-name">Magazine Editorial</h3>
+                    <p class="design-desc">Asymmetric, typography-focused</p>
+                </div>
+            </div>
+
+            <!-- 3D Depth Card -->
+            <div class="design-option" data-design="depth">
+                <div class="design-preview depth-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Product Name</div>
+                            <div class="preview-stars">★★★★★</div>
+                            <div class="preview-price">₹220</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">🎭</span>
+                    <h3 class="design-name">3D Depth Card</h3>
+                    <p class="design-desc">Layered shadows, neumorphic feel</p>
+                </div>
+            </div>
+
+            <!-- Gradient Premium -->
+            <div class="design-option" data-design="gradient">
+                <div class="design-preview gradient-preview">
+                    <div class="preview-card">
+                        <div class="preview-image"></div>
+                        <div class="preview-content">
+                            <div class="preview-title">Product Name</div>
+                            <div class="preview-stars">★★★★</div>
+                            <div class="preview-price">₹42</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="design-info">
+                    <span class="design-icon">🌈</span>
+                    <h3 class="design-name">Gradient Premium</h3>
+                    <p class="design-desc">Smooth gradients, glow effects</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="selector-actions">
+            <button class="apply-design-btn" id="applyDesignBtn">
+                Apply Selected Design 🚀
+            </button>
+            <p class="current-design-info">
+                Current design: <strong id="currentDesignName">Default</strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ============================================
+   DESIGN SELECTOR STYLES
+   ============================================ */
+.design-selector-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.design-selector-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.selector-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.selector-title {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.selector-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.design-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.design-option {
+    background: #f8f9fa;
+    border: 3px solid transparent;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.design-option:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+}
+
+.design-option.selected {
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+}
+
+.design-preview {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.preview-card {
+    width: 80%;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.preview-image {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.preview-content {
+    padding: 12px;
+}
+
+.preview-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.preview-stars {
+    font-size: 0.85rem;
+    color: #FFD700;
+    margin-bottom: 8px;
+}
+
+.preview-price {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #667eea;
+}
+
+/* Specific preview styles */
+.glass-preview {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.glass-preview .preview-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.brutal-preview {
+    background: #FFEB3B;
+}
+
+.brutal-preview .preview-card {
+    background: #FFEB3B;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.brutal-preview .preview-title {
+    font-family: Arial Black, sans-serif;
+    text-transform: uppercase;
+}
+
+.minimal-preview {
+    background: #f0f0f0;
+}
+
+.minimal-preview .preview-card {
+    border: 1px solid #e0e0e0;
+}
+
+.minimal-preview .preview-image {
+    background: #e0e0e0;
+}
+
+.editorial-preview {
+    background: #1a1a1a;
+}
+
+.editorial-preview .preview-title {
+    font-family: Georgia, serif;
+    font-size: 1.1rem;
+}
+
+.depth-preview {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+}
+
+.depth-preview .preview-card {
+    box-shadow: 
+        6px 6px 12px rgba(163, 177, 198, 0.6),
+        -6px -6px 12px rgba(255, 255, 255, 0.8);
+}
+
+.gradient-preview {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-preview .preview-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.gradient-preview .preview-content {
+    color: white;
+}
+
+.gradient-preview .preview-price {
+    color: white;
+}
+
+.design-info {
+    text-align: center;
+}
+
+.design-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.design-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.design-desc {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.selector-actions {
+    text-align: center;
+}
+
+.apply-design-btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.apply-design-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.apply-design-btn:active {
+    transform: translateY(0);
+}
+
+.current-design-info {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.current-design-info strong {
+    color: #667eea;
+    font-weight: 700;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .design-selector-card {
+        padding: 24px;
+    }
+
+    .selector-title {
+        font-size: 1.5rem;
+    }
+
+    .design-options-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+// ============================================
+// DESIGN SELECTOR BOT LOGIC
+// ============================================
+(function() {
+    let selectedDesign = localStorage.getItem('productCardDesign') || 'default';
+    
+    // Update UI on load
+    updateCurrentDesignDisplay();
+    highlightSelectedOption();
+    
+    // Design option selection
+    document.querySelectorAll('.design-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.design-option').forEach(opt => 
+                opt.classList.remove('selected')
+            );
+            this.classList.add('selected');
+            selectedDesign = this.dataset.design;
+        });
+    });
+    
+    // Apply button
+    document.getElementById('applyDesignBtn').addEventListener('click', function() {
+        if (typeof window.applyProductCardDesign === 'function') {
+            window.applyProductCardDesign(selectedDesign);
+            updateCurrentDesignDisplay();
+            
+            // Success feedback
+            const btn = this;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Design Applied Successfully!';
+            btn.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 2000);
+            
+            // Show toast if available
+            if (typeof window.showToast === 'function') {
+                window.showToast(`${getDesignName(selectedDesign)} design applied to all products!`, 'success');
+            }
+        } else {
+            alert('Please include the product-card-star-fix.js file to enable design switching.');
+        }
+    });
+    
+    function updateCurrentDesignDisplay() {
+        const currentDesign = localStorage.getItem('productCardDesign') || 'default';
+        document.getElementById('currentDesignName').textContent = getDesignName(currentDesign);
+    }
+    
+    function highlightSelectedOption() {
+        const savedDesign = localStorage.getItem('productCardDesign');
+        if (savedDesign) {
+            const option = document.querySelector(`[data-design="${savedDesign}"]`);
+            if (option) {
+                option.classList.add('selected');
+                selectedDesign = savedDesign;
+            }
+        }
+    }
+    
+    function getDesignName(design) {
+        const names = {
+            'glass': 'Glassmorphism Luxury',
+            'brutal': 'Neo-Brutalism Bold',
+            'minimal': 'Minimal Elegant',
+            'editorial': 'Magazine Editorial',
+            'depth': '3D Depth Card',
+            'gradient': 'Gradient Premium',
+            'default': 'Default'
+        };
+        return names[design] || 'Custom';
+    }
+})();
+</script>
