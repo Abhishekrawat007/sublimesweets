@@ -1036,7 +1036,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load saved design preference
   loadSavedDesign();
 });
-
+document.addEventListener('DOMContentLoaded', () => {
+    applyProductCardDesign(''); // Pick one
+});
 // Export for use in other scripts
 if (typeof window !== 'undefined') {
   window.ProductCardManager = ProductCardManager;

@@ -2083,3 +2083,31 @@ body.dark-mode .star-icon.full {
 body.dark-mode .star-icon.empty {
     stroke: #FFB52E !important;
 }
+/* Force proper SVG rendering */
+.star-icon {
+    overflow: visible !important;
+}
+
+/* Fix half star gradient on mobile */
+.star-icon.half path {
+    fill: #FFA500 !important;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%) !important;
+}
+
+/* Badge container - prevent overflow */
+.info-badge.rating-badge {
+    overflow: visible !important;
+    flex-wrap: nowrap !important;
+}
+
+.badge-row {
+    overflow: visible !important;
+}
+
+/* Mobile sizing */
+@media (max-width: 550px) {
+    .star-icon {
+        width: 12px !important;
+        height: 12px !important;
+    }
+}
