@@ -1037,7 +1037,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadSavedDesign();
 });
 document.addEventListener('DOMContentLoaded', () => {
-    applyProductCardDesign(''); // Pick one
+    applyProductCardDesign('minimal'); // Pick one
 });
 // Export for use in other scripts
 if (typeof window !== 'undefined') {
