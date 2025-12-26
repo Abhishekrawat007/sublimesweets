@@ -16,11 +16,7 @@
 .menu-bg-layer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, 
-        #f5f7fa 0%, 
-        #c3cfe2 50%, 
-        #f5f7fa 100%
-    );
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #f5f7fa 100%);
     z-index: 0;
 }
 
@@ -58,7 +54,7 @@
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
 }
 
-/* Left Page (Fixed) */
+/* Left Page */
 .menu-left-page {
     flex: 1;
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -80,11 +76,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.1) 50%, 
-        transparent 100%
-    );
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
 }
 
 .menu-logo h1 {
@@ -130,18 +122,14 @@
 /* Book Spine */
 .book-spine {
     width: 30px;
-    background: linear-gradient(to right, 
-        rgba(0, 0, 0, 0.2) 0%, 
-        rgba(0, 0, 0, 0.05) 50%, 
-        rgba(255, 255, 255, 0.1) 100%
-    );
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%);
     position: relative;
     z-index: 5;
     box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
 }
 
-/* Right Page (Turning) */
+/* Right Page */
 .menu-right-page {
     flex: 1;
     position: relative;
@@ -160,7 +148,7 @@
     100% { transform: rotateY(-180deg); }
 }
 
-/* Page Stack (3D depth effect) */
+/* Page Stack */
 .page-stack {
     position: absolute;
     inset: 0;
@@ -190,7 +178,7 @@
     opacity: 0.3;
 }
 
-/* Page Layers - AUTOFIT IMAGES */
+/* Page Layers */
 .page-underneath,
 .page-front,
 .page-back {
@@ -207,22 +195,11 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.page-underneath {
-    z-index: 1;
-}
+.page-underneath { z-index: 1; }
+.page-front { backface-visibility: hidden; z-index: 3; }
+.page-back { backface-visibility: hidden; transform: rotateY(180deg); z-index: 2; }
 
-.page-front {
-    backface-visibility: hidden;
-    z-index: 3;
-}
-
-.page-back {
-    backface-visibility: hidden;
-    transform: rotateY(180deg);
-    z-index: 2;
-}
-
-/* Images - AUTOFIT ALL SIZES */
+/* Images */
 .page-underneath img,
 .page-front img,
 .page-back img {
@@ -231,14 +208,9 @@
     height: 100%;
     object-fit: fill;
     object-position: center;
-     background: white;
+    background: white;
 }
-/* Dark mode background for letterbox */
-[data-theme="dark"] .page-underneath img,
-[data-theme="dark"] .page-front img,
-[data-theme="dark"] .page-back img {
-    background: #2a2a2a;
-}
+
 /* Progress Indicator */
 .menu-progress-indicator {
     position: absolute;
@@ -295,23 +267,16 @@
 }
 
 @keyframes bounceHint {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(10px);
-    }
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
 }
 
 /* ============================================
-   DARK MODE SUPPORT
+   DARK MODE
    ============================================ */
 
 body.dark-mode .menu-bg-layer {
-    background: linear-gradient(135deg, 
-        #1a1a2e 0%, 
-        #16213e 50%, 
-        #0f3460 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 body.dark-mode .menu-botanical-overlay {
@@ -333,13 +298,8 @@ body.dark-mode .menu-logo h1 {
     background-clip: text;
 }
 
-body.dark-mode .menu-tagline {
-    color: #aaa !important;
-}
-
-body.dark-mode .menu-description {
-    color: #bbb !important;
-}
+body.dark-mode .menu-tagline { color: #aaa !important; }
+body.dark-mode .menu-description { color: #bbb !important; }
 
 body.dark-mode .page-front,
 body.dark-mode .page-back,
@@ -355,19 +315,23 @@ body.dark-mode .page-back img {
     background: #2a2a2a;
 }
 
-body.dark-mode .scroll-hint {
-    color: rgba(255, 255, 255, 0.6);
-}
-
+body.dark-mode .scroll-hint { color: rgba(255, 255, 255, 0.6); }
 body.dark-mode .progress-dot {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
 }
+
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE - CLEAN BREAKPOINTS
    ============================================ */
 
+/* Tablets & Smaller Laptops (1024px and below) */
 @media (max-width: 1024px) {
+    .menu-hero-section {
+        min-height: auto;
+        padding: 100px 20px 60px;
+    }
+    
     .menu-book-container {
         height: 500px;
     }
@@ -377,59 +341,23 @@ body.dark-mode .progress-dot {
     }
 }
 
-
-
-/* Show full book layout ABOVE 480px */
-@media (max-width: 480px) {
+/* Small Tablets (768px and below) */
+@media (max-width: 768px) {
     .menu-hero-section {
-        padding: 80px 15px 60px;
+        padding: 90px 15px 50px;
     }
     
     .menu-book-container {
-        width: 95vw;
-        height: 400px;
-    }
-    
-    /* Hide left page ONLY on very small screens */
-    .menu-left-page {
-        display: none;
-    }
-    
-    .book-spine {
-        display: none;
-    }
-    
-    .menu-book-container {
-        justify-content: center;
-    }
-    
-    .menu-right-page {
-        border-radius: 20px;
-    }
-    
-    .page-front,
-    .page-back,
-    .page-underneath,
-    .page-layer {
-        border-radius: 20px;
-    }
-    
-    .progress-dots {
-        gap: 8px;
-    }
-    
-    .progress-dot {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .progress-dot.active {
-        width: 12px;
-        height: 12px;
+        height: 450px;
     }
 }
-/* Fix left page content for screens 480px-560px */
+
+/* Between 481px and 560px - Shrink left page */
 @media (max-width: 560px) and (min-width: 481px) {
+    .menu-hero-section {
+        padding: 80px 15px 45px;
+    }
+    
     .menu-left-page {
         padding: 20px 15px;
     }
@@ -465,34 +393,51 @@ body.dark-mode .progress-dot {
         width: 12px;
     }
 }
-@media (max-width: 1024px) {
-    .menu-hero-section {
-        padding: 0px;
-    }
-}
 
-@media (max-width: 768px) {
-    .menu-hero-section {
-        padding:0px; /* Even less top space */
-    }
-}
-
-@media (max-width: 560px) and (min-width: 481px) {
-    .menu-hero-section {
-        padding: 0px;
-    }
-}
-
+/* Mobile (480px and below) - Hide left page */
 @media (max-width: 480px) {
     .menu-hero-section {
-        padding: 0px; /* Minimal top padding on mobile */
-    }
-}
-@media (max-width: 480px) {
-    .menu-hero-section {
-        padding: 0; /* Remove all padding */
-        margin-top: -80px; /* Pull it UP closer to navbar */
+        padding: 70px 15px 40px;
     }
     
-  
+    .menu-book-container {
+        height: 400px;
+    }
+    
+    .menu-left-page {
+        display: none;
+    }
+    
+    .book-spine {
+        display: none;
+    }
+    
+    .menu-right-page {
+        border-radius: 20px;
+    }
+    
+    .page-front,
+    .page-back,
+    .page-underneath,
+    .page-layer {
+        border-radius: 20px;
+    }
+    
+    .progress-dots {
+        gap: 8px;
+    }
+    
+    .progress-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .progress-dot.active {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .menu-progress-indicator {
+        bottom: 60px;
+    }
 }
