@@ -385,6 +385,10 @@ function changeImage(index) {
     currentImageIndex = index;
     const isVideoSlide = hasVideoSlide() && index === total - 1;
 
+    // ✅ Add changing class for animation
+    mainImage.classList.add('changing');
+    setTimeout(() => mainImage.classList.remove('changing'), 300);
+
     if (isVideoSlide && videoSrc) {
         // Show video, hide image
         mainImage.style.display = 'none';
@@ -409,8 +413,6 @@ function changeImage(index) {
             if (videoTag) {
                 videoTag.style.display = 'block';
                 videoTag.src = videoSrc.url;
-                // If you want autoplay, uncomment:
-                // videoTag.play().catch(() => {});
             }
         }
     } else {
@@ -435,11 +437,12 @@ function changeImage(index) {
         thumb.classList.toggle('active', i === index);
     });
 }
-
 function initSlideshowControls() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const mainImageContainer = document.querySelector('.main-image-container');
 
+    // Click navigation (existing)
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
             const total = getTotalSlides();
@@ -457,6 +460,63 @@ function initSlideshowControls() {
             changeImage(currentImageIndex);
         });
     }
+
+    // ✅ NEW: Touch/Swipe Navigation
+    if (mainImageContainer) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 50; // Minimum swipe distance in pixels
+
+        mainImageContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        mainImageContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistanceX = touchEndX - touchStartX;
+            const swipeDistanceY = touchEndY - touchStartY;
+
+            // Only trigger if horizontal swipe is dominant (not vertical scroll)
+            if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY) && 
+                Math.abs(swipeDistanceX) > minSwipeDistance) {
+                
+                const total = getTotalSlides();
+                if (!total) return;
+
+                if (swipeDistanceX > 0) {
+                    // Swipe right → Previous image
+                    currentImageIndex = (currentImageIndex - 1 + total) % total;
+                    changeImage(currentImageIndex);
+                } else {
+                    // Swipe left → Next image
+                    currentImageIndex = (currentImageIndex + 1) % total;
+                    changeImage(currentImageIndex);
+                }
+            }
+        }
+    }
+
+    // ✅ BONUS: Keyboard navigation (left/right arrows on desktop)
+    document.addEventListener('keydown', (e) => {
+        const total = getTotalSlides();
+        if (!total) return;
+
+        if (e.key === 'ArrowLeft') {
+            currentImageIndex = (currentImageIndex - 1 + total) % total;
+            changeImage(currentImageIndex);
+        } else if (e.key === 'ArrowRight') {
+            currentImageIndex = (currentImageIndex + 1) % total;
+            changeImage(currentImageIndex);
+        }
+    });
 }
 
 
