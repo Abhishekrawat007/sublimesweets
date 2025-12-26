@@ -465,3 +465,34 @@ body.dark-mode .progress-dot {
         width: 12px;
     }
 }
+@media (max-width: 1024px) {
+    .menu-hero-section {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-hero-section {
+        padding:0px; /* Even less top space */
+    }
+}
+
+@media (max-width: 560px) and (min-width: 481px) {
+    .menu-hero-section {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-hero-section {
+        padding: 0px; /* Minimal top padding on mobile */
+    }
+}
+@media (max-width: 480px) {
+    .menu-hero-section {
+        padding: 0; /* Remove all padding */
+        margin-top: -80px; /* Pull it UP closer to navbar */
+    }
+    
+  
+}
