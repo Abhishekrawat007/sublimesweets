@@ -441,3 +441,45 @@ body.dark-mode .progress-dot {
         bottom: 60px;
     }
 }
+/* Between 560px and 630px - Further reduce left page content */
+@media (max-width: 630px) and (min-width: 561px) {
+    .menu-hero-section {
+        padding: 80px 15px 45px;
+    }
+    
+    .menu-left-page {
+        padding: 15px 12px;
+    }
+    
+    .menu-logo h1 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+    
+    .menu-divider {
+        width: 45px;
+        height: 3px;
+        margin-bottom: 8px;
+    }
+    
+    .menu-tagline {
+        font-size: 0.7rem;
+        margin-bottom: 12px;
+    }
+    
+    .menu-description {
+        font-size: 0.65rem;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+    
+    .leaf-decoration {
+        width: 50px;
+        height: 25px;
+    }
+    
+    .book-spine {
+        width: 10px;
+    }
+}

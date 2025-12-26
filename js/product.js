@@ -3385,7 +3385,7 @@ const products = [
   },
   {
     "id": 166,
-    "name": "Veg Manchurian with Fried Rice",
+    "name": "Veg Manchurian",
     "categories": [
       "food",
       "maincourse",
