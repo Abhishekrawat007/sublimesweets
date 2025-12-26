@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - Premium Restaurant</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+        <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/product-card.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/bottom-bar.css">
+
+</head>
+<body>
+    <!-- Include your navbar -->
+    <!-- MAIN NAVBAR -->
+    <nav class="sublime-navbar" id="navbar">
+        <div class="navbar-container">
+            <!-- LEFT SECTION -->
+            <div class="navbar-left">
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+                    <span class="logo-icon">🍰</span>
+                    <span>Sublime Sweets</span>
+                </a>
+            </div>
+
+          <!-- DESKTOP MENU -->
+<div class="desktop-menu">
+    <div class="desktop-menu-item">
+        <a href="/index.html" class="desktop-menu-link active" onclick="setActiveCategory('home')">
+            Home
+        </a>
+    </div>
+
+    <!-- FOOD CATEGORY -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Food
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍕 Street Food</div>
+                    <a href="streetfood.html" class="mega-dropdown-item" onclick="setActiveCategory('streetfood')">View All Street Food</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍛 Main Course</div>
+                    <a href="maincourse.html" class="mega-dropdown-item" onclick="setActiveCategory('maincourse')">View All Main Course</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍽️ Meals / Thalis</div>
+                    <a href="maincourse.html" class="mega-dropdown-item" onclick="setActiveCategory('maincourse')">View All Meals</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍨 Fresh Desserts</div>
+                    <a href="pastry.html" class="mega-dropdown-item" onclick="setActiveCategory('pastries')">View All Desserts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACKS & DRINKS -->
+    <div class="desktop-menu-item">
+        <a href="snacks.html" class="desktop-menu-link" onclick="setActiveCategory('snacks')">
+            Snacks & Drinks
+        </a>
+    </div>
+
+    <!-- MITHAI -->
+    <div class="desktop-menu-item">
+        <a href="mithai.html" class="desktop-menu-link" onclick="setActiveCategory('mithai')">
+            Mithai
+        </a>
+    </div>
+
+    <!-- BAKERY & CAKES -->
+    <div class="desktop-menu-item">
+        <span class="desktop-menu-link">
+            Bakery & Cakes
+            <span style="font-size: 10px;">▼</span>
+        </span>
+        <div class="mega-dropdown">
+            <div class="mega-dropdown-grid">
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🎂 Cakes - Eggless</div>
+                    <a href="cakes.html" class="mega-dropdown-item" onclick="setActiveCategory('cakes')">View All Eggless Cakes</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🥐 Pastries</div>
+                    <a href="pastry.html" class="mega-dropdown-item" onclick="setActiveCategory('pastries')">View All Pastries</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍞 Bread & Buns</div>
+                    <a href="dairy.html" class="mega-dropdown-item" onclick="setActiveCategory('dairy')">View All Bread</a>
+                </div>
+                <div class="mega-dropdown-column">
+                    <div class="mega-dropdown-title">🍪 Cookies</div>
+                    <a href="dairy.html" class="mega-dropdown-item" onclick="setActiveCategory('dairy')">View All Cookies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAIRY -->
+    <div class="desktop-menu-item">
+        <a href="dairy.html" class="desktop-menu-link" onclick="setActiveCategory('dairy')">
+            Dairy
+        </a>
+    </div>
+
+    <!-- DRY FRUITS -->
+    <div class="desktop-menu-item">
+        <a href="dryfruits.html" class="desktop-menu-link" onclick="setActiveCategory('dryfruits')">
+            Dry Fruits
+        </a>
+    </div>
+</div>
+
+            <!-- RIGHT SECTION -->
+            <div class="navbar-right">
+                <!-- DESKTOP SEARCH BAR -->
+                <div class="desktop-search" style="display: none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" placeholder="Search products..." id="desktopSearchInput">
+                </div>
+
+                <!-- DARK MODE TOGGLE (Desktop) -->
+                <button class="icon-btn" id="darkModeBtn" aria-label="Toggle Dark Mode" style="display: none;">
+                    <svg class="sun-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                
+            <!-- WISHLIST -->
+<button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="window.location.href='wishlist.html'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+    <span class="badge" id="wishlistCount" style="display: none;"></span>
+</button>
+
+                <!-- SEARCH (Mobile Only) -->
+                <button class="icon-btn mobile-search-only" id="searchBtn" aria-label="Search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+
+                <!-- CART -->
+                <button class="icon-btn" id="cartBtn" aria-label="Cart">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                  <span class="badge" id="cartCount"></span>
+
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+                <span class="logo-icon">🍰</span>
+                <span>Sublime Sweets</span>
+            </a>
+            <button class="close-btn" id="closeMenu" aria-label="Close Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-menu-content">
+            <!-- HOME -->
+            <div class="mobile-menu-item">
+ <a href="index.html" class="mobile-menu-link active">
+  <span><span class="menu-icon">🏠</span> Home</span>
+</a>
+            </div>
+
+          
+           
+  <!-- All Products (mobile) -->
+<div class="mobile-menu-item">
+<a href="index.html#productsGrid" class="mobile-menu-link" >
+  <span><span class="menu-icon">📦</span> All Products</span>
+</a>
+
+</div>
+
+          
+<!-- CATEGORIES -->
+<div class="mobile-menu-item">
+    <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('categories'); return false;">
+        <span><span class="menu-icon">📂</span> Categories</span>
+        <span class="arrow-icon">▼</span>
+    </a>
+    <div class="mobile-submenu" id="categories">
+
+        <!-- FOOD -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('food'); return false;" style="margin: 8px 0;">
+            <span>🍕 Food</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="food">
+            <a href="streetfood.html" class="mobile-submenu-item" onclick="setActiveCategory('streetfood')">
+                <span class="submenu-emoji">🌮</span> Street Food
+            </a>
+            <a href="maincourse.html" class="mobile-submenu-item" onclick="setActiveCategory('maincourse')">
+                <span class="submenu-emoji">🍛</span> Main Course
+            </a>
+            <a href="maincourse.html" class="mobile-submenu-item" onclick="setActiveCategory('maincourse')">
+                <span class="submenu-emoji">🍽️</span> Meals / Thalis
+            </a>
+            <a href="pastry.html" class="mobile-submenu-item" onclick="setActiveCategory('pastries')">
+                <span class="submenu-emoji">🍨</span> Fresh Desserts
+            </a>
+        </div>
+
+        <!-- SNACKS & DRINKS -->
+        <a href="snacks.html" class="mobile-menu-link" style="margin: 8px 0;" onclick="setActiveCategory('snacks')">
+            <span>🍿 Snacks & Drinks</span>
+        </a>
+
+        <!-- MITHAI -->
+        <a href="mithai.html" class="mobile-menu-link" style="margin: 8px 0;" onclick="setActiveCategory('mithai')">
+            <span>🍬 Mithai (Indian Sweets)</span>
+        </a>
+
+        <!-- BAKERY & CAKES -->
+        <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('bakery'); return false;" style="margin: 8px 0;">
+            <span>🎂 Bakery & Cakes</span>
+            <span class="arrow-icon">▼</span>
+        </a>
+        <div class="mobile-submenu" id="bakery">
+            <a href="cakes.html" class="mobile-submenu-item" onclick="setActiveCategory('cakes')">
+                <span class="submenu-emoji">🎂</span> Cakes
+            </a>
+
+            <a href="pastry.html" class="mobile-submenu-item" onclick="setActiveCategory('pastries')">
+                <span class="submenu-emoji">🥐</span> Pastries
+            </a>
+            <a href="dairy.html" class="mobile-submenu-item" onclick="setActiveCategory('dairy')">
+                <span class="submenu-emoji">🍞</span> Bread & Buns
+            </a>
+            <a href="dairy.html" class="mobile-submenu-item" onclick="setActiveCategory('dairy')">
+                <span class="submenu-emoji">🍪</span> Cookies
+            </a>
+        </div>
+
+        <!-- DAIRY -->
+        <a href="dairy.html" class="mobile-menu-link" style="margin: 8px 0;" onclick="setActiveCategory('dairy')">
+            <span>🥛 Dairy</span>
+        </a>
+
+        <!-- DRY FRUITS -->
+        <a href="dryfruits.html" class="mobile-menu-link" style="margin: 8px 0;" onclick="setActiveCategory('dryfruits')">
+            <span>🌰 Dry Fruits</span>
+        </a>
+        
+        <a href="icecreams.html" class="mobile-menu-link" style="margin: 8px 0;" onclick="setActiveCategory('icecream')">
+  <span>🍦 Ice Cream</span>
+</a>
+
+    </div>
+</div>
+            <!-- YOUR ORDERS -->
+            <div class="mobile-menu-item">
+                <a href="yourorders.html" class="mobile-menu-link" onclick="setActiveCategory('yourorders')">
+                    <span><span class="menu-icon">📋</span> Your Orders</span>
+                </a>
+            </div>
+
+            <!-- ABOUT US -->
+            <div class="mobile-menu-item">
+                <a href="about.html" class="mobile-menu-link" onclick="setActiveCategory('about')">
+                    <span><span class="menu-icon">ℹ️</span> About Us</span>
+                </a>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="mobile-menu-item">
+                <a href="services.html" class="mobile-menu-link" onclick="setActiveCategory('services')">
+                    <span><span class="menu-icon">⚙️</span> Services</span>
+                </a>
+            </div>
+
+            <!-- DARK MODE TOGGLE -->
+            <div class="dark-mode-toggle">
+                <div class="dark-mode-label">
+                    <span style="font-size: 20px;">🌙</span>
+                    <span>Dark Mode</span>
+                </div>
+                <div class="toggle-switch" id="mobileDarkToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-content">
+        <div class="search-modal-header">
+            <h3 class="search-modal-title">🔍 Search Products</h3>
+            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-input-wrapper">
+            <input type="text" class="search-input" placeholder="Search for products, categories..." id="searchInput" autofocus>
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+        </div>
+        <div class="search-suggestions-label">Popular Searches</div>
+        <div class="search-suggestions">
+  <span class="search-tag">Samosa</span>
+                <span class="search-tag">Chocolate Cake</span>
+                <span class="search-tag">Mithai</span>
+                <span class="search-tag">Momo</span>
+                <span class="search-tag">Gulab Jamun</span>
+                <span class="search-tag">Bread</span>
+                <span class="search-tag">Dry Fruits</span>
+                <span class="search-tag">Milk</span>
+            </div>
+        </div>
+    </div>
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Shopping Cart</h3>
+            <button class="close-btn" id="closeCart" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="cart-content" id="cartContent">
+            <!-- Sample Cart Items -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span style="color: var(--accent);">₹0</span>
+            </div>
+           <button class="checkout-btn" onclick="window.location.href='cart.html'">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PREMIUM MENU HERO - PAGE TURNING EFFECT
+         ============================================ -->
+    <section class="menu-hero-section">
+        <!-- Premium Background with Greenery -->
+        <div class="menu-bg-layer"></div>
+        <div class="menu-botanical-overlay"></div>
+        
+        <!-- Page Turning Menu Book -->
+        <div class="menu-book-container">
+            <!-- Left Page (Fixed) -->
+            <div class="menu-left-page">
+                <div class="page-content">
+                    <div class="menu-logo">
+                        <h1>OUR MENU</h1>
+                        <div class="menu-divider"></div>
+                        <p class="menu-tagline">Crafted with Love & Passion</p>
+                    </div>
+                    
+                    <div class="menu-description">
+                        <p>Explore our carefully curated collection of authentic flavors, prepared with the finest ingredients and traditional recipes passed down through generations.</p>
+                    </div>
+                    
+                    <div class="menu-decorative-element">
+                        <svg viewBox="0 0 200 100" class="leaf-decoration">
+                            <path d="M100,10 Q120,30 100,50 Q80,30 100,10" fill="currentColor" opacity="0.2"/>
+                            <path d="M100,50 Q120,70 100,90 Q80,70 100,50" fill="currentColor" opacity="0.15"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+       <!-- Right Page (Turning) -->
+<div class="menu-right-page" id="menuRightPage">
+    <!-- Page Underneath - Shows NEXT image -->
+    <div class="page-underneath">
+        <img src="images/menu-2.webp" alt="Menu" id="underneathImg">
+    </div>
+    
+    <!-- Front Page - Shows CURRENT image -->
+    <div class="page-front">
+        <img src="images/menu-1.webp" alt="Menu" id="frontImg">
+    </div>
+    
+    <!-- Back Page - Shows NEXT image (revealed during flip) -->
+    <div class="page-back">
+        <img src="images/menu-2.webp" alt="Menu" id="backImg">
+    </div>
+</div>
+            <!-- Book Spine -->
+            <div class="book-spine"></div>
+        </div>
+
+        <!-- Elegant Progress Indicator -->
+        <div class="menu-progress-indicator">
+            <div class="progress-dots" id="progressDots">
+                <!-- Dots will be generated via JS -->
+            </div>
+        </div>
+
+        <!-- Subtle Scroll Hint -->
+        <div class="scroll-hint">
+            <span>Explore Our Dishes</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="7 13 12 18 17 13"></polyline>
+                <polyline points="7 6 12 11 17 6"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PRODUCTS SECTION (Same as index.html)
+         ============================================ -->
+    <main class="products-section">
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will render here -->
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3>No products found</h3>
+            <p>Try adjusting your filters or search criteria</p>
+        </div>
+    </main>
+
+    <!-- Size/Flavor Modal (Same as index.html) -->
+    <div class="modal-overlay" id="sizeFlavorOverlay"></div>
+     <div class="size-flavor-modal" id="sizeFlavorModal">
+        <!-- Modal Header -->
+        <div class="modal-header-product">
+            <h3 class="modal-title-product" id="modalProductName">Select Options</h3>
+            <button class="modal-close-btn" id="closeModalBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body-product" id="modalBody">
+            <!-- Size Section (Always Present) -->
+            <div class="size-section">
+                <div class="section-label">Select Size/Weight</div>
+                <div class="size-options" id="sizeOptions">
+                    <!-- Size options will be dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Flavor Section (Only for snacks with flavors) -->
+            <div class="flavor-section" id="flavorSection" style="display: none;">
+                <div class="section-label">Select Flavor</div>
+                <div class="flavor-options" id="flavorOptions">
+                    <!-- Flavor options will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer-product">
+            <button class="modal-cancel-btn" id="cancelBtn">Cancel</button>
+            <button class="modal-apply-btn" id="applyBtn">Apply</button>
+        </div>
+    </div>
+</main>
+</div>
+ <!-- ============================================
+         🔥 ULTRA PREMIUM BOTTOM NAVIGATION BAR
+         ============================================ -->
+    <div class="bottom-nav-container">
+        <nav class="bottom-nav">
+            <!-- HOME -->
+            <a href="/index.html" class="bottom-nav-item active" data-page="home" onclick="setActiveCategory('home')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
+                <span class="nav-label">Home</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- CATEGORIES -->
+            <a href="/categories.html" class="bottom-nav-item" data-page="categories"
+               onclick="setActiveCategory('categories'); openCategoriesModal(); return false;">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <span class="nav-label">Categories</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- SERVICES -->
+            <a href="/services.html" class="bottom-nav-item" data-page="services" onclick="setActiveCategory('services')">
+                <div class="nav-icon-wrapper">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+        </svg>
+                </div>
+                <span class="nav-label">Services</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- ABOUT -->
+            <a href="/about.html" class="bottom-nav-item" data-page="about" onclick="setActiveCategory('about')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">About</span>
+                <div class="nav-indicator"></div>
+            </a>
+
+            <!-- HELP -->
+            <a href="/contact.html" class="bottom-nav-item" data-page="help" onclick="setActiveCategory('contact')">
+                <div class="nav-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <span class="nav-label">Help</span>
+                <div class="nav-indicator"></div>
+            </a>
+        </nav>
+    </div>
+
+<!-- Categories Modal -->
+<div class="categories-modal-overlay" id="categoriesModalOverlay"></div>
+<div class="categories-modal" id="categoriesModal">
+  <div class="modal-handle"></div>
+
+  <div class="modal-header">
+    <h2>Shop by Category</h2>
+    <button class="modal-close-btn" id="closeCategoriesModal" onclick="closeCategoriesModal()">
+      <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="categories-modal-grid">
+      <!-- Mithai -->
+      <a href="/mithai.html" class="category-modal-item" onclick="setActiveCategory('mithai')">
+        <div class="category-modal-image">
+          <img src="images/gpt4.webp" alt="Mithai">
+        </div>
+        <span class="category-modal-name">Mithai</span>
+      </a>
+
+      <!-- Snacks -->
+      <a href="/snacks.webp" class="category-modal-item" onclick="setActiveCategory('snacks')">
+        <div class="category-modal-image">
+          <img src="images/gpt2.webp" alt="Snacks">
+        </div>
+        <span class="category-modal-name">Snacks</span>
+      </a>
+
+      <!-- Dairy -->
+      <a href="/dairy.html" class="category-modal-item" onclick="setActiveCategory('dairy')">
+        <div class="category-modal-image">
+          <img src="images/dairy.webp" alt="Dairy">
+        </div>
+        <span class="category-modal-name">Dairy</span>
+      </a>
+
+      <!-- Street Foods -->
+      <a href="/streetfood.html" class="category-modal-item" onclick="setActiveCategory('streetfood')">
+        <div class="category-modal-image">
+          <img src="images/gpt3.webp" alt="Street Food">
+        </div>
+        <span class="category-modal-name">Street Foods</span>
+      </a>
+
+      <!-- Main Course -->
+      <a href="/maincourse.html" class="category-modal-item" onclick="setActiveCategory('maincourse')">
+        <div class="category-modal-image">
+          <img src="images/gpt1.webp" alt="Main Course">
+        </div>
+        <span class="category-modal-name">Main Course</span>
+      </a>
+
+      <!-- Dry Fruits -->
+      <a href="/dryfruits.html" class="category-modal-item" onclick="setActiveCategory('dryfruits')">
+        <div class="category-modal-image">
+          <img src="images/dryfruits.webp" alt="Dry Fruits">
+        </div>
+        <span class="category-modal-name">Dry Fruits</span>
+      </a>
+
+      <!-- Cakes -->
+      <a href="/cakes.html" class="category-modal-item" onclick="setActiveCategory('cakes')">
+        <div class="category-modal-image">
+          <img src="images/gpt8.webp" alt="Cakes">
+        </div>
+        <span class="category-modal-name">Cakes</span>
+      </a>
+
+      <!-- Pastries -->
+      <a href="/pastry.html" class="category-modal-item" onclick="setActiveCategory('pastries')">
+        <div class="category-modal-image">
+          <img src="images/gpt6.webp" alt="Pastries">
+        </div>
+        <span class="category-modal-name">Pastries</span>
+      </a>
+
+      <!-- Ice Cream -->
+      <a href="/icecreams.html" class="category-modal-item" onclick="setActiveCategory('icecreams')">
+        <div class="category-modal-image">
+          <img src="images/Butterscotch-Ice-Cream-8.webp" alt="Ice Cream">
+        </div>
+        <span class="category-modal-name">Ice Creams</span>
+      </a>
+    </div>
+  </div>
+</div>
+    <script src="js/product.js"></script>
+    <script src="js/navbar.js" defer></script>
+    <script src="js/product-card3.js"></script>
+    <script src="js/menu.js"></script>
+      <script src="js/bottom-bar.js"></script>
+    <script src="js/nav-sync.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

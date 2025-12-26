@@ -834,3 +834,45 @@ body.dark-mode .clear-categories-btn:hover {
     gap: 8px;
     margin-bottom: 16px;
 }
+/* ============================================
+   🔧 DESKTOP LAYOUT FIX
+   Ensures products sit BESIDE filter sidebar
+   Add this to your main CSS or variation CSS
+   ============================================ */
+
+/* 
+ .filter-products-wrapper {
+    display: flex;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.products-section {
+    flex: 1;
+    min-width: 0; 
+}
+
+
+@media (min-width: 701px) {
+    .filter-products-wrapper {
+        display: flex;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .filter-products-wrapper {
+        display: block;
+        padding: 0;
+    }
+    
+    .filter-sidebar {
+        display: none !important;
+    }
+    
+    .products-section {
+        width: 100%;
+    }
+}  */

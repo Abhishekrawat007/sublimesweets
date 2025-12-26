@@ -1,0 +1,467 @@
+/* ============================================
+   PREMIUM MENU HERO - PAGE TURNING EFFECT
+   ============================================ */
+
+.menu-hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 100px 20px 80px;
+}
+
+/* Premium Background Layers */
+.menu-bg-layer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        #f5f7fa 0%, 
+        #c3cfe2 50%, 
+        #f5f7fa 100%
+    );
+    z-index: 0;
+}
+
+.menu-botanical-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(76, 175, 80, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 195, 74, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(102, 187, 106, 0.05) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.menu-botanical-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 Q35 20 30 30 Q25 20 30 10' fill='%234CAF50' opacity='0.03'/%3E%3C/svg%3E");
+    animation: floatPattern 60s linear infinite;
+}
+
+@keyframes floatPattern {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(60px, 60px); }
+}
+
+/* Menu Book Container */
+.menu-book-container {
+    position: relative;
+    width: min(1400px, 90vw);
+    height: 600px;
+    display: flex;
+    perspective: 2500px;
+    z-index: 10;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
+}
+
+/* Left Page (Fixed) */
+.menu-left-page {
+    flex: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px 0 0 20px;
+    padding: 60px 50px;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.menu-left-page::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0, 0, 0, 0.1) 50%, 
+        transparent 100%
+    );
+}
+
+.menu-logo h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.menu-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+
+.menu-tagline {
+    font-size: 1.2rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.menu-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.leaf-decoration {
+    width: 150px;
+    height: 75px;
+    color: #4CAF50;
+    opacity: 0.5;
+}
+
+/* Book Spine */
+.book-spine {
+    width: 30px;
+    background: linear-gradient(to right, 
+        rgba(0, 0, 0, 0.2) 0%, 
+        rgba(0, 0, 0, 0.05) 50%, 
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    position: relative;
+    z-index: 5;
+    box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+/* Right Page (Turning) */
+.menu-right-page {
+    flex: 1;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    min-width: 0;
+    min-height: 0;
+}
+
+.menu-right-page.turning {
+    animation: pageTurn 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+@keyframes pageTurn {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(-180deg); }
+}
+
+/* Page Stack (3D depth effect) */
+.page-stack {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.page-layer {
+    position: absolute;
+    inset: 0;
+    background: white;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.page-layer:nth-child(1) {
+    transform: translateX(3px) translateZ(-10px);
+    opacity: 0.7;
+}
+
+.page-layer:nth-child(2) {
+    transform: translateX(6px) translateZ(-20px);
+    opacity: 0.5;
+}
+
+.page-layer:nth-child(3) {
+    transform: translateX(9px) translateZ(-30px);
+    opacity: 0.3;
+}
+
+/* Page Layers - AUTOFIT IMAGES */
+.page-underneath,
+.page-front,
+.page-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.page-underneath {
+    z-index: 1;
+}
+
+.page-front {
+    backface-visibility: hidden;
+    z-index: 3;
+}
+
+.page-back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    z-index: 2;
+}
+
+/* Images - AUTOFIT ALL SIZES */
+.page-underneath img,
+.page-front img,
+.page-back img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+     background: white;
+}
+/* Dark mode background for letterbox */
+[data-theme="dark"] .page-underneath img,
+[data-theme="dark"] .page-front img,
+[data-theme="dark"] .page-back img {
+    background: #2a2a2a;
+}
+/* Progress Indicator */
+.menu-progress-indicator {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.progress-dots {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.progress-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-color: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+/* Scroll Hint */
+.scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 20;
+    animation: bounceHint 2s ease-in-out infinite;
+}
+
+.scroll-hint svg {
+    width: 24px;
+    height: 24px;
+}
+
+@keyframes bounceHint {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+body.dark-mode .menu-bg-layer {
+    background: linear-gradient(135deg, 
+        #1a1a2e 0%, 
+        #16213e 50%, 
+        #0f3460 100%);
+}
+
+body.dark-mode .menu-botanical-overlay {
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(76, 175, 80, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 195, 74, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(102, 187, 106, 0.08) 0%, transparent 50%);
+}
+
+body.dark-mode .menu-left-page {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .menu-logo h1 {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark-mode .menu-tagline {
+    color: #aaa !important;
+}
+
+body.dark-mode .menu-description {
+    color: #bbb !important;
+}
+
+body.dark-mode .page-front,
+body.dark-mode .page-back,
+body.dark-mode .page-underneath,
+body.dark-mode .page-layer {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .page-underneath img,
+body.dark-mode .page-front img,
+body.dark-mode .page-back img {
+    background: #2a2a2a;
+}
+
+body.dark-mode .scroll-hint {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .progress-dot {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .menu-book-container {
+        height: 500px;
+    }
+    
+    .menu-left-page {
+        padding: 40px 30px;
+    }
+}
+
+
+
+/* Show full book layout ABOVE 480px */
+@media (max-width: 480px) {
+    .menu-hero-section {
+        padding: 80px 15px 60px;
+    }
+    
+    .menu-book-container {
+        width: 95vw;
+        height: 400px;
+    }
+    
+    /* Hide left page ONLY on very small screens */
+    .menu-left-page {
+        display: none;
+    }
+    
+    .book-spine {
+        display: none;
+    }
+    
+    .menu-book-container {
+        justify-content: center;
+    }
+    
+    .menu-right-page {
+        border-radius: 20px;
+    }
+    
+    .page-front,
+    .page-back,
+    .page-underneath,
+    .page-layer {
+        border-radius: 20px;
+    }
+    
+    .progress-dots {
+        gap: 8px;
+    }
+    
+    .progress-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .progress-dot.active {
+        width: 12px;
+        height: 12px;
+    }
+}
+/* Fix left page content for screens 480px-560px */
+@media (max-width: 560px) and (min-width: 481px) {
+    .menu-left-page {
+        padding: 20px 15px;
+    }
+    
+    .menu-logo h1 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    .menu-divider {
+        width: 50px;
+        height: 3px;
+        margin-bottom: 10px;
+    }
+    
+    .menu-tagline {
+        font-size: 0.75rem;
+        margin-bottom: 15px;
+    }
+    
+    .menu-description {
+        font-size: 0.7rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+    
+    .leaf-decoration {
+        width: 60px;
+        height: 30px;
+    }
+    
+    .book-spine {
+        width: 12px;
+    }
+}

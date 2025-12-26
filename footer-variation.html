@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Footer Variations - Sublime Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        body.dark-mode .theme-switcher {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-btn {
+            padding: 8px 16px;
+            border: 2px solid #e5e5e5;
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .theme-btn {
+            background: #2d2d2d;
+            color: #e5e5e5;
+            border-color: #404040;
+        }
+
+        .theme-btn:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .theme-btn.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            padding: 8px 16px;
+            border: 2px solid #e5e5e5;
+            background: white;
+            color: #333;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: #2d2d2d;
+            color: #e5e5e5;
+            border-color: #404040;
+        }
+
+        .dark-mode-toggle:hover {
+            border-color: #ffa500;
+        }
+
+        /* Demo Content */
+        .demo-content {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px 40px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .demo-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b4e 100%);
+        }
+
+        .demo-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Hide all footers by default */
+        footer {
+            display: none;
+        }
+
+        footer.active {
+            display: block;
+        }
+
+        /* Common Styles */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* ============================================
+           FOOTER V2: GLASSMORPHISM CARDS
+           ============================================ */
+        .footer-v2 {
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+            padding: 60px 20px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .footer-v2 {
+            background: linear-gradient(180deg, #1a202c 0%, #0d0d0d 100%);
+        }
+
+        .footer-v2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff6b6b, #ffa500, transparent);
+        }
+
+        .footer-v2 .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .footer-v2 .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .footer-v2 .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-v2 .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.2);
+        }
+
+        body.dark-mode .footer-v2 .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+        }
+
+        .footer-v2 h3 {
+            color: #fff;
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-v2 h3 i {
+            color: #ffa500;
+            font-size: 1.2rem;
+        }
+
+        .footer-v2 p, .footer-v2 li, .footer-v2 a {
+            color: #cbd5e0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .footer-v2 p,
+        body.dark-mode .footer-v2 li,
+        body.dark-mode .footer-v2 a {
+            color: #a0aec0;
+        }
+
+        .footer-v2 ul {
+            list-style: none;
+        }
+
+        .footer-v2 ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .footer-v2 ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #ffa500;
+        }
+
+        .footer-v2 a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-v2 a:hover {
+            color: #ffa500;
+            padding-left: 5px;
+        }
+
+        .footer-v2 .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .footer-v2 .trust-item {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .footer-v2 .trust-item i {
+            font-size: 1.5rem;
+            color: #ffa500;
+            margin-bottom: 8px;
+        }
+
+        .footer-v2 .trust-item strong {
+            display: block;
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        .footer-v2 .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.875rem;
+        }
+
+        body.dark-mode .footer-v2 .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: #718096;
+        }
+
+        /* ============================================
+           FOOTER V3: CENTERED MINIMAL
+           ============================================ */
+        .footer-v3 {
+            background: #1a1a1a;
+            padding: 60px 20px 30px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .footer-v3 {
+            background: #0d0d0d;
+        }
+
+        .footer-v3 .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-v3 .logo-section {
+            margin-bottom: 40px;
+        }
+
+        .footer-v3 .footer-logo {
+            width: 140px;
+            margin-bottom: 20px;
+            filter: brightness(1.2);
+        }
+
+        .footer-v3 .tagline {
+            font-size: 1.125rem;
+            color: #cbd5e0;
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .footer-v3 .tagline {
+            color: #a0aec0;
+        }
+
+        .footer-v3 .stats-inline {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-v3 .stat {
+            text-align: center;
+        }
+
+        .footer-v3 .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-v3 .stat-label {
+            font-size: 0.875rem;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+
+        body.dark-mode .footer-v3 .stat-label {
+            color: #718096;
+        }
+
+        .footer-v3 .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-v3 .nav-section h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer-v3 ul {
+            list-style: none;
+        }
+
+        .footer-v3 ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-v3 a {
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .footer-v3 a {
+            color: #a0aec0;
+        }
+
+        .footer-v3 a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-v3 .trust-badges-inline {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .footer-v3 .trust-badges-inline {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-v3 .badge-inline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 165, 0, 0.1));
+            border-radius: 50px;
+        }
+
+        .footer-v3 .badge-inline i {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+        }
+
+        .footer-v3 .badge-inline span {
+            color: #e5e5e5;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .footer-v3 .badge-inline span {
+            color: #cbd5e0;
+        }
+
+        .footer-v3 .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .footer-v3 .social-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: #cbd5e0;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        body.dark-mode .footer-v3 .social-btn {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .footer-v3 .social-btn:hover {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-v3 .footer-bottom {
+            color: #a0aec0;
+            font-size: 0.875rem;
+        }
+
+        body.dark-mode .footer-v3 .footer-bottom {
+            color: #718096;
+        }
+
+        /* ============================================
+           FOOTER V4: SPLIT GRADIENT
+           ============================================ */
+        .footer-v4 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b4e 100%);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .footer-v4 {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a0f2e 100%);
+        }
+
+        .footer-v4::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 107, 107, 0.15), transparent);
+        }
+
+        body.dark-mode .footer-v4::before {
+            background: radial-gradient(circle at 50% 0%, rgba(255, 107, 107, 0.2), transparent);
+        }
+
+        .footer-v4 .top-section {
+            padding: 60px 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        body.dark-mode .footer-v4 .top-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-v4 .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-v4 .brand-row {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-v4 .brand-content h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-v4 .brand-content p {
+            color: #cbd5e0;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        body.dark-mode .footer-v4 .brand-content p {
+            color: #a0aec0;
+        }
+
+        .footer-v4 .highlight-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-v4 .highlight-stat {
+            text-align: center;
+        }
+
+        .footer-v4 .highlight-stat .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffa500;
+            margin-bottom: 4px;
+        }
+
+        .footer-v4 .highlight-stat .label {
+            font-size: 0.8rem;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .footer-v4 .highlight-stat .label {
+            color: #718096;
+        }
+
+        .footer-v4 .quick-contact {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        body.dark-mode .footer-v4 .quick-contact {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 107, 0.15);
+        }
+
+        .footer-v4 .quick-contact h3 {
+            color: #fff;
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-v4 .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .footer-v4 .contact-item {
+            color: #a0aec0;
+        }
+
+        .footer-v4 .contact-item i {
+            color: #ffa500;
+            width: 20px;
+        }
+
+        .footer-v4 .contact-item a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .footer-v4 .contact-item a {
+            color: #a0aec0;
+        }
+
+        .footer-v4 .contact-item a:hover {
+            color: #ffa500;
+        }
+
+        .footer-v4 .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-v4 .link-column h4 {
+            color: #ffa500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .footer-v4 .link-column ul {
+            list-style: none;
+        }
+
+        .footer-v4 .link-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-v4 .link-column a {
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        body.dark-mode .footer-v4 .link-column a {
+            color: #a0aec0;
+        }
+
+        .footer-v4 .link-column a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-v4 .bottom-section {
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-v4 .bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-v4 .copyright {
+            color: #a0aec0;
+            font-size: 0.875rem;
+        }
+
+        body.dark-mode .footer-v4 .copyright {
+            color: #718096;
+        }
+
+        .footer-v4 .payment-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-v4 .payment-icon {
+            width: 50px;
+            height: 32px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-v4 .payment-icon i {
+            font-size: 1.5rem;
+        }
+
+        /* ============================================
+           FOOTER V5: ULTRA MODERN GRID
+           ============================================ */
+        .footer-v5 {
+            background: #0f172a;
+            padding: 0;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .footer-v5 {
+            background: #020617;
+        }
+
+        .footer-v5 .hero-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-v5 .hero-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .footer-v5 .hero-banner p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        .footer-v5 .mega-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-v5 .mega-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .footer-v5 .mega-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-v5 .mega-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 107, 107, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .footer-v5 .mega-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-v5 .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-v5 .card-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .footer-v5 .mega-card h3 {
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-v5 .mega-card p, .footer-v5 .mega-card li {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .footer-v5 .mega-card p,
+        body.dark-mode .footer-v5 .mega-card li {
+            color: #64748b;
+        }
+
+        .footer-v5 ul {
+            list-style: none;
+        }
+
+        .footer-v5 ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-v5 a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .footer-v5 a {
+            color: #64748b;
+        }
+
+        .footer-v5 a:hover {
+            color: #ffa500;
+        }
+
+        .footer-v5 .trust-row {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .footer-v5 .trust-pill {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #ffa500;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .footer-v5 .final-bar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 24px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode .footer-v5 .final-bar {
+            background: rgba(0, 0, 0, 0.7);
+            color: #475569;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .theme-switcher {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .demo-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .footer-v4 .brand-row {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-v4 .bottom-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-v5 .hero-banner h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="v2">V2: Glass</button>
+        <button class="theme-btn" data-theme="v3">V3: Minimal</button>
+        <button class="theme-btn" data-theme="v4">V4: Split</button>
+        <button class="theme-btn" data-theme="v5">V5: Modern</button>
+        <button class="dark-mode-toggle" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+            <span>Dark</span>
+        </button>
+    </div>
+
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <div>
+            <h1>🔥 4 More Premium Footer Variations</h1>
+            <p>Switch themes above to preview each design!</p>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER V2: GLASSMORPHISM CARDS
+         ============================================ -->
+    <footer class="footer-v2 active">
+        <div class="footer-container">
+            <div class="glass-card">
+                <h3><i class="fas fa-store"></i> About Sublime</h3>
+                <p>Discover unique gadgets that simplify life and spark curiosity. Innovation with style.</p>
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>SSL Secure</strong>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-truck"></i>
+                        <strong>Free Ship</strong>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-money-bill"></i>
+                        <strong>COD</strong>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-star"></i>
+                        <strong>4.8★</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h3><i class="fas fa-link"></i> Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="return.html">Returns</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="shipping.html">Shipping</a></li>
+                </ul>
+            </div>
+
+            <div class="glass-card">
+                <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
+                <p style="margin-bottom: 16px;">Near Variety Store, Link Road<br>Takana Road, Pithoragarh<br>Uttarakhand, India</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+918868839446">+91 88688 39446</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:s4sublimestore@gmail.com">s4sublimestore@gmail.com</a></p>
+            </div>
+
+            <div class="glass-card">
+                <h3><i class="fas fa-share-alt"></i> Connect</h3>
+                <ul style="padding-left: 0;">
+                    <li style="padding-left: 0;"><a href="https://wa.me/918868839446" target="_blank">📱 WhatsApp</a></li>
+                    <li style="padding-left: 0;"><a href="https://instagram.com/thesublimestore_" target="_blank">📸 Instagram</a></li>
+                    <li style="padding-left: 0;"><a href="https://youtube.com/@Sublime.store-pithoragarh" target="_blank">🎥 YouTube</a></li>
+                </ul>
+                <div style="margin-top: 20px;">
+                    <strong style="color: #fff; font-size: 0.875rem;">Business Hours</strong>
+                    <p style="margin-top: 8px; font-size: 0.85rem;">Mon-Sat: 10AM - 8PM<br>Sun: 11AM - 6PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sublime Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         FOOTER V3: CENTERED MINIMAL
+         ============================================ -->
+    <footer class="footer-v3">
+        <div class="footer-container">
+            <div class="logo-section">
+                <img src="https://via.placeholder.com/140x45/ff6b6b/ffffff?text=SUBLIME" alt="Logo" class="footer-logo">
+                <p class="tagline">Innovation meets style. Discover gadgets that matter.</p>
+            </div>
+
+            <div class="stats-inline">
+                <div class="stat">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24hrs</div>
+                    <div class="stat-label">Fast Delivery</div>
+                </div>
+            </div>
+
+            <div class="trust-badges-inline">
+                <div class="badge-inline">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SSL Secure</span>
+                </div>
+                <div class="badge-inline">
+                    <i class="fas fa-truck"></i>
+                    <span>Free Shipping</span>
+                </div>
+                <div class="badge-inline">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>COD Available</span>
+                </div>
+            </div>
+
+            <div class="nav-grid">
+                <div class="nav-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="return.html">Returns</a></li>
+                        <li><a href="shipping.html">Shipping</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+918868839446">+91 88688 39446</a></li>
+                        <li><a href="mailto:s4sublimestore@gmail.com">s4sublimestore@gmail.com</a></li>
+                        <li>Pithoragarh, Uttarakhand</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="social-row">
+                <a href="https://wa.me/918868839446" class="social-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com/thesublimestore_" class="social-btn" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://youtube.com/@Sublime.store-pithoragarh" class="social-btn" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sublime Store. All rights reserved. Made with ❤️ in Pithoragarh</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         FOOTER V4: SPLIT GRADIENT
+         ============================================ -->
+    <footer class="footer-v4">
+        <div class="top-section">
+            <div class="container">
+                <div class="brand-row">
+                    <div class="brand-content">
+                        <h2>Sublime Store</h2>
+                        <p>Your destination for innovative gadgets and unique products. We bring you quality, style, and innovation - all in one place.</p>
+                        <div class="highlight-stats">
+                            <div class="highlight-stat">
+                                <div class="number">10K+</div>
+                                <div class="label">Orders</div>
+                            </div>
+                            <div class="highlight-stat">
+                                <div class="number">4.8★</div>
+                                <div class="label">Rating</div>
+                            </div>
+                            <div class="highlight-stat">
+                                <div class="number">24/7</div>
+                                <div class="label">Support</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-contact">
+                        <h3>Get In Touch</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Takana Road, Pithoragarh, Uttarakhand</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+918868839446">+91 88688 39446</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:s4sublimestore@gmail.com">s4sublimestore@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Sat: 10AM-8PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="links-grid">
+                    <div class="link-column">
+                        <h4>Shop</h4>
+                        <ul>
+                            <li><a href="#">All Products</a></li>
+                            <li><a href="#">New Arrivals</a></li>
+                            <li><a href="#">Best Sellers</a></li>
+                            <li><a href="#">Special Offers</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Policies</h4>
+                        <ul>
+                            <li><a href="return.html">Return Policy</a></li>
+                            <li><a href="shipping.html">Shipping Info</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Trust Badges</h4>
+                        <ul style="line-height: 2;">
+                            <li>✓ SSL Encrypted</li>
+                            <li>✓ Free Shipping</li>
+                            <li>✓ COD Available</li>
+                            <li>✓ 100% Authentic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div class="bottom-content">
+                <div class="copyright">
+                    &copy; 2025 Sublime Store. All rights reserved.
+                </div>
+                <div class="payment-icons">
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-visa" style="color: #1A1F71;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-mastercard" style="color: #EB001B;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-paypal" style="color: #003087;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt" style="color: #5f259f;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         FOOTER V5: ULTRA MODERN GRID
+         ============================================ -->
+    <footer class="footer-v5">
+        <div class="hero-banner">
+            <h2>Sublime Store</h2>
+            <p>Innovation • Quality • Style</p>
+        </div>
+
+        <div class="mega-grid">
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3>About Us</h3>
+                <p>Discover unique gadgets that simplify life and spark curiosity. We bring innovation with style.</p>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Special Offers</a></li>
+                </ul>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="return.html">Returns</a></li>
+                    <li><a href="shipping.html">Shipping</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Trust & Security</h3>
+                <div class="trust-row">
+                    <div class="trust-pill">SSL Secure</div>
+                    <div class="trust-pill">COD</div>
+                </div>
+                <div class="trust-row">
+                    <div class="trust-pill">Free Ship</div>
+                    <div class="trust-pill">4.8★</div>
+                </div>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Location</h3>
+                <p>Near Variety Store<br>Link Road, Takana Road<br>Pithoragarh, Uttarakhand</p>
+                <p style="margin-top: 12px;"><strong>Hours:</strong><br>Mon-Sat: 10AM-8PM</p>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="tel:+918868839446">+91 88688 39446</a></li>
+                    <li><a href="mailto:s4sublimestore@gmail.com">s4sublimestore@gmail.com</a></li>
+                    <li><a href="https://wa.me/918868839446">WhatsApp Chat</a></li>
+                </ul>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3>Social Media</h3>
+                <ul>
+                    <li><a href="https://wa.me/918868839446" target="_blank">WhatsApp</a></li>
+                    <li><a href="https://instagram.com/thesublimestore_" target="_blank">Instagram</a></li>
+                    <li><a href="https://youtube.com/@Sublime.store-pithoragarh" target="_blank">YouTube</a></li>
+                </ul>
+            </div>
+
+            <div class="mega-card">
+                <div class="card-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3>We Accept</h3>
+                <p>Visa, Mastercard, PayPal, UPI, and all major payment methods. Cash on Delivery available.</p>
+            </div>
+        </div>
+
+        <div class="final-bar">
+            <p>&copy; 2025 Sublime Store. All rights reserved. Designed with ❤️ in Pithoragarh</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Theme Switcher
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const footers = document.querySelectorAll('footer');
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                
+                // Update buttons
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show selected footer
+                footers.forEach(f => f.classList.remove('active'));
+                document.querySelector(`.footer-${theme}`).classList.add('active');
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = darkModeToggle.querySelector('i');
+        const darkModeText = darkModeToggle.querySelector('span');
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            darkModeIcon.className = 'fas fa-sun';
+            darkModeText.textContent = 'Light';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeIcon.className = 'fas fa-sun';
+                darkModeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                darkModeIcon.className = 'fas fa-moon';
+                darkModeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>

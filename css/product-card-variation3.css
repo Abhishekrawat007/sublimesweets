@@ -1,0 +1,1381 @@
+/* ============================================
+   🔥 8 COMPLETELY DIFFERENT CARD STRUCTURES
+   Fixed layouts, separate button colors
+   ============================================ */
+
+/* Color Variables */
+:root {
+    --card-primary: #4CAF50;      /* Add to Cart button */
+    --card-secondary: #FF9800;    /* Size Select button */
+    --card-accent: #FF6B6B;       /* Discount badge */
+}
+
+/* Star fixes for ALL cards */
+.star-icon {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+}
+
+@media (max-width: 550px) {
+    .star-icon { width: 14px !important; height: 14px !important; }
+}
+
+@media (min-width: 551px) {
+    .star-icon { width: 18px !important; height: 18px !important; }
+}
+
+.star-icon.full { fill: currentColor !important; }
+.star-icon.half path { fill: currentColor !important; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%) !important; }
+.star-icon.empty { fill: none !important; stroke: currentColor !important; stroke-width: 1.5 !important; }
+.rating-stars { display: inline-flex !important; gap: 3px !important; align-items: center !important; overflow: visible !important; }
+
+/* ============================================
+   1. CIRCULAR PROFILE CARD
+   Round image like Instagram, centered, polished
+   ============================================ */
+.product-card.circular-profile {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 2px solid #f0f0f0;
+}
+
+.product-card.circular-profile:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-color: var(--card-primary);
+}
+
+.product-card.circular-profile .product-card-image {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+@media (max-width: 550px) {
+    .product-card.circular-profile .product-card-image {
+        width: 130px;
+        height: 130px;
+        border-width: 5px;
+    }
+}
+
+/* Hide discount badge on circular profile */
+.product-card.circular-profile .discount-badge {
+    display: none !important;
+}
+
+.product-card.circular-profile .product-card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.product-card.circular-profile .badge-row {
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.product-card.circular-profile .product-price-section {
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.product-card.circular-profile .price-new {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--card-primary);
+}
+
+.product-card.circular-profile .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-card.circular-profile .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Modal */
+.size-flavor-modal.circular-profile-modal {
+    border-radius: 30px 30px 0 0;
+    background: white;
+}
+
+.size-flavor-modal.circular-profile-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.circular-profile-modal .modal-apply-btn {
+    background: var(--card-primary);
+    border-radius: 30px;
+}
+.product-card.horizontal-split {
+    background: white;
+    border-radius: 16px;
+    padding: 20px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    
+    /* Grid with named areas */
+    display: grid !important;
+    grid-template-areas: 
+        "image info"
+        "buttons buttons" !important;
+    grid-template-columns: 0.45fr 0.55fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 12px 12px !important;
+    align-items: start !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split {
+        padding: 16px !important;
+        grid-template-columns: 0.42fr 0.58fr !important;
+        gap: 10px 10px !important;
+    }
+}
+
+.product-card.horizontal-split:hover {
+    transform: translateX(4px) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* IMAGE - Left side */
+.product-card.horizontal-split .product-card-image {
+    grid-area: image !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.product-card.horizontal-split .product-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* HIDE DISCOUNT BADGE */
+.product-card.horizontal-split .discount-badge {
+    display: none !important;
+}
+
+.product-card.horizontal-split .wishlist-btn {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+}
+
+/* INFO - Right side (name, badges, price) */
+.product-card.horizontal-split .product-card-info {
+    grid-area: info !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    justify-content: flex-start !important;
+}
+
+.product-card.horizontal-split .product-card-name {
+    font-size: 1.05rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .product-card-name {
+        font-size: 0.95rem !important;
+    }
+}
+
+.product-card.horizontal-split .badge-row {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.product-card.horizontal-split .info-badge {
+    font-size: 8px !important;
+    padding: 3px 6px !important;
+}
+
+.product-card.horizontal-split .product-price-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.product-card.horizontal-split .price-new {
+    font-size: 1.3rem !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .price-new {
+        font-size: 1.15rem !important;
+    }
+}
+
+.product-card.horizontal-split .price-old {
+    font-size: 0.9rem !important;
+}
+
+.product-card.horizontal-split .price-discount {
+    font-size: 0.75rem !important;
+}
+
+/* BUTTONS - Bottom (spanning full width below image+text) */
+.product-card.horizontal-split .size-select-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-secondary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .add-to-cart-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .quantity-controls {
+    grid-area: buttons !important;
+    width: 100% !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .size-select-btn,
+    .product-card.horizontal-split .add-to-cart-btn {
+        padding: 9px !important;
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Modal */
+.size-flavor-modal.horizontal-split-modal {
+    background: white;
+    border-top: 4px solid var(--card-secondary);
+}
+
+.size-flavor-modal.horizontal-split-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .flavor-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .modal-apply-btn {
+    background: var(--card-primary);
+}
+EOF
+cat /mnt/user-data/outputs/HORIZONTAL-SPLIT-FIXED.css
+Output
+
+/* ============================================
+   2. HORIZONTAL SPLIT - FIXED VERSION
+   Image left, name right (side by side), buttons below
+   ============================================ */
+.product-card.horizontal-split {
+    background: white;
+    border-radius: 16px;
+    padding: 16px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    
+    /* Grid with named areas */
+    display: grid !important;
+    grid-template-areas: 
+        "image info"
+        "buttons buttons" !important;
+    grid-template-columns: 130px 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 0px !important;
+    align-items: start !important;
+}
+
+@media (max-width: 550px) {
+    /* FULL WIDTH ON MOBILE - ONE PER ROW */
+    .product-card.horizontal-split {
+        padding: 14px !important;
+        grid-template-columns: 110px 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Override grid to show one per row */
+    #productsGrid.has-horizontal-split {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.product-card.horizontal-split:hover {
+    transform: translateX(4px) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* IMAGE - Left side */
+.product-card.horizontal-split .product-card-image {
+    grid-area: image !important;
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.product-card.horizontal-split .product-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* HIDE DISCOUNT BADGE */
+.product-card.horizontal-split .discount-badge {
+    display: none !important;
+}
+
+.product-card.horizontal-split .wishlist-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .wishlist-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* INFO - Right side (name, badges, price) */
+.product-card.horizontal-split .product-card-info {
+    grid-area: info !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    justify-content: flex-start !important;
+}
+
+.product-card.horizontal-split .product-card-name {
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .product-card-name {
+        font-size: 1rem !important;
+        -webkit-line-clamp: 2 !important;
+    }
+}
+
+.product-card.horizontal-split .badge-row {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.product-card.horizontal-split .info-badge {
+    font-size: 9px !important;
+    padding: 4px 8px !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .info-badge {
+        font-size: 8px !important;
+        padding: 3px 6px !important;
+    }
+}
+
+.product-card.horizontal-split .product-price-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
+.product-card.horizontal-split .price-new {
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .price-new {
+        font-size: 1.3rem !important;
+    }
+}
+
+.product-card.horizontal-split .price-old {
+    font-size: 1rem !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .price-old {
+        font-size: 0.9rem !important;
+    }
+}
+
+.product-card.horizontal-split .price-discount {
+    font-size: 0.8rem !important;
+}
+
+/* BUTTONS - Bottom (spanning full width below image+text) */
+.product-card.horizontal-split .size-select-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-secondary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .add-to-cart-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .quantity-controls {
+    grid-area: buttons !important;
+    width: 100% !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .size-select-btn,
+    .product-card.horizontal-split .add-to-cart-btn {
+        padding: 11px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Modal */
+.size-flavor-modal.horizontal-split-modal {
+    background: white;
+    border-top: 4px solid var(--card-secondary);
+}
+
+.size-flavor-modal.horizontal-split-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .flavor-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .modal-apply-btn {
+    background: var(--card-primary);
+}
+
+/* ============================================
+   2. HORIZONTAL SPLIT - ONE PER ROW ON MOBILE
+   Image left, name right (side by side), buttons below
+   MOBILE: Full width cards, one per row
+   ============================================ */
+   /* FORCE ONE COLUMN ON MOBILE */
+/* 2 PRODUCTS PER ROW ON LAPTOP */
+@media (min-width: 768px) and (max-width: 1024px) {
+    #productsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    #productsGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+.product-card.horizontal-split {
+    background: white;
+    border-radius: 16px;
+    padding: 16px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    
+    /* Grid with named areas */
+    display: grid !important;
+    grid-template-areas: 
+        "image info"
+        "buttons buttons" !important;
+    grid-template-columns: 200px 1fr !important;
+    grid-template-rows: auto auto !important;
+    gap: 14px !important;
+    align-items: start !important;
+}
+
+@media (max-width: 550px) {
+    /* FULL WIDTH ON MOBILE - ONE PER ROW */
+     #productsGrid {
+        grid-template-columns: 1fr !important;
+    }
+    .product-card.horizontal-split {
+        padding: 14px !important;
+        grid-template-columns: 110px 1fr !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Override grid to show one per row */
+    #productsGrid.has-horizontal-split {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.product-card.horizontal-split:hover {
+    transform: translateX(4px) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* IMAGE - Left side */
+.product-card.horizontal-split .product-card-image {
+    grid-area: image !important;
+    width: 100% !important;
+    height: 100% !important;
+     min-width: 180px !important;
+   
+    min-height: 220px !important;
+    aspect-ratio: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.product-card.horizontal-split .product-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* HIDE DISCOUNT BADGE */
+.product-card.horizontal-split .discount-badge {
+    display: none !important;
+}
+
+.product-card.horizontal-split .wishlist-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .wishlist-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* INFO - Right side (name, badges, price) */
+.product-card.horizontal-split .product-card-info {
+    grid-area: info !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    justify-content: flex-start !important;
+}
+
+.product-card.horizontal-split .product-card-name {
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .product-card-name {
+        font-size: 1rem !important;
+        -webkit-line-clamp: 2 !important;
+    }
+}
+
+.product-card.horizontal-split .badge-row {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.product-card.horizontal-split .info-badge {
+    font-size: 9px !important;
+    padding: 4px 8px !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .info-badge {
+        font-size: 8px !important;
+        padding: 3px 6px !important;
+    }
+}
+
+.product-card.horizontal-split .product-price-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
+.product-card.horizontal-split .price-new {
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .price-new {
+        font-size: 1.3rem !important;
+    }
+}
+
+.product-card.horizontal-split .price-old {
+    font-size: 1rem !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .price-old {
+        font-size: 0.9rem !important;
+    }
+}
+
+.product-card.horizontal-split .price-discount {
+    font-size: 0.8rem !important;
+}
+
+/* BUTTONS - Bottom (spanning full width below image+text) */
+.product-card.horizontal-split .size-select-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-secondary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .add-to-cart-btn {
+    grid-area: buttons !important;
+    width: 100% !important;
+    background: var(--card-primary) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.product-card.horizontal-split .quantity-controls {
+    grid-area: buttons !important;
+    width: 100% !important;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .size-select-btn,
+    .product-card.horizontal-split .add-to-cart-btn {
+        padding: 11px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Modal */
+.size-flavor-modal.horizontal-split-modal {
+    background: white;
+    border-top: 4px solid var(--card-secondary);
+}
+
+.size-flavor-modal.horizontal-split-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .flavor-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .modal-apply-btn {
+    background: var(--card-primary);
+}
+/* ============================================
+   3. OVERLAY DARK (FIXED!)
+   Image background, text overlay on bottom
+   ============================================ */
+.product-card.overlay-dark {
+    background: #1a1a1a;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3/4;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    padding: 0 !important;
+}
+
+.product-card.overlay-dark:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+}
+
+.product-card.overlay-dark .product-card-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
+.product-card.overlay-dark .product-card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0,0,0,0.2) 40%,
+        rgba(0,0,0,0.7) 70%,
+        rgba(0,0,0,0.9) 100%);
+    z-index: 1;
+}
+
+.product-card.overlay-dark .product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card.overlay-dark .discount-badge {
+    z-index: 3;
+}
+
+.product-card.overlay-dark .wishlist-btn {
+    z-index: 3;
+}
+
+.product-card.overlay-dark .product-card-info {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 20px !important;
+    z-index: 2 !important;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark {
+        aspect-ratio: 3/4; /* Keep same ratio on mobile */
+    }
+    
+    .product-card.overlay-dark .product-card-info {
+        padding: 16px !important;
+        gap: 6px;
+    }
+}
+
+.product-card.overlay-dark .product-card-name {
+    color: white !important;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark .product-card-name {
+        font-size: 1.1rem;
+    }
+}
+
+.product-card.overlay-dark .badge-row {
+    margin: 0;
+}
+
+.product-card.overlay-dark .info-badge {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 10px;
+    padding: 4px 8px;
+}
+
+.product-card.overlay-dark .product-price-section {
+    margin: 0;
+    gap: 8px;
+}
+
+.product-card.overlay-dark .price-new {
+    color: white !important;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark .price-new {
+        font-size: 1.5rem;
+    }
+}
+
+.product-card.overlay-dark .price-old {
+    color: rgba(255,255,255,0.6) !important;
+    font-size: 1.1rem;
+}
+
+.product-card.overlay-dark .price-discount {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.product-card.overlay-dark .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-top: 4px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.product-card.overlay-dark .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-top: 4px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark .size-select-btn,
+    .product-card.overlay-dark .add-to-cart-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+    
+
+
+/* Modal */
+.size-flavor-modal.overlay-dark-modal {
+    background: #1a1a1a;
+    color: white;
+    border-top: 3px solid var(--card-secondary);
+}
+
+.size-flavor-modal.overlay-dark-modal .modal-title-product {
+    color: white;
+}
+
+.size-flavor-modal.overlay-dark-modal .size-option {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.size-flavor-modal.overlay-dark-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.overlay-dark-modal .modal-apply-btn {
+    background: var(--card-primary);
+}
+
+/* ============================================
+   4. COMPACT MINIMAL
+   Dense, space-efficient
+   ============================================ */
+.product-card.compact-minimal {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.product-card.compact-minimal:hover {
+    border-color: var(--card-primary);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: none !important;
+}
+
+.product-card.compact-minimal .product-card-image {
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.product-card.compact-minimal .product-card-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.product-card.compact-minimal .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.product-card.compact-minimal .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 0.85rem;
+}
+
+/* Modal */
+.size-flavor-modal.compact-minimal-modal {
+    background: #fafafa;
+    border-top: 3px solid var(--card-secondary);
+}
+
+.size-flavor-modal.compact-minimal-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.compact-minimal-modal .modal-apply-btn {
+    background: var(--card-primary);
+}
+
+/* ============================================
+   5. MAGAZINE EDITORIAL
+   Asymmetric, bold typography
+   ============================================ */
+.product-card.magazine-editorial {
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: all 0.4s ease;
+}
+
+.product-card.magazine-editorial:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+}
+
+.product-card.magazine-editorial .product-card-image {
+    aspect-ratio: 3/4;
+    margin: 0;
+    border-radius: 0;
+}
+
+.product-card.magazine-editorial .product-card-info {
+    padding: 24px;
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .product-card-info {
+        padding: 16px;
+    }
+}
+
+.product-card.magazine-editorial .product-card-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .product-card-name {
+        font-size: 1.3rem;
+    }
+}
+
+.product-card.magazine-editorial .price-new {
+    font-size: 2.2rem;
+    font-weight: 900;
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .price-new {
+        font-size: 1.8rem;
+    }
+}
+
+.product-card.magazine-editorial .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.product-card.magazine-editorial .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Modal */
+.size-flavor-modal.magazine-editorial-modal {
+    background: white;
+    border-top: 6px solid var(--card-secondary);
+    border-radius: 0;
+}
+
+.size-flavor-modal.magazine-editorial-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.magazine-editorial-modal .modal-apply-btn {
+    background: var(--card-primary);
+    border-radius: 0;
+}
+
+/* ============================================
+   6. ROUNDED SOFT
+   All corners rounded, soft feel
+   ============================================ */
+.product-card.rounded-soft {
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEBF0 100%);
+    border-radius: 32px;
+    padding: 20px;
+    border: 3px solid rgba(255,255,255,0.5);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+}
+
+.product-card.rounded-soft:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.product-card.rounded-soft .product-card-image {
+    border-radius: 24px;
+    margin-bottom: 16px;
+    border: 4px solid white;
+}
+
+.product-card.rounded-soft .product-card-name {
+    font-family: 'Quicksand', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.product-card.rounded-soft .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    margin-bottom: 8px;
+}
+
+.product-card.rounded-soft .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+/* Modal */
+.size-flavor-modal.rounded-soft-modal {
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEBF0 100%);
+    border-radius: 32px 32px 0 0;
+    border-top: 5px solid var(--card-secondary);
+}
+
+.size-flavor-modal.rounded-soft-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.rounded-soft-modal .modal-apply-btn {
+    background: var(--card-primary);
+    border-radius: 25px;
+}
+
+/* ============================================
+   7. SQUARE BOLD
+   Sharp corners, bold design
+   ============================================ */
+.product-card.square-bold {
+    background: white;
+    border-radius: 0;
+    border: 4px solid #000;
+    padding: 16px;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.product-card.square-bold:hover {
+    transform: translate(-4px, -4px) !important;
+    box-shadow: 12px 12px 0 rgba(0,0,0,0.15);
+}
+
+.product-card.square-bold .product-card-image {
+    border-radius: 0;
+    border: 3px solid #000;
+    margin-bottom: 16px;
+}
+
+.product-card.square-bold .product-card-name {
+    font-family: 'Archivo Black', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.product-card.square-bold .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: 3px solid #000;
+    border-radius: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.product-card.square-bold .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: 3px solid #000;
+    border-radius: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* Modal */
+.size-flavor-modal.square-bold-modal {
+    background: white;
+    border-radius: 0;
+    border-top: 6px solid #000;
+}
+
+.size-flavor-modal.square-bold-modal .size-option {
+    border-radius: 0;
+    border: 2px solid #000;
+}
+
+.size-flavor-modal.square-bold-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.square-bold-modal .modal-apply-btn {
+    background: var(--card-primary);
+    border: 3px solid #000;
+    border-radius: 0;
+}
+
+/* ============================================
+   8. TILTED FLOATING
+   Slight rotation, floating effect
+   ============================================ */
+.product-card.tilted-floating {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card.tilted-floating:hover {
+    transform: rotate(-3deg) translateY(-10px) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.product-card.tilted-floating .product-card-image {
+    border-radius: 16px;
+    margin-bottom: 16px;
+    transform: rotate(2deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.product-card.tilted-floating .product-card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.product-card.tilted-floating .size-select-btn {
+    background: var(--card-secondary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transform: rotate(-1deg);
+}
+
+.product-card.tilted-floating .add-to-cart-btn {
+    background: var(--card-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    transform: rotate(1deg);
+}
+
+/* Modal */
+.size-flavor-modal.tilted-floating-modal {
+    background: white;
+    border-radius: 20px 20px 0 0;
+    border-top: 4px solid var(--card-secondary);
+}
+
+.size-flavor-modal.tilted-floating-modal .size-option.selected {
+    background: var(--card-secondary);
+    color: white;
+}
+
+.size-flavor-modal.tilted-floating-modal .modal-apply-btn {
+    background: var(--card-primary);
+    border-radius: 12px;
+}
+
+/* ============================================
+   RESPONSIVE FOR ALL
+   ============================================ */
+@media (max-width: 550px) {
+    .product-card {
+        padding: 12px;
+    }
+    
+    .product-card-name {
+        font-size: 1.1rem !important;
+    }
+    
+    .add-to-cart-btn,
+    .size-select-btn {
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}

@@ -1,0 +1,702 @@
+/* ============================================
+   🔥 6 COMPLETELY DIFFERENT CARD STRUCTURES
+   Different layouts, shapes, arrangements
+   Each with unique modal design & customizable colors
+   ============================================ */
+
+/* ============================================
+   VARIATION 1: CIRCULAR LUXURY CARD
+   Rounded image, centered, elegant
+   ============================================ */
+.product-card.circular-luxury {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+}
+
+.product-card.circular-luxury:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.product-card.circular-luxury .product-card-image {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #f0f0f0;
+    position: relative;
+}
+
+@media (max-width: 550px) {
+    .product-card.circular-luxury .product-card-image {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+.product-card.circular-luxury .discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--card-accent, #FF6B6B);
+    border-radius: 20px;
+    padding: 6px 12px;
+}
+
+.product-card.circular-luxury .wishlist-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: white;
+    border-radius: 50%;
+}
+
+.product-card.circular-luxury .product-card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    min-height: auto;
+}
+
+.product-card.circular-luxury .badge-row {
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.product-card.circular-luxury .product-price-section {
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.product-card.circular-luxury .add-to-cart-btn,
+.product-card.circular-luxury .size-select-btn {
+    background: var(--card-primary, #4CAF50);
+    color: white;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+/* Circular Modal */
+.size-flavor-modal.circular-luxury-modal {
+    border-radius: 30px 30px 0 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.size-flavor-modal.circular-luxury-modal .size-option {
+    border-radius: 20px;
+}
+
+.size-flavor-modal.circular-luxury-modal .size-option.selected {
+    background: var(--card-primary, #4CAF50);
+    color: white;
+}
+
+.size-flavor-modal.circular-luxury-modal .modal-apply-btn {
+    background: var(--card-primary, #4CAF50);
+    border-radius: 30px;
+}
+
+/* ============================================
+   VARIATION 2: HORIZONTAL SPLIT CARD
+   Image left, content right
+   ============================================ */
+.product-card.horizontal-split {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    padding: 0;
+    height: 200px;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split {
+        height: 160px;
+    }
+}
+
+.product-card.horizontal-split:hover {
+    transform: translateX(4px) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.product-card.horizontal-split .product-card-image {
+    width: 45%;
+    flex-shrink: 0;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.product-card.horizontal-split .product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card.horizontal-split .product-card-info {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media (max-width: 550px) {
+    .product-card.horizontal-split .product-card-info {
+        padding: 12px;
+    }
+}
+
+.product-card.horizontal-split .product-card-name {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-card.horizontal-split .badge-row {
+    margin-bottom: 8px;
+    gap: 6px;
+}
+
+.product-card.horizontal-split .add-to-cart-btn,
+.product-card.horizontal-split .size-select-btn {
+    background: var(--card-primary, #667eea);
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Horizontal Modal */
+.size-flavor-modal.horizontal-split-modal {
+    background: white;
+    border-top: 4px solid var(--card-primary, #667eea);
+}
+
+.size-flavor-modal.horizontal-split-modal .size-option {
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.size-flavor-modal.horizontal-split-modal .size-option.selected {
+    background: var(--card-primary, #667eea);
+    color: white;
+}
+
+.size-flavor-modal.horizontal-split-modal .modal-apply-btn {
+    background: var(--card-primary, #667eea);
+}
+
+/* ============================================
+   VARIATION 3: OVERLAY DARK CARD
+   Text overlays on image, dark theme
+   ============================================ */
+.product-card.overlay-dark {
+    background: #1a1a1a;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    height: 400px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark {
+        height: 350px;
+    }
+}
+
+.product-card.overlay-dark:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+}
+
+.product-card.overlay-dark .product-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.product-card.overlay-dark .product-card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.9) 100%);
+}
+
+.product-card.overlay-dark .product-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card.overlay-dark .product-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    z-index: 2;
+    color: white;
+}
+
+@media (max-width: 550px) {
+    .product-card.overlay-dark .product-card-info {
+        padding: 16px;
+    }
+}
+
+.product-card.overlay-dark .product-card-name {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.product-card.overlay-dark .badge-row {
+    margin-bottom: 12px;
+}
+
+.product-card.overlay-dark .info-badge {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+.product-card.overlay-dark .price-new {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.product-card.overlay-dark .price-old {
+    color: rgba(255,255,255,0.6);
+}
+
+.product-card.overlay-dark .add-to-cart-btn,
+.product-card.overlay-dark .size-select-btn {
+    background: var(--card-primary, #00FFFF);
+    color: #1a1a1a;
+    border-radius: 12px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+}
+
+/* Overlay Modal */
+.size-flavor-modal.overlay-dark-modal {
+    background: #1a1a1a;
+    color: white;
+    border-top: 3px solid var(--card-primary, #00FFFF);
+}
+
+.size-flavor-modal.overlay-dark-modal .modal-title-product {
+    color: white;
+}
+
+.size-flavor-modal.overlay-dark-modal .size-option {
+    background: #2a2a2a;
+    border-color: #3a3a3a;
+}
+
+.size-flavor-modal.overlay-dark-modal .size-option.selected {
+    background: var(--card-primary, #00FFFF);
+    color: #1a1a1a;
+    border-color: var(--card-primary, #00FFFF);
+}
+
+.size-flavor-modal.overlay-dark-modal .modal-apply-btn {
+    background: var(--card-primary, #00FFFF);
+    color: #1a1a1a;
+}
+
+/* ============================================
+   VARIATION 4: COMPACT MINIMAL CARD
+   Dense, minimal, space-efficient
+   ============================================ */
+.product-card.compact-minimal {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.product-card.compact-minimal:hover {
+    border-color: var(--card-primary, #2196F3);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+    transform: none !important;
+}
+
+.product-card.compact-minimal .product-card-image {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    aspect-ratio: 1;
+}
+
+.product-card.compact-minimal .product-card-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.product-card.compact-minimal .badge-row {
+    margin-bottom: 8px;
+    gap: 4px;
+}
+
+.product-card.compact-minimal .info-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+}
+
+.product-card.compact-minimal .product-price-section {
+    margin-bottom: 10px;
+    gap: 6px;
+}
+
+.product-card.compact-minimal .price-new {
+    font-size: 1.4rem;
+}
+
+.product-card.compact-minimal .add-to-cart-btn,
+.product-card.compact-minimal .size-select-btn {
+    background: var(--card-primary, #2196F3);
+    color: white;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Compact Modal */
+.size-flavor-modal.compact-minimal-modal {
+    background: #fafafa;
+    border-top: 3px solid var(--card-primary, #2196F3);
+}
+
+.size-flavor-modal.compact-minimal-modal .size-option {
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.size-flavor-modal.compact-minimal-modal .size-option.selected {
+    background: var(--card-primary, #2196F3);
+    color: white;
+}
+
+.size-flavor-modal.compact-minimal-modal .modal-apply-btn {
+    background: var(--card-primary, #2196F3);
+}
+
+/* ============================================
+   VARIATION 5: MAGAZINE EDITORIAL CARD
+   Asymmetric, bold typography, editorial
+   ============================================ */
+.product-card.magazine-editorial {
+    background: white;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card.magazine-editorial:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+}
+
+.product-card.magazine-editorial .product-card-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    margin: 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.product-card.magazine-editorial .product-card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--card-primary, #E91E63) 0%, transparent 100%);
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.product-card.magazine-editorial .product-card-info {
+    padding: 24px;
+    background: white;
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .product-card-info {
+        padding: 16px;
+    }
+}
+
+.product-card.magazine-editorial .product-card-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .product-card-name {
+        font-size: 1.3rem;
+    }
+}
+
+.product-card.magazine-editorial .badge-row {
+    margin-bottom: 16px;
+    gap: 8px;
+}
+
+.product-card.magazine-editorial .product-price-section {
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.product-card.magazine-editorial .price-new {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--card-primary, #E91E63);
+}
+
+@media (max-width: 550px) {
+    .product-card.magazine-editorial .price-new {
+        font-size: 2rem;
+    }
+}
+
+.product-card.magazine-editorial .add-to-cart-btn,
+.product-card.magazine-editorial .size-select-btn {
+    background: var(--card-primary, #E91E63);
+    color: white;
+    border-radius: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 16px;
+}
+
+/* Magazine Modal */
+.size-flavor-modal.magazine-editorial-modal {
+    background: white;
+    border-top: 6px solid var(--card-primary, #E91E63);
+    border-radius: 0;
+}
+
+.size-flavor-modal.magazine-editorial-modal .modal-title-product {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+}
+
+.size-flavor-modal.magazine-editorial-modal .size-option {
+    border-radius: 0;
+    border: 2px solid #e0e0e0;
+}
+
+.size-flavor-modal.magazine-editorial-modal .size-option.selected {
+    background: var(--card-primary, #E91E63);
+    color: white;
+    border-color: var(--card-primary, #E91E63);
+}
+
+.size-flavor-modal.magazine-editorial-modal .modal-apply-btn {
+    background: var(--card-primary, #E91E63);
+    border-radius: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   VARIATION 6: ROUNDED PLAYFUL CARD
+   Soft rounded corners, playful colors
+   ============================================ */
+.product-card.rounded-playful {
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEBF0 100%);
+    border-radius: 32px;
+    padding: 20px;
+    border: 3px solid transparent;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card.rounded-playful:hover {
+    border-color: var(--card-primary, #FF6B9D);
+    transform: rotate(-2deg) scale(1.05) !important;
+    box-shadow: 0 16px 40px rgba(255, 107, 157, 0.2);
+}
+
+.product-card.rounded-playful .product-card-image {
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-card.rounded-playful .product-card-name {
+    font-family: 'Quicksand', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #2a2a2a;
+}
+
+.product-card.rounded-playful .badge-row {
+    margin-bottom: 12px;
+}
+
+.product-card.rounded-playful .info-badge {
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.product-card.rounded-playful .price-new {
+    color: var(--card-primary, #FF6B9D);
+    font-weight: 900;
+}
+
+.product-card.rounded-playful .add-to-cart-btn,
+.product-card.rounded-playful .size-select-btn {
+    background: var(--card-primary, #FF6B9D);
+    color: white;
+    border-radius: 25px;
+    font-weight: 800;
+    padding: 14px;
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+}
+
+.product-card.rounded-playful .add-to-cart-btn:hover,
+.product-card.rounded-playful .size-select-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+/* Rounded Modal */
+.size-flavor-modal.rounded-playful-modal {
+    background: linear-gradient(135deg, #FFF9F0 0%, #FFEBF0 100%);
+    border-radius: 32px 32px 0 0;
+    border-top: 5px solid var(--card-primary, #FF6B9D);
+}
+
+.size-flavor-modal.rounded-playful-modal .size-option {
+    border-radius: 20px;
+    border: 3px solid #FFE0EB;
+}
+
+.size-flavor-modal.rounded-playful-modal .size-option.selected {
+    background: var(--card-primary, #FF6B9D);
+    color: white;
+    border-color: var(--card-primary, #FF6B9D);
+}
+
+.size-flavor-modal.rounded-playful-modal .modal-apply-btn {
+    background: var(--card-primary, #FF6B9D);
+    border-radius: 25px;
+}
+
+/* ============================================
+   RESPONSIVE FIXES FOR ALL VARIATIONS
+   ============================================ */
+@media (max-width: 550px) {
+    .product-card-name {
+        font-size: 1.1rem !important;
+    }
+    
+    .price-new {
+        font-size: 1.4rem !important;
+    }
+    
+    .add-to-cart-btn,
+    .size-select-btn {
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ============================================
+   STAR FIXES FOR ALL VARIATIONS
+   ============================================ */
+.star-icon {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+}
+
+@media (max-width: 550px) {
+    .star-icon {
+        width: 14px !important;
+        height: 14px !important;
+    }
+}
+
+@media (min-width: 551px) {
+    .star-icon {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
+.star-icon.full {
+    fill: currentColor !important;
+}
+
+.star-icon.half path {
+    fill: currentColor !important;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%) !important;
+}
+
+.star-icon.empty {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.5 !important;
+}
+
+.rating-stars {
+    display: inline-flex !important;
+    gap: 3px !important;
+    align-items: center !important;
+    overflow: visible !important;
+}

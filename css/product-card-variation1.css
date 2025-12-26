@@ -1,0 +1,739 @@
+/* ============================================
+   🔥 6 ULTRA-PREMIUM PRODUCT CARD VARIATIONS
+   Mobile + Desktop Responsive
+   Each with Unique Modal Design
+   Bigger Stars, Professional Quality
+   ============================================ */
+
+/* ============================================
+   GLOBAL STAR FIXES (ALL VARIATIONS)
+   ============================================ */
+.star-icon {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    overflow: visible !important;
+}
+
+@media (max-width: 550px) {
+    .star-icon {
+        width: 14px !important;
+        height: 14px !important;
+    }
+}
+
+@media (min-width: 551px) {
+    .star-icon {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+
+.star-icon.full {
+    fill: currentColor !important;
+}
+
+.star-icon.half path {
+    fill: currentColor !important;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%) !important;
+}
+
+.star-icon.empty {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.5 !important;
+}
+
+.rating-stars {
+    display: inline-flex !important;
+    gap: 3px !important;
+    align-items: center !important;
+    overflow: visible !important;
+}
+
+.info-badge.rating-badge {
+    overflow: visible !important;
+}
+
+/* Remove any transforms that cause diagonal issues */
+.product-card {
+    transform: none !important;
+}
+
+.product-card:hover {
+    transform: translateY(-4px) !important;
+}
+
+.product-card-image img {
+    transform: none !important;
+}
+
+.product-card:hover .product-card-image img {
+    transform: scale(1.05) !important;
+}
+
+/* ============================================
+   VARIATION 1: LUXURY GOLD PRESTIGE
+   Elegant, gold accents, premium feel
+   ============================================ */
+.product-card.luxury-gold {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F6F0 100%);
+    border: 2px solid #E8DCC4;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(197, 165, 107, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card.luxury-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #C9A961 0%, #E8DCC4 50%, #C9A961 100%);
+}
+
+.product-card.luxury-gold:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 40px rgba(197, 165, 107, 0.25);
+    border-color: #C9A961;
+}
+
+.product-card.luxury-gold .product-card-image {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #E8DCC4;
+}
+
+.product-card.luxury-gold .product-card-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2C2416;
+    letter-spacing: 0.3px;
+}
+
+.product-card.luxury-gold .info-badge.rating-badge {
+    color: #C9A961;
+}
+
+.product-card.luxury-gold .info-badge.size-badge {
+    background: linear-gradient(135deg, #C9A961 0%, #B8860B 100%);
+    color: white;
+}
+
+.product-card.luxury-gold .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #E8DCC4 0%, #D4C5A9 100%);
+    color: #2C2416;
+}
+
+.product-card.luxury-gold .price-new {
+    color: #8B6914;
+    font-weight: 900;
+}
+
+.product-card.luxury-gold .add-to-cart-btn {
+    background: linear-gradient(135deg, #C9A961 0%, #B8860B 100%);
+    color: white;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+}
+
+.product-card.luxury-gold .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #D4AF37 0%, #C9A961 100%);
+    box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
+}
+
+.product-card.luxury-gold .size-select-btn {
+    background: linear-gradient(135deg, #E8DCC4 0%, #D4C5A9 100%);
+    color: #2C2416;
+    border: 2px solid #C9A961;
+}
+
+/* Luxury Gold Modal */
+.size-flavor-modal.luxury-gold-modal {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F6F0 100%);
+    border-top: 4px solid #C9A961;
+}
+
+.size-flavor-modal.luxury-gold-modal .modal-title-product {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #2C2416;
+    font-size: 1.8rem;
+}
+
+.size-flavor-modal.luxury-gold-modal .size-option.selected,
+.size-flavor-modal.luxury-gold-modal .flavor-option.selected {
+    background: linear-gradient(135deg, #FFF9E6 0%, #F8F6F0 100%);
+    border-color: #C9A961;
+    box-shadow: 0 2px 8px rgba(201, 169, 97, 0.2);
+}
+
+.size-flavor-modal.luxury-gold-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #C9A961 0%, #B8860B 100%);
+    color: white;
+}
+
+/* ============================================
+   VARIATION 2: NEON CYBER DARK
+   Dark, neon accents, futuristic
+   ============================================ */
+.product-card.neon-cyber {
+    background: linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 100%);
+    border: 2px solid #16213E;
+    border-radius: 20px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.1),
+        0 8px 24px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card.neon-cyber::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.product-card.neon-cyber:hover::after {
+    left: 100%;
+}
+
+.product-card.neon-cyber:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.3),
+        0 12px 40px rgba(0, 0, 0, 0.8);
+    border-color: #00FFFF;
+}
+
+.product-card.neon-cyber .product-card-image {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #16213E;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.product-card.neon-cyber .product-card-name {
+    font-family: 'Orbitron', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.product-card.neon-cyber .info-badge.rating-badge {
+    color: #00FFFF;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.product-card.neon-cyber .info-badge.size-badge {
+    background: linear-gradient(135deg, #00FFFF 0%, #0099CC 100%);
+    color: #0F0F1E;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.product-card.neon-cyber .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #FF00FF 0%, #CC0099 100%);
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
+}
+
+.product-card.neon-cyber .price-new {
+    color: #00FFFF;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.product-card.neon-cyber .price-old {
+    color: #666;
+}
+
+.product-card.neon-cyber .add-to-cart-btn {
+    background: linear-gradient(135deg, #00FFFF 0%, #0099CC 100%);
+    color: #0F0F1E;
+    border: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.product-card.neon-cyber .add-to-cart-btn:hover {
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.6),
+        0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+.product-card.neon-cyber .size-select-btn {
+    background: linear-gradient(135deg, #16213E 0%, #0F0F1E 100%);
+    color: #00FFFF;
+    border: 2px solid #00FFFF;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Neon Cyber Modal */
+.size-flavor-modal.neon-cyber-modal {
+    background: linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 100%);
+    border-top: 3px solid #00FFFF;
+    box-shadow: 0 -8px 40px rgba(0, 255, 255, 0.2);
+}
+
+.size-flavor-modal.neon-cyber-modal .modal-title-product {
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.size-flavor-modal.neon-cyber-modal .size-option,
+.size-flavor-modal.neon-cyber-modal .flavor-option {
+    background: #16213E;
+    border-color: #1A1A2E;
+}
+
+.size-flavor-modal.neon-cyber-modal .size-option.selected,
+.size-flavor-modal.neon-cyber-modal .flavor-option.selected {
+    background: #1A1A2E;
+    border-color: #00FFFF;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.size-flavor-modal.neon-cyber-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #00FFFF 0%, #0099CC 100%);
+    color: #0F0F1E;
+}
+
+/* ============================================
+   VARIATION 3: SOFT PASTEL DREAM
+   Light, airy, gentle colors
+   ============================================ */
+.product-card.pastel-dream {
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFF0F5 100%);
+    border: 2px solid #FFD6E8;
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.15);
+    transition: all 0.4s ease;
+}
+
+.product-card.pastel-dream:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 12px 35px rgba(255, 182, 193, 0.25);
+    border-color: #FFB6C1;
+}
+
+.product-card.pastel-dream .product-card-image {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #FFE4EC;
+}
+
+.product-card.pastel-dream .product-card-name {
+    font-family: 'Quicksand', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8B5A7D;
+}
+
+.product-card.pastel-dream .info-badge.rating-badge {
+    color: #FFB6C1;
+}
+
+.product-card.pastel-dream .info-badge.size-badge {
+    background: linear-gradient(135deg, #FFB6C1 0%, #FF9AA2 100%);
+    color: white;
+}
+
+.product-card.pastel-dream .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #C7CEEA 0%, #B5BAD0 100%);
+    color: white;
+}
+
+.product-card.pastel-dream .price-new {
+    color: #E91E63;
+    font-weight: 900;
+}
+
+.product-card.pastel-dream .add-to-cart-btn {
+    background: linear-gradient(135deg, #FFB6C1 0%, #FF9AA2 100%);
+    color: white;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+}
+
+.product-card.pastel-dream .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #FFC0CB 0%, #FFB6C1 100%);
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
+}
+
+.product-card.pastel-dream .size-select-btn {
+    background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
+    color: #8B5A7D;
+    border: 2px solid #FFB6C1;
+}
+
+/* Pastel Dream Modal */
+.size-flavor-modal.pastel-dream-modal {
+    background: linear-gradient(135deg, #FFF5F7 0%, #FFF0F5 100%);
+    border-top: 4px solid #FFB6C1;
+}
+
+.size-flavor-modal.pastel-dream-modal .modal-title-product {
+    font-family: 'Quicksand', sans-serif;
+    color: #8B5A7D;
+}
+
+.size-flavor-modal.pastel-dream-modal .size-option.selected,
+.size-flavor-modal.pastel-dream-modal .flavor-option.selected {
+    background: linear-gradient(135deg, #FFFAFC 0%, #FFF5F7 100%);
+    border-color: #FFB6C1;
+    box-shadow: 0 2px 10px rgba(255, 182, 193, 0.2);
+}
+
+.size-flavor-modal.pastel-dream-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #FFB6C1 0%, #FF9AA2 100%);
+    color: white;
+}
+
+/* ============================================
+   VARIATION 4: FOREST GREEN ORGANIC
+   Natural, earthy, eco-friendly
+   ============================================ */
+.product-card.forest-green {
+    background: linear-gradient(135deg, #F4F7F0 0%, #E8F0E3 100%);
+    border: 2px solid #C8D5B9;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(76, 110, 70, 0.12);
+    transition: all 0.4s ease;
+}
+
+.product-card.forest-green:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 14px 38px rgba(76, 110, 70, 0.2);
+    border-color: #8FC965;
+}
+
+.product-card.forest-green .product-card-image {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid #C8D5B9;
+}
+
+.product-card.forest-green .product-card-name {
+    font-family: 'Poppins', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2C5530;
+}
+
+.product-card.forest-green .info-badge.rating-badge {
+    color: #8FC965;
+}
+
+.product-card.forest-green .info-badge.size-badge {
+    background: linear-gradient(135deg, #8FC965 0%, #68A357 100%);
+    color: white;
+}
+
+.product-card.forest-green .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #C8D5B9 0%, #A8BF9A 100%);
+    color: #2C5530;
+}
+
+.product-card.forest-green .price-new {
+    color: #2C5530;
+    font-weight: 900;
+}
+
+.product-card.forest-green .add-to-cart-btn {
+    background: linear-gradient(135deg, #8FC965 0%, #68A357 100%);
+    color: white;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(104, 163, 87, 0.3);
+}
+
+.product-card.forest-green .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #9DD975 0%, #8FC965 100%);
+    box-shadow: 0 6px 20px rgba(104, 163, 87, 0.4);
+}
+
+.product-card.forest-green .size-select-btn {
+    background: linear-gradient(135deg, #E8F0E3 0%, #D8E8D0 100%);
+    color: #2C5530;
+    border: 2px solid #8FC965;
+}
+
+/* Forest Green Modal */
+.size-flavor-modal.forest-green-modal {
+    background: linear-gradient(135deg, #F4F7F0 0%, #E8F0E3 100%);
+    border-top: 4px solid #8FC965;
+}
+
+.size-flavor-modal.forest-green-modal .modal-title-product {
+    font-family: 'Poppins', sans-serif;
+    color: #2C5530;
+}
+
+.size-flavor-modal.forest-green-modal .size-option.selected,
+.size-flavor-modal.forest-green-modal .flavor-option.selected {
+    background: linear-gradient(135deg, #FAFCF8 0%, #F4F7F0 100%);
+    border-color: #8FC965;
+    box-shadow: 0 2px 10px rgba(104, 163, 87, 0.2);
+}
+
+.size-flavor-modal.forest-green-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #8FC965 0%, #68A357 100%);
+    color: white;
+}
+
+/* ============================================
+   VARIATION 5: ROYAL PURPLE PREMIUM
+   Bold, luxurious, rich
+   ============================================ */
+.product-card.royal-purple {
+    background: linear-gradient(135deg, #F8F5FA 0%, #F0E8F5 100%);
+    border: 2px solid #D8C4E8;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(138, 77, 168, 0.15);
+    transition: all 0.4s ease;
+}
+
+.product-card.royal-purple:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 14px 38px rgba(138, 77, 168, 0.25);
+    border-color: #9C4FBD;
+}
+
+.product-card.royal-purple .product-card-image {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid #D8C4E8;
+}
+
+.product-card.royal-purple .product-card-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #5A2D6B;
+}
+
+.product-card.royal-purple .info-badge.rating-badge {
+    color: #9C4FBD;
+}
+
+.product-card.royal-purple .info-badge.size-badge {
+    background: linear-gradient(135deg, #9C4FBD 0%, #7B3FA3 100%);
+    color: white;
+}
+
+.product-card.royal-purple .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #D8C4E8 0%, #C8B0DC 100%);
+    color: #5A2D6B;
+}
+
+.product-card.royal-purple .price-new {
+    color: #7B3FA3;
+    font-weight: 900;
+}
+
+.product-card.royal-purple .add-to-cart-btn {
+    background: linear-gradient(135deg, #9C4FBD 0%, #7B3FA3 100%);
+    color: white;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(123, 63, 163, 0.3);
+}
+
+.product-card.royal-purple .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #B063D1 0%, #9C4FBD 100%);
+    box-shadow: 0 6px 20px rgba(123, 63, 163, 0.4);
+}
+
+.product-card.royal-purple .size-select-btn {
+    background: linear-gradient(135deg, #F0E8F5 0%, #E4D4EE 100%);
+    color: #5A2D6B;
+    border: 2px solid #9C4FBD;
+}
+
+/* Royal Purple Modal */
+.size-flavor-modal.royal-purple-modal {
+    background: linear-gradient(135deg, #F8F5FA 0%, #F0E8F5 100%);
+    border-top: 4px solid #9C4FBD;
+}
+
+.size-flavor-modal.royal-purple-modal .modal-title-product {
+    font-family: 'Playfair Display', serif;
+    color: #5A2D6B;
+}
+
+.size-flavor-modal.royal-purple-modal .size-option.selected,
+.size-flavor-modal.royal-purple-modal .flavor-option.selected {
+    background: linear-gradient(135deg, #FAF8FC 0%, #F8F5FA 100%);
+    border-color: #9C4FBD;
+    box-shadow: 0 2px 10px rgba(123, 63, 163, 0.2);
+}
+
+.size-flavor-modal.royal-purple-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #9C4FBD 0%, #7B3FA3 100%);
+    color: white;
+}
+
+/* ============================================
+   VARIATION 6: OCEAN BLUE FRESH
+   Clean, fresh, modern
+   ============================================ */
+.product-card.ocean-blue {
+    background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%);
+    border: 2px solid #B8D4E8;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(66, 135, 245, 0.12);
+    transition: all 0.4s ease;
+}
+
+.product-card.ocean-blue:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 14px 38px rgba(66, 135, 245, 0.2);
+    border-color: #4287F5;
+}
+
+.product-card.ocean-blue .product-card-image {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #B8D4E8;
+}
+
+.product-card.ocean-blue .product-card-name {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1E4D7B;
+}
+
+.product-card.ocean-blue .info-badge.rating-badge {
+    color: #4287F5;
+}
+
+.product-card.ocean-blue .info-badge.size-badge {
+    background: linear-gradient(135deg, #4287F5 0%, #2C6DDB 100%);
+    color: white;
+}
+
+.product-card.ocean-blue .info-badge.flavor-badge {
+    background: linear-gradient(135deg, #B8D4E8 0%, #9FBFD9 100%);
+    color: #1E4D7B;
+}
+
+.product-card.ocean-blue .price-new {
+    color: #2C6DDB;
+    font-weight: 900;
+}
+
+.product-card.ocean-blue .add-to-cart-btn {
+    background: linear-gradient(135deg, #4287F5 0%, #2C6DDB 100%);
+    color: white;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(66, 135, 245, 0.3);
+}
+
+.product-card.ocean-blue .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #5A9AFF 0%, #4287F5 100%);
+    box-shadow: 0 6px 20px rgba(66, 135, 245, 0.4);
+}
+
+.product-card.ocean-blue .size-select-btn {
+    background: linear-gradient(135deg, #E6F3FF 0%, #D4E8FA 100%);
+    color: #1E4D7B;
+    border: 2px solid #4287F5;
+}
+
+/* Ocean Blue Modal */
+.size-flavor-modal.ocean-blue-modal {
+    background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%);
+    border-top: 4px solid #4287F5;
+}
+
+.size-flavor-modal.ocean-blue-modal .modal-title-product {
+    font-family: 'Inter', sans-serif;
+    color: #1E4D7B;
+}
+
+.size-flavor-modal.ocean-blue-modal .size-option.selected,
+.size-flavor-modal.ocean-blue-modal .flavor-option.selected {
+    background: linear-gradient(135deg, #F8FCFF 0%, #F0F8FF 100%);
+    border-color: #4287F5;
+    box-shadow: 0 2px 10px rgba(66, 135, 245, 0.2);
+}
+
+.size-flavor-modal.ocean-blue-modal .modal-apply-btn {
+    background: linear-gradient(135deg, #4287F5 0%, #2C6DDB 100%);
+    color: white;
+}
+
+/* ============================================
+   RESPONSIVE - ALL VARIATIONS
+   ============================================ */
+@media (max-width: 550px) {
+    .product-card.luxury-gold,
+    .product-card.neon-cyber,
+    .product-card.pastel-dream,
+    .product-card.forest-green,
+    .product-card.royal-purple,
+    .product-card.ocean-blue {
+        border-radius: 12px;
+    }
+    
+    .product-card .product-card-name {
+        font-size: 1.1rem !important;
+    }
+    
+    .product-card .price-new {
+        font-size: 1.4rem !important;
+    }
+}
+
+/* Dark mode support for all variations */
+body.dark-mode .product-card.luxury-gold {
+    background: linear-gradient(135deg, #2A2416 0%, #1F1A0F 100%);
+    border-color: #4A3C1F;
+}
+
+body.dark-mode .product-card.pastel-dream {
+    background: linear-gradient(135deg, #2A1F23 0%, #221A1F 100%);
+    border-color: #4A2F3A;
+}
+
+body.dark-mode .product-card.forest-green {
+    background: linear-gradient(135deg, #1F2A1F 0%, #1A221A 100%);
+    border-color: #3A4A3A;
+}
+
+body.dark-mode .product-card.royal-purple {
+    background: linear-gradient(135deg, #2A1F2A 0%, #221A22 100%);
+    border-color: #4A2F4A;
+}
+
+body.dark-mode .product-card.ocean-blue {
+    background: linear-gradient(135deg, #1F252A 0%, #1A1F22 100%);
+    border-color: #2F3F4A;
+}

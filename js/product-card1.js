@@ -968,7 +968,7 @@ class ProductCardManager {
  * @param {string} design - Design class: 'glass', 'brutal', 'minimal', 'editorial', 'depth', 'gradient'
  */
 function applyProductCardDesign(design) {
-    const validDesigns = ['glass', 'brutal', 'minimal', 'editorial', 'depth', 'gradient'];
+    const validDesigns = ['glass', 'brutal', 'minimal', 'editorial', 'depth', 'gradient','luxury-gold', 'neon-cyber', 'pastel-dream', 'forest-green', 'royal-purple', 'ocean-blue'];
     
     if (!validDesigns.includes(design)) {
         console.error(`Invalid design: ${design}. Valid options: ${validDesigns.join(', ')}`);
@@ -1036,9 +1036,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load saved design preference
   loadSavedDesign();
 });
-document.addEventListener('DOMContentLoaded', () => {
-    applyProductCardDesign('minimal'); // Pick one
-});
+
 // Export for use in other scripts
 if (typeof window !== 'undefined') {
   window.ProductCardManager = ProductCardManager;

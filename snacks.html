@@ -1234,15 +1234,13 @@
 
     <script src="js/product.js"  defer></script>
     <script src="js/navbar.js" defer></script>
-    <script src="js/product-card.js" defer></script>
+    <script src="js/product-card3.js" defer></script>
      <script src="js/nav-sync.js"></script>
     <script src="js/footer.js" defer></script>
 
     
     <script src="js/bottom-bar.js"></script>
-<script>
-  // This page is the Mithai category
-  const CURRENT_CATEGORY = 'snacks';
+<script>const CURRENT_CATEGORY = 'snacks';
 
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -1266,6 +1264,7 @@
     }, 100);
   });
 
+ 
   function initCategoryPage() {
     const loading = document.getElementById('loadingState');
     const grid = document.getElementById('productsGrid');
@@ -1280,29 +1279,27 @@
       return;
     }
 
- 
-   // ✅ Use the central category filter
-const categoryProducts = window.productManager.filterByCategory(CURRENT_CATEGORY);
+    // ✅ Filter by category
+    const categoryProducts = window.productManager.filterByCategory(CURRENT_CATEGORY);
 
-// ‼️ DO NOT overwrite productManager.products here
-// window.productManager.products = categoryProducts;  // ❌ remove this line
+    // ✅ REPLACE the product manager's product list with ONLY this category
+    window.productManager.products = categoryProducts;
+    window.productManager.loadedProducts = []; // Clear loaded cache
 
-// Just show mithai on this page visually:
-if (countEl) countEl.textContent = categoryProducts.length;
+    // Update count
+    if (countEl) countEl.textContent = categoryProducts.length;
 
-if (categoryProducts.length > 0) {
-  if (grid) grid.style.display = 'grid';
-  if (noProducts) noProducts.style.display = 'none';
+    if (categoryProducts.length > 0) {
+      if (grid) grid.style.display = 'grid';
+      if (noProducts) noProducts.style.display = 'none';
 
-  // Render only mithai cards, but keep the global product list intact
-  window.productManager.renderProducts(categoryProducts);
-} else {
-  if (grid) grid.style.display = 'none';
-  if (noProducts) noProducts.style.display = 'block';
-}
-
-  }
-</script>
+      // ✅ Render (now it will use the filtered list for scroll loading too)
+      window.productManager.renderProducts();
+    } else {
+      if (grid) grid.style.display = 'none';
+      if (noProducts) noProducts.style.display = 'block';
+    }
+}</script>
 
 
 

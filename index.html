@@ -8,13 +8,13 @@
 <link rel="stylesheet" href="css/wishlist.css">
 <link rel="stylesheet" href="css/toast.css">
 <link rel="stylesheet" href="css/autoslideshow.css">
-<link rel="stylesheet" href="css/category8.css">
+<link rel="stylesheet" href="css/category.css">
 <link rel="stylesheet" href="css/ice-cream.css">
 <link rel="stylesheet" href="css/main-course.css">
-<link rel="stylesheet" href="css/filter-variation2.css">
-<!-- <link rel="stylesheet" href="css/filter-section.css"> -->
-<!-- <link rel="stylesheet" href="css/mobilefilter-section.css"> -->
- <link rel="stylesheet" href="css/product-card-variation.css">
+<!-- <link rel="stylesheet" href="css/filter-variation2.css"> -->
+<link rel="stylesheet" href="css/filter-section.css">
+<link rel="stylesheet" href="css/mobilefilter-section.css">
+ <!-- <link rel="stylesheet" href="css/product-card-variation3.css"> -->
 <link rel="stylesheet" href="css/product-card.css">  
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/bottom-bar.css">
@@ -108,49 +108,7 @@ body.search-active .products-section {
         padding-top: 0 !important;
     }
 }
-/* ============================================
-   🔧 DESKTOP LAYOUT FIX
-   Ensures products sit BESIDE filter sidebar
-   Add this to your main CSS or variation CSS
-   ============================================ */
 
-/* Wrapper for Desktop Filters + Products */
-.filter-products-wrapper {
-    display: flex;
-    gap: 24px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 30px 20px;
-}
-
-/* Products Section sits on the RIGHT */
-.products-section {
-    flex: 1;
-    min-width: 0; /* Prevents flex overflow */
-}
-
-/* Desktop Only */
-@media (min-width: 701px) {
-    .filter-products-wrapper {
-        display: flex;
-    }
-}
-
-/* Mobile: Stack vertically (products full width) */
-@media (max-width: 700px) {
-    .filter-products-wrapper {
-        display: block;
-        padding: 0;
-    }
-    
-    .filter-sidebar {
-        display: none !important;
-    }
-    
-    .products-section {
-        width: 100%;
-    }
-}
 </style>
 </head>
 <body style="padding-top: 70px; background: #f5f5f5;">
@@ -545,18 +503,18 @@ body.search-active .products-section {
                 <h1 class="slide-title" id="slideTitle"></h1>
                 <p class="slide-subtitle" id="slideSubtitle"></p>
                 
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <span id="ctaText">Shop Now</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <span>Explore Menu</span>
-                    </a>
-                </div>
+              <div class="cta-buttons">
+    <a href="#productsGrid" class="btn btn-primary smooth-scroll">
+        <span id="ctaText">Shop Now</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </a>
+    <a href="menu.html" class="btn btn-secondary">
+        <span>Explore Menu</span>
+    </a>
+</div>
             </div>
         </div>
 
@@ -1320,94 +1278,7 @@ body.search-active .products-section {
 
             </div>
         </aside>
-    <div class="theme-controls">
-  <div class="theme-control">
-    <label for="sizeThemeSelect">Size Button Color</label>
-    <select id="sizeThemeSelect">
-      <option value="">Default</option>
-      <!-- 1–35 -->
-      <option value="1">Theme 1</option>
-      <option value="2">Theme 2</option>
-      <option value="3">Theme 3</option>
-      <option value="4">Theme 4</option>
-      <option value="5">Theme 5</option>
-      <option value="6">Theme 6</option>
-      <option value="7">Theme 7</option>
-      <option value="8">Theme 8</option>
-      <option value="9">Theme 9</option>
-      <option value="10">Theme 10</option>
-      <option value="11">Theme 11</option>
-      <option value="12">Theme 12</option>
-      <option value="13">Theme 13</option>
-      <option value="14">Theme 14</option>
-      <option value="15">Theme 15</option>
-      <option value="16">Theme 16</option>
-      <option value="17">Theme 17</option>
-      <option value="18">Theme 18</option>
-      <option value="19">Theme 19</option>
-      <option value="20">Theme 20</option>
-      <option value="21">Theme 21</option>
-      <option value="22">Theme 22</option>
-      <option value="23">Theme 23</option>
-      <option value="24">Theme 24</option>
-      <option value="25">Theme 25</option>
-      <option value="26">Theme 26</option>
-      <option value="27">Theme 27</option>
-      <option value="28">Theme 28</option>
-      <option value="29">Theme 29</option>
-      <option value="30">Theme 30</option>
-      <option value="31">Theme 31</option>
-      <option value="32">Theme 32</option>
-      <option value="33">Theme 33</option>
-      <option value="34">Theme 34</option>
-      <option value="35">Theme 35</option>
-    </select>
-  </div>
-
-  <div class="theme-control">
-    <label for="cartThemeSelect">Add to Cart Button Color</label>
-    <select id="cartThemeSelect">
-      <option value="">Default</option>
-      <!-- 1–35 -->
-      <option value="1">Theme 1</option>
-      <option value="2">Theme 2</option>
-      <option value="3">Theme 3</option>
-      <option value="4">Theme 4</option>
-      <option value="5">Theme 5</option>
-      <option value="6">Theme 6</option>
-      <option value="7">Theme 7</option>
-      <option value="8">Theme 8</option>
-      <option value="9">Theme 9</option>
-      <option value="10">Theme 10</option>
-      <option value="11">Theme 11</option>
-      <option value="12">Theme 12</option>
-      <option value="13">Theme 13</option>
-      <option value="14">Theme 14</option>
-      <option value="15">Theme 15</option>
-      <option value="16">Theme 16</option>
-      <option value="17">Theme 17</option>
-      <option value="18">Theme 18</option>
-      <option value="19">Theme 19</option>
-      <option value="20">Theme 20</option>
-      <option value="21">Theme 21</option>
-      <option value="22">Theme 22</option>
-      <option value="23">Theme 23</option>
-      <option value="24">Theme 24</option>
-      <option value="25">Theme 25</option>
-      <option value="26">Theme 26</option>
-      <option value="27">Theme 27</option>
-      <option value="28">Theme 28</option>
-      <option value="29">Theme 29</option>
-      <option value="30">Theme 30</option>
-      <option value="31">Theme 31</option>
-      <option value="32">Theme 32</option>
-      <option value="33">Theme 33</option>
-      <option value="34">Theme 34</option>
-      <option value="35">Theme 35</option>
-    </select>
-  </div>
-</div>
-
+   
 
 
         <!-- ============================================
@@ -1852,8 +1723,9 @@ body.search-active .products-section {
     <script src="js/ice-cream.js" defer></script>
     <script src="js/main-course.js" defer></script>
     <script src="js/autoslideshow.js" defer></script>
-    <script src="js/product-card1.js" defer></script>
+    <script src="js/product-card3.js" defer></script>
     <script src="js/filter-integration.js" defer></script>
+     <!-- <script src="js/filter-template.js"></script> -->
     <script src="js/ice-cream.js" defer></script>
     <script src="js/main-course.js" defer></script>
     <script src="js/filter-section.js" defer></script>

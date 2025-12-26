@@ -57,17 +57,20 @@
    SECTION TITLE
    ============================================ */
 .section-title {
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(40px, 6vw, 64px); /* Increased from 32-48px to 40-64px */
     font-weight: 900;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #000; /* Black text */
     margin-bottom: 50px;
     text-align: center;
     letter-spacing: -1px;
 }
 
+/* Dark mode - white text */
+@media (prefers-color-scheme: dark) {
+    .section-title {
+        color: #fff;
+    }
+}
 /* ============================================
    CATEGORIES GRID - 3 COLUMNS
    ============================================ */

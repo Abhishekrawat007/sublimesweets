@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Footer V1 - Sublime Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding-bottom: 0;
+        }
+
+        /* Demo content area */
+        .demo-content {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .demo-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           🔥 PREMIUM FOOTER V1
+           ============================================ */
+        .footer {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: #e5e5e5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top gradient border */
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa500, #ff6b6b);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Quick Stats Bar */
+        .footer-stats {
+            background: rgba(255, 107, 107, 0.1);
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            padding: 20px 0;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-item i {
+            font-size: 1.8rem;
+            color: #ffa500;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #b0b0b0;
+        }
+
+        /* Main Footer Content */
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa500);
+            border-radius: 2px;
+        }
+
+        .footer-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 16px;
+            filter: brightness(1.2);
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Links */
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffa500;
+            transform: translateX(5px);
+        }
+
+        /* Address with icons */
+        .footer-address li {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-address li i {
+            color: #ffa500;
+            margin-top: 3px;
+            min-width: 16px;
+        }
+
+        /* Business Hours */
+        .business-hours {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .hours-row .day {
+            color: #e5e5e5;
+        }
+
+        .hours-row .time {
+            color: #ffa500;
+            font-weight: 600;
+        }
+
+        /* Mini Map */
+        .mini-map {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 16px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .mini-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(1) invert(1) contrast(0.9);
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+
+        .social-icons li a:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .social-icons li a i {
+            font-size: 1.2rem;
+        }
+
+        .whatsapp:hover { color: #25D366 !important; }
+        .instagram:hover { color: #E4405F !important; }
+        .youtube:hover { color: #FF0000 !important; }
+
+        /* Trust Badges Section */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+        }
+
+        .badge i {
+            font-size: 1.5rem;
+            color: #ffa500;
+        }
+
+        .badge-text {
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .badge-text strong {
+            display: block;
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .payment-methods span {
+            font-size: 0.875rem;
+            color: #b0b0b0;
+            margin-right: 8px;
+        }
+
+        .payment-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 32px;
+            background: white;
+            border-radius: 6px;
+            padding: 4px;
+        }
+
+        .payment-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .payment-icon i {
+            font-size: 1.5rem;
+        }
+
+        /* Language/Currency Selector */
+        .selector-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .selector {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #e5e5e5;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .selector:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffa500;
+        }
+
+        .selector option {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 24px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #b0b0b0;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 6px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trust-badges {
+                grid-template-columns: 1fr;
+            }
+
+            .selector-group {
+                flex-direction: column;
+            }
+
+            .demo-content h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Content Area -->
+    <div class="demo-content">
+        <div>
+            <h1>🔥 Premium Footer V1</h1>
+            <p>Scroll down to see the magic ✨</p>
+        </div>
+    </div>
+
+    <!-- Premium Footer -->
+    <footer class="footer">
+        <!-- Quick Stats Bar -->
+        <div class="footer-stats">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <i class="fas fa-box"></i>
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Orders Delivered</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Customer Rating</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <div class="stat-number">24 Hrs</div>
+                    <div class="stat-label">Fast Shipping</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-headset"></i>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-container">
+            <!-- About Section -->
+            <div class="footer-section">
+                <img src="https://via.placeholder.com/120x40/ff6b6b/ffffff?text=SUBLIME" alt="Sublime Store Logo" class="footer-logo">
+                <h3>About Sublime Store</h3>
+                <p>Discover unique gadgets that simplify life and spark curiosity. Sublime Store brings you innovation with style.</p>
+                
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="badge-text">
+                            <strong>Secure</strong>
+                            SSL Encrypted
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-truck"></i>
+                        <div class="badge-text">
+                            <strong>Free Shipping</strong>
+                            Pan-India
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div class="badge-text">
+                            <strong>COD Available</strong>
+                            Pay on Delivery
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="badge-text">
+                            <strong>100% Authentic</strong>
+                            Verified Products
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <span>We Accept:</span>
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-visa" style="color: #1A1F71;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-mastercard" style="color: #EB001B;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fab fa-cc-paypal" style="color: #003087;"></i>
+                    </div>
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt" style="color: #5f259f;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="return.html">Return & Exchange Policy</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                </ul>
+
+                <!-- Language/Currency Selector -->
+                <div class="selector-group">
+                    <select class="selector">
+                        <option value="en">🇮🇳 English</option>
+                        <option value="hi">🇮🇳 हिंदी</option>
+                    </select>
+                    <select class="selector">
+                        <option value="inr">₹ INR</option>
+                        <option value="usd">$ USD</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Address Section with Business Hours -->
+            <div class="footer-section">
+                <h3>Visit Us</h3>
+                <ul class="footer-address">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Sublime Store, near Variety Store,<br>Link Road, Takana Road,<br>Pithoragarh, Uttarakhand, India</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:+918868839446">+91 88688 39446</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:s4sublimestore@gmail.com">s4sublimestore@gmail.com</a>
+                    </li>
+                </ul>
+
+                <!-- Business Hours -->
+                <div class="business-hours">
+                    <div class="hours-row">
+                        <span class="day">Monday - Saturday</span>
+                        <span class="time">10 AM - 8 PM</span>
+                    </div>
+                    <div class="hours-row">
+                        <span class="day">Sunday</span>
+                        <span class="time">11 AM - 6 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social + Map Section -->
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <ul class="social-icons">
+                    <li><a href="https://wa.me/918868839446" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    <li><a href="https://www.instagram.com/thesublimestore_" target="_blank" class="instagram"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://youtube.com/@Sublime.store-pithoragarh" class="youtube" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+
+                <!-- Mini Google Map -->
+                <div class="mini-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.123456789!2d80.21612!3d29.58333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDM0JzU5LjIiTiA4MMKwMTInNTguMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sublime Store. All rights reserved. | Designed with ❤️ in Pithoragarh</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // ============================================
+        // 🌐 LANGUAGE SWITCHER - FIXED VERSION
+        // ============================================
+        const translations = {
+            hi: {
+                'About Sublime Store': 'सब्लाइम स्टोर के बारे में',
+                'Discover unique gadgets that simplify life and spark curiosity. Sublime Store brings you innovation with style.': 'अनोखे गैजेट्स खोजें जो जीवन को सरल बनाते हैं। सब्लाइम स्टोर आपके लिए स्टाइल के साथ इनोवेशन लाता है।',
+                'Quick Links': 'त्वरित लिंक',
+                'About Us': 'हमारे बारे में',
+                'Return & Exchange Policy': 'वापसी और विनिमय नीति',
+                'Our Services': 'हमारी सेवाएं',
+                'Terms & Conditions': 'नियम और शर्तें',
+                'Privacy Policy': 'गोपनीयता नीति',
+                'Shipping Policy': 'शिपिंग नीति',
+                'Visit Us': 'हमसे मिलें',
+                'Connect With Us': 'हमसे जुड़ें',
+                'Monday - Saturday': 'सोमवार - शनिवार',
+                'Sunday': 'रविवार',
+                'Orders Delivered': 'ऑर्डर डिलीवर',
+                'Customer Rating': 'ग्राहक रेटिंग',
+                'Fast Shipping': 'तेज़ शिपिंग',
+                'Support Available': 'सहायता उपलब्ध',
+                'Secure': 'सुरक्षित',
+                'SSL Encrypted': 'एसएसएल एन्क्रिप्टेड',
+                'Free Shipping': 'मुफ़्त शिपिंग',
+                'Pan-India': 'पूरे भारत में',
+                'COD Available': 'सीओडी उपलब्ध',
+                'Pay on Delivery': 'डिलीवरी पर भुगतान',
+                '100% Authentic': '100% प्रामाणिक',
+                'Verified Products': 'सत्यापित उत्पाद',
+                'We Accept:': 'हम स्वीकार करते हैं:'
+            }
+        };
+
+        const langSelect = document.querySelector('.selector-group .selector:first-child');
+        let isInitialized = false;
+        
+        // Store original English text in data attributes (ONLY ONCE)
+        function storeOriginalText() {
+            if (isInitialized) return;
+            
+            const elements = document.querySelectorAll('.footer h3, .footer p, .footer li a, .footer span, .stat-label, .badge-text strong, .badge-text, .day, .payment-methods span');
+            
+            elements.forEach(el => {
+                // Store original English text
+                el.dataset.originalText = el.textContent.trim();
+            });
+            
+            isInitialized = true;
+        }
+
+        langSelect.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('language', lang);
+            translatePage(lang);
+        });
+
+        function translatePage(lang) {
+            storeOriginalText(); // Store original text first time
+            
+            const elements = document.querySelectorAll('.footer h3, .footer p, .footer li a, .footer span, .stat-label, .badge-text strong, .badge-text, .day, .payment-methods span');
+            
+            elements.forEach(el => {
+                const originalText = el.dataset.originalText;
+                
+                if (lang === 'hi') {
+                    // Translate to Hindi
+                    if (translations.hi[originalText]) {
+                        el.textContent = translations.hi[originalText];
+                    }
+                } else {
+                    // Restore original English
+                    el.textContent = originalText;
+                }
+            });
+        }
+
+        // Load saved language
+        const savedLang = localStorage.getItem('language') || 'en';
+        langSelect.value = savedLang;
+        
+        // Wait for page to fully load, then apply saved language
+        window.addEventListener('load', () => {
+            if (savedLang === 'hi') {
+                translatePage('hi');
+            } else {
+                storeOriginalText(); // Just store, don't translate
+            }
+        });
+
+        // ============================================
+        // 💰 CURRENCY SWITCHER
+        // ============================================
+        const currencySelect = document.querySelector('.selector-group .selector:last-child');
+        
+        currencySelect.addEventListener('change', (e) => {
+            const currency = e.target.value;
+            localStorage.setItem('currency', currency);
+            updateCurrency(currency);
+        });
+
+        function updateCurrency(currency) {
+            // Update all price elements (add your price selectors here)
+            const priceElements = document.querySelectorAll('.price, .product-price, .total-price');
+            
+            priceElements.forEach(el => {
+                let price = parseFloat(el.dataset.price || el.textContent.replace(/[^\d.]/g, ''));
+                
+                if (currency === 'usd') {
+                    const usdPrice = (price / 83).toFixed(2); // ₹83 = $1 (adjust rate)
+                    el.textContent = `$${usdPrice}`;
+                } else {
+                    el.textContent = `₹${price}`;
+                }
+            });
+
+            // Visual feedback
+            const btn = document.createElement('div');
+            btn.textContent = `Currency changed to ${currency.toUpperCase()}`;
+            btn.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #ff6b6b, #ffa500);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            document.body.appendChild(btn);
+            setTimeout(() => btn.remove(), 2000);
+        }
+
+        // Load saved currency
+        const savedCurrency = localStorage.getItem('currency') || 'inr';
+        currencySelect.value = savedCurrency;
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+
+</body>
+</html>

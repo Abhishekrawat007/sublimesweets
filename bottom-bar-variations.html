@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Premium Bottom Bar Variations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px 120px;
+        }
+
+        .demo-container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+
+        .demo-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .demo-container p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .theme-btn {
+            padding: 12px 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .theme-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
+        .content-area {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin: 20px 0;
+            min-height: 300px;
+        }
+
+        /* ============================================
+           VARIATION 1: FLOATING PILL - Minimal & Modern
+           ============================================ */
+        .bottom-bar-v1 {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 8px 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            display: none;
+            z-index: 9000;
+        }
+
+        .bottom-bar-v1.active { display: flex; }
+
+        .bottom-bar-v1 .nav-content {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .bottom-bar-v1 .nav-item {
+            position: relative;
+            padding: 12px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #666;
+        }
+
+        .bottom-bar-v1 .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+
+        .bottom-bar-v1 .nav-item span {
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .bottom-bar-v1 .nav-item:hover {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .bottom-bar-v1 .nav-item.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+        }
+
+        .bottom-bar-v1 .nav-item.active span {
+            display: block;
+        }
+
+        /* ============================================
+           VARIATION 2: MORPHING CAPSULE - Smooth Transform
+           ============================================ */
+        .bottom-bar-v2 {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: 12px 20px 20px;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+            display: none;
+            z-index: 9000;
+        }
+
+        .bottom-bar-v2.active { display: block; }
+
+        .bottom-bar-v2 .nav-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .bottom-bar-v2 .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #666;
+            position: relative;
+            padding: 8px 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bottom-bar-v2 .nav-item svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v2 .nav-item span {
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v2 .nav-item.active {
+            color: #ff6b6b;
+        }
+
+        .bottom-bar-v2 .nav-item.active svg {
+            transform: scale(1.2);
+        }
+
+        .bottom-bar-v2 .nav-item.active span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bottom-bar-v2 .nav-item::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v2 .nav-item.active::after {
+            opacity: 1;
+        }
+
+        /* ============================================
+           VARIATION 3: GLASS DOCK - macOS Style
+           ============================================ */
+        .bottom-bar-v3 {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: 10px 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            display: none;
+            z-index: 9000;
+        }
+
+        .bottom-bar-v3.active { display: flex; }
+
+        .bottom-bar-v3 .nav-content {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .bottom-bar-v3 .nav-item {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .bottom-bar-v3 .nav-item svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v3 .nav-item:hover {
+            transform: translateY(-8px) scale(1.1);
+        }
+
+        .bottom-bar-v3 .nav-item.active {
+            transform: translateY(-12px) scale(1.2);
+        }
+
+        .bottom-bar-v3 .nav-item.active svg {
+            color: #ff6b6b;
+        }
+
+        .bottom-bar-v3 .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v3 .nav-item.active::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+           VARIATION 4: SPLIT BAR - Floating Islands
+           ============================================ */
+        .bottom-bar-v4 {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: none;
+            z-index: 9000;
+            padding: 0 20px;
+        }
+
+        .bottom-bar-v4.active { display: block; }
+
+        .bottom-bar-v4 .nav-content {
+            max-width: 500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .bottom-bar-v4 .nav-group {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 4px;
+        }
+
+        .bottom-bar-v4 .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 8px;
+            border-radius: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v4 .nav-item svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+
+        .bottom-bar-v4 .nav-item span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .bottom-bar-v4 .nav-item:hover {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .bottom-bar-v4 .nav-item.active {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* ============================================
+           VARIATION 5: ULTRA MINIMAL LINE - Sleek
+           ============================================ */
+        .bottom-bar-v5 {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            padding: 12px 20px;
+            display: none;
+            z-index: 9000;
+        }
+
+        .bottom-bar-v5.active { display: block; }
+
+        .bottom-bar-v5 .nav-content {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+        }
+
+        .bottom-bar-v5 .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #999;
+            position: relative;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v5 .nav-item svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v5 .nav-item span {
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v5 .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa500);
+            border-radius: 0 0 3px 3px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-bar-v5 .nav-item.active {
+            color: #ff6b6b;
+        }
+
+        .bottom-bar-v5 .nav-item.active::before {
+            width: 40px;
+        }
+
+        .bottom-bar-v5 .nav-item.active svg {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .bottom-bar-v1 .nav-content { gap: 4px; }
+            .bottom-bar-v1 .nav-item { padding: 10px 12px; }
+            .bottom-bar-v3 .nav-item { width: 44px; height: 44px; }
+            .bottom-bar-v4 .nav-content { gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎯 5 Premium Bottom Bars</h1>
+        <p>Each variation has its own unique personality. Choose your theme!</p>
+
+        <div class="theme-switcher">
+            <button class="theme-btn active" data-theme="v1">Floating Pill</button>
+            <button class="theme-btn" data-theme="v2">Morphing</button>
+            <button class="theme-btn" data-theme="v3">Glass Dock</button>
+            <button class="theme-btn" data-theme="v4">Split Islands</button>
+            <button class="theme-btn" data-theme="v5">Ultra Minimal</button>
+        </div>
+
+        <div class="content-area">
+            <h2 style="margin-bottom: 16px; font-size: 1.5rem;">✨ Features</h2>
+            <p style="opacity: 0.9; line-height: 1.6;">
+                • Minimal CSS (no bloat)<br>
+                • Smooth animations<br>
+                • Mobile optimized<br>
+                • Premium aesthetics<br>
+                • Easy to customize
+            </p>
+        </div>
+    </div>
+
+    <!-- VARIATION 1: FLOATING PILL -->
+    <div class="bottom-bar-v1 active">
+        <div class="nav-content">
+            <a href="/index.html" class="nav-item active" data-page="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="/categories.html" class="nav-item" data-page="categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Shop</span>
+            </a>
+            <a href="/services.html" class="nav-item" data-page="services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+                <span>Services</span>
+            </a>
+            <a href="/about.html" class="nav-item" data-page="about">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>About</span>
+            </a>
+            <a href="/contact.html" class="nav-item" data-page="help">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Help</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- VARIATION 2: MORPHING CAPSULE -->
+    <div class="bottom-bar-v2">
+        <div class="nav-content">
+            <a href="/index.html" class="nav-item active" data-page="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="/categories.html" class="nav-item" data-page="categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Shop</span>
+            </a>
+            <a href="/services.html" class="nav-item" data-page="services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+                <span>Services</span>
+            </a>
+            <a href="/about.html" class="nav-item" data-page="about">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>About</span>
+            </a>
+            <a href="/contact.html" class="nav-item" data-page="help">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Help</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- VARIATION 3: GLASS DOCK -->
+    <div class="bottom-bar-v3">
+        <div class="nav-content">
+            <a href="/index.html" class="nav-item active" data-page="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </a>
+            <a href="/categories.html" class="nav-item" data-page="categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+            </a>
+            <a href="/services.html" class="nav-item" data-page="services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+            </a>
+            <a href="/about.html" class="nav-item" data-page="about">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            </a>
+            <a href="/contact.html" class="nav-item" data-page="help">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- VARIATION 4: SPLIT ISLANDS -->
+    <div class="bottom-bar-v4">
+        <div class="nav-content">
+            <div class="nav-group">
+                <a href="/index.html" class="nav-item active" data-page="home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <a href="/categories.html" class="nav-item" data-page="categories">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Shop</span>
+                </a>
+            </div>
+            <div class="nav-group">
+                <a href="/services.html" class="nav-item" data-page="services">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                    <span>Services</span>
+                </a>
+                <a href="/about.html" class="nav-item" data-page="about">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>About</span>
+                </a>
+                <a href="/contact.html" class="nav-item" data-page="help">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Help</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- VARIATION 5: ULTRA MINIMAL LINE -->
+    <div class="bottom-bar-v5">
+        <div class="nav-content">
+            <a href="/index.html" class="nav-item active" data-page="home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="/categories.html" class="nav-item" data-page="categories">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Shop</span>
+            </a>
+            <a href="/services.html" class="nav-item" data-page="services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+                <span>Services</span>
+            </a>
+            <a href="/about.html" class="nav-item" data-page="about">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>About</span>
+            </a>
+            <a href="/contact.html" class="nav-item" data-page="help">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span>Help</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Theme switcher
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const bottomBars = document.querySelectorAll('[class^="bottom-bar-v"]');
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                
+                // Update active button
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show selected bottom bar
+                bottomBars.forEach(bar => bar.classList.remove('active'));
+                document.querySelector(`.bottom-bar-${theme}`).classList.add('active');
+            });
+        });
+
+        // Active state for nav items in each variation
+        document.querySelectorAll('[class^="bottom-bar-v"]').forEach(bar => {
+            const navItems = bar.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active from siblings
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    
+                    // Add active to clicked item
+                    item.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
