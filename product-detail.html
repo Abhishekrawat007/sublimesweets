@@ -820,7 +820,54 @@ body.dark-mode .flavor-btn.active {
     flex-shrink: 0;  /* don't let it shrink too much on small screens */
 }
 
+#mainImage,
+#discountBadge {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+#mainImage.loaded,
+#discountBadge.loaded {
+    opacity: 1;
+}
+/* SVG Star Rating Styles */
+.stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.star-icon.full {
+    fill: #ffc107;
+    color: #ffc107;
+}
+
+.star-icon.half {
+    color: #ffc107;
+}
+
+.star-icon.empty {
+    stroke: rgba(0, 0, 0, 0.2);
+    fill: none;
+}
+
+body.dark-mode .star-icon.empty {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .star-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1217,8 +1264,8 @@ body.dark-mode .flavor-btn.active {
     <!-- MAIN IMAGE FIRST -->
     <div class="main-image-wrapper">
         <div class="main-image-container">
-            <img src="" alt="Product" class="main-image" id="mainImage">
-            <div class="discount-badge" id="discountBadge">25% OFF</div>
+           <img alt="Product" class="main-image" id="mainImage">
+           <div class="discount-badge" id="discountBadge"></div>
           <button class="wishlist-btn-detail" id="detailWishlistBtn">
     <svg viewBox="0 0 24 24" stroke-width="2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>

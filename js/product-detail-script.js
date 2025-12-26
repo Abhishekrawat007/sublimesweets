@@ -169,14 +169,59 @@ if (currentProduct && currentProduct.categories && currentProduct.categories.len
         product.categories?.[0] || 'Products';
 
     // Rating
-    const fullStars = Math.floor(product.rating || 0);
-    const hasHalf = (product.rating || 0) % 1 >= 0.5;
-    let stars = '★'.repeat(fullStars);
-    if (hasHalf) stars += '⯨';
-    stars += '☆'.repeat(5 - Math.ceil(product.rating || 0));
+    // Rating - Use SVG stars instead of unicode
+const starsHTML = window.generateStarsHTML 
+    ? window.generateStarsHTML(product.rating || 0)
+    : generateLocalStars(product.rating || 0);
 
-    document.getElementById('productStars').textContent = stars;
-    document.getElementById('ratingText').textContent = `(${product.rating} rating)`;
+const productStars = document.getElementById('productStars');
+productStars.innerHTML = starsHTML; // ✅ Use innerHTML instead of textContent
+document.getElementById('ratingText').textContent = `(${product.rating} rating)`;
+
+// Fallback function if product-card.js hasn't loaded yet
+function generateLocalStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    let starsHTML = '';
+    
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += `
+            <svg class="star-icon full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        `;
+    }
+    
+    // Half star
+    if (hasHalfStar) {
+        const gradientId = `half-gradient-detail-${rating.toString().replace('.', '-')}`;
+        starsHTML += `
+            <svg class="star-icon half" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="${gradientId}">
+                        <stop offset="50%" stop-color="currentColor"/>
+                        <stop offset="50%" stop-color="rgba(0,0,0,0.2)"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#${gradientId})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        `;
+    }
+    
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += `
+            <svg class="star-icon empty" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        `;
+    }
+    
+    return starsHTML;
+}
 
     // IMAGES + VIDEO SLIDE
     renderImages();
@@ -244,7 +289,8 @@ function renderImages() {
     const images = currentProduct.images || [];
     const total = getTotalSlides();
     const videoSrc = getPreferredVideoSource();
-
+      mainImage.src = images[0];
+mainImage.classList.add('loaded');
     // Ensure containers for both iframe & <video>
     const container = mainImage.parentElement;
     let videoIframe = document.getElementById('mainVideoIframe');
@@ -432,6 +478,8 @@ function updatePrice(variant) {
     if (discountBadge) {
         discountBadge.textContent = `${variant.discount} OFF`;
     }
+    discountBadge.textContent = `${variant.discount} OFF`;
+discountBadge.classList.add('loaded');
 }
 
 function renderSizes(variants) {
