@@ -92,7 +92,6 @@ const products = [
     ],
     "description": "Crispy, crunchy Kurkure namkeen with bold masala flavours, ideal for tea-time snacking or a quick crunchy bite anytime.",
     "images": [
-      "images/kurkure-1.webp",
       "images/kurkure-2.webp",
       "images/kurkure-3.webp",
       "images/kurkure-4.webp",

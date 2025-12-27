@@ -393,9 +393,10 @@
         padding: 40px 20px 30px;
     }
 
-    .section-title {
-        font-size: clamp(28px, 3vw, 36px);
-        margin-bottom: 30px;
+    .categories-section .section-title {
+        font-size: clamp(44px, 4.5vw, 60px) !important;
+        margin-bottom: 40px;
+        letter-spacing: -2px;
     }
 
     .categories-grid {

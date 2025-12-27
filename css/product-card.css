@@ -301,12 +301,6 @@ body.dark-mode .wishlist-btn:not(.saved) svg {
     gap: 5px !important;
   }
 }
-/* @media (min-width: 551px) {
-  .product-card-image {
-    margin: 12px 12px 0 12px;
-    width: calc(100% - 24px);
-  }
-} */
  @media (min-width: 551px) {
   .products-grid .product-card,
   div.product-card {
@@ -471,7 +465,7 @@ body.dark-mode .price-discount {
 .size-select-btn {
   width: 100%;
   padding: 12px 14px;
-  background: linear-gradient(to right, #232526, #414345);
+  background: linear-gradient(to right, #141E30, #243B55);
   color: #ffffff;
   font-weight: 900;
   border: none;
@@ -495,7 +489,7 @@ body.dark-mode .price-discount {
   }
 }
 .size-select-btn:hover {
-  background: linear-gradient(to right, #1C1E1F, #37393B);
+  background: linear-gradient(to right, #101A28, #1E3348);
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(67, 233, 123, 0.4);
 }
@@ -518,9 +512,9 @@ body.dark-mode .price-discount {
 .add-to-cart-btn {
   width: 100%;
   padding: 12px 14px;
-  background: linear-gradient(to right, #FFFFFF, #E0E0E0);
-  color: #111111;
-  border: 1px solid #C0C0C0;
+  background: linear-gradient(to right, #F8D800, #FFB300);
+  color: #1a1a1a;
+  border: none;
   font-weight: 900;
   border-radius: 12px;
   font-size: 16px;
@@ -545,7 +539,7 @@ body.dark-mode .price-discount {
 
 
 .add-to-cart-btn:hover {
-  background: linear-gradient(to right, #F5F5F5, #D6D6D6);
+  background: linear-gradient(to right, #E9C900, #F0A000);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
 }
