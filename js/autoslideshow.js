@@ -3,38 +3,38 @@
         // ============================================
         const desktopSlides = [
               {
-                image: 'images/mithai1.jpg',
-                title: '<span class="highlight">Quality Snacking</span>',
+                image: 'images/slide-desktop-1.webp',
+                title: '<span class="highlight">Indian Snacks</span>',
                 subtitle: 'Pure Refreshment',
-                cta: 'Shop Now'
-            },
-            {
-                image: 'images/image2.jpg',
-                title: '<span class="highlight">Crafted Tradition</span>',
-                subtitle: 'Timeless Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'images/image3.jpg',
-                title: '<span class="highlight">Savory Delights</span>',
+                image: 'images/slide-desktop-5.webp',
+                title: '<span class="highlight">Indian Sweets</span>',
+                subtitle: 'Traditional Mithai & Desserts',
+                cta: 'Order Now'
+            },
+            {
+                image: 'images/slide-desktop-3.webp',
+                title: '<span class="highlight">Main Course</span>',
                 subtitle: 'Unforgettable Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'images/image5.jpg',
-                title: '<span class="highlight">Sweet Traditions</span>',
+                image: 'images/slide-desktop-4.webp',
+                title: '<span class="highlight">Street Food</span>',
                 subtitle: 'Pure Indulgence',
                 cta: 'Explore'
             },
             {
-                image: 'images/image6.jpg',
-                title: '<span class="highlight">Authentic Flavors</span>',
-                subtitle: 'Heritage Recipes',
+                image: 'images/slide-desktop-2.webp',
+                title: '<span class="highlight">Food</span>',
+                subtitle: 'Authentic Indian Cuisine',
                 cta: 'Discover'
             },
             {
-                image: 'images/mithai2.jpg',
-                title: '<span class="highlight">Premium Selection</span>',
+                image: 'images/slide-desktop-7.webp',
+                title: '<span class="highlight">Mithai</span>',
                 subtitle: 'Curated Excellence',
                 cta: 'View Menu'
             }
@@ -44,39 +44,39 @@
         // 📱 MOBILE SLIDES (768x1024 recommended)
         // ============================================
         const mobileSlides = [
-            {
-                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Quality Snacking</span>',
+             {
+                image: 'images/slide-mobile-1.webp',
+                title: '<span class="highlight">Indian Snacks</span>',
                 subtitle: 'Pure Refreshment',
-                cta: 'Shop Now'
-            },
-            {
-                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Crafted Tradition</span>',
-                subtitle: 'Timeless Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Savory Delights</span>',
+                image: 'images/slide-mobile-5.webp',
+                title: '<span class="highlight">Indian Sweets</span>',
+                subtitle: 'Traditional Mithai & Desserts',
+                cta: 'Order Now'
+            },
+            {
+                image: 'images/slide-mobile-3.webp',
+                title: '<span class="highlight">Main Course</span>',
                 subtitle: 'Unforgettable Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Sweet Traditions</span>',
+                image: 'images/slide-mobile-4.webp',
+                title: '<span class="highlight">Street Food</span>',
                 subtitle: 'Pure Indulgence',
                 cta: 'Explore'
             },
             {
-                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=1920&h=1080&fit=crop',
-                title: '<span class="highlight">Authentic Flavors</span>',
-                subtitle: 'Heritage Recipes',
+                image: 'images/slide-mobile-2.webp',
+                title: '<span class="highlight">Food</span>',
+                subtitle: 'Authentic Indian Cuisine',
                 cta: 'Discover'
             },
             {
-                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=768&h=1024&fit=crop',
-                title: '<span class="highlight">Premium Selection</span>',
+                image: 'images/slide-mobile-7.webp',
+                title: '<span class="highlight">Mithai</span>',
                 subtitle: 'Curated Excellence',
                 cta: 'View Menu'
             }
