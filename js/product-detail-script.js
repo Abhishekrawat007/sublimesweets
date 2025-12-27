@@ -948,6 +948,11 @@ function createBasicCard(product) {
     card.className = 'product-card';
     card.onclick = () => window.location.href = `product-detail.html?id=${product.id}`;
 
+    // ✅ Generate SVG stars for related products
+    const starsHTML = window.generateStarsHTML 
+        ? window.generateStarsHTML(product.rating || 0)
+        : generateLocalStars(product.rating || 0);
+
     card.innerHTML = `
         <div class="product-card-image">
             <img src="${product.images[0]}" alt="${product.name}">
@@ -955,6 +960,13 @@ function createBasicCard(product) {
         </div>
         <div class="product-card-info">
             <h3 class="product-card-name">${product.name}</h3>
+            
+            <!-- ✅ Add star rating here -->
+            <div class="product-rating-small">
+                ${starsHTML}
+                <span class="rating-count">(${product.rating})</span>
+            </div>
+            
             <div class="product-price-section">
                 <span class="price-new">₹${variant.newPrice}</span>
                 <span class="price-old">₹${variant.oldPrice}</span>
@@ -963,4 +975,49 @@ function createBasicCard(product) {
     `;
 
     return card;
+}
+
+// ✅ Fallback star generator (same as before)
+function generateLocalStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    let starsHTML = '';
+    
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += `
+            <svg class="star-icon full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        `;
+    }
+    
+    // Half star
+    if (hasHalfStar) {
+        const gradientId = `half-gradient-related-${rating.toString().replace('.', '-')}-${Math.random().toString(36).substr(2, 9)}`;
+        starsHTML += `
+            <svg class="star-icon half" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="${gradientId}">
+                        <stop offset="50%" stop-color="currentColor"/>
+                        <stop offset="50%" stop-color="rgba(0,0,0,0.2)"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#${gradientId})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        `;
+    }
+    
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += `
+            <svg class="star-icon empty" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        `;
+    }
+    
+    return starsHTML;
 }

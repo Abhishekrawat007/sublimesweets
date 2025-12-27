@@ -1,45 +1,24 @@
 /* ============================================
-   🌟 LIGHTWEIGHT PREMIUM BESTSELLERS SECTION
-   Optimized for performance - 45% lighter!
+   🌟 ULTRA-LIGHTWEIGHT CATEGORY SECTION
+   Minimal CSS - Maximum Performance
    ============================================ */
 
 /* ============================================
-   ANIMATIONS - Only Essential Ones
-   ============================================ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================================
-   CSS VARIABLES - Easy Dark Mode Control
+   CSS VARIABLES
    ============================================ */
 :root {
     --section-bg: #f8f9fa;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-border: rgba(255, 255, 255, 0.8);
-    --card-shadow: rgba(0, 0, 0, 0.1);
-    --footer-bg: rgba(255, 255, 255, 0.7);
-    --footer-border: rgba(255, 107, 107, 0.2);
-    --title-gradient: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
-    --title-hover: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --text-color: #1a1a1a;
+    --accent: #ff6b6b;
 }
 
 .sublime-navbar.dark-mode ~ .categories-section {
     --section-bg: #1a1a1a;
-    --card-bg: rgba(42, 42, 42, 0.95);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-shadow: rgba(0, 0, 0, 0.4);
-    --footer-bg: rgba(42, 42, 42, 0.8);
-    --footer-border: rgba(255, 107, 107, 0.3);
-    --title-gradient: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
-    --title-hover: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);
+    --card-bg: #2a2a2a;
+    --card-border: #3a3a3a;
+    --text-color: #ffffff;
 }
 
 /* ============================================
@@ -50,27 +29,20 @@
     background: var(--section-bg);
     max-width: 1400px;
     margin: 0 auto;
-    position: relative;
 }
 
 /* ============================================
    SECTION TITLE
    ============================================ */
 .section-title {
-    font-size: clamp(40px, 6vw, 64px); /* Increased from 32-48px to 40-64px */
+    font-size: clamp(40px, 6vw, 64px);
     font-weight: 900;
-    color: #000; /* Black text */
+    color: var(--text-color);
     margin-bottom: 50px;
     text-align: center;
     letter-spacing: -1px;
 }
 
-/* Dark mode - white text */
-@media (prefers-color-scheme: dark) {
-    .section-title {
-        color: #fff;
-    }
-}
 /* ============================================
    CATEGORIES GRID - 3 COLUMNS
    ============================================ */
@@ -81,41 +53,30 @@
 }
 
 /* ============================================
-   CATEGORY CARD
+   CATEGORY CARD - MINIMAL STYLING
    ============================================ */
 .category-card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid var(--card-border);
-    box-shadow: 0 8px 32px var(--card-shadow);
-    animation: fadeInUp 0.6s ease forwards;
-    animation-delay: calc(var(--index) * 0.1s);
-    opacity: 0;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.category-card:nth-child(1) { --index: 0; }
-.category-card:nth-child(2) { --index: 1; }
-.category-card:nth-child(3) { --index: 2; }
-.category-card:nth-child(4) { --index: 3; }
-.category-card:nth-child(5) { --index: 4; }
-.category-card:nth-child(6) { --index: 5; }
-
+/* Lightweight hover - slight lift + shadow */
 .category-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.sublime-navbar.dark-mode ~ .categories-section .category-card:hover {
-    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+.category-card:active {
+    transform: translateY(-2px);
 }
 
 /* ============================================
-   PRODUCT IMAGE - SINGLE IMAGE DISPLAY
+   PRODUCT IMAGE - SINGLE IMAGE
    ============================================ */
 .category-products {
     display: block;
@@ -123,10 +84,8 @@
     border-radius: 20px 20px 0 0;
     aspect-ratio: 1;
     overflow: hidden;
-    position: relative;
 }
 
-/* Hide all images except second one */
 .product-item {
     display: none !important;
 }
@@ -142,87 +101,49 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s ease;
 }
 
+/* Subtle image fade on hover */
 .category-card:hover .product-item:nth-child(2) img {
-    transform: scale(1.08);
-}
-
-/* Subtle overlay on hover */
-.product-item:nth-child(2)::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.category-card:hover .product-item:nth-child(2)::before {
-    opacity: 1;
+    opacity: 0.9;
 }
 
 /* ============================================
-   CARD FOOTER
+   CARD FOOTER - SIMPLE
    ============================================ */
 .category-footer {
     padding: 20px 24px;
-    background: var(--footer-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--card-bg);
     border-radius: 0 0 20px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid var(--footer-border);
-}
-
-/* Bottom accent line on hover */
-.category-footer::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #ffa500);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.category-card:hover .category-footer::before {
-    width: 100%;
+    border-top: 1px solid var(--card-border);
 }
 
 /* ============================================
-   CATEGORY TITLE
+   CATEGORY TITLE - PLAIN TEXT
    ============================================ */
 .category-title {
     font-size: 18px;
     font-weight: 700;
-    background: var(--title-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-color);
     letter-spacing: -0.5px;
-    transition: all 0.3s ease;
+    transition: color 0.2s ease;
 }
 
+/* Title color change on hover */
 .category-card:hover .category-title {
-    background: var(--title-hover);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transform: translateX(5px);
+    color: var(--accent);
 }
 
 /* ============================================
-   VIEW ALL BUTTON
+   VIEW ALL BUTTON - SIMPLE
    ============================================ */
 .view-all-btn {
     padding: 10px 20px;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    background: var(--accent);
     color: white;
     border: none;
     border-radius: 50px;
@@ -232,27 +153,17 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    transition: opacity 0.2s ease;
 }
 
 .view-all-btn:hover {
-    transform: translateX(5px) scale(1.05);
-    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+    opacity: 0.9;
 }
 
 .view-all-btn:active {
-    transform: translateX(5px) scale(0.98);
-}
-
-.view-all-btn svg {
-    transition: transform 0.3s ease;
-}
-
-.view-all-btn:hover svg {
-    transform: translateX(5px);
+    opacity: 0.7;
 }
 
 /* ============================================
@@ -354,13 +265,13 @@
         border-radius: 20px;
     }
     
-    /* Show FIRST image on mobile */
     .category-products {
         border-radius: 20px 20px 0 0;
         aspect-ratio: 0.65;
         min-height: 140px;
     }
     
+    /* Show FIRST image on mobile */
     .product-item {
         display: none !important;
     }
@@ -375,25 +286,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .category-card:active .product-item:first-child img {
-        transform: scale(1.12);
-    }
-    
-    .product-item:first-child::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 1;
-    }
-    
-    .category-card:active .product-item:first-child::before {
-        opacity: 1;
     }
     
     .category-footer {
@@ -416,24 +308,10 @@
         line-height: 1.3;
     }
     
+    /* Mobile tap feedback */
     .category-card:active {
-        transform: scale(0.97);
-    }
-    
-    /* Subtle tap feedback */
-    .category-card::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 165, 0, 0.12));
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        border-radius: 20px;
-    }
-    
-    .category-card:active::after {
-        opacity: 1;
+        transform: scale(0.98);
+        opacity: 0.9;
     }
 }
 
@@ -470,10 +348,6 @@
         font-size: 14px;
         font-weight: 800;
     }
-    
-    .category-card::after {
-        border-radius: 18px;
-    }
 }
 
 /* ULTRA TINY: Below 360px */
@@ -508,10 +382,6 @@
     .category-title {
         font-size: 13px;
     }
-    
-    .category-card::after {
-        border-radius: 16px;
-    }
 }
 
 /* ============================================
@@ -534,12 +404,6 @@
 
     .category-card {
         border-radius: 20px;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-    }
-
-    .category-card:hover {
-        transform: translateY(-8px) scale(1.01);
-        box-shadow: 0 14px 40px rgba(255, 107, 107, 0.25);
     }
 
     .category-products {

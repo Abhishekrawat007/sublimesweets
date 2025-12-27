@@ -3,37 +3,37 @@
         // ============================================
         const desktopSlides = [
               {
-                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1920&h=1080&fit=crop',
+                image: 'images/mithai1.jpg',
                 title: '<span class="highlight">Quality Snacking</span>',
                 subtitle: 'Pure Refreshment',
                 cta: 'Shop Now'
             },
             {
-                image: 'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=1920&h=1080&fit=crop',
+                image: 'images/image2.jpg',
                 title: '<span class="highlight">Crafted Tradition</span>',
                 subtitle: 'Timeless Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=1920&h=1080&fit=crop',
+                image: 'images/image3.jpg',
                 title: '<span class="highlight">Savory Delights</span>',
                 subtitle: 'Unforgettable Taste',
                 cta: 'Order Now'
             },
             {
-                image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=1920&h=1080&fit=crop',
+                image: 'images/image5.jpg',
                 title: '<span class="highlight">Sweet Traditions</span>',
                 subtitle: 'Pure Indulgence',
                 cta: 'Explore'
             },
             {
-                image: 'https://images.unsplash.com/photo-1585518419759-7fe2e0fbf8a6?w=1920&h=1080&fit=crop',
+                image: 'images/image6.jpg',
                 title: '<span class="highlight">Authentic Flavors</span>',
                 subtitle: 'Heritage Recipes',
                 cta: 'Discover'
             },
             {
-                image: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=1920&h=1080&fit=crop',
+                image: 'images/mithai2.jpg',
                 title: '<span class="highlight">Premium Selection</span>',
                 subtitle: 'Curated Excellence',
                 cta: 'View Menu'

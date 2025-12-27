@@ -1153,6 +1153,57 @@ body.dark-mode .wishlist-btn-detail {
 body.dark-mode .slide-btn {
     background: rgba(42, 42, 42, 0.95);
 }
+/* ============================================
+   RELATED PRODUCTS STAR RATING
+   ============================================ */
+.product-rating-small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.product-rating-small .star-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.product-rating-small .star-icon.full {
+    fill: #ffc107;
+    color: #ffc107;
+}
+
+.product-rating-small .star-icon.half {
+    color: #ffc107;
+}
+
+.product-rating-small .star-icon.empty {
+    stroke: rgba(0, 0, 0, 0.2);
+    fill: none;
+}
+
+.rating-count {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+body.dark-mode .product-rating-small .star-icon.empty {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .product-rating-small .star-icon {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .rating-count {
+        font-size: 12px;
+    }
+}
     </style>
 </head>
 <body>

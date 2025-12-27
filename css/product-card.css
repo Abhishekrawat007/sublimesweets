@@ -467,13 +467,13 @@ body.dark-mode .price-discount {
   color: #4ade80;
 }
 
-/* Size Button - VIBRANT */
+/* Size Button */
 .size-select-btn {
   width: 100%;
   padding: 12px 14px;
-background: linear-gradient(to right, #FF9800, #FF5722);
-color: white;
-font-weight: 900;
+  background: linear-gradient(to right, #232526, #414345);
+  color: #ffffff;
+  font-weight: 900;
   border: none;
   border-radius: 12px;
   font-size: 16px;
@@ -495,7 +495,7 @@ font-weight: 900;
   }
 }
 .size-select-btn:hover {
-background: linear-gradient(to right, #F57C00, #E64A19);;
+  background: linear-gradient(to right, #1C1E1F, #37393B);
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(67, 233, 123, 0.4);
 }
@@ -510,22 +510,18 @@ background: linear-gradient(to right, #F57C00, #E64A19);;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4), 0 10px 28px rgba(0, 0, 0, 0.12);
 }
 
-body.dark-mode .size-select-btn {
- 
-}
-
 .size-select-btn .arrow-down {
   font-size: 9px;
 }
 
-/* Add to Cart - VIBRANT */
+/* Add to Cart */
 .add-to-cart-btn {
   width: 100%;
   padding: 12px 14px;
-background: linear-gradient(to right, #4CAF50, #388E3C);
-color: white;
-font-weight: 900;
-  border: none;
+  background: linear-gradient(to right, #FFFFFF, #E0E0E0);
+  color: #111111;
+  border: 1px solid #C0C0C0;
+  font-weight: 900;
   border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
@@ -549,7 +545,7 @@ font-weight: 900;
 
 
 .add-to-cart-btn:hover {
-background: linear-gradient(to right, #388E3C, #2E7D32);
+  background: linear-gradient(to right, #F5F5F5, #D6D6D6);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
 }
@@ -562,10 +558,6 @@ background: linear-gradient(to right, #388E3C, #2E7D32);
 .add-to-cart-btn:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4), 0 10px 28px rgba(0, 0, 0, 0.12);
-}
-body.dark-mode .add-to-cart-btn {
- background: linear-gradient(to right, #4CAF50, #388E3C);
-  color: white;
 }
 
 /* ============================
@@ -684,50 +676,6 @@ body.dark-mode .qty-btn {
 
 body.dark-mode .qty-count {
   color: #e5e7eb;
-}
-
-
-@media (min-width: 551px) {
-  .qty-btn {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-.qty-btn:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
-  border-color: transparent;
-}
-
-body.dark-mode .qty-btn {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-  color: #e0e0e0;
-}
-
-body.dark-mode .qty-btn:hover {
-  background: linear-gradient(135deg, #7c8fff 0%, #8b5ecf 100%);
-  border-color: transparent;
-}
-
-.qty-count {
-  font-size: 14px;
-  font-weight: 800;
-  color: #1a1a1a;
-  min-width: 20px;
-  text-align: center;
-}
-
-@media (min-width: 551px) {
-  .qty-count {
-    font-size: 15px;
-    min-width: 24px;
-  }
-}
-
-body.dark-mode .qty-count {
-  color: #e0e0e0;
 }
 
 
@@ -1162,421 +1110,6 @@ body.dark-mode .modal-apply-btn:hover {
   box-shadow: 0 4px 12px rgba(124, 143, 255, 0.3);
 }
 
-/* Size/Flavor Selection Modal */
-.size-flavor-modal {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border-radius: 20px 20px 0 0;
-  z-index: 10000;
-  max-height: 80vh;
-  overflow: hidden;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-  animation: slideUp 0.3s ease;
-}
-
-.size-flavor-modal.active {
-  display: flex;
-  flex-direction: column;
-}
-
-body.dark-mode .size-flavor-modal {
-  background: #2a2a2a;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-/* Modal Overlay */
-.modal-overlay#sizeFlavorOverlayy {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.modal-overlay#sizeFlavorOverlay.active {
-  display: block;
-}
-
-body.dark-mode .modal-overlay#sizeFlavorOverlay {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Modal Header */
-.modal-header-product {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-body.dark-mode .modal-header-product {
-  border-bottom-color: #3a3a3a;
-}
-
-.modal-title-product {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-body.dark-mode .modal-title-product {
-  color: #e0e0e0;
-}
-
-.modal-close-btn {
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-
-.modal-close-btn:hover {
-  background: #f5f5f5;
-}
-
-body.dark-mode .modal-close-btn:hover {
-  background: #3a3a3a;
-}
-
-.modal-close-btn svg {
-  width: 20px;
-  height: 20px;
-  stroke: #666;
-}
-
-body.dark-mode .modal-close-btn svg {
-  stroke: #999;
-}
-
-/* Modal Body */
-.modal-body-product {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-/* Size Section */
-.size-section {
-  margin-bottom: 24px;
-}
-
-.section-label {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-}
-
-body.dark-mode .section-label {
-  color: #e0e0e0;
-}
-
-.size-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.size-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  background: #fafafa;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.size-option:hover {
-  background: #f5f5f5;
-  border-color: #667eea;
-}
-
-.size-option.selected {
-  background: #f0f4ff;
-  border-color: #667eea;
-}
-
-body.dark-mode .size-option {
-  background: #1f1f1f;
-  border-color: #3a3a3a;
-}
-
-body.dark-mode .size-option:hover {
-  background: #2a2a2a;
-  border-color: #667eea;
-}
-
-body.dark-mode .size-option.selected {
-  background: #2a2f4a;
-  border-color: #667eea;
-}
-
-.size-option-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.size-radio {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #d0d0d0;
-  border-radius: 50%;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.size-option.selected .size-radio {
-  border-color: #667eea;
-}
-
-.size-option.selected .size-radio::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
-  background: #667eea;
-  border-radius: 50%;
-}
-
-body.dark-mode .size-radio {
-  border-color: #4a4a4a;
-}
-
-body.dark-mode .size-option.selected .size-radio {
-  border-color: #7c8fff;
-}
-
-body.dark-mode .size-option.selected .size-radio::after {
-  background: #7c8fff;
-}
-
-.size-label {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-body.dark-mode .size-label {
-  color: #e0e0e0;
-}
-
-.size-option-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-
-.size-price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-body.dark-mode .size-price {
-  color: #e0e0e0;
-}
-
-.size-price-old {
-  font-size: 13px;
-  font-weight: 500;
-  color: #999;
-  text-decoration: line-through;
-}
-
-/* Flavor Section */
-.flavor-section {
-  margin-bottom: 24px;
-}
-
-.flavor-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.flavor-option {
-  flex: 1;
-  min-width: calc(50% - 5px);
-  max-width: calc(50% - 5px);
-  padding: 12px;
-  background: #fafafa;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.flavor-option:hover {
-  background: #f5f5f5;
-  border-color: #667eea;
-}
-
-.flavor-option.selected {
-  background: #f0f4ff;
-  border-color: #667eea;
-}
-
-body.dark-mode .flavor-option {
-  background: #1f1f1f;
-  border-color: #3a3a3a;
-}
-
-body.dark-mode .flavor-option:hover {
-  background: #2a2a2a;
-  border-color: #667eea;
-}
-
-body.dark-mode .flavor-option.selected {
-  background: #2a2f4a;
-  border-color: #667eea;
-}
-
-.flavor-radio {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #d0d0d0;
-  border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.flavor-option.selected .flavor-radio {
-  border-color: #667eea;
-}
-
-.flavor-option.selected .flavor-radio::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: #667eea;
-  border-radius: 50%;
-}
-
-body.dark-mode .flavor-radio {
-  border-color: #4a4a4a;
-}
-
-body.dark-mode .flavor-option.selected .flavor-radio {
-  border-color: #7c8fff;
-}
-
-body.dark-mode .flavor-option.selected .flavor-radio::after {
-  background: #7c8fff;
-}
-
-.flavor-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1a1a1a;
-  line-height: 1.3;
-}
-
-body.dark-mode .flavor-label {
-  color: #e0e0e0;
-}
-
-/* Modal Footer */
-.modal-footer-product {
-  display: flex;
-  gap: 12px;
-  padding: 16px 20px;
-  border-top: 1px solid #f0f0f0;
-}
-
-body.dark-mode .modal-footer-product {
-  border-top-color: #3a3a3a;
-}
-
-.modal-cancel-btn,
-.modal-apply-btn {
-  flex: 1;
-  padding: 14px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.modal-cancel-btn {
-  background: transparent;
-  border: 1.5px solid #e0e0e0;
-  color: #666;
-}
-
-.modal-cancel-btn:hover {
-  background: #f5f5f5;
-  border-color: #d0d0d0;
-}
-
-body.dark-mode .modal-cancel-btn {
-  border-color: #3a3a3a;
-  color: #999;
-}
-
-body.dark-mode .modal-cancel-btn:hover {
-  background: #2a2a2a;
-  border-color: #4a4a4a;
-}
-
-.modal-apply-btn {
-  background: #667eea;
-  color: #ffffff;
-}
-
-.modal-apply-btn:hover {
-  background: #5568d3;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-body.dark-mode .modal-apply-btn {
-  background: #7c8fff;
-}
-
-body.dark-mode .modal-apply-btn:hover {
-  background: #667eea;
-  box-shadow: 0 4px 12px rgba(124, 143, 255, 0.3);
-}
 /* Out of Stock Button */
 .out-of-stock-btn {
   width: 100%;
