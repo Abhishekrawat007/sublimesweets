@@ -1855,15 +1855,19 @@
   border-color: rgba(255,107,107,0.12) !important;
 }
 .navbar-logo-img {
-    height: 80px; /* desktop size */
+    height: 75px; /* desktop size */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1235px) {
     .navbar-logo-img {
         height: 60px; /* mobile size */
     }
 }
 .mobile-logo {
     height: 60px;
+    width:150px;
     
+}
+.sublime-navbar.dark-mode .navbar-logo-img {
+    filter: brightness(0) invert(1) !important;
 }
