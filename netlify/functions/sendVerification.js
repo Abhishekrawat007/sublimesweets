@@ -61,7 +61,7 @@ export async function handler(event) {
     const now = Date.now();
 
     // Save OTP in Firebase
-    await admin.database().ref("sites/showcase-2/emailVerifications/" + key).set({
+    await admin.database().ref("sites/sublimesweets/emailVerifications/" + key).set({
       email,
       code,
       createdAt: now,
