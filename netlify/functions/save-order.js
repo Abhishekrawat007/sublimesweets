@@ -63,7 +63,7 @@ export async function handler(event) {
     const db = admin.database();
     
     // ✅ Save to same path as COD orders
-    const orderRef = await db.ref("sites/showcase-2/orders").push({
+    const orderRef = await db.ref("sites/sublimesweets/orders").push({
       orderId,
       name,
       phone,
@@ -83,7 +83,7 @@ export async function handler(event) {
     // ✅ SEND NOTIFICATIONS SYNCHRONOUSLY
     let notifResult = { status: 'starting' };
     try {
-      const snapshot = await admin.database().ref('sites/showcase-2/adminTokens').once('value');
+      const snapshot = await admin.database().ref('sites/sublimesweets/adminTokens').once('value');
       const tokenData = snapshot.val() || {};
       const adminTokens = Object.values(tokenData).map(t => t.token).filter(Boolean);
       
@@ -120,7 +120,7 @@ export async function handler(event) {
         
         // Cleanup invalid tokens
         for (const tokenKey of toRemove) {
-          await admin.database().ref('sites/showcase-2/adminTokens/' + tokenKey).remove();
+          await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
         }
         
         notifResult.status = 'sent';

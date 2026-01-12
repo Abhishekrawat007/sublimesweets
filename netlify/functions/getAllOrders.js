@@ -35,7 +35,7 @@ exports.handler = async (event) => {
     
     // ✅ READ PATH FROM REQUEST BODY
     const body = JSON.parse(event.body || '{}');
-    const path = body.path || 'sites/showcase-2/orders';
+    const path = body.path || 'sites/sublimesweets/orders';
     
     console.log('📦 getAllOrders reading from:', path);
     

@@ -159,8 +159,8 @@ export async function handler(event) {
           notification: { title, body: bodyText },
           webpush: {
             notification: {
-              icon: process.env.PUSH_ICON || "https://sublimestore.in/web-app-manifest-192x192.png",
-              badge: process.env.PUSH_ICON || "https://sublimestore.in/web-app-manifest-192x192.png",
+              icon: process.env.PUSH_ICON || "https://sublimesweets.netlify.app/web-app-manifest-192x192.png",
+              badge: process.env.PUSH_ICON || "https://sublimesweets.netlify.app/web-app-manifest-192x192.png",
               tag: 'sublime-notification'
             },
             fcmOptions: { link: url || "/" }
