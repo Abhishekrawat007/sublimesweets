@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Orders – Sublime Store</title>
-  <meta name="description" content="Track and view your past orders from Sublime Store.">
-  <meta name="theme-color" content="#1e88e5"/>
+  <title>Sublime Sweets – Fresh Mithai & Sweets Online</title>
+  <meta name="description" content="Order fresh sweets, mithai, and desserts online from Sublime Sweets. Premium quality sweets in Pithoragarh. Free delivery on orders over ₹199.">
+  <meta name="keywords" content="sweets Pithoragarh, mithai online, Sublime Sweets, gulab jamun, rasgulla, kaju katli, online sweets delivery Pithoragarh, fresh sweets">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sublimesweets.netlify.app/yourorders.html">
+<meta name="theme-color" content="#1e88e5"/>
+<!-- Favicon for most browsers -->
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Android Chrome Icons -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="72x72" href="web-app-manifest-72x72.png">
+<link rel="icon" type="image/png" sizes="144x144" href="web-app-manifest-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="web-app-manifest-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="web-app-manifest-512x512.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/bottom-bar.css">
   <link rel="stylesheet" href="css/footer.css">
-  
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     :root {
       --primary: #2563eb;
       --primary-dark: #1e40af;
@@ -30,7 +43,6 @@
       --shadow: rgba(0, 0, 0, 0.05);
       --shadow-lg: rgba(0, 0, 0, 0.1);
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg-secondary);
@@ -38,7 +50,6 @@
       line-height: 1.6;
       min-height: 100vh;
     }
-
     .page-header {
       background: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -49,7 +60,6 @@
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.95);
     }
-
     .header-content {
       max-width: 800px;
       margin: 0 auto;
@@ -58,7 +68,6 @@
       align-items: center;
       justify-content: space-between;
     }
-
     .back-btn {
       display: inline-flex;
       align-items: center;
@@ -73,20 +82,17 @@
       cursor: pointer;
       transition: all 0.15s ease;
     }
-
     .back-btn:hover {
       background: var(--bg);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px var(--shadow);
     }
-
     .page-title {
       font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.02em;
       color: var(--text);
     }
-
     .theme-toggle-btn {
       width: 40px;
       height: 40px;
@@ -100,18 +106,15 @@
       font-size: 1.25rem;
       transition: all 0.15s ease;
     }
-
     .theme-toggle-btn:hover {
       background: var(--border);
       transform: rotate(15deg);
     }
-
     .container {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1.5rem;
     }
-
     .phone-section {
       background: var(--bg);
       border-radius: 16px;
@@ -119,20 +122,17 @@
       box-shadow: 0 1px 3px var(--shadow);
       text-align: center;
     }
-
     .phone-section h2 {
       font-size: 1.875rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 0.5rem;
     }
-
     .phone-section .subtitle {
       font-size: 1rem;
       color: var(--text-light);
       margin-bottom: 2rem;
     }
-
     .form-group {
       margin-bottom: 1.5rem;
       text-align: left;
@@ -140,7 +140,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
     .form-group label {
       display: block;
       font-size: 0.875rem;
@@ -148,7 +147,6 @@
       color: var(--text);
       margin-bottom: 0.5rem;
     }
-
     .form-group input {
       width: 100%;
       padding: 0.875rem 1rem;
@@ -159,20 +157,17 @@
       color: var(--text);
       transition: all 0.15s ease;
     }
-
     .form-group input:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
-
     #phoneError {
       color: #ef4444;
       font-size: 0.875rem;
       margin-top: 0.5rem;
       display: none;
     }
-
     .button-primary {
       width: 100%;
       max-width: 400px;
@@ -187,27 +182,22 @@
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
-
     .button-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
     }
-
     .button-primary:active {
       transform: translateY(0);
     }
-
     .phone-section small {
       display: block;
       margin-top: 1rem;
       font-size: 0.875rem;
       color: var(--text-light);
     }
-
     #orderList {
       margin-top: 2rem;
     }
-
     .orders-header {
       font-size: 1.5rem;
       font-weight: 700;
@@ -215,7 +205,6 @@
       margin-bottom: 1.5rem;
       text-align: center;
     }
-
     .order-card {
       background: var(--bg);
       border-radius: 16px;
@@ -227,12 +216,10 @@
       align-items: start;
       transition: all 0.2s ease;
     }
-
     .order-card:hover {
       box-shadow: 0 4px 12px var(--shadow-lg);
       transform: translateY(-2px);
     }
-
     .order-card img {
       width: 90px;
       height: 90px;
@@ -241,11 +228,9 @@
       background: var(--bg-secondary);
       flex-shrink: 0;
     }
-
     .order-info {
       flex: 1;
     }
-
     .order-info h4 {
       font-size: 1.125rem;
       font-weight: 600;
@@ -253,26 +238,22 @@
       margin-bottom: 0.5rem;
       line-height: 1.4;
     }
-
     .order-info p {
       font-size: 0.875rem;
       color: var(--text-light);
       margin: 0.25rem 0;
     }
-
     .order-info .order-total {
       font-size: 1.125rem;
       font-weight: 700;
       color: var(--primary);
       margin-top: 0.5rem;
     }
-
     .order-info .order-date {
       font-size: 0.8125rem;
       color: var(--text-light);
       margin-top: 0.5rem;
     }
-
     .order-info button {
       margin-top: 1rem;
       padding: 0.625rem 1.25rem;
@@ -285,17 +266,14 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
     .order-info button:hover {
       background: #059669;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
-
     .order-info button:active {
       transform: translateY(0);
     }
-
     .empty-state {
       text-align: center;
       padding: 4rem 2rem;
@@ -303,25 +281,21 @@
       border-radius: 16px;
       margin-top: 2rem;
     }
-
     .empty-state .icon {
       font-size: 4rem;
       margin-bottom: 1rem;
       opacity: 0.5;
     }
-
     .empty-state h3 {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 0.5rem;
     }
-
     .empty-state p {
       font-size: 1rem;
       color: var(--text-light);
     }
-
     body.dark-mode {
       --text: #f9fafb;
       --text-light: #9ca3af;
@@ -331,52 +305,41 @@
       --shadow: rgba(0, 0, 0, 0.3);
       --shadow-lg: rgba(0, 0, 0, 0.5);
     }
-
     body.dark-mode .page-header {
       background: rgba(31, 41, 55, 0.95);
     }
-
     @media (max-width: 640px) {
       .page-header {
         padding: 1rem 0;
       }
-
       .header-content {
         padding: 0 1rem;
       }
-
       .page-title {
         font-size: 1.25rem;
       }
-
       .container {
         margin: 1rem auto;
         padding: 0 1rem;
       }
-
       .phone-section {
         padding: 2rem 1.5rem;
       }
-
       .phone-section h2 {
         font-size: 1.5rem;
       }
-
       .order-card {
         flex-direction: column;
         padding: 1.25rem;
       }
-
       .order-card img {
         width: 100%;
         height: 200px;
       }
-
       .back-btn span {
         display: none;
       }
     }
-
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -387,34 +350,27 @@
         transform: translateY(0);
       }
     }
-
     .order-card {
       animation: fadeIn 0.3s ease;
     }
-
     @media (max-width: 1235px) {
       .top-banner {
         font-size: 0.75rem;
         padding: 0.5rem;
       }
-      
       .page-header {
         border-bottom: none;
       }
-      
       .header-content {
         padding: 0 0.75rem;
       }
-      
       .back-btn {
         padding: 0.5rem 0.75rem;
         font-size: 0.75rem;
       }
-      
       .page-title {
         font-size: 1rem;
       }
-      
       .theme-toggle-btn {
         width: 32px;
         height: 32px;
@@ -422,9 +378,6 @@
       }
     }
   </style>
-
- 
-
 </head>
 
 <body>

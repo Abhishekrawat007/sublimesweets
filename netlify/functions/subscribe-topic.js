@@ -55,6 +55,10 @@ export async function handler(event) {
     try {
       const resp = await mg.subscribeToTopic([token], topic);
       console.log("subscribeToTopic resp:", JSON.stringify(resp));
+      if (resp.failureCount > 0) {
+  await admin.database().ref('sites/sublimesweets/pushSubscribers/' + token).remove();
+  console.log('Removed invalid token:', token.slice(0,16));
+}
       // Save metadata to RTDB under pushSubscribers/<token>/topics/<topic>
       try {
         const meta = {
@@ -63,7 +67,7 @@ export async function handler(event) {
           time: Date.now(),
           resp
         };
-        await admin.database().ref('/pushSubscribers/' + token + '/topics/' + topic).set(meta);
+        await admin.database().ref('sites/sublimesweets/pushSubscribers/' + token + '/topics/' + topic).set(meta);
       } catch (e) {
         console.warn('Could not write topic metadata to DB', e && e.message);
       }
@@ -72,7 +76,7 @@ export async function handler(event) {
       console.error("subscribe-topic error", err);
       // Write failure detail to DB for inspection
       try {
-        await admin.database().ref('/pushSubscribers/' + token + '/topics/' + topic).set({
+        await admin.database().ref('sites/sublimesweets/pushSubscribers/' + token + '/topics/' + topic).set({
           subscribed: false,
           error: err.message || String(err),
           time: Date.now()

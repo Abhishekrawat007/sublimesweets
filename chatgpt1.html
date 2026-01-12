@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sublime Grocery — Freshness Delivered</title>
-  <meta name="description" content="Sublime Grocery — premium design grocery storefront with search, filters, and responsive product grid." />
+  <title>Sublime Sweets – Fresh Mithai & Sweets Online</title>
+  <meta name="description" content="Order fresh sweets, mithai, and desserts online from Sublime Sweets. Premium quality sweets in Pithoragarh. Free delivery on orders over ₹199.">
+  <meta name="keywords" content="sweets Pithoragarh, mithai online, Sublime Sweets, gulab jamun, rasgulla, kaju katli, online sweets delivery Pithoragarh, fresh sweets">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sublimesweets.netlify.app/chatgpt1.html">
+<!-- Favicon for most browsers -->
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Android Chrome Icons -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="72x72" href="web-app-manifest-72x72.png">
+<link rel="icon" type="image/png" sizes="144x144" href="web-app-manifest-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="web-app-manifest-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="web-app-manifest-512x512.png">
   <style>
     :root{
       --bg:#0f1720; --card:#0b1220; --muted:#9aa4b2; --accent1:#34d399; --accent2:#60a5fa; --glass: rgba(255,255,255,0.03);
@@ -17,7 +32,6 @@
       background: linear-gradient(180deg,#071025 0%, #0f1720 100%); color:#e6eef6;
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-
     /* NAVBAR */
     .navbar{position:fixed;left:0;right:0;top:0;height:72px;padding:10px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(180deg, rgba(12,18,28,0.45), rgba(12,18,28,0.28));backdrop-filter: blur(8px);z-index:1000;border-bottom:1px solid rgba(255,255,255,0.03)}
     .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px}
@@ -29,7 +43,6 @@
     .cart-badge{position:relative}
     .cart-badge .count{position:absolute;right:-6px;top:-6px;background:#ff6b6b;color:#081018;padding:3px 7px;border-radius:999px;font-weight:700;font-size:12px}
     .hamburger{display:none}
-
     /* HERO */
     .hero{padding-top:120px;padding-bottom:64px;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;max-width:1200px;margin:0 auto;padding-left:5%;padding-right:5%}
     .hero-left h1{font-size:46px;line-height:1.02;margin-bottom:14px;background:linear-gradient(90deg,#fff,#9be7d7 45%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -37,27 +50,23 @@
     .cta-row{display:flex;gap:12px}
     .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:14px 20px;border-radius:12px;border:0;color:#022022;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(96,165,250,0.08)}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px 18px;border-radius:12px;color:var(--muted);cursor:pointer}
-
     .hero-right{background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:20px;border:1px solid rgba(255,255,255,0.03);box-shadow: 0 8px 30px rgba(2,6,23,0.7)}
     .promo{display:flex;gap:12px;align-items:center;margin-bottom:14px}
     .promo .pill{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;font-weight:700;color:var(--accent1)}
     .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     .mini-card{background:var(--card);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center}
     .mini-card svg{width:58px;height:58px;border-radius:10px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:grid;place-items:center}
-
     /* CATEGORIES */
     .categories{max-width:1200px;margin:28px auto 6px;padding:0 5%}
     .cats{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
     .chip{background:var(--glass);padding:10px 14px;border-radius:999px;white-space:nowrap;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
     .chip.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#042730;font-weight:700}
-
     /* PRODUCTS */
     .store{max-width:1200px;margin:20px auto;padding:0 5%;}
     .controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}
     .controls .left{display:flex;gap:12px;align-items:center}
     .controls .sort, .controls .filter-btn{background:var(--glass);padding:8px 12px;border-radius:12px;border:0;color:var(--muted)}
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-
     .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:12px}
     .img{height:160px;border-radius:12px;background:linear-gradient(135deg,#e6f9ef 0%, #dbeeff 100%);display:grid;place-items:center;font-weight:800;color:#052018}
     .title{font-weight:700}
@@ -68,13 +77,10 @@
     .card-footer{display:flex;gap:8px}
     .add-btn{flex:1;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent1),#2dd4bf);color:#042730;font-weight:800;cursor:pointer}
     .wish{padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
-
     /* SLIDE FILTER */
     .filter-panel{position:fixed;right:20px;bottom:20px;background:var(--card);padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 40px rgba(2,6,23,0.6)}
-
     /* FOOTER */
     footer{margin-top:40px;padding:40px 5%;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-
     /* RESPONSIVE */
     @media (max-width:1000px){
       .grid{grid-template-columns:repeat(3,1fr)}
@@ -93,8 +99,6 @@
       .grid{grid-template-columns:1fr}
       .hero-left h1{font-size:30px}
     }
-    
-
   </style>
 </head>
 <body>

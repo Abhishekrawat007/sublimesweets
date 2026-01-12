@@ -1,27 +1,27 @@
 
-// // at top of editor.js — auth check on script load
-// (async function ensureAuth() {
-//   const token = sessionStorage.getItem("adminToken");
-//   if (!token) {
-//     window.location.href = "kunnu.html";
-//     return;
-//   }
-//   try {
-//     const res = await fetch("/.netlify/functions/verify", {
-//       method: "GET",
-//       headers: { Authorization: "Bearer " + token }
-//     });
-//     const data = await res.json();
-//     if (!res.ok || !data.ok) {
-//       sessionStorage.removeItem("adminToken");
-//       window.location.href = "kunnu.html";
-//     }
-//   } catch (e) {
-//     console.error("Auth verify error:", e);
-//     sessionStorage.removeItem("adminToken");
-//     window.location.href = "kunnu.html";
-//   }
-// })();
+// at top of editor.js — auth check on script load
+(async function ensureAuth() {
+  const token = sessionStorage.getItem("adminToken");
+  if (!token) {
+    window.location.href = "kunnu.html";
+    return;
+  }
+  try {
+    const res = await fetch("/.netlify/functions/verify", {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token }
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+      sessionStorage.removeItem("adminToken");
+      window.location.href = "kunnu.html";
+    }
+  } catch (e) {
+    console.error("Auth verify error:", e);
+    sessionStorage.removeItem("adminToken");
+    window.location.href = "kunnu.html";
+  }
+})();
 
 let originalProducts = JSON.parse(JSON.stringify(products));
 const productHistory = new Map();
@@ -827,13 +827,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Ask for secret (so we do not store it in code)
-    let secret = sessionStorage.getItem('broadcast_secret');
-    if (!secret) {
-      secret = prompt('Enter broadcast secret (admin only):');
-      if (!secret) return;
-      sessionStorage.setItem('broadcast_secret', secret);
-    }
+   
     openModal();
   });
 
@@ -855,12 +849,7 @@ sendBtn?.addEventListener('click', async () => {
     return;
   }
 
-  let secret = sessionStorage.getItem('broadcast_secret');
-  if (!secret) {
-    secret = prompt('Enter broadcast secret (admin only):');
-    if (!secret) { resultEl.textContent = 'Broadcast cancelled.'; resultEl.className = 'broadcast-result error'; return; }
-    sessionStorage.setItem('broadcast_secret', secret);
-  }
+ 
 
   sendBtn.disabled = true;
   sendBtn.textContent = 'Sending...';
@@ -870,12 +859,11 @@ sendBtn?.addEventListener('click', async () => {
     const adminToken = sessionStorage.getItem('adminToken') || '';
     const res = await fetch('/.netlify/functions/broadcast', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-broadcast-secret': secret,
-        'Authorization': adminToken ? ('Bearer ' + adminToken) : ''
-      },
-      body: JSON.stringify({ title, body, url, topic: 'all', secret })
+     headers: {
+  'Content-Type': 'application/json',
+  'Authorization': adminToken ? ('Bearer ' + adminToken) : ''
+},
+body: JSON.stringify({ title, body, url, topic: 'all' })
     });
 
     let data;
@@ -978,26 +966,23 @@ function openOrderDetail(order, no) {
       `).join('')
     : '<li>No items</li>';
 
+  // ✅ Add PDF download button if available
+  const pdfButton = order.pdfUrl 
+    ? `<a href="${order.pdfUrl}" download="Order-${order.orderId}.pdf" style="display:inline-block;padding:8px 16px;background:#dc2626;color:#fff;border-radius:6px;text-decoration:none;margin-top:10px;">📄 Download Invoice PDF</a>`
+    : '';
+
   document.getElementById('orderDetailBody').innerHTML = `
     <h3>Order #${no}</h3>
-
     <p><b>Order ID:</b> ${order.orderId}</p>
     <p><b>Time:</b> ${formatOrderDate(order)}</p>
-
-    <hr>
-
     <p><b>Name:</b> ${order.name}</p>
     <p><b>Phone:</b> ${order.phone}</p>
-
-    <hr>
-
     <p><b>Total:</b> ₹${order.totalAmount}</p>
     <p><b>Payment:</b> ${order.payment?.status || 'N/A'}</p>
-
-    <hr>
-
     <h4>Items Ordered</h4>
     <ul>${itemsHtml}</ul>
+
+    ${pdfButton}
 
     <div class="order-actions">
       <a href="https://wa.me/91${order.phone}" target="_blank">💬 WhatsApp Customer</a>
@@ -1024,10 +1009,13 @@ async function loadOrders() {
     const token = sessionStorage.getItem("adminToken") || "";
 
     const res = await fetch("/.netlify/functions/getAllOrders", {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    });
+  method: "POST",  
+  headers: {
+    Authorization: "Bearer " + token,
+    "Content-Type": "application/json" 
+  },
+  body: JSON.stringify({ path: "sites/sublimesweets/orders" })  
+});
 
     if (!res.ok) throw new Error("Failed to fetch orders");
 

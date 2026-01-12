@@ -2,6 +2,7 @@
 import admin from "firebase-admin";
 import zlib from "zlib";
 import { promisify } from "util";
+import jwt from "jsonwebtoken"; // ✅ ADD THIS
 
 const gunzip = promisify(zlib.gunzip);
 
@@ -46,9 +47,9 @@ async function removeInvalidTokens(tokensToRemove = []) {
   if (!tokensToRemove.length) return;
   for (const t of tokensToRemove) {
     try {
-      await admin.database().ref('/pushSubscribers/' + t).remove();
+      await admin.database().ref('sites/sublimesweets/pushSubscribers/' + t).remove();
       const shortKey = t.slice(0, 24).replace(/[^a-zA-Z0-9_-]/g, '');
-      await admin.database().ref('/tokens/' + shortKey).remove().catch(()=>{});
+      await admin.database().ref('sites/sublimesweets/tokens/' + shortKey).remove().catch(()=>{});
       console.log('Removed invalid token from DB:', tokenShort(t));
     } catch (e) {
       console.warn('Failed to remove invalid token', tokenShort(t), e && e.message);
@@ -67,7 +68,7 @@ export async function handler(event) {
   try {
     // Quick GET debug/test path: ?testToken=1
     if (event.httpMethod === "GET" && event.queryStringParameters?.testToken === "1") {
-      const snap = await admin.database().ref("/pushSubscribers").limitToFirst(1).once("value");
+      const snap = await admin.database().ref("sites/sublimesweets/pushSubscribers").limitToFirst(1).once("value");
       const tokensObj = snap.val() || {};
       const tokens = Object.values(tokensObj).map(o => o.token || o).filter(Boolean);
       if (!tokens.length) return { statusCode: 200, body: JSON.stringify({ ok: false, msg: "no tokens in /pushSubscribers" }) };
@@ -91,10 +92,18 @@ export async function handler(event) {
 
     if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
 
-    // AUTH
-    const secret = event.headers["x-broadcast-secret"] || event.headers["X-Broadcast-Secret"] || "";
-    if (!secret || secret !== process.env.BROADCAST_SECRET) {
-      return { statusCode: 401, body: JSON.stringify({ error: "Unauthorized" }) };
+    // ✅ REPLACE SECRET CHECK WITH JWT VERIFICATION
+    const authHeader = event.headers["authorization"] || event.headers["Authorization"] || "";
+    const token = authHeader.replace("Bearer ", "").trim();
+    
+    if (!token) {
+      return { statusCode: 401, body: JSON.stringify({ error: "No token provided" }) };
+    }
+
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      return { statusCode: 401, body: JSON.stringify({ error: "Invalid token" }) };
     }
 
     const bodyJson = JSON.parse(event.body || "{}");
@@ -106,7 +115,7 @@ export async function handler(event) {
     if (!title || !bodyText) return { statusCode: 400, body: JSON.stringify({ error: "Missing title or body" }) };
 
     // Read tokens
-    const dbRef = admin.database().ref("/pushSubscribers");
+    const dbRef = admin.database().ref("sites/sublimesweets/pushSubscribers");
     const snap = await dbRef.once("value");
     const tokenObjs = snap.val() || {};
     const tokens = Object.values(tokenObjs).map(o => (o && o.token) ? o.token : o).filter(Boolean);

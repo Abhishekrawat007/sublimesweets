@@ -2,13 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sublime Sweets — Ultra Premium Navbar</title>
-  <meta name="description" content="Ultra-premium, mobile-first navbar component for Sublime Sweets. Scoped CSS under .sublime-navbar. Fully functional: hamburger, mega menus, accessible keyboard UX, search, cart, wishlist, dark mode, animations, and category filtering hooks." />
-
+  <title>Sublime Sweets – Fresh Mithai & Sweets Online</title>
+  <meta name="description" content="Order fresh sweets, mithai, and desserts online from Sublime Sweets. Premium quality sweets in Pithoragarh. Free delivery on orders over ₹199.">
+  <meta name="keywords" content="sweets Pithoragarh, mithai online, Sublime Sweets, gulab jamun, rasgulla, kaju katli, online sweets delivery Pithoragarh, fresh sweets">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sublimesweets.netlify.app/newchtgptnavbar.html">
+<!-- Favicon for most browsers -->
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Android Chrome Icons -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="72x72" href="web-app-manifest-72x72.png">
+<link rel="icon" type="image/png" sizes="144x144" href="web-app-manifest-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="web-app-manifest-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="web-app-manifest-512x512.png">
   <!-- Google Fonts: Poppins (premium) with Inter fallback -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-
   <style>
   /* ==============================================================
      SUBLIME SWEETS — ULTRA PREMIUM NAVBAR
@@ -17,7 +30,6 @@
      - All CSS variables at the top for easy customization
      - This file intentionally verbose to reach >1000 lines of premium code
      ============================================================== */
-
   /* ---------------- THEME VARIABLES ---------------- */
 :root{
   --accent-1: #FF6B6B;              /* primary warm */
@@ -35,29 +47,23 @@
   --nav-h-desktop: 76px;
   --z-base: 9999;
 }
-
 /* ---------------- SCOPE: Avoid bleeding ---------------- */
 .sublime-navbar{font-family:Poppins,Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;position:relative;z-index:var(--z-base);color:var(--text)}
 .sublime-navbar *{box-sizing:border-box}
-
 /* ---------------- RESET ICONS & BUTTONS ---------------- */
 .sublime-navbar button{background:transparent;border:0;padding:0;cursor:pointer}
 .sublime-navbar a{color:inherit}
-
 /* ---------------- NAV WRAPPER (MOBILE FIRST) ---------------- */
 .sublime-navbar .nav-wrap{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h-mobile);gap:12px;padding:10px 14px;background:var(--bg);box-shadow:var(--shadow-lg);border-bottom-left-radius:var(--radius-xl);border-bottom-right-radius:var(--radius-xl)}
 .sublime-navbar .nav-left,.sublime-navbar .nav-center,.sublime-navbar .nav-right{display:flex;align-items:center;gap:10px}
-
 /* ---------------- BRAND ---------------- */
 .sublime-navbar .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .sublime-navbar .brand .logo-mark{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;font-weight:800;font-size:14px}
 .sublime-navbar .brand .logo-text{font-weight:800;font-size:18px;letter-spacing:0.2px}
-
 /* ---------------- ICON BUTTON (consistent) ---------------- */
 .sublime-navbar .icon-btn{width:48px;height:48px;border-radius:12px;border:1px solid rgba(15,23,36,0.04);display:inline-flex;align-items:center;justify-content:center;position:relative;background:transparent}
 .sublime-navbar .icon-btn:focus{outline:3px solid rgba(11,114,255,0.12);outline-offset:3px}
 .sublime-navbar .badge{position:absolute;top:6px;right:6px;background:var(--accent-1);color:#fff;font-weight:800;font-size:11px;padding:4px 7px;border-radius:999px;transform-origin:center center}
-
 /* ---------------- MOBILE SEARCH MODAL ---------------- */
 .sublime-navbar .search-modal{position:fixed;inset:0;display:none;align-items:flex-start;padding:18px;z-index:calc(var(--z-base)+300)}
 .sublime-navbar .search-backdrop{position:absolute;inset:0;background:rgba(2,6,23,0.55)}
@@ -65,10 +71,8 @@
 .sublime-navbar .search-row{display:flex;gap:10px;align-items:center}
 .sublime-navbar .search-row input{flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(15,23,36,0.06);font-size:15px}
 .sublime-navbar .search-close{padding:10px;border-radius:10px;border:1px solid rgba(15,23,36,0.06)}
-
 /* premium input border and highlight on focus */
 .sublime-navbar .search-row input:focus{outline:none;box-shadow:0 6px 24px rgba(11,114,255,0.08);border-color:rgba(11,114,255,0.32)}
-
 /* ---------------- MOBILE SLIDE MENU (LEFT) ---------------- */
 .sublime-navbar .mobile-menu{position:fixed;inset:0;display:none;z-index:calc(var(--z-base)+250)}
 .sublime-navbar .mobile-backdrop{position:absolute;inset:0;background:rgba(2,6,23,0.45)}
@@ -76,42 +80,34 @@
 .sublime-navbar .mobile-header{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid rgba(15,23,36,0.04)}
 .sublime-navbar .mobile-body{padding:12px;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1}
 .sublime-navbar .mobile-footer{padding:12px;border-top:1px solid rgba(15,23,36,0.04)}
-
 /* menu item styles */
 .sublime-navbar .mm-section{margin-bottom:8px}
 .sublime-navbar .mm-title{font-weight:700;padding:10px 6px;color:var(--muted)}
 .sublime-navbar .mm-link{display:block;padding:12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600}
 .sublime-navbar .mm-sub{display:block;padding:10px 12px;border-radius:8px;color:var(--muted);text-decoration:none}
-
 /* make mobile menu scrollable long list look premium */
 .sublime-navbar .mm-sub + .mm-sub{margin-top:6px}
 .sublime-navbar .divider{height:1px;background:rgba(15,23,36,0.04);margin:12px 0;border-radius:2px}
-
 /* ---------------- DESKTOP BAR ---------------- */
 .sublime-navbar .desktop-bar{display:none;padding:16px 28px;align-items:center;gap:20px;background:transparent}
 .sublime-navbar .desktop-menu{display:flex;gap:22px;align-items:center}
 .sublime-navbar .desktop-item{position:relative}
 .sublime-navbar .desktop-link{padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:700}
 .sublime-navbar .desktop-link:focus{outline:3px solid rgba(11,114,255,0.12);outline-offset:6px}
-
 /* ---------------- MEGA MENU (PREMIUM) ---------------- */
 .sublime-navbar .mega{position:absolute;left:0;top:calc(100% + 12px);min-width:480px;background:var(--surface);box-shadow:var(--shadow-xl);padding:18px;border-radius:14px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s}
 .sublime-navbar .desktop-item:focus-within .mega,.sublime-navbar .desktop-item:hover .mega{opacity:1;visibility:visible;transform:translateY(0)}
 .sublime-navbar .mega-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
 .sublime-navbar .mega-col h4{margin-bottom:10px}
 .sublime-navbar .mega-col a{display:block;padding:6px 8px;border-radius:8px;color:var(--muted);text-decoration:none}
-
 /* hover bridge pseudo element to prevent accidental menu close - large gap support */
 .sublime-navbar .desktop-item::after{content:'';position:absolute;left:0;right:0;top:100%;height:40px} /* invisible bridge area */
-
 /* ---------------- DESKTOP SEARCH & ACTIONS ---------------- */
 .sublime-navbar .desktop-actions{margin-left:auto;display:flex;align-items:center;gap:12px}
 .sublime-navbar .desktop-search{display:flex;align-items:center;gap:10px;border-radius:12px;padding:6px;background:rgba(15,23,36,0.03);border:1px solid rgba(15,23,36,0.04)}
 .sublime-navbar .desktop-search input{border:0;background:transparent;outline:none;padding:8px 12px;width:240px}
-
 /* hide search input until >=1465px */
 .sublime-navbar .desktop-search.hide-input input{width:0;opacity:0;padding:0;border:0}
-
 /* ---------------- CART DRAWER (RIGHT) ---------------- */
 .sublime-navbar .cart-drawer{position:fixed;right:12px;top:12px;bottom:12px;width:420px;max-width:calc(100% - 24px);background:var(--surface);box-shadow:var(--shadow-xl);border-radius:14px;display:none;z-index:calc(var(--z-base)+400);overflow:hidden;display:flex;flex-direction:column}
 .sublime-navbar .cart-head{padding:16px;border-bottom:1px solid rgba(15,23,36,0.04);display:flex;align-items:center;justify-content:space-between}
@@ -119,19 +115,16 @@
 .sublime-navbar .cart-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px}
 .sublime-navbar .cart-footer{padding:16px;border-top:1px solid rgba(15,23,36,0.04);display:flex;align-items:center;justify-content:space-between}
 .sublime-navbar .checkout-btn{padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));color:#fff;font-weight:800}
-
 /* ---------------- DYNAMIC VISIBILITY HELPERS ---------------- */
 .hidden{display:none !important}
 .fade-in{animation:fadeIn .18s ease both}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-
 /* ---------------- SMALL SCREEN POLISH (prevent clipping) ---------------- */
 @media (max-width:375px){
   .sublime-navbar .brand .logo-text{font-size:16px}
   .sublime-navbar .icon-btn{width:42px;height:42px}
   .sublime-navbar .mobile-panel{width:300px}
 }
-
 /* ---------------- DESKTOP BREAKPOINTS ---------------- */
 @media (min-width:1200px){
   .sublime-navbar .nav-wrap{display:none}
@@ -144,7 +137,6 @@
 @media (min-width:1465px){
   .sublime-navbar .desktop-search input{width:280px;opacity:1}
 }
-
 /* ---------------- DARK MODE (SOLID surfaces) ---------------- */
 .sublime-navbar.dark-mode{color:#fff}
 .sublime-navbar.dark-mode .nav-wrap{background:#071022}
@@ -154,16 +146,13 @@
 .sublime-navbar.dark-mode .desktop-search{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06)}
 .sublime-navbar.dark-mode .icon-btn{border-color:rgba(255,255,255,0.04)}
 .sublime-navbar.dark-mode .badge{background:var(--accent-3)}
-
 /* ---------------- MICRO-INTERACTIONS & TRANSITIONS ---------------- */
 .sublime-navbar .icon-btn{transition:transform .14s cubic-bezier(.2,.9,.2,1),box-shadow .14s}
 .sublime-navbar .icon-btn:hover{transform:translateY(-4px)}
 .sublime-navbar .badge.pulse{animation:badgePulse .9s ease both}
 @keyframes badgePulse{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
-
 /* verbose spacing / decorative lines (intentional) */
 /* Many small helper utilities and commented sections intentionally increase file length. */
-
 /* ==================== END CSS ==================== */
   </style>
 </head>

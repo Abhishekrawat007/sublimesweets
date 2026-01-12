@@ -2,105 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🛍 Product Editor - SublimeStore</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sublime Sweets – Fresh Mithai & Sweets Online</title>
+  <meta name="description" content="Order fresh sweets, mithai, and desserts online from Sublime Sweets. Premium quality sweets in Pithoragarh. Free delivery on orders over ₹199.">
+  <meta name="keywords" content="sweets Pithoragarh, mithai online, Sublime Sweets, gulab jamun, rasgulla, kaju katli, online sweets delivery Pithoragarh, fresh sweets">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sublimesweets.netlify.app/editor.html">
+  
+  
+  
+  
+  
+  
+  
+  
   
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <link rel="stylesheet" href="css/editor-page.css">
-  
- 
 
- 
+    <!-- Firebase SDKs used by the editor -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
 
 
+  <script src="js/config.js"></script>
+<script src="js/init-firebase.js"></script>
+
+<!-- Compatibility shim — keep this EXACTLY here, before other scripts -->
+<!-- Compatibility shim — keep this EXACTLY here, before other scripts -->
+<script>
+(function(){
+  // Install shim once firebase is ready; if not ready, wait for event.
+  function installShim() {
+    // alias for new code (back-compat)
+    window.db = window.database || window.db || null;
+
+    // expose window.database getter so other code can read window.database even if they read it later
+    try {
+      Object.defineProperty(window, 'database', {
+        get: function() { return window.db; },
+        configurable: true
+      });
+    } catch (e) {
+      if (!window.database) window.database = window.db;
+    }
+
+    // If firebase present and not patched, patch it to return window.db where appropriate
+    if (window.firebase && !firebase.__dbPatched) {
+      firebase.__dbPatched = true;
+      firebase.__originalDatabaseFn = firebase.database || null;
+      firebase.database = function() {
+        if (window.db) return window.db;
+        if (typeof firebase.__originalDatabaseFn === 'function') return firebase.__originalDatabaseFn.apply(firebase, arguments);
+        return null;
+      };
+      console.log('✅ Firebase compatibility shim installed. window.db:', !!window.db);
+    } else if (window.firebase && firebase.__dbPatched) {
+      // already patched but ensure log shows current state
+      console.log('✅ Firebase compatibility shim already installed. window.db:', !!window.db);
+    } else {
+      // Not ready yet — wait for init, but also attempt a fallback after a short timeout
+      console.warn('⚠️ Firebase not ready yet — shim will install once initialized. window.db:', !!window.db);
+    }
+  }
+
+  // If firebase already present and db set, install immediately; otherwise wait for "firebase-ready"
+  if (window.firebase && (window.db !== undefined && window.db !== null)) {
+    installShim();
+  } else {
+    // install when init script dispatches firebase-ready (our init-firebase.js will dispatch it)
+    document.addEventListener('firebase-ready', function onReady() {
+      try { installShim(); } catch(e) { console.error('Shim install error', e); }
+    }, { once: true });
+
+    // fallback attempt in case event missed
+    setTimeout(() => {
+      try { installShim(); } catch(e) { /* ignore */ }
+    }, 1500);
+  }
+})();
+</script>
 
 </head>
 <body>
 <script>
-// (async function verifyAuthOnLoad(){
-//   const token = sessionStorage.getItem("adminToken");
-//   if (!token) {
-//     alert("Unauthorized. Please login.");
-//     window.location.href = "kunnu.html"; // or admin.html
-//     return;
-//   }
-//   try {
-//     const res = await fetch("/.netlify/functions/verify", {
-//       method: "GET",
-//       headers: { Authorization: "Bearer " + token }
-//     });
-//     const data = await res.json();
-//     if (!res.ok || !data.ok) {
-//       sessionStorage.removeItem("adminToken");
-//       alert("Session expired or invalid. Please login.");
-//       window.location.href = "kunnu.html";
-//       return;
-//     }
-//     // authenticated — you're good to continue
-//   } catch (err) {
-//     console.error("Auth check failed:", err);
-//     alert("Network error while verifying authentication.");
-//     window.location.href = "kunnu.html";
-//   }
-// })();
-function decodeJwt(token) {
-  // JWT parts: header.payload.signature
-  const payload = token.split('.')[1];
-  // JWT payload is base64url encoded, replace URL-safe chars and decode
-  const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split('')
-      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-      .join('')
-  );
-  return JSON.parse(jsonPayload);
-}
-
-function setupTokenExpiryWarning(token) {
-  const payload = decodeJwt(token);
-  if (!payload.exp) {
-    console.warn("Token has no expiry");
+(async function verifyAuthOnLoad(){
+  const token = sessionStorage.getItem("adminToken");
+  if (!token) {
+    alert("Unauthorized. Please login.");
+    window.location.href = "kunnu.html"; // or admin.html
     return;
   }
-
-  const expiryTime = payload.exp * 1000; // convert to ms
-  const now = Date.now();
-  const warningTime = expiryTime - 5 * 60 * 1000; // 5 minutes before expiry
-
-  if (now > expiryTime) {
-    alert("Your session has already expired. Please login again.");
-    sessionStorage.removeItem("adminToken");
+  try {
+    const res = await fetch("/.netlify/functions/verify", {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token }
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+      sessionStorage.removeItem("adminToken");
+      alert("Session expired or invalid. Please login.");
+      window.location.href = "kunnu.html";
+      return;
+    }
+    // authenticated — you're good to continue
+  } catch (err) {
+    console.error("Auth check failed:", err);
+    alert("Network error while verifying authentication.");
     window.location.href = "kunnu.html";
+  }
+})();
+document.addEventListener('firebase-ready', async function() {
+try {
+  console.log('🔔 Requesting FCM token...');
+   const messaging = firebase.messaging();
+  const reg = await navigator.serviceWorker.ready;
+  const fcmToken = await messaging.getToken({
+    vapidKey: 'BHBFlNFxt6EUM9f6NYU_o006ti5ZG0a-VMPJ-dWHYH_X6iqlWpEu3DDB7fvq6OSOaIoIeJBqpw7iZSDntJV-KMk',
+    serviceWorkerRegistration: reg
+  });
+  
+  console.log('✅ FCM Token:', fcmToken ? fcmToken.substring(0, 20) + '...' : 'NONE');
+  
+  if (!fcmToken) {
+    console.log('⚠️ No FCM token');
     return;
   }
-
-  if (now > warningTime) {
-    // If less than 5 minutes remain, show warning immediately
-    showExpiryWarning(expiryTime);
+  
+  const adminToken = sessionStorage.getItem('adminToken');
+  console.log('📤 Saving admin token...');
+  
+  const saveRes = await fetch('/.netlify/functions/saveAdminToken', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + adminToken
+    },
+    body: JSON.stringify({ 
+      fcmToken,
+      site: 'Sublime Sweets'  
+    })
+  });
+  
+  const saveData = await saveRes.json();
+  console.log('💾 Token save response:', saveData);
+  
+  if (saveRes.ok) {
+    console.log('✅ Admin token saved securely');
   } else {
-    // Otherwise, set a timeout to warn at warningTime
-    setTimeout(() => showExpiryWarning(expiryTime), warningTime - now);
+    console.error('❌ Token save failed:', saveData);
   }
+} catch (err) {
+  console.error('❌ Admin token save failed:', err);
 }
-
-function showExpiryWarning(expiryTime) {
-  const timeLeft = Math.round((expiryTime - Date.now()) / 1000 / 60);
-  if (confirm(`⚠️ Your session will expire in about ${timeLeft} minutes.\nDo you want to stay logged in?`)) {
-    // User wants to stay logged in - redirect to login or refresh token
-    window.location.href = "kunnu.html";
-  } else {
-    // User ignores or cancels - do nothing or log out after expiry
-    // Optional: you can auto-logout after expiry time here if you want
-  }
-}
-
-// // Run this after successful token verification on editor page load
-// const token = sessionStorage.getItem("adminToken");
-// if (token) {
-//   setupTokenExpiryWarning(token);
-// }
-
+}, { once: true });
 </script>
 
 

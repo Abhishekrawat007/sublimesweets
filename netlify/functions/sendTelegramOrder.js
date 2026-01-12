@@ -12,7 +12,6 @@ function getChatIdsFromEnv() {
   return raw.split(",").map(s => s.trim()).filter(Boolean);
 }
 
-
 // --- Helper: Escape Markdown special chars ---
 function escapeMarkdown(text) {
   return text.replace(/([_*[\]()~`>#+\-=|{}.!])/g, "\\$1");
@@ -104,6 +103,18 @@ export async function handler(event) {
       return { statusCode: 400, body: "Missing order details" };
     }
 
+    // ========== Get site/shop branding ==========
+    // Dynamic per site (from env)
+    const shopName = process.env.SHOP_NAME || "Sublime Store";
+    const siteUrl = process.env.SITE_URL || process.env.URL || "sublimestore.netlify.app";
+    const siteName = siteUrl.replace(/^https?:\/\//, '').replace(/\.netlify\.app$/, '').toUpperCase();
+    
+    // Fixed for all sites (hardcoded)
+    const shopAddress = "Near Variety Store, Link Road, Takana Road";
+    const shopCity = "Pithoragarh, Uttarakhand, India";
+    const shopPhone = "+91 8937973753";
+    // ============================================
+
     // Build items list for message if needed
     const itemLines = Array.isArray(cart) ? cart.map((it) => {
       const title = it.title || it.name || it.product || "Item";
@@ -131,75 +142,100 @@ export async function handler(event) {
     // WhatsApp link
     const waLink = phone ? `https://wa.me/91${String(phone).replace(/\D/g, "")}` : "";
 
-    // ---------- NEW: Preserve "Buy Now" if the request is a buy-now ----------
+    // ---------- Preserve "Buy Now" if the request is a buy-now ----------
     const lowerMsg = (messageText || "").toString().toLowerCase();
     const isBuyNowIndicator = /buy now/.test(lowerMsg) || (body.orderType && body.orderType.toString().toLowerCase() === 'buy_now') || (body.source && body.source.toString().toLowerCase() === 'buynow');
 
     if (messageText && typeof messageText === "string" && messageText.trim().length > 0) {
       if (isBuyNowIndicator) {
-        // If it's already a buy-now style message, ensure badge is present and prefix appropriately
         if (!/^(🟢|🔴)/.test(messageText.trim())) {
-          messageText = `🛒 *Buy Now Order* ${statusBadge}\n` + messageText;
+          messageText = `🛒 *Buy Now Order from ${siteName}* ${statusBadge}\n` + messageText;
         } else {
-          // already has a badge - still ensure header text present
           if (!/Buy Now Order/i.test(messageText)) {
-            messageText = messageText.replace(/^(🧾?\s*\*?New Order Received\*?\s*)/i, `🛒 *Buy Now Order* ${statusBadge}\n`);
+            messageText = messageText.replace(/^(🧾?\s*\*?New Order Received\*?\s*)/i, `🛒 *Buy Now Order from ${siteName}* ${statusBadge}\n`);
           }
         }
       } else {
-        // default behaviour: keep "New Order Received" header as before
         if (!/^(🟢|🔴)/.test(messageText.trim()) && !/New Order Received/i.test(messageText)) {
-          messageText = `🧾 *New Order Received* ${statusBadge}\n` + messageText;
+          messageText = `🧾 *New Order from ${siteName}* ${statusBadge}\n` + messageText;
         } else if (!/New Order Received/i.test(messageText)) {
-          messageText = `🧾 *New Order Received* ${statusBadge}\n` + messageText;
+          messageText = `🧾 *New Order from ${siteName}* ${statusBadge}\n` + messageText;
         } else {
           if (!/^(🟢|🔴)/.test(messageText.trim())) {
-            messageText = messageText.replace(/^(🧾\s*\*New Order Received\*\s*)/i, `$1${statusBadge}\n`);
+            messageText = messageText.replace(/^(🧾\s*\*New Order Received\*\s*)/i, `$1from ${siteName} ${statusBadge}\n`);
           }
         }
       }
     } else {
       // No custom messageText provided — build one.
       if (isBuyNowIndicator) {
-        messageText = `🛒 *Buy Now Order* ${statusBadge}\n` +
+        messageText = `🛒 *Buy Now Order from ${siteName}* ${statusBadge}\n` +
           `*Order ID:* ${orderId}\n` +
           `${name ? `👤 *Name:* ${name}\n` : ""}` +
           `${phone ? `📞 *Phone:* ${phone}\n` : ""}` +
           `${waLink ? `💬 *WhatsApp:* [Chat](${waLink})\n` : ""}` +
           `💰 *Total:* Rs. ${computedTotal}\n` +
-          `📦 *Items:*\n${itemLines}`;
+          `📦 *Items:*\n${itemLines}\n` +
+          `\n━━━━━━━━━━━━━━━━━━━━━━\n` +
+          `📍 *Site:* ${siteUrl}`;
       } else {
-        messageText = `🧾 *New Order Received* ${statusBadge}\n` +
+        messageText = `🧾 *New Order from ${siteName}* ${statusBadge}\n` +
           `*Order ID:* ${orderId}\n` +
           `${name ? `👤 *Name:* ${name}\n` : ""}` +
           `${phone ? `📞 *Phone:* ${phone}\n` : ""}` +
           `${waLink ? `💬 *WhatsApp:* [Chat](${waLink})\n` : ""}` +
           `💰 *Total:* Rs. ${computedTotal}\n` +
-          `📦 *Items:*\n${itemLines}`;
+          `📦 *Items:*\n${itemLines}\n` +
+          `\n━━━━━━━━━━━━━━━━━━━━━━\n` +
+          `📍 *Site:* ${siteUrl}`;
       }
     }
 
-    // --- Create PDF ---
+    // ═══════════════════════════════════════════════════════════════
+    // 🔥 PREMIUM PDF - YOUR PROVEN LAYOUT + ORANGE/GOLD COLORS 🔥
+    // ═══════════════════════════════════════════════════════════════
+
     const pdf = new jsPDF("p", "pt", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
 
-    // Header
+    // Premium cream background (subtle, not harsh white)
+    pdf.setFillColor(255, 250, 240); // Very light cream
+    pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+    // PREMIUM ORANGE HEADER BAR (single solid color)
+    pdf.setFillColor(255, 140, 0); // Orange
+    pdf.rect(0, 0, pageWidth, 90, 'F');
+
+    // Gold decorative line below header
+    pdf.setDrawColor(255, 215, 0); // Gold
+    pdf.setLineWidth(2);
+    pdf.line(0, 90, pageWidth, 90);
+
+    // Shop name - WHITE TEXT on orange background
     pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(18);
-    pdf.text("Sublime Store", pageWidth / 2, 40, { align: "center" });
-    pdf.setFontSize(10);
-    pdf.setFont("helvetica", "normal");
-    pdf.text("Near Variety Store, Link Road, Takana Road, Pithoragarh", pageWidth / 2, 55, { align: "center" });
-    pdf.text("Phone: +91 8868839446 | Website: sublimestore.in", pageWidth / 2, 70, { align: "center" });
+    pdf.setFontSize(20);
+    pdf.setTextColor(255, 255, 255); // White
+    pdf.text(shopName.toUpperCase(), pageWidth / 2, 45, { align: "center" });
 
-    let y = 100;
+    // Contact info - WHITE TEXT on orange header
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(9);
+    pdf.setTextColor(255, 255, 255); // White
+    pdf.text(`${shopAddress}, ${shopCity}`, pageWidth / 2, 63, { align: "center" });
+    pdf.text(`Phone: ${shopPhone} | Website: ${siteUrl.replace(/^https?:\/\//, '')}`, pageWidth / 2, 78, { align: "center" });
+
+    // Customer and order details section - BLACK TEXT on cream background
+    let y = 120;
     pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0); // Black text
     pdf.text(`Customer: ${name}`, 40, y);
     pdf.text(`Phone: ${phone}`, 40, y + 18);
     pdf.text(`Order ID: ${orderId}`, 40, y + 36);
     pdf.text(`Date: ${new Date().toLocaleString()}`, 40, y + 54);
     y += 80;
 
+    // Build table rows with images
     const rows = [];
     for (let i = 0; i < cart.length; i++) {
       const item = cart[i];
@@ -214,19 +250,46 @@ export async function handler(event) {
       ]);
     }
 
+    // Total row with BIGGER, BOLDER text
     rows.push([
-      { content: "Total", colSpan: 5, styles: { halign: "right", fontStyle: "bold" } },
-      { content: `Rs. ${computedTotal}`, styles: { halign: "right", fontStyle: "bold" } }
+      { content: "Total", colSpan: 5, styles: { halign: "right", fontStyle: "bold", fontSize: 14, textColor: [0, 0, 0] } },
+      { content: `Rs. ${computedTotal}`, styles: { halign: "right", fontStyle: "bold", fontSize: 14, textColor: [255, 140, 0] } }
     ]);
 
+    // Create the table with PREMIUM ORANGE HEADER
     autoTable(pdf, {
       startY: y,
       head: [["No.", "Image", "Product", "Qty", "Price", "Subtotal"]],
       body: rows,
-      styles: { fontSize: 10, valign: "middle", lineWidth: 0.5, lineColor: [0, 0, 0] },
-      headStyles: { fillColor: [220, 220, 220], textColor: [0, 0, 0], fontStyle: "bold", lineWidth: 0.5, lineColor: [0, 0, 0] },
-      bodyStyles: { minCellHeight: 50, lineWidth: 0.5, lineColor: [0, 0, 0] },
-      columnStyles: { 0: { cellWidth: 35 }, 1: { cellWidth: 50 }, 2: { cellWidth: 210 }, 3: { cellWidth: 50 }, 4: { cellWidth: 70 }, 5: { cellWidth: 80 } },
+      styles: { 
+        fontSize: 10, 
+        valign: "middle", 
+        lineWidth: 0.5, 
+        lineColor: [200, 200, 200] // Light gray borders
+      },
+      headStyles: { 
+        fillColor: [255, 140, 0], // ORANGE HEADER
+        textColor: [255, 255, 255], // White text
+        fontStyle: "bold", 
+        lineWidth: 0.5, 
+        lineColor: [255, 140, 0] 
+      },
+      bodyStyles: { 
+        minCellHeight: 50, 
+        lineWidth: 0.5, 
+        lineColor: [200, 200, 200] 
+      },
+      alternateRowStyles: {
+        fillColor: [255, 248, 240] // Light cream for alternate rows
+      },
+      columnStyles: { 
+        0: { cellWidth: 35 }, 
+        1: { cellWidth: 50 }, 
+        2: { cellWidth: 210 }, 
+        3: { cellWidth: 50 }, 
+        4: { cellWidth: 70 }, 
+        5: { cellWidth: 80 } 
+      },
       didDrawCell: (data) => {
         try {
           if (data.column.index === 1 && data.cell.raw?.image) {
@@ -241,66 +304,73 @@ export async function handler(event) {
       }
     });
 
-    const finalY = (pdf.lastAutoTable && pdf.lastAutoTable.finalY) ? pdf.lastAutoTable.finalY + 20 : y + 20;
+    // Premium footer with gold accent line
+    const finalY = (pdf.lastAutoTable && pdf.lastAutoTable.finalY) ? pdf.lastAutoTable.finalY + 30 : y + 30;
+    
+    // Gold decorative line before footer
+    pdf.setDrawColor(255, 215, 0); // Gold
+    pdf.setLineWidth(1.5);
+    pdf.line(40, finalY - 10, pageWidth - 40, finalY - 10);
+    
+    // Footer message
     pdf.setFont("times", "italic");
     pdf.setFontSize(11);
-    pdf.setTextColor(60);
+    pdf.setTextColor(139, 69, 19); // Brown for elegance
     pdf.text(
-      "Thank you for shopping at Sublime Store.\nWe’ll call or WhatsApp you to confirm your order.",
+      `Thank you for shopping with ${shopName}.\nWe'll call or WhatsApp you to confirm your order.`,
       pageWidth / 2,
-      finalY + 30,
+      finalY + 15,
       { align: "center" }
     );
 
     const pdfBuffer = Buffer.from(pdf.output("arraybuffer"));
-   // Send a copy to owner emails via Netlify server function (optional — non-blocking)
-try {
-  const pdfB64 = pdfBuffer.toString('base64');
-  // fire-and-forget: call Netlify function to email owners
-  fetch(`${process.env.URL || ""}/.netlify/functions/sendEmailOrder`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name,
-      phone,
-      orderId,
-      cart,
-      totalAmount: computedTotal,
-      messageText,
-      pdfBase64: pdfB64
-    })
-  }).catch(err => {
-    // log but do not fail the main function
-    console.warn('sendEmailOrder call failed:', err && err.message);
-  });
-} catch (e) {
-  console.warn('Error preparing email send:', e && e.message);
-}
-// after pdfBuffer created and maybe after owner email/fire-and-forget call
-try {
-  const pdfB64 = pdfBuffer.toString('base64');
-  // call Netlify function to send customer receipt via Brevo
-  if (body.email) {
-    fetch(`${process.env.URL || ""}/.netlify/functions/sendEmailCustomer`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name,
-        phone,
-        email: body.email,
-        orderId,
-        cart,
-        totalAmount: computedTotal,
-        messageText,
-        pdfBase64: pdfB64
-      })
-    }).catch(err => {
-      console.warn('sendEmailCustomer call failed:', err && err.message);
-    });
-  }
-} catch (e) {
-  console.warn('Error calling sendEmailCustomer:', e && e.message);
-}
+
+    // Send a copy to owner emails via Netlify server function (optional — non-blocking)
+    try {
+      const pdfB64 = pdfBuffer.toString('base64');
+      fetch(`${process.env.URL || ""}/.netlify/functions/sendEmailOrder`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          orderId,
+          cart,
+          totalAmount: computedTotal,
+          messageText,
+          pdfBase64: pdfB64
+        })
+      }).catch(err => {
+        console.warn('sendEmailOrder call failed:', err && err.message);
+      });
+    } catch (e) {
+      console.warn('Error preparing email send:', e && e.message);
+    }
+
+    // Send customer receipt via Brevo
+    try {
+      const pdfB64 = pdfBuffer.toString('base64');
+      if (body.email) {
+        fetch(`${process.env.URL || ""}/.netlify/functions/sendEmailCustomer`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            email: body.email,
+            orderId,
+            cart,
+            totalAmount: computedTotal,
+            messageText,
+            pdfBase64: pdfB64
+          })
+        }).catch(err => {
+          console.warn('sendEmailCustomer call failed:', err && err.message);
+        });
+      }
+    } catch (e) {
+      console.warn('Error calling sendEmailCustomer:', e && e.message);
+    }
 
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
     const TELEGRAM_CHAT_IDS = getChatIdsFromEnv();
@@ -325,7 +395,7 @@ try {
         const formData = new FormData();
         formData.append("chat_id", chatId);
         formData.append("document", pdfBuffer, {
-          filename: `order-${orderId}.pdf`,
+          filename: `${shopName.replace(/\s+/g, '-')}-Order-${orderId}.pdf`,
           contentType: "application/pdf"
         });
         const headers = formData.getHeaders ? formData.getHeaders() : {};

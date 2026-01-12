@@ -1,0 +1,25 @@
+# robots.txt for https://sublimesweets.netlify.app
+
+User-agent: *
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /checkout
+Disallow: /checkout/*
+Disallow: /cart
+Disallow: /cart/*
+Disallow: /user
+Disallow: /user/*
+Disallow: /account
+Disallow: /account/*
+Disallow: /api
+Disallow: /api/*
+Disallow: /temp
+Disallow: /temp/*
+Disallow: /private
+Disallow: /private/*
+
+# Allow all other pages
+Allow: /
+
+# Sitemap
+Sitemap: https://sublimesweets.netlify.app/sitemap.xml
