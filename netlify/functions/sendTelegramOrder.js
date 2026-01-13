@@ -123,14 +123,15 @@ export async function handler(event) {
       return `• ${title} (x${qty}) - Rs. ${price * qty}`;
     }).join("\n") : "";
 
-    // Determine paid / cod badge (server-enforced)
+    // ✅ FIXED: Determine paid / cod badge ONLY by payment.status
     let statusBadge = '🔴 *COD / UNPAID*';
     try {
       const payment = body.payment || {};
       const status = (payment.status || '').toString().toLowerCase();
-      const amountPaidNum = Number(body.amountPaid ?? body.amount ?? body.amount_paid ?? 0);
-
-      if (status === 'paid' || status === 'success' || (!isNaN(amountPaidNum) && amountPaidNum > 0)) {
+      
+      // ✅ Only check payment.status, NOT amount
+      // COD orders have status='pending', paid orders have status='paid'
+      if (status === 'paid' || status === 'success') {
         statusBadge = '🟢 *PAID*';
       } else {
         statusBadge = '🔴 *COD / UNPAID*';
