@@ -3460,12 +3460,10 @@ const products = [
   }
 ];
 
-// Works in browser
 if (typeof window !== 'undefined') {
   window.products = products;
 }
 
-// Works in Node.js / Netlify
 if (typeof module !== 'undefined') {
   module.exports = products;
 }
