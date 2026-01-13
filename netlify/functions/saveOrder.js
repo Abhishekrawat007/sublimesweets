@@ -33,6 +33,7 @@ async function ensureFirebaseInit() {
 }
 
 export async function handler(event) {
+    console.log("❌ saveOrder called with body:", event.body);
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -40,22 +41,23 @@ export async function handler(event) {
   try {
     await ensureFirebaseInit();
 
-    const order = JSON.parse(event.body || "{}");
+    const { pdfUrl, ...order } = JSON.parse(event.body || "{}");
 
-    if (!order.orderId || !order.phone || !order.cart) {
-      return { statusCode: 400, body: "Invalid order payload" };
+    if (!order.orderId) {
+      return { statusCode: 400, body: "Missing orderId" };
     }
 
-    // Save order
+    // Save order to Firebase
     const orderRef = await admin
       .database()
       .ref("sites/sublimesweets/orders")
       .push({
         ...order,
+        pdfUrl: pdfUrl || null,
         createdAt: Date.now(),
       });
 
- // ✅ SEND NOTIFICATION + AUTO-CLEANUP FAILED TOKENS
+  // ✅ SEND NOTIFICATION SYNCHRONOUSLY (WAIT BEFORE RETURNING)
 let notifResult = { status: 'starting' };
 try {
   const snapshot = await admin.database().ref('sites/sublimesweets/adminTokens').once('value');
@@ -68,7 +70,7 @@ try {
     notifResult.status = 'sending';
     let successCount = 0;
     let failureCount = 0;
-    const toRemove = []; // ✅ DEFINE ARRAY HERE
+    const toRemove = [];
     
     for (const token of adminTokens) {
       try {
@@ -85,31 +87,38 @@ try {
         successCount++;
       } catch (err) {
         failureCount++;
-        toRemove.push(token);
-        console.log('Failed token, removing:', token.substring(0, 20));
+        const tokenKey = Object.keys(tokenData).find(k => tokenData[k].token === token);
+        if (tokenKey) {
+          toRemove.push(tokenKey);
+        }
+        console.error(`Failed token:`, token.substring(0, 20), err.message);
       }
     }
     
     // Cleanup invalid tokens
-    for (const token of toRemove) {
-      await admin.database().ref('sites/sublimesweets/adminTokens/' + token).remove();
+    for (const tokenKey of toRemove) {
+      await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
     }
     
     notifResult.status = 'sent';
     notifResult.success = successCount;
     notifResult.failed = failureCount;
     notifResult.removed = toRemove.length;
+    
+    console.log(`✅ Sent: ${successCount}/${adminTokens.length}, Cleaned: ${toRemove.length}`);
   } else {
     notifResult.status = 'noTokens';
   }
 } catch (notifErr) {
   notifResult.status = 'error';
   notifResult.error = notifErr.message;
+  console.error("⚠️ Notification failed:", notifErr);
 }
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ ok: true, orderId: orderRef.key, debug: notifResult }),
-    };
+
+return {
+  statusCode: 200,
+  body: JSON.stringify({ ok: true, orderId: orderRef.key, debug: notifResult }),
+};
   } catch (err) {
     console.error("saveOrder error:", err);
     return {
