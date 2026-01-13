@@ -1439,7 +1439,7 @@ window.addEventListener('focus', () => {
       }
     });
     
-    // Handle checkout form submission
+    // ✅ CORRECTED CHECKOUT FORM HANDLER
     document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       
@@ -1495,28 +1495,29 @@ window.addEventListener('focus', () => {
       const totalAmount = calculateTotal(cart);
       
       if (method === 'cod') {
-        // COD flow
-       const itemLines = cart.map(item => {
-  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
-  const label = details ? `${item.title} (${details})` : item.title;
-  return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
-}).join('\n');
-        const messageText = `🧾 *New Order Received*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n📦 *Items:*\n${itemLines}`;
+        // ========== COD FLOW - USE saveOrder ==========
+        const itemLines = cart.map(item => {
+          const details = [item.size, item.flavor].filter(Boolean).join(' | ');
+          const label = details ? `${item.title} (${details})` : item.title;
+          return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
+        }).join('\n');
         
-        const payload = {
+        const messageText = `🧾 *New COD Order*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n📦 *Items:*\n${itemLines}`;
+        
+        const basePayload = {
           orderId,
           name,
           phone,
           email,
           cart: cart.map(i => ({
-  id: i.id,
-  title: i.title,
-  price: i.price,
-  qty: i.qty,
-  image: i.image || "",
-  size: i.size || null,
-  flavor: i.flavor || null
-})),
+            id: i.id,
+            title: i.title,
+            price: i.price,
+            qty: i.qty,
+            image: i.image || "",
+            size: i.size || null,
+            flavor: i.flavor || null
+          })),
           totalAmount,
           amountPaid: totalAmount,
           currency: 'INR',
@@ -1525,45 +1526,61 @@ window.addEventListener('focus', () => {
           ts: Date.now()
         };
         
+        // 🔔 Step 1: Send to Telegram (generates PDF)
+        let pdfUrl = null;
+        try {
+          console.log('📤 Sending to Telegram...');
+          const telegramRes = await fetch("/.netlify/functions/sendTelegramOrder", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(basePayload)
+          });
+          
+          if (telegramRes.ok) {
+            const telegramData = await telegramRes.json();
+            console.log('✅ Telegram response:', telegramData);
+            if (telegramData && telegramData.pdfUrl) {
+              pdfUrl = telegramData.pdfUrl;
+              console.log('✅ PDF URL received:', pdfUrl);
+            }
+          } else {
+            console.warn('⚠️ Telegram send failed:', await telegramRes.text());
+          }
+        } catch (e) {
+          console.warn('⚠️ Telegram send error:', e);
+        }
         
-        // 🔔 Send Telegram FIRST to get PDF
-let pdfUrl = null;
-try {
-  const telegramRes = await fetch("/.netlify/functions/sendTelegramOrder", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
-  const telegramData = await telegramRes.json();
-  console.log('Telegram response:', telegramData);
-  if (telegramData && telegramData.pdfUrl) {
-    pdfUrl = telegramData.pdfUrl;
-  }
-} catch (e) {
-  console.warn('Telegram send failed', e);
-}
-
-// ✅ Save to Firebase with pdfUrl
-try {
-  const savePayload = { ...payload, pdfUrl };
-  console.log("❌ Saving order to Firebase:", savePayload);
-  const saveRes = await fetch("/.netlify/functions/saveOrder", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(savePayload)
-  });
-  const saveData = await saveRes.json();
-  console.log("✅ Firebase save response:", saveData);
-} catch (err) {
-  console.error("saveOrder COD failed:", err);
-}
+        // 💾 Step 2: Save to Firebase using saveOrder (COD function)
+        try {
+          const savePayload = { 
+            ...basePayload, 
+            pdfUrl,  // ✅ Include PDF URL
+            timestamp: new Date().toISOString()
+          };
+          
+          console.log("💾 Saving COD order to saveOrder:", savePayload);
+          
+          const saveRes = await fetch("/.netlify/functions/saveOrder", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(savePayload)
+          });
+          
+          if (saveRes.ok) {
+            const saveData = await saveRes.json();
+            console.log("✅ saveOrder response:", saveData);
+          } else {
+            console.error("❌ saveOrder failed:", await saveRes.text());
+          }
+        } catch (err) {
+          console.error("❌ saveOrder COD failed:", err);
+        }
         
-       
         // Show success
         showSuccessMessage(orderId, name);
         
       } else {
-        // Online payment flow
+        // ========== ONLINE PAYMENT FLOW - USE save-order ==========
         try {
           const amountPaise = Math.round(totalAmount * 100);
           const createRes = await fetch('/.netlify/functions/create-order', {
@@ -1575,33 +1592,6 @@ try {
           if (!createRes.ok) throw new Error('Failed to create order');
           
           const order = await createRes.json();
-          
-          // Save to saveOrder first
-          try {
-            await fetch("/.netlify/functions/saveOrder", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                orderId,
-                name,
-                phone,
-                email,
-                cart: cart.map(i => ({
-                  id: i.id,
-                  title: i.title,
-                  price: i.price,
-                  qty: i.qty,
-                  image: i.image || "",
-                  size: i.size || null,
-                  flavor: i.flavor || null
-                })),
-                totalAmount,
-                timestamp: new Date().toISOString()
-              })
-            });
-          } catch (err) {
-            console.warn('saveOrder before payment failed:', err);
-          }
           
           if (!window.Razorpay) {
             await new Promise((resolve, reject) => {
@@ -1618,8 +1608,8 @@ try {
             key: RAZORPAY_KEY_ID,
             amount: order.amount,
             currency: order.currency,
-            name: 'Sublime Store',
-            description: 'Order from Sublime Store',
+            name: window.SHOP_NAME || 'Sublime Store',
+            description: 'Order from ' + (window.SHOP_NAME || 'Sublime Store'),
             order_id: order.id,
             prefill: { name, contact: phone, email },
             handler: async function(response) {
@@ -1633,30 +1623,29 @@ try {
                 
                 if (!verifyRes.ok) throw new Error('Payment verification failed');
                 
-               const itemLines = cart.map(item => {
-  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
-  const label = details ? `${item.title} (${details})` : item.title;
-  return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
-}).join('\n');
+                const itemLines = cart.map(item => {
+                  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
+                  const label = details ? `${item.title} (${details})` : item.title;
+                  return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
+                }).join('\n');
 
-                const messageText = `🧾 *New Order Received*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n📦 *Items:*\n${itemLines}`;
+                const messageText = `🧾 *New PAID Order*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n✅ *Payment ID:* ${response.razorpay_payment_id}\n📦 *Items:*\n${itemLines}`;
                 
-                const payload = {
+                const basePayload = {
                   orderId,
                   razorOrderId: response.razorpay_order_id,
                   name,
                   phone,
                   email,
-                 cart: cart.map(i => ({
-  id: i.id,
-  title: i.title,
-  price: i.price,
-  qty: i.qty,
-  image: i.image || "",
-  size: i.size || null,
-  flavor: i.flavor || null
-})),
-
+                  cart: cart.map(i => ({
+                    id: i.id,
+                    title: i.title,
+                    price: i.price,
+                    qty: i.qty,
+                    image: i.image || "",
+                    size: i.size || null,
+                    flavor: i.flavor || null
+                  })),
                   totalAmount,
                   amountPaid: totalAmount,
                   currency: 'INR',
@@ -1669,46 +1658,60 @@ try {
                     status: 'paid'
                   },
                   messageText,
-                  ts: Date.now(),
-                  timestamp: new Date().toISOString()
+                  ts: Date.now()
                 };
                 
-             // 🔔 Send Telegram FIRST to get PDF
-let pdfUrl = null;
-try {
-  const telegramRes = await fetch('/.netlify/functions/sendTelegramOrder', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  const telegramData = await telegramRes.json();
-  console.log('Telegram response:', telegramData);
-  if (telegramData && telegramData.pdfUrl) {
-    pdfUrl = telegramData.pdfUrl;
-  }
-} catch (e) {
-  console.warn('Telegram failed:', e);
-}
+                // 🔔 Step 1: Send to Telegram (generates PDF)
+                let pdfUrl = null;
+                try {
+                  console.log('📤 Sending to Telegram...');
+                  const telegramRes = await fetch('/.netlify/functions/sendTelegramOrder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(basePayload)
+                  });
+                  
+                  if (telegramRes.ok) {
+                    const telegramData = await telegramRes.json();
+                    console.log('✅ Telegram response:', telegramData);
+                    if (telegramData && telegramData.pdfUrl) {
+                      pdfUrl = telegramData.pdfUrl;
+                      console.log('✅ PDF URL received:', pdfUrl);
+                    }
+                  }
+                } catch (e) {
+                  console.warn('⚠️ Telegram failed:', e);
+                }
 
-// ✅ Save with PDF URL
-try {
-  const saveRes = await fetch('/.netlify/functions/save-order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-      ...payload, 
-      pdfUrl: pdfUrl,
-      isPaid: true,
-      razorpay_payment_id: response.razorpay_payment_id,
-      createdAt: Date.now(),
-      timestamp: new Date().toISOString()
-    })
-  });
-  const saveData = await saveRes.json();
-  console.log('✅ Online order saved:', saveData);
-} catch (err) {
-  console.error('❌ save-order failed:', err);
-}
+                // 💾 Step 2: Save to Firebase using save-order (PAID function)
+                try {
+                  const savePayload = {
+                    ...basePayload,
+                    pdfUrl,  // ✅ Include PDF URL
+                    isPaid: true,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    createdAt: Date.now(),
+                    timestamp: new Date().toISOString()
+                  };
+                  
+                  console.log('💾 Saving PAID order to save-order:', savePayload);
+                  
+                  const saveRes = await fetch('/.netlify/functions/save-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(savePayload)
+                  });
+                  
+                  if (saveRes.ok) {
+                    const saveData = await saveRes.json();
+                    console.log('✅ save-order response:', saveData);
+                  } else {
+                    console.error('❌ save-order failed:', await saveRes.text());
+                  }
+                } catch (err) {
+                  console.error('❌ save-order error:', err);
+                }
+                
                 showSuccessMessage(orderId, name);
                 
               } catch (err) {
