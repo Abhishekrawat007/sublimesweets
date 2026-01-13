@@ -631,7 +631,7 @@ const res = await fetch("/.netlify/functions/updateProduct", {
     "Content-Type": "application/json",
     Authorization: "Bearer " + (token || "")
   },
- body: JSON.stringify({ owner: "Abhishekrawat007", repo: "showcase-2", path: "js/product.js", content: fileContent }),
+ body: JSON.stringify({ owner: "Abhishekrawat007", repo: "sublimesweets", path: "js/product.js", content: fileContent }),
 });
 
 
@@ -1292,7 +1292,7 @@ function showNewOrderNotification(order) {
         headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
         body: JSON.stringify({
   owner: "Abhishekrawat007",
-  repo: "showcase-2",
+  repo: "sublimesweets",
   path: "js/stylishPages.js",
   content
 })
