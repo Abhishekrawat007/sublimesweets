@@ -690,7 +690,7 @@ export default newArrivals;
       },
       body: JSON.stringify({
   owner: "Abhishekrawat007",
-  repo: "showcase-2",
+  repo: "sublimesweets",
   path: "js/newArrivals.js",
   content: fileContent
 })
