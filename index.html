@@ -1718,6 +1718,375 @@ body.search-active .products-section {
   </div>
 </div>
 
+
+<div id="pwa-install-bar" hidden>
+  <button class="pwa-close" id="pwa-close-btn">×</button>
+  <div class="pwa-row">
+    <img src="/web-app-manifest-192x192.png" width="48" height="48" style="border-radius:12px;">
+    <div class="pwa-text">
+      <div class="pwa-title">Install App</div>
+      <div class="pwa-sub">Quick access from home screen</div>
+    </div>
+    <div class="pwa-cta">
+      <button id="pwa-install-btn" class="pwa-btn pwa-install">Install</button>
+      <button id="pwa-later-btn" class="pwa-btn pwa-later">✕</button>
+    </div>
+  </div>
+</div>
+<style>
+#pwa-install-bar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(94vw,460px);background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.3);padding:14px 16px;z-index:999999;opacity:0;transition:opacity 0.3s;}
+#pwa-install-bar:not([hidden]){opacity:1;}
+.pwa-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border:0;background:rgba(255,255,255,0.1);color:#fff;border-radius:50%;cursor:pointer;font-size:16px;}
+.pwa-row{display:flex;align-items:center;gap:12px;}
+.pwa-text{flex:1;min-width:0;}
+.pwa-title{font-size:15px;font-weight:700;color:#fff;}
+.pwa-sub{font-size:13px;color:rgba(255,255,255,0.7);margin-top:2px;}
+.pwa-cta{display:flex;gap:8px;}
+.pwa-btn{padding:8px 16px;border-radius:10px;border:0;font-weight:600;font-size:14px;cursor:pointer;}
+.pwa-install{background:#3b82f6;color:#fff;}
+.pwa-later{background:rgba(255,255,255,0.1);color:#fff;width:32px;padding:8px;}
+@media(prefers-color-scheme:light){
+#pwa-install-bar{background:rgba(255,255,255,0.95);box-shadow:0 4px 24px rgba(0,0,0,0.15);}
+.pwa-title{color:#0f172a;}
+.pwa-sub{color:#64748b;}
+.pwa-close,.pwa-later{background:rgba(0,0,0,0.05);color:#0f172a;}
+}
+</style>
+<!-- Ultra Premium Notification Modal -->
+<div id="sublime-notif-modal" class="sublime-notif-modal sublime-hidden" role="dialog" aria-modal="true" aria-labelledby="sublime-notif-title" aria-describedby="sublime-notif-desc">
+  <div class="sublime-notif-backdrop" id="sublime-notif-backdrop" tabindex="-1"></div>
+
+  <div class="sublime-notif-wrap"> 
+    <!-- Animated floating icon -->
+    <div class="sublime-notif-icon" aria-hidden="true">
+      <div class="sublime-icon-ring"></div>
+      <svg class="sublime-icon-bell" width="32" height="32" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22c1.1046 0 2-.8954 2-2h-4c0 1.1046.8954 2 2 2z" fill="currentColor"/>
+        <path d="M18 16v-5c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 10-3 0v.68C7.64 5.36 6 7.92 6 11v5l-1.7 1.7A1 1 0 005 19h14a1 1 0 00.7-1.6L18 16z" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="sublime-notif-dialog" role="document" aria-labelledby="sublime-notif-title">
+      <header class="sublime-notif-header">
+        <h3 id="sublime-notif-title">Stay in the Loop</h3>
+        <p class="sublime-notif-subtitle">Get notified about new arrivals & exclusive deals</p>
+      </header>
+
+      <div class="sublime-notif-body" id="sublime-notif-desc">
+        <div class="sublime-feature">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>New product launches</span>
+        </div>
+        <div class="sublime-feature">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Flash sales & offers</span>
+        </div>
+        <div class="sublime-feature">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Order updates</span>
+        </div>
+      </div>
+
+      <footer class="sublime-notif-footer">
+        <button id="sublime-notif-enable" class="sublime-btn sublime-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9zM13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Enable Notifications
+        </button>
+        <button id="sublime-notif-close" class="sublime-btn sublime-ghost">Maybe Later</button>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<style>
+.sublime-hidden { display: none !important; }
+
+.sublime-notif-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120000;
+  animation: sublimeFadeIn 0.3s ease;
+}
+
+@keyframes sublimeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sublime-notif-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.sublime-notif-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  pointer-events: none;
+}
+
+/* Floating animated icon */
+.sublime-notif-icon {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: -32px;
+  z-index: 3;
+  pointer-events: none;
+  animation: sublimeFloat 3s ease-in-out infinite;
+}
+
+@keyframes sublimeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.sublime-icon-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.4);
+  animation: sublimePulse 2s ease-in-out infinite;
+}
+
+@keyframes sublimePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.sublime-icon-bell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+  animation: sublimeRing 2s ease-in-out infinite;
+}
+
+@keyframes sublimeRing {
+  0%, 90%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  92%, 96% { transform: translate(-50%, -50%) rotate(-10deg); }
+  94%, 98% { transform: translate(-50%, -50%) rotate(10deg); }
+}
+
+/* Dialog card */
+.sublime-notif-dialog {
+  pointer-events: auto;
+  width: 92%;
+  max-width: 440px;
+  border-radius: 20px;
+  padding: 48px 28px 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-sizing: border-box;
+  text-align: center;
+  animation: sublimeSlideUp 0.4s ease;
+}
+
+@keyframes sublimeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sublime-notif-header {
+  margin-bottom: 20px;
+}
+
+.sublime-notif-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sublime-notif-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.sublime-notif-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.sublime-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.sublime-feature svg {
+  flex-shrink: 0;
+  color: #667eea;
+}
+
+.sublime-feature span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.sublime-notif-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sublime-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sublime-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+}
+
+.sublime-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.45);
+}
+
+.sublime-primary:active {
+  transform: translateY(0);
+}
+
+.sublime-ghost {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.sublime-ghost:hover {
+  background: rgba(100, 116, 139, 0.05);
+  color: #475569;
+}
+
+@media (max-width: 520px) {
+  .sublime-notif-dialog {
+    width: calc(100% - 28px);
+    max-width: none;
+    padding: 40px 20px 20px;
+    border-radius: 16px;
+  }
+  .sublime-notif-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: -28px;
+  }
+  .sublime-icon-bell {
+    width: 28px;
+    height: 28px;
+  }
+  .sublime-notif-header h3 {
+    font-size: 20px;
+  }
+}
+
+/* Dark mode */
+.dark-mode .sublime-notif-backdrop {
+  background: rgba(0,0,0,0.75);
+}
+
+.dark-mode .sublime-notif-dialog {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.dark-mode .sublime-notif-header h3 {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark-mode .sublime-notif-subtitle {
+  color: #94a3b8;
+}
+
+.dark-mode .sublime-feature {
+  background: rgba(129, 140, 248, 0.08);
+  border-color: rgba(129, 140, 248, 0.15);
+}
+
+.dark-mode .sublime-feature svg {
+  color: #818cf8;
+}
+
+.dark-mode .sublime-feature span {
+  color: #e2e8f0;
+}
+
+.dark-mode .sublime-icon-ring {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  box-shadow: 0 8px 32px rgba(129, 140, 248, 0.3);
+}
+
+.dark-mode .sublime-primary {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  box-shadow: 0 8px 24px rgba(129, 140, 248, 0.25);
+}
+
+.dark-mode .sublime-primary:hover {
+  box-shadow: 0 12px 32px rgba(129, 140, 248, 0.35);
+}
+
+.dark-mode .sublime-ghost {
+  background: rgba(255,255,255,0.03);
+  color: #cbd5e1;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dark-mode .sublime-ghost:hover {
+  background: rgba(255,255,255,0.06);
+  color: #e2e8f0;
+}
+</style>
     <script src="js/product.js" defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/ice-cream.js" defer></script>
@@ -1733,6 +2102,8 @@ body.search-active .products-section {
     <script src="js/footer.js" defer></script>
     <script src="js/bottom-bar.js" defer></script>
     <script src="js/nav-sync.js"></script>
+    <script src="js/pwa-install.js" defer></script>
+    <script src="js/push.js"></script>
 
   <script>
     let lastScrollY = window.scrollY;
@@ -1769,6 +2140,33 @@ const categorySection = document.querySelector('.categories-section');
 if (categorySection) {
     animateOnScroll.observe(categorySection);
 }
+ function notifyAndScroll() {
+    // Let your cart UI know to recompute (read localStorage)
+    document.dispatchEvent(new CustomEvent('cart:maybeUpdated'));
+    if (clear) document.dispatchEvent(new CustomEvent('cart:cleared'));
+
+    // Scroll to product list if present
+    const target = document.getElementById('productList');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback: set hash so if the section mounts later, browser will jump
+      try { location.hash = '#productList'; } catch(_){}
+    }
+
+    // Re-emit once on next tick for late-mounted listeners (hydration, etc.)
+    setTimeout(() => {
+      document.dispatchEvent(new CustomEvent('cart:maybeUpdated'));
+      if (clear) document.dispatchEvent(new CustomEvent('cart:cleared'));
+    }, 0);
+  }
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', notifyAndScroll, { once: true });
+  } else {
+    // DOM is ready already
+    notifyAndScroll();
+  }
 </script>
 
 </body>
