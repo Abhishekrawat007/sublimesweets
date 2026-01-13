@@ -1,3 +1,4 @@
+// netlify/functions/saveOrder.js (COD ORDERS)
 import admin from "firebase-admin";
 import zlib from "zlib";
 import { promisify } from "util";
@@ -33,7 +34,8 @@ async function ensureFirebaseInit() {
 }
 
 export async function handler(event) {
-    console.log("❌ saveOrder called with body:", event.body);
+  console.log("💾 saveOrder (COD) called");
+  
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -41,86 +43,104 @@ export async function handler(event) {
   try {
     await ensureFirebaseInit();
 
-    const { pdfUrl, ...order } = JSON.parse(event.body || "{}");
+    const body = JSON.parse(event.body || "{}");
+    const { pdfUrl, orderId, name, phone, email, cart, totalAmount, payment, timestamp } = body;
 
-    if (!order.orderId) {
+    if (!orderId) {
       return { statusCode: 400, body: "Missing orderId" };
     }
 
-    // Save order to Firebase
+    // ✅ Save COD order with EXPLICIT isPaid: false
     const orderRef = await admin
       .database()
       .ref("sites/sublimesweets/orders")
       .push({
-        ...order,
+        orderId,
+        name,
+        phone,
+        email: email || null,
+        cart,
+        totalAmount,
+        isPaid: false,  // ✅ COD is ALWAYS unpaid initially
         pdfUrl: pdfUrl || null,
+        payment: payment || { provider: 'COD', method: 'cod', status: 'pending' },
         createdAt: Date.now(),
+        timestamp: timestamp || new Date().toISOString(),
       });
 
-  // ✅ SEND NOTIFICATION SYNCHRONOUSLY (WAIT BEFORE RETURNING)
-let notifResult = { status: 'starting' };
-try {
-  const snapshot = await admin.database().ref('sites/sublimesweets/adminTokens').once('value');
-  const tokenData = snapshot.val() || {};
-  const adminTokens = Object.values(tokenData).map(t => t.token).filter(Boolean);
-  
-  notifResult.tokensFound = adminTokens.length;
+    console.log('✅ COD order saved:', orderRef.key);
 
-  if (adminTokens.length > 0) {
-    notifResult.status = 'sending';
-    let successCount = 0;
-    let failureCount = 0;
-    const toRemove = [];
-    
-    for (const token of adminTokens) {
-      try {
-        await admin.messaging().send({
-          token: token,
-          notification: {
-            title: "🔔 New Order!",
-            body: `${order.name || 'Customer'} - ₹${order.totalAmount || 0}`
-          },
-          webpush: {
-            fcmOptions: { link: "/editor.html" }
+    // ✅ SEND NOTIFICATION SYNCHRONOUSLY
+    let notifResult = { status: 'starting' };
+    try {
+      const snapshot = await admin.database().ref('sites/sublimesweets/adminTokens').once('value');
+      const tokenData = snapshot.val() || {};
+      const adminTokens = Object.values(tokenData).map(t => t.token).filter(Boolean);
+      
+      notifResult.tokensFound = adminTokens.length;
+
+      if (adminTokens.length > 0) {
+        notifResult.status = 'sending';
+        let successCount = 0;
+        let failureCount = 0;
+        const toRemove = [];
+        
+        for (const token of adminTokens) {
+          try {
+            await admin.messaging().send({
+              token: token,
+              notification: {
+                title: "🔔 New COD Order!",
+                body: `${name || 'Customer'} - ₹${totalAmount || 0} (COD)`
+              },
+              webpush: {
+                fcmOptions: { link: "/editor.html" }
+              }
+            });
+            successCount++;
+          } catch (err) {
+            failureCount++;
+            const tokenKey = Object.keys(tokenData).find(k => tokenData[k].token === token);
+            if (tokenKey) {
+              toRemove.push(tokenKey);
+            }
+            console.error(`Failed token:`, token.substring(0, 20), err.message);
           }
-        });
-        successCount++;
-      } catch (err) {
-        failureCount++;
-        const tokenKey = Object.keys(tokenData).find(k => tokenData[k].token === token);
-        if (tokenKey) {
-          toRemove.push(tokenKey);
         }
-        console.error(`Failed token:`, token.substring(0, 20), err.message);
+        
+        // Cleanup invalid tokens
+        for (const tokenKey of toRemove) {
+          await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
+        }
+        
+        notifResult.status = 'sent';
+        notifResult.success = successCount;
+        notifResult.failed = failureCount;
+        notifResult.removed = toRemove.length;
+        
+        console.log(`✅ COD Notifications: ${successCount}/${adminTokens.length}, Cleaned: ${toRemove.length}`);
+      } else {
+        notifResult.status = 'noTokens';
       }
+    } catch (notifErr) {
+      notifResult.status = 'error';
+      notifResult.error = notifErr.message;
+      console.error("⚠️ Notification failed:", notifErr);
     }
-    
-    // Cleanup invalid tokens
-    for (const tokenKey of toRemove) {
-    await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
-    }
-    
-    notifResult.status = 'sent';
-    notifResult.success = successCount;
-    notifResult.failed = failureCount;
-    notifResult.removed = toRemove.length;
-    
-    console.log(`✅ Sent: ${successCount}/${adminTokens.length}, Cleaned: ${toRemove.length}`);
-  } else {
-    notifResult.status = 'noTokens';
-  }
-} catch (notifErr) {
-  notifResult.status = 'error';
-  notifResult.error = notifErr.message;
-  console.error("⚠️ Notification failed:", notifErr);
-}
 
-return {
-  statusCode: 200,
-  body: JSON.stringify({ ok: true, orderId: orderRef.key, debug: notifResult }),
-};
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ 
+        ok: true, 
+        orderId: orderRef.key, 
+        type: 'COD',
+        isPaid: false,
+        hasPdf: !!pdfUrl,
+        debug: notifResult 
+      }),
+    };
   } catch (err) {
-    console.error("saveOrder error:", err);
+    console.error("❌ saveOrder (COD) error:", err);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: err.message }),
