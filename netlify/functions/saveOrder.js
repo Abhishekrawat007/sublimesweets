@@ -97,7 +97,7 @@ try {
     
     // Cleanup invalid tokens
     for (const tokenKey of toRemove) {
-      await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
+    await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
     }
     
     notifResult.status = 'sent';
