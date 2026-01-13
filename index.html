@@ -1769,83 +1769,94 @@ body.search-active .products-section {
 
 
 <div id="pwa-install-bar" hidden>
-  <div class="pwa-glow"></div>
-  <button class="pwa-close" id="pwa-close-btn">×</button>
+  <div class="pwa-shimmer"></div>
+  <button class="pwa-close" id="pwa-close-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+  </button>
   
-  <div class="pwa-content">
-    <div class="pwa-icon-wrap">
-      <img src="/web-app-manifest-192x192.png" width="56" height="56" style="border-radius:16px;">
-      <div class="pwa-pulse"></div>
+  <div class="pwa-container">
+    <div class="pwa-hero">
+      <div class="pwa-icon-stack">
+        <div class="pwa-icon-bg"></div>
+        <img src="/web-app-manifest-192x192.png" width="64" height="64" style="border-radius:18px;position:relative;z-index:2;">
+        <div class="pwa-spark">✨</div>
+      </div>
+      
+      <div class="pwa-info">
+        <div class="pwa-tag">LIGHTNING FAST</div>
+        <h3 class="pwa-title">Experience Native Speed</h3>
+        <p class="pwa-desc">Instant loads • Works offline • 1-tap checkout</p>
+      </div>
     </div>
     
-    <div class="pwa-text">
-      <div class="pwa-badge">⚡ NATIVE APP</div>
-      <div class="pwa-title">Install SublimeStore</div>
-      <div class="pwa-sub">Lightning-fast checkout • Offline access • Push updates</div>
-    </div>
-    
-    <div class="pwa-cta">
-      <button id="pwa-install-btn" class="pwa-btn pwa-install">
-        <span>Install Now</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <div class="pwa-actions">
+      <button id="pwa-install-btn" class="pwa-btn pwa-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Install App
       </button>
-      <button id="pwa-later-btn" class="pwa-btn pwa-later">Maybe Later</button>
+      <button id="pwa-later-btn" class="pwa-btn pwa-ghost">Skip</button>
     </div>
   </div>
   
-  <div class="pwa-progress"><i></i></div>
+  <div class="pwa-timer"><span></span></div>
 </div>
 
 <style>
-#pwa-install-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:min(94vw,650px);background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,41,59,0.98));backdrop-filter:blur(20px);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.1);padding:20px 24px;z-index:999999;opacity:0;transform:translateX(-50%) translateY(100px);transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);}
-#pwa-install-bar:not([hidden]){opacity:1;transform:translateX(-50%) translateY(0);}
+#pwa-install-bar{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) scale(0.9);width:min(92vw,580px);background:linear-gradient(145deg,#0a0e27 0%,#1a1f3a 100%);border-radius:28px;box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.08),inset 0 1px 0 rgba(255,255,255,0.05);padding:24px;z-index:999999;opacity:0;transition:all 0.6s cubic-bezier(0.16,1,0.3,1);overflow:hidden;}
+#pwa-install-bar:not([hidden]){opacity:1;transform:translateX(-50%) scale(1);}
 
-.pwa-glow{position:absolute;inset:-40%;background:radial-gradient(circle,rgba(59,130,246,0.15),transparent 70%);filter:blur(40px);pointer-events:none;animation:glow 3s ease-in-out infinite;}
-@keyframes glow{0%,100%{opacity:0.5;}50%{opacity:0.8;}}
+.pwa-shimmer{position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,0.03) 50%,transparent 60%);animation:shimmer 3s infinite;}
+@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
 
-.pwa-close{position:absolute;top:12px;right:12px;width:28px;height:28px;border:0;background:rgba(255,255,255,0.08);color:#fff;border-radius:50%;cursor:pointer;font-size:18px;transition:all 0.2s;}
-.pwa-close:hover{background:rgba(255,255,255,0.15);transform:rotate(90deg);}
+.pwa-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:0;background:rgba(255,255,255,0.06);color:#fff;border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);z-index:10;}
+.pwa-close:hover{background:rgba(255,255,255,0.12);transform:rotate(180deg) scale(1.1);}
 
-.pwa-content{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;}
+.pwa-container{display:flex;flex-direction:column;gap:20px;}
 
-.pwa-icon-wrap{position:relative;width:56px;height:56px;}
-.pwa-pulse{position:absolute;inset:-4px;border-radius:18px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);opacity:0.4;animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:0.4;}50%{transform:scale(1.1);opacity:0.2;}}
+.pwa-hero{display:flex;align-items:center;gap:20px;}
 
-.pwa-text{min-width:0;}
-.pwa-badge{display:inline-block;padding:4px 10px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-size:10px;font-weight:800;letter-spacing:0.5px;border-radius:6px;margin-bottom:6px;}
-.pwa-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;letter-spacing:-0.02em;}
-.pwa-sub{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.4;}
+.pwa-icon-stack{position:relative;width:64px;height:64px;flex-shrink:0;}
+.pwa-icon-bg{position:absolute;inset:-12px;background:conic-gradient(from 0deg,#667eea,#764ba2,#f093fb,#667eea);border-radius:24px;opacity:0.6;filter:blur(16px);animation:rotate 4s linear infinite;}
+@keyframes rotate{to{transform:rotate(360deg);}}
+.pwa-spark{position:absolute;top:-8px;right:-8px;font-size:20px;animation:sparkle 1.5s ease-in-out infinite;}
+@keyframes sparkle{0%,100%{transform:scale(1) rotate(0deg);opacity:1;}50%{transform:scale(1.2) rotate(180deg);opacity:0.7;}}
 
-.pwa-cta{display:flex;flex-direction:column;gap:8px;}
-.pwa-btn{padding:12px 20px;border-radius:12px;border:0;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;justify-content:center;transition:all 0.2s;white-space:nowrap;}
-.pwa-install{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;box-shadow:0 8px 24px rgba(59,130,246,0.3);}
-.pwa-install:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(59,130,246,0.4);}
-.pwa-install:active{transform:translateY(0);}
-.pwa-later{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);font-size:13px;padding:8px 16px;}
-.pwa-later:hover{background:rgba(255,255,255,0.12);}
+.pwa-info{flex:1;min-width:0;}
+.pwa-tag{display:inline-block;padding:4px 12px;background:rgba(102,126,234,0.2);border:1px solid rgba(102,126,234,0.3);color:#a5b4fc;font-size:10px;font-weight:800;letter-spacing:1px;border-radius:8px;margin-bottom:8px;}
+.pwa-title{font-size:20px;font-weight:900;background:linear-gradient(135deg,#fff 0%,#a5b4fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 6px 0;letter-spacing:-0.03em;}
+.pwa-desc{font-size:13px;color:rgba(255,255,255,0.6);margin:0;line-height:1.5;}
 
-.pwa-progress{position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.1);border-radius:0 0 24px 24px;overflow:hidden;}
-.pwa-progress i{display:block;height:100%;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#3b82f6);width:100%;animation:progress 20s linear;}
-@keyframes progress{to{width:0;}}
+.pwa-actions{display:flex;gap:10px;}
+.pwa-btn{flex:1;padding:14px 20px;border-radius:14px;border:0;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);}
+.pwa-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;box-shadow:0 10px 30px rgba(102,126,234,0.4),inset 0 1px 0 rgba(255,255,255,0.2);}
+.pwa-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(102,126,234,0.5),inset 0 1px 0 rgba(255,255,255,0.2);}
+.pwa-primary:active{transform:translateY(-1px);}
+.pwa-ghost{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);}
+.pwa-ghost:hover{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.9);}
 
-@media(max-width:640px){
-.pwa-content{grid-template-columns:1fr;text-align:center;}
-.pwa-icon-wrap{margin:0 auto;}
-.pwa-cta{width:100%;}
-.pwa-btn{width:100%;}
+.pwa-timer{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.08);border-radius:0 0 28px 28px;overflow:hidden;}
+.pwa-timer span{display:block;height:100%;background:linear-gradient(90deg,#667eea,#764ba2,#f093fb);width:100%;animation:countdown 18s linear;}
+@keyframes countdown{to{width:0;}}
+
+@media(max-width:520px){
+.pwa-hero{flex-direction:column;text-align:center;}
+.pwa-actions{flex-direction:column;}
 }
 
 @media(prefers-color-scheme:light){
-#pwa-install-bar{background:linear-gradient(135deg,rgba(255,255,255,0.98),rgba(248,250,252,0.98));box-shadow:0 20px 60px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.06);}
-.pwa-glow{background:radial-gradient(circle,rgba(59,130,246,0.08),transparent 70%);}
-.pwa-close{background:rgba(0,0,0,0.05);color:#0f172a;}
-.pwa-close:hover{background:rgba(0,0,0,0.1);}
-.pwa-title{color:#0f172a;}
-.pwa-sub{color:#64748b;}
-.pwa-later{background:rgba(0,0,0,0.04);color:#475569;}
-.pwa-later:hover{background:rgba(0,0,0,0.08);}
-.pwa-progress{background:rgba(0,0,0,0.05);}
+#pwa-install-bar{background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);box-shadow:0 24px 64px rgba(0,0,0,0.1),0 0 0 1px rgba(0,0,0,0.05),inset 0 1px 0 rgba(255,255,255,0.8);}
+.pwa-shimmer{background:linear-gradient(110deg,transparent 40%,rgba(0,0,0,0.02) 50%,transparent 60%);}
+.pwa-close{background:rgba(0,0,0,0.04);color:#0f172a;}
+.pwa-close:hover{background:rgba(0,0,0,0.08);}
+.pwa-icon-bg{opacity:0.4;}
+.pwa-tag{background:rgba(102,126,234,0.1);border-color:rgba(102,126,234,0.2);color:#667eea;}
+.pwa-title{background:linear-gradient(135deg,#0f172a 0%,#667eea 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pwa-desc{color:#64748b;}
+.pwa-primary{box-shadow:0 10px 30px rgba(102,126,234,0.3),inset 0 1px 0 rgba(255,255,255,0.4);}
+.pwa-primary:hover{box-shadow:0 16px 40px rgba(102,126,234,0.4),inset 0 1px 0 rgba(255,255,255,0.4);}
+.pwa-ghost{background:rgba(0,0,0,0.03);color:#475569;border-color:rgba(0,0,0,0.08);}
+.pwa-ghost:hover{background:rgba(0,0,0,0.05);color:#0f172a;}
+.pwa-timer{background:rgba(0,0,0,0.05);}
 }
 </style>
 <!-- Ultra Premium Notification Modal -->
