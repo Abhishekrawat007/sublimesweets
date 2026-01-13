@@ -15,7 +15,8 @@ const products = [
       "images/paneer-do-pyaza-4.webp",
       "images/temp_0_1766556702457.webp",
       "images/temp_0_1766556708341.webp",
-      "images/temp_0_1766556713595.webp"
+      "images/temp_0_1766556713595.webp",
+      "https://res.cloudinary.com/dx4rkba7l/image/upload/v1768288218/u28u4udspeyrssxelhci.webp"
     ],
     "rating": 4.5,
     "videoFile": "videos/paneer-do-pyaza-720p.mp4",
@@ -1861,7 +1862,7 @@ const products = [
       "images/salted-popcorn-4.webp",
       "images/salted-popcorn-salted-1.webp"
     ],
-    "rating": 4.0,
+    "rating": 4,
     "variants": [
       {
         "size": "40g",
@@ -2998,7 +2999,6 @@ const products = [
     "defaultVariant": 0,
     "inStock": false
   },
- 
   {
     "id": 154,
     "name": "Mango Duet Bar",
@@ -3151,7 +3151,6 @@ const products = [
     "defaultVariant": 0,
     "inStock": true
   },
-  
   {
     "id": 159,
     "name": "Chocolate Lava Pastry",
@@ -3346,7 +3345,6 @@ const products = [
     "defaultVariant": 0,
     "inStock": true
   },
-
   {
     "id": 165,
     "name": "Rajma Chawal Bowl",
@@ -3470,6 +3468,3 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined') {
   module.exports = products;
 }
-
-console.log('🔥 Final products length inside product.js:', products.length);
-console.log('🔥 Last product object:', products[products.length - 1]);
