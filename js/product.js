@@ -16,7 +16,8 @@ const products = [
       "images/temp_0_1766556702457.webp",
       "images/temp_0_1766556708341.webp",
       "images/temp_0_1766556713595.webp",
-      "https://res.cloudinary.com/dx4rkba7l/image/upload/v1768288218/u28u4udspeyrssxelhci.webp"
+      "https://res.cloudinary.com/dx4rkba7l/image/upload/v1768288218/u28u4udspeyrssxelhci.webp",
+      "https://res.cloudinary.com/dx4rkba7l/image/upload/v1768294957/ibkk6viym2xpf1f929fo.webp"
     ],
     "rating": 4.5,
     "videoFile": "videos/paneer-do-pyaza-720p.mp4",
