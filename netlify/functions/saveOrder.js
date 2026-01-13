@@ -49,7 +49,7 @@ export async function handler(event) {
     // Save order
     const orderRef = await admin
       .database()
-      .ref("sites/showcase-2/orders")
+      .ref("sites/sublimesweets/orders")
       .push({
         ...order,
         createdAt: Date.now(),
