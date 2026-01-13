@@ -1,4 +1,5 @@
 import admin from "firebase-admin";
+import jwt from "jsonwebtoken";
 import zlib from "zlib";
 import { promisify } from "util";
 
@@ -33,97 +34,43 @@ async function ensureFirebaseInit() {
 }
 
 export async function handler(event) {
-    console.log("❌ saveOrder called with body:", event.body);
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
+    const authHeader = event.headers['authorization'] || event.headers['Authorization'] || '';
+    const token = authHeader.replace('Bearer ', '').trim();
+    
+    if (!token) {
+      return { statusCode: 401, body: JSON.stringify({ error: 'No token' }) };
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET);
+
     await ensureFirebaseInit();
 
-    const { pdfUrl, ...order } = JSON.parse(event.body || "{}");
-
-    if (!order.orderId) {
-      return { statusCode: 400, body: "Missing orderId" };
+    const { fcmToken } = JSON.parse(event.body || '{}');
+    
+    if (!fcmToken) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing fcmToken' }) };
     }
 
-    // Save order to Firebase
-    const orderRef = await admin
-      .database()
-      .ref("sites/showcase-2/orders")
-      .push({
-        ...order,
-        pdfUrl: pdfUrl || null,
-        createdAt: Date.now(),
-      });
+    await admin.database().ref('sites/sublimesweets/adminTokens/' + fcmToken).set({
+      token: fcmToken,
+      timestamp: Date.now()
+    });
 
-  // ✅ SEND NOTIFICATION SYNCHRONOUSLY (WAIT BEFORE RETURNING)
-let notifResult = { status: 'starting' };
-try {
-  const snapshot = await admin.database().ref('sites/sublimesweets/adminTokens').once('value');
-  const tokenData = snapshot.val() || {};
-  const adminTokens = Object.values(tokenData).map(t => t.token).filter(Boolean);
-  
-  notifResult.tokensFound = adminTokens.length;
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true })
+    };
 
-  if (adminTokens.length > 0) {
-    notifResult.status = 'sending';
-    let successCount = 0;
-    let failureCount = 0;
-    const toRemove = [];
-    
-    for (const token of adminTokens) {
-      try {
-        await admin.messaging().send({
-          token: token,
-          notification: {
-            title: "🔔 New Order!",
-            body: `${order.name || 'Customer'} - ₹${order.totalAmount || 0}`
-          },
-          webpush: {
-            fcmOptions: { link: "/editor.html" }
-          }
-        });
-        successCount++;
-      } catch (err) {
-        failureCount++;
-        const tokenKey = Object.keys(tokenData).find(k => tokenData[k].token === token);
-        if (tokenKey) {
-          toRemove.push(tokenKey);
-        }
-        console.error(`Failed token:`, token.substring(0, 20), err.message);
-      }
-    }
-    
-    // Cleanup invalid tokens
-    for (const tokenKey of toRemove) {
-      await admin.database().ref('sites/sublimesweets/adminTokens/' + tokenKey).remove();
-    }
-    
-    notifResult.status = 'sent';
-    notifResult.success = successCount;
-    notifResult.failed = failureCount;
-    notifResult.removed = toRemove.length;
-    
-    console.log(`✅ Sent: ${successCount}/${adminTokens.length}, Cleaned: ${toRemove.length}`);
-  } else {
-    notifResult.status = 'noTokens';
-  }
-} catch (notifErr) {
-  notifResult.status = 'error';
-  notifResult.error = notifErr.message;
-  console.error("⚠️ Notification failed:", notifErr);
-}
-
-return {
-  statusCode: 200,
-  body: JSON.stringify({ ok: true, orderId: orderRef.key, debug: notifResult }),
-};
   } catch (err) {
-    console.error("saveOrder error:", err);
+    console.error("saveAdminToken error:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({ error: err.message })
     };
   }
 }
