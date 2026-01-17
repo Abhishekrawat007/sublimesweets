@@ -108,29 +108,29 @@ export async function handler(event) {
     const bodyText = bodyJson.body;
     const url = bodyJson.url || "/";
     const topic = bodyJson.topic || "all";
-    const image = bodyJson.image; // ✅ GET IMAGE
+    const image = bodyJson.image;
 
     if (!title || !bodyText) return { statusCode: 400, body: JSON.stringify({ error: "Missing title or body" }) };
 
     const dbRef = admin.database().ref("sites/sublimesweets/pushSubscribers");
     const snap = await dbRef.once("value");
     const tokenObjs = snap.val() || {};
-    const tokens = Object.keys(tokenObjs).filter(Boolean); // ✅ FIXED: Use Object.keys
+    const tokens = Object.keys(tokenObjs).filter(Boolean);
 
     console.log("tokens count:", tokens.length);
 
     if (!tokens.length) {
       console.log('No tokens found -> sending to topic fallback:', topic);
       try {
-        const resp = await admin.messaging().send({
+        const topicMsg = {
           topic: topic,
-          notification: { 
-            title, 
-            body: bodyText,
-            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png'
-          },
+          notification: { title, body: bodyText },
           webpush: { fcmOptions: { link: url } }
-        });
+        };
+        if (image && image.length > 0) {
+          topicMsg.notification.image = image;
+        }
+        const resp = await admin.messaging().send(topicMsg);
         return { statusCode: 200, body: JSON.stringify({ ok: true, resp, info: "sentToTopicFallback" }) };
       } catch (err) {
         console.error("topic send error", err);
@@ -155,17 +155,14 @@ export async function handler(event) {
       if (supportsMulticast) {
         const multicast = {
           tokens: chunk,
-          notification: { 
-            title, 
-            body: bodyText,
-            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png'
-          },
+          notification: { title, body: bodyText },
           webpush: { fcmOptions: { link: url || "/" } }
         };
-        // ✅ Only add image if provided
-if (image) {
-  multicast.notification.image = image;
-}
+        
+        if (image && image.length > 0) {
+          multicast.notification.image = image;
+        }
+
         try {
           const r = await mg.sendMulticast(multicast);
           aggregated.successCount += r.successCount || 0;
@@ -200,15 +197,17 @@ if (image) {
         }
 
       } else if (supportsSendAll) {
-        const messages = chunk.map(t => ({
-          token: t,
-          notification: { 
-            title, 
-            body: bodyText,
-            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png'
-          },
-          webpush: { fcmOptions: { link: url || "/" } }
-        }));
+        const messages = chunk.map(t => {
+          const msg = {
+            token: t,
+            notification: { title, body: bodyText },
+            webpush: { fcmOptions: { link: url || "/" } }
+          };
+          if (image && image.length > 0) {
+            msg.notification.image = image;
+          }
+          return msg;
+        });
 
         try {
           const r = await mg.sendAll(messages);
@@ -242,15 +241,16 @@ if (image) {
         const toRemove = [];
         for (const t of chunk) {
           try {
-            const resp = await mg.send({
+            const msg = {
               token: t,
-              notification: { 
-                title, 
-                body: bodyText,
-                image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png'
-              },
+              notification: { title, body: bodyText },
               webpush: { fcmOptions: { link: url || "/" } }
-            });
+            };
+            if (image && image.length > 0) {
+              msg.notification.image = image;
+            }
+            
+            const resp = await mg.send(msg);
             perTokenResults.push({ token: tokenShort(t), ok: true, resp });
             aggregated.successCount++;
           } catch (err) {
