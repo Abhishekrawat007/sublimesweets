@@ -201,15 +201,15 @@ export async function handler(event) {
     const pageHeight = pdf.internal.pageSize.getHeight();
 
     // Premium cream background (subtle, not harsh white)
-    pdf.setFillColor(250, 250, 250); // Black & Gold (Ultra Luxury) background
+    pdf.setFillColor(255, 250, 240); // Very light cream
     pdf.rect(0, 0, pageWidth, pageHeight, 'F');
 
     // PREMIUM ORANGE HEADER BAR (single solid color)
-    pdf.setFillColor(0, 0, 0); // Black & Gold (Ultra Luxury) header
+    pdf.setFillColor(255, 140, 0); // Orange
     pdf.rect(0, 0, pageWidth, 90, 'F');
 
     // Gold decorative line below header
-    pdf.setDrawColor(255, 215, 0); // Black & Gold (Ultra Luxury) accent
+    pdf.setDrawColor(255, 215, 0); // Gold
     pdf.setLineWidth(2);
     pdf.line(0, 90, pageWidth, 90);
 
@@ -254,7 +254,7 @@ export async function handler(event) {
     // Total row with BIGGER, BOLDER text
     rows.push([
       { content: "Total", colSpan: 5, styles: { halign: "right", fontStyle: "bold", fontSize: 14, textColor: [0, 0, 0] } },
-      { content: `Rs. ${computedTotal}`, styles: { halign: "right", fontStyle: "bold", fontSize: 14, textColor: [218, 165, 32] } }
+      { content: `Rs. ${computedTotal}`, styles: { halign: "right", fontStyle: "bold", fontSize: 14, textColor: [255, 140, 0] } }
     ]);
 
     // Create the table with PREMIUM ORANGE HEADER
@@ -269,7 +269,7 @@ export async function handler(event) {
         lineColor: [200, 200, 200] // Light gray borders
       },
       headStyles: { 
-        fillColor: [0, 0, 0], // Black & Gold (Ultra Luxury) table header
+        fillColor: [255, 140, 0], // ORANGE HEADER
         textColor: [255, 255, 255], // White text
         fontStyle: "bold", 
         lineWidth: 0.5, 
@@ -281,7 +281,7 @@ export async function handler(event) {
         lineColor: [200, 200, 200] 
       },
       alternateRowStyles: {
-        fillColor: [245, 245, 245] // Black & Gold (Ultra Luxury) alternate rows
+        fillColor: [255, 248, 240] // Light cream for alternate rows
       },
       columnStyles: { 
         0: { cellWidth: 35 }, 
@@ -309,14 +309,14 @@ export async function handler(event) {
     const finalY = (pdf.lastAutoTable && pdf.lastAutoTable.finalY) ? pdf.lastAutoTable.finalY + 30 : y + 30;
     
     // Gold decorative line before footer
-    pdf.setDrawColor(255, 215, 0); // Black & Gold (Ultra Luxury) accent
+    pdf.setDrawColor(255, 215, 0); // Gold
     pdf.setLineWidth(1.5);
     pdf.line(40, finalY - 10, pageWidth - 40, finalY - 10);
     
     // Footer message
     pdf.setFont("times", "italic");
     pdf.setFontSize(11);
-    pdf.setTextColor(0, 0, 0); // Black & Gold (Ultra Luxury) footer
+    pdf.setTextColor(139, 69, 19); // Brown for elegance
     pdf.text(
       `Thank you for shopping with ${shopName}.\nWe'll call or WhatsApp you to confirm your order.`,
       pageWidth / 2,
