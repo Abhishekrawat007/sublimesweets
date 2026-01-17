@@ -893,7 +893,7 @@ sendBtn?.addEventListener('click', async () => {
   const title = inTitle.value.trim();
   const body = inBody.value.trim();
   const url = (inUrl.value || '/').trim() || '/';
-   const image = document.getElementById('broadcast-input-image').value.trim();
+  const image = document.getElementById('broadcast-input-image').value.trim();
 
   if (!title || !body) {
     resultEl.textContent = 'Title and message are required.';
@@ -901,21 +901,26 @@ sendBtn?.addEventListener('click', async () => {
     return;
   }
 
- 
-
   sendBtn.disabled = true;
   sendBtn.textContent = 'Sending...';
   resultEl.textContent = '';
 
   try {
     const adminToken = sessionStorage.getItem('adminToken') || '';
+    
+    // ✅ Only include image if it has a value
+    const payload = { title, body, url, topic: 'all' };
+    if (image && image.length > 0) {
+      payload.image = image;
+    }
+    
     const res = await fetch('/.netlify/functions/broadcast', {
       method: 'POST',
-     headers: {
-  'Content-Type': 'application/json',
-  'Authorization': adminToken ? ('Bearer ' + adminToken) : ''
-},
-body: JSON.stringify({ title, body, url, topic: 'all', image })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': adminToken ? ('Bearer ' + adminToken) : ''
+      },
+      body: JSON.stringify(payload)  // ✅ Use payload instead
     });
 
     let data;
