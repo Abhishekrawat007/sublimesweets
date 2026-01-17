@@ -893,6 +893,7 @@ sendBtn?.addEventListener('click', async () => {
   const title = inTitle.value.trim();
   const body = inBody.value.trim();
   const url = (inUrl.value || '/').trim() || '/';
+   const image = document.getElementById('broadcast-input-image').value.trim();
 
   if (!title || !body) {
     resultEl.textContent = 'Title and message are required.';
@@ -914,7 +915,7 @@ sendBtn?.addEventListener('click', async () => {
   'Content-Type': 'application/json',
   'Authorization': adminToken ? ('Bearer ' + adminToken) : ''
 },
-body: JSON.stringify({ title, body, url, topic: 'all' })
+body: JSON.stringify({ title, body, url, topic: 'all', image })
     });
 
     let data;
