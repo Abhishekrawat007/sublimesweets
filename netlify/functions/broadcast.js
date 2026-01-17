@@ -2,7 +2,7 @@
 import admin from "firebase-admin";
 import zlib from "zlib";
 import { promisify } from "util";
-import jwt from "jsonwebtoken"; // ✅ ADD THIS
+import jwt from "jsonwebtoken";
 
 const gunzip = promisify(zlib.gunzip);
 
@@ -66,7 +66,6 @@ export async function handler(event) {
   }
 
   try {
-    // Quick GET debug/test path: ?testToken=1
     if (event.httpMethod === "GET" && event.queryStringParameters?.testToken === "1") {
       const snap = await admin.database().ref("sites/sublimesweets/pushSubscribers").limitToFirst(1).once("value");
       const tokensObj = snap.val() || {};
@@ -76,7 +75,6 @@ export async function handler(event) {
       const token = tokens[0];
       const mg = admin.messaging();
       console.log("Test send -> token:", tokenShort(token));
-      // Try single message send
       try {
         const resp = await mg.send({
           token,
@@ -92,7 +90,6 @@ export async function handler(event) {
 
     if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
 
-    // ✅ REPLACE SECRET CHECK WITH JWT VERIFICATION
     const authHeader = event.headers["authorization"] || event.headers["Authorization"] || "";
     const token = authHeader.replace("Bearer ", "").trim();
     
@@ -111,10 +108,10 @@ export async function handler(event) {
     const bodyText = bodyJson.body;
     const url = bodyJson.url || "/";
     const topic = bodyJson.topic || "all";
+    const image = bodyJson.image; // ✅ EXTRACT IMAGE
 
     if (!title || !bodyText) return { statusCode: 400, body: JSON.stringify({ error: "Missing title or body" }) };
 
-    // Read tokens
     const dbRef = admin.database().ref("sites/sublimesweets/pushSubscribers");
     const snap = await dbRef.once("value");
     const tokenObjs = snap.val() || {};
@@ -123,12 +120,15 @@ export async function handler(event) {
     console.log("tokens count:", tokens.length);
 
     if (!tokens.length) {
-      // fallback to topic send
       console.log('No tokens found -> sending to topic fallback:', topic);
       try {
         const resp = await admin.messaging().send({
           topic: topic,
-          notification: { title, body: bodyText },
+          notification: { 
+            title, 
+            body: bodyText,
+            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png' // ✅ IMAGE FALLBACK
+          },
           webpush: { fcmOptions: { link: url } }
         });
         return { statusCode: 200, body: JSON.stringify({ ok: true, resp, info: "sentToTopicFallback" }) };
@@ -152,19 +152,15 @@ export async function handler(event) {
     const aggregated = { successCount: 0, failureCount: 0, responses: [] };
 
     for (const chunk of chunks) {
-      // Build message body
       if (supportsMulticast) {
         const multicast = {
           tokens: chunk,
-          notification: { title, body: bodyText },
-          webpush: {
-            notification: {
-              icon: process.env.PUSH_ICON || "https://sublimesweets.netlify.app/web-app-manifest-192x192.png",
-              badge: process.env.PUSH_ICON || "https://sublimesweets.netlify.app/web-app-manifest-192x192.png",
-              tag: 'sublime-notification'
-            },
-            fcmOptions: { link: url || "/" }
-          }
+          notification: { 
+            title, 
+            body: bodyText,
+            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png' // ✅ IMAGE FALLBACK
+          },
+          webpush: { fcmOptions: { link: url || "/" } }
         };
         try {
           const r = await mg.sendMulticast(multicast);
@@ -172,7 +168,6 @@ export async function handler(event) {
           aggregated.failureCount += r.failureCount || 0;
           aggregated.responses.push({ chunkSize: chunk.length, ok: true, r });
 
-          // Detect invalid tokens from r.responses
           const toRemove = [];
           if (Array.isArray(r.responses)) {
             r.responses.forEach((resp, idx) => {
@@ -203,8 +198,12 @@ export async function handler(event) {
       } else if (supportsSendAll) {
         const messages = chunk.map(t => ({
           token: t,
-          notification: { title, body: bodyText },
-          webpush: { fcmOptions: { link: url || "/" }, notification: { icon: process.env.PUSH_ICON, badge: process.env.PUSH_ICON, tag: 'sublime-notification' } }
+          notification: { 
+            title, 
+            body: bodyText,
+            image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png' // ✅ IMAGE FALLBACK
+          },
+          webpush: { fcmOptions: { link: url || "/" } }
         }));
 
         try {
@@ -213,7 +212,6 @@ export async function handler(event) {
           aggregated.failureCount += r.failureCount || 0;
           aggregated.responses.push({ chunkSize: chunk.length, ok: true, r });
 
-          // cleanup invalid tokens
           const toRemove = [];
           if (Array.isArray(r.responses)) {
             r.responses.forEach((resp, idx) => {
@@ -236,15 +234,18 @@ export async function handler(event) {
         }
 
       } else {
-        // final fallback: per-token send
         const perTokenResults = [];
         const toRemove = [];
         for (const t of chunk) {
           try {
             const resp = await mg.send({
               token: t,
-              notification: { title, body: bodyText },
-              webpush: { fcmOptions: { link: url || "/" }, notification: { icon: process.env.PUSH_ICON, badge: process.env.PUSH_ICON, tag: 'sublime-notification' } }
+              notification: { 
+                title, 
+                body: bodyText,
+                image: image || 'https://sublimesweets.netlify.app/web-app-manifest-192x192.png' // ✅ IMAGE FALLBACK
+              },
+              webpush: { fcmOptions: { link: url || "/" } }
             });
             perTokenResults.push({ token: tokenShort(t), ok: true, resp });
             aggregated.successCount++;
@@ -262,8 +263,8 @@ export async function handler(event) {
           await removeInvalidTokens(toRemove);
         }
         aggregated.responses.push({ chunkSize: chunk.length, ok: true, perTokenResults });
-      } // end chunk handling
-    } // end chunks loop
+      }
+    }
 
     return { statusCode: 200, body: JSON.stringify({ ok: true, aggregated }) };
 
