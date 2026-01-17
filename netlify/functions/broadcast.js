@@ -162,6 +162,10 @@ export async function handler(event) {
           },
           webpush: { fcmOptions: { link: url || "/" } }
         };
+        // ✅ Only add image if provided
+if (image) {
+  multicast.notification.image = image;
+}
         try {
           const r = await mg.sendMulticast(multicast);
           aggregated.successCount += r.successCount || 0;
