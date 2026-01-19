@@ -230,6 +230,7 @@ function generateLocalStars(rating) {
     updatePrice(variant);
     renderSizes(product.variants || []);
     renderFlavors(product.flavors || []);
+    renderCustomMessageSection(product);
 
     // DESCRIPTION
     document.getElementById('productDescription').textContent =
@@ -604,7 +605,44 @@ function renderFlavors(flavors) {
 
     selectedFlavor = flavors[0];
 }
+// ✅ RENDER CUSTOM MESSAGE SECTION
+function renderCustomMessageSection(product) {
+    const messageSection = document.getElementById('messageSection');
+    const messageInput = document.getElementById('customMessageInput');
+    const charCount = document.getElementById('charCount');
 
+    if (!messageSection || !messageInput || !charCount) return;
+
+    const hasCustomMessage = product.variants.some(v => v.customMessage === true);
+
+    if (hasCustomMessage) {
+        messageSection.style.display = 'block';
+
+        // ✅ RESTORE SAVED MESSAGE IF IT EXISTS
+        const existingCartItem = getCartItemForCurrent();
+
+        if (existingCartItem && existingCartItem.customMessage) {
+            messageInput.value = existingCartItem.customMessage;
+            charCount.textContent = `${existingCartItem.customMessage.length}/100`;
+        } else {
+            messageInput.value = '';
+            charCount.textContent = '0/100';
+        }
+
+        // Character counter
+        messageInput.addEventListener('input', () => {
+            const count = messageInput.value.length;
+            charCount.textContent = `${count}/100`;
+
+            if (count > 100) {
+                messageInput.value = messageInput.value.slice(0, 100);
+                charCount.textContent = '100/100';
+            }
+        });
+    } else {
+        messageSection.style.display = 'none';
+    }
+}
 // -------------------------------------
 // STOCK & ACTION UI
 // -------------------------------------
@@ -855,13 +893,33 @@ function upsertCartQuantity() {
     if (quantity > 99) quantity = 99;
 
     if (existing) {
-        existing.quantity = quantity;
-    } else {
-        pm.cart.push({
-            ...key,
-            quantity
-        });
+    existing.quantity = quantity;
+    
+    // ✅ UPDATE CUSTOM MESSAGE
+    const hasCustomMessage = currentProduct.variants.some(v => v.customMessage === true);
+    if (hasCustomMessage) {
+        const messageInput = document.getElementById('customMessageInput');
+        if (messageInput && messageInput.value.trim()) {
+            existing.customMessage = messageInput.value.trim();
+        }
     }
+} else {
+    const cartItem = {
+        ...key,
+        quantity
+    };
+    
+    // ✅ ADD CUSTOM MESSAGE IF IT'S A CAKE
+    const hasCustomMessage = currentProduct.variants.some(v => v.customMessage === true);
+    if (hasCustomMessage) {
+        const messageInput = document.getElementById('customMessageInput');
+        if (messageInput && messageInput.value.trim()) {
+            cartItem.customMessage = messageInput.value.trim();
+        }
+    }
+    
+    pm.cart.push(cartItem);
+}
 
     localStorage.setItem('cart', JSON.stringify(pm.cart));
     if (typeof pm.syncCartUI === 'function') {

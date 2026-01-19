@@ -350,6 +350,7 @@ class ProductCardManager {
 modalName.textContent = product.name;
 
 // ✅ ADD CUSTOM MESSAGE BOX FOR CAKES
+// ✅ ADD CUSTOM MESSAGE BOX FOR CAKES
 const messageSection = document.getElementById('messageSection');
 const messageInput = document.getElementById('customMessageInput');
 const charCount = document.getElementById('charCount');
@@ -357,8 +358,20 @@ const charCount = document.getElementById('charCount');
 const hasCustomMessage = product.variants.some(v => v.customMessage === true);
 if (hasCustomMessage) {
   messageSection.style.display = 'block';
-  messageInput.value = ''; // Clear previous
-  charCount.textContent = '0/100';
+  
+  // ✅ RESTORE SAVED MESSAGE IF IT EXISTS
+  const existingCartItem = this.cart.find(item => 
+    item.productId === product.id && 
+    item.customMessage
+  );
+  
+  if (existingCartItem && existingCartItem.customMessage) {
+    messageInput.value = existingCartItem.customMessage;
+    charCount.textContent = `${existingCartItem.customMessage.length}/100`;
+  } else {
+    messageInput.value = ''; // Clear if no saved message
+    charCount.textContent = '0/100';
+  }
   
   // Character counter
  messageInput.addEventListener('input', () => {
