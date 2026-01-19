@@ -792,23 +792,37 @@
     </button>
   </div>
 
-  <div class="modal-body-product">
-    <!-- SIZE SECTION -->
-    <div class="size-section">
-      <div class="section-label">Choose size</div>
-      <div class="size-options" id="sizeOptions">
-        <!-- Filled by JS -->
-      </div>
-    </div>
-
-    <!-- FLAVOR SECTION (hidden if no flavors) -->
-    <div class="flavor-section" id="flavorSection">
-      <div class="section-label">Choose flavor</div>
-      <div class="flavor-options" id="flavorOptions">
-        <!-- Filled by JS -->
-      </div>
+ <div class="modal-body-product" id="modalBody">
+  <!-- Custom Message Section (Cakes Only) -->
+  <div id="messageSection" class="message-section" style="display: none;">
+    <label class="section-label">Special Message (Optional)</label>
+    <textarea 
+      id="customMessageInput" 
+      placeholder="e.g., Happy Birthday Sarah! 🎂"
+      rows="3"
+      style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; resize: none;"
+    ></textarea>
+    <div style="text-align: right; font-size: 12px; color: #999; margin-top: 4px;">
+      <span id="charCount">0/100</span> characters
     </div>
   </div>
+
+  <!-- SIZE SECTION -->
+  <div class="size-section">
+    <div class="section-label">Choose size</div>
+    <div class="size-options" id="sizeOptions">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+
+  <!-- FLAVOR SECTION (hidden if no flavors) -->
+  <div class="flavor-section" id="flavorSection">
+    <div class="section-label">Choose flavor</div>
+    <div class="flavor-options" id="flavorOptions">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
 
   <div class="modal-footer-product">
     <button class="modal-cancel-btn" id="cancelBtn">Cancel</button>
@@ -1206,7 +1220,7 @@
 
     <script>
   // This page is the Mithai category
-const CURRENT_CATEGORY = 'Mithai';
+const CURRENT_CATEGORY = 'mithai';
 
 
   document.addEventListener('DOMContentLoaded', function () {
