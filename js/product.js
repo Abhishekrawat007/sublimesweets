@@ -2908,6 +2908,7 @@ const products = [
         "oldPrice": 520,
         "newPrice": 480,
         "discount": "8%",
+         "customMessage": true,
         "inStock": true
       },
       {
@@ -2915,6 +2916,7 @@ const products = [
         "oldPrice": 950,
         "newPrice": 880,
         "discount": "7%",
+         "customMessage": true,
         "inStock": true
       }
     ],
@@ -2946,6 +2948,7 @@ const products = [
         "oldPrice": 560,
         "newPrice": 510,
         "discount": "9%",
+        "customMessage": true,
         "inStock": true
       },
       {
@@ -2953,6 +2956,7 @@ const products = [
         "oldPrice": 1050,
         "newPrice": 960,
         "discount": "9%",
+        "customMessage": true,
         "inStock": true
       }
     ],
@@ -2985,6 +2989,7 @@ const products = [
         "oldPrice": 590,
         "newPrice": 540,
         "discount": "8%",
+       "customMessage": true,
         "inStock": false
       },
       {
@@ -2992,6 +2997,7 @@ const products = [
         "oldPrice": 1120,
         "newPrice": 1020,
         "discount": "9%",
+         "customMessage": true,
         "inStock": false
       }
     ],

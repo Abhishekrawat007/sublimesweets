@@ -170,11 +170,12 @@ class ProductCardManager {
           <span class="price-discount">${defaultVariant.discount} off</span>
         </div>
             ${isOutOfStock ? '' : `
-          <button class="size-select-btn" data-product-id="${product.id}">
-            <span>${defaultVariant.size}</span>
-            <span class="arrow-down">▼</span>
-          </button>
-        `}
+  <button class="size-select-btn" data-product-id="${product.id}">
+    <span>${product.categories.includes('cakes') ? 'Customize' : defaultVariant.size}</span>
+    <span class="arrow-down">▼</span>
+  </button>
+`}
+        
 
         ${isOutOfStock ? `
           <button class="out-of-stock-btn" disabled>
@@ -345,11 +346,36 @@ class ProductCardManager {
     const flavorSection = document.getElementById('flavorSection');
     const flavorOptions = document.getElementById('flavorOptions');
 
-    // Set product name
-    modalName.textContent = product.name;
+   // Set product name
+modalName.textContent = product.name;
 
-    // Render size options
-    sizeOptions.innerHTML = '';
+// ✅ ADD CUSTOM MESSAGE BOX FOR CAKES
+const messageSection = document.getElementById('messageSection');
+const messageInput = document.getElementById('customMessageInput');
+const charCount = document.getElementById('charCount');
+
+if (product.categories.includes('cakes')) {
+  messageSection.style.display = 'block';
+  messageInput.value = ''; // Clear previous
+  charCount.textContent = '0/100';
+  
+  // Character counter
+  messageInput.addEventListener('input', () => {
+    const words = messageInput.value.trim().split(/\s+/).filter(Boolean);
+    const count = words.length;
+    charCount.textContent = `${count}/100`;
+    
+    if (count > 100) {
+      messageInput.value = words.slice(0, 100).join(' ');
+      charCount.textContent = '100/100';
+    }
+  });
+} else {
+  messageSection.style.display = 'none';
+}
+
+// Render size options
+sizeOptions.innerHTML = '';
     product.variants.forEach((variant, index) => {
       const isSelected = index === (product.defaultVariant || 0);
       const option = document.createElement('div');
@@ -515,14 +541,25 @@ class ProductCardManager {
 
     if (existingItem) {
       existingItem.quantity++;
-    } else {
-      this.cart.push({
-        productId,
-        variantIndex,
-        flavor,
-        quantity: 1
-      });
+  } else {
+  const cartItem = {
+    productId,
+    variantIndex,
+    flavor,
+    quantity: 1
+  };
+  
+  // ✅ ADD CUSTOM MESSAGE IF IT'S A CAKE
+  const product = this.products.find(p => String(p.id) === String(productId));
+  if (product && product.categories.includes('cakes')) {
+    const messageInput = document.getElementById('customMessageInput');
+    if (messageInput && messageInput.value.trim()) {
+      cartItem.customMessage = messageInput.value.trim();
     }
+  }
+  
+  this.cart.push(cartItem);
+}
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
