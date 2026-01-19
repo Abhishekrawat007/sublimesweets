@@ -1410,26 +1410,34 @@ window.addEventListener('focus', () => {
 
     // Verify button handler
     document.getElementById('verifyCodeBtn').addEventListener('click', async function() {
-      const code = getOtpValue();
-      const email = document.getElementById('customerEmail').value.trim().toLowerCase();
-      const orderId = window.currentOrderId || null;
-      const msgEl = document.getElementById('emailVerifyMsg');
-      
-      if (!orderId) {
-        msgEl.textContent = 'Order id missing. Refresh the page.';
-        msgEl.style.display = 'inline';
-        return;
-      }
-      
-      if (!/^\d{6}$/.test(code)) {
-        msgEl.textContent = 'Please enter a 6-digit code.';
-        msgEl.style.display = 'inline';
-        return;
-      }
-      
-      try {
-        this.disabled = true;
-        msgEl.style.display = 'none';
+  const code = getOtpValue();
+  const email = document.getElementById('customerEmail').value.trim().toLowerCase();
+  const orderId = window.currentOrderId || null;
+  const msgEl = document.getElementById('emailVerifyMsg');
+  
+  if (!orderId) {
+    msgEl.textContent = 'Order id missing. Refresh the page.';
+    msgEl.style.display = 'inline';
+    return;
+  }
+  
+  if (!/^\d{6}$/.test(code)) {
+    msgEl.textContent = 'Please enter a 6-digit code.';
+    msgEl.style.display = 'inline';
+    return;
+  }
+  
+  try {
+    this.disabled = true;
+    msgEl.style.display = 'none';
+    
+    // ✅ ADD SPINNER
+    const btnText = this.querySelector('span');
+    const btnIcon = this.querySelector('i');
+    if (btnText) btnText.textContent = 'Verifying...';
+    if (btnIcon) {
+      btnIcon.className = 'btn-spinner';
+    }
         await verifyCodeOnServer(email, code);
         sessionStorage.setItem('emailVerified_' + orderId, '1');
         hideVerifyPanel();
@@ -1437,10 +1445,18 @@ window.addEventListener('focus', () => {
       } catch (err) {
         msgEl.textContent = 'Invalid or expired code. Try resend.';
         msgEl.style.display = 'inline';
-      } finally {
-        this.disabled = false;
-      }
-    });
+     } finally {
+    this.disabled = false;
+    
+    // ✅ RESTORE BUTTON
+    const btnText = this.querySelector('span');
+    const btnIcon = this.querySelector('.btn-spinner');
+    if (btnText) btnText.textContent = 'Verify';
+    if (btnIcon) {
+      btnIcon.className = 'fas fa-check';
+    }
+  }
+});
     
     // Resend button handler
     document.getElementById('resendCodeBtn').addEventListener('click', async function() {

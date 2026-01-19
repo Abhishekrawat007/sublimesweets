@@ -116,11 +116,11 @@ export async function handler(event) {
     // ============================================
 
     // Build items list for message if needed
-   const itemLines = Array.isArray(cart) ? cart.map((it) => {
+  const itemLines = Array.isArray(cart) ? cart.map((it) => {
   const title = it.title || it.name || it.product || "Item";
   const qty = it.qty ?? it.quantity ?? 1;
   const price = it.price ?? it.newPrice ?? 0;
-  const customMsg = it.customMessage ? `\n  💬 "${it.customMessage}"` : '';
+  const customMsg = it.customMessage ? `\n  💬 Message: ${it.customMessage}` : '';
   return `• ${title} (x${qty}) - Rs. ${price * qty}${customMsg}`;
 }).join("\n") : "";
 
@@ -242,14 +242,10 @@ export async function handler(event) {
     for (let i = 0; i < cart.length; i++) {
       const item = cart[i];
       const imgBase64 = await fetchImageAsBase64(item.image);
-      const productTitle = item.customMessage 
-  ? `${item.title}\n💬 ${item.customMessage}` 
-  : item.title;
-
-rows.push([
+     rows.push([
   i + 1,
   { content: "", image: imgBase64 },
-  productTitle,
+  item.title + (item.customMessage ? `\n💬 ${item.customMessage}` : ''),
   item.qty,
   `Rs. ${item.price}`,
   `Rs. ${item.price * item.qty}`
