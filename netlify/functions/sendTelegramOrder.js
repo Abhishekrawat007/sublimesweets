@@ -241,19 +241,28 @@ export async function handler(event) {
     y += 80;
 
     // Build table rows with images
-    const rows = [];
-    for (let i = 0; i < cart.length; i++) {
-      const item = cart[i];
-      const imgBase64 = await fetchImageAsBase64(item.image);
-     rows.push([
-  i + 1,
-  { content: "", image: imgBase64 },
-  item.title + (item.customMessage ? `\nMessage: ${item.customMessage}` : ''),
-  item.qty,
-  `Rs. ${item.price}`,
-  `Rs. ${item.price * item.qty}`
-]);
-    }
+// Build table rows with images
+const rows = [];
+for (let i = 0; i < cart.length; i++) {
+  const item = cart[i];
+  const imgBase64 = await fetchImageAsBase64(item.image);
+  
+  // Build product text WITHOUT emojis for PDF
+  let productText = item.title;
+  if (item.customMessage) {
+    const cleanMessage = item.customMessage.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+    productText = productText + `\nMessage: ${cleanMessage}`;
+  }
+  
+  rows.push([
+    i + 1,
+    { content: "", image: imgBase64 },
+    productText,
+    item.qty,
+    `Rs. ${item.price}`,
+    `Rs. ${item.price * item.qty}`
+  ]);
+}
 
     // Total row with BIGGER, BOLDER text
     rows.push([

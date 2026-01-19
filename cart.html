@@ -1553,11 +1553,15 @@ window.addEventListener('focus', () => {
       
       if (method === 'cod') {
         // ========== COD FLOW - USE saveOrder ==========
-        const itemLines = cart.map(item => {
-          const details = [item.size, item.flavor].filter(Boolean).join(' | ');
-          const label = details ? `${item.title} (${details})` : item.title;
-          return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
-        }).join('\n');
+       const itemLines = cart.map(item => {
+  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
+  const label = details ? `${item.title} (${details})` : item.title;
+  let line = `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
+  if (item.customMessage) {
+    line += `\n  💬 ${item.customMessage}`;
+  }
+  return line;
+}).join('\n');
         
         const messageText = `🧾 *New COD Order*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n📦 *Items:*\n${itemLines}`;
         
@@ -1682,10 +1686,14 @@ window.addEventListener('focus', () => {
                 if (!verifyRes.ok) throw new Error('Payment verification failed');
                 
                 const itemLines = cart.map(item => {
-                  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
-                  const label = details ? `${item.title} (${details})` : item.title;
-                  return `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
-                }).join('\n');
+  const details = [item.size, item.flavor].filter(Boolean).join(' | ');
+  const label = details ? `${item.title} (${details})` : item.title;
+  let line = `• ${label} (x${item.qty}) - Rs. ${item.price * item.qty}`;
+  if (item.customMessage) {
+    line += `\n  💬 ${item.customMessage}`;
+  }
+  return line;
+}).join('\n');
 
                 const messageText = `🧾 *New PAID Order*\n*Order ID:* ${orderId}\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n💬 *WhatsApp:* [Chat](https://wa.me/91${phone})\n💰 *Total:* Rs. ${totalAmount}\n✅ *Payment ID:* ${response.razorpay_payment_id}\n📦 *Items:*\n${itemLines}`;
                 
