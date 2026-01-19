@@ -120,8 +120,11 @@ export async function handler(event) {
   const title = it.title || it.name || it.product || "Item";
   const qty = it.qty ?? it.quantity ?? 1;
   const price = it.price ?? it.newPrice ?? 0;
-  const customMsg = it.customMessage ? `\n  💬 Message: ${it.customMessage}` : '';
-  return `• ${title} (x${qty}) - Rs. ${price * qty}${customMsg}`;
+  let line = `• ${title} (x${qty}) - Rs. ${price * qty}`;
+  if (it.customMessage) {
+    line += `\n  Message: ${it.customMessage}`;
+  }
+  return line;
 }).join("\n") : "";
 
     // ✅ FIXED: Determine paid / cod badge ONLY by payment.status
@@ -245,7 +248,7 @@ export async function handler(event) {
      rows.push([
   i + 1,
   { content: "", image: imgBase64 },
-  item.title + (item.customMessage ? `\n💬 ${item.customMessage}` : ''),
+  item.title + (item.customMessage ? `\nMessage: ${item.customMessage}` : ''),
   item.qty,
   `Rs. ${item.price}`,
   `Rs. ${item.price * item.qty}`

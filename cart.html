@@ -216,12 +216,22 @@ body.dark-mode .spinner-overlay {
   border-radius: 8px;
   border-left: 3px solid #f59e0b;
   line-height: 1.4;
+  word-wrap: break-word;      /* ✅ ADD THIS */
+  overflow-wrap: break-word;   /* ✅ ADD THIS */
+  word-break: break-word;      /* ✅ ADD THIS */
+  max-width: 100%;             /* ✅ ADD THIS */
 }
+
 
 body.dark-mode .cart-item-message {
   color: #fef3c3;
   background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
   border-left-color: #fbbf24;
+    word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.4;
 }
 
 @media (max-width: 640px) {
