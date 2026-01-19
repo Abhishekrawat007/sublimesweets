@@ -171,7 +171,7 @@ class ProductCardManager {
         </div>
             ${isOutOfStock ? '' : `
   <button class="size-select-btn" data-product-id="${product.id}">
-    <span>${product.categories.includes('cakes') ? 'Customize' : defaultVariant.size}</span>
+    <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
     <span class="arrow-down">▼</span>
   </button>
 `}
@@ -354,7 +354,8 @@ const messageSection = document.getElementById('messageSection');
 const messageInput = document.getElementById('customMessageInput');
 const charCount = document.getElementById('charCount');
 
-if (product.categories.includes('cakes')) {
+const hasCustomMessage = product.variants.some(v => v.customMessage === true);
+if (hasCustomMessage) {
   messageSection.style.display = 'block';
   messageInput.value = ''; // Clear previous
   charCount.textContent = '0/100';
@@ -551,8 +552,10 @@ sizeOptions.innerHTML = '';
   
   // ✅ ADD CUSTOM MESSAGE IF IT'S A CAKE
   const product = this.products.find(p => String(p.id) === String(productId));
-  if (product && product.categories.includes('cakes')) {
-    const messageInput = document.getElementById('customMessageInput');
+ const hasCustomMessage = product && product.variants.some(v => v.customMessage === true);
+
+if (hasCustomMessage) {
+  const messageInput = document.getElementById('customMessageInput');
     if (messageInput && messageInput.value.trim()) {
       cartItem.customMessage = messageInput.value.trim();
     }
