@@ -1196,57 +1196,42 @@
 </footer>
 <!-- FOOTER END -->
 
-<!-- Scripts -->
-<script src="js/safe-storage.js"></script>
-<script src="js/product.js"></script>
-<!-- ❌ DON'T load script.js on category pages -->
-<!-- <script src="js/script.js"></script> -->
-<script src="js/navbar.js" defer></script>
-<script src="js/cart.js" defer></script>
-<script src="js/pwa-install.js"></script>
+ <script src="js/product.js"  defer></script>
+    <script src="js/navbar.js" defer></script>
+    <script src="js/search-router.js" defer></script>
+    <script src="js/product-card3.js" defer></script>
+    <script src="js/bottom-bar.js"></script>
+     <script src="js/nav-sync.js"></script>
+    <script src="js/footer.js" defer></script>
 
-<!-- ✅ CATEGORY PAGE SCRIPT - STANDALONE -->
-<script>
-// ✅ Apply dark mode early
-(function applyDarkModeEarly() {
-  try {
-    const theme = window.safeStorage?.getItem("theme");
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark-mode");
-    }
-  } catch (e) {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add("dark-mode");
-    }
-  }
-})();
+    <script>
+  // This page is the Mithai category
+const CURRENT_CATEGORY = 'Mithai';
 
-const CURRENT_CATEGORY = 'anime';
 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚀 Category page loaded');
-    
+  document.addEventListener('DOMContentLoaded', function () {
     let waited = 0;
-    const maxWait = 5000;
+    const maxWait = 5000; // 5 seconds
 
     const interval = setInterval(() => {
-        // ✅ Wait for product.js to load
-        if (window.products && Array.isArray(window.products) && window.products.length > 0) {
-            clearInterval(interval);
-            console.log('✅ Products loaded:', window.products.length);
-            initCategoryPage();
-        } else {
-            waited += 100;
-            if (waited >= maxWait) {
-                clearInterval(interval);
-                console.error('❌ Products failed to load after 5s');
-                showNoProducts();
-            }
+      if (window.productManager && Array.isArray(window.products) && window.products.length > 0) {
+        clearInterval(interval);
+        initCategoryPage();
+      } else {
+        waited += 100;
+        if (waited >= maxWait) {
+          clearInterval(interval);
+          const loading = document.getElementById('loadingState');
+          const noProducts = document.getElementById('noProducts');
+          if (loading) loading.style.display = 'none';
+          if (noProducts) noProducts.style.display = 'block';
         }
+      }
     }, 100);
-});
+  });
 
-function initCategoryPage() {
+ 
+  function initCategoryPage() {
     const loading = document.getElementById('loadingState');
     const grid = document.getElementById('productsGrid');
     const noProducts = document.getElementById('noProducts');
@@ -1254,149 +1239,35 @@ function initCategoryPage() {
 
     if (loading) loading.style.display = 'none';
 
-    if (!window.products || !Array.isArray(window.products)) {
-        console.error('❌ Products not available');
-        showNoProducts();
-        return;
+    if (!window.productManager) {
+      console.error('ProductCardManager not ready.');
+      if (noProducts) noProducts.style.display = 'block';
+      return;
     }
 
     // ✅ Filter by category
-    const categoryProducts = window.products.filter(product => {
-        const catList = [];
-        
-        if (typeof product.category === "string") {
-            catList.push(product.category.toLowerCase());
-        }
-        
-        if (Array.isArray(product.categories)) {
-            product.categories.forEach(c => catList.push(c.toLowerCase()));
-        }
-        
-        return catList.includes(CURRENT_CATEGORY);
-    });
+    const categoryProducts = window.productManager.filterByCategory(CURRENT_CATEGORY);
 
-    console.log(`✅ Found ${categoryProducts.length} ${CURRENT_CATEGORY} products out of ${window.products.length} total`);
-
-    // Show sample for debugging
-    if (categoryProducts.length > 0) {
-        console.log('📦 Sample product:', categoryProducts[0]);
-    }
+    // ✅ REPLACE the product manager's product list with ONLY this category
+    window.productManager.products = categoryProducts;
+    window.productManager.loadedProducts = []; // Clear loaded cache
 
     // Update count
     if (countEl) countEl.textContent = categoryProducts.length;
 
     if (categoryProducts.length > 0) {
-        if (grid) grid.style.display = 'grid';
-        if (noProducts) noProducts.style.display = 'none';
+      if (grid) grid.style.display = 'grid';
+      if (noProducts) noProducts.style.display = 'none';
 
-        // ✅ Render products
-        categoryProducts.forEach(product => {
-            const card = createProductCard(product);
-            grid.appendChild(card);
-        });
-        
-        console.log('✅ Products rendered successfully');
+      // ✅ Render (now it will use the filtered list for scroll loading too)
+      window.productManager.renderProducts();
     } else {
-        console.warn('⚠️ No products found in category:', CURRENT_CATEGORY);
-        showNoProducts();
+      if (grid) grid.style.display = 'none';
+      if (noProducts) noProducts.style.display = 'block';
     }
 }
-
-function showNoProducts() {
-    const loading = document.getElementById('loadingState');
-    const grid = document.getElementById('productsGrid');
-    const noProducts = document.getElementById('noProducts');
-    
-    if (loading) loading.style.display = 'none';
-    if (grid) grid.style.display = 'none';
-    if (noProducts) noProducts.style.display = 'block';
-}
-
-// ✅ Create product card (standalone version)
-function createProductCard(product) {
-    let buttonsHTML = '';
-
-    if (product.inStock) {
-        buttonsHTML = 
-            `<div class="button-group">
-                <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
-                <div class="quantity-controls" style="display:none;" data-id="${product.id}">
-                    <button class="qty-btn minus" data-id="${product.id}">-</button>
-                    <span class="qty-count" id="qty-${product.id}">1</span>
-                    <button class="qty-btn plus" data-id="${product.id}">+</button>
-                </div>
-                <button class="buy-now-btn" data-id="${product.id}">Buy Now</button>
-            </div>`;
-    } else {
-        buttonsHTML = 
-            `<div class="button-group">
-                <a href="tel:+918868839446" class="call-btn">Call Now</a> 
-                <a href="https://wa.me/918868839446" class="whatsapp-btn">WhatsApp</a>
-            </div>`;
-    }
-
-    const cardContent = 
-        `<div class="image-container">
-            <img src="${product.images[0]}" class="product-img" alt="${product.name}" loading="lazy"/>
-            ${!product.inStock ? '<span class="stock-label">Out of Stock</span>' : ''}
-            <span class="media-info">${product.mediaCount || ''}</span>
-        </div>
-        <h3 class="product-title">${product.name}</h3>
-        <div class="details">
-            <p class="price">
-                <span class="old">₹${product.oldPrice}</span>
-                <span class="new">₹${product.newPrice}</span>
-                <span class="discount">(${product.discount} off)</span>
-            </p>
-            ${buttonsHTML}
-        </div>`;
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "product-card";
-    if (!product.inStock) wrapper.classList.add("out-of-stock");
-    wrapper.innerHTML = cardContent;
-
-    // Click handlers
-    wrapper.querySelector('.product-img')?.addEventListener('click', () => {
-        window.location.href = `product-detail.html?id=${product.id}`;
-    });
-    
-    wrapper.querySelector('.product-title')?.addEventListener('click', () => {
-        window.location.href = `product-detail.html?id=${product.id}`;
-    });
-
-    // Buy Now handler
-    const buyNowBtn = wrapper.querySelector('.buy-now-btn');
-    if (buyNowBtn) {
-        buyNowBtn.addEventListener('click', () => {
-            try {
-                sessionStorage.setItem("buyNowProduct", product.id);
-                window.location.href = "buynow.html";
-            } catch(e) {
-                console.error('SessionStorage blocked:', e);
-            }
-        });
-    }
-
-    return wrapper;
-}
-
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// ✅ Scroll to top button visibility
-window.onscroll = function () {
-    const btn = document.getElementById("scrollToTopBtn");
-    if (btn) {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            btn.style.display = "block";
-        } else {
-            btn.style.display = "none";
-        }
-    }
-};
 </script>
+
 
 </body>
 </html>
