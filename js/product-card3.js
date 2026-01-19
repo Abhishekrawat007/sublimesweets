@@ -361,16 +361,15 @@ if (hasCustomMessage) {
   charCount.textContent = '0/100';
   
   // Character counter
-  messageInput.addEventListener('input', () => {
-    const words = messageInput.value.trim().split(/\s+/).filter(Boolean);
-    const count = words.length;
-    charCount.textContent = `${count}/100`;
-    
-    if (count > 100) {
-      messageInput.value = words.slice(0, 100).join(' ');
-      charCount.textContent = '100/100';
-    }
-  });
+ messageInput.addEventListener('input', () => {
+  const count = messageInput.value.length;
+  charCount.textContent = `${count}/100`;
+  
+  if (count > 100) {
+    messageInput.value = messageInput.value.slice(0, 100);
+    charCount.textContent = '100/100';
+  }
+});
 } else {
   messageSection.style.display = 'none';
 }
@@ -746,16 +745,17 @@ if (hasCustomMessage) {
       cartItemDiv.dataset.flavor = item.flavor || '';
 
       cartItemDiv.innerHTML = `
-        <div class="cart-item-image">
-          <img src="${product.images[0]}" alt="${product.name}">
-        </div>
-        <div class="cart-item-details">
-          <div class="cart-item-name">
-            ${product.name}
-            ${variant.size ? ` (${variant.size})` : ''}
-            ${item.flavor ? ` - ${item.flavor}` : ''}
-          </div>
-          <div class="cart-item-price">₹${price}</div>
+  <div class="cart-item-image">
+    <img src="${product.images[0]}" alt="${product.name}">
+  </div>
+  <div class="cart-item-details">
+    <div class="cart-item-name">
+      ${product.name}
+      ${variant.size ? ` (${variant.size})` : ''}
+      ${item.flavor ? ` - ${item.flavor}` : ''}
+    </div>
+    ${item.customMessage ? `<div class="cart-item-message">💬 "${item.customMessage}"</div>` : ''}
+    <div class="cart-item-price">₹${price}</div>
           <div class="cart-item-quantity">
             <button class="qty-btn cart-minus">-</button>
             <span class="cart-qty" style="color: var(--nav-text); font-weight: 600;">${qty}</span>

@@ -1207,3 +1207,19 @@ body.dark-mode .star-icon.empty {
         height: 16px !important;
     }
 }
+.cart-item-message {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 6px;
+  border-left: 3px solid #f59e0b;
+}
+
+body.dark-mode .cart-item-message {
+  color: #d1d5db;
+  background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+  border-left-color: #f59e0b;
+}

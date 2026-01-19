@@ -206,6 +206,31 @@ body.dark-mode .spinner-overlay {
   border: 1px solid var(--border);
   font-weight: 500;
 }
+.cart-item-message {
+  font-size: 13px;
+  color: #854d0e;
+  font-style: italic;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 8px;
+  border-left: 3px solid #f59e0b;
+  line-height: 1.4;
+}
+
+body.dark-mode .cart-item-message {
+  color: #fef3c3;
+  background: linear-gradient(135deg, #451a03 0%, #78350f 100%);
+  border-left-color: #fbbf24;
+}
+
+@media (max-width: 640px) {
+  .cart-item-message {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-top: 6px;
+  }
+}
     .item-price {
       font-size: 1.25rem;
       font-weight: 700;
@@ -927,16 +952,17 @@ function getCart() {
     const variant = product.variants[cartItem.variantIndex] || product.variants[0];
     const price = variant.newPrice || variant.price || 0;
     
-    return {
-      id: cartItem.productId,
-      title: product.name,
-      price: price,
-      qty: cartItem.quantity,
-      image: product.images?.[0] || "img/default.jpg",
-      flavor: cartItem.flavor || null,
-      variantIndex: cartItem.variantIndex,
-      size: variant.size
-    };
+   return {
+  id: cartItem.productId,
+  title: product.name,
+  price: price,
+  qty: cartItem.quantity,
+  image: product.images?.[0] || "img/default.jpg",
+  flavor: cartItem.flavor || null,
+  variantIndex: cartItem.variantIndex,
+  size: variant.size,
+  customMessage: cartItem.customMessage || null
+};
   }).filter(item => item !== null);
 }
 
@@ -974,7 +1000,7 @@ function calculateTotal(cart) {
       }
       
       const total = calculateTotal(cart);
-      const itemsHtml = cart.map(item => `
+     const itemsHtml = cart.map(item => `
   <div class="cart-item">
     <img src="${item.image}" alt="${item.title}" class="item-image">
     
@@ -987,6 +1013,8 @@ function calculateTotal(cart) {
           ${item.flavor ? `<span class="item-meta-pill">${item.flavor}</span>` : ''}
         </div>
       ` : '' }
+
+      ${item.customMessage ? `<div class="cart-item-message">💬 "${item.customMessage}"</div>` : ''}
 
       <div class="item-price">₹${item.price}</div>
       
@@ -1512,15 +1540,16 @@ window.addEventListener('focus', () => {
           name,
           phone,
           email,
-          cart: cart.map(i => ({
-            id: i.id,
-            title: i.title,
-            price: i.price,
-            qty: i.qty,
-            image: i.image || "",
-            size: i.size || null,
-            flavor: i.flavor || null
-          })),
+         cart: cart.map(i => ({
+  id: i.id,
+  title: i.title,
+  price: i.price,
+  qty: i.qty,
+  image: i.image || "",
+  size: i.size || null,
+  flavor: i.flavor || null,
+  customMessage: i.customMessage || null
+})),
           totalAmount,
           amountPaid: totalAmount,
           currency: 'INR',
@@ -1641,14 +1670,15 @@ window.addEventListener('focus', () => {
                   phone,
                   email,
                   cart: cart.map(i => ({
-                    id: i.id,
-                    title: i.title,
-                    price: i.price,
-                    qty: i.qty,
-                    image: i.image || "",
-                    size: i.size || null,
-                    flavor: i.flavor || null
-                  })),
+  id: i.id,
+  title: i.title,
+  price: i.price,
+  qty: i.qty,
+  image: i.image || "",
+  size: i.size || null,
+  flavor: i.flavor || null,
+  customMessage: i.customMessage || null
+})),
                   totalAmount,
                   amountPaid: totalAmount,
                   currency: 'INR',
