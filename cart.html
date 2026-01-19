@@ -1555,7 +1555,6 @@ window.addEventListener('focus', () => {
       if (method === 'cod') {
         // ========== COD FLOW - USE saveOrder ==========
         console.log("🔔 COD - Full cart being sent:", JSON.stringify(cart, null, 2));
-
        const itemLines = cart.map(item => {
   const details = [item.size, item.flavor].filter(Boolean).join(' | ');
   const label = details ? `${item.title} (${details})` : item.title;
@@ -1590,9 +1589,9 @@ window.addEventListener('focus', () => {
           messageText,
           ts: Date.now()
         };
-        };
-
+      
 console.log("📤 Sending basePayload to Telegram:", JSON.stringify(basePayload, null, 2));
+        
         // 🔔 Step 1: Send to Telegram (generates PDF)
         let pdfUrl = null;
         try {
