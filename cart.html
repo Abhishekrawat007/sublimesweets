@@ -983,6 +983,7 @@ function calculateTotal(cart) {
     // Render cart
     function renderCart() {
       const cart = getCart();
+       console.log("🔍 FULL CART DATA:", JSON.stringify(cart, null, 2));
       const container = document.getElementById("cartItemsContainer");
       const summary = document.getElementById("orderSummary");
       const countBadge = document.getElementById("cartCount");
