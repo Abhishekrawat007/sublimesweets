@@ -922,80 +922,324 @@ body.dark-mode .video-preview-hint a {
 .video-section .upload-btn {
   margin-top: 8px;
 }
+/* ============================================
+   📦 ULTRA PREMIUM ORDERS SECTION
+   ============================================ */
+
 #ordersSection {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #e5e7eb;
-  padding: 24px;
-  border-radius: 16px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  padding: 28px;
+  border-radius: 20px;
   margin: 20px;
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 #ordersSection h2 {
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  font-size: 28px;
+  font-weight: 800;
 }
 
+#ordersStatusText {
+  color: #92400e !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  margin-bottom: 16px !important;
+}
+
+/* Premium Order Buttons */
 .order-btn {
   width: 100%;
-  padding: 20px;
+  padding: 20px 24px;
   margin-bottom: 14px;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
   backdrop-filter: blur(10px);
-  color: #e5e7eb;
+  color: #78350f;
   text-align: left;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
 }
 
 .order-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(118, 75, 162, 0.25));
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #ffffff, #fef9f3);
+  border-color: #fbbf24;
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+}
+
+/* Order Detail Modal - ULTRA PREMIUM */
+#orderDetailModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+#orderDetailModal.hidden {
+  display: none;
 }
 
 #orderDetailModal .modal-content {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  color: #e5e7eb;
-  max-width: 600px;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  color: #78350f;
+  max-width: 550px;
+  width: 92%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 24px;
+  padding: 32px 28px;
+  box-shadow: 0 20px 60px rgba(251, 191, 36, 0.4);
+  border: 2px solid rgba(251, 191, 36, 0.4);
+  position: relative;
 }
 
 #orderDetailModal h3 {
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 20px 0;
+}
+
+#orderDetailModal p {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #78350f;
+}
+
+#orderDetailModal p b {
+  color: #92400e;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+#orderDetailModal hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
+  margin: 16px 0;
+}
+
+#orderDetailModal h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 20px 0 12px 0;
+  color: #92400e;
+}
+
+#orderDetailModal ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+#orderDetailModal li {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 14px 16px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border-left: 4px solid #fbbf24;
+  color: #78350f;
+  font-size: 15px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.15);
+}
+
+#orderDetailModal li:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.25);
+}
+
+/* Close Button */
+.order-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: #fff !important;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  z-index: 100;
+}
+
+.order-close:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+/* Order Actions - FIXED OVERLAPPING */
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.order-actions a {
+  width: 100%;
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.order-actions a:first-child {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+}
+
+.order-actions a:first-child:hover {
+  background: linear-gradient(135deg, #128C7E, #075E54);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+.order-actions a:nth-child(2) {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.order-actions a:nth-child(2):hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.order-actions a:nth-child(3) {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.order-actions a:nth-child(3):hover {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+}
+
+/* Scrollbar for modal */
+#orderDetailModal .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#orderDetailModal .modal-content::-webkit-scrollbar-track {
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: 4px;
+}
+
+#orderDetailModal .modal-content::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.4);
+  border-radius: 4px;
+}
+
+#orderDetailModal .modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 191, 36, 0.6);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  #ordersSection {
+    padding: 20px 16px;
+    margin: 16px;
+  }
+  
+  #orderDetailModal .modal-content {
+    padding: 60px 20px 24px 20px;
+    width: 94%;
+  }
+  
+  #orderDetailModal h3 {
+    font-size: 22px;
+  }
+  
+  .order-close {
+    top: 12px;
+    right: 12px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  
+  .order-actions a {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #orderDetailModal h3 {
+    font-size: 20px;
+  }
+  
+  #orderDetailModal p {
+    font-size: 14px;
+  }
+  
+  .order-actions a {
+    padding: 12px 18px;
+  }
+}
+
+/* Dark Mode Orders */
+body.dark-mode #ordersSection {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+body.dark-mode #ordersSection h2 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.order-close {
-  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-  color: #fff !important;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
+body.dark-mode .order-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.2);
 }
 
-.order-actions a {
-  background: linear-gradient(135deg, #10b981, #059669);
-  padding: 14px 24px;
-  border-radius: 12px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
+body.dark-mode .order-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.08));
 }
 
-.order-actions a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+body.dark-mode #orderDetailModal .modal-content {
+  background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+body.dark-mode #orderDetailModal li {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fde68a;
 }
 .broadcast-modal-inner {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)) !important;
@@ -1097,30 +1341,26 @@ body.dark-mode .broadcast-modal-inner textarea {
     width: 100% !important;
     padding: 12px !important;
   }
-  
-  /* Order Detail Modal */
-  #orderDetailModal .modal-content {
-    padding: 24px 16px !important;
-    max-height: 85vh !important;
-  }
-  
-  #orderDetailModal h3 {
-    font-size: 22px !important;
-  }
-  
-  #orderDetailModal p {
-    font-size: 14px !important;
-  }
-  
-  .order-actions {
+  /* === FIX BROADCAST IMAGE INPUT ON MOBILE === */
+@media (max-width: 768px) {
+  .broadcast-modal-inner label > div {
     flex-direction: column !important;
+    align-items: stretch !important;
   }
   
-  .order-actions a {
+  .broadcast-modal-inner label > div label[for="broadcast-upload-btn"] {
     width: 100% !important;
     text-align: center !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .broadcast-modal-inner input[type="text"],
+  .broadcast-modal-inner input[type="file"] + input {
+    width: 100% !important;
+    flex: none !important;
   }
 }
+  
 
 @media (max-width: 480px) {
   .modal-content h2,
