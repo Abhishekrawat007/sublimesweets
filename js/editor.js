@@ -571,7 +571,7 @@ function logout() {
     message: "Are you sure you want to log out of the admin panel?",
     onConfirm: () => {
       localStorage.removeItem("isAdmin");
-      window.location.href = "admin.html";
+      window.location.href = "kunnu.html";
     }
   });
 }
@@ -1455,17 +1455,16 @@ function updateFlavors(index, value) {
 function toggleMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   const backdrop = document.getElementById('menuBackdrop');
+  const toggle = document.querySelector('.mobile-menu-toggle');
   
-  if (menu && backdrop) {
-    menu.classList.toggle('active');
-    backdrop.classList.toggle('active');
-  }
+  menu.classList.toggle('active');
+  backdrop.classList.toggle('active');
+  toggle.classList.toggle('active');
+  document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
 }
 
-// Close mobile menu when backdrop clicked
-if (document.getElementById('menuBackdrop')) {
-  document.getElementById('menuBackdrop').addEventListener('click', toggleMobileMenu);
-}
+// Close on backdrop click
+document.getElementById('menuBackdrop')?.addEventListener('click', toggleMobileMenu);
 
 // Expose to window
 window.addProduct = addProduct;
