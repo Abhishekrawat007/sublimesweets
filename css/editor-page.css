@@ -1037,3 +1037,132 @@ body.dark-mode .broadcast-modal-inner textarea {
   border-color: #3a3a3c !important;
   color: #f5f5f7 !important;
 }
+/* === PREMIUM MOBILE MODALS === */
+@media (max-width: 768px) {
+  .modal-content, 
+  .custom-modal-content,
+  .broadcast-modal-inner {
+    width: 94% !important;
+    max-width: 94% !important;
+    padding: 24px 20px !important;
+    border-radius: 16px !important;
+  }
+  
+  .modal-content h2,
+  .modal-content h3,
+  .custom-modal-content h2,
+  .broadcast-modal-inner h3 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .modal-content p {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .modal-buttons {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .modal-buttons button,
+  .btn {
+    width: 100% !important;
+    padding: 14px !important;
+    font-size: 15px !important;
+  }
+  
+  /* Broadcast/New Arrival modals */
+  .broadcast-modal {
+    width: 94% !important;
+    max-width: 94% !important;
+  }
+  
+  .broadcast-modal-inner label {
+    font-size: 13px !important;
+  }
+  
+  .broadcast-modal-inner input,
+  .broadcast-modal-inner textarea {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+  
+  .broadcast-actions {
+    flex-direction: column !important;
+  }
+  
+  .broadcast-actions button {
+    width: 100% !important;
+    padding: 12px !important;
+  }
+  
+  /* Order Detail Modal */
+  #orderDetailModal .modal-content {
+    padding: 24px 16px !important;
+    max-height: 85vh !important;
+  }
+  
+  #orderDetailModal h3 {
+    font-size: 22px !important;
+  }
+  
+  #orderDetailModal p {
+    font-size: 14px !important;
+  }
+  
+  .order-actions {
+    flex-direction: column !important;
+  }
+  
+  .order-actions a {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content h2,
+  .modal-content h3 {
+    font-size: 18px !important;
+  }
+  
+  .modal-content p {
+    font-size: 14px !important;
+  }
+  
+  .modal-buttons button {
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+}
+/* Mobile Menu Header */
+.mobile-menu-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.mobile-menu .dashboard-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  padding: 12px 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+body.dark-mode .mobile-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .mobile-menu .dashboard-title {
+  background: linear-gradient(135deg, #a5b4fc, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
