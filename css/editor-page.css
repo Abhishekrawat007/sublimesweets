@@ -1360,7 +1360,8 @@ body.dark-mode .broadcast-modal-inner textarea {
     flex: none !important;
   }
 }
-  
+ 
+}
 
 @media (max-width: 480px) {
   .modal-content h2,
