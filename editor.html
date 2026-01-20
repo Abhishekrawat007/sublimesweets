@@ -161,12 +161,11 @@ try {
 </div>
 
 <!-- Hamburger OUTSIDE header -->
-<button class="mobile-menu-toggle" aria-label="Toggle menu">
+<button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
   <span></span>
   <span></span>
   <span></span>
 </button>
-
 <div class="menu-backdrop" id="menuBackdrop"></div>
 
 <div class="mobile-menu" id="mobileMenu">
@@ -174,7 +173,6 @@ try {
   <button class="export" onclick="exportProducts(); toggleMobileMenu();">💾 Export product.js</button>
   <button class="undo" onclick="undoChanges(); toggleMobileMenu();">↩️ Undo Changes</button>
   <button class="exit" onclick="exitEditor(); toggleMobileMenu();">🚪 Exit Editor</button>
-  <button class="dark-toggle" onclick="toggleDarkMode();">🌙 Toggle Dark Mode</button>
   <button class="logout" onclick="logout(); toggleMobileMenu();">🔐 Logout</button>
   <button class="orders" onclick="openOrdersSection(); toggleMobileMenu();">📦 Orders</button>
   <button class="broadcast" onclick="document.getElementById('btn-broadcast').click(); toggleMobileMenu();">🔔 Broadcast</button>
@@ -187,7 +185,6 @@ try {
     <button class="export" onclick="exportProducts()">💾 Export product.js</button>
     <button class="undo" onclick="undoChanges()">↩️ Undo Changes</button>
     <button class="exit" onclick="exitEditor()">🚪 Exit Editor</button>
-    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
     <button class="logout" onclick="logout()">🔐 Logout</button>
       <button class="export" onclick="openOrdersSection()">📦 Orders</button>
     <button id="btn-broadcast" class="broadcast" style="background:#6f42c1;">🔔 Broadcast</button>

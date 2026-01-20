@@ -1457,15 +1457,21 @@ function toggleMobileMenu() {
   const backdrop = document.getElementById('menuBackdrop');
   const toggle = document.querySelector('.mobile-menu-toggle');
   
-  menu.classList.toggle('active');
-  backdrop.classList.toggle('active');
-  toggle.classList.toggle('active');
-  document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+  if (menu && backdrop && toggle) {
+    menu.classList.toggle('active');
+    backdrop.classList.toggle('active');
+    toggle.classList.toggle('active');
+    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+  }
 }
 
 // Close on backdrop click
-document.getElementById('menuBackdrop')?.addEventListener('click', toggleMobileMenu);
-
+document.addEventListener('DOMContentLoaded', () => {
+  const backdrop = document.getElementById('menuBackdrop');
+  if (backdrop) {
+    backdrop.addEventListener('click', toggleMobileMenu);
+  }
+});
 // Expose to window
 window.addProduct = addProduct;
 window.exportProducts = exportProducts;
