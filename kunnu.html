@@ -11,18 +11,30 @@
       padding: 0;
       box-sizing: border-box;
     }
+ html {
+  height: 100%;
+  overflow: hidden;
+}
 
-    body {
-      display: flex;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      padding: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
+html, body {
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+ body {
+  display: flex;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
 
     /* Animated background particles */
     body::before {
@@ -42,18 +54,21 @@
     }
 
     .login-container {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
-      border-radius: clamp(16px, 3vw, 24px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      width: 100%;
-      max-width: 420px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation: slideUp 0.5s ease;
-    }
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
+  border-radius: clamp(16px, 3vw, 24px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.5s ease;
+  overflow: hidden;
+}
 
     @keyframes slideUp {
       from {
@@ -66,10 +81,10 @@
       }
     }
 
-    .logo {
-      text-align: center;
-      margin-bottom: clamp(1.5rem, 4vw, 2rem);
-    }
+   .logo {
+  text-align: center;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
 
     .logo-icon {
       width: clamp(60px, 15vw, 80px);
@@ -100,10 +115,10 @@
       font-weight: 500;
     }
 
-    .input-group {
-      position: relative;
-      margin-bottom: clamp(1rem, 3vw, 1.5rem);
-    }
+   .input-group {
+  position: relative;
+  margin-bottom: clamp(0.875rem, 2.5vw, 1.25rem);
+}
 
     .input-group label {
       display: block;
@@ -233,12 +248,12 @@
     }
 
     .footer {
-      margin-top: clamp(1.5rem, 4vw, 2rem);
-      text-align: center;
-      color: #6b7280;
-      font-size: clamp(0.65rem, 2vw, 0.75rem);
-      line-height: 1.4;
-    }
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+  text-align: center;
+  color: #6b7280;
+  font-size: clamp(0.65rem, 2vw, 0.75rem);
+  line-height: 1.4;
+}
 
     /* Dark mode */
     body.dark-mode {
