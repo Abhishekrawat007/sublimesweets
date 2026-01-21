@@ -410,13 +410,27 @@ body.dark-mode input, body.dark-mode textarea { background:#2b2b2b; color:#eee; 
    // Scroll to top functionality
   const scrollBtn = document.getElementById("scrollToTopBtn");
 
- window.onscroll = function () {
+window.onscroll = function () {
+  const scrollBtn = document.getElementById("scrollToTopBtn");
+  if (!scrollBtn) return;
+  
+  // Check if mobile menu or any modal is open
+  const mobileMenuOpen = document.getElementById('mobileMenu')?.classList.contains('active');
+  const broadcastModalOpen = !document.getElementById('broadcast-modal')?.classList.contains('hidden');
+  const orderDetailModalOpen = !document.getElementById('orderDetailModal')?.classList.contains('hidden');
+  const confirmModalOpen = document.getElementById('confirmModal')?.classList.contains('show');
+  
+  // Hide if any modal/menu is open
+  if (mobileMenuOpen || broadcastModalOpen || orderDetailModalOpen || confirmModalOpen) {
+    scrollBtn.style.display = "none";
+    return;
+  }
+  
+  // Show only if scrolled down
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
     scrollBtn.style.display = "block";
-    scrollBtn.style.opacity = "1";
   } else {
     scrollBtn.style.display = "none";
-    scrollBtn.style.opacity = "0";
   }
 };
 
@@ -425,6 +439,32 @@ body.dark-mode input, body.dark-mode textarea { background:#2b2b2b; color:#eee; 
   };
   
 </script> 
+<script>
+// Prevent back button from leaving editor
+(function preventBackNav() {
+  // Push a state on load
+  history.pushState({ editorPage: true }, '', location.href);
+  
+  window.addEventListener('popstate', function(e) {
+    // If user tries to go back, push state again and stay on page
+    if (e.state && e.state.editorPage) {
+      // Already on editor page, do nothing
+    } else {
+      // Push state again to trap user
+      history.pushState({ editorPage: true }, '', location.href);
+      
+      // Show confirmation
+      const shouldLeave = confirm("⚠️ Leave Editor?\n\nYou have unsaved changes. Are you sure you want to leave?");
+      
+      if (shouldLeave) {
+        // User confirmed, allow navigation
+        history.back(); // This will now actually go back
+      }
+      // If not confirmed, state is already pushed so user stays
+    }
+  });
+})();
+</script>
 <script src="js/product.js"></script>
 <script  src="js/editor.js"> </script>
 </body>

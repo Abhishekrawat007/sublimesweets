@@ -1479,3 +1479,21 @@ body.dark-mode #scrollToTopBtn {
     font-size: 20px;
   }
 }
+/* Custom message in order detail modal */
+body.dark-mode #orderDetailModal li span {
+  color: #fde68a !important;
+  background: rgba(251, 191, 36, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+#orderDetailModal li span {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: #fef3c7;
+  border-left: 3px solid #f59e0b;
+  border-radius: 4px;
+}

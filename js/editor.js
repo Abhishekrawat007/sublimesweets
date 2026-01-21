@@ -1064,6 +1064,7 @@ function openOrderDetail(order, no) {
           ${i.size ? ` • Size: ${i.size}` : ''}
           ${i.flavor ? ` • Flavor: ${i.flavor}` : ''}
           × ${i.qty || i.quantity || 1}
+          ${i.customMessage ? `<br><span style="...">💬 "${i.customMessage}"</span>` : ''}
         </li>
       `).join('')
     : '<li>No items</li>';
@@ -1528,6 +1529,7 @@ function toggleMobileMenu() {
     backdrop.classList.toggle('active');
     toggle.classList.toggle('active');
     document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+     if (scrollBtn) scrollBtn.style.display = menu.classList.contains('active') ? 'none' : '';
   }
 }
 
