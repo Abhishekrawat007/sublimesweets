@@ -27,6 +27,7 @@ let originalProducts = JSON.parse(JSON.stringify(products));
 const productHistory = new Map();
 let filteredProducts = [...products];
 let lastPublishTime = 0;
+let viewedOrderIds = new Set(JSON.parse(localStorage.getItem('viewedOrders') || '[]'));
 let currentPage = 1;
 const perPage = 30;
 const productList = document.getElementById("productList");
@@ -324,13 +325,20 @@ function updateImages(index, value) {
 }
 
 function undoProduct(index) {
-  if (productHistory.has(index)) {
-    products[index] = { ...productHistory.get(index) };
-    productHistory.delete(index);
-    renderProducts();
-  } else {
-    alert("No recent changes to undo for this product.");
-  }
+  showModal({
+    title: "Undo Changes for This Product?",
+    message: "This will revert all unsaved changes to this product only. Are you sure?",
+    onConfirm: () => {
+      if (productHistory.has(index)) {
+        products[index] = { ...productHistory.get(index) };
+        productHistory.delete(index);
+        renderProducts();
+        alert("✅ Product changes reverted!");
+      } else {
+        alert("ℹ️ No recent changes to undo for this product.");
+      }
+    }
+  });
 }
 async function handleImageUpload(files, index) {
   const uploadBtn = document.querySelector(`#upload-btn-${index}`);
@@ -1092,12 +1100,13 @@ async function loadOrders() {
 
     // latest first
     arr.sort((a, b) => getOrderTimestamp(b) - getOrderTimestamp(a));
+     const newOrdersCount = arr.filter(o => !viewedOrderIds.has(o.orderId)).length;
 
     renderOrdersList(arr);
 
     if (statusEl) {
-      statusEl.textContent = arr.length
-        ? `Showing ${arr.length} orders`
+       statusEl.textContent = arr.length
+        ? `Showing ${arr.length} orders${newOrdersCount > 0 ? ` (${newOrdersCount} new)` : ''}`
         : 'No orders yet';
     }
   } catch (err) {
@@ -1112,11 +1121,25 @@ function renderOrdersList(arr) {
 
   arr.forEach((order, idx) => {
     const orderNo = arr.length - idx;
+    const isNew = !viewedOrderIds.has(order.orderId);
 
     const btn = document.createElement('button');
     btn.className = 'order-btn';
-    btn.textContent = `Order #${orderNo}`;
-    btn.onclick = () => openOrderDetail(order, orderNo);
+    
+    // Add "NEW" badge if unread
+    btn.innerHTML = isNew 
+      ? `<span style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; margin-right: 8px; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);">🔥 NEW</span>Order #${orderNo}`
+      : `Order #${orderNo}`;
+    
+    btn.onclick = () => {
+      // Mark as viewed when clicked
+      viewedOrderIds.add(order.orderId);
+      localStorage.setItem('viewedOrders', JSON.stringify([...viewedOrderIds]));
+      openOrderDetail(order, orderNo);
+      
+      // Re-render to remove NEW badge
+      renderOrdersList(arr);
+    };
 
     list.appendChild(btn);
   });
