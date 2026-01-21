@@ -410,13 +410,15 @@ body.dark-mode input, body.dark-mode textarea { background:#2b2b2b; color:#eee; 
    // Scroll to top functionality
   const scrollBtn = document.getElementById("scrollToTopBtn");
 
-  window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      scrollBtn.style.display = "block";
-    } else {
-      scrollBtn.style.display = "none";
-    }
-  };
+ window.onscroll = function () {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    scrollBtn.style.display = "block";
+    scrollBtn.style.opacity = "1";
+  } else {
+    scrollBtn.style.display = "none";
+    scrollBtn.style.opacity = "0";
+  }
+};
 
   scrollBtn.onclick = function () {
     window.scrollTo({ top: 0, behavior: "smooth" });

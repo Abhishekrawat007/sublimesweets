@@ -1440,3 +1440,42 @@ body.dark-mode .mobile-menu .dashboard-title {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+#scrollToTopBtn {
+  position: fixed;
+  right: 30px;
+  bottom: 100px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+  z-index: 999;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+body.dark-mode #scrollToTopBtn {
+  background: linear-gradient(135deg, #a5b4fc, #c4b5fd);
+  color: #1d1d1f;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  #scrollToTopBtn {
+    right: 20px;
+    bottom: 80px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+}

@@ -28,6 +28,22 @@ const productHistory = new Map();
 let filteredProducts = [...products];
 let lastPublishTime = 0;
 let viewedOrderIds = new Set(JSON.parse(localStorage.getItem('viewedOrders') || '[]'));
+(function cleanupOldViewedOrders() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('viewedOrdersWithTime') || '{}');
+    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+    
+    // Filter out entries older than 30 days
+    const cleaned = Object.fromEntries(
+      Object.entries(stored).filter(([id, timestamp]) => timestamp > thirtyDaysAgo)
+    );
+    
+    localStorage.setItem('viewedOrdersWithTime', JSON.stringify(cleaned));
+    viewedOrderIds = new Set(Object.keys(cleaned));
+  } catch (e) {
+    console.warn('Cleanup failed:', e);
+  }
+})();
 let currentPage = 1;
 const perPage = 30;
 const productList = document.getElementById("productList");
@@ -543,13 +559,20 @@ function addProduct() {
 function undoChanges() {
   showModal({
     title: "Undo All Changes?",
-    message: "This will revert all unsaved changes to products. Are you sure?",
+    message: "This will revert ALL unsaved changes to all products. Are you sure?",
     onConfirm: () => {
       products = JSON.parse(JSON.stringify(originalProducts));
       filteredProducts = [...products];
       currentPage = 1;
+      productHistory.clear();
       renderProducts();
-      alert("✅ All changes have been reverted!");
+      
+      // Optional: Show success feedback
+      const statusEl = document.createElement('div');
+      statusEl.textContent = '✅ All changes reverted!';
+      statusEl.style.cssText = 'position:fixed;top:20px;right:20px;background:#28a745;color:white;padding:12px 20px;border-radius:8px;z-index:9999;';
+      document.body.appendChild(statusEl);
+      setTimeout(() => statusEl.remove(), 2000);
     }
   });
 }
@@ -1121,7 +1144,9 @@ function renderOrdersList(arr) {
 
   arr.forEach((order, idx) => {
     const orderNo = arr.length - idx;
-    const isNew = !viewedOrderIds.has(order.orderId);
+    const orderAge = Date.now() - getOrderTimestamp(order);
+const is24HoursOld = orderAge > 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const isNew = !viewedOrderIds.has(order.orderId) && !is24HoursOld;
 
     const btn = document.createElement('button');
     btn.className = 'order-btn';
@@ -1132,10 +1157,14 @@ function renderOrdersList(arr) {
       : `Order #${orderNo}`;
     
     btn.onclick = () => {
-      // Mark as viewed when clicked
-      viewedOrderIds.add(order.orderId);
-      localStorage.setItem('viewedOrders', JSON.stringify([...viewedOrderIds]));
-      openOrderDetail(order, orderNo);
+  // Mark as viewed with timestamp
+  viewedOrderIds.add(order.orderId);
+  
+  const viewedWithTime = JSON.parse(localStorage.getItem('viewedOrdersWithTime') || '{}');
+  viewedWithTime[order.orderId] = Date.now();
+  localStorage.setItem('viewedOrdersWithTime', JSON.stringify(viewedWithTime));
+  
+  openOrderDetail(order, orderNo);
       
       // Re-render to remove NEW badge
       renderOrdersList(arr);
