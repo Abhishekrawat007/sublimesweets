@@ -2,139 +2,397 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sublime Store – Affordable Trendy Products</title>
-  <meta name="description" content="Buy amazing affordable products online from Sublime Store. Free delivery on orders over ₹199">
-  <meta name="keywords" content="Sublime Store, online shop, budget products, free delivery India">
+  <title>Admin Login – Sublime Sweets</title>
+  <meta name="description" content="Secure admin access for Sublime Sweets dashboard">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       display: flex;
-      height: 100vh;
+      min-height: 100vh;
       justify-content: center;
       align-items: center;
-      background: #f4f4f4;
-      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .login-box {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: drift 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-50px, -50px); }
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 3rem 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       width: 100%;
-      max-width: 350px;
+      max-width: 420px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: slideUp 0.5s ease;
     }
 
-    .login-box h2 {
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
       text-align: center;
-      margin-bottom: 1.5rem;
-      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 1rem;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    }
+
+    .logo h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo p {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 500;
     }
 
     .input-group {
       position: relative;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     input[type="password"],
     input[type="text"] {
       width: 100%;
-      padding: 12px 40px 12px 12px;
+      padding: 14px 50px 14px 16px;
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-sizing: border-box;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      background: #f9fafb;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
     }
 
     .toggle-eye {
       position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 16px;
+      bottom: 14px;
       cursor: pointer;
-      font-size: 18px;
-      color: #666;
+      font-size: 20px;
       user-select: none;
+      transition: transform 0.2s ease;
     }
 
-    button {
+    .toggle-eye:hover {
+      transform: scale(1.1);
+    }
+
+    .login-btn {
       width: 100%;
-      padding: 12px;
-      background: #28a745;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    button:hover {
-      background: #218838;
+    .login-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
+    }
+
+    .login-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+
+    .login-btn.loading .spinner {
+      display: block;
+    }
+
+    .login-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .error {
-      margin-top: 10px;
-      color: #e63946;
+      margin-top: 1rem;
+      padding: 12px 16px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 10px;
+      color: #dc2626;
       text-align: center;
       font-size: 14px;
+      font-weight: 600;
+      display: none;
+      animation: shake 0.3s ease;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.75rem;
+    }
+
+    /* Dark mode toggle (optional) */
+    body.dark-mode {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+
+    body.dark-mode .login-container {
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode input {
+      background: #1e293b;
+      border-color: #334155;
+      color: #f1f5f9;
+    }
+
+    body.dark-mode input:focus {
+      background: #0f172a;
+      border-color: #a5b4fc;
+    }
+
+    body.dark-mode .input-group label {
+      color: #cbd5e1;
+    }
+
+    body.dark-mode .logo p {
+      color: #94a3b8;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .logo-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 35px;
+      }
+
+      .logo h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="login-box">
-    <h2>🔐 Admin Login</h2>
+  <div class="login-container">
+    <div class="logo">
+      <div class="logo-icon">🔐</div>
+      <h1>Admin Login</h1>
+      <p>Enter your credentials to continue</p>
+    </div>
+
     <div class="input-group">
-      <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+      <label for="adminPassword">Password</label>
+      <input 
+        type="password" 
+        id="adminPassword" 
+        placeholder="Enter your admin password"
+        autocomplete="current-password"
+      />
       <span class="toggle-eye" onclick="togglePassword()">👁️</span>
     </div>
-    <button onclick="login()">Login</button>
+
+    <button class="login-btn" onclick="login()">
+      <span class="btn-text">🚀 Login to Dashboard</span>
+      <span class="spinner"></span>
+    </button>
+
     <div class="error" id="errorText"></div>
+
+    <div class="footer">
+      Sublime Sweets © 2025 • Secure Admin Access
+    </div>
   </div>
 
   <script>
-async function togglePassword() {
-  const input = document.getElementById("adminPassword");
-  const eye = document.querySelector(".toggle-eye");
-  if (input.type === "password") {
-    input.type = "text";
-    eye.textContent = "🙈";
-  } else {
-    input.type = "password";
-    eye.textContent = "👁";
-  }
-}
-
-async function login() {
-  const enteredPassword = document.getElementById("adminPassword").value;
-  const errorText = document.getElementById("errorText");
-  errorText.textContent = "";
-
-  try {
-    const res = await fetch("/.netlify/functions/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: enteredPassword })
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      errorText.textContent = "❌ " + (data.error || "Login failed");
-      return;
+    function togglePassword() {
+      const input = document.getElementById("adminPassword");
+      const eye = document.querySelector(".toggle-eye");
+      if (input.type === "password") {
+        input.type = "text";
+        eye.textContent = "🙈";
+      } else {
+        input.type = "password";
+        eye.textContent = "👁️";
+      }
     }
 
-    // store token and redirect
-    sessionStorage.setItem("adminToken", data.token);
-    window.location.href = "editor.html";
-  } catch (err) {
-    console.error(err);
-    errorText.textContent = "❌ Network error";
-  }
-}
-</script>
+    // Enter key support
+    document.getElementById("adminPassword").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") login();
+    });
 
+    async function login() {
+      const enteredPassword = document.getElementById("adminPassword").value;
+      const errorText = document.getElementById("errorText");
+      const loginBtn = document.querySelector(".login-btn");
+      
+      // Clear previous error
+      errorText.classList.remove("show");
+      errorText.textContent = "";
+
+      if (!enteredPassword) {
+        errorText.textContent = "⚠️ Please enter your password";
+        errorText.classList.add("show");
+        return;
+      }
+
+      // Show spinner
+      loginBtn.disabled = true;
+      loginBtn.classList.add("loading");
+
+      try {
+        const res = await fetch("/.netlify/functions/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: enteredPassword })
+        });
+
+        const data = await res.json();
+        
+        if (!res.ok) {
+          errorText.textContent = "❌ " + (data.error || "Invalid password");
+          errorText.classList.add("show");
+          loginBtn.disabled = false;
+          loginBtn.classList.remove("loading");
+          return;
+        }
+
+        // Store token and redirect
+        sessionStorage.setItem("adminToken", data.token);
+        
+        // Keep spinner while redirecting
+        setTimeout(() => {
+          window.location.href = "editor.html";
+        }, 500);
+        
+      } catch (err) {
+        console.error(err);
+        errorText.textContent = "❌ Network error. Please try again.";
+        errorText.classList.add("show");
+        loginBtn.disabled = false;
+        loginBtn.classList.remove("loading");
+      }
+    }
+
+    // Apply saved theme
+    (function() {
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark') {
+          document.body.classList.add('dark-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
 </body>
 </html>
