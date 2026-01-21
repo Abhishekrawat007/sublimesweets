@@ -1018,41 +1018,25 @@
 .mobile-menu-content {
       /* 🔥 ROYAL DEEP PURPLE GRADIENT */
   background: linear-gradient(180deg, 
-    #2d1b69 0%,      /* Deep Royal Purple */
-    #1a0f3d 100%     /* Midnight Purple */
+    #7dd3c0 0%,      /* Soft Turquoise */
+    #a0e7d7 100%     /* Light Mint */
   ) !important;
-
-  /* background: linear-gradient(180deg, 
-  #7c2d12 0%,     
-  #451a03 100%     
-) !important; */
-
-  /* background: linear-gradient(180deg, 
-  #1e3a8a 0%,     
-  #0f172a 100%     
-) !important; */
-  
-
-/* background: linear-gradient(180deg, 
-  #1e40af 0%,     
-  #1e293b 100%     
-) !important; */
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
 /* Keep header slightly lighter with frosted effect */
 .mobile-menu-header {
-    background: linear-gradient(135deg, 
-      rgba(109, 46, 157, 0.95) 0%,   /* Royal Purple with transparency */
-      rgba(77, 25, 117, 0.98) 100%   /* Deep Purple */
+     background: linear-gradient(135deg, 
+      rgba(125, 211, 192, 0.95) 0%,   /* Turquoise with transparency */
+      rgba(160, 231, 215, 0.98) 100%   /* Light Mint */
     ) !important;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 
-        0 4px 16px rgba(109, 46, 157, 0.3),
-        0 1px 3px rgba(0, 0, 0, 0.2);
+        0 4px 16px rgba(125, 211, 192, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Text colors for royal background */
@@ -1060,26 +1044,26 @@
 .mobile-menu .mobile-submenu-item,
 .mobile-menu .dark-mode-label,
 .mobile-menu .navbar-logo {
-  color: #ffffff !important;
-}
+ color: #1a1a1a !important;}
 
 .mobile-menu .arrow-icon,
 .mobile-menu .menu-icon {
-  color: rgba(255, 255, 255, 0.8) !important;
+   color: rgba(0, 0, 0, 0.6) !important;
 }
 
 /* Hover states for royal theme */
 .mobile-menu .mobile-menu-link:hover,
 .mobile-menu .mobile-submenu-item:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+ background: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(125, 211, 192, 0.3);
 }
 
 /* Active link on royal background */
 .mobile-menu .mobile-menu-link.active {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%) !important;
+     background: linear-gradient(135deg, #5bc0a8 0%, #4fb39d 100%) !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+  box-shadow: 0 6px 20px rgba(91, 192, 168, 0.5);
+
 }
 .cart-sidebar,
 .cart-header,
