@@ -533,10 +533,17 @@ function addProduct() {
 }
 
 function undoChanges() {
-  products = JSON.parse(JSON.stringify(originalProducts));
-  filteredProducts = [...products];
-  currentPage = 1;
-  renderProducts();
+  showModal({
+    title: "Undo All Changes?",
+    message: "This will revert all unsaved changes to products. Are you sure?",
+    onConfirm: () => {
+      products = JSON.parse(JSON.stringify(originalProducts));
+      filteredProducts = [...products];
+      currentPage = 1;
+      renderProducts();
+      alert("✅ All changes have been reverted!");
+    }
+  });
 }
 
 function exportProducts() {
@@ -816,6 +823,8 @@ document.addEventListener("DOMContentLoaded", () => {
     inTitle.focus();
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
+  document.getElementById('productsSection').style.filter = 'blur(6px)';
   }
 
   function closeModal() {
@@ -826,6 +835,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // restore scrolling
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
+     document.body.classList.remove('modal-open');
+  document.getElementById('productsSection').style.filter = '';
   }
  
   const uploadBtn = document.getElementById('broadcast-upload-btn');

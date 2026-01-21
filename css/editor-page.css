@@ -1233,13 +1233,35 @@ body.dark-mode .order-btn:hover {
 
 body.dark-mode #orderDetailModal .modal-content {
   background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
-  color: #fbbf24;
+  color: #fde68a !important;
   border-color: rgba(251, 191, 36, 0.3);
 }
 
+body.dark-mode #orderDetailModal .modal-content p {
+  color: #fde68a !important;
+  font-weight: 500;
+}
+
+body.dark-mode #orderDetailModal .modal-content b {
+  color: #fbbf24 !important;
+  font-weight: 800;
+}
+
+body.dark-mode #orderDetailModal h3 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode #orderDetailModal h4 {
+  color: #fbbf24 !important;
+  font-weight: 700;
+}
+
 body.dark-mode #orderDetailModal li {
-  background: rgba(255, 255, 255, 0.05);
-  color: #fde68a;
+  background: rgba(251, 191, 36, 0.15) !important;
+  color: #fde68a !important;
+  border-left-color: #fbbf24;
 }
 .broadcast-modal-inner {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)) !important;
