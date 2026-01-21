@@ -557,24 +557,27 @@ function addProduct() {
 }
 
 function undoChanges() {
-  showModal({
-    title: "Undo All Changes?",
-    message: "This will revert ALL unsaved changes to all products. Are you sure?",
-    onConfirm: () => {
-      products = JSON.parse(JSON.stringify(originalProducts));
-      filteredProducts = [...products];
-      currentPage = 1;
-      productHistory.clear();
-      renderProducts();
-      
-      // Optional: Show success feedback
-      const statusEl = document.createElement('div');
-      statusEl.textContent = '✅ All changes reverted!';
-      statusEl.style.cssText = 'position:fixed;top:20px;right:20px;background:#28a745;color:white;padding:12px 20px;border-radius:8px;z-index:9999;';
-      document.body.appendChild(statusEl);
-      setTimeout(() => statusEl.remove(), 2000);
-    }
-  });
+  const confirmed = confirm("⚠️ Undo All Changes?\n\nThis will revert ALL unsaved changes to all products. Are you sure?");
+  
+  if (confirmed) {
+    // Clear the product history
+    productHistory.clear();
+    
+    // Deep copy original products back
+    products.splice(0, products.length, ...JSON.parse(JSON.stringify(originalProducts)));
+    
+    // Reset filtered products
+    filteredProducts = [...products];
+    
+    // Reset to first page
+    currentPage = 1;
+    
+    // Force re-render
+    renderProducts();
+    
+    // Show success
+    alert("✅ All changes have been undone!");
+  }
 }
 
 function exportProducts() {
