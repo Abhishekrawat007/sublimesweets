@@ -712,7 +712,7 @@ body.dark-mode .clear-categories-btn:hover {
    📱 RESPONSIVE
    ============================================ */
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .filter-sidebar {
         display: none;
     }
@@ -735,7 +735,7 @@ body.dark-mode .clear-categories-btn:hover {
     }
 }
 
-@media (min-width: 701px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .filter-sidebar {
         width: 260px;
     }
@@ -763,7 +763,7 @@ body.dark-mode .clear-categories-btn:hover {
    📱 MOBILE RESPONSIVE - SHARE PRODUCTS
    ============================================ */
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     /* Hide desktop sidebar only */
     .filter-sidebar {
         display: none !important;

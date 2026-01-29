@@ -1060,7 +1060,7 @@
 
 /* Active link on royal background */
 .mobile-menu .mobile-menu-link.active {
-     background: linear-gradient(135deg, #5bc0a8 0%, #4fb39d 100%) !important;
+     background: linear-gradient(135deg, #5bc0a8 0%, #4fb39d 100%) ;
   color: #ffffff !important;
   box-shadow: 0 6px 20px rgba(91, 192, 168, 0.5);
 
