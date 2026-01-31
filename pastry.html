@@ -1257,12 +1257,8 @@
       return;
     }
 
-    // ✅ Filter by category
+  // ✅ Filter by category (DON'T replace products array!)
     const categoryProducts = window.productManager.filterByCategory(CURRENT_CATEGORY);
-
-    // ✅ REPLACE the product manager's product list with ONLY this category
-    window.productManager.products = categoryProducts;
-    window.productManager.loadedProducts = []; // Clear loaded cache
 
     // Update count
     if (countEl) countEl.textContent = categoryProducts.length;
@@ -1271,8 +1267,8 @@
       if (grid) grid.style.display = 'grid';
       if (noProducts) noProducts.style.display = 'none';
 
-      // ✅ Render (now it will use the filtered list for scroll loading too)
-      window.productManager.renderProducts();
+      // ✅ Render ONLY filtered products (keeps original products array intact for cart!)
+      window.productManager.renderProducts(categoryProducts);
     } else {
       if (grid) grid.style.display = 'none';
       if (noProducts) noProducts.style.display = 'block';

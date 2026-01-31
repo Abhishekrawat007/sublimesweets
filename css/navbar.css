@@ -1500,11 +1500,11 @@
     }
 
     .navbar-left .hamburger {
-        transform: scale(0.85);  /* shrink hamburger */
+        transform: scale(0.95);  /* shrink hamburger */
     }
 
     .navbar-right .icon-btn {
-        transform: scale(0.85); /* shrink icons slightly */
+        transform: scale(0.95); /* shrink icons slightly */
         margin-left: 3px;  /* tighten spacing */
     }
 
@@ -1883,4 +1883,125 @@ body.dark-mode .cart-item-message {
   white-space: normal;
   max-width: 100%;
   line-height: 1.4;
+}
+
+@media (max-width: 320px) {
+  .products-grid {
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Force equal column widths */
+  .product-card {
+    width: 50vw !important;
+    max-width: 50vw !important;
+  }
+  
+  .product-card-image {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .product-card-info {
+    padding: 5px 6px 6px 6px !important;
+    gap: 3px !important;
+  }
+  
+  .product-card-name {
+    font-size: 10px !important;
+    padding: 5px 6px !important;
+  }
+  
+  .price-new {
+    font-size: 14px !important;
+  }
+  
+  .price-old {
+    font-size: 11px !important;
+  }
+  
+  .info-badge {
+    padding: 2px 4px !important;
+    font-size: 8px !important;
+  }
+  
+  .size-select-btn,
+  .add-to-cart-btn {
+    padding: 6px 6px !important;
+    font-size: 11px !important;
+    min-height: 32px !important;
+  }
+  
+  .discount-badge {
+    padding: 2px 5px !important;
+    font-size: 8px !important;
+  }
+}
+
+@media (max-width: 290px) {
+    .navbar-container {
+        padding: 0 6px;
+        gap: 4px;
+    }
+    
+    .navbar-left,
+    .navbar-right {
+        gap: 4px !important;
+    }
+    
+    .navbar-logo {
+        font-size: 16px;
+    }
+    
+   .navbar-logo-img {
+    height: 60px !important;
+}
+    .icon-btn {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .icon-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .hamburger {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .badge {
+        font-size: 8px;
+        min-width: 14px;
+        height: 14px;
+    }
+}
+@media (max-width: 270px) {
+     .navbar-container {
+        padding: 0 4px;
+        gap: 2px;
+    }
+    
+    .navbar-left,
+    .navbar-right {
+        gap: 2px !important;
+    }
+       .navbar-logo-img {
+    height: 50px !important;
+}
+    .icon-btn {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .icon-btn svg {
+        width: 16px;
+        height: 16px;
+    } 
+}
+@media (max-width: 240px) {
+         .navbar-logo-img {
+    height: 40px !important;
+}
 }
