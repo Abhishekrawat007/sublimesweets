@@ -730,11 +730,14 @@ if (hasCustomMessage) {
     localStorage.setItem('cart', JSON.stringify(this.cart));
     
     if (!this.cart.length) {
-      cartContent.innerHTML = `
-        <div class="empty-cart-message">
-          Your cart is empty.
-        </div>
-      `;
+       cartContent.innerHTML = `
+            <div class="empty-cart-state" style="display:flex;flex-direction:column;align-items:center;padding:60px 20px;text-align:center;">
+                <div style="font-size:80px;margin-bottom:20px;opacity:0.3;">🛒</div>
+                <h3 style="font-size:22px;font-weight:700;margin-bottom:10px;">Your cart is empty</h3>
+                <p style="color:var(--nav-text-secondary);margin-bottom:30px;">Add some items to get started!</p>
+              <a href="index.html#productsGrid" onclick="document.getElementById('cartSidebar').classList.remove('active'); document.getElementById('mobileMenuOverlay').classList.remove('active'); document.body.style.overflow='';" style="display:inline-block;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:14px 32px;border-radius:12px;font-weight:600;text-decoration:none;">Start Shopping</a>
+            </div>
+        `;
       totalEl.textContent = '₹0';
       return;
     }

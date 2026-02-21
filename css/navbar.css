@@ -1885,58 +1885,7 @@ body.dark-mode .cart-item-message {
   line-height: 1.4;
 }
 
-@media (max-width: 320px) {
-  .products-grid {
-    gap: 0 !important;
-    padding: 0 !important;
-  }
-  
-  /* Force equal column widths */
-  .product-card {
-    width: 50vw !important;
-    max-width: 50vw !important;
-  }
-  
-  .product-card-image {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-  
-  .product-card-info {
-    padding: 5px 6px 6px 6px !important;
-    gap: 3px !important;
-  }
-  
-  .product-card-name {
-    font-size: 10px !important;
-    padding: 5px 6px !important;
-  }
-  
-  .price-new {
-    font-size: 14px !important;
-  }
-  
-  .price-old {
-    font-size: 11px !important;
-  }
-  
-  .info-badge {
-    padding: 2px 4px !important;
-    font-size: 8px !important;
-  }
-  
-  .size-select-btn,
-  .add-to-cart-btn {
-    padding: 6px 6px !important;
-    font-size: 11px !important;
-    min-height: 32px !important;
-  }
-  
-  .discount-badge {
-    padding: 2px 5px !important;
-    font-size: 8px !important;
-  }
-}
+
 
 @media (max-width: 290px) {
     .navbar-container {

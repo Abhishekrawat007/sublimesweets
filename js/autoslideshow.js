@@ -128,37 +128,47 @@ let currentAnimationStyle = 0;
         }
 
         // Navigate to specific slide
-        function goToSlide(index) {
-            if (isAnimating || index === currentSlide) return;
+      function goToSlide(index) {
+    if (isAnimating || index === currentSlide) return;
 
-            isAnimating = true;
-            const nextSlideData = slides[index];
+    isAnimating = true;
+    const nextSlideData = slides[index];
 
-            // Fade out content
-            contentWrapper.classList.add('fade-out');
+    contentWrapper.classList.add('fade-out');
 
-            // Create and animate fragments
-            setTimeout(() => {
-                createFragments(nextSlideData.image);
-            }, 500);
-
-            // Update after animation completes
+    if (isMobile) {
+        // Simple crossfade on mobile
+        setTimeout(() => {
+            slideBase.style.opacity = '0';
             setTimeout(() => {
                 slideBase.style.backgroundImage = `url(${nextSlideData.image})`;
+                slideBase.style.opacity = '1';
                 currentSlide = index;
                 updateIndicators();
                 updateContent(index);
-                
-                // Clear fragments
-                fragmentContainer.innerHTML = '';
-                
-                // Fade in content
                 contentWrapper.classList.remove('fade-out');
-                
                 isAnimating = false;
                 resetAutoPlay();
-            }, 2500);
-        }
+            }, 400);
+        }, 300);
+    } else {
+        // Full fragment animation on desktop
+        setTimeout(() => {
+            createFragments(nextSlideData.image);
+        }, 500);
+
+        setTimeout(() => {
+            slideBase.style.backgroundImage = `url(${nextSlideData.image})`;
+            currentSlide = index;
+            updateIndicators();
+            updateContent(index);
+            fragmentContainer.innerHTML = '';
+            contentWrapper.classList.remove('fade-out');
+            isAnimating = false;
+            resetAutoPlay();
+        }, 2500);
+    }
+}
 
         // Create fragments that complete the image (NO GAPS, NO ROTATION)
         function createFragments(imageUrl) {
