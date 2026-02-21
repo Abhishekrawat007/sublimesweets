@@ -111,6 +111,155 @@ body.search-active .products-section {
         padding-top: 0 !important;
     }
 }
+/* ════════════════════════════════════════════════
+   V53 — TOPOGRAPHIC MAP
+   Trekking · Outdoor · Coffee Brand · Nature Brand
+   CSS contour lines as the visual backdrop,
+   story overlaid on the terrain
+════════════════════════════════════════════════ */
+.v53{--ac:#3d7a4f;background:var(--bg)}
+[data-theme="dark"] .v53{--ac:#4ade80;background:#060a07}
+[data-theme="light"] .v53{background:#f0f5ee}
+
+.v53-outer{position:relative;overflow:hidden}
+
+/* topo contour lines — CSS radial-gradient rings */
+.v53-topo{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 20%, var(--b1) 20.5%, transparent 21%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 30%, var(--b1) 30.5%, transparent 31%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 40%, var(--b1) 40.5%, transparent 41%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 50%, var(--b1) 50.5%, transparent 51%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 60%, var(--b1) 60.5%, transparent 61%),
+    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 70%, var(--b1) 70.5%, transparent 71%),
+    var(--bg);
+  pointer-events:none;
+}
+
+.v53-wrap{max-width:1100px;margin:0 auto;padding:52px 20px;position:relative;z-index:1}
+
+.v53-elevation{
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.v53-elev-line{flex:0 0 30px;height:1px;background:var(--ac)}
+.v53-elev-text{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ac);
+}
+
+.v53-title{
+  font-family:'Unna',serif;
+  font-size:clamp(28px,7.5vw,58px);
+  font-weight:700;line-height:1.08;
+  color:var(--tx);margin-bottom:14px;
+}
+.v53-title em{font-style:italic;color:var(--ac)}
+
+/* main image with topo overlay feel */
+.v53-img{
+  aspect-ratio:16/9;overflow:hidden;
+  position:relative;margin-bottom:24px;
+}
+.v53-img img{height:100%;object-fit:cover;filter:brightness(.75) saturate(1.1)}
+
+/* elevation marker on image */
+.v53-elev-badge{
+  position:absolute;bottom:14px;left:14px;
+  background:var(--ac);color:#fff;
+  padding:6px 12px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  font-weight:600;
+}
+
+/* waypoints — like GPS coords on a map */
+.v53-waypoints{
+  display:flex;flex-direction:column;gap:0;
+  margin-bottom:20px;
+}
+.v53-waypoint{
+  display:grid;grid-template-columns:28px 1fr;gap:12px;
+  padding:14px 0;border-bottom:1px solid var(--b1);
+  align-items:start;
+}
+.v53-waypoint:last-child{border-bottom:none}
+.v53-wp-marker{
+  width:20px;height:20px;
+  border-radius:50% 50% 50% 0;
+  background:var(--ac);
+  transform:rotate(-45deg);
+  flex-shrink:0;
+  margin-top:2px;
+}
+.v53-wp-marker-inner{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--bg);
+  margin:6px auto 0;
+  transform:rotate(45deg);
+}
+.v53-wp-title{font-size:14px;font-weight:500;color:var(--tx);margin-bottom:3px}
+.v53-wp-body{font-size:13px;line-height:1.65;color:var(--mu)}
+.v53-wp-body strong{color:var(--tx)}
+.v53-wp-coords{font-size:10px;color:var(--ac);margin-top:3px;letter-spacing:.5px}
+
+/* contour stats */
+.v53-contours{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border:1px solid var(--b1);
+  margin-top:4px;
+}
+.v53-contour{
+  padding:16px 0;text-align:center;
+  border-right:1px solid var(--b1);
+  background:var(--sur);
+}
+.v53-contour:last-child{border-right:none}
+.v53-contour strong{display:block;font-family:'Unna',serif;font-size:26px;color:var(--ac);line-height:1}
+.v53-contour span{font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
+
+@media(min-width:768px){
+  .v53-wrap{padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .v53-img{aspect-ratio:3/4;margin-bottom:0}
+  .v53-right{display:flex;flex-direction:column;gap:0}
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+[data-theme="dark"]{
+  --bg:#07070a;
+  --sur:#0e0e12;
+  --sur2:#151518;
+  --b1:rgba(255,255,255,.055);
+  --b2:rgba(255,255,255,.1);
+  --tx:#edeae2;
+  --mu:rgba(237,234,226,.37);
+  --sh:rgba(0,0,0,.75);
+}
+[data-theme="light"]{
+  --bg:#f1ede8;
+  --sur:#ffffff;
+  --sur2:#e6e2da;
+  --b1:rgba(0,0,0,.06);
+  --b2:rgba(0,0,0,.11);
+  --tx:#0a0a0a;
+  --mu:#7b7469;
+  --sh:rgba(0,0,0,.07);
+}
+
+body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--tx);transition:background .3s,color .3s;overflow-x:hidden}
+img{display:block;width:100%}
+
+/* TOGGLE */
+.tb{position:sticky;top:0;z-index:999;background:var(--sur);border-bottom:1px solid var(--b1);padding:13px 20px;display:flex;align-items:center;justify-content:space-between}
+.tb-t{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu)}
+.tg{display:flex;align-items:center;gap:9px;cursor:pointer;background:var(--sur2);border:1px solid var(--b2);border-radius:100px;padding:5px 13px 5px 7px}
+.tr{width:34px;height:18px;background:var(--b2);border-radius:100px;position:relative;transition:background .3s}
+[data-theme="light"] .tr{background:#111}
+.tt{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--mu);transition:transform .3s,background .3s}
+[data-theme="light"] .tt{transform:translateX(16px);background:#fff}
+.tl{font-size:11px;font-weight:500;color:var(--tx)}
+.sl{background:var(--sur2);border-left:3px solid var(--ac,#888);padding:11px 20px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu)}
+.sep{height:1px;background:var(--b1)}
+
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -763,6 +912,85 @@ body.search-active .products-section {
     </div>
 </div>
 
+<!-- V53 -->
+
+<section class="v53">
+  <div class="v53-outer">
+    <div class="v53-topo"></div>
+    <div class="v53-wrap">
+      <div class="v53-left">
+        <div class="v53-elevation">
+          <div class="v53-elev-line"></div>
+          <div class="v53-elev-text">Elevation: Our Story</div>
+        </div>
+        <h2 class="v53-title">We didn't build<br>a brand. We built<br>a <em>trail.</em></h2>
+        <div class="v53-img" style="margin-top:18px">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900" alt="Mountain trail">
+          <div class="v53-elev-badge">ALT: 3,200m · Uttarakhand</div>
+        </div>
+        <div class="v53-contours" style="margin-top:20px">
+          <div class="v53-contour"><strong>14yr</strong><span>On Trail</span></div>
+          <div class="v53-contour"><strong>80+</strong><span>Routes</span></div>
+          <div class="v53-contour"><strong>22k</strong><span>Trekkers</span></div>
+        </div>
+      </div>
+      <div class="v53-right">
+        <div class="v53-waypoints">
+          <div class="v53-waypoint">
+            <div>
+              <div class="v53-wp-marker">
+                <div class="v53-wp-marker-inner"></div>
+              </div>
+            </div>
+            <div>
+              <div class="v53-wp-title">Base Camp · 2010</div>
+              <div class="v53-wp-body"><strong>Ranjit and Priya Mehta</strong> led their first group into the Roopkund valley with borrowed tents and a handdrawn route. 11 people. All came back. All came back again the next year.</div>
+              <div class="v53-wp-coords">30.0668° N, 79.7243° E</div>
+            </div>
+          </div>
+          <div class="v53-waypoint">
+            <div>
+              <div class="v53-wp-marker">
+                <div class="v53-wp-marker-inner"></div>
+              </div>
+            </div>
+            <div>
+              <div class="v53-wp-title">First Altitude Camp · 2013</div>
+              <div class="v53-wp-body">Certified mountain rescue training mandatory for all guides — two years before it became an industry standard. <strong>We required it because it was right, not because it was required.</strong></div>
+              <div class="v53-wp-coords">32.2396° N, 77.1887° E</div>
+            </div>
+          </div>
+          <div class="v53-waypoint">
+            <div>
+              <div class="v53-wp-marker">
+                <div class="v53-wp-marker-inner"></div>
+              </div>
+            </div>
+            <div>
+              <div class="v53-wp-title">Summit Decision · 2018</div>
+              <div class="v53-wp-body">Turned 200 bookings away in one season. Weather was wrong, snowpack was unstable. The mountain would be there next year. <strong>The trust of our clients had to be too.</strong></div>
+              <div class="v53-wp-coords">31.1048° N, 77.2673° E</div>
+            </div>
+          </div>
+          <div class="v53-waypoint">
+            <div>
+              <div class="v53-wp-marker">
+                <div class="v53-wp-marker-inner"></div>
+              </div>
+            </div>
+            <div>
+              <div class="v53-wp-title">Present Position · 2024</div>
+              <div class="v53-wp-body">80 routes. 22,000 trekkers. Zero fatalities in 14 years. Still led by the same two founders. Still handchecking every route before each season opens.</div>
+              <div class="v53-wp-coords">You are here.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
  <!-- ============================================
      🍦 PREMIUM ICE-CREAM GALLERY SECTION
      Ultra-luxury horizontal scroll showcase
