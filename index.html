@@ -787,11 +787,16 @@ body.search-active .products-section {
     .pdf-banner p{font-size:15px;margin-bottom:14px;opacity:.95;}
     .pdf-download-btn{display:inline-block;background:var(--white);color:#7c3aed;padding:12px 30px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;letter-spacing:.5px;}
     .pdf-download-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,.3);}
-    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:#16a34a;color:#fff;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.22);z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;opacity:0;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;}
+    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:#16a34a;color:#fff;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.22);z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;opacity:0;pointer-events:none;white-space: normal;max-width:90vw;text-align:center;}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
     .toast.error{background:#dc2626;}
     @media(max-width:768px){.reservation-section{padding:70px 20px;}.reservation-container h2{font-size:34px;}.reservation-container .subtitle{font-size:15px;margin-bottom:35px;}.reservation-form{padding:30px 20px;}.form-grid{grid-template-columns:1fr;gap:18px;}.form-group.full{grid-column:1;}}
-    @media(max-width:480px){.reservation-container h2{font-size:26px;}}
+    @media(max-width:480px){  .toast {
+    max-width: 85vw;
+    white-space: normal;
+    text-align: center;
+    padding: 12px 20px;
+  }.reservation-container h2{font-size:26px;}}
     body.dark-mode .reservation-section {
   background: linear-gradient(135deg, #1e3a5f 0%, #2d4a3e 100%) !important;
 }
