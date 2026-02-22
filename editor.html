@@ -179,6 +179,7 @@ try {
   <button class="exit" onclick="exitEditor(); toggleMobileMenu();">🚪 Exit Editor</button>
   <button class="logout" onclick="logout(); toggleMobileMenu();">🔐 Logout</button>
   <button class="orders" onclick="openOrdersSection(); toggleMobileMenu();">📦 Orders</button>
+  <button class="orders" onclick="openReservationsSection(); toggleMobileMenu();">🍽️ Reservations</button>
   <button class="broadcast" onclick="document.getElementById('btn-broadcast').click(); toggleMobileMenu();">🔔 Broadcast</button>
     
 
@@ -191,6 +192,7 @@ try {
     <button class="exit" onclick="exitEditor()">🚪 Exit Editor</button>
     <button class="logout" onclick="logout()">🔐 Logout</button>
       <button class="export" onclick="openOrdersSection()">📦 Orders</button>
+      <button class="orders" onclick="openReservationsSection()">🍽️ Reservations</button>
     <button id="btn-broadcast" class="broadcast" style="background:#6f42c1;">🔔 Broadcast</button>
       
 
@@ -222,6 +224,23 @@ try {
 <div id="ordersList"></div>
 
 </section>
+<section id="reservationsSection" style="display:none; margin-top:1rem;">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;">
+    <h2 style="margin:0;">🍽️ Reservations</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+      <button class="exit" onclick="showProductsSection()">⬅ Back to Products</button>
+      <button id="refreshReservationsBtn" class="export">🔁 Refresh</button>
+    </div>
+  </div>
+  <p id="reservationsStatusText" style="margin-bottom:.75rem;color:#6b7280;font-size:.85rem;">Reservations not loaded yet.</p>
+  <div id="reservationsList"></div>
+</section>
+<div id="reservationDetailModal" class="modal hidden">
+  <div class="modal-content">
+    <button class="order-close" onclick="closeReservationDetail()">✖ Close</button>
+    <div id="reservationDetailBody"></div>
+  </div>
+</div>
 
  
   <div id="modal" class="modal hidden">
@@ -441,6 +460,99 @@ window.onscroll = function () {
   };
   
 </script> 
+<script>
+const RESERVATION_SITE_PATH = 'sublimesweets';
+let viewedReservationIds = new Set(JSON.parse(localStorage.getItem('viewedReservations') || '[]'));
+
+function openReservationsSection() {
+  document.getElementById('productsSection').style.display     = 'none';
+  document.getElementById('ordersSection').style.display       = 'none';
+  document.getElementById('reservationsSection').style.display = 'block';
+  loadReservations();
+}
+
+function getReservationTimestamp(res) {
+  try { if (res.timestamp) return new Date(res.timestamp).getTime(); if (res.createdAt) return Number(res.createdAt); } catch (_) {}
+  return Date.now();
+}
+
+function formatReservationDate(res) {
+  try { if (res.timestamp) return new Date(res.timestamp).toLocaleString(); if (res.createdAt) return new Date(Number(res.createdAt)).toLocaleString(); } catch (_) {}
+  return '';
+}
+
+async function loadReservations() {
+  const statusEl = document.getElementById('reservationsStatusText');
+  if (statusEl) statusEl.textContent = 'Loading reservations…';
+  try {
+    const token = sessionStorage.getItem('adminToken') || '';
+    const res = await fetch('/.netlify/functions/getAllReservations', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: 'sites/' + RESERVATION_SITE_PATH + '/reservations' })
+    });
+    if (!res.ok) throw new Error('Failed to fetch');
+    const data = await res.json();
+    const arr  = data.reservations || [];
+    arr.sort((a, b) => getReservationTimestamp(b) - getReservationTimestamp(a));
+    const newCount = arr.filter(r => !viewedReservationIds.has(r.reservationId)).length;
+    renderReservationsList(arr);
+    if (statusEl) statusEl.textContent = arr.length ? 'Showing ' + arr.length + ' reservations' + (newCount > 0 ? ' (' + newCount + ' new)' : '') : 'No reservations yet.';
+  } catch (err) {
+    console.error('Reservations load failed:', err);
+    if (statusEl) statusEl.textContent = 'Error loading reservations.';
+  }
+}
+
+function renderReservationsList(arr) {
+  const list = document.getElementById('reservationsList');
+  if (!list) return;
+  list.innerHTML = '';
+  if (!arr.length) { list.innerHTML = '<p style="color:#6b7280;text-align:center;padding:2rem;">No reservations found.</p>'; return; }
+  arr.forEach((res, idx) => {
+    const no  = arr.length - idx;
+    const age = Date.now() - getReservationTimestamp(res);
+    const isNew = !viewedReservationIds.has(res.reservationId) && age < 86400000;
+    const btn = document.createElement('button');
+    btn.className = 'order-btn';
+    btn.innerHTML = isNew ? '<span style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:800;margin-right:8px;box-shadow:0 2px 8px rgba(139,92,246,.4);">🍽️ NEW</span>Reservation #' + no + ' — ' + res.name + ' — ' + res.date + ' at ' + res.time : 'Reservation #' + no + ' — ' + res.name + ' — ' + res.date + ' at ' + res.time;
+    btn.onclick = () => {
+      viewedReservationIds.add(res.reservationId);
+      const stored = JSON.parse(localStorage.getItem('viewedReservations') || '[]');
+      if (!stored.includes(res.reservationId)) { stored.push(res.reservationId); localStorage.setItem('viewedReservations', JSON.stringify(stored)); }
+      openReservationDetail(res, no);
+      renderReservationsList(arr);
+    };
+    list.appendChild(btn);
+  });
+}
+
+function openReservationDetail(res, no) {
+  document.getElementById('reservationDetailBody').innerHTML =
+    '<h3 style="margin-bottom:16px;">Reservation #' + no + '</h3>' +
+    '<p style="margin-bottom:8px;"><b>Reservation ID:</b> ' + (res.reservationId||'—') + '</p>' +
+    '<p style="margin-bottom:8px;"><b>Booked On:</b> '      + formatReservationDate(res) + '</p>' +
+    '<p style="margin-bottom:8px;"><b>Name:</b> '           + res.name + '</p>' +
+    '<p style="margin-bottom:8px;"><b>Phone:</b> '          + res.phone + '</p>' +
+    (res.email ? '<p style="margin-bottom:8px;"><b>Email:</b> ' + res.email + '</p>' : '') +
+    '<p style="margin-bottom:8px;"><b>Date:</b> '           + res.date + '</p>' +
+    '<p style="margin-bottom:8px;"><b>Time:</b> '           + res.time + '</p>' +
+    '<p style="margin-bottom:8px;"><b>Guests:</b> '         + res.guests + '</p>' +
+    (res.specialRequests ? '<p style="margin-bottom:8px;"><b>Special Requests:</b> ' + res.specialRequests + '</p>' : '') +
+    '<p style="margin-bottom:16px;"><b>Status:</b> ' + (res.status||'pending') + '</p>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">' +
+    '<a href="https://wa.me/91' + String(res.phone||'').replace(/\D/g,'') + '" target="_blank" style="padding:10px 20px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">💬 WhatsApp</a>' +
+    '<a href="tel:' + res.phone + '" style="padding:10px 20px;background:#0077BE;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">📞 Call</a>' +
+    '</div>';
+  document.getElementById('reservationDetailModal').classList.remove('hidden');
+}
+
+function closeReservationDetail() { document.getElementById('reservationDetailModal').classList.add('hidden'); }
+document.getElementById('reservationDetailModal')?.addEventListener('click', e => { if (e.target.id==='reservationDetailModal') closeReservationDetail(); });
+document.getElementById('refreshReservationsBtn')?.addEventListener('click', loadReservations);
+window.openReservationsSection = openReservationsSection;
+window.closeReservationDetail  = closeReservationDetail;
+</script>
 <script>
 // Prevent back button from leaving editor
 (function preventBackNav() {

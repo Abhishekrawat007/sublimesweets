@@ -111,155 +111,6 @@ body.search-active .products-section {
         padding-top: 0 !important;
     }
 }
-/* ════════════════════════════════════════════════
-   V53 — TOPOGRAPHIC MAP
-   Trekking · Outdoor · Coffee Brand · Nature Brand
-   CSS contour lines as the visual backdrop,
-   story overlaid on the terrain
-════════════════════════════════════════════════ */
-.v53{--ac:#3d7a4f;background:var(--bg)}
-[data-theme="dark"] .v53{--ac:#4ade80;background:#060a07}
-[data-theme="light"] .v53{background:#f0f5ee}
-
-.v53-outer{position:relative;overflow:hidden}
-
-/* topo contour lines — CSS radial-gradient rings */
-.v53-topo{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 20%, var(--b1) 20.5%, transparent 21%),
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 30%, var(--b1) 30.5%, transparent 31%),
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 40%, var(--b1) 40.5%, transparent 41%),
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 50%, var(--b1) 50.5%, transparent 51%),
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 60%, var(--b1) 60.5%, transparent 61%),
-    radial-gradient(ellipse 80% 60% at 70% 50%, transparent 70%, var(--b1) 70.5%, transparent 71%),
-    var(--bg);
-  pointer-events:none;
-}
-
-.v53-wrap{max-width:1100px;margin:0 auto;padding:52px 20px;position:relative;z-index:1}
-
-.v53-elevation{
-  display:flex;align-items:center;gap:10px;margin-bottom:18px;
-}
-.v53-elev-line{flex:0 0 30px;height:1px;background:var(--ac)}
-.v53-elev-text{
-  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ac);
-}
-
-.v53-title{
-  font-family:'Unna',serif;
-  font-size:clamp(28px,7.5vw,58px);
-  font-weight:700;line-height:1.08;
-  color:var(--tx);margin-bottom:14px;
-}
-.v53-title em{font-style:italic;color:var(--ac)}
-
-/* main image with topo overlay feel */
-.v53-img{
-  aspect-ratio:16/9;overflow:hidden;
-  position:relative;margin-bottom:24px;
-}
-.v53-img img{height:100%;object-fit:cover;filter:brightness(.75) saturate(1.1)}
-
-/* elevation marker on image */
-.v53-elev-badge{
-  position:absolute;bottom:14px;left:14px;
-  background:var(--ac);color:#fff;
-  padding:6px 12px;
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  font-weight:600;
-}
-
-/* waypoints — like GPS coords on a map */
-.v53-waypoints{
-  display:flex;flex-direction:column;gap:0;
-  margin-bottom:20px;
-}
-.v53-waypoint{
-  display:grid;grid-template-columns:28px 1fr;gap:12px;
-  padding:14px 0;border-bottom:1px solid var(--b1);
-  align-items:start;
-}
-.v53-waypoint:last-child{border-bottom:none}
-.v53-wp-marker{
-  width:20px;height:20px;
-  border-radius:50% 50% 50% 0;
-  background:var(--ac);
-  transform:rotate(-45deg);
-  flex-shrink:0;
-  margin-top:2px;
-}
-.v53-wp-marker-inner{
-  width:8px;height:8px;
-  border-radius:50%;
-  background:var(--bg);
-  margin:6px auto 0;
-  transform:rotate(45deg);
-}
-.v53-wp-title{font-size:14px;font-weight:500;color:var(--tx);margin-bottom:3px}
-.v53-wp-body{font-size:13px;line-height:1.65;color:var(--mu)}
-.v53-wp-body strong{color:var(--tx)}
-.v53-wp-coords{font-size:10px;color:var(--ac);margin-top:3px;letter-spacing:.5px}
-
-/* contour stats */
-.v53-contours{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0;border:1px solid var(--b1);
-  margin-top:4px;
-}
-.v53-contour{
-  padding:16px 0;text-align:center;
-  border-right:1px solid var(--b1);
-  background:var(--sur);
-}
-.v53-contour:last-child{border-right:none}
-.v53-contour strong{display:block;font-family:'Unna',serif;font-size:26px;color:var(--ac);line-height:1}
-.v53-contour span{font-size:10px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
-
-@media(min-width:768px){
-  .v53-wrap{padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .v53-img{aspect-ratio:3/4;margin-bottom:0}
-  .v53-right{display:flex;flex-direction:column;gap:0}
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
-[data-theme="dark"]{
-  --bg:#07070a;
-  --sur:#0e0e12;
-  --sur2:#151518;
-  --b1:rgba(255,255,255,.055);
-  --b2:rgba(255,255,255,.1);
-  --tx:#edeae2;
-  --mu:rgba(237,234,226,.37);
-  --sh:rgba(0,0,0,.75);
-}
-[data-theme="light"]{
-  --bg:#f1ede8;
-  --sur:#ffffff;
-  --sur2:#e6e2da;
-  --b1:rgba(0,0,0,.06);
-  --b2:rgba(0,0,0,.11);
-  --tx:#0a0a0a;
-  --mu:#7b7469;
-  --sh:rgba(0,0,0,.07);
-}
-
-body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--tx);transition:background .3s,color .3s;overflow-x:hidden}
-img{display:block;width:100%}
-
-/* TOGGLE */
-.tb{position:sticky;top:0;z-index:999;background:var(--sur);border-bottom:1px solid var(--b1);padding:13px 20px;display:flex;align-items:center;justify-content:space-between}
-.tb-t{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu)}
-.tg{display:flex;align-items:center;gap:9px;cursor:pointer;background:var(--sur2);border:1px solid var(--b2);border-radius:100px;padding:5px 13px 5px 7px}
-.tr{width:34px;height:18px;background:var(--b2);border-radius:100px;position:relative;transition:background .3s}
-[data-theme="light"] .tr{background:#111}
-.tt{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--mu);transition:transform .3s,background .3s}
-[data-theme="light"] .tt{transform:translateX(16px);background:#fff}
-.tl{font-size:11px;font-weight:500;color:var(--tx)}
-.sl{background:var(--sur2);border-left:3px solid var(--ac,#888);padding:11px 20px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu)}
-.sep{height:1px;background:var(--b1)}
-
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -911,86 +762,94 @@ img{display:block;width:100%}
         </div>
     </div>
 </div>
-
-<!-- V53 -->
-
-<section class="v53">
-  <div class="v53-outer">
-    <div class="v53-topo"></div>
-    <div class="v53-wrap">
-      <div class="v53-left">
-        <div class="v53-elevation">
-          <div class="v53-elev-line"></div>
-          <div class="v53-elev-text">Elevation: Our Story</div>
-        </div>
-        <h2 class="v53-title">We didn't build<br>a brand. We built<br>a <em>trail.</em></h2>
-        <div class="v53-img" style="margin-top:18px">
-          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900" alt="Mountain trail">
-          <div class="v53-elev-badge">ALT: 3,200m · Uttarakhand</div>
-        </div>
-        <div class="v53-contours" style="margin-top:20px">
-          <div class="v53-contour"><strong>14yr</strong><span>On Trail</span></div>
-          <div class="v53-contour"><strong>80+</strong><span>Routes</span></div>
-          <div class="v53-contour"><strong>22k</strong><span>Trekkers</span></div>
-        </div>
+<style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--azure:#0077BE;--navy:#0A1628;--cream:#FFF8F0;--white:#FFFFFF;--olive:#3D5A4C;}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--navy);min-height:100vh;}
+    .reservation-section{padding:120px 60px;background:linear-gradient(135deg,var(--azure) 0%,var(--olive) 100%);color:var(--white);min-height:100vh;display:flex;align-items:center;}
+    .reservation-container{max-width:900px;margin:0 auto;width:100%;text-align:center;}
+    .reservation-container h2{font-family:'Cinzel',serif;font-size:52px;margin-bottom:16px;font-weight:700;line-height:1.15;}
+    .reservation-container .subtitle{font-size:18px;margin-bottom:55px;opacity:.92;font-weight:300;}
+    .reservation-form{background:rgba(255,255,255,.10);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:50px 55px;text-align:left;}
+    .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:24px;}
+    .form-group{display:flex;flex-direction:column;}
+    .form-group.full{grid-column:1/-1;}
+    .form-group label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;font-weight:700;color:rgba(255,255,255,.85);}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:15px 18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:12px;color:var(--white);font-family:'Lato',sans-serif;font-size:15px;transition:all .3s;outline:none;}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.50);}
+    .form-group select option{color:var(--navy);background:var(--white);}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.65);box-shadow:0 0 0 3px rgba(255,255,255,.10);}
+    .form-group textarea{resize:vertical;min-height:110px;}
+    .submit-reservation-btn{width:100%;background:var(--white);color:var(--azure);padding:18px;border:none;border-radius:12px;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:8px;}
+    .submit-reservation-btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,255,255,.28);}
+    .submit-reservation-btn:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+    .pdf-banner{display:none;margin-top:28px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:14px;padding:22px 28px;text-align:center;}
+    .pdf-banner p{font-size:15px;margin-bottom:14px;opacity:.95;}
+    .pdf-download-btn{display:inline-block;background:var(--white);color:#7c3aed;padding:12px 30px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;letter-spacing:.5px;}
+    .pdf-download-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,.3);}
+    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:#16a34a;color:#fff;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.22);z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;opacity:0;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center;}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    .toast.error{background:#dc2626;}
+    @media(max-width:768px){.reservation-section{padding:70px 20px;}.reservation-container h2{font-size:34px;}.reservation-container .subtitle{font-size:15px;margin-bottom:35px;}.reservation-form{padding:30px 20px;}.form-grid{grid-template-columns:1fr;gap:18px;}.form-group.full{grid-column:1;}}
+    @media(max-width:480px){.reservation-container h2{font-size:26px;}}
+  </style>
+</head>
+<body>
+<section class="reservation-section" id="reservation">
+  <div class="reservation-container">
+    <h2>Experience It Firsthand</h2>
+    <p class="subtitle">Reserve your table and savor every moment.</p>
+    <form class="reservation-form" id="reservationForm" novalidate>
+      <div class="form-grid">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="resName" placeholder="John Doe" required /></div>
+        <div class="form-group"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
+        <div class="form-group"><label>Email</label><input type="email" id="resEmail" placeholder="john@example.com" /></div>
+        <div class="form-group"><label>Number of Guests *</label><select id="resGuests" required><option value="1">1 Person</option><option value="2" selected>2 People</option><option value="3">3 People</option><option value="4">4 People</option><option value="5">5 People</option><option value="6">6 People</option><option value="7+">7+ People</option></select></div>
+        <div class="form-group"><label>Date *</label><input type="date" id="resDate" required /></div>
+        <div class="form-group"><label>Preferred Time *</label><select id="resTime" required><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option selected>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option></select></div>
+        <div class="form-group full"><label>Special Requests</label><textarea id="resRequests" placeholder="Dietary restrictions, special occasions, seating preferences…"></textarea></div>
       </div>
-      <div class="v53-right">
-        <div class="v53-waypoints">
-          <div class="v53-waypoint">
-            <div>
-              <div class="v53-wp-marker">
-                <div class="v53-wp-marker-inner"></div>
-              </div>
-            </div>
-            <div>
-              <div class="v53-wp-title">Base Camp · 2010</div>
-              <div class="v53-wp-body"><strong>Ranjit and Priya Mehta</strong> led their first group into the Roopkund valley with borrowed tents and a handdrawn route. 11 people. All came back. All came back again the next year.</div>
-              <div class="v53-wp-coords">30.0668° N, 79.7243° E</div>
-            </div>
-          </div>
-          <div class="v53-waypoint">
-            <div>
-              <div class="v53-wp-marker">
-                <div class="v53-wp-marker-inner"></div>
-              </div>
-            </div>
-            <div>
-              <div class="v53-wp-title">First Altitude Camp · 2013</div>
-              <div class="v53-wp-body">Certified mountain rescue training mandatory for all guides — two years before it became an industry standard. <strong>We required it because it was right, not because it was required.</strong></div>
-              <div class="v53-wp-coords">32.2396° N, 77.1887° E</div>
-            </div>
-          </div>
-          <div class="v53-waypoint">
-            <div>
-              <div class="v53-wp-marker">
-                <div class="v53-wp-marker-inner"></div>
-              </div>
-            </div>
-            <div>
-              <div class="v53-wp-title">Summit Decision · 2018</div>
-              <div class="v53-wp-body">Turned 200 bookings away in one season. Weather was wrong, snowpack was unstable. The mountain would be there next year. <strong>The trust of our clients had to be too.</strong></div>
-              <div class="v53-wp-coords">31.1048° N, 77.2673° E</div>
-            </div>
-          </div>
-          <div class="v53-waypoint">
-            <div>
-              <div class="v53-wp-marker">
-                <div class="v53-wp-marker-inner"></div>
-              </div>
-            </div>
-            <div>
-              <div class="v53-wp-title">Present Position · 2024</div>
-              <div class="v53-wp-body">80 routes. 22,000 trekkers. Zero fatalities in 14 years. Still led by the same two founders. Still handchecking every route before each season opens.</div>
-              <div class="v53-wp-coords">You are here.</div>
-            </div>
-          </div>
-        </div>
+      <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">Confirm Reservation</button>
+      <div class="pdf-banner" id="pdfBanner">
+        <p>✅ Your reservation is confirmed! Download your confirmation below.</p>
+        <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
       </div>
-    </div>
+    </form>
   </div>
 </section>
+<div class="toast" id="resToast"></div>
+<script>
+  (function(){const t=new Date().toISOString().split('T')[0];document.getElementById('resDate').setAttribute('min',t);})();
+  function showToast(m,e){const t=document.getElementById('resToast');t.textContent=m;t.className='toast'+(e?' error':'');void t.offsetWidth;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
+  function genResId(){return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();}
+  document.getElementById('reservationForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('resName').value.trim();
+    const phone=document.getElementById('resPhone').value.trim();
+    const email=document.getElementById('resEmail').value.trim();
+    const guests=document.getElementById('resGuests').value;
+    const date=document.getElementById('resDate').value;
+    const time=document.getElementById('resTime').value;
+    const special=document.getElementById('resRequests').value.trim();
+    if(!name){showToast('⚠️ Please enter your name.',true);return;}
+    if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
+    if(!date){showToast('⚠️ Please select a date.',true);return;}
+    const reservationId=genResId();
+    const btn=document.getElementById('resSubmitBtn');
+    btn.disabled=true;btn.textContent='⏳ Confirming…';
+    const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
+    try{
+      const saveRes=await fetch('/.netlify/functions/saveReservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
+      const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(tgRes.ok){const tgData=await tgRes.json().catch(()=>({}));if(tgData.pdfUrl){const link=document.getElementById('pdfDownloadLink');link.href=tgData.pdfUrl;link.download='Reservation-'+reservationId+'.pdf';document.getElementById('pdfBanner').style.display='block';}}
+      showToast('✅ Reservation confirmed! We will contact you shortly.');
+      btn.textContent='✅ Reservation Confirmed!';
+      setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
+    }catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
+  });
+</script>
 
-<div class="sep"></div>
  <!-- ============================================
      🍦 PREMIUM ICE-CREAM GALLERY SECTION
      Ultra-luxury horizontal scroll showcase
