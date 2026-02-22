@@ -202,4 +202,4 @@ export async function handler(event) {
     console.error("sendReservationTelegram error:", err && (err.stack || err.message));
     return { statusCode: 500, body: JSON.stringify({ error: err?.message || String(err) }) };
   }
-}
+} 

@@ -1489,3 +1489,15 @@ body.dark-mode #orderDetailModal li span {
   border-left: 3px solid #f59e0b;
   border-radius: 4px;
 }
+button.orders { 
+  background: #17a2b8;  /* or whatever color you want */
+  color: #fff;
+}
+#reservationsSection {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 100%);
+  padding: 28px;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
