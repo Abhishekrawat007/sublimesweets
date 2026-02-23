@@ -111,215 +111,42 @@ body.search-active .products-section {
         padding-top: 0 !important;
     }
 }
-   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{--azure:#0077BE;--navy:#0A1628;--cream:#FFF8F0;--white:#FFFFFF;--olive:#3D5A4C;}
-
-body{
-  font-family:'Lato',sans-serif;
-  background:#f8f5f0;
-  color:#090909;
-  min-height:100vh;
-}
-
-/* RESERVATION SECTION */
-.reservation-section{
-  padding:120px 60px;
-  background:linear-gradient(135deg, #e5e0d7 0%, #d4cfc4 100%);
-  color:#090909;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-}
-
-body.dark-mode .reservation-section{
-  background:linear-gradient(135deg, #3a3630 0%, #2a2621 100%) !important;
-  color:#f5f5f7;
-}
-
-.reservation-container{
-  max-width:1200px;
-  margin:0 auto;
-  width:100%;
-}
-
-/* COMPASS LAYOUT */
-.compass-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
-}
-
-@media(max-width:860px){
-  .compass-wrap{
-    grid-template-columns:1fr;
-    gap:32px;
-  }
-}
-
-/* COMPASS LEFT SIDE */
-.compass-left{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:24px;
-}
-
-@media(max-width:860px){
-  .compass-left{
-    align-items:center;
-    text-align:center;
-  }
-}
-
-/* COMPASS RING */
-.compass-ring{
-  width:clamp(200px,30vw,320px);
-  height:clamp(200px,30vw,320px);
-  border-radius:50%;
-  border:1px solid rgba(0,0,0,.12);
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-.compass-ring::before{
-  content:'';
-  position:absolute;
-  inset:12px;
-  border-radius:50%;
-  border:1px solid rgba(0,0,0,.08);
-}
-
-.compass-ring::after{
-  content:'';
-  position:absolute;
-  inset:24px;
-  border-radius:50%;
-  border:1px dashed rgba(0,0,0,.15);
-}
-
-/* CARDINAL DIRECTIONS */
-.compass-n,.compass-s,.compass-e,.compass-w{
-  position:absolute;
-  font-family:'Cinzel',serif;
-  font-size:11px;
-  letter-spacing:2px;
-  color:rgba(0,0,0,.4);
-}
-
-.compass-n{
-  top:18px;
-  left:50%;
-  transform:translateX(-50%);
-  color:#92400E;
-}
-
-.compass-s{
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.compass-e{
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-}
-
-.compass-w{
-  left:20px;
-  top:50%;
-  transform:translateY(-50%);
-}
-
-/* ROTATING NEEDLE */
-.compass-needle{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  animation:spin 18s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.cn-line{
-  width:2px;
-  height:70%;
-  background:linear-gradient(to top,transparent,#92400E 50%,transparent);
-  position:absolute;
-  border-radius:1px;
-}
-
-/* CENTER DOT */
-.compass-center{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#92400E;
-  position:relative;
-  z-index:2;
-  box-shadow:0 0 0 4px rgba(146,64,14,.15);
-}
-
-/* COMPASS INFO */
-.compass-info{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  width:100%;
-  max-width:320px;
-}
-
-.ci-t{
-  font-family:'Cinzel',serif;
-  font-size:clamp(22px,3.5vw,40px);
-  letter-spacing:2px;
-  line-height:1;
-  color:#090909;
-}
-
-.ci-s{
-  font-size:12.5px;
-  color:#635849;
-  line-height:1.65;
-  font-weight:300;
-}
-
-/* DARK MODE - COMPASS */
-body.dark-mode .compass-ring{border:1px solid rgba(255,255,255,.2)}
-body.dark-mode .compass-ring::before{border:1px solid rgba(255,255,255,.1)}
-body.dark-mode .compass-ring::after{border:1px dashed rgba(255,255,255,.15)}
-body.dark-mode .compass-n,
-body.dark-mode .compass-s,
-body.dark-mode .compass-e,
-body.dark-mode .compass-w{color:rgba(255,255,255,.3)}
-body.dark-mode .compass-n{color:#c09848}
-body.dark-mode .compass-center{background:#c09848;box-shadow:0 0 0 4px rgba(192,152,72,.15)}
-body.dark-mode .cn-line{background:linear-gradient(to top,transparent,#c09848 50%,transparent)}
-body.dark-mode .ci-t{color:#f5f5f7}
-body.dark-mode .ci-s{color:rgba(255,255,255,.7)}
-
-/* FORM */
-.reservation-form{
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:22px;
-  padding:50px 55px;
-  text-align:left;
-}
-
-body.dark-mode .reservation-form{
-  background:rgba(0,0,0,.3);
-  border:1px solid rgba(255,255,255,.1);
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--azure:#0077BE;--navy:#0A1628;--cream:#FFF8F0;--white:#FFFFFF;--olive:#3D5A4C;}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--navy);min-height:100vh;}
+    .reservation-section{padding:120px 60px;background:linear-gradient(135deg,var(--azure) 0%,var(--olive) 100%);color:var(--white);min-height:100vh;display:flex;align-items:center;}
+    .reservation-container{max-width:900px;margin:0 auto;width:100%;text-align:center;}
+    .reservation-container h2{font-family:'Cinzel',serif;font-size:52px;margin-bottom:16px;font-weight:700;line-height:1.15;}
+    .reservation-container .subtitle{font-size:18px;margin-bottom:55px;opacity:.92;font-weight:300;}
+    .reservation-form{background:rgba(255,255,255,.10);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:50px 55px;text-align:left;}
+    .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:24px;}
+    .form-group{display:flex;flex-direction:column;}
+    .form-group.full{grid-column:1/-1;}
+    .form-group label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;font-weight:700;color:rgba(255,255,255,.85);}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:15px 18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:12px;color:var(--white);font-family:'Lato',sans-serif;font-size:15px;transition:all .3s;outline:none;}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.50);}
+    .form-group select option{color:var(--navy);background:var(--white);}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.65);box-shadow:0 0 0 3px rgba(255,255,255,.10);}
+    .form-group textarea{resize:vertical;min-height:110px;}
+    .submit-reservation-btn{width:100%;background:var(--white);color:var(--azure);padding:18px;border:none;border-radius:12px;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:8px;}
+    .submit-reservation-btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,255,255,.28);}
+    .submit-reservation-btn:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+    .pdf-banner{display:none;margin-top:28px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);border-radius:14px;padding:22px 28px;text-align:center;}
+    .pdf-banner p{font-size:15px;margin-bottom:14px;opacity:.95;}
+    .pdf-download-btn{display:inline-block;background:var(--white);color:#7c3aed;padding:12px 30px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;letter-spacing:.5px;}
+    .pdf-download-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,255,255,.3);}
+    .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:#16a34a;color:#fff;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.22);z-index:9999;transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;opacity:0;pointer-events:none;white-space: normal;max-width:90vw;text-align:center;}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    .toast.error{background:#dc2626;}
+    @media(max-width:768px){.reservation-section{padding:70px 20px;}.reservation-container h2{font-size:34px;}.reservation-container .subtitle{font-size:15px;margin-bottom:35px;}.reservation-form{padding:30px 20px;}.form-grid{grid-template-columns:1fr;gap:18px;}.form-group.full{grid-column:1;}}
+    @media(max-width:480px){  .toast {
+    max-width: 85vw;
+    white-space: normal;
+    text-align: center;
+    padding: 12px 20px;
+  }.reservation-container h2{font-size:26px;}}
+    body.dark-mode .reservation-section {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d4a3e 100%) !important;
 }
 
 .form-heading{
@@ -327,265 +154,141 @@ body.dark-mode .reservation-form{
   font-size:clamp(20px, 3vw, 32px);
   font-weight:600;
   letter-spacing:1px;
-  margin-bottom:24px;
-  color:#090909;
+  margin-bottom:18px;
+  color:#f5f5f7;
 }
 
 body.dark-mode .form-heading{
   color:#f5f5f7;
 }
 
-.form-grid{
+@media(max-width:768px){
+  .form-heading{
+    margin-bottom:10px;
+  }
+}
+/* Artist Residency Layout */
+.art-wrap{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:24px;
-  margin-bottom:24px;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  overflow:hidden;
+  max-width:1200px;
+  margin:0 auto;
 }
 
-.form-group{
+.art-left{
+  position:relative;
+  overflow:hidden;
+  min-height:600px;
+}
+
+.art-left img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  position:absolute;
+  inset:0;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+
+.art-wrap:hover .art-left img{
+  transform:scale(1.04);
+}
+
+.art-left::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 60%,transparent 100%);
+}
+
+.art-left-body{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:2;
+  padding:32px;
+}
+
+.art-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(24px,3.5vw,44px);
+  font-weight:300;
+  line-height:1;
+  letter-spacing:-1px;
+  margin-bottom:10px;
+  color:#fff;
+}
+
+.art-bio{
+  font-family:'Lato',sans-serif;
+  font-style:italic;
+  font-size:13.5px;
+  color:rgba(255,255,255,.7);
+  line-height:1.65;
+}
+
+.art-bio2{
+  font-family:'Lato',sans-serif;
+  font-style:italic;
+  font-size:13.5px;
+  color:rgba(255,255,255,.7);
+  line-height:1.65;
+  margin-bottom: 10px;
+}
+
+.art-right{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  padding:48px 40px;
   display:flex;
   flex-direction:column;
+  justify-content:center;
 }
 
-.form-group.full{
-  grid-column:1/-1;
+/* Mobile */
+@media(max-width:860px){
+  .art-wrap{
+    grid-template-columns:1fr;
+  }
+  .art-left{
+    min-height:320px;
+  }
+  .art-left-body{
+    padding:20px;
+  }
+  .art-right{
+    padding:28px 20px;
+  }
 }
 
-.form-group label{
-  font-size:12px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:9px;
-  font-weight:700;
-  color:rgba(0,0,0,.6);
+@media(max-width:768px){
+  .art-right{
+    padding:24px 18px;
+  }
 }
-
-body.dark-mode .form-group label{
-  color:rgba(255,255,255,.7);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-  width:100%;
-  padding:15px 18px;
-  background:rgba(255,255,255,.5);
-  border:1px solid rgba(0,0,0,.15);
-  border-radius:12px;
-  color:#090909;
-  font-family:'Lato',sans-serif;
-  font-size:15px;
-  transition:all .3s;
-  outline:none;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder{
-  color:rgba(0,0,0,.4);
-}
-
-.form-group select option{
-  color:#090909;
-  background:#fff;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  background:rgba(255,255,255,.8);
-  border-color:#92400E;
-  box-shadow:0 0 0 3px rgba(146,64,14,.1);
-}
-
-.form-group textarea{
-  resize:vertical;
-  min-height:110px;
-}
-
-/* DARK MODE - FORM INPUTS */
-body.dark-mode .form-group input,
-body.dark-mode .form-group select,
-body.dark-mode .form-group textarea{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.1);
-  color:#f5f5f7;
-}
-
-body.dark-mode .form-group input::placeholder,
-body.dark-mode .form-group textarea::placeholder{
-  color:rgba(255,255,255,.3);
-}
-
-body.dark-mode .form-group select option{
-  color:#090909;
-  background:#fff;
-}
-
-body.dark-mode .form-group input:focus,
-body.dark-mode .form-group select:focus,
-body.dark-mode .form-group textarea:focus{
-  background:rgba(255,255,255,.08);
-  border-color:#c09848;
-  box-shadow:0 0 0 3px rgba(192,152,72,.1);
-}
-
-/* SUBMIT BUTTON */
-.submit-reservation-btn{
-  width:100%;
-  background:#92400E;
-  color:#fff;
-  padding:18px;
-  border:none;
-  border-radius:12px;
-  font-size:15px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:all .3s;
-  margin-top:8px;
-}
-
-.submit-reservation-btn:hover:not(:disabled){
-  transform:translateY(-3px);
-  box-shadow:0 12px 35px rgba(146,64,14,.4);
-  background:#78350F;
-}
-
-.submit-reservation-btn:disabled{
-  opacity:.65;
-  cursor:not-allowed;
-  transform:none;
-}
-
-body.dark-mode .submit-reservation-btn{
-  background:#c09848;
-  color:#050505;
-}
-
-body.dark-mode .submit-reservation-btn:hover:not(:disabled){
-  background:#dab860;
-  box-shadow:0 12px 35px rgba(192,152,72,.4);
-}
-
-/* PDF BANNER */
-.pdf-banner{
-  display:none;
-  margin-top:28px;
-  background:rgba(146,64,14,.1);
-  border:1px solid rgba(146,64,14,.3);
-  border-radius:14px;
-  padding:22px 28px;
-  text-align:center;
-}
-
-body.dark-mode .pdf-banner{
-  background:rgba(192,152,72,.1);
-  border:1px solid rgba(192,152,72,.3);
-}
-
-.pdf-banner p{
-  font-size:15px;
-  margin-bottom:14px;
-  opacity:.95;
-  color:#090909;
-}
-
-body.dark-mode .pdf-banner p{
-  color:#f5f5f7;
-}
-
-.pdf-download-btn{
-  display:inline-block;
-  background:#92400E;
-  color:#fff;
-  padding:12px 30px;
-  border-radius:50px;
-  font-size:14px;
-  font-weight:700;
-  text-decoration:none;
-  transition:all .3s;
-  letter-spacing:.5px;
-}
-
-.pdf-download-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(146,64,14,.4);
-  background:#78350F;
-}
-
-body.dark-mode .pdf-download-btn{
-  background:#c09848;
-  color:#050505;
-}
-
-body.dark-mode .pdf-download-btn:hover{
-  background:#dab860;
-  box-shadow:0 8px 20px rgba(192,152,72,.4);
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:28px;
-  left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:#16a34a;
-  color:#fff;
-  padding:14px 28px;
-  border-radius:50px;
-  font-size:14px;
-  font-weight:600;
-  box-shadow:0 8px 30px rgba(0,0,0,.22);
-  z-index:9999;
-  transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;
-  opacity:0;
-  pointer-events:none;
-  white-space:normal;
-  max-width:90vw;
-  text-align:center;
-}
-
-.toast.show{
-  transform:translateX(-50%) translateY(0);
-  opacity:1;
-}
-
-.toast.error{
-  background:#dc2626;
-}
-
-/* MOBILE */
 @media(max-width:768px){
   .reservation-section{
-    padding:70px 20px;
+    padding:0 0 70px 0; /* top=0, sides=0, bottom=70px */
   }
   
-  .reservation-form{
-    padding:30px 20px;
+  .reservation-container{
+    padding:0; /* remove container padding on mobile */
   }
   
-  .form-grid{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-  
-  .form-group.full{
-    grid-column:1;
-  }
-  
-  .form-heading{
-    margin-bottom:18px;
+  .art-wrap{
+    border-radius:0; /* optional: remove rounded corners on mobile */
   }
 }
+:root{--azure:#F59E0B;--olive:#92400E;}
+.reservation-section{background:linear-gradient(135deg,#F59E0B 0%,#92400E 100%);}
+body.dark-mode .reservation-section{background:linear-gradient(135deg, #d97706 0%, #78350f 100%) !important;}
 
-@media(max-width:480px){
-  .toast{
-    max-width:85vw;
-    padding:12px 20px;
-  }
-}
- 
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -1237,30 +940,26 @@ body.dark-mode .pdf-download-btn:hover{
         </div>
     </div>
 </div>
-<section class="reservation-section" id="reservation">
-  <div class="reservation-container" style="max-width:1200px">
+
+<section class="reservation-section">
+  <div class="reservation-container" style="max-width:1400px">
     
-    <div class="compass-wrap">
+    <div class="art-wrap">
       
-      <!-- LEFT: Compass Visual -->
-      <div class="compass-left">
-        <div class="compass-ring">
-          <div class="compass-n">N</div>
-          <div class="compass-s">S</div>
-          <div class="compass-e">E</div>
-          <div class="compass-w">W</div>
-          <div class="compass-needle"><div class="cn-line"></div></div>
-          <div class="compass-center"></div>
-        </div>
-        <div class="compass-info">
-          <h2 class="ci-t">A Table Awaits You</h2>
-          <p class="ci-s">Enjoy freshly prepared dishes and a comfortable dining experience. Book your table in advance to avoid waiting.</p>
+      <!-- LEFT: Portrait Image -->
+      <div class="art-left">
+        <img src="https://images.unsplash.com/photo-1543353071-087092ec393a?w=800&q=85" alt="chef">
+        <div class="art-left-body">
+          <div class="art-name">Dine With Us Tonight</div>
+          <p class="art-bio">Good food, a relaxed atmosphere, and a table waiting just for you. Reserve now for a smooth dining experience.</p>
         </div>
       </div>
 
-      <!-- RIGHT: Your EXISTING form (keep exactly as is) -->
-      <form class="reservation-form" id="reservationForm" novalidate>
+      <!-- RIGHT: Your EXISTING form -->
+      <div class="art-right">
+     <form class="reservation-form" id="reservationForm" novalidate>
         <h3 class="form-heading">RESERVE YOUR TABLE</h3>
+        <p class="art-bio2">Join us for thoughtfully prepared meals and a welcoming ambiance. Reserve your table in seconds.</p>
       <div class="form-grid">
         <div class="form-group"><label>Full Name *</label><input type="text" id="resName" placeholder="John Doe" required /></div>
         <div class="form-group"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
@@ -1276,12 +975,11 @@ body.dark-mode .pdf-download-btn:hover{
         <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
       </div>
     </form>
+      </div>
 
     </div>
   </div>
 </section>
-
-
 <div class="toast" id="resToast"></div>
 <script>
   (function(){const t=new Date().toISOString().split('T')[0];document.getElementById('resDate').setAttribute('min',t);})();
