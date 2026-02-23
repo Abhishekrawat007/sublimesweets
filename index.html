@@ -146,7 +146,7 @@ body.search-active .products-section {
     padding: 12px 20px;
   }.reservation-container h2{font-size:26px;}}
     body.dark-mode .reservation-section {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2d4a3e 100%) !important;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d4a3e 100%);
 }
 
 .form-heading{
@@ -167,128 +167,512 @@ body.dark-mode .form-heading{
     margin-bottom:10px;
   }
 }
-/* Artist Residency Layout */
-.art-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:10px;
-  overflow:hidden;
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --e:cubic-bezier(.4,0,.2,1);
+  --bg:#f7f4ef;
+  --bg2:#ece7dd;
+  --bg3:#e2dbd1;
+  --bg4:#d6cec4;
+  --tx:#121010;
+  --tx2:#635849;
+  --tx3:#a5968a;
+  --gd:#83601e;
+  --gd2:#a47628;
+  --br:rgba(0,0,0,.06);
+  --br2:rgba(0,0,0,.11);
+  --inp:rgba(0,0,0,.03);
+  --ibd:rgba(0,0,0,.09);
+  --if:rgba(0,0,0,.05);
+  --ph:rgba(0,0,0,.28);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--tx);
+  font-family:'DM Sans',sans-serif;
+  transition:background .35s var(--e),color .35s var(--e);
+}
+
+/* RESERVATION SECTION */
+.reservation-section{
+  padding:80px 0;
+  background:var(--bg2);
+  min-height:100vh;
+}
+
+.reservation-container{
   max-width:1200px;
   margin:0 auto;
+  padding:0 40px;
 }
 
-.art-left{
-  position:relative;
-  overflow:hidden;
-  min-height:600px;
+/* CALENDAR LAYOUT */
+.cal-wrap{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:40px;
+  align-items:start;
 }
 
-.art-left img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  position:absolute;
-  inset:0;
-  transition:transform .6s cubic-bezier(.4,0,.2,1);
-}
+.cal-box{}
 
-.art-wrap:hover .art-left img{
-  transform:scale(1.04);
-}
-
-.art-left::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.3) 60%,transparent 100%);
-}
-
-.art-left-body{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:2;
-  padding:32px;
-}
-
-.art-name{
+.cal-t{
   font-family:'Cinzel',serif;
-  font-size:clamp(24px,3.5vw,44px);
-  font-weight:300;
+  font-size:clamp(22px,3.5vw,48px);
+  font-weight:400;
+  letter-spacing:1px;
+  margin-bottom:6px;
   line-height:1;
-  letter-spacing:-1px;
-  margin-bottom:10px;
+  color:#121010; /* ADD THIS - force black */
+}
+
+.cal-month-name{
+  font-family:'Cinzel',serif;
+  font-size:18px; /* CHANGED from 15px to 18px */
+  letter-spacing:2px;
+  color:#121010; /* ADD THIS - force black */
+}
+
+.cal-form-t{
+  font-family:'Cinzel',serif;
+  font-size:20px;
+  font-weight:400;
+  letter-spacing:1px;
+  margin-bottom:18px;
+  line-height:1.1;
+  color:#121010; /* ADD THIS - force black */
+}
+
+.cal-s{
+  font-size:13px;
+  color:var(--tx2);
+  font-weight:300;
+  margin-bottom:22px;
+  letter-spacing:.3px;
+}
+
+/* MONTH NAVIGATION */
+.cal-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+
+
+.cal-nav-btn{
+  width:32px;
+  height:32px;
+  border:1px solid var(--br2);
+  border-radius:50%;
+  background:var(--inp);
+  color:var(--tx);
+  cursor:pointer;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .2s;
+}
+
+.cal-nav-btn:hover{
+  border-color:var(--gd);
+  color:var(--gd);
+}
+
+/* DAY HEADERS */
+.cal-days-head{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+  margin-bottom:4px;
+}
+
+.cal-dh{
+  text-align:center;
+  font-size:8.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--tx3);
+  padding:4px 0;
+}
+
+/* DATE GRID */
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+}
+
+.cd{
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  font-size:13px;
+  cursor:pointer;
+  transition:all .2s var(--e);
+  border:1px solid transparent;
+  background:var(--inp);
+  color:var(--tx);
+  font-weight:400;
+}
+
+.cd:hover:not(.past):not(.empty){
+  border-color:var(--gd);
+  color:var(--gd);
+}
+
+.cd.on{
+  background:var(--gd);
   color:#fff;
+  border-color:var(--gd);
+  font-weight:600;
 }
 
-.art-bio{
-  font-family:'Lato',sans-serif;
-  font-style:italic;
-  font-size:13.5px;
-  color:rgba(255,255,255,.7);
-  line-height:1.65;
+.cd.past{
+  opacity:.25;
+  pointer-events:none;
+  background:transparent;
 }
 
-.art-bio2{
-  font-family:'Lato',sans-serif;
-  font-style:italic;
-  font-size:13.5px;
-  color:rgba(255,255,255,.7);
-  line-height:1.65;
-  margin-bottom: 10px;
+.cd.empty{
+  background:transparent;
+  border:none;
+  pointer-events:none;
 }
 
-.art-right{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-  padding:48px 40px;
+.cd.today{
+  border-color:var(--br2);
+}
+
+/* TIME SLOTS */
+.cal-slots{
+  margin-top:14px;
+}
+
+.cal-slots-label{
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--tx3);
+  margin-bottom:9px;
+}
+
+.cal-slot-row{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.csl{
+  padding:7px 14px;
+  border:1px solid var(--br2);
+  border-radius:50px;
+  font-size:11.5px;
+  color:var(--tx2);
+  cursor:pointer;
+  transition:all .22s;
+  background:var(--inp);
+}
+
+.csl:hover{
+  border-color:var(--gd);
+  color:var(--tx);
+}
+
+.csl.on{
+  border-color:var(--gd);
+  background:rgba(131,96,30,.12);
+  color:var(--gd);
+}
+
+.csl.full{
+  opacity:.3;
+  pointer-events:none;
+  text-decoration:line-through;
+}
+
+/* RIGHT FORM CARD */
+.cal-form-card{
+  background:var(--bg3);
+  border:1px solid var(--br2);
+  border-radius:10px;
+  padding:28px 22px;
+  position:sticky;
+  top:24px;
+}
+
+
+
+.cal-selected-display{
+  background:rgba(131,96,30,.1);
+  border:1px solid rgba(131,96,30,.2);
+  border-radius:6px;
+  padding:10px 14px;
+  margin-bottom:16px;
+  font-size:12px;
+  color:var(--gd);
+  letter-spacing:.5px;
+}
+
+/* FORM */
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:11px;
+  margin-bottom:11px;
+}
+
+.form-group{
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  gap:5px;
 }
 
-/* Mobile */
-@media(max-width:860px){
-  .art-wrap{
+.form-group label{
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--tx2);
+  font-weight:500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:var(--inp);
+  border:1px solid var(--ibd);
+  border-radius:6px;
+  padding:11px 13px;
+  color:var(--tx);
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  width:100%;
+  transition:all .25s var(--e);
+  outline:none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+  color:var(--ph);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--gd);
+  background:var(--if);
+  box-shadow:0 0 0 3px rgba(131,96,30,.08);
+}
+
+.form-group textarea{
+  resize:none;
+  min-height:78px;
+}
+
+.form-group select{
+  cursor:pointer;
+}
+
+/* SUBMIT BUTTON */
+.submit-reservation-btn{
+  width:100%;
+  border:none;
+  border-radius:6px;
+  padding:13px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .3s var(--e);
+  font-family:'DM Sans',sans-serif;
+  margin-top:4px;
+  background:var(--gd);
+  color:#fff;
+  box-shadow:0 8px 24px rgba(131,96,30,.28);
+}
+
+.submit-reservation-btn:hover:not(:disabled){
+  background:var(--gd2);
+  box-shadow:0 14px 36px rgba(131,96,30,.38);
+  transform:translateY(-2px);
+}
+
+.submit-reservation-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+  transform:none;
+}
+
+/* PDF BANNER */
+.pdf-banner{
+  display:none;
+  margin-top:18px;
+  background:rgba(131,96,30,.1);
+  border:1px solid rgba(131,96,30,.2);
+  border-radius:8px;
+  padding:18px;
+  text-align:center;
+}
+
+.pdf-banner p{
+  font-size:12px;
+  color:var(--tx2);
+  margin-bottom:12px;
+}
+
+.pdf-download-btn{
+  display:inline-block;
+  background:var(--gd);
+  color:#fff;
+  padding:10px 24px;
+  border-radius:50px;
+  font-size:11px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:1px;
+  transition:all .3s;
+}
+
+.pdf-download-btn:hover{
+  background:var(--gd2);
+  transform:translateY(-2px);
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:#16a34a;
+  color:#fff;
+  padding:14px 28px;
+  border-radius:50px;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 8px 30px rgba(0,0,0,.22);
+  z-index:9999;
+  transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;
+  opacity:0;
+  pointer-events:none;
+  white-space:normal;
+  max-width:90vw;
+  text-align:center;
+}
+
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
+.toast.error{
+  background:#dc2626;
+}
+
+/* DARK MODE */
+body.dark-mode{
+  --bg:#060606;
+  --bg2:#0b0b0b;
+  --bg3:#111;
+  --bg4:#181818;
+  --tx:#ede7de;
+  --tx2:#726a64;
+  --tx3:#343030;
+  --gd:#c09848;
+  --gd2:#daB860;
+  --br:rgba(255,255,255,.06);
+  --br2:rgba(255,255,255,.11);
+  --inp:rgba(255,255,255,.04);
+  --ibd:rgba(255,255,255,.09);
+  --if:rgba(255,255,255,.07);
+  --ph:rgba(255,255,255,.2);
+}
+
+body.dark-mode .reservation-section{
+  background:var(--bg2);
+}
+
+body.dark-mode .cd.on{
+  color:#060606;
+}
+
+body.dark-mode .csl.on{
+  background:rgba(192,152,72,.12);
+}
+
+body.dark-mode .cal-selected-display{
+  background:rgba(192,152,72,.1);
+  border-color:rgba(192,152,72,.2);
+}
+
+body.dark-mode .pdf-banner{
+  background:rgba(192,152,72,.1);
+  border-color:rgba(192,152,72,.2);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .cal-wrap{
     grid-template-columns:1fr;
+    gap:24px;
   }
-  .art-left{
-    min-height:320px;
-  }
-  .art-left-body{
-    padding:20px;
-  }
-  .art-right{
-    padding:28px 20px;
+  
+  .cal-form-card{
+    position:static;
+    padding:22px 16px;
+    border-radius:8px;
   }
 }
 
-@media(max-width:768px){
-  .art-right{
-    padding:24px 18px;
-  }
-}
 @media(max-width:768px){
   .reservation-section{
-    padding:0 0 70px 0; /* top=0, sides=0, bottom=70px */
+    padding:60px 0;
   }
   
   .reservation-container{
-    padding:0; /* remove container padding on mobile */
+    padding:0 16px;
   }
   
-  .art-wrap{
-    border-radius:0; /* optional: remove rounded corners on mobile */
+  .cal-s{
+    margin-bottom:14px;
+  }
+  
+  .cal-form-t{
+    font-size:17px;
+    margin-bottom:14px;
+  }
+  
+  .cal-selected-display{
+    margin-bottom:12px;
   }
 }
-:root{--azure:#F59E0B;--olive:#92400E;}
-.reservation-section{background:linear-gradient(135deg,#F59E0B 0%,#92400E 100%);}
-body.dark-mode .reservation-section{background:linear-gradient(135deg, #d97706 0%, #78350f 100%) !important;}
 
+@media(max-width:480px){
+  .cd{
+    font-size:12px;
+    border-radius:4px;
+  }
+  
+  .toast{
+    max-width:85vw;
+    padding:12px 20px;
+  }
+}
+body.dark-mode .cal-t,
+body.dark-mode .cal-month-name,
+body.dark-mode .cal-form-t{
+  color:#ede7de; /* Light text for dark mode */
+}
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -942,75 +1326,272 @@ body.dark-mode .reservation-section{background:linear-gradient(135deg, #d97706 0
 </div>
 
 <section class="reservation-section">
-  <div class="reservation-container" style="max-width:1400px">
+<div class="reservation-container">
+  
+  <div class="cal-wrap">
     
-    <div class="art-wrap">
-      
-      <!-- LEFT: Portrait Image -->
-      <div class="art-left">
-        <img src="https://images.unsplash.com/photo-1543353071-087092ec393a?w=800&q=85" alt="chef">
-        <div class="art-left-body">
-          <div class="art-name">Dine With Us Tonight</div>
-          <p class="art-bio">Good food, a relaxed atmosphere, and a table waiting just for you. Reserve now for a smooth dining experience.</p>
+    <!-- LEFT: Calendar -->
+    <div class="cal-box">
+      <h2 class="cal-t">Where Flavor Meets Comfort</h2>
+      <p class="cal-s">Skip the wait and secure your spot for a relaxed dining experience.</p>
+
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <div class="cal-month-name" id="calMonthName">March 2026</div>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+
+      <div class="cal-days-head">
+        <div class="cal-dh">Su</div>
+        <div class="cal-dh">Mo</div>
+        <div class="cal-dh">Tu</div>
+        <div class="cal-dh">We</div>
+        <div class="cal-dh">Th</div>
+        <div class="cal-dh">Fr</div>
+        <div class="cal-dh">Sa</div>
+      </div>
+
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div class="cal-slots" id="calSlots" style="display:none">
+        <div class="cal-slots-label">Available Times</div>
+        <div class="cal-slot-row">
+          <div class="csl" onclick="selSlot(this)">12:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">1:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">2:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">5:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">6:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">7:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">8:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">9:00 PM</div>
+          <div class="csl" onclick="selSlot(this)">10:00 PM</div>
         </div>
       </div>
-
-      <!-- RIGHT: Your EXISTING form -->
-      <div class="art-right">
-     <form class="reservation-form" id="reservationForm" novalidate>
-        <h3 class="form-heading">RESERVE YOUR TABLE</h3>
-        <p class="art-bio2">Join us for thoughtfully prepared meals and a welcoming ambiance. Reserve your table in seconds.</p>
-      <div class="form-grid">
-        <div class="form-group"><label>Full Name *</label><input type="text" id="resName" placeholder="John Doe" required /></div>
-        <div class="form-group"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
-        <div class="form-group"><label>Email</label><input type="email" id="resEmail" placeholder="john@example.com" /></div>
-        <div class="form-group"><label>Number of Guests *</label><select id="resGuests" required><option value="1">1 Person</option><option value="2" selected>2 People</option><option value="3">3 People</option><option value="4">4 People</option><option value="5">5 People</option><option value="6">6 People</option><option value="7+">7+ People</option></select></div>
-        <div class="form-group"><label>Date *</label><input type="date" id="resDate" required /></div>
-        <div class="form-group"><label>Preferred Time *</label><select id="resTime" required><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option selected>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option></select></div>
-        <div class="form-group full"><label>Special Requests</label><textarea id="resRequests" placeholder="Dietary restrictions, special occasions, seating preferences…"></textarea></div>
-      </div>
-      <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">Confirm Reservation</button>
-      <div class="pdf-banner" id="pdfBanner">
-        <p>✅ Your reservation is confirmed! Download your confirmation below.</p>
-        <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
-      </div>
-    </form>
-      </div>
-
     </div>
+
+    <!-- RIGHT: Form -->
+    <div class="cal-form-card">
+      <h3 class="cal-form-t">Complete Your Reservation</h3>
+      <div class="cal-selected-display" id="selDisplay">No date selected yet</div>
+      
+      <form id="reservationForm" novalidate>
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="resName" placeholder="Your name" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="resEmail" placeholder="you@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" id="resPhone" placeholder="+91 98765 43210" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Guests *</label>
+            <select id="resGuests" required>
+              <option value="1">1 Person</option>
+              <option value="2" selected>2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4 People</option>
+              <option value="5">5 People</option>
+              <option value="6">6 People</option>
+              <option value="7+">7+ People</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Special Requests</label>
+            <textarea id="resRequests" placeholder="Dietary needs, seating preferences..."></textarea>
+          </div>
+          
+        </div>
+        
+        <input type="hidden" id="resDate">
+        <input type="hidden" id="resTime">
+        
+        <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">Confirm Reservation</button>
+        
+        <div class="pdf-banner" id="pdfBanner">
+          <p>✅ Your reservation is confirmed! Download your confirmation below.</p>
+          <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
+        </div>
+      </form>
+    </div>
+
   </div>
+</div>
 </section>
+
 <div class="toast" id="resToast"></div>
 <script>
-  (function(){const t=new Date().toISOString().split('T')[0];document.getElementById('resDate').setAttribute('min',t);})();
-  function showToast(m,e){const t=document.getElementById('resToast');t.textContent=m;t.className='toast'+(e?' error':'');void t.offsetWidth;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
-  function genResId(){return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();}
-  document.getElementById('reservationForm').addEventListener('submit',async function(e){
-    e.preventDefault();
-    const name=document.getElementById('resName').value.trim();
-    const phone=document.getElementById('resPhone').value.trim();
-    const email=document.getElementById('resEmail').value.trim();
-    const guests=document.getElementById('resGuests').value;
-    const date=document.getElementById('resDate').value;
-    const time=document.getElementById('resTime').value;
-    const special=document.getElementById('resRequests').value.trim();
-    if(!name){showToast('⚠️ Please enter your name.',true);return;}
-    if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
-    if(!date){showToast('⚠️ Please select a date.',true);return;}
-    const reservationId=genResId();
-    const btn=document.getElementById('resSubmitBtn');
-    btn.disabled=true;btn.textContent='⏳ Confirming…';
-    const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
-    try{
-      const saveRes=await fetch('/.netlify/functions/saveReservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
-      const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      if(tgRes.ok){const tgData=await tgRes.json().catch(()=>({}));if(tgData.pdfUrl){const link=document.getElementById('pdfDownloadLink');link.href=tgData.pdfUrl;link.download='Reservation-'+reservationId+'.pdf';document.getElementById('pdfBanner').style.display='block';}}
-      showToast('✅ Reservation confirmed! We will contact you shortly.');
-      btn.textContent='✅ Reservation Confirmed!';
-      setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
-    }catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
+    // Calendar Variables
+let curMonth = new Date().getMonth();
+let curYear = new Date().getFullYear();
+let selDay = null;
+let selTime = null;
+
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// Build Calendar
+function buildCal() {
+  const grid = document.getElementById('calGrid');
+  const name = document.getElementById('calMonthName');
+  
+  name.textContent = months[curMonth] + ' ' + curYear;
+  
+  const first = new Date(curYear, curMonth, 1).getDay();
+  const days = new Date(curYear, curMonth + 1, 0).getDate();
+  const today = new Date();
+  
+  grid.innerHTML = '';
+  
+  // Empty cells before month starts
+  for (let i = 0; i < first; i++) {
+    const e = document.createElement('div');
+    e.className = 'cd empty';
+    grid.appendChild(e);
+  }
+  
+  // Date cells
+  for (let d = 1; d <= days; d++) {
+    const e = document.createElement('div');
+    const isPast = (curYear < today.getFullYear()) || 
+                   (curYear === today.getFullYear() && curMonth < today.getMonth()) ||
+                   (curYear === today.getFullYear() && curMonth === today.getMonth() && d < today.getDate());
+    
+    let cls = 'cd';
+    if (isPast) cls += ' past';
+    else if (d === selDay) cls += ' on';
+    
+    e.className = cls;
+    e.textContent = d;
+    
+    if (!isPast) e.onclick = () => pickDay(d);
+    
+    grid.appendChild(e);
+  }
+}
+
+// Pick a day
+function pickDay(d) {
+  selDay = d;
+  selTime = null;
+  buildCal();
+  
+  document.getElementById('calSlots').style.display = 'block';
+  document.getElementById('selDisplay').textContent = months[curMonth] + ' ' + d + ', ' + curYear + ' — Select a time below';
+  
+  // Clear selected time slots
+  document.querySelectorAll('.csl').forEach(s => s.classList.remove('on'));
+  
+  // Update hidden date input
+  const dateStr = curYear + '-' + String(curMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  document.getElementById('resDate').value = dateStr;
+  
+  // ✅ CHECK IF TODAY - DISABLE PAST TIMES
+  const today = new Date();
+  const isToday = (curYear === today.getFullYear() && curMonth === today.getMonth() && d === today.getDate());
+  
+  if (isToday) {
+    const currentHour = today.getHours();
+    const currentMinute = today.getMinutes();
+    
+    document.querySelectorAll('.csl').forEach(slot => {
+      const timeText = slot.textContent.trim(); // e.g. "5:00 PM"
+      const [time, period] = timeText.split(' '); // ["5:00", "PM"]
+      const [hour, minute] = time.split(':').map(Number); // [5, 0]
+      
+      let hour24 = hour;
+      if (period === 'PM' && hour !== 12) hour24 += 12;
+      if (period === 'AM' && hour === 12) hour24 = 0;
+      
+      // Check if this time has passed
+      const isPast = (hour24 < currentHour) || (hour24 === currentHour && minute <= currentMinute);
+      
+      if (isPast) {
+        slot.classList.add('full'); // Mark as unavailable
+      } else {
+        slot.classList.remove('full'); // Available
+      }
+    });
+  } else {
+    // Not today - all times available
+    document.querySelectorAll('.csl').forEach(slot => slot.classList.remove('full'));
+  }
+}
+// Change month
+function changeMonth(dir) {
+  curMonth += dir;
+  if (curMonth > 11) { curMonth = 0; curYear++; }
+  if (curMonth < 0) { curMonth = 11; curYear--; }
+  
+  selDay = null;
+  selTime = null;
+  buildCal();
+  
+  document.getElementById('calSlots').style.display = 'none';
+  document.getElementById('selDisplay').textContent = 'No date selected yet';
+  document.getElementById('resDate').value = '';
+  document.getElementById('resTime').value = '';
+}
+
+// Select time slot
+function selSlot(el) {
+  document.querySelectorAll('.csl').forEach(s => {
+    if (!s.classList.contains('full')) s.classList.remove('on');
   });
+  
+  el.classList.add('on');
+  selTime = el.textContent;
+  
+  if (selDay) {
+    document.getElementById('selDisplay').textContent = months[curMonth] + ' ' + selDay + ', ' + curYear + ' at ' + selTime;
+    document.getElementById('resTime').value = selTime;
+  }
+}
+
+// Initialize calendar on load
+buildCal();
+ (function(){const t=new Date().toISOString().split('T')[0];document.getElementById('resDate').setAttribute('min',t);})();
+function showToast(m,e){const t=document.getElementById('resToast');t.textContent=m;t.className='toast'+(e?' error':'');void t.offsetWidth;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
+function genResId(){return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();}
+document.getElementById('reservationForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const name=document.getElementById('resName').value.trim();
+  const phone=document.getElementById('resPhone').value.trim();
+  const email=document.getElementById('resEmail').value.trim();
+  const guests=document.getElementById('resGuests').value;
+  const date=document.getElementById('resDate').value;
+  const time=document.getElementById('resTime').value;
+  const special=document.getElementById('resRequests').value.trim();
+  
+  if(!name){showToast('⚠️ Please enter your name.',true);return;}
+  if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
+  
+  // ADD THIS NEW VALIDATION HERE (AFTER phone check, BEFORE reservationId)
+  if(!date){showToast('⚠️ Please select a date from the calendar.',true);return;}
+  if(!time){showToast('⚠️ Please select a time slot.',true);return;}
+  
+  const reservationId=genResId();
+  const btn=document.getElementById('resSubmitBtn');
+  btn.disabled=true;btn.textContent='⏳ Confirming…';
+  const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
+  try{
+    const saveRes=await fetch('/.netlify/functions/saveReservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
+    const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(tgRes.ok){const tgData=await tgRes.json().catch(()=>({}));if(tgData.pdfUrl){const link=document.getElementById('pdfDownloadLink');link.href=tgData.pdfUrl;link.download='Reservation-'+reservationId+'.pdf';document.getElementById('pdfBanner').style.display='block';}}
+    showToast('✅ Reservation confirmed! We will contact you shortly.');
+    btn.textContent='✅ Reservation Confirmed!';
+    setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
+  }catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
+});
 </script>
 
  <!-- ============================================
