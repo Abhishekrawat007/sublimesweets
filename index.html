@@ -186,12 +186,15 @@ body.search-active .products-section {
   gap:0;
 }
 
-#reservation .ff-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
+#reservation .ff-img{
+  height:100%; /* REMOVE THIS */
+  height:auto; /* ADD THIS - lets it match form */
+  min-height:500px; /* ADD THIS - prevents too small */
+  overflow:hidden;
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0;
 }
 
 #reservation .flip-card:hover .ff-img img{transform:scale(1.05)}
@@ -446,34 +449,173 @@ body.search-active .products-section {
   opacity:1;
 }
 .toast.error{background:#dc2626}
+/* FORM STYLES FOR FLIP CARD - MATCHING FLIP DESIGN */
+#reservation .reservation-form{
+  background:transparent;
+  padding:0;
+  border:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
 
-/* MOBILE */
+#reservation .form-heading{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(16px,2vw,20px);
+  margin-bottom:14px;
+  line-height:1.1;
+  color:#eee8df;
+  font-weight:400;
+}
+
+#reservation .form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:10px;
+}
+
+#reservation .form-group{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+#reservation .form-group.full{
+  grid-column:1/-1;
+}
+
+#reservation .form-group label{
+  font-size:9px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:#bf9840;
+  font-weight:500;
+}
+
+#reservation .form-group input,
+#reservation .form-group select,
+#reservation .form-group textarea{
+  width:100%;
+  padding:10px 12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:5px;
+  color:#eee8df;
+  font-family:inherit;
+  font-size:12px;
+  transition:all .25s;
+  outline:none;
+}
+
+#reservation .form-group input::placeholder,
+#reservation .form-group textarea::placeholder{
+  color:rgba(255,255,255,.18);
+}
+
+#reservation .form-group select option{
+  color:#0A1628;
+  background:#fff;
+}
+
+#reservation .form-group input:focus,
+#reservation .form-group select:focus,
+#reservation .form-group textarea:focus{
+  border-color:#bf9840;
+  background:rgba(255,255,255,.06);
+}
+
+#reservation .form-group textarea{
+  resize:none;
+  min-height:64px;
+}
+
+#reservation .form-group select{
+  cursor:pointer;
+}
+
+#reservation .submit-reservation-btn{
+  width:100%;
+  background:#bf9840;
+  color:#040404;
+  padding:12px;
+  border:none;
+  border-radius:5px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all .3s;
+  margin-top:8px;
+}
+
+#reservation .submit-reservation-btn:hover:not(:disabled){
+  background:#d9b458;
+}
+
+#reservation .submit-reservation-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+#reservation .pdf-banner{
+  display:none;
+  margin-top:12px;
+  background:rgba(191,152,64,.1);
+  border:1px solid rgba(191,152,64,.2);
+  border-radius:6px;
+  padding:14px;
+  text-align:center;
+}
+
+#reservation .pdf-banner p{
+  font-size:11px;
+  color:#6a6260;
+  margin-bottom:8px;
+}
+
+#reservation .pdf-download-btn{
+  display:inline-block;
+  background:#bf9840;
+  color:#040404;
+  padding:8px 20px;
+  border-radius:50px;
+  font-size:10px;
+  font-weight:700;
+  text-decoration:none;
+  letter-spacing:1px;
+}
 @media(max-width:768px){
   #reservation{
     padding:0 16px;
     margin:8px auto;
   }
   
-  #reservation .flip-card{height:650px} /* SHORTER - was 700px */
+  #reservation .flip-card{
+    height:auto;
+    min-height:600px;
+  }
   
   #reservation .flip-section-t{margin-bottom:2px}
   #reservation .flip-section-s{margin-bottom:10px}
   
-  /* 2 IMAGES STACKED - KEEP ORIGINAL HEIGHT */
+  /* SINGLE IMAGE ON MOBILE */
   #reservation .ff-img{
     grid-template-columns:1fr;
-    grid-template-rows:1fr 1fr; /* 2 ROWS */
-    height:300px; /* SHORTER - not 400px */
+    grid-template-rows:1fr;
+    height:280px;
+    min-height:280px;
   }
   
-  /* HIDE 3RD IMAGE */
+  /* HIDE 2ND AND 3RD IMAGE */
+  #reservation .ff-img img:nth-child(2),
   #reservation .ff-img img:nth-child(3){
     display:none;
   }
   
-  /* LIGHTER OVERLAY */
   #reservation .ff-img::after{
-    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.65) 80%);
+    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.65) 75%);
   }
   
   #reservation .ff-body{
@@ -482,19 +624,62 @@ body.search-active .products-section {
     background:none;
   }
   
-  #reservation .ff-name{
-    font-size:20px;
+  #reservation .ff-name{font-size:20px}
+  #reservation .ff-desc{font-size:12.5px}
+  
+  /* FORM FIXES */
+  #reservation .form-grid{
+    grid-template-columns:1fr;
+    gap:10px;
   }
   
-  #reservation .ff-desc{
-    font-size:12.5px;
+  #reservation .form-group.full{grid-column:1}
+  
+  /* SHORTER LABELS ON MOBILE */
+  #reservation .form-group label[for="resGuests"]::after{
+    content:'Guests *';
+  }
+  #reservation .form-group label[for="resGuests"]{
+    font-size:0;
+  }
+  #reservation .form-group label[for="resGuests"]::after{
+    font-size:9px;
   }
   
-  /* DATE/TIME FIX FOR MOBILE */
-  #reservation .fl input[type="date"],
-  #reservation .fl input[type="time"]{
-    font-size:16px; /* Prevents zoom on iOS */
+  #reservation .form-group label[for="resTime"]::after{
+    content:'Time *';
+  }
+  #reservation .form-group label[for="resTime"]{
+    font-size:0;
+  }
+  #reservation .form-group label[for="resTime"]::after{
+    font-size:9px;
+  }
+  
+  /* FIX DATE/TIME INPUTS ON MOBILE */
+  #reservation .form-group input[type="date"],
+  #reservation .form-group select{
+    font-size:16px; /* Prevents iOS zoom */
     min-height:44px; /* Better tap target */
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  
+  /* Make date picker icon visible */
+  #reservation .form-group input[type="date"]{
+    position:relative;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23bf9840'%3E%3Cpath d='M3 0h2v2H3V0zm8 0h2v2h-2V0zM0 4v12h16V4H0zm14 10H2V6h12v8z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    padding-right:36px;
+  }
+  
+  /* Style select dropdown */
+  #reservation .form-group select{
+    background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23bf9840' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    padding-right:36px;
   }
 }
 </style>
@@ -1171,68 +1356,33 @@ body.search-active .products-section {
           </div>
         </div>
         
+      
         <!-- BACK -->
-        <div class="flip-face flip-back">
-          <button class="fb-close" onclick="flipCard()">Flip back</button>
-          <div class="fb-t">Complete Your Reservation</div>
-          
-          <form id="reservationForm" novalidate>
-            <div class="fb-fields">
-              
-              <div class="fl">
-                <label>Full Name *</label>
-                <input type="text" id="resName" placeholder="Your name" required>
-              </div>
-              
-              <div class="fl">
-                <label>Phone *</label>
-                <input type="tel" id="resPhone" placeholder="+91 98765 43210" required>
-              </div>
-              
-              <div class="fl">
-                <label>Email</label>
-                <input type="email" id="resEmail" placeholder="you@email.com">
-              </div>
-              
-              <div class="fl">
-                <label>Guests *</label>
-                <select id="resGuests" required>
-                  <option value="1">1 Person</option>
-                  <option value="2" selected>2 People</option>
-                  <option value="3">3 People</option>
-                  <option value="4">4 People</option>
-                  <option value="5">5 People</option>
-                  <option value="6">6 People</option>
-                  <option value="7+">7+ People</option>
-                </select>
-              </div>
-              
-              <div class="fl">
-                <label>Date *</label>
-                <input type="date" id="resDate" required>
-              </div>
-              
-              <div class="fl">
-                <label>Time *</label>
-                <input type="time" id="resTime" required>
-              </div>
-              
-              <div class="fl">
-                <label>Special Requests</label>
-                <textarea id="resRequests" placeholder="Dietary needs, occasions..."></textarea>
-              </div>
-              
-            </div>
-            
-            <button type="submit" class="fb-btn" id="resSubmitBtn">Reserve →</button>
-            
-            <div class="pdf-banner" id="pdfBanner">
-              <p>✅ Reservation confirmed! Download your confirmation.</p>
-              <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation.pdf">Download PDF</a>
-            </div>
-          </form>
-          
-        </div>
+<div class="flip-face flip-back">
+  <button class="fb-close" onclick="flipCard()">Flip back</button>
+  
+  <form class="reservation-form" id="reservationForm" novalidate style="background:transparent;padding:0;border:none;">
+    <h3 class="form-heading" style="color:#eee8df;font-size:18px;margin-bottom:12px;">RESERVE YOUR TABLE</h3>
+    
+    <div class="form-grid" style="gap:10px;margin-bottom:10px;">
+      <div class="form-group"><label>Full Name *</label><input type="text" id="resName" placeholder="John Doe" required /></div>
+      <div class="form-group"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
+      <div class="form-group"><label>Email</label><input type="email" id="resEmail" placeholder="john@example.com" /></div>
+      <div class="form-group"><label>Number of Guests *</label><select id="resGuests" required><option value="1">1 Person</option><option value="2" selected>2 People</option><option value="3">3 People</option><option value="4">4 People</option><option value="5">5 People</option><option value="6">6 People</option><option value="7+">7+ People</option></select></div>
+      <div class="form-group"><label>Date *</label><input type="date" id="resDate" required /></div>
+      <div class="form-group"><label>Preferred Time *</label><select id="resTime" required><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option selected>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option></select></div>
+      <div class="form-group full"><label>Special Requests</label><textarea id="resRequests" placeholder="Dietary restrictions, occasions…"></textarea></div>
+    </div>
+    
+    <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">Confirm Reservation</button>
+    
+    <div class="pdf-banner" id="pdfBanner">
+      <p>✅ Your reservation is confirmed! Download your confirmation below.</p>
+      <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
+    </div>
+  </form>
+  
+</div>
         
       </div>
     </div>
@@ -1246,89 +1396,37 @@ function flipCard(){
   document.getElementById('fc1').classList.toggle('flipped');
 }
 
-function showToast(m,e){
-  const t=document.getElementById('resToast');
-  t.textContent=m;
-  t.className='toast'+(e?' error':'');
-  void t.offsetWidth;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),4000);
-}
+(function(){const t=new Date().toISOString().split('T')[0];document.getElementById('resDate').setAttribute('min',t);})();
 
-function genResId(){
-  return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();
-}
+function showToast(m,e){const t=document.getElementById('resToast');t.textContent=m;t.className='toast'+(e?' error':'');void t.offsetWidth;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
 
-// MAKE SURE THIS addEventListener IS **OUTSIDE** ANY OTHER FUNCTION
-document.addEventListener('DOMContentLoaded', function(){
-  document.getElementById('reservationForm').addEventListener('submit',async function(e){
-    e.preventDefault();
-    
-    const name=document.getElementById('resName').value.trim();
-    const phone=document.getElementById('resPhone').value.trim();
-    const email=document.getElementById('resEmail').value.trim();
-    const guests=document.getElementById('resGuests').value;
-    const date=document.getElementById('resDate').value;
-    const time=document.getElementById('resTime').value;
-    const special=document.getElementById('resRequests').value.trim();
-    
-    if(!name){showToast('⚠️ Please enter your name.',true);return;}
-    if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
-    if(!date){showToast('⚠️ Please select a date.',true);return;}
-    if(!time){showToast('⚠️ Please select a time.',true);return;}
-    
-    const reservationId=genResId();
-    const btn=document.getElementById('resSubmitBtn');
-    btn.disabled=true;
-    btn.textContent='⏳ Confirming…';
-    
-    const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
-    
-    try{
-      const saveRes=await fetch('/.netlify/functions/saveReservation',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(payload)
-      });
-      
-      if(!saveRes.ok){
-        const err=await saveRes.json().catch(()=>({}));
-        throw new Error(err.error||'Save failed');
-      }
-      
-      const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(payload)
-      });
-      
-      if(tgRes.ok){
-        const tgData=await tgRes.json().catch(()=>({}));
-        if(tgData.pdfUrl){
-          const link=document.getElementById('pdfDownloadLink');
-          link.href=tgData.pdfUrl;
-          link.download='Reservation-'+reservationId+'.pdf';
-          document.getElementById('pdfBanner').style.display='block';
-        }
-      }
-      
-      showToast('✅ Reservation confirmed! We will contact you shortly.');
-      btn.textContent='✅ Confirmed!';
-      
-      setTimeout(()=>{
-        document.getElementById('reservationForm').reset();
-        document.getElementById('pdfBanner').style.display='none';
-        btn.disabled=false;
-        btn.textContent='Reserve →';
-      },5000);
-      
-    }catch(err){
-      console.error(err);
-      showToast('❌ Something went wrong. Please try again.',true);
-      btn.disabled=false;
-      btn.textContent='Reserve →';
-    }
-  });
+function genResId(){return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();}
+
+document.getElementById('reservationForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const name=document.getElementById('resName').value.trim();
+  const phone=document.getElementById('resPhone').value.trim();
+  const email=document.getElementById('resEmail').value.trim();
+  const guests=document.getElementById('resGuests').value;
+  const date=document.getElementById('resDate').value;
+  const time=document.getElementById('resTime').value;
+  const special=document.getElementById('resRequests').value.trim();
+  if(!name){showToast('⚠️ Please enter your name.',true);return;}
+  if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
+  if(!date){showToast('⚠️ Please select a date.',true);return;}
+  const reservationId=genResId();
+  const btn=document.getElementById('resSubmitBtn');
+  btn.disabled=true;btn.textContent='⏳ Confirming…';
+  const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
+  try{
+    const saveRes=await fetch('/.netlify/functions/saveReservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
+    const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(tgRes.ok){const tgData=await tgRes.json().catch(()=>({}));if(tgData.pdfUrl){const link=document.getElementById('pdfDownloadLink');link.href=tgData.pdfUrl;link.download='Reservation-'+reservationId+'.pdf';document.getElementById('pdfBanner').style.display='block';}}
+    showToast('✅ Reservation confirmed! We will contact you shortly.');
+    btn.textContent='✅ Reservation Confirmed!';
+    setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
+  }catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
 });
 </script>
 
