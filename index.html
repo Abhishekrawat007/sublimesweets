@@ -172,6 +172,8 @@ body.search-active .products-section {
   overflow:hidden;
   border:1px solid rgba(255,255,255,.1);
   background:#0d0d0d;
+  transform-style: flat; /* ADD THIS */
+  will-change: transform; /* ADD THIS */
 }
 
 /* FRONT */
@@ -265,14 +267,17 @@ body.search-active .products-section {
 #reservation .flip-back{
   background:#141414;
   transform:rotateY(180deg);
-  padding:24px 20px;
+  padding:40px;
   display:flex;
-  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   overflow-y:auto;
+  transform-style: flat;
+  transform: rotateY(180deg) translateZ(0);
 }
 
 #reservation .fb-close{
-  align-self:flex-end;
+  align-self:flex-start;
   font-size:10px;
   letter-spacing:2px;
   text-transform:uppercase;
@@ -312,9 +317,13 @@ body.search-active .products-section {
 
 #reservation .form-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:10px;
+  grid-template-columns:1fr; /* Single column on desktop */
+  gap:12px;
+  margin-bottom:12px;
+}
+
+#reservation .form-group.full{
+  grid-column:1; /* Not needed but keeps it clean */
 }
 
 #reservation .form-group{
@@ -354,7 +363,11 @@ body.search-active .products-section {
 #reservation .form-group textarea::placeholder{
   color:rgba(255,255,255,.18);
 }
-
+#reservation .form-group input[type="date"]::-webkit-calendar-picker-indicator{
+  cursor:pointer;
+  opacity:1;
+  filter:brightness(0) invert(1);
+}
 #reservation .form-group select option{
   color:#0A1628;
   background:#fff;
@@ -372,22 +385,8 @@ body.search-active .products-section {
   min-height:64px;
 }
 
-#reservation .form-group select{
-  cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23bf9840' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 12px center;
-  padding-right:36px;
-}
 
-#reservation .form-group input[type="date"]{
-  color-scheme:dark;
-}
 
-#reservation .form-group input[type="date"]::-webkit-calendar-picker-indicator{
-  filter:invert(1) brightness(1.2);
-  cursor:pointer;
-}
 
 #reservation .submit-reservation-btn{
   width:100%;
@@ -470,6 +469,30 @@ body.search-active .products-section {
 }
 .toast.error{background:#dc2626}
 
+#reservation .ff-features{
+  display:none;
+}
+
+#reservation .form-container{
+  max-width:450px;
+  width:100%;
+  background:rgba(0,0,0,.3);
+  border:1px solid rgba(191,152,64,.2);
+  border-radius:10px;
+  padding:32px 28px;
+  backdrop-filter:blur(10px);
+}
+#reservation .form-header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+#reservation .fb-close{
+  align-self:auto;
+  margin-bottom:0;
+}
 /* MOBILE */
 @media(max-width:768px){
   #reservation{
@@ -478,8 +501,8 @@ body.search-active .products-section {
   }
   
   #reservation .flip-card{
-    height:auto;
-    min-height:600px;
+    height:680px;
+    min-height:680px;
   }
   
   #reservation .flip-section-t{margin-bottom:2px}
@@ -521,26 +544,53 @@ body.search-active .products-section {
   
   #reservation .form-group.full{grid-column:1}
   
-  /* SHORTER LABELS ON MOBILE */
-  #reservation .form-group label{
-    font-size:9px;
-  }
-  
-  /* FIX DATE/TIME INPUTS ON MOBILE */
-  #reservation .form-group input[type="date"],
-  #reservation .form-group select{
+  /* FIX ALL INPUTS ON MOBILE */
+  #reservation .form-group input,
+  #reservation .form-group select,
+  #reservation .form-group textarea{
     font-size:16px !important;
-    min-height:44px !important;
+    min-height:48px !important;
   }
   
-  #reservation .form-group input[type="date"]{
-    color-scheme:dark;
+  /* REMOVE CUSTOM ARROW - LET NATIVE DROPDOWN WORK */
+  #reservation .form-group select{
+    background-image:none !important;
+    padding-right:12px !important;
   }
-  
-  #reservation .form-group input[type="date"]::-webkit-calendar-picker-indicator{
-    filter:invert(1) brightness(1.2);
-    cursor:pointer;
-  }
+  /* REMOVE CUSTOM ARROW ON MOBILE */
+#reservation .form-group select{
+  background-image:none !important;
+  padding-right:12px !important;
+}
+/* Premium features - mobile only */
+#reservation .ff-features{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:12px;
+  margin-bottom:16px;
+}
+
+#reservation .ff-feat{
+  font-size:11px;
+  color:#bf9840;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  letter-spacing:.3px;
+}
+#reservation .form-container{
+  max-width:100%;
+  background:transparent;
+  border:none;
+  padding:0;
+  backdrop-filter:none;
+}
+
+#reservation .flip-back{
+  padding:24px 20px;
+  align-items:stretch;
+}
 }
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
@@ -1211,19 +1261,31 @@ body.search-active .products-section {
           <div class="ff-body">
             <div class="ff-tag">Fine Dining</div>
             <div class="ff-name">Saffron Room</div>
-            <div class="ff-desc">7-course contemporary Indian — reimagined for the modern palate. 32 covers only.</div>
-            <button class="ff-cta" onclick="flipCard()">Book this</button>
+           <div class="ff-desc">Our restaurant is built around one simple idea: serve quality food in a welcoming atmosphere. Every dish is prepared with care, using fresh ingredients and thoughtful recipes. From the moment you arrive to the last bite, we want your experience to feel easy, enjoyable, and worth coming back for..</div>
+
+<!-- ADD THESE FEATURES (mobile only) -->
+<div class="ff-features">
+  <div class="ff-feat">✓ Farm-fresh ingredients daily</div>
+  <div class="ff-feat">✓ Private dining available</div>
+  <div class="ff-feat">✓ Complimentary valet parking</div>
+  <div class="ff-feat">✓ Wine pairing included</div>
+</div>
+
+<button class="ff-cta" onclick="flipCard()">Book this</button>
           </div>
         </div>
         
       
 <!-- BACK -->
 <div class="flip-face flip-back">
-  <button class="fb-close" onclick="flipCard()">Flip back</button>
+  <div class="form-container">
   
+
   <form class="reservation-form" id="reservationForm" novalidate>
-    <h3 class="form-heading">RESERVE YOUR TABLE</h3>
-    
+     <div class="form-header-row">
+    <h3 class="form-heading" style="margin-bottom:0;">RESERVE YOUR TABLE</h3>
+    <button class="fb-close" onclick="flipCard()">Flip back</button>
+  </div>
     <div class="form-grid">
       <div class="form-group"><label>Full Name *</label><input type="text" id="resName" placeholder="John Doe" required /></div>
       <div class="form-group"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
@@ -1241,7 +1303,7 @@ body.search-active .products-section {
       <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">📄 Download Confirmation PDF</a>
     </div>
   </form>
-  
+</div>
 </div>
         
       </div>
