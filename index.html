@@ -424,31 +424,74 @@ body.search-active .products-section {
 }
 .toast.error{background:#dc2626}
 
-/* MOBILE */
 @media(max-width:768px){
   #reservation{
     padding:0 16px;
     margin:8px auto;
   }
   
-  #reservation .flip-card{height:650px}
+  #reservation .flip-card{height:750px}
   
   #reservation .flip-section-t{margin-bottom:2px}
   #reservation .flip-section-s{margin-bottom:10px}
   
+  /* 2 IMAGES STACKED VERTICALLY ON MOBILE */
   #reservation .ff-img{
-    grid-template-columns:1fr;
-    height:240px;
+    grid-template-columns:1fr; /* Single column */
+    grid-template-rows:1fr 1fr; /* 2 rows */
+    height:400px; /* TALLER to fit 2 images */
+  }
+  
+  /* Hide 3rd image on mobile */
+  #reservation .ff-img img:nth-child(3){
+    display:none;
   }
   
   #reservation .ff-img::after{
-    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.75) 80%);
+    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.8) 70%);
   }
   
   #reservation .ff-body{
     position:relative;
-    padding:18px 16px;
+    padding:20px 16px;
     background:none;
+  }
+  
+  #reservation .ff-name{
+    font-size:22px;
+  }
+  
+  #reservation .ff-desc{
+    font-size:13px;
+  }
+  
+  /* FORM BIGGER ON MOBILE */
+  #reservation .fl input,
+  #reservation .fl select,
+  #reservation .fl textarea{
+    padding:12px 14px;
+    font-size:14px;
+  }
+  
+  #reservation .fl label{
+    font-size:10px;
+  }
+  
+  /* FIX DATE/TIME PICKER ICONS */
+  #reservation .fl input[type="date"],
+  #reservation .fl input[type="time"]{
+    position:relative;
+    padding-right:40px; /* Space for icon */
+  }
+  
+  #reservation .fl input[type="date"]::-webkit-calendar-picker-indicator,
+  #reservation .fl input[type="time"]::-webkit-calendar-picker-indicator{
+    position:absolute;
+    right:10px;
+    filter:invert(1) brightness(1.5);
+    cursor:pointer;
+    width:20px;
+    height:20px;
   }
 }
 </style>
