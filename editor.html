@@ -539,7 +539,8 @@ function openReservationDetail(res, no) {
     '<p style="margin-bottom:8px;"><b>Time:</b> '           + res.time + '</p>' +
     '<p style="margin-bottom:8px;"><b>Guests:</b> '         + res.guests + '</p>' +
     (res.specialRequests ? '<p style="margin-bottom:8px;"><b>Special Requests:</b> ' + res.specialRequests + '</p>' : '') +
-    '<p style="margin-bottom:16px;"><b>Status:</b> ' + (res.status||'pending') + '</p>' +
+'<p style="margin-bottom:16px;"><b>Status:</b> ' + (res.status||'pending') + '</p>' +
+(res.pdfUrl ? '<a href="' + res.pdfUrl + '" download="Reservation-' + res.reservationId + '.pdf" style="display:inline-block;padding:8px 16px;background:#dc2626;color:#fff;border-radius:6px;text-decoration:none;margin-bottom:16px;">📄 Download Confirmation PDF</a>' : '') +'</p>' +
     '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">' +
     '<a href="https://wa.me/91' + String(res.phone||'').replace(/\D/g,'') + '" target="_blank" style="padding:10px 20px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">💬 WhatsApp</a>' +
     '<a href="tel:' + res.phone + '" style="padding:10px 20px;background:#0077BE;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">📞 Call</a>' +

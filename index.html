@@ -1343,18 +1343,31 @@ document.getElementById('reservationForm').addEventListener('submit',async funct
   if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
   if(!date){showToast('⚠️ Please select a date.',true);return;}
   const reservationId=genResId();
-  const btn=document.getElementById('resSubmitBtn');
-  btn.disabled=true;btn.textContent='⏳ Confirming…';
-  const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
-  try{
-    const saveRes=await fetch('/.netlify/functions/saveReservation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
-    const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if(tgRes.ok){const tgData=await tgRes.json().catch(()=>({}));if(tgData.pdfUrl){const link=document.getElementById('pdfDownloadLink');link.href=tgData.pdfUrl;link.download='Reservation-'+reservationId+'.pdf';document.getElementById('pdfBanner').style.display='block';}}
-    showToast('✅ Reservation confirmed! We will contact you shortly.');
-    btn.textContent='✅ Reservation Confirmed!';
-    setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
-  }catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
+const btn=document.getElementById('resSubmitBtn');
+btn.disabled=true;btn.textContent='⏳ Confirming…';
+const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
+try{
+  const [tgRes, saveRes] = await Promise.all([
+    fetch('/.netlify/functions/sendReservationTelegram', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),
+    fetch('/.netlify/functions/saveReservation', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+  ]);
+  if(!saveRes.ok){const err=await saveRes.json().catch(()=>({}));throw new Error(err.error||'Save failed');}
+  let pdfUrl = null;
+  if(tgRes.ok){
+    const tgData=await tgRes.json().catch(()=>({}));
+    pdfUrl = tgData.pdfUrl;
+    if(pdfUrl){
+      fetch('/.netlify/functions/updateReservationPdf', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reservationId, pdfUrl})}).catch(()=>{});
+      const link=document.getElementById('pdfDownloadLink');
+      link.href=pdfUrl;
+      link.download='Reservation-'+reservationId+'.pdf';
+      document.getElementById('pdfBanner').style.display='block';
+    }
+  }
+  showToast('✅ Reservation confirmed! We will contact you shortly.');
+  btn.textContent='✅ Confirmed!';
+  setTimeout(()=>{document.getElementById('reservationForm').reset();document.getElementById('pdfBanner').style.display='none';btn.disabled=false;btn.textContent='Confirm Reservation';},5000);
+}catch(err){console.error(err);showToast('❌ Something went wrong. Please try again.',true);btn.disabled=false;btn.textContent='Confirm Reservation';}
 });
 </script>
 

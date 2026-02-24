@@ -38,7 +38,7 @@ export async function handler(event) {
   try {
     await ensureFirebaseInit();
     const body = JSON.parse(event.body || "{}");
-    const { reservationId, name, phone, email, guests, date, time, specialRequests } = body;
+    const { reservationId, name, phone, email, guests, date, time, specialRequests, pdfUrl } = body;
 
     if (!reservationId || !name || !phone || !date || !time) {
       return { statusCode: 400, body: "Missing required fields" };
@@ -46,18 +46,19 @@ export async function handler(event) {
 
     const db  = admin.database();
     const ref = await db.ref("sites/sublimesweets/reservations").push({
-      reservationId,
-      name,
-      phone,
-      email: email || null,
-      guests: guests || "2",
-      date,
-      time,
-      specialRequests: specialRequests || null,
-      status: "pending",
-      createdAt: Date.now(),
-      timestamp: new Date().toISOString(),
-    });
+  reservationId,
+  name,
+  phone,
+  email: email || null,
+  guests: guests || "2",
+  date,
+  time,
+  specialRequests: specialRequests || null,
+  pdfUrl: pdfUrl || null,  // ✅ ADD THIS LINE
+  status: "pending",
+  createdAt: Date.now(),
+  timestamp: new Date().toISOString(),
+});
 
     console.log("✅ Reservation saved:", ref.key);
 
