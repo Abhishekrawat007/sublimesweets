@@ -159,7 +159,6 @@ body.search-active .products-section {
   position:relative;
   transform-style:preserve-3d;
   transition:transform .7s cubic-bezier(.4,0,.2,1);
-  cursor:pointer;
 }
 #reservation .flip-card.flipped{transform:rotateY(180deg)}
 
@@ -275,6 +274,7 @@ body.search-active .products-section {
   padding:24px 20px;
   display:flex;
   flex-direction:column;
+  overflow-y:auto;
 }
 
 #reservation .fb-close{
@@ -336,6 +336,8 @@ body.search-active .products-section {
   width:100%;
   transition:all .25s;
   outline:none;
+  -webkit-appearance:none;
+  appearance:none;
 }
 
 #reservation .fl input::placeholder,
@@ -349,7 +351,28 @@ body.search-active .products-section {
 }
 
 #reservation .fl textarea{resize:none;min-height:64px}
-#reservation .fl select{cursor:pointer}
+#reservation .fl select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23bf9840' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  padding-right:36px;
+}
+
+/* DATE/TIME INPUTS */
+#reservation .fl input[type="date"],
+#reservation .fl input[type="time"]{
+  position:relative;
+  color-scheme:dark;
+}
+
+#reservation .fl input[type="date"]::-webkit-calendar-picker-indicator,
+#reservation .fl input[type="time"]::-webkit-calendar-picker-indicator{
+  background:transparent;
+  color:#bf9840;
+  cursor:pointer;
+  filter:invert(1) brightness(0.8);
+}
 
 #reservation .fb-btn{
   margin-top:12px;
@@ -424,74 +447,54 @@ body.search-active .products-section {
 }
 .toast.error{background:#dc2626}
 
+/* MOBILE */
 @media(max-width:768px){
   #reservation{
     padding:0 16px;
     margin:8px auto;
   }
   
-  #reservation .flip-card{height:750px}
+  #reservation .flip-card{height:650px} /* SHORTER - was 700px */
   
   #reservation .flip-section-t{margin-bottom:2px}
   #reservation .flip-section-s{margin-bottom:10px}
   
-  /* 2 IMAGES STACKED VERTICALLY ON MOBILE */
+  /* 2 IMAGES STACKED - KEEP ORIGINAL HEIGHT */
   #reservation .ff-img{
-    grid-template-columns:1fr; /* Single column */
-    grid-template-rows:1fr 1fr; /* 2 rows */
-    height:400px; /* TALLER to fit 2 images */
+    grid-template-columns:1fr;
+    grid-template-rows:1fr 1fr; /* 2 ROWS */
+    height:300px; /* SHORTER - not 400px */
   }
   
-  /* Hide 3rd image on mobile */
+  /* HIDE 3RD IMAGE */
   #reservation .ff-img img:nth-child(3){
     display:none;
   }
   
+  /* LIGHTER OVERLAY */
   #reservation .ff-img::after{
-    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.8) 70%);
+    background:linear-gradient(to bottom, transparent 0%, rgba(13,13,13,.65) 80%);
   }
   
   #reservation .ff-body{
     position:relative;
-    padding:20px 16px;
+    padding:18px 16px;
     background:none;
   }
   
   #reservation .ff-name{
-    font-size:22px;
+    font-size:20px;
   }
   
   #reservation .ff-desc{
-    font-size:13px;
+    font-size:12.5px;
   }
   
-  /* FORM BIGGER ON MOBILE */
-  #reservation .fl input,
-  #reservation .fl select,
-  #reservation .fl textarea{
-    padding:12px 14px;
-    font-size:14px;
-  }
-  
-  #reservation .fl label{
-    font-size:10px;
-  }
-  
-  /* FIX DATE/TIME PICKER ICONS */
+  /* DATE/TIME FIX FOR MOBILE */
   #reservation .fl input[type="date"],
   #reservation .fl input[type="time"]{
-    position:relative;
-    padding-right:40px; /* Space for icon */
-  }
-  
-  #reservation .fl input[type="date"]::-webkit-calendar-picker-indicator,
-  #reservation .fl input[type="time"]::-webkit-calendar-picker-indicator{
-    position:absolute;
-    right:10px;
-    filter:invert(1) brightness(1.5);
-    cursor:pointer;
-    width:20px;
-    height:20px;
+    font-size:16px; /* Prevents zoom on iOS */
+    min-height:44px; /* Better tap target */
   }
 }
 </style>
@@ -1256,73 +1259,76 @@ function genResId(){
   return'RES-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();
 }
 
-document.getElementById('reservationForm').addEventListener('submit',async function(e){
-  e.preventDefault();
-  
-  const name=document.getElementById('resName').value.trim();
-  const phone=document.getElementById('resPhone').value.trim();
-  const email=document.getElementById('resEmail').value.trim();
-  const guests=document.getElementById('resGuests').value;
-  const date=document.getElementById('resDate').value;
-  const time=document.getElementById('resTime').value;
-  const special=document.getElementById('resRequests').value.trim();
-  
-  if(!name){showToast('⚠️ Please enter your name.',true);return;}
-  if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
-  if(!date){showToast('⚠️ Please select a date.',true);return;}
-  if(!time){showToast('⚠️ Please select a time.',true);return;}
-  
-  const reservationId=genResId();
-  const btn=document.getElementById('resSubmitBtn');
-  btn.disabled=true;
-  btn.textContent='⏳ Confirming…';
-  
-  const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
-  
-  try{
-    const saveRes=await fetch('/.netlify/functions/saveReservation',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
+// MAKE SURE THIS addEventListener IS **OUTSIDE** ANY OTHER FUNCTION
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('reservationForm').addEventListener('submit',async function(e){
+    e.preventDefault();
     
-    if(!saveRes.ok){
-      const err=await saveRes.json().catch(()=>({}));
-      throw new Error(err.error||'Save failed');
-    }
+    const name=document.getElementById('resName').value.trim();
+    const phone=document.getElementById('resPhone').value.trim();
+    const email=document.getElementById('resEmail').value.trim();
+    const guests=document.getElementById('resGuests').value;
+    const date=document.getElementById('resDate').value;
+    const time=document.getElementById('resTime').value;
+    const special=document.getElementById('resRequests').value.trim();
     
-    const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
+    if(!name){showToast('⚠️ Please enter your name.',true);return;}
+    if(!phone){showToast('⚠️ Please enter your phone.',true);return;}
+    if(!date){showToast('⚠️ Please select a date.',true);return;}
+    if(!time){showToast('⚠️ Please select a time.',true);return;}
     
-    if(tgRes.ok){
-      const tgData=await tgRes.json().catch(()=>({}));
-      if(tgData.pdfUrl){
-        const link=document.getElementById('pdfDownloadLink');
-        link.href=tgData.pdfUrl;
-        link.download='Reservation-'+reservationId+'.pdf';
-        document.getElementById('pdfBanner').style.display='block';
+    const reservationId=genResId();
+    const btn=document.getElementById('resSubmitBtn');
+    btn.disabled=true;
+    btn.textContent='⏳ Confirming…';
+    
+    const payload={reservationId,name,phone,email,guests,date,time,specialRequests:special};
+    
+    try{
+      const saveRes=await fetch('/.netlify/functions/saveReservation',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      
+      if(!saveRes.ok){
+        const err=await saveRes.json().catch(()=>({}));
+        throw new Error(err.error||'Save failed');
       }
-    }
-    
-    showToast('✅ Reservation confirmed! We will contact you shortly.');
-    btn.textContent='✅ Confirmed!';
-    
-    setTimeout(()=>{
-      document.getElementById('reservationForm').reset();
-      document.getElementById('pdfBanner').style.display='none';
+      
+      const tgRes=await fetch('/.netlify/functions/sendReservationTelegram',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload)
+      });
+      
+      if(tgRes.ok){
+        const tgData=await tgRes.json().catch(()=>({}));
+        if(tgData.pdfUrl){
+          const link=document.getElementById('pdfDownloadLink');
+          link.href=tgData.pdfUrl;
+          link.download='Reservation-'+reservationId+'.pdf';
+          document.getElementById('pdfBanner').style.display='block';
+        }
+      }
+      
+      showToast('✅ Reservation confirmed! We will contact you shortly.');
+      btn.textContent='✅ Confirmed!';
+      
+      setTimeout(()=>{
+        document.getElementById('reservationForm').reset();
+        document.getElementById('pdfBanner').style.display='none';
+        btn.disabled=false;
+        btn.textContent='Reserve →';
+      },5000);
+      
+    }catch(err){
+      console.error(err);
+      showToast('❌ Something went wrong. Please try again.',true);
       btn.disabled=false;
       btn.textContent='Reserve →';
-    },5000);
-    
-  }catch(err){
-    console.error(err);
-    showToast('❌ Something went wrong. Please try again.',true);
-    btn.disabled=false;
-    btn.textContent='Reserve →';
-  }
+    }
+  });
 });
 </script>
 
