@@ -588,10 +588,11 @@ body.search-active .products-section {
       #reservation .chalk-top { padding: 20px 20px 16px; }
       #reservation .chalk-badge { display: none; }
       #reservation .g2 { grid-template-columns: 1fr; }
-      #reservation .menu-display { min-height: 300px; }
+      #reservation .menu-display { min-height: 400px; }
       #reservation .menu-item-name { max-width: 44%; font-size: 12.5px; }
       #reservation .menu-variant-price { font-size: 12px; }
       #reservation .menu-variant-size { font-size: 9px; }
+      #reservation .menu-item { padding: 0px 0; }
     }
 
     @media (max-width: 480px) {
@@ -1526,13 +1527,16 @@ function renderAllPanels() {
     display.appendChild(panel);
   });
 }
-
+const isMobile = () => window.innerWidth <= 768;
 function buildPanelHTML(g) {
   let html = `<div class="menu-cat-title">${g.label}</div>
     <div class="menu-item-count">${g.items.length} item${g.items.length !== 1 ? 's' : ''}</div>`;
 
   g.items.forEach(item => {
-    const vars = (item.variants || []).filter(v => v.inStock !== false);
+   const allVars = (item.variants || []).filter(v => v.inStock !== false);
+const vars = isMobile()
+  ? (allVars.length >= 2 ? [allVars[1]] : allVars.slice(0,1))
+  : allVars;
     const varHTML = vars.map((v, i) =>
       `<span class="menu-variant">
         <span class="menu-variant-size">${v.size}</span>
