@@ -408,26 +408,6 @@ body.search-active .products-section {
       color: var(--chalk-dim); font-size: 10px;
     }
 
-    #reservation .menu-progress {
-      height: 2px; background: var(--chalk-border);
-      border-radius: 2px; margin-top: 16px;
-      overflow: hidden; flex-shrink: 0;
-    }
-
-    #reservation .menu-progress-bar {
-      height: 100%; background: var(--gold);
-      width: 0%; border-radius: 2px;
-      transition: width linear;
-    }
-
-    #reservation .menu-pause-hint {
-      font-size: 9px; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--chalk-dim);
-      margin-top: 7px; text-align: right;
-      flex-shrink: 0; min-height: 14px;
-      font-family: 'DM Sans', sans-serif;
-    }
-
     #reservation .menu-loading {
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -598,7 +578,7 @@ body.search-active .products-section {
     @media (max-width: 480px) {
       #reservation .menu-item-name { max-width: 38%; font-size: 12px; }
       #reservation .menu-cat-title  { font-size: 17px; }
-   #resToast { font-size: 11px; padding: 10px 20px; white-space: nowrap; }
+   #resToast { font-size: 12px; padding: 16px 25px; white-space: nowrap; }
 
     }
 
@@ -1292,8 +1272,6 @@ body.search-active .products-section {
           <div id="menuContent" style="display:none;flex-direction:column;flex:1;">
             <div class="menu-cats" id="menuCats"></div>
             <div class="menu-display" id="menuDisplay"></div>
-            <div class="menu-progress"><div class="menu-progress-bar" id="menuProgressBar"></div></div>
-            <div class="menu-pause-hint" id="menuPauseHint"></div>
           </div>
         </div>
 
@@ -1407,11 +1385,7 @@ function getCategoryLabel(k) {
 ═══════════════════════════════════════════════════════════ */
 let menuGroups  = [];
 let currentCat  = 0;
-let rotateTimer = null;
-let isPaused    = false;
-const ROTATE_MS = 3000;
 
-const isTouch = () => ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 /* Wait for window.products from product.js */
 (function waitForProducts() {
@@ -1458,48 +1432,8 @@ function initMenu() {
   renderCatTabs();
   renderAllPanels();
   showCategory(0);
-  startRotation();
-  setupPauseEvents();
 }
 
-function setupPauseEvents() {
-  const area = document.getElementById('chalkMenuArea');
-  const hint = document.getElementById('menuPauseHint');
-
-  if (isTouch()) {
-    /* MOBILE — double-tap to toggle pause/resume */
-    let lastTap = 0;
-    area.addEventListener('touchend', function(e) {
-      const now = Date.now();
-      if (now - lastTap < 350) {
-        e.preventDefault();
-        isPaused = !isPaused;
-        if (isPaused) {
-          stopRotation(); stopProgressBar();
-          hint.textContent = '⏸ Paused — double tap to resume';
-        } else {
-          hint.textContent = 'Auto-rotating — double tap to pause';
-          startRotation();
-        }
-      }
-      lastTap = now;
-    }, { passive: false });
-    hint.textContent = 'Auto-rotating — double tap to pause';
-
-  } else {
-    /* DESKTOP — hover to pause */
-    area.addEventListener('mouseenter', () => {
-      isPaused = true; stopRotation(); stopProgressBar();
-      hint.textContent = 'Paused — move away to resume';
-    });
-    area.addEventListener('mouseleave', () => {
-      isPaused = false;
-      hint.textContent = 'Auto-rotating — hover to pause';
-      startRotation();
-    });
-    hint.textContent = 'Auto-rotating — hover to pause';
-  }
-}
 
 function renderCatTabs() {
   const el = document.getElementById('menuCats');
@@ -1509,10 +1443,7 @@ function renderCatTabs() {
     btn.className = 'menu-cat-btn' + (i === 0 ? ' active' : '');
     btn.textContent = g.label;
     btn.addEventListener('click', () => {
-      isPaused = true; stopRotation(); stopProgressBar();
       showCategory(i);
-      document.getElementById('menuPauseHint').textContent =
-        isTouch() ? '⏸ Paused — double tap to resume' : 'Paused — move away to resume';
     });
     el.appendChild(btn);
   });
@@ -1566,39 +1497,6 @@ function showCategory(idx) {
   currentCat = idx;
 }
 
-function startRotation() {
-  stopRotation();
-  if (menuGroups.length <= 1) return;
-  startProgressBar();
-  rotateTimer = setTimeout(() => {
-    if (!isPaused) {
-      showCategory((currentCat + 1) % menuGroups.length);
-      startRotation();
-    }
-  }, ROTATE_MS);
-}
-
-function stopRotation() {
-  if (rotateTimer) { clearTimeout(rotateTimer); rotateTimer = null; }
-}
-
-function startProgressBar() {
-  stopProgressBar();
-  const bar = document.getElementById('menuProgressBar');
-  bar.style.transition = 'none';
-  bar.style.width = '0%';
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    bar.style.transition = `width ${ROTATE_MS}ms linear`;
-    bar.style.width = '100%';
-  }));
-}
-
-function stopProgressBar() {
-  const bar = document.getElementById('menuProgressBar');
-  if (!bar) return;
-  bar.style.transition = 'none';
-  bar.style.width = '0%';
-}
 
 /* ═══════════════════════════════════════════════════════════
    FORM
