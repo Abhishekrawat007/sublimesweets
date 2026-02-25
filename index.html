@@ -325,190 +325,14 @@ body.search-active .products-section {
       background: var(--bg);
       border-left: 4px solid rgba(0,0,0,.25);
       display: grid;
-      grid-template-columns: 1fr 1px 380px;
+        grid-template-columns: 1fr;
     }
 
     #reservation .pp-divider {
       background: var(--br);
     }
 
-    /* ── MENU SIDE ── */
-    #reservation .pp-menu {
-      padding: 28px 30px;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #reservation .pp-menu-header {
-      border-bottom: 2px solid var(--tx);
-      padding-bottom: 10px;
-      margin-bottom: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-shrink: 0;
-    }
-
-    #reservation .pp-menu-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(15px, 1.8vw, 20px);
-      font-weight: 600; letter-spacing: 1px;
-    }
-
-    #reservation .pp-menu-date {
-      font-size: 9px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--tx3);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* category tabs */
-    #reservation .menu-cats {
-      display: flex; flex-wrap: wrap;
-      gap: 7px; margin-bottom: 16px; flex-shrink: 0;
-    }
-
-    #reservation .menu-cat-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 9px; letter-spacing: 2.5px;
-      padding: 4px 12px; border-radius: 3px;
-      border: 1px solid var(--br2);
-      background: transparent; color: var(--tx3);
-      cursor: pointer; transition: all 0.25s ease;
-      text-transform: uppercase;
-    }
-
-    #reservation .menu-cat-btn.active {
-      background: rgba(128,96,26,.10);
-      border-color: rgba(128,96,26,.4);
-      color: var(--gd);
-    }
-
-    body.dark-mode #reservation .menu-cat-btn.active {
-      background: rgba(191,152,64,.10);
-      border-color: rgba(191,152,64,.4);
-    }
-
-    #reservation .menu-cat-btn:hover:not(.active) {
-      border-color: var(--tx2); color: var(--tx);
-    }
-
-    /* menu display */
-    #reservation .menu-display {
-      flex: 1; position: relative; min-height: 300px;
-    }
-
-    #reservation .menu-panel {
-      position: absolute; inset: 0;
-      opacity: 0; transform: translateY(8px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-      overflow-y: auto; overflow-x: hidden;
-      scrollbar-width: thin;
-      scrollbar-color: var(--scroll-thumb) var(--scroll-track);
-    }
-
-    #reservation .menu-panel::-webkit-scrollbar { width: 3px; }
-    #reservation .menu-panel::-webkit-scrollbar-track {
-      background: var(--scroll-track); border-radius: 4px;
-    }
-    #reservation .menu-panel::-webkit-scrollbar-thumb {
-      background: var(--scroll-thumb); border-radius: 4px;
-    }
-
-    #reservation .menu-panel.active {
-      opacity: 1; transform: translateY(0); pointer-events: auto;
-    }
-
-    #reservation .menu-cat-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(13px, 1.5vw, 16px);
-      letter-spacing: 3px; color: var(--tx);
-      margin-bottom: 4px;
-      display: flex; align-items: center; gap: 10px;
-      position: sticky; top: 0;
-      background: var(--bg); padding-bottom: 5px; z-index: 2;
-    }
-
-    #reservation .menu-cat-title::after {
-      content: ''; flex: 1;
-      border-bottom: 1px dashed var(--br2);
-    }
-
-    #reservation .menu-item-count {
-      font-size: 8.5px; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--tx3);
-      margin-bottom: 10px;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .menu-item {
-      display: flex; align-items: baseline;
-      padding: 8px 0;
-      border-bottom: 1px dotted var(--item-border);
-    }
-
-    #reservation .menu-item:last-child { border-bottom: none; }
-
-    #reservation .menu-item-name {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12.5px; font-weight: 400; color: var(--tx);
-      flex-shrink: 0; max-width: 38%;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    #reservation .menu-item-dots {
-      flex: 1; border-bottom: 1px dashed var(--br2);
-      height: 0; margin: 0 8px; min-width: 12px;
-      align-self: center;
-    }
-
-    #reservation .menu-item-variants {
-      display: flex; align-items: baseline;
-      gap: 8px; flex-shrink: 0;
-      flex-wrap: wrap; justify-content: flex-end;
-      padding-right: 14px;
-    }
-
-    #reservation .menu-variant {
-      display: flex; align-items: baseline; gap: 3px;
-    }
-
-    #reservation .menu-variant-size {
-      font-size: 9.5px; color: var(--tx2);
-      letter-spacing: 0.5px; font-weight: 300;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .menu-variant-price {
-      font-family: 'Lato', sans-serif;
-      font-weight: 700; font-size: 12px; color: var(--gd);
-    }
-
-    #reservation .menu-variant-sep {
-      color: var(--tx3); font-size: 9px;
-    }
-
-    #reservation .menu-loading {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      height: 180px; gap: 10px;
-    }
-
-    #reservation .menu-loading-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--gd);
-      animation: ppMenuPulse 1.2s infinite;
-      display: inline-block; margin: 0 3px;
-    }
-
-    #reservation .menu-loading-dot:nth-child(2) { animation-delay: 0.2s; }
-    #reservation .menu-loading-dot:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes ppMenuPulse {
-      0%, 100% { opacity: 0.2; transform: scale(0.8); }
-      50%       { opacity: 1;   transform: scale(1.2); }
-    }
+   
 
     /* ── FORM SIDE ── */
     #reservation .pp-form {
@@ -673,10 +497,6 @@ body.search-active .products-section {
       #reservation .pp-number { display: none; }
       #reservation .pp-pages { grid-template-columns: 1fr; border-left: none; }
       #reservation .pp-divider { display: none; }
-      #reservation .pp-menu {
-        min-height: auto; padding: 22px 18px;
-        border-bottom: 1px solid var(--br2);
-      }
       #reservation .pp-form { padding: 22px 18px; }
     }
 
@@ -685,9 +505,7 @@ body.search-active .products-section {
       #reservation .res-inner { padding: 0 12px; }
       #reservation .pp-cover { flex-direction: column; text-align: center; padding: 24px 18px; gap: 12px; }
       #reservation .pp-grid2 { grid-template-columns: 1fr; }
-      #reservation .menu-display { min-height: 260px; }
-      #reservation .menu-item-name { max-width: 42%; font-size: 12px; }
-      #reservation .menu-item { padding: 6px 0; }
+      
     }
 
 
@@ -1371,28 +1189,7 @@ body.search-active .products-section {
       <div class="pp-pages">
 
         <!-- MENU -->
-        <div class="pp-menu" id="chalkMenuArea">
-          <div class="pp-menu-header">
-            <div class="pp-menu-title">Our Menu</div>
-            <div class="pp-menu-date">Today's Selection</div>
-          </div>
-
-          <div class="menu-loading" id="menuLoading">
-            <div>
-              <span class="menu-loading-dot"></span>
-              <span class="menu-loading-dot"></span>
-              <span class="menu-loading-dot"></span>
-            </div>
-            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tx3);font-family:'DM Sans',sans-serif;">Loading…</div>
-          </div>
-
-          <div id="menuContent" style="display:none;flex-direction:column;flex:1;">
-            <div class="menu-cats" id="menuCats"></div>
-            <div class="menu-display" id="menuDisplay"></div>
-          </div>
-        </div>
-
-        <div class="pp-divider"></div>
+       
 
         <!-- FORM -->
         <div class="pp-form">
@@ -1485,143 +1282,7 @@ body.search-active .products-section {
 
 <script>
 (function() {
-/* ═══════════════════════════════════════════════════
-   CONFIG — edit these
-═══════════════════════════════════════════════════ */
-const MENU_CATEGORIES = ["maincourse", "streetfood", "mithai", "snacks"];
 
-const CATEGORY_LABELS = {
-  maincourse:    "Main Course",
-  streetfood:    "Street Food",
-  "street-food": "Street Food",
-  mithai:        "Mithai",
-  sweets:        "Sweets",
-  snacks:        "Snacks",
-  dairy:         "Dairy",
-  beverages:     "Beverages",
-  icecreams:     "Ice Creams",
-  desserts:      "Desserts",
-  starters:      "Starters",
-  breads:        "Breads",
-};
-
-function getCategoryLabel(k) {
-  return CATEGORY_LABELS[k] || k.replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase());
-}
-
-const isMobile = () => window.innerWidth <= 600;
-
-/* ═══════════════════════════════════════════════════
-   MENU
-═══════════════════════════════════════════════════ */
-let menuGroups = [];
-let currentCat = 0;
-
-(function waitForProducts() {
-  let waited = 0;
-  const iv = setInterval(() => {
-    if (Array.isArray(window.products) && window.products.length > 0) {
-      clearInterval(iv);
-      buildMenuGroups();
-      initMenu();
-    } else {
-      waited += 100;
-      if (waited >= 6000) {
-        clearInterval(iv);
-        document.getElementById('menuLoading').innerHTML =
-          '<p style="color:var(--tx3);font-size:11px;font-family:\'DM Sans\',sans-serif;text-align:center">Menu unavailable</p>';
-      }
-    }
-  }, 100);
-})();
-
-function buildMenuGroups() {
-  const grouped = {};
-  MENU_CATEGORIES.forEach(k => { grouped[k] = []; });
-  (window.products || []).forEach(p => {
-    (p.categories || []).forEach(c => {
-      if (grouped[c]) grouped[c].push(p);
-    });
-  });
-  menuGroups = MENU_CATEGORIES
-    .filter(k => grouped[k].length > 0)
-    .map(k => ({ key: k, label: getCategoryLabel(k), items: grouped[k] }));
-}
-
-function initMenu() {
-  if (!menuGroups.length) {
-    document.getElementById('menuLoading').innerHTML =
-      '<p style="color:var(--tx3);font-size:11px;font-family:\'DM Sans\',sans-serif;text-align:center">No items found</p>';
-    return;
-  }
-  document.getElementById('menuLoading').style.display = 'none';
-  const content = document.getElementById('menuContent');
-  content.style.display = 'flex';
-  renderCatTabs();
-  renderAllPanels();
-  showCategory(0);
-}
-
-function renderCatTabs() {
-  const el = document.getElementById('menuCats');
-  el.innerHTML = '';
-  menuGroups.forEach((g, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'menu-cat-btn' + (i === 0 ? ' active' : '');
-    btn.textContent = g.label;
-    btn.addEventListener('click', () => showCategory(i));
-    el.appendChild(btn);
-  });
-}
-
-function renderAllPanels() {
-  const display = document.getElementById('menuDisplay');
-  display.innerHTML = '';
-  menuGroups.forEach((g, i) => {
-    const panel = document.createElement('div');
-    panel.className = 'menu-panel' + (i === 0 ? ' active' : '');
-    panel.id = 'menuPanel_' + i;
-    panel.innerHTML = buildPanelHTML(g);
-    display.appendChild(panel);
-  });
-}
-
-function buildPanelHTML(g) {
-  let html = `<div class="menu-cat-title">${g.label}</div>
-    <div class="menu-item-count">${g.items.length} item${g.items.length !== 1 ? 's' : ''}</div>`;
-
-  g.items.forEach(item => {
-    const allVars = (item.variants || []).filter(v => v.inStock !== false);
-    const vars = isMobile()
-      ? (allVars.length >= 2 ? [allVars[1]] : allVars.slice(0,1))
-      : allVars;
-
-    const varHTML = vars.map((v, i) =>
-      `<span class="menu-variant">
-        <span class="menu-variant-size">${v.size}</span>
-        <span class="menu-variant-price">₹${v.newPrice ?? v.price ?? ''}</span>
-      </span>${i < vars.length - 1 ? '<span class="menu-variant-sep">·</span>' : ''}`
-    ).join('');
-
-    html += `<div class="menu-item">
-      <span class="menu-item-name" title="${item.name}">${item.name}</span>
-      <div class="menu-item-dots"></div>
-      <div class="menu-item-variants">${varHTML}</div>
-    </div>`;
-  });
-  return html;
-}
-
-function showCategory(idx) {
-  document.querySelectorAll('#menuDisplay .menu-panel').forEach((p, i) => {
-    p.classList.toggle('active', i === idx);
-    if (i === idx) p.scrollTop = 0;
-  });
-  document.querySelectorAll('#menuCats .menu-cat-btn').forEach((b, i) => {
-    b.classList.toggle('active', i === idx);
-  });
-  currentCat = idx;
-}
 
 /* ═══════════════════════════════════════════════════
    FORM
