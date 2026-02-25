@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/dairy.html">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -39,164 +40,7 @@
         /* ============================================
            ULTRA PREMIUM CATEGORY HERO 
         ============================================ */
-        .category-hero {
-            position: relative;
-            min-height: 65vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-           background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
-            overflow: hidden;
-            margin-top: 80px;
-        }
-        /* Animated gradient overlay */
-        .hero-gradient-overlay {
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 40%);
-            animation: gradientShift 8s ease-in-out infinite;
-        }
-        @keyframes gradientShift {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-        }
-        /* Floating shapes */
-        .hero-shapes {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
-        .shape {
-            position: absolute;
-            background: rgba(255,255,255,0.08);
-            border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
-        }
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            left: -50px;
-            animation-delay: 0s;
-        }
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: -50px;
-            right: 10%;
-            animation-delay: -5s;
-        }
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 40%;
-            right: -30px;
-            animation-delay: -10s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
-            padding: 80px 24px;
-        }
-        /* Premium badge */
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 24px;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 40px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 28px;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            animation: fadeInDown 0.8s ease-out;
-        }
-        .hero-badge span:first-child {
-            font-size: 20px;
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        /* Main title */
-        .category-title {
-            font-size: clamp(52px, 10vw, 88px);
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 24px;
-            letter-spacing: -3px;
-            line-height: 1;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.15);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        /* Subtitle */
-        .category-subtitle {
-            font-size: clamp(18px, 3vw, 22px);
-            color: rgba(255,255,255,0.95);
-            line-height: 1.7;
-            max-width: 650px;
-            margin: 0 auto 48px;
-            font-weight: 400;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-        /* Stats row */
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 56px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-        .stat {
-            text-align: center;
-            padding: 0 16px;
-        }
-        .stat-number {
-            display: block;
-            font-size: clamp(38px, 6vw, 48px);
-            font-weight: 900;
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.1);
-        }
-        .stat-label {
-            display: block;
-            font-size: 14px;
-            color: rgba(255,255,255,0.85);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
+     
         /* ============================================
            PRODUCTS SECTION - USES YOUR EXISTING CARDS
         ============================================ */
@@ -331,6 +175,220 @@
         margin-top: 65px;  
     }
 }
+
+.category-hero {
+    position: relative;
+    min-height: 80svh ;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background: #0c1824;
+    overflow: hidden;
+    margin-top: 0;
+    padding: 0;
+}
+
+/* Stars */
+.hero-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.hero-star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 3s infinite;
+}
+@keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50%      { opacity: 0.8; }
+}
+
+/* Horizon glow */
+.hero-horizon {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, transparent, rgba(56,189,248,0.1));
+    pointer-events: none;
+}
+
+/* Background emoji */
+.hero-bg-emoji {
+    position: absolute;
+    right: 8%; top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px;
+    opacity: 0.06;
+    animation: bgSpin 20s linear infinite, fadeIn 1s 0.5s forwards;
+    pointer-events: none;
+}
+@keyframes bgSpin { to { transform: translateY(-50%) rotate(360deg); } }
+
+/* Inner */
+.hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 120px 5% 80px;
+    min-height: 100svh;
+    width: 100%;
+}
+
+/* Kicker */
+.hero-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #38bdf8;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+}
+
+/* Title */
+.category-title {
+    font-family: 'Antonio', sans-serif;
+    font-weight: 700;
+    font-size: clamp(70px, 14vw, 150px);
+    line-height: 0.85;
+    color: #fff;
+    margin: 16px 0;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+}
+.category-title .outline {
+    -webkit-text-stroke: 2px rgba(255,255,255,0.3);
+    color: transparent;
+    display: block;
+}
+
+/* Coords */
+.hero-coords {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+}
+
+/* Tags */
+.hero-tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+}
+.hero-tag {
+    padding: 8px 18px;
+    border: 1px solid rgba(56,189,248,0.4);
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    border-radius: 2px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.hero-tag:hover {
+    background: rgba(56,189,248,0.15);
+    color: #fff;
+    border-color: #38bdf8;
+}
+
+/* Stats */
+.hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 1s forwards;
+}
+.stat {
+    padding-left: 16px;
+    border-left: 2px solid rgba(56,189,248,0.3);
+}
+.stat-number {
+    display: block;
+    font-family: 'Antonio', sans-serif;
+    font-size: clamp(28px, 5vw, 36px);
+    color: #38bdf8;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.stat-label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .category-hero {   min-height: 80svh !important;
+        max-height: 85svh !important;}
+    .hero-inner { padding: 100px 24px 60px; }
+    .hero-bg-emoji { font-size: 50px; right: 4%; }
+    .category-title { font-size: clamp(60px, 16vw, 90px); }
+    .hero-coords { font-size: 10px; letter-spacing: 1px; }
+    .hero-stats { gap: 20px; }
+    .stat-number { font-size: 24px; }
+}
+@media (max-width: 400px) {
+    .category-title { font-size: clamp(52px, 17vw, 72px); letter-spacing: -1px; }
+    .hero-bg-emoji { 
+        font-size: 80px;
+        right: 20%;
+        top:280px;
+        opacity: 0.05;
+    }
+}
+@media (max-width: 375px) {
+    .hero-inner { padding-top: 90px; }
+    .hero-stats { gap: 14px; }
+    .stat-number { font-size: 20px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+}
+@media (max-width: 360px) {
+    .category-title { font-size: clamp(46px, 16vw, 64px); letter-spacing: -1px; }
+}
+@media (max-width: 320px) {
+    .category-title { font-size: clamp(40px, 15vw, 56px); letter-spacing: -2px; }
+    .stat-number { font-size: 18px; }
+    .stat-label { font-size: 8px; letter-spacing: 0; }
+    .hero-stats { gap: 10px; }
+       .hero-bg-emoji { 
+        font-size: 50px;
+         right: 20%;
+        top:280px;
+        opacity: 0.05;
+    }
+}
+@media (max-width: 300px) {
+    .category-title { font-size: clamp(34px, 14vw, 48px); letter-spacing: -2px; }
+}
+
     </style>
 </head>
 <body>
@@ -712,43 +770,44 @@
 
 
     <!-- STUNNING HERO -->
-    <section class="category-hero">
-        <div class="hero-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+<section class="category-hero">
+    <div class="hero-stars" id="heroStars"></div>
+    <div class="hero-horizon"></div>
+    <div class="hero-bg-emoji">🥛</div>
+
+    <div class="hero-inner">
+        <p class="hero-kicker">// Farm Fresh Every Morning</p>
+
+        <h1 class="category-title">
+            PURE
+            <span class="outline">DAIRY</span>
+        </h1>
+
+        <p class="hero-coords">Farm to Table · 100% Pure · Delivered Fresh</p>
+
+        <div class="hero-tags">
+            <span class="hero-tag">🥛 Milk</span>
+            <span class="hero-tag">🧈 Butter</span>
+            <span class="hero-tag">🧀 Cheese</span>
+            <span class="hero-tag">🍦 Paneer</span>
         </div>
-        <div class="hero-gradient-overlay"></div>
-        
-        <div class="hero-content">
-           <div class="hero-badge">
-    <span>🥛</span>
-    <span>Farm-Fresh Dairy</span>
-</div>
 
-<h1 class="category-title">Dairy</h1>
-
-<p class="category-subtitle">
-    Fresh milk, curd, paneer and more – sourced and stored with care to keep every product rich, pure and wholesome.
-</p>
-
-            
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number" id="productCount">0</span>
-                    <span class="stat-label">Products</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Fresh</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4.4★</span>
-                    <span class="stat-label">Rated</span>
-                </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number" id="productCount">0</span>
+                <span class="stat-label">Products</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Pure</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">4.8★</span>
+                <span class="stat-label">Rated</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
@@ -1273,7 +1332,22 @@
       if (grid) grid.style.display = 'none';
       if (noProducts) noProducts.style.display = 'block';
     }
-}</script>
+
+// Generate stars
+(function(){
+    const container = document.getElementById('heroStars');
+    for(let i = 0; i < 80; i++){
+        const s = document.createElement('div');
+        s.className = 'hero-star';
+        s.style.cssText = `
+            left: ${Math.random()*100}%;
+            top: ${Math.random()*100}%;
+            animation-delay: ${Math.random()*3}s;
+            animation-duration: ${2+Math.random()*3}s;
+        `;
+        container.appendChild(s);
+    }
+})();}</script>
 
 
 
