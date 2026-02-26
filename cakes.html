@@ -389,8 +389,34 @@
 @media (max-width: 300px) {
     .category-title { font-size: 34px; }
 }
-
-
+:root {
+    --accent: #0d9488;
+    --accent-rgb: 13,148,136;
+    --bg: #f0fdfa;
+    --title-color: #042f2e;
+    --grid: rgba(13,148,136,0.04);
+    --row-border: rgba(13,148,136,0.1);
+    --row-hover: rgba(13,148,136,0.08);
+    --row-hover-border: rgba(13,148,136,0.3);
+    --row-bg: rgba(13,148,136,0.02);
+    --stat-border: rgba(13,148,136,0.1);
+    --stat-bg: rgba(13,148,136,0.02);
+}
+.category-hero { background: var(--bg); }
+.hero-grid { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); }
+.hero-live-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.hero-live-text { color: var(--accent); }
+.category-title { color: var(--title-color); }
+.category-title .accent { color: var(--accent); }
+.hero-row { border-color: var(--row-border); background: var(--row-bg); }
+.hero-row:hover { background: var(--row-hover); border-color: var(--row-hover-border); }
+.hero-row-name { color: rgba(4,47,46,0.7); }
+.hero-row-tag { color: var(--accent); }
+.hero-cta { background: var(--accent); color: #fff; }
+.stat { border-color: var(--stat-border); background: var(--stat-bg); }
+.stat:last-child { border-color: var(--stat-border); }
+.stat-number { color: var(--accent); }
+.stat-label { color: rgba(4,47,46,0.35); }
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>

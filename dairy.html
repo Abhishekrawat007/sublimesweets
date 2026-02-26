@@ -175,58 +175,26 @@
         margin-top: 65px;  
     }
 }
-
 .category-hero {
     position: relative;
-    min-height: 80svh ;
+    min-height: 100svh;
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background: #0c1824;
+    background: #020c18;
     overflow: hidden;
     margin-top: 0;
     padding: 0;
 }
 
-/* Stars */
-.hero-stars {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-.hero-star {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0;
-    animation: twinkle 3s infinite;
-}
-@keyframes twinkle {
-    0%,100% { opacity: 0.2; }
-    50%      { opacity: 0.8; }
-}
-
-/* Horizon glow */
-.hero-horizon {
+/* Cool glow */
+.hero-heat {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 40%;
-    background: linear-gradient(180deg, transparent, rgba(56,189,248,0.1));
+    height: 50%;
+    background: radial-gradient(ellipse at 50% 100%, rgba(14,165,233,0.15) 0%, transparent 70%);
     pointer-events: none;
 }
-
-/* Background emoji */
-.hero-bg-emoji {
-    position: absolute;
-    right: 8%; top: 50%;
-    transform: translateY(-50%);
-    font-size: 120px;
-    opacity: 0.06;
-    animation: bgSpin 20s linear infinite, fadeIn 1s 0.5s forwards;
-    pointer-events: none;
-}
-@keyframes bgSpin { to { transform: translateY(-50%) rotate(360deg); } }
 
 /* Inner */
 .hero-inner {
@@ -234,161 +202,167 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
-    padding: 120px 5% 80px;
+    padding: 120px 24px 80px;
     min-height: 100svh;
     width: 100%;
 }
 
-/* Kicker */
-.hero-kicker {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: #38bdf8;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+/* Icon */
+.hero-icon {
+    font-size: 44px;
+    display: block;
     opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
+    animation: scaleIn 0.5s 0.2s forwards;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes scaleIn {
+    from { opacity:0; transform:scale(0.75); }
+    to   { opacity:1; transform:scale(1); }
 }
 
 /* Title */
 .category-title {
     font-family: 'Antonio', sans-serif;
     font-weight: 700;
-    font-size: clamp(70px, 14vw, 150px);
+    font-size: clamp(64px, 18vw, 100px);
     line-height: 0.85;
     color: #fff;
-    margin: 16px 0;
+    margin: 14px 0;
     opacity: 0;
     animation: fadeUp 0.6s 0.4s forwards;
 }
-.category-title .outline {
-    -webkit-text-stroke: 2px rgba(255,255,255,0.3);
-    color: transparent;
-    display: block;
-}
+.category-title .fire { color: #0ea5e9; }
 
-/* Coords */
-.hero-coords {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 2px;
+/* Freshness meter */
+.hero-meter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
     opacity: 0;
     animation: fadeUp 0.6s 0.6s forwards;
 }
-
-/* Tags */
-.hero-tags {
-    display: flex;
-    gap: 10px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s forwards;
-}
-.hero-tag {
-    padding: 8px 18px;
-    border: 1px solid rgba(56,189,248,0.4);
-    color: rgba(255,255,255,0.6);
-    font-size: 12px;
-    border-radius: 2px;
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: 1px;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-.hero-tag:hover {
-    background: rgba(56,189,248,0.15);
-    color: #fff;
-    border-color: #38bdf8;
-}
-
-/* Stats */
-.hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 1s forwards;
-}
-.stat {
-    padding-left: 16px;
-    border-left: 2px solid rgba(56,189,248,0.3);
-}
-.stat-number {
-    display: block;
-    font-family: 'Antonio', sans-serif;
-    font-size: clamp(28px, 5vw, 36px);
-    color: #38bdf8;
-    line-height: 1;
-    margin-bottom: 4px;
-}
-.stat-label {
-    display: block;
+.hero-meter-label {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.35);
     letter-spacing: 2px;
-    text-transform: uppercase;
+    white-space: nowrap;
+}
+.hero-meter-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.hero-meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0ea5e9, #7dd3fc);
+    border-radius: 2px;
+    width: 0;
+    animation: fillBar 1.2s 0.8s forwards;
+}
+@keyframes fillBar { to { width: 92%; } }
+
+/* Category rows */
+.hero-cats {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.9s forwards;
+}
+.hero-cat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border: 1px solid rgba(14,165,233,0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.hero-cat:hover {
+    background: rgba(14,165,233,0.08);
+    border-color: rgba(14,165,233,0.3);
+}
+.hero-cat-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.hero-cat-icon { font-size: 22px; }
+.hero-cat-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+}
+.hero-cat-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #0ea5e9;
 }
 
 @keyframes fadeUp {
     from { opacity:0; transform:translateY(24px); }
     to   { opacity:1; transform:translateY(0); }
 }
-@keyframes fadeIn {
-    from { opacity:0; }
-    to   { opacity:1; }
-}
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero {   min-height: 80svh !important;
-        max-height: 85svh !important;}
-    .hero-inner { padding: 100px 24px 60px; }
-    .hero-bg-emoji { font-size: 50px; right: 4%; }
-    .category-title { font-size: clamp(60px, 16vw, 90px); }
-    .hero-coords { font-size: 10px; letter-spacing: 1px; }
-    .hero-stats { gap: 20px; }
-    .stat-number { font-size: 24px; }
-}
-@media (max-width: 400px) {
-    .category-title { font-size: clamp(52px, 17vw, 72px); letter-spacing: -1px; }
-    .hero-bg-emoji { 
-        font-size: 80px;
-        right: 20%;
-        top:280px;
-        opacity: 0.05;
-    }
+    .hero-inner { padding: 100px 20px 60px; }
+    .hero-icon { font-size: 36px; }
+    .hero-cat { padding: 12px 14px; }
+    .hero-cat-name { font-size: 12px; }
+    .hero-meter-label { font-size: 9px; letter-spacing: 1px; }
 }
 @media (max-width: 375px) {
     .hero-inner { padding-top: 90px; }
-    .hero-stats { gap: 14px; }
-    .stat-number { font-size: 20px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    .hero-cat { padding: 10px 12px; }
+    .hero-cat-name { font-size: 11px; }
+    .hero-cat-icon { font-size: 18px; }
+    .hero-cat-count { font-size: 10px; }
 }
-@media (max-width: 360px) {
-    .category-title { font-size: clamp(46px, 16vw, 64px); letter-spacing: -1px; }
+@media (max-width: 340px) {
+    .category-title { font-size: 52px; }
 }
 @media (max-width: 320px) {
-    .category-title { font-size: clamp(40px, 15vw, 56px); letter-spacing: -2px; }
-    .stat-number { font-size: 18px; }
-    .stat-label { font-size: 8px; letter-spacing: 0; }
-    .hero-stats { gap: 10px; }
-       .hero-bg-emoji { 
-        font-size: 50px;
-         right: 20%;
-        top:280px;
-        opacity: 0.05;
-    }
+    .category-title { font-size: 46px; }
+    .hero-cat-name { font-size: 10px; }
+    .hero-meter-label { font-size: 8px; letter-spacing: 0; }
 }
 @media (max-width: 300px) {
-    .category-title { font-size: clamp(34px, 14vw, 48px); letter-spacing: -2px; }
+    .category-title { font-size: 40px; }
+    .hero-cat { padding: 8px 10px; }
 }
-
+:root {
+    --accent: #ea580c;
+    --accent-light: #fb923c;
+    --accent-rgb: 234,88,12;
+    --bg: #0c0600;
+    --title: #fff7ed;
+    --glow: rgba(234,88,12,0.15);
+    --row-border: rgba(234,88,12,0.1);
+    --row-hover-bg: rgba(234,88,12,0.08);
+    --row-hover-border: rgba(234,88,12,0.3);
+    --name-color: rgba(255,247,237,0.7);
+    --meter-bg: rgba(255,255,255,0.08);
+    --meter-label: rgba(255,255,255,0.35);
+}
+.category-hero { background: var(--bg); }
+.hero-heat { background: radial-gradient(ellipse at 50% 100%, var(--glow) 0%, transparent 70%); }
+.category-title { color: var(--title); }
+.category-title .fire { color: var(--accent); }
+.hero-meter-label { color: var(--meter-label); }
+.hero-meter-bar { background: var(--meter-bg); }
+.hero-meter-fill { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+.hero-cat { border-color: var(--row-border); }
+.hero-cat:hover { background: var(--row-hover-bg); border-color: var(--row-hover-border); }
+.hero-cat-name { color: var(--name-color); }
+.hero-cat-count { color: var(--accent); }
     </style>
 </head>
 <body>
@@ -771,44 +745,55 @@
 
     <!-- STUNNING HERO -->
 <section class="category-hero">
-    <div class="hero-stars" id="heroStars"></div>
-    <div class="hero-horizon"></div>
-    <div class="hero-bg-emoji">🥛</div>
+    <div class="hero-heat"></div>
 
     <div class="hero-inner">
-        <p class="hero-kicker">// Farm Fresh Every Morning</p>
+        <span class="hero-icon">🥛</span>
 
         <h1 class="category-title">
-            PURE
-            <span class="outline">DAIRY</span>
+            PURE<br><span class="fire">DAIRY</span>
         </h1>
 
-        <p class="hero-coords">Farm to Table · 100% Pure · Delivered Fresh</p>
-
-        <div class="hero-tags">
-            <span class="hero-tag">🥛 Milk</span>
-            <span class="hero-tag">🧈 Butter</span>
-            <span class="hero-tag">🧀 Cheese</span>
-            <span class="hero-tag">🍦 Paneer</span>
+        <div class="hero-meter">
+            <span class="hero-meter-label">FRESHNESS LEVEL</span>
+            <div class="hero-meter-bar">
+                <div class="hero-meter-fill"></div>
+            </div>
+            <span style="font-size:18px">🌿</span>
         </div>
 
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Products</span>
+        <div class="hero-cats">
+            <div class="hero-cat">
+                <div class="hero-cat-left">
+                    <span class="hero-cat-icon">🥛</span>
+                    <span class="hero-cat-name">Fresh Milk</span>
+                </div>
+                <span class="hero-cat-count" id="productCount">0</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Pure</span>
+            <div class="hero-cat">
+                <div class="hero-cat-left">
+                    <span class="hero-cat-icon">🧈</span>
+                    <span class="hero-cat-name">Butter & Ghee</span>
+                </div>
+                <span class="hero-cat-count">Pure</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">4.8★</span>
-                <span class="stat-label">Rated</span>
+            <div class="hero-cat">
+                <div class="hero-cat-left">
+                    <span class="hero-cat-icon">🧀</span>
+                    <span class="hero-cat-name">Cheese & Paneer</span>
+                </div>
+                <span class="hero-cat-count">Fresh</span>
+            </div>
+            <div class="hero-cat">
+                <div class="hero-cat-left">
+                    <span class="hero-cat-icon">🍦</span>
+                    <span class="hero-cat-name">Curd & Lassi</span>
+                </div>
+                <span class="hero-cat-count">4.8★</span>
             </div>
         </div>
     </div>
 </section>
-
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
         <div class="container">
@@ -1334,20 +1319,7 @@
     }
 
 // Generate stars
-(function(){
-    const container = document.getElementById('heroStars');
-    for(let i = 0; i < 80; i++){
-        const s = document.createElement('div');
-        s.className = 'hero-star';
-        s.style.cssText = `
-            left: ${Math.random()*100}%;
-            top: ${Math.random()*100}%;
-            animation-delay: ${Math.random()*3}s;
-            animation-duration: ${2+Math.random()*3}s;
-        `;
-        container.appendChild(s);
-    }
-})();}</script>
+}</script>
 
 
 

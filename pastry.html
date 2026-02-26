@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/pastry.html">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -39,181 +39,204 @@
         /* ============================================
            ULTRA PREMIUM CATEGORY HERO 
         ============================================ */
-      .category-hero {
+    .category-hero {
     position: relative;
-    min-height: 80vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background: #fdf8f0;
+    overflow: hidden;
+    margin-top: 0;
+    padding: 0;
+    color: #1a1206;
+}
+
+/* Wave */
+.hero-wave {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #ec4899, #f9a8d4, #ec4899);
+    background-size: 200% 100%;
+    animation: waveShift 3s linear infinite;
+}
+@keyframes waveShift { to { background-position: -200% 0; } }
+
+/* Inner */
+.hero-inner {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #0d0015;
-    overflow: hidden;
-    margin-top: 80px;
-}
-
-/* Noise grain */
-.hero-noise {
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-/* Big glitch title */
-.category-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 16vw, 160px);
-    color: #fff;
+    padding: 120px 24px 80px;
     text-align: center;
-    line-height: 0.9;
-    position: relative;
-    z-index: 2;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.3s forwards;
-}
-.category-title::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 3px; top: 0;
-    color: #ff006e;
-    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
-    animation: glitch 2s infinite;
+    min-height: 100svh;
     width: 100%;
-}
-.category-title::after {
-    content: attr(data-text);
-    position: absolute;
-    left: -3px; top: 0;
-    color: #00f5ff;
-    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
-    animation: glitch 2s 0.1s infinite reverse;
-    width: 100%;
-}
-@keyframes glitch {
-    0%,90%,100% { transform: translateX(0); }
-    92% { transform: translateX(-4px); }
-    96% { transform: translateX(4px); }
+    
 }
 
-/* Gradient line */
-.hero-line {
-    width: 200px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ff006e, #00f5ff, transparent);
-    margin: 20px auto 0;
-    position: relative;
-    z-index: 2;
+/* Icon */
+.hero-icon {
+    font-size: 56px;
+    display: block;
     opacity: 0;
-    animation: fadeUp 0.5s 0.7s forwards;
+    animation: scaleIn 0.6s 0.2s forwards;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes scaleIn {
+    from { opacity:0; transform:scale(0.75); }
+    to   { opacity:1; transform:scale(1); }
 }
 
-/* Subtitle */
-.hero-subtitle {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: #ff006e;
-    letter-spacing: 6px;
+/* Eyebrow */
+.hero-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ec4899;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    text-align: center;
     margin-top: 16px;
-    position: relative;
-    z-index: 2;
     opacity: 0;
-    animation: fadeUp 0.5s 0.6s forwards;
+    animation: fadeUp 0.6s 0.4s forwards;
 }
 
-/* Tags */
-.hero-tags {
+/* Title */
+.category-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 14vw, 80px);
+    color: #1a1206;
+    line-height: 1;
+    margin: 10px 0;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+}
+.category-title em {
+    font-style: italic;
+    color: #ec4899;
+}
+
+/* Description */
+.hero-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: rgba(26,18,6,0.5);
+    line-height: 1.7;
+    max-width: 300px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+}
+
+/* Category boxes */
+.hero-cats {
     display: flex;
-    gap: 10px;
-    justify-content: center;
+    gap: 12px;
     margin-top: 28px;
     flex-wrap: wrap;
-    position: relative;
-    z-index: 2;
-    padding: 0 20px;
+    justify-content: center;
     opacity: 0;
-    animation: fadeUp 0.5s 0.9s forwards;
+    animation: fadeUp 0.6s 1s forwards;
 }
-.hero-tag {
-    padding: 7px 16px;
-    border: 1px solid rgba(255,0,110,0.4);
-    color: rgba(255,255,255,0.6);
-    font-size: 12px;
-    letter-spacing: 1px;
-    font-family: 'Space Mono', monospace;
+.hero-cat {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: rgba(236,72,153,0.07);
+    border: 1px solid rgba(236,72,153,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     cursor: pointer;
     transition: all 0.2s;
-    border-radius: 2px;
 }
-.hero-tag:hover {
-    background: rgba(255,0,110,0.15);
-    border-color: #ff006e;
-    color: #fff;
+.hero-cat:hover {
+    background: rgba(236,72,153,0.14);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(236,72,153,0.1);
+}
+.hero-cat-icon { font-size: 24px; display: block; }
+.hero-cat-name {
+    font-size: 9px;
+    color: rgba(26,18,6,0.45);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Stats */
 .hero-stats {
     display: flex;
-    gap: 40px;
-    justify-content: center;
-    margin-top: 36px;
+    gap: 28px;
+    margin-top: 32px;
     flex-wrap: wrap;
-    position: relative;
-    z-index: 2;
+    justify-content: center;
     opacity: 0;
-    animation: fadeUp 0.5s 1.1s forwards;
+    animation: fadeUp 0.6s 1.2s forwards;
 }
 .stat { text-align: center; }
 .stat-number {
     display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 28px;
-    color: #ff006e;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 5vw, 28px);
+    color: #ec4899;
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
-.stat-number.cyan { color: #00f5ff; }
 .stat-label {
     display: block;
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(26,18,6,0.35);
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-}
-
-/* Sparkles */
-.sparkle {
-    position: absolute;
-    animation: fall linear infinite;
-    opacity: 0.5;
-    z-index: 1;
-    pointer-events: none;
-}
-@keyframes fall {
-    from { transform: translateY(-20px) rotate(0deg); opacity: 0.5; }
-    to   { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
 }
 
 /* MOBILE */
-@media (max-width: 768px) {   .category-hero { min-height: 70svh; margin-top: 0; padding-top: 70px; padding-bottom: 40px; }
-    .hero-stats { gap: 24px; }
-    .stat-number { font-size: 22px; }
-    .stat-label { font-size: 10px; }
-    .hero-subtitle { font-size: 10px; letter-spacing: 3px; }
-    .hero-tag { font-size: 11px; padding: 6px 12px; }
-    .hero-line { width: 140px; }
+@media (max-width: 768px) {
+    .hero-inner { padding: 100px 20px 60px; }
+    .hero-icon { font-size: 44px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 3px; }
+    .hero-cats { gap: 10px; }
+    .hero-cat { width: 64px; height: 64px; border-radius: 14px; }
+    .hero-cat-icon { font-size: 20px; }
+    .hero-stats { gap: 20px; }
+    .stat-number { font-size: 20px; }
 }
 @media (max-width: 375px) {
-    .category-hero { margin-top: 65px; }
-    .hero-stats { gap: 16px; }
+    .hero-inner { padding-top: 90px; }
+    .hero-cat { width: 58px; height: 58px; }
+    .hero-cat-name { font-size: 8px; }
+    .hero-stats { gap: 14px; }
+    .stat-number { font-size: 18px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+}
+@media (max-width: 340px) {
+    .category-title { font-size: 42px; }
+}
+@media (max-width: 320px) {
+    .category-title { font-size: 38px; }
+    .hero-cat { width: 52px; height: 52px; border-radius: 12px; }
+    .hero-cats { gap: 8px; }
+    .stat-number { font-size: 16px; }
+    .stat-label { font-size: 8px; letter-spacing: 0; }
+    .hero-stats { gap: 10px; }
+}
+@media (max-width: 300px) {
+    .category-title { font-size: 34px; }
+    .hero-cat { width: 46px; height: 46px; }
+    .hero-cat-icon { font-size: 18px; }
+    .stat-number { font-size: 15px; }
 }
         /* ============================================
            PRODUCTS SECTION - USES YOUR EXISTING CARDS
@@ -349,6 +372,7 @@
         margin-top: 65px;  
     }
 }
+
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -731,35 +755,52 @@
 
 
     <!-- STUNNING HERO -->
- <section class="category-hero">
-    <div class="hero-noise"></div>
+<section class="category-hero">
+    <div class="hero-wave"></div>
 
-    <h1 class="category-title" data-text="PASTRIES">PASTRIES</h1>
+    <div class="hero-inner">
+        <span class="hero-icon">🥐</span>
 
-    <div class="hero-line"></div>
+        <p class="hero-eyebrow">Freshly Baked Every Morning</p>
 
-    <p class="hero-subtitle">Baked Fresh Daily</p>
+        <h1 class="category-title">
+            Our <em>Sweet</em><br>Pastries
+        </h1>
 
-    <div class="hero-tags">
-        <span class="hero-tag">Croissants</span>
-        <span class="hero-tag">Tarts</span>
-        <span class="hero-tag">Eclairs</span>
-        <span class="hero-tag">Muffins</span>
-        <span class="hero-tag">Danish</span>
-    </div>
+        <p class="hero-desc">Buttery croissants, flaky danishes, soft brioches and more — baked fresh with love every single morning.</p>
 
-    <div class="hero-stats">
-        <div class="stat">
-            <span class="stat-number" id="productCount">0</span>
-            <span class="stat-label">Products</span>
+        <div class="hero-cats">
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🥐</span>
+                <span class="hero-cat-name">Croissants</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🧁</span>
+                <span class="hero-cat-name">Muffins</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🍩</span>
+                <span class="hero-cat-name">Donuts</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🥧</span>
+                <span class="hero-cat-name">Tarts</span>
+            </div>
         </div>
-        <div class="stat">
-            <span class="stat-number cyan">100%</span>
-            <span class="stat-label">Fresh</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">4.8★</span>
-            <span class="stat-label">Rated</span>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number" id="productCount">0</span>
+                <span class="stat-label">Products</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Fresh</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">4.9★</span>
+                <span class="stat-label">Rated</span>
+            </div>
         </div>
     </div>
 </section>
@@ -1287,21 +1328,7 @@
       if (noProducts) noProducts.style.display = 'block';
     }
 }
-// Sparkle spawn
-(function(){
-    const hero = document.querySelector('.category-hero');
-    function spawn(){
-        const s = document.createElement('div');
-        s.className = 'sparkle';
-        s.textContent = ['✨','🌟','⭐','💫'][Math.floor(Math.random()*4)];
-        s.style.left = Math.random()*100 + 'vw';
-        s.style.fontSize = (10 + Math.random()*14) + 'px';
-        s.style.animationDuration = (3 + Math.random()*4) + 's';
-        hero.appendChild(s);
-        setTimeout(() => s.remove(), 7000);
-    }
-    setInterval(spawn, 700);
-})();</script>
+</script>
 
 
 
