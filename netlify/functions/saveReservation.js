@@ -38,8 +38,7 @@ export async function handler(event) {
   try {
     await ensureFirebaseInit();
     const body = JSON.parse(event.body || "{}");
-    const { reservationId, name, phone, email, guests, date, time, specialRequests, pdfUrl } = body;
-
+   const { reservationId, name, phone, email, guests, date, time, specialRequests, pdfUrl, occasion } = body;
     if (!reservationId || !name || !phone || !date || !time) {
       return { statusCode: 400, body: "Missing required fields" };
     }
@@ -53,6 +52,7 @@ export async function handler(event) {
   guests: guests || "2",
   date,
   time,
+ occasion: occasion || null,
   specialRequests: specialRequests || null,
   pdfUrl: pdfUrl || null,  // ✅ ADD THIS LINE
   status: "pending",

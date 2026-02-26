@@ -21,7 +21,7 @@ export async function handler(event) {
 
   try {
     const body = JSON.parse(event.body || "{}");
-    const { name, phone, email, guests, date, time, specialRequests, reservationId } = body;
+   const { name, phone, email, guests, date, time, specialRequests, reservationId, occasion } = body;
 
     if (!name || !phone || !date || !time || !reservationId) {
       return { statusCode: 400, body: "Missing reservation details" };
@@ -44,6 +44,7 @@ export async function handler(event) {
       `📅 *Date:* ${date}\n` +
       `🕐 *Time:* ${time}\n` +
       `👥 *Guests:* ${guests}\n` +
+      (occasion ? `🎉 *Occasion:* ${occasion}\n` : "") +
       (email          ? `📧 *Email:* ${email}\n` : "") +
       (specialRequests ? `📝 *Requests:* ${specialRequests}\n` : "") +
       `\n━━━━━━━━━━━━━━━━━━━━━━\n` +
@@ -97,6 +98,7 @@ export async function handler(event) {
       ["Date",             date],
       ["Time",             time],
       ["No. of Guests",    String(guests)],
+      ["Occasion",         occasion || "—"],
       ["Special Requests", specialRequests || "None"],
       ["Status",           "Confirmed ✓"],
       ["Booked On",        new Date().toLocaleString()],
