@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/snacks.html">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -175,205 +175,192 @@
         margin-top: 65px;  
     }
 }
-   .category-hero {
+  .category-hero {
     position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    background: #f5f0e8;
+    background: #0a0f08;
     overflow: hidden;
     margin-top: 0;
-    padding: 100px 40px 80px;
+    padding: 0;
 }
 
-/* Warm blob */
-.hero-blob {
+/* Diagonal texture */
+.hero-texture {
     position: absolute;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, #e8a040 0%, transparent 70%);
-    opacity: 0.2;
-    border-radius: 50%;
-    top: -100px; right: -100px;
+    inset: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.01) 0px,
+        rgba(255,255,255,0.01) 1px,
+        transparent 1px,
+        transparent 8px
+    );
     pointer-events: none;
-    animation: blobPulse 4s ease-in-out infinite;
-}
-@keyframes blobPulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
 }
 
-/* Bottom accent line */
-.hero-bottom-line {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #c97a20, #e8a040, #c97a20);
-}
-
-/* Inner layout */
+/* Inner */
 .hero-inner {
     position: relative;
     z-index: 2;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    gap: 80px;
+    padding: 120px 5% 80px;
+    min-height: 100svh;
     width: 100%;
-    max-width: 1100px;
-    flex-wrap: wrap;
 }
 
-/* LEFT */
-.hero-left {
-    max-width: 420px;
-    flex: 1;
-    min-width: 280px;
-}
-
-.hero-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #c97a20;
-    letter-spacing: 2px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.2s forwards;
-}
-
-.category-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 8vw, 88px);
-    font-weight: 700;
-    line-height: 1;
-    color: #1a1208;
-    margin: 12px 0 24px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
-}
-
-.hero-desc {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    color: rgba(26,18,8,0.55);
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.6s forwards;
-}
-
-.hero-cta {
-    display: inline-block;
-    margin-top: 28px;
-    padding: 14px 32px;
-    background: #1a1208;
-    color: #f5f0e8;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
+/* Kicker */
+.hero-kicker {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: #facc15;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    cursor: pointer;
-    border: none;
     opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
-    transition: background 0.2s;
+    animation: fadeUp 0.6s 0.2s forwards;
 }
-.hero-cta:hover { background: #c97a20; }
 
-/* Stats row */
+/* Title */
+.category-title {
+    font-family: 'Antonio', sans-serif;
+    font-weight: 700;
+    font-size: clamp(72px, 14vw, 144px);
+    line-height: 0.85;
+    color: #fefce8;
+    margin: 16px 0;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+}
+.category-title .thin {
+    font-weight: 400;
+    -webkit-text-stroke: 1px rgba(250,204,21,0.5);
+    color: transparent;
+    display: block;
+}
+
+/* Stats */
 .hero-stats {
     display: flex;
     gap: 32px;
-    margin-top: 36px;
+    margin-top: 40px;
     flex-wrap: wrap;
     opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
+    animation: fadeUp 0.6s 0.6s forwards;
 }
-.stat { text-align: left; }
+.stat {
+    padding-left: 16px;
+    border-left: 2px solid rgba(250,204,21,0.3);
+}
 .stat-number {
     display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: #c97a20;
+    font-family: 'Antonio', sans-serif;
+    font-size: clamp(28px, 5vw, 36px);
+    color: #facc15;
     line-height: 1;
     margin-bottom: 4px;
 }
 .stat-label {
     display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    color: rgba(26,18,8,0.4);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: rgba(254,252,232,0.35);
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-/* RIGHT */
-.hero-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.6s forwards;
-    flex-shrink: 0;
-}
-
-.hero-item {
-    width: 130px; height: 130px;
-    background: rgba(26,18,8,0.05);
+/* Pills */
+.hero-pills {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
+    gap: 10px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
 }
-.hero-item:hover { background: rgba(26,18,8,0.1); }
-.hero-item-icon { font-size: 32px; }
-.hero-item-label {
-    font-size: 11px;
-    font-family: 'DM Sans', sans-serif;
-    color: rgba(26,18,8,0.45);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.hero-pill {
+    padding: 8px 18px;
+    border: 1px solid rgba(250,204,21,0.2);
+    color: rgba(254,252,232,0.5);
+    font-size: 12px;
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.hero-pill:hover {
+    border-color: #facc15;
+    color: #fefce8;
+    background: rgba(250,204,21,0.08);
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero {
-        padding: 90px 24px 60px;
-        min-height: 100svh;
+    .category-hero{
+         min-height: 90svh;
     }
-    .hero-inner {
-        flex-direction: column;
-        gap: 40px;
-        align-items: flex-start;
-    }
-    .hero-left { max-width: 100%; }
-    .hero-right {
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
-    }
-    .hero-item {
-        width: 100%;
-        height: 100px;
-    }
+    .hero-inner { padding: 100px 24px 60px; }
+    .category-title { font-size: clamp(60px, 16vw, 90px); }
     .hero-stats { gap: 20px; }
-    .stat-number { font-size: 22px; }
-    .category-title { font-size: clamp(42px, 10vw, 64px); }
-    .hero-blob { width: 300px; height: 300px; top: -60px; right: -60px; }
+    .stat-number { font-size: 24px; }
+    .hero-kicker { font-size: 9px; letter-spacing: 3px; }
+}
+@media (max-width: 400px) {
+    .category-title { font-size: clamp(52px, 17vw, 72px); letter-spacing: -1px; }
 }
 @media (max-width: 375px) {
-    .category-hero { padding-top: 80px; }
-    .hero-item { height: 85px; }
-    .hero-item-icon { font-size: 26px; }
+    .hero-inner { padding-top: 90px; }
+    .hero-stats { gap: 14px; }
+    .stat-number { font-size: 20px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    .hero-pill { font-size: 11px; padding: 6px 14px; }
+}
+@media (max-width: 360px) {
+    .category-title { font-size: clamp(46px, 16vw, 64px); letter-spacing: -1px; }
+}
+@media (max-width: 320px) {
+    .category-title { font-size: clamp(40px, 15vw, 56px); letter-spacing: -2px; }
+    .stat-number { font-size: 18px; }
+    .stat-label { font-size: 8px; letter-spacing: 0; }
+    .hero-stats { gap: 10px; }
+    .hero-pill { font-size: 10px; padding: 5px 12px; }
+}
+@media (max-width: 300px) {
+    .category-title { font-size: clamp(34px, 14vw, 48px); }
+    .stat-number { font-size: 16px; }
 }
 
+:root {
+    --accent: #15803d;
+    --accent-rgb: 21,128,61;
+    --bg: #f0fdf4;
+    --title-color: #052e16;
+    --stroke: rgba(21,128,61,0.5);
+    --stat-border: rgba(21,128,61,0.3);
+    --stat-label: rgba(5,46,22,0.35);
+    --pill-border: rgba(21,128,61,0.2);
+    --pill-color: rgba(5,46,22,0.5);
+    --pill-hover-bg: rgba(21,128,61,0.08);
+}
+.category-hero { background: var(--bg); }
+.hero-kicker { color: var(--accent); }
+.category-title { color: var(--title-color); }
+.category-title .thin { -webkit-text-stroke: 1px var(--stroke); color: transparent; }
+.stat { border-left-color: var(--stat-border); }
+.stat-number { color: var(--accent); }
+.stat-label { color: var(--stat-label); }
+.hero-pill { border-color: var(--pill-border); color: var(--pill-color); }
+.hero-pill:hover { border-color: var(--accent); color: var(--title-color); background: var(--pill-hover-bg); }
     </style>
+    
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
 <body>
@@ -756,56 +743,39 @@
 
 
     <!-- STUNNING HERO -->
-    <section class="category-hero">
-    <div class="hero-blob"></div>
-    <div class="hero-bottom-line"></div>
+<section class="category-hero">
+    <div class="hero-texture"></div>
 
     <div class="hero-inner">
+        <p class="hero-kicker">// Crispy & Crunchy</p>
 
-        <!-- LEFT -->
-        <div class="hero-left">
-            <p class="hero-label">— Fresh from our Kitchen</p>
-            <h1 class="category-title">Sweet<br>Delights</h1>
-            <p class="hero-desc">Handcrafted mithai, fresh bakes and street food favourites — made daily with pure ingredients and a whole lot of love.</p>
-            <button class="hero-cta" onclick="document.getElementById('productsGrid').scrollIntoView({behavior:'smooth'})">
-                Explore Menu
-            </button>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number" id="productCount">0</span>
-                    <span class="stat-label">Products</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Fresh</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4.8★</span>
-                    <span class="stat-label">Rated</span>
-                </div>
+        <h1 class="category-title">
+            SNACKS
+            <span class="thin">& MORE</span>
+        </h1>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number" id="productCount">0</span>
+                <span class="stat-label">Products</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Fresh</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">4.7★</span>
+                <span class="stat-label">Rated</span>
             </div>
         </div>
 
-        <!-- RIGHT -->
-        <div class="hero-right">
-            <div class="hero-item">
-                <span class="hero-item-icon">🍬</span>
-                <span class="hero-item-label">Mithai</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🎂</span>
-                <span class="hero-item-label">Cakes</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🌮</span>
-                <span class="hero-item-label">Street Food</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🍪</span>
-                <span class="hero-item-label">Snacks</span>
-            </div>
+        <div class="hero-pills">
+            <span class="hero-pill">🥨 Namkeen</span>
+            <span class="hero-pill">🍟 Chips</span>
+            <span class="hero-pill">🧆 Bhujia</span>
+            <span class="hero-pill">🫙 Mixtures</span>
+            <span class="hero-pill">🍿 Popcorn</span>
         </div>
-
     </div>
 </section>
 
