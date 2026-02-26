@@ -538,7 +538,6 @@ function openReservationDetail(res, no) {
     '<p style="margin-bottom:8px;"><b>Date:</b> '           + res.date + '</p>' +
     '<p style="margin-bottom:8px;"><b>Time:</b> '           + res.time + '</p>' +
     '<p style="margin-bottom:8px;"><b>Guests:</b> '         + res.guests + '</p>' +
-    (res.occasion ? '<p style="margin-bottom:8px;"><b>Occasion:</b> ' + res.occasion + '</p>' : '') +
     (res.specialRequests ? '<p style="margin-bottom:8px;"><b>Special Requests:</b> ' + res.specialRequests + '</p>' : '') +
 '<p style="margin-bottom:16px;"><b>Status:</b> ' + (res.status||'pending') + '</p>' +
 (res.pdfUrl ? '<a href="' + res.pdfUrl + '" download="Reservation-' + res.reservationId + '.pdf" style="display:inline-block;padding:8px 16px;background:#dc2626;color:#fff;border-radius:6px;text-decoration:none;margin-bottom:16px;">📄 Download Confirmation PDF</a>' : '') +'</p>' +
