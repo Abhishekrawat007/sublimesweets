@@ -270,7 +270,7 @@ body.search-active .products-section {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 6px;
-  height: 560px;
+  height: 700px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -325,87 +325,7 @@ body.search-active .products-section {
   pointer-events: none;
 }
 
-    /* ═══════════════════════════════════════
-       RIGHT — ACCORDION
-    ═══════════════════════════════════════ */
-    #reservation .accord {
-      border: 1px solid var(--br2);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-
-    #reservation .ac-item { border-bottom: 1px solid var(--br2); }
-    #reservation .ac-item:last-child { border-bottom: none; }
-
-    #reservation .ac-head {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 17px 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      transition: background .2s;
-      color: var(--tx);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .ac-head:hover { background: var(--br); }
-    #reservation .ac-head.open { background: var(--ac-open); }
-
-    #reservation .ac-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      border: 1.5px solid var(--br2);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tx3);
-      transition: all .25s;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .ac-head.open .ac-num {
-      border-color: var(--gd);
-      color: var(--gd);
-      background: rgba(192,152,72,.08);
-    }
-
-    #reservation .ac-head-info { flex: 1; }
-    #reservation .ac-head-t { font-size: 13.5px; font-weight: 500; }
-    #reservation .ac-head-s { font-size: 11px; color: var(--tx2); margin-top: 1px; }
-
-    #reservation .ac-arr {
-      font-size: 12px;
-      color: var(--tx3);
-      transition: transform .3s ease;
-      flex-shrink: 0;
-    }
-
-    #reservation .ac-head.open .ac-arr {
-      transform: rotate(180deg);
-      color: var(--gd);
-    }
-
-    /* accordion body */
-#reservation .ac-body {
-  display: none;
-  background: var(--ac-open);
-}
-#reservation .ac-body.open { display: block; }
-
-    #reservation .ac-fields {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
+ 
 
     /* form atoms */
     #reservation .fl { display: flex; flex-direction: column; gap: 5px; }
@@ -479,63 +399,6 @@ body.search-active .products-section {
 
     #reservation .submit-reservation-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-  #reservation .r5-info {
-  border-left: 2px solid var(--gd);
-  padding-left: 16px;
-  margin-bottom: 20px;
-}
-#reservation .r5-info-name {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(16px, 2vw, 22px);
-  letter-spacing: 2px;
-  color: var(--tx);
-  margin-bottom: 4px;
-}
-#reservation .r5-info-tag {
-  font-size: 9px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--gd);
-  margin-bottom: 14px;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-info-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-#reservation .r5-info-row {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-info-row-k {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--tx3);
-  min-width: 72px;
-  padding-top: 1px;
-}
-#reservation .r5-info-row-v {
-  font-size: 12.5px;
-  color: var(--tx);
-  line-height: 1.4;
-}
-#reservation .r5-info-divider {
-  height: 1px;
-  background: var(--br2);
-  margin: 12px 0;
-}
-#reservation .r5-fine-print {
-  text-align: center;
-  font-size: 10px;
-  color: var(--tx3);
-  letter-spacing: .5px;
-  margin-top: 10px;
-  font-family: 'DM Sans', sans-serif;
-}
 #reservation .r5-eyebrow-r {
   font-size: 9px;
   letter-spacing: 4px;
@@ -570,25 +433,6 @@ body.search-active .products-section {
   letter-spacing: .5px;
   font-family: 'DM Sans', sans-serif;
 }
-
-#reservation .r5-title-r {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(22px, 3vw, 42px);
-  font-weight: 400;
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 6px;
-  color: var(--tx);
-}
-#reservation .r5-sub-r {
-  font-size: 13px;
-  color: var(--tx2);
-  font-weight: 300;
-  margin-bottom: 20px;
-  letter-spacing: .5px;
-  font-family: 'DM Sans', sans-serif;
-}
-
     /* pdf banner */
     #reservation .pdf-banner {
       display: none;
@@ -666,7 +510,7 @@ body.search-active .products-section {
     @media(max-width: 420px) {
       #reservation .collage { grid-template-rows: 190px 120px 120px; }
     }
- 
+ #reservation .fstack { display: flex; flex-direction: column; gap: 11px; }
 
 
 </style>
@@ -1382,147 +1226,24 @@ body.search-active .products-section {
 <h2 class="r5-title-r">Reserve<br>A Table</h2>
 <p class="r5-sub-r">Complete your reservation in 3 simple steps</p>
 
-        <form id="reservationForm" novalidate>
-
-          <div class="accord">
-
-            <!-- STEP 1 — Guest Info -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">1</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Guest Information</div>
-                  <div class="ac-head-s">Name, email &amp; contact</div>
-                </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Full Name *</label>
-                    <input type="text" id="resName" placeholder="Your full name" required />
-                  </div>
-                  <div class="fl">
-                    <label>Email Address</label>
-                    <input type="email" id="resEmail" placeholder="you@email.com" />
-                  </div>
-                  <div class="fl">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="resPhone" placeholder="+91 98765 43210" required />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 2 — Details -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">2</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Reservation Details</div>
-                  <div class="ac-head-s">Date, time &amp; guests</div>
-                </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Date *</label>
-                    <input type="date" id="resDate" required />
-                  </div>
-                  <div class="g2">
-                    <div class="fl">
-                      <label>Preferred Time *</label>
-                      <select id="resTime">
-                        <option>7:00 AM</option>
-                        <option>8:00 AM</option>
-                        <option>9:00 AM</option>
-                        <option>12:00 PM</option>
-                        <option>1:00 PM</option>
-                        <option>2:00 PM</option>
-                        <option>6:00 PM</option>
-                        <option selected>7:00 PM</option>
-                        <option>8:00 PM</option>
-                        <option>9:00 PM</option>
-                        <option>10:00 PM</option>
-                      </select>
-                    </div>
-                    <div class="fl">
-                      <label>No. of Guests *</label>
-                      <select id="resGuests">
-                        <option value="1">1 Person</option>
-                        <option value="2" selected>2 People</option>
-                        <option value="3">3 People</option>
-                        <option value="4">4 People</option>
-                        <option value="5">5 People</option>
-                        <option value="6">6 People</option>
-                        <option value="7+">7+ People</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 3 — Preferences -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">3</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Preferences &amp; Extras</div>
-                  <div class="ac-head-s">Special requests &amp; notes</div>
-                </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Special Requests</label>
-                    <textarea id="resRequests" placeholder="Dietary needs, occasions, seating preferences, allergies…"></textarea>
-                  </div>
-                  <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">
-                    Reserve My Table
-                  </button>
-                  <div class="pdf-banner" id="pdfBanner">
-                    <p>✅ Confirmed! Download your reservation.</p>
-                    <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation.pdf">📄 Download PDF</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div><!-- .accord -->
-
-        </form>
-
-   <div class="r5-info">
-  <div class="r5-info-name">Rajkumar Hotel</div>
-  <div class="r5-info-tag">Fine Dining · Est. 2015</div>
-  <div class="r5-info-rows">
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Chef</span>
-      <span class="r5-info-row-v">Chef Arjun Mehra</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Cuisine</span>
-      <span class="r5-info-row-v">North Indian · Continental</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Hours</span>
-      <span class="r5-info-row-v">12PM–3PM · 7PM–11PM</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Location</span>
-      <span class="r5-info-row-v">Your City, India</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Features</span>
-      <span class="r5-info-row-v">Rooftop · Private Dining · Live Music · Chef's Table</span>
+    <form id="reservationForm" novalidate>
+  <div class="fstack">
+    <div class="fl"><label>Full Name *</label><input type="text" id="resName" placeholder="Your full name" required /></div>
+    <div class="fl"><label>Phone *</label><input type="tel" id="resPhone" placeholder="+91 98765 43210" required /></div>
+    <div class="fl"><label>Email</label><input type="email" id="resEmail" placeholder="you@email.com" /></div>
+    <div class="fl"><label>Date *</label><input type="date" id="resDate" required /></div>
+    <div class="fl"><label>Preferred Time</label><select id="resTime"><option>7:00 AM</option><option>8:00 AM</option><option>9:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>6:00 PM</option><option selected>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option></select></div>
+    <div class="fl"><label>Guests</label><select id="resGuests"><option value="1">1 Person</option><option value="2" selected>2 People</option><option value="3">3 People</option><option value="4">4 People</option><option value="5">5 People</option><option value="6">6 People</option><option value="7+">7+ People</option></select></div>
+    <div class="fl"><label>Special Requests</label><textarea id="resRequests" placeholder="Dietary needs, seating preferences, allergies…"></textarea></div>
+    <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">Reserve My Table</button>
+    <p class="r5-fine-print">Free cancellation · Confirmed within 2 hours</p>
+    <div class="pdf-banner" id="pdfBanner">
+      <p>✅ Confirmed! Download your reservation.</p>
+      <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation.pdf">📄 Download PDF</a>
     </div>
   </div>
-</div>
-<div class="r5-info-divider"></div>
-<p class="r5-fine-print">Free cancellation · Confirmed within 2 hours</p>
+</form>
+
 
       </div>
     </div>
@@ -1541,16 +1262,6 @@ body.search-active .products-section {
     updateSummary();
   };
 
-  /* accordion */
-window.toggleR5Ac = function(btn){
-  const body = btn.nextElementSibling;
-  const isOpen = btn.classList.contains('open');
-  document.querySelectorAll('#reservation .ac-head').forEach(b => {
-    b.classList.remove('open');
-    b.nextElementSibling.classList.remove('open');
-  });
-  if(!isOpen){ btn.classList.add('open'); body.classList.add('open'); }
-};
 
   /* date min */
   const dateEl = document.getElementById('resDate');
