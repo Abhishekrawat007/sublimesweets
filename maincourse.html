@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/maincourse.html">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -178,183 +178,164 @@
     position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    background: #fafaf8;
+    background: #080605;
     overflow: hidden;
     margin-top: 0;
-    padding: 100px 0 80px;
-    color: #1a1a1a;
+    padding: 0;
 }
 
-/* Ruled lines */
-.hero-rules {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 31px,
-        rgba(26,26,26,0.05) 31px,
-        rgba(26,26,26,0.05) 32px
-    );
-    pointer-events: none;
+/* BG glows */
+.hero-bg {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 90%, rgba(34,197,94,0.04) 0%, transparent 40%);
 }
 
-/* Margin line */
-.hero-margin {
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 80px;
-    width: 1px;
-    background: rgba(220,38,38,0.15);
+/* Plate circle */
+.hero-plate {
+    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: 260px; height: 260px; border-radius: 50%;
+    border: 1px solid rgba(34,197,94,0.08);
+    display: flex; align-items: center; justify-content: center;
     pointer-events: none;
+}
+.hero-plate::before {
+    content: '';
+    position: absolute; inset: 20px; border-radius: 50%;
+    border: 1px solid rgba(34,197,94,0.05);
 }
 
 /* Inner */
 .hero-inner {
-    position: relative;
-    z-index: 2;
-    padding: 60px 5% 60px 120px;
-    max-width: 700px;
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 26px 80px;
+    min-height: 100svh;
     width: 100%;
 }
 
-/* Date */
-.hero-date {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(26,26,26,0.35);
-    letter-spacing: 2px;
+/* Stars */
+.hero-stars {
+    display: flex; gap: 5px; margin-bottom: 18px;
+    opacity: 0; animation: fadeIn 0.6s 0.2s forwards;
+}
+.hero-star {
+    width: 22px; height: 22px;
+    border: 1px solid rgba(34,197,94,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #22c55e;
+}
+
+/* Eyebrow */
+.hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(34,197,94,0.55);
+    letter-spacing: 4px;
     opacity: 0;
-    animation: fadeUp 0.7s 0.2s forwards;
+    animation: fadeUp 0.7s 0.3s forwards;
 }
 
 /* Title */
 .category-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(52px, 10vw, 96px);
-    color: #1a1a1a;
-    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(56px, 15vw, 88px);
+    color: #f0fdf4;
+    line-height: 0.9;
     margin: 12px 0;
     opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
+    animation: fadeUp 0.7s 0.5s forwards;
 }
 .category-title em {
     font-style: italic;
-    color: #dc2626;
+    color: #22c55e;
 }
 
-/* Description */
-.hero-desc {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: rgba(26,26,26,0.5);
-    line-height: 1.8;
-    max-width: 380px;
-    border-left: 2px solid rgba(220,38,38,0.2);
-    padding-left: 16px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.6s forwards;
+/* Rule divider */
+.hero-rule {
+    display: flex; align-items: center; gap: 10px;
+    margin: 18px 0;
+    opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
 }
+.hero-rule-line { flex: 1; height: 1px; background: rgba(34,197,94,0.15); }
+.hero-rule-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(34,197,94,0.4); }
 
-/* Items */
-.hero-items {
-    display: flex;
-    gap: 16px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
+/* Course rows */
+.hero-courses {
+    display: flex; flex-direction: column; gap: 2px;
+    opacity: 0; animation: fadeUp 0.7s 0.9s forwards;
 }
-.hero-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: rgba(26,26,26,0.5);
-    font-family: 'Space Mono', monospace;
-    cursor: pointer;
-    transition: color 0.2s;
+.hero-course {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(34,197,94,0.06);
+    cursor: pointer; transition: all 0.2s;
 }
-.hero-item:hover { color: #dc2626; }
-.hero-item::before {
-    content: '→';
-    color: #dc2626;
-}
-
-/* Underline */
-.hero-underline {
-    width: 0;
-    height: 2px;
-    background: #dc2626;
-    margin-top: 24px;
-    animation: lineGrow 1s 0.9s forwards;
-}
-@keyframes lineGrow { to { width: 100%; max-width: 380px; } }
-
-/* Stats */
-.hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
-}
-.stat { text-align: left; }
-.stat-number {
-    display: block;
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(22px, 4vw, 28px);
-    color: #dc2626;
-    line-height: 1;
-    margin-bottom: 4px;
-}
-.stat-label {
-    display: block;
+.hero-course:hover .hero-course-name { color: #22c55e; }
+.hero-course-left { display: flex; align-items: center; gap: 12px; }
+.hero-course-num {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
-    color: rgba(26,26,26,0.35);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    color: rgba(34,197,94,0.35);
+    letter-spacing: 1px;
+    width: 20px;
+}
+.hero-course-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: rgba(240,253,244,0.7);
+    transition: color 0.2s;
+}
+.hero-course-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: rgba(34,197,94,0.5);
 }
 
+@keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+}
 @keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
+    from { opacity:0; transform:translateY(26px); }
     to   { opacity:1; transform:translateY(0); }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero { padding: 90px 0 60px; }
-    .hero-margin { left: 24px; }
-    .hero-inner { padding: 40px 24px 40px 48px; }
-    .hero-desc { font-size: 13px; max-width: 100%; }
-    .hero-stats { gap: 20px; }
-    .stat-number { font-size: 20px; }
-    .hero-items { gap: 12px; }
-    .hero-item { font-size: 11px; }
+    .hero-inner { padding: 100px 22px 60px; }
+    .hero-plate { width: 180px; height: 180px; right: -40px; }
+    .hero-eyebrow { font-size: 12px; letter-spacing: 3px; }
+    .hero-course { padding: 11px 0; }
+    .hero-course-name { font-size: 15px; }
+    .hero-course-price { font-size: 11px; }
 }
 @media (max-width: 375px) {
-    .category-hero { padding-top: 80px; }
-    .hero-margin { left: 16px; }
-    .hero-inner { padding-left: 36px; }
-    .hero-stats { gap: 14px; }
-    .stat-number { font-size: 18px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
+    .hero-inner { padding-top: 90px; }
+    .hero-plate { width: 140px; height: 140px; right: -30px; }
+    .hero-course-name { font-size: 14px; }
+    .hero-course-price { font-size: 10px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 2px; }
+}
+@media (max-width: 340px) {
+    .category-title { font-size: 46px; }
 }
 @media (max-width: 320px) {
-    .hero-inner { padding-left: 28px; }
-    .hero-stats { gap: 10px; }
-    .stat-number { font-size: 16px; }
-    .stat-label { font-size: 8px; letter-spacing: 0; }
-    .hero-item { font-size: 10px; }
+    .category-title { font-size: 42px; }
+    .hero-course-name { font-size: 13px; }
+    .hero-course-price { font-size: 9px; }
+    .hero-plate { display: none; }
 }
 @media (max-width: 300px) {
-    .stat-number { font-size: 14px; }
-    .hero-items { gap: 8px; }
+    .category-title { font-size: 38px; }
+    .hero-course { padding: 9px 0; }
 }
+
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -738,40 +719,58 @@
 
 
     <!-- STUNNING HERO -->
- <section class="category-hero">
-    <div class="hero-rules"></div>
-    <div class="hero-margin"></div>
+
+<section class="category-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-plate"></div>
 
     <div class="hero-inner">
-        <p class="hero-date" id="heroDate"></p>
-
-        <h1 class="category-title">
-            Taste<br>it <em>Hot</em>
-        </h1>
-
-        <p class="hero-desc">Wholesome dals, sabzis, rotis and thalis — cooked fresh daily with homestyle love and pure ingredients.</p>
-
-        <div class="hero-items">
-            <span class="hero-item">Dal & Sabzi</span>
-            <span class="hero-item">Roti & Rice</span>
-            <span class="hero-item">Thali</span>
-            <span class="hero-item">Special Curry</span>
+        <div class="hero-stars">
+            <span class="hero-star">★</span>
+            <span class="hero-star">★</span>
+            <span class="hero-star">★</span>
         </div>
 
-        <div class="hero-underline"></div>
+        <p class="hero-eyebrow">Chef's Table Collection</p>
 
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Dishes</span>
+        <h1 class="category-title">
+            Main<br><em>Course</em><br>Specials
+        </h1>
+
+        <div class="hero-rule">
+            <div class="hero-rule-line"></div>
+            <div class="hero-rule-dot"></div>
+            <div class="hero-rule-line"></div>
+        </div>
+
+        <div class="hero-courses">
+            <div class="hero-course">
+                <div class="hero-course-left">
+                    <span class="hero-course-num">01</span>
+                    <span class="hero-course-name">Biryanis & Rice</span>
+                </div>
+                <span class="hero-course-price">From ₹180</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Homestyle</span>
+            <div class="hero-course">
+                <div class="hero-course-left">
+                    <span class="hero-course-num">02</span>
+                    <span class="hero-course-name">Curries & Gravies</span>
+                </div>
+                <span class="hero-course-price">From ₹120</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">4.8★</span>
-                <span class="stat-label">Rated</span>
+            <div class="hero-course">
+                <div class="hero-course-left">
+                    <span class="hero-course-num">03</span>
+                    <span class="hero-course-name">Tandoor & Grills</span>
+                </div>
+                <span class="hero-course-price">From ₹220</span>
+            </div>
+            <div class="hero-course">
+                <div class="hero-course-left">
+                    <span class="hero-course-num">04</span>
+                    <span class="hero-course-name">Breads & Rotis</span>
+                </div>
+                <span class="hero-course-price">From ₹60</span>
             </div>
         </div>
     </div>

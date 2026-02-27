@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/icecreams.html">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -174,169 +174,161 @@
         margin-top: 65px;  
     }
 }
+
 .category-hero {
     position: relative;
-    min-height: 90svh;
+    min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    background: #111008;
+    background: #050505;
     overflow: hidden;
     margin-top: 0;
-    padding: 100px 24px 80px;
+    padding: 0;
 }
 
-/* Tick background */
-.hero-tick-bg {
+/* Speed lines */
+.hero-speed-lines {
     position: absolute;
     inset: 0;
-    background: repeating-conic-gradient(
-        rgba(56,189,248,0.03) 0deg,
-        rgba(56,189,248,0.03) 1deg,
-        transparent 1deg,
-        transparent 6deg
-    );
-    opacity: 0.5;
     pointer-events: none;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 60px,
+        rgba(56,189,248,0.02) 60px, rgba(56,189,248,0.02) 61px
+    );
+    animation: rushLines 0.8s linear infinite;
+}
+@keyframes rushLines {
+    from { background-position: 0 0; }
+    to   { background-position: 61px 0; }
 }
 
-/* Clock ring */
-.hero-clock-ring {
+/* Left accent bar */
+.hero-accent-bar {
     position: absolute;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    border: 1px solid rgba(56,189,248,0.15);
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 1s 0.3s both;
-}
-.hero-clock-ring::before {
-    content: '';
-    position: absolute;
-    inset: 20px;
-    border-radius: 50%;
-    border: 1px solid rgba(56,189,248,0.08);
-}
-
-/* Clock hand */
-.hero-clock-hand {
-    position: absolute;
-    width: 2px; height: 120px;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
     background: #38bdf8;
-    transform-origin: bottom center;
-    bottom: 50%; left: calc(50% - 1px);
-    box-shadow: 0 0 6px rgba(56,189,248,0.5);
-    animation: tickHand 60s linear infinite;
 }
-@keyframes tickHand { to { transform: rotate(360deg); } }
 
 /* Inner */
 .hero-inner {
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 24px 80px 36px;
+    min-height: 100svh;
     width: 100%;
 }
 
-/* Eyebrow */
-.hero-eyebrow {
+/* Kicker */
+.hero-kicker {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
     color: #38bdf8;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
+    animation: slideL 0.4s 0.2s forwards;
+}
+@keyframes slideL {
+    from { opacity:0; transform:translateX(-32px); }
+    to   { opacity:1; transform:translateX(0); }
 }
 
 /* Title */
 .category-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(52px, 11vw, 108px);
-    color: #f0f9ff;
-    line-height: 0.95;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 20vw, 120px);
+    line-height: 0.82;
+    color: #fff;
     margin: 12px 0;
     opacity: 0;
-    animation: fadeUp 0.7s 0.6s forwards;
+    animation: fadeUp 0.5s 0.4s forwards;
 }
+.category-title .ice { color: #38bdf8; }
 
-/* Sub */
-.hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: rgba(56,189,248,0.6);
-    opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
-}
-
-/* Stats */
-.hero-stats {
+/* RPM bars */
+.hero-rpm {
     display: flex;
-    gap: 32px;
-    justify-content: center;
-    margin-top: 36px;
-    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 4px;
+    margin: 20px 0;
     opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
+    animation: fadeUp 0.5s 0.6s forwards;
+}
+.rpm-bar {
+    width: 8px;
+    background: rgba(56,189,248,0.3);
+    border-radius: 2px;
+    animation: rpmPulse 1s ease-in-out infinite;
+}
+@keyframes rpmPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* Stats grid */
+.hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 8px;
+    opacity: 0;
+    animation: fadeUp 0.5s 0.8s forwards;
 }
 .stat {
-    border-top: 1px solid rgba(56,189,248,0.2);
-    padding-top: 10px;
-    min-width: 80px;
+    background: rgba(56,189,248,0.05);
+    border: 1px solid rgba(56,189,248,0.1);
+    padding: 12px 14px;
 }
 .stat-number {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(18px, 4vw, 22px);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
     color: #38bdf8;
+    display: block;
     line-height: 1;
-    margin-bottom: 4px;
 }
 .stat-label {
-    display: block;
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     color: rgba(255,255,255,0.3);
     letter-spacing: 2px;
-    text-transform: uppercase;
+    margin-top: 2px;
+    display: block;
 }
 
 @keyframes fadeUp {
     from { opacity:0; transform:translateY(24px); }
     to   { opacity:1; transform:translateY(0); }
 }
-@keyframes fadeIn {
-    from { opacity:0; }
-    to   { opacity:1; }
-}
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero { padding: 90px 20px 60px; }
-    .hero-clock-ring { width: 280px; height: 280px; }
-    .hero-clock-hand { height: 80px; }
-    .hero-sub { font-size: 16px; }
-    .hero-eyebrow { font-size: 9px; letter-spacing: 3px; }
-    .hero-stats { gap: 20px; }
+    .hero-inner { padding: 100px 20px 60px 28px; }
+    .hero-kicker { font-size: 9px; letter-spacing: 2px; }
+    .stat { padding: 10px 12px; }
+    .stat-number { font-size: 26px; }
+    .stat-label { font-size: 8px; letter-spacing: 1px; }
 }
 @media (max-width: 375px) {
-    .category-hero { padding-top: 80px; }
-    .hero-stats { gap: 12px; }
-    .stat-number { font-size: 16px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
-    .hero-clock-ring { width: 220px; height: 220px; }
-    .hero-clock-hand { height: 60px; }
+    .hero-inner { padding-top: 90px; padding-left: 24px; }
+    .stat-number { font-size: 22px; }
+    .stat-label { font-size: 7px; }
+    .stat { padding: 8px 10px; }
+}
+@media (max-width: 340px) {
+    .category-title { font-size: 58px; }
 }
 @media (max-width: 320px) {
-    .stat-number { font-size: 14px; }
-    .stat-label { font-size: 8px; letter-spacing: 0; }
-    .hero-stats { gap: 8px; }
+    .category-title { font-size: 52px; }
+    .stat-number { font-size: 20px; }
+    .stat-label { font-size: 7px; letter-spacing: 0; }
+}
+@media (max-width: 300px) {
+    .category-title { font-size: 46px; }
+    .stat { padding: 7px 8px; }
+    .stat-number { font-size: 18px; }
 }
 
     </style>
@@ -921,23 +913,30 @@
 
     <!-- STUNNING HERO -->
     <section class="category-hero">
-    <div class="hero-tick-bg"></div>
-    <div class="hero-clock-ring">
-        <div class="hero-clock-hand"></div>
-    </div>
+    <div class="hero-speed-lines"></div>
+    <div class="hero-accent-bar"></div>
 
     <div class="hero-inner">
-        <p class="hero-eyebrow">Frozen Fresh · Made Daily</p>
-        <h1 class="category-title">Frozen<br>Delights</h1>
-        <p class="hero-sub">Every scoop, a celebration.</p>
+        <p class="hero-kicker">// COLD · CREAMY · DREAMY</p>
+
+        <h1 class="category-title">
+            ICE<br><span class="ice">CREAM</span>
+        </h1>
+
+        <div class="hero-rpm" id="rpmBars"></div>
+
         <div class="hero-stats">
             <div class="stat">
                 <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Flavours</span>
+                <span class="stat-label">Products</span>
             </div>
             <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Fresh Daily</span>
+                <span class="stat-number">🍦</span>
+                <span class="stat-label">Softy</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">🍧</span>
+                <span class="stat-label">Sorbets</span>
             </div>
             <div class="stat">
                 <span class="stat-number">4.9★</span>
@@ -946,6 +945,20 @@
         </div>
     </div>
 </section>
+
+<script>
+(function(){
+    const c = document.getElementById('rpmBars');
+    if(!c) return;
+    const heights = [14,22,18,32,26,20,36,28,16,24,30,20,14];
+    heights.forEach((h,i) => {
+        const b = document.createElement('div');
+        b.className = 'rpm-bar';
+        b.style.cssText = `height:${h}px;animation-delay:${i*0.07}s;`;
+        c.appendChild(b);
+    });
+})();
+</script>
 
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">

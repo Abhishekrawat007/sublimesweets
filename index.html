@@ -9,7 +9,7 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+ <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -118,53 +118,77 @@ body.search-active .products-section {
     /* ═══════════════════════════════════════
        VARIABLES — Vol.7 Original
     ═══════════════════════════════════════ */
-    #reservation {
-      --bg:        #f7f4ef;
-      --bg2:       #ece7dd;
-      --bg3:       #e2dbd1;
-      --bg4:       #d7cfc5;
-      --tx:        #131110;
-      --tx2:       #655a4e;
-      --tx3:       #a8998a;
-      --gd:        #84601e;
-      --gd2:       #a47828;
-      --br:        rgba(0,0,0,.06);
-      --br2:       rgba(0,0,0,.11);
-      --inp:       rgba(0,0,0,.03);
-      --ibd:       rgba(0,0,0,.09);
-      --ifoc:      rgba(0,0,0,.05);
-      --ph:        rgba(0,0,0,.28);
-      --shad:      0 24px 64px rgba(0,0,0,.08);
-      --section-bg:#f7f4ef;
-      --ac-open:   #ece7dd;
+     #reservation {
+      --bg:           #f8f5f0;
+      --bg2:          #ede8de;
+      --bg3:          #e3dcd2;
+      --tx:           #111010;
+      --tx2:          #625848;
+      --tx3:          #a59488;
+      --gd:           #80601a;
+      --gd2:          #9e7624;
+      --br:           rgba(0,0,0,.055);
+      --br2:          rgba(0,0,0,.1);
+      --inp:          rgba(0,0,0,.03);
+      --ibd:          rgba(0,0,0,.08);
+      --ifoc:         rgba(0,0,0,.05);
+      --ph:           rgba(0,0,0,.27);
+    
+      --cover-from:   #5a0a14;
+      --cover-to:     #3d0609;
+      --cover-stripe: rgba(255,255,255,.015);
+      --cover-tx:     rgba(255,255,255,.5);
+      --cover-tx2:    rgba(255,255,255,.4);
+      --cover-tx3:    rgba(255,255,255,.25);
+      --cover-border: rgba(255,255,255,.3);
+      --cover-num:    rgba(255,255,255,.15);
+      --stamp-border: rgba(0,0,0,.15);
+      --stamp-tx:     var(--tx3);
+      --scroll-thumb: rgba(128,96,26,.35);
+      --scroll-track: rgba(0,0,0,.06);
+      --item-border:  rgba(0,0,0,.06);
+
+      --section-bg:   #f5f0e8;
     }
 
     body.dark-mode #reservation {
-      --bg:        #060606;
-      --bg2:       #0d0d0d;
-      --bg3:       #141414;
-      --bg4:       #1c1c1c;
-      --tx:        #ede7de;
-      --tx2:       #746c66;
-      --tx3:       #363230;
-      --gd:        #c09848;
-      --gd2:       #dab860;
-      --br:        rgba(255,255,255,.07);
-      --br2:       rgba(255,255,255,.12);
-      --inp:       rgba(255,255,255,.04);
-      --ibd:       rgba(255,255,255,.10);
-      --ifoc:      rgba(255,255,255,.08);
-      --ph:        rgba(255,255,255,.25);
-      --shad:      0 24px 64px rgba(0,0,0,.60);
-      --section-bg:#070707;
-      --ac-open:   #0d0d0d;
+      --bg:           #090909;
+      --bg2:          #0f0f0f;
+      --bg3:          #161616;
+      --tx:           #eee8df;
+      --tx2:          #6e6660;
+      --tx3:          #302e2c;
+      --gd:           #bf9840;
+      --gd2:          #d9b458;
+      --br:           rgba(255,255,255,.055);
+      --br2:          rgba(255,255,255,.1);
+      --inp:          rgba(255,255,255,.04);
+      --ibd:          rgba(255,255,255,.08);
+      --ifoc:         rgba(255,255,255,.06);
+      --ph:           rgba(255,255,255,.18);
+    
+      --cover-from:   #5a0a14;
+      --cover-to:     #3d0609;
+      --cover-stripe: rgba(255,255,255,.015);
+      --cover-tx:     rgba(255,255,255,.5);
+      --cover-tx2:    rgba(255,255,255,.4);
+      --cover-tx3:    rgba(255,255,255,.25);
+      --cover-border: rgba(255,255,255,.3);
+      --cover-num:    rgba(255,255,255,.15);
+      --stamp-border: rgba(255,255,255,.15);
+      --stamp-tx:     rgba(255,255,255,.35);
+      --scroll-thumb: rgba(191,152,64,.35);
+      --scroll-track: rgba(255,255,255,.05);
+      --item-border:  rgba(255,255,255,.055);
+     
+      --section-bg:   #050505;
     }
 
-    /* ═══════════════════════════════════════
-       SECTION
-    ═══════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════
+       SECTION — scoped, no global bleed
+    ═══════════════════════════════════════════════════════ */
     #reservation {
-      padding: 72px 0 90px;
+      padding: 60px 0;
       background: var(--section-bg);
       position: relative;
       overflow: hidden;
@@ -175,497 +199,480 @@ body.search-active .products-section {
     #reservation .res-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 28px;
       position: relative;
       z-index: 1;
     }
 
-    /* ═══════════════════════════════════════
-       EYEBROW
-    ═══════════════════════════════════════ */
-    #reservation .r5-eyebrow {
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--tx3);
+    /* ═══════════════════════════════════════════════════════
+       PASSPORT WRAP
+    ═══════════════════════════════════════════════════════ */
+    #reservation .passport-wrap {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      border: 1px solid var(--br2);
+      border-radius: 8px;
+      overflow: hidden;
+     
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       LEFT — PASSPORT COVER
+    ═══════════════════════════════════════════════════════ */
+    #reservation .pp-cover {
+     background: var(--cover-from);
+      padding: 40px 28px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 9px;
+      justify-content: center;
+      text-align: center;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    #reservation .pp-cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 10px,
+        var(--cover-stripe) 10px, var(--cover-stripe) 11px
+      );
+    }
+
+    #reservation .pp-emblem {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      border: 2px solid var(--cover-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      position: relative; z-index: 1;
+      flex-shrink: 0;
+    }
+
+    #reservation .pp-cover-text {
+      position: relative; z-index: 1;
+    }
+
+    #reservation .pp-location {
+      font-size: 9px; letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cover-tx);
+      margin-bottom: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    #reservation .pp-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: #fff; letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.25; margin-bottom: 5px;
+    }
+
+    #reservation .pp-subtitle {
+      font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cover-tx2);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* cuisine category stamps */
+    #reservation .pp-stamps {
+      display: flex; flex-wrap: wrap;
+      gap: 7px; justify-content: center;
+      position: relative; z-index: 1;
+    }
+
+    #reservation .pp-stamp {
+      border: 1.5px solid var(--cover-border);
+      border-radius: 3px;
+      padding: 4px 10px;
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cover-tx2);
+      font-family: 'DM Sans', sans-serif;
+      opacity: 0.85;
+    }
+
+    #reservation .pp-stamp.gd {
+      border-color: rgba(191,152,64,.6);
+      color: var(--gd2);
+      opacity: 1;
+    }
+
+    #reservation .pp-number {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--cover-tx3);
+      border-top: 1px solid var(--cover-num);
+      padding-top: 12px; width: 100%;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RIGHT — PAGES (menu + form)
+    ═══════════════════════════════════════════════════════ */
+    #reservation .pp-pages {
+      background: var(--bg);
+      border-left: 4px solid rgba(0,0,0,.25);
+      display: grid;
+      grid-template-columns: 1fr 1px 380px;
+    }
+
+    #reservation .pp-divider {
+      background: var(--br);
+    }
+
+    /* ── MENU SIDE ── */
+    #reservation .pp-menu {
+      padding: 28px 30px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #reservation .pp-menu-header {
+      border-bottom: 2px solid var(--tx);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-shrink: 0;
+    }
+
+    #reservation .pp-menu-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 600; letter-spacing: 1px;
+    }
+
+    #reservation .pp-menu-date {
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--tx3);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* category tabs */
+    #reservation .menu-cats {
+      display: flex; flex-wrap: wrap;
+      gap: 7px; margin-bottom: 16px; flex-shrink: 0;
+    }
+
+    #reservation .menu-cat-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 9px; letter-spacing: 2.5px;
+      padding: 4px 12px; border-radius: 3px;
+      border: 1px solid var(--br2);
+      background: transparent; color: var(--tx3);
+      cursor: pointer; transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+
+    #reservation .menu-cat-btn.active {
+      background: rgba(128,96,26,.10);
+      border-color: rgba(128,96,26,.4);
+      color: var(--gd);
+    }
+
+    body.dark-mode #reservation .menu-cat-btn.active {
+      background: rgba(191,152,64,.10);
+      border-color: rgba(191,152,64,.4);
+    }
+
+    #reservation .menu-cat-btn:hover:not(.active) {
+      border-color: var(--tx2); color: var(--tx);
+    }
+
+    /* menu display */
+    #reservation .menu-display {
+      flex: 1; position: relative; min-height: 300px;
+    }
+
+  #reservation .menu-panel {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+  overflow-y: auto; overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+}
+#reservation .menu-panel.active {
+  opacity: 1; pointer-events: auto;
+}
+
+    #reservation .menu-panel::-webkit-scrollbar { width: 3px; }
+    #reservation .menu-panel::-webkit-scrollbar-track {
+      background: var(--scroll-track); border-radius: 4px;
+    }
+    #reservation .menu-panel::-webkit-scrollbar-thumb {
+      background: var(--scroll-thumb); border-radius: 4px;
+    }
+
+  
+
+    #reservation .menu-cat-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(13px, 1.5vw, 16px);
+      letter-spacing: 3px; color: var(--tx);
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 10px;
+      position: sticky; top: 0;
+      background: var(--bg); padding-bottom: 5px; z-index: 2;
+    }
+
+    #reservation .menu-cat-title::after {
+      content: ''; flex: 1;
+      border-bottom: 1px dashed var(--br2);
+    }
+
+    #reservation .menu-item-count {
+      font-size: 8.5px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--tx3);
       margin-bottom: 10px;
       font-family: 'DM Sans', sans-serif;
     }
 
-    #reservation .r5-eyebrow::before {
-      content: '';
-      width: 22px; height: 1px;
-      background: var(--gd);
-      flex-shrink: 0;
+    #reservation .menu-item {
+      display: flex; align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px dotted var(--item-border);
     }
 
-    #reservation .r5-title {
+    #reservation .menu-item:last-child { border-bottom: none; }
+
+    #reservation .menu-item-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px; font-weight: 400; color: var(--tx);
+      flex-shrink: 0; max-width: 38%;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    #reservation .menu-item-dots {
+      flex: 1; border-bottom: 1px dashed var(--br2);
+      height: 0; margin: 0 8px; min-width: 12px;
+      align-self: center;
+    }
+
+    #reservation .menu-item-variants {
+      display: flex; align-items: baseline;
+      gap: 8px; flex-shrink: 0;
+      flex-wrap: wrap; justify-content: flex-end;
+      padding-right: 14px;
+    }
+
+    #reservation .menu-variant {
+      display: flex; align-items: baseline; gap: 3px;
+    }
+
+    #reservation .menu-variant-size {
+      font-size: 9.5px; color: var(--tx2);
+      letter-spacing: 0.5px; font-weight: 300;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    #reservation .menu-variant-price {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700; font-size: 12px; color: var(--gd);
+    }
+
+    #reservation .menu-variant-sep {
+      color: var(--tx3); font-size: 9px;
+    }
+
+    #reservation .menu-loading {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 180px; gap: 10px;
+    }
+
+   #reservation .menu-loading-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gd);
+  display: inline-block; margin: 0 3px;
+  opacity: .4;
+}
+ 
+
+    /* ── FORM SIDE ── */
+    #reservation .pp-form {
+      padding: 28px 28px;
+      background: var(--bg);
+    }
+
+    #reservation .pp-form-header {
+      border-bottom: 2px solid var(--tx);
+      padding-bottom: 10px; margin-bottom: 18px;
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+
+    #reservation .pp-form-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(24px, 4vw, 58px);
-      font-weight: 400;
-      letter-spacing: 2px;
-      line-height: 1;
-      margin-bottom: 6px;
-      color: var(--tx);
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 600; letter-spacing: 1px;
     }
 
-    #reservation .r5-sub {
-      font-size: 13px;
-      color: var(--tx2);
-      font-weight: 300;
-      margin-bottom: 36px;
-      letter-spacing: .5px;
+    #reservation .pp-form-sub {
+      font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--tx3);
       font-family: 'DM Sans', sans-serif;
     }
 
-    /* ═══════════════════════════════════════
-       MOOD PILLS
-    ═══════════════════════════════════════ */
-    #reservation .r5-mood {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
+    /* underline field style — "official form" feel */
+    #reservation .pp-field {
+      display: flex; flex-direction: column;
+      gap: 4px; border-bottom: 1px solid var(--br2);
+      padding-bottom: 10px;
     }
 
-    #reservation .r5-pill {
-      padding: 6px 15px;
-      border: 1px solid var(--br2);
-      border-radius: 50px;
-      font-size: 11px;
-      color: var(--tx2);
-      cursor: pointer;
-      transition: all .22s ease;
-      background: var(--inp);
+    #reservation .pp-field label {
+      font-size: 8px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--tx3);
       font-family: 'DM Sans', sans-serif;
     }
 
-    #reservation .r5-pill:hover { border-color: var(--gd); color: var(--tx); }
-
-    #reservation .r5-pill.active {
-      border-color: rgba(192,152,72,.45);
-      background: rgba(192,152,72,.10);
-      color: var(--gd);
-      font-weight: 500;
-    }
-
-    /* ═══════════════════════════════════════
-       MAIN LAYOUT
-    ═══════════════════════════════════════ */
-    #reservation .r5-layout {
-      display: grid;
-      grid-template-columns: 1fr 440px;
-      gap: 48px;
-      align-items: start;
-    }
-
-    /* ═══════════════════════════════════════
-       5-IMAGE COLLAGE
-    ═══════════════════════════════════════ */
-   #reservation .collage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 6px;
-  height: 560px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-    #reservation .col-img {
-      overflow: hidden;
-      position: relative;
-    }
-
-   #reservation .col-img img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
-  
-
-    /* 4 smalls on the right */
-   #reservation .col-img.hero { grid-column: 1; grid-row: 1 / 3; }
-   #reservation .col-img.lft2 { grid-column: 1; grid-row: 3; }
-#reservation .col-img.sm1  { grid-column: 2; grid-row: 1; }
-#reservation .col-img.sm2  { grid-column: 2; grid-row: 2; }
-#reservation .col-img.sm3  { grid-column: 2; grid-row: 3; }
-
-    /* overlay badge on hero */
-  #reservation .col-badge {
-  position: absolute;
-  bottom: 16px; left: 16px;
-  background: rgba(0,0,0,.62);
-  border-radius: 50px;
-  padding: 7px 14px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  z-index: 2;
-}
-
-    #reservation .col-badge-stars { font-size: 10px; color: #d4a820; letter-spacing: 1px; }
-    #reservation .col-badge-txt { font-size: 11px; color: rgba(255,255,255,.88); font-family: 'DM Sans', sans-serif; }
-
-    /* label chips on small images */
-   #reservation .col-chip {
-  position: absolute;
-  bottom: 8px; left: 8px;
-  background: rgba(0,0,0,.62);
-  color: rgba(255,255,255,.80);
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 50px;
-  font-family: 'DM Sans', sans-serif;
-  z-index: 2;
-  pointer-events: none;
-}
-
-    /* ═══════════════════════════════════════
-       RIGHT — ACCORDION
-    ═══════════════════════════════════════ */
-    #reservation .accord {
-      border: 1px solid var(--br2);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-
-    #reservation .ac-item { border-bottom: 1px solid var(--br2); }
-    #reservation .ac-item:last-child { border-bottom: none; }
-
-    #reservation .ac-head {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 17px 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      transition: background .2s;
-      color: var(--tx);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .ac-head:hover { background: var(--br); }
-    #reservation .ac-head.open { background: var(--ac-open); }
-
-    #reservation .ac-num {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      border: 1.5px solid var(--br2);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--tx3);
-      transition: all .25s;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .ac-head.open .ac-num {
-      border-color: var(--gd);
-      color: var(--gd);
-      background: rgba(192,152,72,.08);
-    }
-
-    #reservation .ac-head-info { flex: 1; }
-    #reservation .ac-head-t { font-size: 13.5px; font-weight: 500; }
-    #reservation .ac-head-s { font-size: 11px; color: var(--tx2); margin-top: 1px; }
-
-    #reservation .ac-arr {
-      font-size: 12px;
-      color: var(--tx3);
-      transition: transform .3s ease;
-      flex-shrink: 0;
-    }
-
-    #reservation .ac-head.open .ac-arr {
-      transform: rotate(180deg);
-      color: var(--gd);
-    }
-
-    /* accordion body */
-#reservation .ac-body {
-  display: none;
-  background: var(--ac-open);
-}
-#reservation .ac-body.open { display: block; }
-
-    #reservation .ac-fields {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-    }
-
-    /* form atoms */
-    #reservation .fl { display: flex; flex-direction: column; gap: 5px; }
-
-    #reservation .fl label {
-      font-size: 9px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--tx2);
-      font-weight: 500;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    #reservation .fl input,
-    #reservation .fl select,
-    #reservation .fl textarea {
-      background: var(--inp);
-      border: 1px solid var(--ibd);
-      border-radius: 6px;
-      padding: 11px 13px;
-      color: var(--tx);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      width: 100%;
-      outline: none;
-      transition: all .25s ease;
+    #reservation .pp-field input,
+    #reservation .pp-field select,
+    #reservation .pp-field textarea {
+      background: none; border: none; outline: none;
+      color: var(--tx); font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px; padding: 4px 0; width: 100%;
       -webkit-appearance: none;
+      transition: color 0.2s;
     }
 
-    #reservation .fl input::placeholder,
-    #reservation .fl textarea::placeholder { color: var(--ph); }
+    #reservation .pp-field input::placeholder,
+    #reservation .pp-field textarea::placeholder { color: var(--ph); }
 
-    #reservation .fl select option { background: #070707; color: #ede7de; }
+    #reservation .pp-field input:focus,
+    #reservation .pp-field select:focus,
+    #reservation .pp-field textarea:focus { color: var(--gd); }
 
-    #reservation .fl input:focus,
-    #reservation .fl select:focus,
-    #reservation .fl textarea:focus {
-      border-color: var(--gd);
-      background: var(--ifoc);
-      box-shadow: 0 0 0 3px rgba(192,152,72,.07);
+    #reservation .pp-field select { cursor: pointer; }
+
+    #reservation .pp-field select option {
+      background: #0f0f0f; color: #eee8df;
     }
 
-    #reservation .fl textarea { resize: none; min-height: 80px; }
+    #reservation .pp-field textarea {
+      resize: none; min-height: 58px; font-size: 13px;
+    }
 
-    #reservation .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    #reservation .pp-grid2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
 
-    /* submit inside accordion */
+    #reservation .pp-fields {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    /* submit button */
     #reservation .submit-reservation-btn {
-      width: 100%;
-      background: var(--gd);
-      color: #fff;
-      padding: 13px;
-      border: none;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all .3s ease;
-      font-family: 'DM Sans', sans-serif;
-      margin-top: 2px;
+      width: 100%; background: var(--gd); color: #050505;
+      padding: 13px; border: none; border-radius: 5px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; cursor: pointer;
+     transition: background .25s;
+      margin-top: 6px; font-family: 'DM Sans', sans-serif;
+     
     }
-
-    body.dark-mode #reservation .submit-reservation-btn { color: #070707; }
 
    #reservation .submit-reservation-btn:hover:not(:disabled) {
   background: var(--gd2);
-}
-
-    #reservation .submit-reservation-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
-
-  #reservation .r5-info {
-  border-left: 2px solid var(--gd);
-  padding-left: 16px;
-  margin-bottom: 20px;
-}
-#reservation .r5-info-name {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(16px, 2vw, 22px);
-  letter-spacing: 2px;
-  color: var(--tx);
-  margin-bottom: 4px;
-}
-#reservation .r5-info-tag {
-  font-size: 9px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--gd);
-  margin-bottom: 14px;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-info-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-#reservation .r5-info-row {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-info-row-k {
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--tx3);
-  min-width: 72px;
-  padding-top: 1px;
-}
-#reservation .r5-info-row-v {
-  font-size: 12.5px;
-  color: var(--tx);
-  line-height: 1.4;
-}
-#reservation .r5-info-divider {
-  height: 1px;
-  background: var(--br2);
-  margin: 12px 0;
-}
-#reservation .r5-fine-print {
-  text-align: center;
-  font-size: 10px;
-  color: var(--tx3);
-  letter-spacing: .5px;
-  margin-top: 10px;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-eyebrow-r {
-  font-size: 9px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--tx3);
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 10px;
-  font-family: 'DM Sans', sans-serif;
-}
-#reservation .r5-eyebrow-r::before {
-  content: '';
-  width: 22px; height: 1px;
-  background: var(--gd);
-  flex-shrink: 0;
-}
-#reservation .r5-title-r {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(22px, 3vw, 42px);
-  font-weight: 400;
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 6px;
-  color: var(--tx);
-}
-#reservation .r5-sub-r {
-  font-size: 13px;
-  color: var(--tx2);
-  font-weight: 300;
-  margin-bottom: 20px;
-  letter-spacing: .5px;
-  font-family: 'DM Sans', sans-serif;
-}
-
-#reservation .r5-title-r {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(22px, 3vw, 42px);
-  font-weight: 400;
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 6px;
-  color: var(--tx);
-}
-#reservation .r5-sub-r {
-  font-size: 13px;
-  color: var(--tx2);
-  font-weight: 300;
-  margin-bottom: 20px;
-  letter-spacing: .5px;
-  font-family: 'DM Sans', sans-serif;
-}
-
-    /* pdf banner */
-    #reservation .pdf-banner {
-      display: none;
-      margin-top: 14px;
-      background: rgba(192,152,72,.07);
-      border: 1px solid rgba(192,152,72,.22);
-      border-radius: 6px;
-      padding: 14px 16px;
-      text-align: center;
     }
 
-    #reservation .pdf-banner p { font-size: 12px; margin-bottom: 9px; color: var(--tx); font-family: 'DM Sans', sans-serif; }
+    #reservation .submit-reservation-btn:disabled {
+      opacity: 0.6; cursor: not-allowed; transform: none;
+    }
 
-    #reservation .pdf-download-btn {
-      display: inline-block;
-      background: var(--gd); color: #fff;
-      padding: 8px 20px; border-radius: 50px;
-      font-size: 11px; font-weight: 700;
-      text-decoration: none; letter-spacing: .5px;
-      transition: transform .25s, box-shadow .25s;
+    #reservation .pp-form-note {
+      text-align: center; font-size: 9.5px;
+      color: var(--tx3); letter-spacing: 0.5px; margin-top: 6px;
       font-family: 'DM Sans', sans-serif;
     }
 
-    body.dark-mode #reservation .pdf-download-btn { color: #070707; }
-   #reservation .pdf-download-btn:hover { opacity: .88; }
+    /* PDF banner */
+    #reservation .pdf-banner {
+      display: none; margin-top: 14px;
+      background: rgba(191,152,64,.08);
+      border: 1px solid rgba(191,152,64,.22);
+      border-radius: 6px; padding: 14px 16px; text-align: center;
+    }
+
+    #reservation .pdf-banner p {
+      font-size: 12px; margin-bottom: 9px;
+      color: var(--tx); opacity: 0.9;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    #reservation .pdf-download-btn {
+      display: inline-block; background: var(--gd); color: #050505;
+      padding: 8px 20px; border-radius: 50px; font-size: 11px;
+      font-weight: 700; text-decoration: none; letter-spacing: 0.5px;
+      transition: opacity .25s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+  #reservation .pdf-download-btn:hover { opacity: .88; }
+
     /* TOAST */
     #resToast {
       position: fixed; bottom: 28px; left: 50%;
       transform: translateX(-50%) translateY(80px);
       background: #16a34a; color: #fff;
       padding: 13px 26px; border-radius: 50px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13.5px; font-weight: 600;
+      font-family: 'DM Sans', sans-serif; font-size: 13.5px; font-weight: 600;
       z-index: 9999;
-      transition: transform .4s cubic-bezier(.175,.885,.32,1.275), opacity .4s;
+      transition: transform 0.4s cubic-bezier(0.175,.885,.32,1.275), opacity 0.4s;
       opacity: 0; pointer-events: none;
       max-width: 90vw; text-align: center;
     }
 
     #resToast.show  { transform: translateX(-50%) translateY(0); opacity: 1; }
     #resToast.error { background: #dc2626; }
-    @media(max-width:768px) { #resToast { font-size:11px; padding:17px 25px; white-space:nowrap; } }
 
-    /* ═══════════════════════════════════════
+    @media (max-width: 768px) {
+      #resToast { font-size: 11px; padding: 16px 25px;  white-space: nowrap; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
        RESPONSIVE
-    ═══════════════════════════════════════ */
-    @media(max-width: 960px) {
-      #reservation .r5-layout { grid-template-columns: 1fr; gap: 36px; }
-      #reservation .collage { height: 420px; }
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1060px) {
+      #reservation .pp-pages { grid-template-columns: 1fr 1px 320px; }
     }
 
-    @media(max-width: 600px) {
-      #reservation { padding: 44px 0 60px; }
-      #reservation .res-inner { padding: 0 14px; }
-      #reservation .collage {
-        height: auto;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 220px 140px 140px;
+    @media (max-width: 900px) {
+      #reservation .passport-wrap { grid-template-columns: 1fr; }
+      #reservation .pp-cover {
+        min-height: auto; padding: 28px 24px;
+        flex-direction: row; text-align: left;
+        justify-content: flex-start; gap: 20px;
       }
-      #reservation .col-img.hero {
-        grid-column: 1 / 3;
-        grid-row: 1;
+      #reservation .pp-number { display: none; }
+      #reservation .pp-pages { grid-template-columns: 1fr; border-left: none; }
+      #reservation .pp-divider { display: none; }
+      #reservation .pp-menu {
+        min-height: auto; padding: 22px 18px;
+        border-bottom: 1px solid var(--br2);
       }
-     #reservation .col-img.sm1  { grid-column: 1; grid-row: 2; }
-#reservation .col-img.sm2  { grid-column: 2; grid-row: 2; }
-#reservation .col-img.sm3  { grid-column: 1; grid-row: 3; }
-#reservation .col-img.lft2 { grid-column: 2; grid-row: 3; }
-      #reservation .g2 { grid-template-columns: 1fr; }
-      #reservation .ac-fields { padding: 16px; }
-      #reservation .ac-head { padding: 14px 16px; gap: 10px; }
-      #reservation .r5-sub { margin-bottom: 20px; }
+      #reservation .pp-form { padding: 22px 18px; }
     }
 
-    @media(max-width: 420px) {
-      #reservation .collage { grid-template-rows: 190px 120px 120px; }
+    @media (max-width: 600px) {
+      #reservation { padding: 36px 0; }
+      #reservation .res-inner { padding: 0 12px; }
+      #reservation .pp-cover { flex-direction: column; text-align: center; padding: 24px 18px; gap: 12px; }
+      #reservation .pp-grid2 { grid-template-columns: 1fr; }
+      #reservation .menu-display { min-height: 260px; }
+      #reservation .menu-item-name { max-width: 42%; font-size: 12px; }
+      #reservation .menu-item { padding: 6px 0; }
     }
- 
-
 
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
@@ -1319,322 +1326,368 @@ body.search-active .products-section {
 
 
 
+
 <section id="reservation">
   <div class="res-inner">
+    <div class="passport-wrap">
 
-    <!-- eyebrow + headline -->
-    <div class="r5-eyebrow">Fine Dining Restaurant</div>
-    <h2 class="r5-title">Your Perfect<br>Evening</h2>
-    <p class="r5-sub">Every detail attended to — from your first course to your last.</p></p>
+      <!-- ── PASSPORT COVER ── -->
+      <div class="pp-cover">
+        <div class="pp-emblem">🍽️</div>
+        <div class="pp-cover-text">
+          <div class="pp-location">Est. Your City · 2020</div>
+          <div class="pp-title">Your<br>Restaurant<br>Name</div>
+          <div class="pp-subtitle">Fine Dining Experience</div>
+        </div>
+        <div class="pp-stamps">
+          <div class="pp-stamp gd">North Indian</div>
+          <div class="pp-stamp gd">Street Food</div>
+          <div class="pp-stamp gd">Mithai</div>
+          <div class="pp-stamp">Snacks</div>
+          <div class="pp-stamp">Beverages</div>
+        </div>
+        <div class="pp-number">SEASON 2026 · RESERVE YOUR TABLE</div>
+      </div>
 
-    <!-- mood pills -->
-    <div class="r5-mood" id="r5Mood">
-      <div class="r5-pill active" onclick="selR5Pill(this)">🌅 Breakfast</div>
-      <div class="r5-pill" onclick="selR5Pill(this)">☀️ Lunch</div>
-      <div class="r5-pill" onclick="selR5Pill(this)">🌙 Dinner</div>
-      <div class="r5-pill" onclick="selR5Pill(this)">🎉 Private Event</div>
-    </div>
+      <!-- ── PAGES ── -->
+      <div class="pp-pages">
 
-    <div class="r5-layout">
+        <!-- MENU -->
+        <div class="pp-menu" id="chalkMenuArea">
+          <div class="pp-menu-header">
+            <div class="pp-menu-title">Our Menu</div>
+            <div class="pp-menu-date">Today's Selection</div>
+          </div>
 
-      <!-- LEFT — 5 IMAGE COLLAGE -->
-      <div class="collage">
+          <div class="menu-loading" id="menuLoading">
+            <div>
+              <span class="menu-loading-dot"></span>
+              <span class="menu-loading-dot"></span>
+              <span class="menu-loading-dot"></span>
+            </div>
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tx3);font-family:'DM Sans',sans-serif;">Loading…</div>
+          </div>
 
-        <!-- HERO — big left -->
-        <div class="col-img hero">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85" alt="Restaurant interior" />
-          <div class="col-badge">
-            <span class="col-badge-stars">★★★★★</span>
-            <span class="col-badge-txt">4.9 · 312 reviews</span>
+          <div id="menuContent" style="display:none;flex-direction:column;flex:1;">
+            <div class="menu-cats" id="menuCats"></div>
+            <div class="menu-display" id="menuDisplay"></div>
           </div>
         </div>
-        <div class="col-img lft2">
-  <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80" alt="Private dining" />
-  <div class="col-chip">Private</div>
-</div>
 
-        <!-- SMALL 1 -->
-        <div class="col-img sm1">
-          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&q=80" alt="Terrace dining" />
-          <div class="col-chip">Terrace</div>
-        </div>
+        <div class="pp-divider"></div>
 
-        <!-- SMALL 2 -->
-        <div class="col-img sm2">
-          <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?w=500&q=80" alt="Signature dish" />
-          <div class="col-chip">Signature</div>
-        </div>
+        <!-- FORM -->
+        <div class="pp-form">
+          <div class="pp-form-header">
+            <div class="pp-form-title">Reserve a Table</div>
+            <div class="pp-form-sub">Complete in full</div>
+          </div>
 
-        <!-- SMALL 3 -->
-        <div class="col-img sm3">
-          <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80" alt="Ambience" />
-          <div class="col-chip">Ambience</div>
-        </div>
+          <form id="reservationForm" novalidate>
+            <div class="pp-fields">
 
-      </div>
-
-      <!-- RIGHT — ACCORDION + SUMMARY -->
-      <div>
-
-   
-<h2 class="r5-title-r">Reserve<br>A Table</h2>
-<p class="r5-sub-r">Complete your reservation in 3 simple steps</p>
-
-        <form id="reservationForm" novalidate>
-
-          <div class="accord">
-
-            <!-- STEP 1 — Guest Info -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">1</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Guest Information</div>
-                  <div class="ac-head-s">Name, email &amp; contact</div>
+              <div class="pp-grid2">
+                <div class="pp-field">
+                  <label>Full Name *</label>
+                  <input type="text" id="resName" placeholder="Your name" required />
                 </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Full Name *</label>
-                    <input type="text" id="resName" placeholder="Your full name" required />
-                  </div>
-                  <div class="fl">
-                    <label>Email Address</label>
-                    <input type="email" id="resEmail" placeholder="you@email.com" />
-                  </div>
-                  <div class="fl">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="resPhone" placeholder="+91 98765 43210" required />
-                  </div>
+                <div class="pp-field">
+                  <label>Phone *</label>
+                  <input type="tel" id="resPhone" placeholder="+91 98765 43210" required />
                 </div>
               </div>
-            </div>
 
-            <!-- STEP 2 — Details -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">2</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Reservation Details</div>
-                  <div class="ac-head-s">Date, time &amp; guests</div>
+              <div class="pp-field">
+                <label>Email Address</label>
+                <input type="email" id="resEmail" placeholder="you@email.com" />
+              </div>
+
+              <div class="pp-grid2">
+                <div class="pp-field">
+                  <label>Date *</label>
+                  <input type="date" id="resDate" required />
                 </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Date *</label>
-                    <input type="date" id="resDate" required />
-                  </div>
-                  <div class="g2">
-                    <div class="fl">
-                      <label>Preferred Time *</label>
-                      <select id="resTime">
-                        <option>7:00 AM</option>
-                        <option>8:00 AM</option>
-                        <option>9:00 AM</option>
-                        <option>12:00 PM</option>
-                        <option>1:00 PM</option>
-                        <option>2:00 PM</option>
-                        <option>6:00 PM</option>
-                        <option selected>7:00 PM</option>
-                        <option>8:00 PM</option>
-                        <option>9:00 PM</option>
-                        <option>10:00 PM</option>
-                      </select>
-                    </div>
-                    <div class="fl">
-                      <label>No. of Guests *</label>
-                      <select id="resGuests">
-                        <option value="1">1 Person</option>
-                        <option value="2" selected>2 People</option>
-                        <option value="3">3 People</option>
-                        <option value="4">4 People</option>
-                        <option value="5">5 People</option>
-                        <option value="6">6 People</option>
-                        <option value="7+">7+ People</option>
-                      </select>
-                    </div>
-                  </div>
+                <div class="pp-field">
+                  <label>Preferred Time *</label>
+                  <select id="resTime" required>
+                    <option>12:00 PM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                    <option>5:00 PM</option>
+                    <option>6:00 PM</option>
+                    <option selected>7:00 PM</option>
+                    <option>8:00 PM</option>
+                    <option>9:00 PM</option>
+                    <option>10:00 PM</option>
+                  </select>
                 </div>
               </div>
-            </div>
 
-            <!-- STEP 3 — Preferences -->
-            <div class="ac-item">
-              <button type="button" class="ac-head" onclick="toggleR5Ac(this)">
-                <div class="ac-num">3</div>
-                <div class="ac-head-info">
-                  <div class="ac-head-t">Preferences &amp; Extras</div>
-                  <div class="ac-head-s">Special requests &amp; notes</div>
-                </div>
-                <span class="ac-arr">▼</span>
-              </button>
-              <div class="ac-body">
-                <div class="ac-fields">
-                  <div class="fl">
-                    <label>Special Requests</label>
-                    <textarea id="resRequests" placeholder="Dietary needs, occasions, seating preferences, allergies…"></textarea>
-                  </div>
-                  <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">
-                    Reserve My Table
-                  </button>
-                  <div class="pdf-banner" id="pdfBanner">
-                    <p>✅ Confirmed! Download your reservation.</p>
-                    <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation.pdf">📄 Download PDF</a>
-                  </div>
-                </div>
+              <div class="pp-field">
+                <label>Number of Guests *</label>
+                <select id="resGuests" required>
+                  <option value="1">1 Person</option>
+                  <option value="2" selected>2 People</option>
+                  <option value="3">3 People</option>
+                  <option value="4">4 People</option>
+                  <option value="5">5 People</option>
+                  <option value="6">6 People</option>
+                  <option value="7+">7+ People</option>
+                </select>
               </div>
+
+              <div class="pp-field">
+                <label>Special Requests</label>
+                <textarea id="resRequests" placeholder="Dietary restrictions, occasions, seating preferences…"></textarea>
+              </div>
+
+              <button type="submit" class="submit-reservation-btn" id="resSubmitBtn">
+                Reserve My Table
+              </button>
+
+              <p class="pp-form-note">Confirmed within 2 hours · Free cancellation</p>
+
+              <div class="pdf-banner" id="pdfBanner">
+                <p>✅ Reservation confirmed! Download your confirmation below.</p>
+                <a href="#" class="pdf-download-btn" id="pdfDownloadLink" download="Reservation-Confirmation.pdf">
+                  📄 Download PDF
+                </a>
+              </div>
+
             </div>
+          </form>
+        </div>
 
-          </div><!-- .accord -->
-
-        </form>
-
-   <div class="r5-info">
-  <div class="r5-info-name">Rajkumar Hotel</div>
-  <div class="r5-info-tag">Fine Dining · Est. 2015</div>
-  <div class="r5-info-rows">
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Chef</span>
-      <span class="r5-info-row-v">Chef Arjun Mehra</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Cuisine</span>
-      <span class="r5-info-row-v">North Indian · Continental</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Hours</span>
-      <span class="r5-info-row-v">12PM–3PM · 7PM–11PM</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Location</span>
-      <span class="r5-info-row-v">Your City, India</span>
-    </div>
-    <div class="r5-info-row">
-      <span class="r5-info-row-k">Features</span>
-      <span class="r5-info-row-v">Rooftop · Private Dining · Live Music · Chef's Table</span>
-    </div>
-  </div>
-</div>
-<div class="r5-info-divider"></div>
-<p class="r5-fine-print">Free cancellation · Confirmed within 2 hours</p>
-
-      </div>
-    </div>
-  </div>
+      </div><!-- /.pp-pages -->
+    </div><!-- /.passport-wrap -->
+  </div><!-- /.res-inner -->
 </section>
 
 <div id="resToast"></div>
 
 <script>
-(function(){
+(function() {
+/* ═══════════════════════════════════════════════════
+   CONFIG — edit these
+═══════════════════════════════════════════════════ */
+const MENU_CATEGORIES = ["maincourse", "streetfood", "mithai", "snacks"];
 
-  /* mood pills */
-  window.selR5Pill = function(el){
-    document.querySelectorAll('#r5Mood .r5-pill').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    updateSummary();
-  };
-
-  /* accordion */
-window.toggleR5Ac = function(btn){
-  const body = btn.nextElementSibling;
-  const isOpen = btn.classList.contains('open');
-  document.querySelectorAll('#reservation .ac-head').forEach(b => {
-    b.classList.remove('open');
-    b.nextElementSibling.classList.remove('open');
-  });
-  if(!isOpen){ btn.classList.add('open'); body.classList.add('open'); }
+const CATEGORY_LABELS = {
+  maincourse:    "Main Course",
+  streetfood:    "Street Food",
+  "street-food": "Street Food",
+  mithai:        "Mithai",
+  sweets:        "Sweets",
+  snacks:        "Snacks",
+  dairy:         "Dairy",
+  beverages:     "Beverages",
+  icecreams:     "Ice Creams",
+  desserts:      "Desserts",
+  starters:      "Starters",
+  breads:        "Breads",
 };
 
-  /* date min */
-  const dateEl = document.getElementById('resDate');
-  dateEl.setAttribute('min', new Date().toISOString().split('T')[0]);
+function getCategoryLabel(k) {
+  return CATEGORY_LABELS[k] || k.replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase());
+}
 
+const isMobile = () => window.innerWidth <= 600;
 
+/* ═══════════════════════════════════════════════════
+   MENU
+═══════════════════════════════════════════════════ */
+let menuGroups = [];
+let currentCat = 0;
 
-  /* toast */
-  function showToast(msg, isError){
-    const t = document.getElementById('resToast');
-    t.textContent = msg; t.className = isError ? 'error' : '';
-    void t.offsetWidth; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 4000);
-  }
-
-  function genResId(){
-    return 'RES-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2,4).toUpperCase();
-  }
-
-  /* submit */
-  document.getElementById('reservationForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const name    = document.getElementById('resName').value.trim();
-    const phone   = document.getElementById('resPhone').value.trim();
-    const email   = document.getElementById('resEmail').value.trim();
-    const date    = dateEl.value;
-    const time    = document.getElementById('resTime').value;
-    const guests  = document.getElementById('resGuests').value;
-    const special = document.getElementById('resRequests').value.trim();
-    const occasion= document.querySelector('#r5Mood .r5-pill.active')?.textContent?.trim() || '';
-
-    if(!name)  { showToast('⚠️ Please enter your name.', true); return; }
-    if(!phone) { showToast('⚠️ Please enter your phone.', true); return; }
-    if(!date)  { showToast('⚠️ Please select a date.', true); return; }
-
-    const reservationId = genResId();
-    const btn = document.getElementById('resSubmitBtn');
-    btn.disabled = true; btn.textContent = '⏳ Confirming…';
-
-    const payload = { reservationId, name, phone, email, guests, date, time, specialRequests: special, occasion };
-
-    try {
-      const [tgRes, saveRes] = await Promise.all([
-        fetch('/.netlify/functions/sendReservationTelegram', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-        }),
-        fetch('/.netlify/functions/saveReservation', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-        })
-      ]);
-
-      if(!saveRes.ok){ const err = await saveRes.json().catch(()=>({})); throw new Error(err.error||'Save failed'); }
-
-      if(tgRes.ok){
-        const tgData = await tgRes.json().catch(()=>({}));
-        if(tgData.pdfUrl){
-          fetch('/.netlify/functions/updateReservationPdf', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ reservationId, pdfUrl: tgData.pdfUrl })
-          }).catch(()=>{});
-          const link = document.getElementById('pdfDownloadLink');
-          link.href = tgData.pdfUrl;
-          link.download = 'Reservation-' + reservationId + '.pdf';
-          document.getElementById('pdfBanner').style.display = 'block';
-        }
+(function waitForProducts() {
+  let waited = 0;
+  const iv = setInterval(() => {
+    if (Array.isArray(window.products) && window.products.length > 0) {
+      clearInterval(iv);
+      buildMenuGroups();
+      initMenu();
+    } else {
+      waited += 100;
+      if (waited >= 6000) {
+        clearInterval(iv);
+        document.getElementById('menuLoading').innerHTML =
+          '<p style="color:var(--tx3);font-size:11px;font-family:\'DM Sans\',sans-serif;text-align:center">Menu unavailable</p>';
       }
-
-      showToast('✅ Reservation confirmed! We will contact you shortly.');
-      btn.textContent = '✅ Confirmed!';
-      setTimeout(()=>{
-        document.getElementById('reservationForm').reset();
-        document.getElementById('pdfBanner').style.display = 'none';
-        btn.disabled = false;
-        btn.textContent = 'Reserve My Table';
-        updateSummary();
-      }, 5000);
-
-    } catch(err){
-      console.error(err);
-      showToast('❌ Something went wrong. Please try again.', true);
-      btn.disabled = false;
-      btn.textContent = 'Reserve My Table';
     }
-  });
-
+  }, 100);
 })();
+
+function buildMenuGroups() {
+  const grouped = {};
+  MENU_CATEGORIES.forEach(k => { grouped[k] = []; });
+  (window.products || []).forEach(p => {
+    (p.categories || []).forEach(c => {
+      if (grouped[c]) grouped[c].push(p);
+    });
+  });
+  menuGroups = MENU_CATEGORIES
+    .filter(k => grouped[k].length > 0)
+    .map(k => ({ key: k, label: getCategoryLabel(k), items: grouped[k] }));
+}
+
+function initMenu() {
+  if (!menuGroups.length) {
+    document.getElementById('menuLoading').innerHTML =
+      '<p style="color:var(--tx3);font-size:11px;font-family:\'DM Sans\',sans-serif;text-align:center">No items found</p>';
+    return;
+  }
+  document.getElementById('menuLoading').style.display = 'none';
+  const content = document.getElementById('menuContent');
+  content.style.display = 'flex';
+  renderCatTabs();
+  renderAllPanels();
+  showCategory(0);
+}
+
+function renderCatTabs() {
+  const el = document.getElementById('menuCats');
+  el.innerHTML = '';
+  menuGroups.forEach((g, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'menu-cat-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = g.label;
+    btn.addEventListener('click', () => showCategory(i));
+    el.appendChild(btn);
+  });
+}
+
+function renderAllPanels() {
+  const display = document.getElementById('menuDisplay');
+  display.innerHTML = '';
+  menuGroups.forEach((g, i) => {
+    const panel = document.createElement('div');
+    panel.className = 'menu-panel' + (i === 0 ? ' active' : '');
+    panel.id = 'menuPanel_' + i;
+    panel.innerHTML = buildPanelHTML(g);
+    display.appendChild(panel);
+  });
+}
+
+function buildPanelHTML(g) {
+  let html = `<div class="menu-cat-title">${g.label}</div>
+    <div class="menu-item-count">${g.items.length} item${g.items.length !== 1 ? 's' : ''}</div>`;
+
+  g.items.forEach(item => {
+    const allVars = (item.variants || []).filter(v => v.inStock !== false);
+    const vars = isMobile()
+      ? (allVars.length >= 2 ? [allVars[1]] : allVars.slice(0,1))
+      : allVars;
+
+    const varHTML = vars.map((v, i) =>
+      `<span class="menu-variant">
+        <span class="menu-variant-size">${v.size}</span>
+        <span class="menu-variant-price">₹${v.newPrice ?? v.price ?? ''}</span>
+      </span>${i < vars.length - 1 ? '<span class="menu-variant-sep">·</span>' : ''}`
+    ).join('');
+
+    html += `<div class="menu-item">
+      <span class="menu-item-name" title="${item.name}">${item.name}</span>
+      <div class="menu-item-dots"></div>
+      <div class="menu-item-variants">${varHTML}</div>
+    </div>`;
+  });
+  return html;
+}
+
+function showCategory(idx) {
+  document.querySelectorAll('#menuDisplay .menu-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === idx);
+    if (i === idx) p.scrollTop = 0;
+  });
+  document.querySelectorAll('#menuCats .menu-cat-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  currentCat = idx;
+}
+
+/* ═══════════════════════════════════════════════════
+   FORM
+═══════════════════════════════════════════════════ */
+document.getElementById('resDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+function showToast(msg, isError) {
+  const t = document.getElementById('resToast');
+  t.textContent = msg;
+  t.className = isError ? 'error' : '';
+  void t.offsetWidth;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+function genResId() {
+  return 'RES-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2,4).toUpperCase();
+}
+
+document.getElementById('reservationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('resName').value.trim();
+  const phone   = document.getElementById('resPhone').value.trim();
+  const email   = document.getElementById('resEmail').value.trim();
+  const guests  = document.getElementById('resGuests').value;
+  const date    = document.getElementById('resDate').value;
+  const time    = document.getElementById('resTime').value;
+  const special = document.getElementById('resRequests').value.trim();
+
+  if (!name)  { showToast('⚠️ Please enter your name.', true); return; }
+  if (!phone) { showToast('⚠️ Please enter your phone.', true); return; }
+  if (!date)  { showToast('⚠️ Please select a date.', true); return; }
+
+  const reservationId = genResId();
+  const btn = document.getElementById('resSubmitBtn');
+  btn.disabled = true; btn.textContent = '⏳ Confirming…';
+
+  const payload = { reservationId, name, phone, email, guests, date, time, specialRequests: special };
+
+  try {
+    const [tgRes, saveRes] = await Promise.all([
+      fetch('/.netlify/functions/sendReservationTelegram', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      }),
+      fetch('/.netlify/functions/saveReservation', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+      })
+    ]);
+
+    if (!saveRes.ok) {
+      const err = await saveRes.json().catch(() => ({}));
+      throw new Error(err.error || 'Save failed');
+    }
+
+    if (tgRes.ok) {
+      const tgData = await tgRes.json().catch(() => ({}));
+      if (tgData.pdfUrl) {
+        fetch('/.netlify/functions/updateReservationPdf', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reservationId, pdfUrl: tgData.pdfUrl })
+        }).catch(() => {});
+        const link = document.getElementById('pdfDownloadLink');
+        link.href = tgData.pdfUrl;
+        link.download = 'Reservation-' + reservationId + '.pdf';
+        document.getElementById('pdfBanner').style.display = 'block';
+      }
+    }
+
+    showToast('✅ Reservation confirmed! We will contact you shortly.');
+    btn.textContent = '✅ Confirmed!';
+    setTimeout(() => {
+      document.getElementById('reservationForm').reset();
+      document.getElementById('pdfBanner').style.display = 'none';
+      btn.disabled = false; btn.textContent = 'Reserve My Table';
+    }, 5000);
+
+  } catch (err) {
+    console.error(err);
+    showToast('❌ Something went wrong. Please try again.', true);
+    btn.disabled = false; btn.textContent = 'Reserve My Table';
+  }
+});
+
+})(); // end IIFE
 </script>
 
 
