@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/snacks.html">
- <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -182,116 +182,162 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background: #080604;
+    background: #030810;
     overflow: hidden;
     margin-top: 0;
     padding: 0;
 }
 
-/* Glow */
-.hero-glow {
-    position: absolute;
-    width: 400px; height: 200px;
-    background: radial-gradient(ellipse, rgba(250,204,21,0.08) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    pointer-events: none;
+/* Blue grid */
+.hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+        linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
 /* Inner */
 .hero-inner {
     position: relative; z-index: 2;
     display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
+    justify-content: center;
     padding: 120px 26px 80px;
     min-height: 100svh;
     width: 100%;
 }
 
-/* Eyebrow */
-.hero-eyebrow {
+/* Signal row */
+.hero-signal {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 16px;
+    opacity: 0; animation: fadeIn 0.5s 0.2s forwards;
+}
+.hero-signal-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #facc15;
+    box-shadow: 0 0 8px rgba(250,204,21,0.8);
+    animation: blink 1.5s infinite;
+}
+.hero-signal-text {
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(250,204,21,0.4);
-    letter-spacing: 6px;
-    text-transform: uppercase;
+    font-size: 10px; color: rgba(250,204,21,0.5);
+    letter-spacing: 4px;
+}
+
+/* Scramble display */
+.hero-scramble {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(36px, 10vw, 64px);
+    color: #facc15; line-height: 0.9;
+    min-height: 2em; word-break: break-all;
+}
+
+/* Decoded title — hidden until done */
+.hero-decoded {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 10vw, 64px);
+    color: #fff; line-height: 0.9;
+    display: none;
+    text-shadow: 0 0 30px rgba(250,204,21,0.15);
+}
+
+/* Tagline */
+.hero-tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px; color: rgba(250,204,21,0.4);
+    margin-top: 16px; letter-spacing: 2px;
     opacity: 0;
-    animation: fadeIn 0.6s 0.3s forwards;
 }
-
-/* Word row */
-.hero-word-row {
-    display: flex; gap: 0;
-    margin: 16px 0;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Each letter */
-.hero-letter {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(64px, 17vw, 104px);
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(250,204,21,0.2);
-    line-height: 0.9;
-    display: inline-block;
-    animation: yellowReveal 0.6s forwards;
-    opacity: 0;
-}
-@keyframes yellowReveal {
-    0%   { opacity:0; -webkit-text-stroke-color: rgba(250,204,21,0.1); color: transparent; transform: translateY(10px); }
-    50%  { opacity:1; -webkit-text-stroke-color: rgba(250,204,21,0.8); color: transparent; }
-    100% { opacity:1; -webkit-text-stroke-color: rgba(250,204,21,0); color: #facc15; transform: translateY(0); }
-}
-
-/* Rule line */
-.hero-rule {
-    width: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, #facc15, transparent);
-    margin: 0 auto 14px;
-    animation: ruleLine 0.8s forwards;
-}
-@keyframes ruleLine { to { width: 160px; } }
 
 /* Sub */
 .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: rgba(250,204,21,0.45);
-    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: rgba(56,189,248,0.35);
+    margin-top: 8px; letter-spacing: 2px;
     opacity: 0;
 }
 
-@keyframes fadeIn {
-    from { opacity:0; }
-    to   { opacity:1; }
+/* Progress bar */
+.hero-bar {
+    display: flex; gap: 3px;
+    margin-top: 24px;
+    opacity: 0; animation: fadeIn 0.5s 0.5s forwards;
 }
+.hero-bar-seg {
+    flex: 1; height: 3px;
+    background: rgba(250,204,21,0.15);
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+.hero-bar-seg.lit { background: #facc15; }
+
+/* Category pills */
+.hero-pills {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 24px; opacity: 0;
+}
+.hero-pill {
+    padding: 7px 14px;
+    border: 1px solid rgba(250,204,21,0.2);
+    color: rgba(255,255,255,0.4);
+    font-size: 11px; font-family: 'Outfit', sans-serif;
+    border-radius: 2px; cursor: pointer;
+    transition: all 0.2s;
+}
+.hero-pill:hover {
+    border-color: #facc15;
+    color: #facc15;
+    background: rgba(250,204,21,0.06);
+}
+
+/* Stats rows */
+.hero-stats {
+    display: flex; flex-direction: column;
+    gap: 0; margin-top: 20px; opacity: 0;
+}
+.hero-stat-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.hero-stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+}
+.hero-stat-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; color: #facc15;
+}
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes blink { 50%{opacity:0} }
 
 /* MOBILE */
 @media (max-width: 768px) {
     .hero-inner { padding: 100px 20px 60px; }
-    .hero-eyebrow { font-size: 9px; letter-spacing: 4px; }
-    .hero-sub { font-size: 15px; }
+    .hero-signal-text { font-size: 9px; letter-spacing: 2px; }
+    .hero-scramble { font-size: clamp(28px, 9vw, 48px); }
+    .hero-decoded { font-size: clamp(28px, 9vw, 48px); }
+    .hero-tagline { font-size: 11px; }
+    .hero-sub { font-size: 10px; }
+    .hero-pill { font-size: 10px; padding: 6px 11px; }
+    .hero-stat-label { font-size: 9px; }
+    .hero-stat-val { font-size: 12px; }
 }
-@media (max-width: 375px) {
-    .hero-inner { padding-top: 90px; }
-    .hero-eyebrow { font-size: 8px; letter-spacing: 3px; }
-    .hero-sub { font-size: 14px; }
-}
-@media (max-width: 340px) {
-    .hero-letter { font-size: 54px; }
-}
+
 @media (max-width: 320px) {
-    .hero-letter { font-size: 48px; }
-    .hero-eyebrow { font-size: 7px; letter-spacing: 2px; }
-    .hero-sub { font-size: 13px; }
-}
-@media (max-width: 300px) {
-    .hero-letter { font-size: 42px; }
-    .hero-inner { padding: 80px 16px 44px; }
+      .hero-inner { padding-top: 90px; }
+    .hero-scramble { font-size: 26px; }
+    .hero-decoded { font-size: 26px; }
+    .hero-signal-text { font-size: 8px; }
+    .hero-tagline { font-size: 10px; }
+    .hero-sub { font-size: 9px; }
 }
 
     </style>
@@ -678,17 +724,29 @@
 
 
     <!-- STUNNING HERO -->
+
 <section class="category-hero">
-    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
 
     <div class="hero-inner">
-        <p class="hero-eyebrow">// SNACKS &amp; BEVERAGES</p>
 
-        <div class="hero-word-row" id="heroWordRow"></div>
+        <div class="hero-signal">
+            <div class="hero-signal-dot"></div>
+            <span class="hero-signal-text">SCANNING MENU...</span>
+        </div>
 
-        <div class="hero-rule" id="heroRule" style="animation:none;width:0"></div>
+        <div class="hero-scramble" id="heroScramble"></div>
+        <div class="hero-decoded" id="heroDecoded"></div>
 
+        <p class="hero-tagline" id="heroTagline"></p>
         <p class="hero-sub" id="heroSub"></p>
+
+        <div class="hero-bar" id="heroBar"></div>
+
+        <div class="hero-pills" id="heroPills"></div>
+
+        <div class="hero-stats" id="heroStats"></div>
+
     </div>
 </section>
 
@@ -1219,42 +1277,129 @@ const CURRENT_CATEGORY = 'snacks';
     }
 }
 
+window.addEventListener('load', function() {
 
-(async function() {
-    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+    const target   = 'SNACKS & SIPS';
+    const tagline  = 'Bold flavours. Zero compromise.';
+    const sub      = '// 500+ products · Fresh daily · Free delivery ₹199+';
+    const pills    = ['🍿 Chips & Crisps', '🥤 Cold Drinks', '🍫 Chocolates', '🧃 Juices'];
+    const stats    = [
+        { label: 'IN STOCK',    val: '492+' },
+        { label: 'NEW TODAY',   val: '+18'  },
+        { label: 'AVG RATING',  val: '4.8★' },
+    ];
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#&';
 
-    const word = 'SNACKS';
-    const eyebrow = '// SNACKS & BEVERAGES';
-    const sub = 'Crunch. Sip. Repeat.';
+    const scramEl  = document.getElementById('heroScramble');
+    const decEl    = document.getElementById('heroDecoded');
+    const tagEl    = document.getElementById('heroTagline');
+    const subEl    = document.getElementById('heroSub');
+    const barEl    = document.getElementById('heroBar');
+    const pillsEl  = document.getElementById('heroPills');
+    const statsEl  = document.getElementById('heroStats');
 
-    // Build letters
-    await delay(400);
-    const rowEl = document.getElementById('heroWordRow');
-    word.split('').forEach((ch, i) => {
-        const sp = document.createElement('span');
-        sp.className = 'hero-letter';
-        sp.textContent = ch;
-        sp.style.animationDelay = (0.6 + i * 0.1) + 's';
-        rowEl.appendChild(sp);
-    });
+    // Build progress bar segments
+    const segCount = 16;
+    for (let i = 0; i < segCount; i++) {
+        const seg = document.createElement('div');
+        seg.className = 'hero-bar-seg';
+        barEl.appendChild(seg);
+    }
+    const segs = barEl.querySelectorAll('.hero-bar-seg');
 
-    // Rule line
-    await delay(600 + word.length * 100 + 400);
-    const rule = document.getElementById('heroRule');
-    rule.style.animation = 'ruleLine 0.8s forwards';
+    // Scramble decode
+    let decoded = Array(target.length).fill(null);
+    let pass = 0;
+    const totalPasses = 80;
 
-    // Sub typing
-    await delay(900);
-    const subEl = document.getElementById('heroSub');
-    subEl.style.opacity = '1';
-    let s = 0;
-    const sv = setInterval(() => {
-        subEl.textContent += sub[s]; s++;
-        if (s >= sub.length) clearInterval(sv);
-    }, 55);
-})();
+    const scramIv = setInterval(() => {
+
+        // Light up progress bar
+        const lit = Math.floor((pass / totalPasses) * segCount);
+        segs.forEach((s, i) => {
+            s.className = 'hero-bar-seg' + (i < lit ? ' lit' : '');
+        });
+
+        // Build display string
+        const display = decoded.map((ch, i) => {
+            if (ch !== null) return ch;
+            return target[i] === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+        scramEl.textContent = display;
+
+        // Resolve characters progressively
+        if (pass % 8 === 0) {
+            for (let i = 0; i < decoded.length; i++) {
+                if (decoded[i] === null && Math.random() < 0.3) {
+                    decoded[i] = target[i];
+                }
+            }
+        }
+
+        pass++;
+
+        // All decoded
+        if (decoded.every(d => d !== null)) {
+            clearInterval(scramIv);
+            segs.forEach(s => s.className = 'hero-bar-seg lit');
+
+            // Swap scramble → decoded
+            scramEl.style.display = 'none';
+            decEl.textContent = target;
+            decEl.style.display = 'block';
+            decEl.style.opacity = '0';
+            decEl.style.animation = 'fadeIn 0.4s forwards';
+
+            // Tagline
+            setTimeout(() => {
+                tagEl.style.opacity = '1';
+                tagEl.style.animation = 'fadeUp 0.5s forwards';
+                let ti = 0;
+                const tv = setInterval(() => {
+                    tagEl.textContent += tagline[ti]; ti++;
+                    if (ti >= tagline.length) clearInterval(tv);
+                }, 35);
+            }, 500);
+
+            // Sub
+            setTimeout(() => {
+                subEl.style.opacity = '1';
+                subEl.style.animation = 'fadeUp 0.5s forwards';
+                let si = 0;
+                const sv = setInterval(() => {
+                    subEl.textContent += sub[si]; si++;
+                    if (si >= sub.length) clearInterval(sv);
+                }, 22);
+            }, 900);
+
+            // Pills
+            setTimeout(() => {
+                pillsEl.style.opacity = '1';
+                pillsEl.style.animation = 'fadeUp 0.5s forwards';
+                pills.forEach(p => {
+                    const sp = document.createElement('span');
+                    sp.className = 'hero-pill';
+                    sp.textContent = p;
+                    pillsEl.appendChild(sp);
+                });
+            }, 1300);
+
+            // Stats
+            setTimeout(() => {
+                statsEl.style.opacity = '1';
+                statsEl.style.animation = 'fadeUp 0.5s forwards';
+                stats.forEach(r => {
+                    const row = document.createElement('div');
+                    row.className = 'hero-stat-row';
+                    row.innerHTML = `<span class="hero-stat-label">${r.label}</span><span class="hero-stat-val">${r.val}</span>`;
+                    statsEl.appendChild(row);
+                });
+            }, 1600);
+        }
+
+    }, 60);
+});
 </script>
-
 
 
 </body>
