@@ -365,7 +365,7 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 100px 24px 60px;
-        top:10px;
+        top:15px;
         gap: 50px;
         justify-content: center;
     }
@@ -375,10 +375,7 @@
         clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
         transform-origin: top;
     }
-    /* .hero-inner { padding: 90px 20px 50px; gap: 20px; } */
-    /* .hero-label { font-size: 10px; letter-spacing: 3px; }
-    .hero-num-label { font-size: 10px; }
-    .hero-pill { font-size: 10px; padding: 5px 12px; } */
+   
 }
 
 @media (max-width: 300px) {
@@ -388,6 +385,20 @@
     .hero-num-label { font-size: 10px; }
     .hero-pill { font-size: 10px; padding: 5px 12px; }
 }
+:root {
+    --accent: #be185d;
+    --panel: #fce7f3;
+    --bg: #fff1f8;
+    --title: #1a0212;
+    --num-label: rgba(26,2,18,0.45);
+}
+.category-hero { background: var(--bg); }
+.hero-diagonal { background: var(--panel); }
+.hero-label { color: var(--accent); }
+.category-title { color: var(--title); }
+.hero-num { color: var(--accent); }
+.hero-num-label { color: var(--num-label); }
+.hero-pill { background: var(--accent); color: #fff; }
 
 
     </style>
@@ -785,7 +796,7 @@
 
         <div class="hero-right">
             <div class="hero-num">100%</div>
-            <div class="hero-num-label">Natural & Pure</div>
+            <div class="hero-num-label">Natural & Pure </div>
             <div class="hero-pill">🌰 Premium Quality</div>
         </div>
     </div>

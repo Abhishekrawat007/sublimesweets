@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/streetfood.html">
- html<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -171,189 +171,158 @@
         margin-top: 65px;  
     }
 }
-  .category-hero {
+
+.category-hero {
     position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    background: #110d08;
+    background: #0c0400;
     overflow: hidden;
     margin-top: 0;
-    padding: 100px 24px 80px;
+    padding: 0;
 }
 
-/* Vinyl rings */
-.hero-ring {
-    position: absolute;
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    pointer-events: none;
-}
-.hero-ring:nth-child(1) { width: 200px; height: 200px; border: 1px solid rgba(234,88,12,0.08); }
-.hero-ring:nth-child(2) { width: 320px; height: 320px; border: 1px solid rgba(234,88,12,0.05); }
-.hero-ring:nth-child(3) { width: 440px; height: 440px; border: 1px solid rgba(234,88,12,0.03); }
-.hero-ring:nth-child(4) { width: 560px; height: 560px; border: 1px solid rgba(234,88,12,0.02); }
-
-/* Inner */
 .hero-inner {
-    position: relative;
-    z-index: 2;
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     text-align: center;
-    max-width: 560px;
+    padding: 120px 24px 80px;
+    min-height: 100svh;
     width: 100%;
-    padding: 0 24px;
 }
 
-/* Eyebrow */
-.hero-eyebrow {
+.hero-before {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
-    color: rgba(234,88,12,0.6);
+    color: rgba(255,0,128,0.5);
     letter-spacing: 5px;
-    text-transform: uppercase;
+    margin-bottom: 16px;
     opacity: 0;
-    animation: fadeUp 0.7s 0.2s forwards;
+    animation: fadeIn 0.4s 0.2s forwards;
 }
 
-/* Title */
-.category-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(48px, 9vw, 88px);
-    color: #fef3c7;
-    line-height: 1;
-    margin: 12px 0;
+/* This is the exact same pattern as original t3-main */
+.hero-glitch-wrap {
+    position: relative;
+    display: inline-block;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 13vw, 82px);
+    color: #fff;
+    line-height: 0.9;
     opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
-}
-.category-title em {
-    font-style: italic;
-    color: #ea580c;
+    animation: fadeIn 0.5s 0.4s forwards;
 }
 
-/* Items row */
-.hero-items {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
-}
-.hero-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-}
-.hero-item-icon {
-    font-size: 30px;
-    transition: transform 0.2s;
-    display: block;
-}
-.hero-item:hover .hero-item-icon {
-    transform: scale(1.2) rotate(-8deg);
-}
-.hero-item-name {
-    font-size: 10px;
-    color: rgba(254,243,199,0.35);
-    letter-spacing: 2px;
-    font-family: 'Space Mono', monospace;
-    text-transform: uppercase;
-}
-
-/* Wave */
-.hero-wave {
+/* Exact same as original ::before */
+.hero-glitch-wrap::before {
+    content: attr(data-text);
+    position: absolute; left: 2px; top: 0;
+    color: #ff0080;
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    animation: glitch3 2.5s infinite;
+    pointer-events: none;
     width: 100%;
-    height: 40px;
-    margin-top: 28px;
-    opacity: 0;
-    animation: fadeIn 0.8s 1s forwards;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-}
-.hero-wave-bar {
-    width: 3px;
-    background: rgba(234,88,12,0.5);
-    border-radius: 2px;
-    animation: audioWave 1.4s ease-in-out infinite;
-}
-@keyframes audioWave {
-    0%,100% { height: 4px; }
-    50%      { height: var(--h, 20px); }
 }
 
-/* Stats */
-.hero-stats {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    margin-top: 28px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 1.2s forwards;
+/* Exact same as original ::after */
+.hero-glitch-wrap::after {
+    content: attr(data-text);
+    position: absolute; left: -2px; top: 0;
+    color: #00f5ff;
+    clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
+    animation: glitch3 2.5s 0.15s infinite reverse;
+    pointer-events: none;
+    width: 100%;
 }
-.stat { text-align: center; }
-.stat-number {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(18px, 4vw, 22px);
-    color: #ea580c;
-    line-height: 1;
-    margin-bottom: 4px;
+
+@keyframes glitch3 {
+    0%,88%,100% { transform: translateX(0); }
+    90% { transform: translateX(-3px); }
+    94% { transform: translateX(3px); }
 }
-.stat-label {
-    display: block;
+
+.hero-typed-sub {
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
+    font-size: 13px;
+    color: #ff0080;
+    min-height: 1.4em;
+    margin-top: 18px;
     letter-spacing: 2px;
-    text-transform: uppercase;
+}
+.hero-sub-cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: #ff0080;
+    vertical-align: middle;
+    margin-left: 3px;
+    animation: blink 0.6s infinite;
 }
 
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
-    to   { opacity:1; transform:translateY(0); }
+.hero-tags {
+    display: flex; gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fadeUp 0.5s 0.8s forwards;
 }
+.hero-tag {
+    padding: 6px 14px;
+    border: 1px solid rgba(255,0,128,0.3);
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    font-family: 'Outfit', sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.hero-tag:hover {
+    border-color: #ff0080;
+    color: #fff;
+    background: rgba(255,0,128,0.08);
+}
+
 @keyframes fadeIn {
     from { opacity:0; }
     to   { opacity:1; }
 }
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+@keyframes blink { 50% { opacity:0; } }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero { padding: 90px 20px 60px; }
-    .hero-ring:nth-child(3),
-    .hero-ring:nth-child(4) { display: none; }
-    .hero-items { gap: 16px; }
-    .hero-item-icon { font-size: 24px; }
-    .hero-item-name { font-size: 9px; letter-spacing: 1px; }
-    .hero-stats { gap: 20px; }
-    .hero-eyebrow { font-size: 9px; letter-spacing: 3px; }
+    .category-hero{  min-height: 90svh;}
+    .hero-inner { padding: 100px 20px 60px; }
+    .hero-before { font-size: 9px; letter-spacing: 3px; }
+    .hero-typed-sub { font-size: 11px; }
+    .hero-tag { font-size: 11px; padding: 6px 12px; }
 }
-@media (max-width: 375px) {
-    .category-hero { padding-top: 80px; }
-    .hero-stats { gap: 12px; }
-    .stat-number { font-size: 16px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
-    .hero-items { gap: 12px; }
-    .hero-item-icon { font-size: 20px; }
-}
+
 @media (max-width: 320px) {
-    .stat-number { font-size: 14px; }
-    .stat-label { font-size: 8px; letter-spacing: 0; }
-    .hero-stats { gap: 8px; }
-    .hero-items { gap: 8px; }
+     .hero-inner { padding-top: 88px; }
+    .hero-before { font-size: 8px; letter-spacing: 2px; }
+    .hero-typed-sub { font-size: 10px; }
+    .hero-glitch-wrap { font-size: 40px; }
+    .hero-tag { font-size: 9px; padding: 5px 9px; }
 }
-@media (max-width: 300px) {
-    .stat-number { font-size: 13px; }
-    .hero-item-icon { font-size: 18px; }
-}
+
+
+.category-hero { background: #f0fdfa; }
+.hero-before { color: rgba(13,148,136,0.5); }
+.hero-glitch-wrap { color: #042f2e; }
+.hero-glitch-wrap::before { color: #0d9488; }
+.hero-glitch-wrap::after { color: #0ea5e9; }
+.hero-typed-sub { color: #0d9488; }
+.hero-sub-cursor { background: #0d9488; }
+.hero-tag { border-color: rgba(13,148,136,0.25); color: rgba(4,47,46,0.5); }
+.hero-tag:hover { background: rgba(13,148,136,0.07); border-color: #0d9488; color: #042f2e; }
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -735,57 +704,24 @@
 
 
     <!-- STUNNING HERO -->
-  <section class="category-hero">
-    <div class="hero-ring"></div>
-    <div class="hero-ring"></div>
-    <div class="hero-ring"></div>
-    <div class="hero-ring"></div>
 
+<section class="category-hero">
     <div class="hero-inner">
-        <p class="hero-eyebrow">// Chatpata Street Favourites</p>
+        <p class="hero-before">// STREET FOOD LOADING</p>
 
-        <h1 class="category-title">
-            Street<br><em>Food</em>
-        </h1>
-
-        <div class="hero-items">
-            <div class="hero-item">
-                <span class="hero-item-icon">🌮</span>
-                <span class="hero-item-name">Chaat</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🥙</span>
-                <span class="hero-item-name">Rolls</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🥟</span>
-                <span class="hero-item-name">Momos</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🌯</span>
-                <span class="hero-item-name">Wraps</span>
-            </div>
-            <div class="hero-item">
-                <span class="hero-item-icon">🍢</span>
-                <span class="hero-item-name">Tikka</span>
-            </div>
+        <div class="hero-glitch-wrap" id="t3main" data-text="STREET FOOD">
+            STREET FOOD
         </div>
 
-        <div class="hero-wave" id="heroWave"></div>
+        <div class="hero-typed-sub" id="heroSub">
+            <span class="hero-sub-cursor"></span>
+        </div>
 
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Products</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Fresh</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4.7★</span>
-                <span class="stat-label">Rated</span>
-            </div>
+        <div class="hero-tags">
+            <span class="hero-tag">🌮 Chaat</span>
+            <span class="hero-tag">🍢 Skewers</span>
+            <span class="hero-tag">🥙 Rolls</span>
+            <span class="hero-tag">🍜 Noodles</span>
         </div>
     </div>
 </section>
@@ -1314,29 +1250,95 @@
       if (noProducts) noProducts.style.display = 'block';
     }
 }
-// Typing animation
-(function(){
-    const el = document.getElementById('heroTagline');
-    const text = 'Golgappa · Chow mein · Rolls · Momos';
-    let i = 0;
-    setTimeout(() => {
-        const iv = setInterval(() => {
-            el.textContent += text[i]; i++;
-            if(i >= text.length) clearInterval(iv);
-        }, 55);
-    }, 900);
-})();
-(function(){
-    const wave = document.getElementById('heroWave');
-    const heights = [8,14,22,18,30,24,16,28,20,12,26,18,10,24,16];
-    heights.forEach((h,i) => {
-        const b = document.createElement('div');
-        b.className = 'hero-wave-bar';
-        b.style.cssText = `--h:${h}px; height:${h}px; animation-delay:${i*0.08}s;`;
-        wave.appendChild(b);
-    });
-})();</script>
 
+window.addEventListener('load', function() {
+
+    const subEl = document.getElementById('heroSub');
+    if (!subEl) { console.error('heroSub not found'); return; }
+    
+    const cur = subEl.querySelector('.hero-sub-cursor');
+    if (!cur) { console.error('cursor not found'); return; }
+
+    const subs = [
+        'Hot. Fresh. Straight from the pan.',
+        'Desi flavours. Zero filter.',
+        'Order now. Thank us later.'
+    ];
+
+    // Scramble
+    const mainEl = document.getElementById('t3main');
+    if (mainEl) {
+        const target = 'STREET FOOD';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*';
+        let i = 0;
+        const scrambleIv = setInterval(() => {
+            const scrambled = target.substring(0, i) +
+                Array.from({ length: target.length - i }, (_, k) =>
+                    target[i + k] === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)]
+                ).join('');
+            mainEl.textContent = scrambled;
+            mainEl.setAttribute('data-text', scrambled);
+            if (Math.random() < 0.15) i = Math.min(i + 1, target.length);
+            if (i >= target.length) {
+                clearInterval(scrambleIv);
+                mainEl.textContent = target;
+                mainEl.setAttribute('data-text', target);
+            }
+        }, 60);
+    }
+
+    // TYPE using pure setTimeout — no async/await at all
+    let si = 0;
+    let charIndex = 0;
+    let phase = 'typing'; // 'typing' | 'waiting' | 'erasing' | 'pause'
+
+  function tick() {
+    const txt = subs[si % subs.length];
+
+    if (phase === 'typing') {
+        if (charIndex < txt.length) {
+            // Insert text BEFORE cursor
+            subEl.insertBefore(document.createTextNode(txt[charIndex]), cur);
+            charIndex++;
+            setTimeout(tick, 50);
+        } else {
+            phase = 'waiting';
+            setTimeout(tick, 1400);
+        }
+
+    } else if (phase === 'waiting') {
+        phase = 'erasing';
+        tick();
+
+    } else if (phase === 'erasing') {
+        // Remove all text nodes, never touch the cursor span
+        let removed = false;
+        for (let i = subEl.childNodes.length - 1; i >= 0; i--) {
+            const node = subEl.childNodes[i];
+            if (node.nodeType === 3) { // TEXT NODE ONLY
+                subEl.removeChild(node);
+                removed = true;
+                break;
+            }
+        }
+        if (removed) {
+            setTimeout(tick, 28);
+        } else {
+            // Nothing left to erase
+            phase = 'pause';
+            setTimeout(tick, 200);
+        }
+
+    } else if (phase === 'pause') {
+        si++;
+        charIndex = 0;
+        phase = 'typing';
+        tick();
+    }
+}
+    setTimeout(tick, 800);
+});
+</script>
 
 
 </body>
