@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/icecreams.html">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,300;1,700&family=Syne:wght@700;800&family=Outfit:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -181,156 +181,156 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background: #050505;
+    background: #04040a;
     overflow: hidden;
     margin-top: 0;
     padding: 0;
 }
 
-/* Speed lines */
-.hero-speed-lines {
-    position: absolute;
-    inset: 0;
+/* Flicker BG */
+.hero-flicker-bg {
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,182,193,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 50%, rgba(147,210,255,0.07) 0%, transparent 50%);
+    animation: flickerBg 4s ease-in-out infinite;
     pointer-events: none;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent 0px, transparent 60px,
-        rgba(56,189,248,0.02) 60px, rgba(56,189,248,0.02) 61px
-    );
-    animation: rushLines 0.8s linear infinite;
 }
-@keyframes rushLines {
-    from { background-position: 0 0; }
-    to   { background-position: 61px 0; }
-}
-
-/* Left accent bar */
-.hero-accent-bar {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: #38bdf8;
+@keyframes flickerBg {
+    0%,100%{opacity:1} 48%{opacity:0.8} 50%{opacity:1} 52%{opacity:0.7} 54%{opacity:1}
 }
 
 /* Inner */
 .hero-inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 24px 80px 36px;
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
     min-height: 100svh;
     width: 100%;
 }
 
-/* Kicker */
-.hero-kicker {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: #38bdf8;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+/* Scoop word */
+.hero-open {
+    font-family: 'Fraunces', serif;
+    font-style: italic; font-weight: 700;
+    font-size: clamp(44px, 12vw, 68px);
+    color: #ff0080;
+    text-shadow: 0 0 10px rgba(255,0,128,0.8), 0 0 30px rgba(255,0,128,0.4);
+    line-height: 1;
+    animation: neonFlicker 5s ease-in-out infinite, fadeIn 0.6s 0.2s both;
     opacity: 0;
-    animation: slideL 0.4s 0.2s forwards;
 }
-@keyframes slideL {
-    from { opacity:0; transform:translateX(-32px); }
-    to   { opacity:1; transform:translateX(0); }
+@keyframes neonFlicker {
+    0%,89%,91%,93%,100%{opacity:1}
+    90%{opacity:0.7} 92%{opacity:0.9}
 }
 
 /* Title */
 .category-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 20vw, 120px);
-    line-height: 0.82;
-    color: #fff;
-    margin: 12px 0;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.4s forwards;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(40px, 11vw, 64px);
+    line-height: 0.92;
+    color: #00c8ff;
+    text-shadow: 0 0 10px rgba(0,200,255,0.7), 0 0 30px rgba(0,200,255,0.3);
+    margin: 10px 0;
+    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
 }
-.category-title .ice { color: #38bdf8; }
 
-/* RPM bars */
-.hero-rpm {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    margin: 20px 0;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.6s forwards;
+/* Sub */
+.hero-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; color: rgba(255,255,255,0.3);
+    letter-spacing: 4px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.6s 0.7s forwards;
 }
-.rpm-bar {
-    width: 8px;
-    background: rgba(56,189,248,0.3);
-    border-radius: 2px;
-    animation: rpmPulse 1s ease-in-out infinite;
-}
-@keyframes rpmPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-/* Stats grid */
-.hero-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 8px;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.8s forwards;
+/* Sign rows */
+.hero-signs {
+    display: flex; flex-direction: column;
+    gap: 10px; margin-top: 28px;
+    width: 100%; max-width: 320px;
+    opacity: 0; animation: fadeUp 0.6s 0.9s forwards;
 }
-.stat {
-    background: rgba(56,189,248,0.05);
-    border: 1px solid rgba(56,189,248,0.1);
-    padding: 12px 14px;
+.hero-sign {
+    padding: 14px 18px; border-radius: 8px;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
 }
-.stat-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: #38bdf8;
-    display: block;
-    line-height: 1;
+.hero-sign.pink {
+    border: 1px solid rgba(255,0,128,0.2);
+    background: rgba(255,0,128,0.04);
 }
-.stat-label {
+.hero-sign.blue {
+    border: 1px solid rgba(0,200,255,0.2);
+    background: rgba(0,200,255,0.04);
+}
+.hero-sign.green {
+    border: 1px solid rgba(0,255,128,0.2);
+    background: rgba(0,255,128,0.04);
+}
+.hero-sign:hover { transform: scale(1.02); }
+.hero-sign.pink:hover  { background: rgba(255,0,128,0.08); border-color: rgba(255,0,128,0.4); }
+.hero-sign.blue:hover  { background: rgba(0,200,255,0.08); border-color: rgba(0,200,255,0.4); }
+.hero-sign.green:hover { background: rgba(0,255,128,0.08); border-color: rgba(0,255,128,0.4); }
+
+.hero-sign-left { display: flex; align-items: center; gap: 12px; }
+.hero-sign-icon { font-size: 20px; }
+.hero-sign-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.6);
+}
+.hero-sign-glow {
+    font-size: 10px;
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 2px;
-    margin-top: 2px;
-    display: block;
+    letter-spacing: 1px;
 }
+.hero-sign.pink  .hero-sign-glow { color: rgba(255,0,128,0.6); }
+.hero-sign.blue  .hero-sign-glow { color: rgba(0,200,255,0.6); }
+.hero-sign.green .hero-sign-glow { color: rgba(0,255,128,0.6); }
 
+@keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+}
 @keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
+    from { opacity:0; transform:translateY(26px); }
     to   { opacity:1; transform:translateY(0); }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .hero-inner { padding: 100px 20px 60px 28px; }
-    .hero-kicker { font-size: 9px; letter-spacing: 2px; }
-    .stat { padding: 10px 12px; }
-    .stat-number { font-size: 26px; }
-    .stat-label { font-size: 8px; letter-spacing: 1px; }
+    .hero-inner { padding: 100px 20px 60px; }
+    .hero-sign { padding: 12px 14px; }
+    .hero-sign-name { font-size: 12px; }
+    .hero-sign-glow { font-size: 9px; }
+    .hero-sub { font-size: 11px; letter-spacing: 3px; }
 }
 @media (max-width: 375px) {
-    .hero-inner { padding-top: 90px; padding-left: 24px; }
-    .stat-number { font-size: 22px; }
-    .stat-label { font-size: 7px; }
-    .stat { padding: 8px 10px; }
+    .hero-inner { padding-top: 90px; }
+    .hero-sign { padding: 10px 12px; }
+    .hero-sign-name { font-size: 11px; }
+    .hero-sign-icon { font-size: 17px; }
+    .hero-sub { font-size: 10px; letter-spacing: 2px; }
 }
 @media (max-width: 340px) {
-    .category-title { font-size: 58px; }
+    .hero-open { font-size: 36px; }
+    .category-title { font-size: 34px; }
 }
 @media (max-width: 320px) {
-    .category-title { font-size: 52px; }
-    .stat-number { font-size: 20px; }
-    .stat-label { font-size: 7px; letter-spacing: 0; }
+    .hero-open { font-size: 32px; }
+    .category-title { font-size: 30px; }
+    .hero-sign { padding: 9px 10px; }
+    .hero-sign-name { font-size: 10px; }
+    .hero-sign-glow { font-size: 8px; }
 }
 @media (max-width: 300px) {
-    .category-title { font-size: 46px; }
-    .stat { padding: 7px 8px; }
-    .stat-number { font-size: 18px; }
+    .hero-open { font-size: 28px; }
+    .category-title { font-size: 28px; }
+    .hero-sign { padding: 8px 9px; }
+    .hero-sign-icon { font-size: 15px; }
 }
-
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -912,35 +912,40 @@
 
 
     <!-- STUNNING HERO -->
-    <section class="category-hero">
-    <div class="hero-speed-lines"></div>
-    <div class="hero-accent-bar"></div>
+ 
+<section class="category-hero">
+    <div class="hero-flicker-bg"></div>
 
     <div class="hero-inner">
-        <p class="hero-kicker">// COLD · CREAMY · DREAMY</p>
+        <span class="hero-open">Scoop!</span>
 
         <h1 class="category-title">
-            ICE<br><span class="ice">CREAM</span>
+            ICE<br>CREAM<br>&amp; BITES
         </h1>
 
-        <div class="hero-rpm" id="rpmBars"></div>
+        <p class="hero-sub">Cold · Creamy · Dreamy</p>
 
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Products</span>
+        <div class="hero-signs">
+            <div class="hero-sign pink">
+                <div class="hero-sign-left">
+                    <span class="hero-sign-icon">🍦</span>
+                    <span class="hero-sign-name">Softy & Swirls</span>
+                </div>
+                <span class="hero-sign-glow">PINK GLOW</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">🍦</span>
-                <span class="stat-label">Softy</span>
+            <div class="hero-sign blue">
+                <div class="hero-sign-left">
+                    <span class="hero-sign-icon">🍨</span>
+                    <span class="hero-sign-name">Sundaes & Scoops</span>
+                </div>
+                <span class="hero-sign-glow">ICE BLUE</span>
             </div>
-            <div class="stat">
-                <span class="stat-number">🍧</span>
-                <span class="stat-label">Sorbets</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4.9★</span>
-                <span class="stat-label">Rated</span>
+            <div class="hero-sign green">
+                <div class="hero-sign-left">
+                    <span class="hero-sign-icon">🍧</span>
+                    <span class="hero-sign-name">Sorbets & Gelato</span>
+                </div>
+                <span class="hero-sign-glow">MINT GLOW</span>
             </div>
         </div>
     </div>

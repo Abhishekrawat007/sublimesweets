@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/snacks.html">
- <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -175,190 +175,146 @@
         margin-top: 65px;  
     }
 }
-  .category-hero {
+ .category-hero {
     position: relative;
     min-height: 100svh;
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background: #0a0f08;
+    background: #020202;
     overflow: hidden;
     margin-top: 0;
     padding: 0;
 }
 
-/* Diagonal texture */
-.hero-texture {
-    position: absolute;
-    inset: 0;
+/* Scanlines */
+.hero-scanline {
+    position: absolute; inset: 0; pointer-events: none;
     background: repeating-linear-gradient(
-        45deg,
-        rgba(255,255,255,0.01) 0px,
-        rgba(255,255,255,0.01) 1px,
-        transparent 1px,
-        transparent 8px
+        0deg, transparent 0px, transparent 3px,
+        rgba(250,204,21,0.015) 3px, rgba(250,204,21,0.015) 4px
     );
-    pointer-events: none;
 }
 
 /* Inner */
 .hero-inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 5% 80px;
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 24px 80px;
     min-height: 100svh;
     width: 100%;
+    font-family: 'Space Mono', monospace;
 }
 
-/* Kicker */
-.hero-kicker {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: #facc15;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
+/* Prompt */
+.hero-prompt {
+    font-size: 11px; color: rgba(250,204,21,0.6);
+    letter-spacing: 2px;
+    opacity: 0; animation: fadeIn 0.4s 0.1s forwards;
+}
+.hero-prompt::before { content: '> '; color: #facc15; }
+
+/* Cursor */
+.hero-cursor {
+    display: inline-block; width: 8px; height: 16px;
+    background: #facc15; margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 0.9s infinite;
 }
 
 /* Title */
 .category-title {
-    font-family: 'Antonio', sans-serif;
-    font-weight: 700;
-    font-size: clamp(72px, 14vw, 144px);
-    line-height: 0.85;
-    color: #fefce8;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(52px, 14vw, 80px);
+    line-height: 0.86; color: #fff;
     margin: 16px 0;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.4s forwards;
+    opacity: 0; animation: fadeUp 0.5s 0.3s forwards;
 }
-.category-title .thin {
-    font-weight: 400;
-    -webkit-text-stroke: 1px rgba(250,204,21,0.5);
-    color: transparent;
-    display: block;
-}
-
-/* Stats */
-.hero-stats {
-    display: flex;
-    gap: 32px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.6s forwards;
-}
-.stat {
-    padding-left: 16px;
-    border-left: 2px solid rgba(250,204,21,0.3);
-}
-.stat-number {
-    display: block;
-    font-family: 'Antonio', sans-serif;
-    font-size: clamp(28px, 5vw, 36px);
+.category-title .yellow {
     color: #facc15;
-    line-height: 1;
-    margin-bottom: 4px;
-}
-.stat-label {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(254,252,232,0.35);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    text-shadow: 0 0 16px rgba(250,204,21,0.4);
 }
 
-/* Pills */
-.hero-pills {
-    display: flex;
-    gap: 10px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s forwards;
+/* Log lines */
+.hero-log {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 20px;
+    opacity: 0; animation: fadeUp 0.5s 0.6s forwards;
 }
-.hero-pill {
-    padding: 8px 18px;
-    border: 1px solid rgba(250,204,21,0.2);
-    color: rgba(254,252,232,0.5);
-    font-size: 12px;
-    border-radius: 100px;
-    font-family: 'Outfit', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
+.hero-log-line {
+    font-size: 11px; color: rgba(255,255,255,0.25);
+    letter-spacing: 1px; display: flex; gap: 10px;
 }
-.hero-pill:hover {
-    border-color: #facc15;
-    color: #fefce8;
-    background: rgba(250,204,21,0.08);
+.hero-log-line .ok  { color: #22c55e; }
+.hero-log-line .warn { color: #facc15; }
+.hero-log-line .err  { color: #f97316; }
+
+/* Category grid */
+.hero-cats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px; margin-top: 22px;
+    opacity: 0; animation: fadeUp 0.5s 0.9s forwards;
+}
+.hero-cat {
+    padding: 12px 14px;
+    border: 1px solid rgba(250,204,21,0.12);
+    background: rgba(250,204,21,0.03);
+    border-radius: 4px; cursor: pointer; transition: all 0.2s;
+}
+.hero-cat:hover {
+    border-color: rgba(250,204,21,0.35);
+    background: rgba(250,204,21,0.07);
+}
+.hero-cat-icon { font-size: 18px; display: block; }
+.hero-cat-name {
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    margin-top: 6px; letter-spacing: 1px;
 }
 
+@keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+}
 @keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
+    from { opacity:0; transform:translateY(26px); }
     to   { opacity:1; transform:translateY(0); }
 }
+@keyframes blink { 50% { opacity:0; } }
 
 /* MOBILE */
 @media (max-width: 768px) {
-    .category-hero{
-         min-height: 90svh;
-    }
-    .hero-inner { padding: 100px 24px 60px; }
-    .category-title { font-size: clamp(60px, 16vw, 90px); }
-    .hero-stats { gap: 20px; }
-    .stat-number { font-size: 24px; }
-    .hero-kicker { font-size: 9px; letter-spacing: 3px; }
+        .category-title { font-size: 60px; }
+    .hero-inner { padding: 100px 20px 60px; }
+    .hero-prompt { font-size: 10px; }
+    .hero-log-line { font-size: 10px; }
+    .hero-cat { padding: 10px 12px; }
+    .hero-cat-name { font-size: 10px; }
 }
-@media (max-width: 400px) {
-    .category-title { font-size: clamp(52px, 17vw, 72px); letter-spacing: -1px; }
-}
+@media (max-width: 470px) {
+        .category-title { font-size: 50px; }}
 @media (max-width: 375px) {
+     .category-title { font-size: 44px; }
     .hero-inner { padding-top: 90px; }
-    .hero-stats { gap: 14px; }
-    .stat-number { font-size: 20px; }
-    .stat-label { font-size: 9px; letter-spacing: 1px; }
-    .hero-pill { font-size: 11px; padding: 6px 14px; }
+    .hero-prompt { font-size: 9px; letter-spacing: 1px; }
+    .hero-log-line { font-size: 9px; gap: 7px; }
+    .hero-cat { padding: 9px 10px; }
+    .hero-cat-icon { font-size: 16px; }
+    .hero-cat-name { font-size: 9px; }
 }
-@media (max-width: 360px) {
-    .category-title { font-size: clamp(46px, 16vw, 64px); letter-spacing: -1px; }
+@media (max-width: 340px) {
+    .category-title { font-size: 40px; }
 }
 @media (max-width: 320px) {
-    .category-title { font-size: clamp(40px, 15vw, 56px); letter-spacing: -2px; }
-    .stat-number { font-size: 18px; }
-    .stat-label { font-size: 8px; letter-spacing: 0; }
-    .hero-stats { gap: 10px; }
-    .hero-pill { font-size: 10px; padding: 5px 12px; }
+    .category-title { font-size: 36px; }
+    .hero-log-line { font-size: 8px; gap: 6px; }
+    .hero-cat { padding: 8px 9px; }
+    .hero-cat-name { font-size: 8px; letter-spacing: 0; }
 }
-@media (max-width: 300px) {
-    .category-title { font-size: clamp(34px, 14vw, 48px); }
-    .stat-number { font-size: 16px; }
+@media (max-width: 280px) {
+    .category-title { font-size: 30px; }
+    .hero-cat-icon { font-size: 14px; }
+    .hero-cat { padding: 7px 8px; }
 }
-
-:root {
-    --accent: #15803d;
-    --accent-rgb: 21,128,61;
-    --bg: #f0fdf4;
-    --title-color: #052e16;
-    --stroke: rgba(21,128,61,0.5);
-    --stat-border: rgba(21,128,61,0.3);
-    --stat-label: rgba(5,46,22,0.35);
-    --pill-border: rgba(21,128,61,0.2);
-    --pill-color: rgba(5,46,22,0.5);
-    --pill-hover-bg: rgba(21,128,61,0.08);
-}
-.category-hero { background: var(--bg); }
-.hero-kicker { color: var(--accent); }
-.category-title { color: var(--title-color); }
-.category-title .thin { -webkit-text-stroke: 1px var(--stroke); color: transparent; }
-.stat { border-left-color: var(--stat-border); }
-.stat-number { color: var(--accent); }
-.stat-label { color: var(--stat-label); }
-.hero-pill { border-color: var(--pill-border); color: var(--pill-color); }
-.hero-pill:hover { border-color: var(--accent); color: var(--title-color); background: var(--pill-hover-bg); }
     </style>
     
     <link rel="stylesheet" href="css/bottom-bar.css">
@@ -743,41 +699,45 @@
 
 
     <!-- STUNNING HERO -->
+
 <section class="category-hero">
-    <div class="hero-texture"></div>
+    <div class="hero-scanline"></div>
 
     <div class="hero-inner">
-        <p class="hero-kicker">// Crispy & Crunchy</p>
+        <p class="hero-prompt">Loading snack inventory...<span class="hero-cursor"></span></p>
 
         <h1 class="category-title">
-            SNACKS
-            <span class="thin">& MORE</span>
+            SNACKS<br><span class="yellow">&amp; BITES</span>
         </h1>
 
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Products</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Fresh</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4.7★</span>
-                <span class="stat-label">Rated</span>
-            </div>
+        <div class="hero-log">
+            <div class="hero-log-line"><span class="ok">[OK]</span><span>Fresh stock loaded</span></div>
+            <div class="hero-log-line"><span class="ok">[OK]</span><span>500+ products ready</span></div>
+            <div class="hero-log-line"><span class="warn">[!]</span><span>Limited edition dropping soon</span></div>
+            <div class="hero-log-line"><span class="err">[!!]</span><span>Bestseller almost out of stock</span></div>
         </div>
 
-        <div class="hero-pills">
-            <span class="hero-pill">🥨 Namkeen</span>
-            <span class="hero-pill">🍟 Chips</span>
-            <span class="hero-pill">🧆 Bhujia</span>
-            <span class="hero-pill">🫙 Mixtures</span>
-            <span class="hero-pill">🍿 Popcorn</span>
+        <div class="hero-cats">
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🍿</span>
+                <span class="hero-cat-name">Chips & Crisps</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🥤</span>
+                <span class="hero-cat-name">Cold Drinks</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🍫</span>
+                <span class="hero-cat-name">Chocolates</span>
+            </div>
+            <div class="hero-cat">
+                <span class="hero-cat-icon">🧃</span>
+                <span class="hero-cat-name">Juices & Shakes</span>
+            </div>
         </div>
     </div>
 </section>
+
 
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
