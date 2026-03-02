@@ -309,7 +309,11 @@
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-
+@media (max-width: 1258px) {
+    .category-hero {
+        margin-top: 60px;
+    }
+}
 @media (max-width: 768px) {
     .category-hero { min-height: 65vh; margin-top: 70px; }
     .hero-6-stats { gap: 24px; }
@@ -322,6 +326,16 @@
     .hero-6-stat-num { font-size: 28px; }
     .hero-6-stat-label { font-size: 9px; }
 }
+.category-hero { background: #fdf5f9; }
+.hero-6-grid { background-image: linear-gradient(rgba(219,39,119,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(219,39,119,0.08) 1px, transparent 1px); }
+.hero-6-glow { background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%); }
+.hero-6-tag { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; box-shadow: 0 0 30px rgba(236,72,153,0.3); }
+.hero-6-title { color: #1a0812; text-shadow: 0 0 40px rgba(236,72,153,0.4), 0 0 80px rgba(219,39,119,0.3); }
+.hero-6-subtitle { color: rgba(26,8,18,0.6); }
+.hero-6-stat { background: rgba(26,8,18,0.03); border-color: rgba(219,39,119,0.3); }
+.hero-6-stat::before { background: linear-gradient(135deg, #ec4899, #db2777); }
+.hero-6-stat-num { background: linear-gradient(135deg, #db2777, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-6-stat-label { color: rgba(26,8,18,0.5); }
     </style>
     
     <link rel="stylesheet" href="css/bottom-bar.css">

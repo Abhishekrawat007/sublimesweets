@@ -123,205 +123,162 @@
            RESPONSIVE - MOBILE FIRST
         ============================================ */
 
-        
-      
-/* ============================================
-   DESIGN 20 — SPLIT PANEL HERO
+    /* ============================================
+   DESIGN 22 — IMAGE GRID HERO
 ============================================ */
 .category-hero {
     position: relative;
-    min-height: 70vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
     margin-top: 80px;
     overflow: hidden;
 }
 
-.hero-7-left {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 60px 60px 60px 40px;
+.hero-11-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.hero-11-grid-item {
     position: relative;
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+    overflow: hidden;
 }
 
-.hero-7-right {
-    background: #fff;
-    display: flex;
-    align-items: center;
-    padding: 60px 40px 60px 80px;
+.hero-11-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.hero-7-left-content { max-width: 500px; }
-
-.hero-7-number {
-    font-size: 180px;
-    font-weight: 900;
-    color: rgba(255,255,255,0.1);
-    line-height: 1;
-    margin-bottom: -40px;
-    letter-spacing: -10px;
+.hero-11-grid-item:hover img {
+    transform: scale(1.05);
 }
 
-.hero-7-title {
-    font-size: clamp(56px, 9vw, 88px);
+.hero-11-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(2,15,6,0.75) 0%,
+        rgba(21,128,61,0.35) 50%,
+        rgba(2,15,6,0.75) 100%);
+}
+
+.hero-11-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-11-badge {
+    display: inline-block;
+    padding: 10px 28px;
+    background: rgba(255,255,255,0.95);
+    color: #15803d;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.hero-11-title {
+    font-size: clamp(72px, 14vw, 140px);
     font-weight: 900;
     color: #fff;
-    line-height: 0.9;
-    letter-spacing: -3px;
+    letter-spacing: -6px;
     margin-bottom: 24px;
+    line-height: 0.9;
+    text-shadow:
+        0 4px 20px rgba(0,0,0,0.5),
+        0 8px 40px rgba(21,128,61,0.4);
 }
 
-.hero-7-desc {
-    font-size: 17px;
-    color: rgba(255,255,255,0.9);
+.hero-11-subtitle {
+    font-size: clamp(18px, 3vw, 26px);
+    color: #fff;
+    max-width: 750px;
+    margin: 0 auto 56px;
     line-height: 1.6;
-    margin-bottom: 32px;
+    font-weight: 500;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
 
-.hero-7-tags {
+.hero-11-stats {
     display: flex;
-    gap: 12px;
+    justify-content: center;
+    gap: 60px;
     flex-wrap: wrap;
 }
 
-.hero-7-tag {
-    padding: 8px 16px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
+.hero-11-stat {
+    padding: 28px 40px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 
-.hero-7-right-content { max-width: 500px; }
-
-.hero-7-eyebrow {
-    font-size: 12px;
-    color: #667eea;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-}
-
-.hero-7-heading {
-    font-size: clamp(32px, 6vw, 48px);
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-bottom: 24px;
-    line-height: 1.2;
-}
-
-.hero-7-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.hero-7-stat-card {
-    text-align: center;
-    padding: 24px 16px;
-    background: #f8f9fa;
-    border-radius: 12px;
-}
-
-.hero-7-stat-num {
+.hero-11-stat-num {
     display: block;
-    font-size: 36px;
+    font-size: 52px;
     font-weight: 900;
-    color: #667eea;
-    margin-bottom: 4px;
+    color: #fff;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-.hero-7-stat-label {
-    font-size: 11px;
-    color: #666;
+.hero-11-stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.95);
     text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-@media (max-width: 968px) {
-    .category-hero { margin-top: 70px; }
-    /* .hero-7-left { clip-path: none; padding: 40px 24px; }
-    .hero-7-right { padding: 40px 24px; }
-    .hero-7-stats-grid { gap: 12px; } */
+    letter-spacing: 2px;
+    font-weight: 700;
 }
 
 @media (max-width: 768px) {
- .hero-7-stats-grid { gap: 8px; }
- 
-    .hero-7-left { clip-path: none; padding: 40px 24px; min-height: 100%; align-self: stretch; }
-    .hero-7-right { padding: 40px 24px; }
-    .hero-7-right { padding: 40px 24px; }
-    .hero-7-stat-num { font-size: 26px; }
-    .hero-7-stat-label { font-size: 9px; }
-    .hero-7-desc { display: none;}
+    .category-hero { min-height: 75vh; margin-top: 70px; }
+    .hero-11-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); height: 100%; position: absolute; inset: 0; }
+    .hero-11-grid-item:nth-child(n+9) { display: none; }
+    .hero-11-content { padding: 40px 24px; }
+    .hero-11-stats { gap: 24px; }
+    .hero-11-stat { padding: 20px 28px; }
+    .hero-11-stat-num { font-size: 36px; }
+    .hero-11-title { letter-spacing: -3px; }
 }
-
-
-@media (max-width: 768px) {
-    .hero-7-left { padding: 24px 16px; }
-    .hero-7-right { padding: 24px 12px 24px 20px; }
-    
+@media (max-width: 375px) {
+    .category-hero { margin-top: 65px; }
+    .hero-11-stats { gap: 16px; }
+    .hero-11-stat { padding: 14px 18px; }
+    .hero-11-stat-num { font-size: 28px; }
+    .hero-11-stat-label { font-size: 10px; }
+    .hero-11-badge { font-size: 11px; padding: 8px 18px; }
 }
-
-@media (max-width: 768px) {
-      
-    .hero-7-title { font-size: 36px; letter-spacing: -1px; }
-    .hero-7-number { font-size: 100px; margin-bottom: -20px; }
-    
-    .hero-7-tag { font-size: 11px; padding: 6px 10px; }
-    /* .hero-7-heading { font-size: 20px; } */
-    .hero-7-eyebrow { font-size: 10px; }
-    .hero-7-stat-card { padding: 12px 6px; }
-    .hero-7-stat-num { font-size: 20px; }
-    .hero-7-stat-label { font-size: 8px; letter-spacing: 0; }
-
+@media (max-width: 300px) {
+    .category-hero { margin-top: 65px; }
+    .hero-11-title{ font-size: 50px;
+    }
+    .hero-11-stats { gap: 16px; }
+    .hero-11-stat { padding: 14px 18px; }
+    .hero-11-stat-num { font-size: 28px; }
+    .hero-11-stat-label { font-size: 10px; }
+    .hero-11-badge { font-size: 11px; padding: 8px 18px; }
 }
-
-@media (max-width: 380px) {
-    .hero-7-title { font-size: 40px; }
-    .hero-7-number { font-size: 80px; }
-    .hero-7-heading { font-size: 24px; }
-    .hero-7-stat-num { font-size: 16px; }
-    .hero-7-tags { gap: 6px; }
-    .hero-7-tag { font-size: 10px; padding: 5px 8px; }
-}
-@media (max-width: 350px) {
-    .hero-7-title { font-size: 35px; }
-    .hero-7-number { font-size: 70px; }
-    .hero-7-heading { font-size: 18px; }
-    .hero-7-stat-num { font-size: 16px; }
-    .hero-7-tags { gap: 6px; }
-    .hero-7-tag { font-size: 10px; padding: 5px 8px; }
-}
-@media (max-width: 350px) {
-    
-    .category-hero { grid-template-columns: 1fr; margin-top:60px}
-    .hero-7-left { clip-path: none; padding: 30px 16px; top:10px;}
-    .hero-7-right { padding: 24px 16px; }
-    .hero-7-title { font-size: 36px; }
-    .hero-7-number { font-size: 80px; }
-    .hero-7-stats-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .hero-7-stat-num { font-size: 18px; }
-    .hero-7-stat-label { font-size: 8px; }
-}
-
-
-.hero-7-left { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); }
-.hero-7-right { background: #f0fdf4; }
-.hero-7-eyebrow { color: #15803d; }
-.hero-7-heading { color: #052e16; }
-.hero-7-stat-card { background: #dcfce7; }
-.hero-7-stat-num { color: #15803d; }
-.hero-7-stat-label { color: #2a6040; }
-
 
     </style>
+    
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
 <body>
@@ -703,46 +660,47 @@
 
 
 
-    <!-- STUNNING HERO -->
-
-
-
-
- <!-- STUNNING HERO -->
+   <!-- STUNNING HERO -->
 <section class="category-hero">
 
-    <div class="hero-7-left">
-        <div class="hero-7-left-content">
-            <div class="hero-7-number">01</div>
-            <h1 class="hero-7-title">Anime<br>Merch</h1>
-            <p class="hero-7-desc">
-                Exclusive collectibles and figures from your favorite series. Premium quality, authentic pieces delivered fast.
-            </p>
-            <div class="hero-7-tags">
-                <span class="hero-7-tag">🌸 Premium</span>
-                <span class="hero-7-tag">✨ Authentic</span>
-                <span class="hero-7-tag">⚡ Fast Delivery</span>
-            </div>
-        </div>
+    <!-- Image Grid Background (filled by JS) -->
+    <div class="hero-11-grid">
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
+        <div class="hero-11-grid-item"><img src="" alt="Main Course" loading="eager"></div>
     </div>
 
-    <div class="hero-7-right">
-        <div class="hero-7-right-content">
-            <div class="hero-7-eyebrow">Collection Overview</div>
-            <h2 class="hero-7-heading">Your Favorite<br>Characters</h2>
-            <div class="hero-7-stats-grid">
-                <div class="hero-7-stat-card">
-                    <span class="hero-7-stat-num" id="productCount">0</span>
-                    <span class="hero-7-stat-label">Products</span>
-                </div>
-                <div class="hero-7-stat-card">
-                    <span class="hero-7-stat-num">100%</span>
-                    <span class="hero-7-stat-label">Authentic</span>
-                </div>
-                <div class="hero-7-stat-card">
-                    <span class="hero-7-stat-num">4.9★</span>
-                    <span class="hero-7-stat-label">Rating</span>
-                </div>
+    <!-- Overlay -->
+    <div class="hero-11-overlay"></div>
+
+    <!-- Content -->
+    <div class="hero-11-content">
+        <div class="hero-11-badge">🍛 Hearty Indian Meals</div>
+        <h1 class="hero-11-title">MAIN COURSE</h1>
+        <p class="hero-11-subtitle">
+            Comforting Indian gravies, sabzis and specialities — prepared with homestyle flavors and restaurant-style finesse
+        </p>
+        <div class="hero-11-stats">
+            <div class="hero-11-stat">
+                <span class="hero-11-stat-num" id="productCount">0</span>
+                <span class="hero-11-stat-label">Dishes</span>
+            </div>
+            <div class="hero-11-stat">
+                <span class="hero-11-stat-num">100%</span>
+                <span class="hero-11-stat-label">Fresh</span>
+            </div>
+            <div class="hero-11-stat">
+                <span class="hero-11-stat-num">4.8★</span>
+                <span class="hero-11-stat-label">Rated</span>
             </div>
         </div>
     </div>
@@ -1276,9 +1234,60 @@
       if (noProducts) noProducts.style.display = 'block';
     }
 }
-jsdocument.getElementById('heroDate').textContent = new Date().toLocaleDateString('en-US',{
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-});
+// ============================================
+// AUTO IMAGE GRID FILLER
+// ============================================
+function fillHeroGrid() {
+    const catProducts = (window.products || []).filter(p =>
+        Array.isArray(p.categories) && p.categories.includes(CURRENT_CATEGORY)
+    );
+
+    if (!catProducts.length) return;
+
+    // Build image pool cycling through image indexes
+    const pool = [];
+    let idx = 0;
+
+    while (pool.length < 12) {
+        let added = false;
+        for (let p of catProducts) {
+            if (p.images && p.images[idx]) {
+                pool.push(p.images[idx]);
+                if (pool.length === 12) break;
+                added = true;
+            }
+        }
+        idx++;
+        if (!added) break;
+    }
+
+    // If still less than 12, repeat from beginning of pool
+    if (pool.length > 0) {
+        let i = 0;
+        while (pool.length < 12) {
+            pool.push(pool[i % pool.length]);
+            i++;
+        }
+    }
+
+    // Fill grid slots
+    const gridItems = document.querySelectorAll('.hero-11-grid-item img');
+    gridItems.forEach((img, i) => {
+        if (pool[i]) {
+            img.src = pool[i];
+            img.alt = 'Main Course';
+        }
+    });
+}
+
+// Run after products are ready
+(function waitForProducts() {
+    if (window.products && window.products.length > 0) {
+        fillHeroGrid();
+    } else {
+        setTimeout(waitForProducts, 100);
+    }
+})();
 </script>
 
 
