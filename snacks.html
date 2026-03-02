@@ -177,166 +177,176 @@
 }
 
 /* ============================================
-   DESIGN 21 — NEON GRID HERO
+   DESIGN 23 — SPLIT COLLAGE HERO
 ============================================ */
 .category-hero {
     position: relative;
-    min-height: 75vh;
+    min-height: 80vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0a0a0a;
     margin-top: 80px;
     overflow: hidden;
 }
 
-.hero-6-grid {
+.hero-12-left {
+    flex: 1.2;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+}
+
+.hero-12-collage {
     position: absolute;
     inset: 0;
-    background-image: 
-        linear-gradient(rgba(250,204,21,0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(250,204,21,0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg);
-    transform-origin: center center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
 }
 
-.hero-6-glow {
+.hero-12-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-12-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.hero-12-img:hover img { transform: scale(1.1); }
+
+.hero-12-left-overlay {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(250,204,21,0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: glowPulse 4s ease-in-out infinite;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(202,138,4,0.35) 0%,
+        rgba(234,88,12,0.35) 100%);
 }
 
-@keyframes glowPulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-}
-
-.hero-6-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 60px 24px;
-}
-
-.hero-6-tag {
-    display: inline-block;
-    padding: 8px 24px;
-    background: linear-gradient(135deg, #facc15, #ca8a04);
-    color: #0a0a0a;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    box-shadow: 0 0 30px rgba(250,204,21,0.5);
-}
-
-.hero-6-title {
-    font-size: clamp(64px, 12vw, 120px);
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -4px;
-    margin-bottom: 16px;
-    line-height: 0.9;
-    text-shadow: 0 0 40px rgba(250,204,21,0.8), 0 0 80px rgba(202,138,4,0.6);
-}
-
-.hero-6-glitch {
-    position: relative;
-    display: inline-block;
-}
-
-.hero-6-subtitle {
-    font-size: clamp(16px, 2.5vw, 20px);
-    color: rgba(255,255,255,0.7);
-    max-width: 600px;
-    margin: 0 auto 48px;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
-
-.hero-6-stats {
+.hero-12-right {
+    flex: 0.8;
+    background: #fff;
     display: flex;
-    justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
-}
-
-.hero-6-stat {
+    align-items: center;
+    padding: 60px 60px 60px 120px;
     position: relative;
-    padding: 20px 32px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(250,204,21,0.3);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
 }
 
-.hero-6-stat::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    padding: 1px;
-    background: linear-gradient(135deg, #facc15, #ca8a04);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+.hero-12-content { max-width: 600px; }
+
+.hero-12-eyebrow {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #facc15, #ea580c);
+    color: #0a0a0a;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
 }
 
-.hero-6-stat-num {
-    display: block;
-    font-size: 40px;
+.hero-12-title {
+    font-size: clamp(48px, 9vw, 100px);
     font-weight: 900;
-    background: linear-gradient(135deg, #facc15, #fb923c);
+    color: #1a1a1a;
+    letter-spacing: -3px;
+    margin-bottom: 20px;
+    line-height: 0.95;
+}
+
+.hero-12-title span {
+    display: block;
+    background: linear-gradient(135deg, #facc15, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-12-desc {
+    font-size: clamp(15px, 2vw, 18px);
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.hero-12-stats-wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.hero-12-stat-box {
+    text-align: center;
+    padding: 20px 12px;
+    background: linear-gradient(135deg, #f8f9fa, #fff);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid #f0f0f0;
+}
+
+.hero-12-stat-num {
+    display: block;
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #facc15, #ea580c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 4px;
 }
 
-.hero-6-stat-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.6);
+.hero-12-stat-label {
+    font-size: 10px;
+    color: #999;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
-@media (max-width: 1258px) {
-    .category-hero {
-        margin-top: 60px;
-    }
+
+/* MOBILE — left takes more space than right */
+@media (max-width: 968px) {
+    .category-hero { flex-direction: column; min-height: auto; margin-top: 70px; }
+    .hero-12-left { clip-path: none; flex: none; height: 45vh; width: 100%; order: 1; }
+    .hero-12-right { flex: none; width: 100%; padding: 40px 32px; order: 2; }
+    .hero-12-title { font-size: 48px; letter-spacing: -2px; margin-bottom: 16px; }
+    .hero-12-desc { font-size: 15px; margin-bottom: 28px; }
+    .hero-12-stats-wrap { gap: 16px; }
+    .hero-12-stat-box { padding: 16px 10px; }
+    .hero-12-stat-num { font-size: 26px; }
 }
-@media (max-width: 768px) {
-    .category-hero { min-height: 65vh; margin-top: 70px; }
-    .hero-6-stats { gap: 24px; }
-    .hero-6-stat { padding: 16px 24px; }
+
+@media (max-width: 640px) {
+    .hero-12-left { height: 40vh; }
+    .hero-12-right { padding: 32px 20px; }
+    .hero-12-eyebrow { padding: 6px 14px; font-size: 11px; margin-bottom: 16px; }
+    .hero-12-title { font-size: 38px; letter-spacing: -2px; }
+    .hero-12-desc { font-size: 14px; margin-bottom: 24px; }
+    .hero-12-stats-wrap { gap: 10px; }
+    .hero-12-stat-box { padding: 12px 8px; border-radius: 10px; }
+    .hero-12-stat-num { font-size: 22px; }
+    .hero-12-stat-label { font-size: 9px; letter-spacing: 0.5px; }
 }
+
 @media (max-width: 375px) {
     .category-hero { margin-top: 65px; }
-    .hero-6-stats { gap: 16px; }
-    .hero-6-stat { padding: 12px 16px; }
-    .hero-6-stat-num { font-size: 28px; }
-    .hero-6-stat-label { font-size: 9px; }
+    .hero-12-left { height: 35vh; }
+    .hero-12-right { padding: 28px 16px; }
+    .hero-12-title { font-size: 32px; margin-bottom: 10px; }
+    .hero-12-desc { font-size: 13px; margin-bottom: 20px; }
+    .hero-12-stat-num { font-size: 18px; }
+    .hero-12-stat-label { font-size: 8px; }
 }
-.category-hero { background: #fdf5f9; }
-.hero-6-grid { background-image: linear-gradient(rgba(219,39,119,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(219,39,119,0.08) 1px, transparent 1px); }
-.hero-6-glow { background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%); }
-.hero-6-tag { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; box-shadow: 0 0 30px rgba(236,72,153,0.3); }
-.hero-6-title { color: #1a0812; text-shadow: 0 0 40px rgba(236,72,153,0.4), 0 0 80px rgba(219,39,119,0.3); }
-.hero-6-subtitle { color: rgba(26,8,18,0.6); }
-.hero-6-stat { background: rgba(26,8,18,0.03); border-color: rgba(219,39,119,0.3); }
-.hero-6-stat::before { background: linear-gradient(135deg, #ec4899, #db2777); }
-.hero-6-stat-num { background: linear-gradient(135deg, #db2777, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero-6-stat-label { color: rgba(26,8,18,0.5); }
-    </style>
+
+/* Dark mode */
+body.dark-mode .hero-12-right { background: #0a0a0a; }
+body.dark-mode .hero-12-title { color: #e0e0e0; }
+body.dark-mode .hero-12-desc { color: #aaa; }
+body.dark-mode .hero-12-stat-box { background: linear-gradient(135deg, #1a1a1a, #0f0f0f); border-color: #2a2a2a; }
+body.dark-mode .hero-12-stat-label { color: #888; }  </style>
     
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -722,31 +732,48 @@
     <!-- STUNNING HERO -->
 <!-- STUNNING HERO -->
 <section class="category-hero">
-    <div class="hero-6-grid"></div>
-    <div class="hero-6-glow"></div>
-    <div class="hero-6-content">
-        <div class="hero-6-tag">Chatpata Collection</div>
-        <h1 class="hero-6-title">
-            <span class="hero-6-glitch">SNACKS</span>
-        </h1>
-        <p class="hero-6-subtitle">
-            &gt; Crispy, crunchy & totally irresistible bites_
-        </p>
-        <div class="hero-6-stats">
-            <div class="hero-6-stat">
-                <span class="hero-6-stat-num" id="productCount">0</span>
-                <span class="hero-6-stat-label">Products</span>
-            </div>
-            <div class="hero-6-stat">
-                <span class="hero-6-stat-num">100%</span>
-                <span class="hero-6-stat-label">Fresh</span>
-            </div>
-            <div class="hero-6-stat">
-                <span class="hero-6-stat-num">4.8★</span>
-                <span class="hero-6-stat-label">Rated</span>
+
+    <!-- Left - Image Collage (filled by JS) -->
+    <div class="hero-12-left">
+        <div class="hero-12-collage">
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+        </div>
+        <div class="hero-12-left-overlay"></div>
+    </div>
+
+    <!-- Right - Content -->
+    <div class="hero-12-right">
+        <div class="hero-12-content">
+            <div class="hero-12-eyebrow">Chatpata Collection</div>
+            <h1 class="hero-12-title">
+                Crispy<br>
+                <span>Snacks</span>
+            </h1>
+            <p class="hero-12-desc">
+                Crunchy, chatpata and totally irresistible bites — from classic namkeen to premium imported chips, all under one roof.
+            </p>
+            <div class="hero-12-stats-wrap">
+                <div class="hero-12-stat-box">
+                    <span class="hero-12-stat-num" id="productCount">0</span>
+                    <span class="hero-12-stat-label">Products</span>
+                </div>
+                <div class="hero-12-stat-box">
+                    <span class="hero-12-stat-num">100%</span>
+                    <span class="hero-12-stat-label">Fresh</span>
+                </div>
+                <div class="hero-12-stat-box">
+                    <span class="hero-12-stat-num">4.8★</span>
+                    <span class="hero-12-stat-label">Rated</span>
+                </div>
             </div>
         </div>
     </div>
+
 </section>
 
 
@@ -1275,129 +1302,60 @@ const CURRENT_CATEGORY = 'snacks';
       if (noProducts) noProducts.style.display = 'block';
     }
 }
+// ============================================
+// AUTO COLLAGE IMAGE FILLER
+// ============================================
+function fillHeroCollage() {
+    const catProducts = (window.products || []).filter(p =>
+        Array.isArray(p.categories) && p.categories.includes(CURRENT_CATEGORY)
+    );
 
-window.addEventListener('load', function() {
+    if (!catProducts.length) return;
 
-    const target   = 'SNACKS & SIPS';
-    const tagline  = 'Bold flavours. Zero compromise.';
-    const sub      = '// 500+ products · Fresh daily · Free delivery ₹199+';
-    const pills    = ['🍿 Chips & Crisps', '🥤 Cold Drinks', '🍫 Chocolates', '🧃 Juices'];
-    const stats    = [
-        { label: 'IN STOCK',    val: '492+' },
-        { label: 'NEW TODAY',   val: '+18'  },
-        { label: 'AVG RATING',  val: '4.8★' },
-    ];
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#&';
+    // Build pool cycling through image indexes
+    const pool = [];
+    let idx = 0;
 
-    const scramEl  = document.getElementById('heroScramble');
-    const decEl    = document.getElementById('heroDecoded');
-    const tagEl    = document.getElementById('heroTagline');
-    const subEl    = document.getElementById('heroSub');
-    const barEl    = document.getElementById('heroBar');
-    const pillsEl  = document.getElementById('heroPills');
-    const statsEl  = document.getElementById('heroStats');
-
-    // Build progress bar segments
-    const segCount = 16;
-    for (let i = 0; i < segCount; i++) {
-        const seg = document.createElement('div');
-        seg.className = 'hero-bar-seg';
-        barEl.appendChild(seg);
-    }
-    const segs = barEl.querySelectorAll('.hero-bar-seg');
-
-    // Scramble decode
-    let decoded = Array(target.length).fill(null);
-    let pass = 0;
-    const totalPasses = 80;
-
-    const scramIv = setInterval(() => {
-
-        // Light up progress bar
-        const lit = Math.floor((pass / totalPasses) * segCount);
-        segs.forEach((s, i) => {
-            s.className = 'hero-bar-seg' + (i < lit ? ' lit' : '');
-        });
-
-        // Build display string
-        const display = decoded.map((ch, i) => {
-            if (ch !== null) return ch;
-            return target[i] === ' ' ? ' ' : chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-        scramEl.textContent = display;
-
-        // Resolve characters progressively
-        if (pass % 8 === 0) {
-            for (let i = 0; i < decoded.length; i++) {
-                if (decoded[i] === null && Math.random() < 0.3) {
-                    decoded[i] = target[i];
-                }
+    while (pool.length < 6) {
+        let added = false;
+        for (let p of catProducts) {
+            if (p.images && p.images[idx]) {
+                pool.push(p.images[idx]);
+                if (pool.length === 6) break;
+                added = true;
             }
         }
+        idx++;
+        if (!added) break;
+    }
 
-        pass++;
-
-        // All decoded
-        if (decoded.every(d => d !== null)) {
-            clearInterval(scramIv);
-            segs.forEach(s => s.className = 'hero-bar-seg lit');
-
-            // Swap scramble → decoded
-            scramEl.style.display = 'none';
-            decEl.textContent = target;
-            decEl.style.display = 'block';
-            decEl.style.opacity = '0';
-            decEl.style.animation = 'fadeIn 0.4s forwards';
-
-            // Tagline
-            setTimeout(() => {
-                tagEl.style.opacity = '1';
-                tagEl.style.animation = 'fadeUp 0.5s forwards';
-                let ti = 0;
-                const tv = setInterval(() => {
-                    tagEl.textContent += tagline[ti]; ti++;
-                    if (ti >= tagline.length) clearInterval(tv);
-                }, 35);
-            }, 500);
-
-            // Sub
-            setTimeout(() => {
-                subEl.style.opacity = '1';
-                subEl.style.animation = 'fadeUp 0.5s forwards';
-                let si = 0;
-                const sv = setInterval(() => {
-                    subEl.textContent += sub[si]; si++;
-                    if (si >= sub.length) clearInterval(sv);
-                }, 22);
-            }, 900);
-
-            // Pills
-            setTimeout(() => {
-                pillsEl.style.opacity = '1';
-                pillsEl.style.animation = 'fadeUp 0.5s forwards';
-                pills.forEach(p => {
-                    const sp = document.createElement('span');
-                    sp.className = 'hero-pill';
-                    sp.textContent = p;
-                    pillsEl.appendChild(sp);
-                });
-            }, 1300);
-
-            // Stats
-            setTimeout(() => {
-                statsEl.style.opacity = '1';
-                statsEl.style.animation = 'fadeUp 0.5s forwards';
-                stats.forEach(r => {
-                    const row = document.createElement('div');
-                    row.className = 'hero-stat-row';
-                    row.innerHTML = `<span class="hero-stat-label">${r.label}</span><span class="hero-stat-val">${r.val}</span>`;
-                    statsEl.appendChild(row);
-                });
-            }, 1600);
+    // If still less than 6, repeat from beginning
+    if (pool.length > 0) {
+        let i = 0;
+        while (pool.length < 6) {
+            pool.push(pool[i % pool.length]);
+            i++;
         }
+    }
 
-    }, 60);
-});
+    // Fill collage slots
+    const imgs = document.querySelectorAll('.hero-12-img img');
+    imgs.forEach((img, i) => {
+        if (pool[i]) {
+            img.src = pool[i];
+            img.alt = 'Snacks';
+        }
+    });
+}
+
+// Run after products are ready
+(function waitForCollage() {
+    if (window.products && window.products.length > 0) {
+        fillHeroCollage();
+    } else {
+        setTimeout(waitForCollage, 100);
+    }
+})();
 </script>
 
 
