@@ -184,239 +184,169 @@
         margin-top: 60px;  
     }
 }
+
+/* ============================================
+   DESIGN 25 — EDITORIAL IMAGE HERO
+============================================ */
 .category-hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 70vh;
     display: flex;
-    align-items: stretch;
-    justify-content: center;
-    background: #000;
+    align-items: center;
+    margin-top: 80px;
     overflow: hidden;
-    margin-top: 0;
-    padding: 0;
 }
 
-/* Grid */
-.hero-grid {
+.hero-18-bg {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 55%;
+}
+
+.hero-18-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-18-bg::after {
+    content: '';
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(236,72,153,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(236,72,153,0.04) 1px, transparent 1px);
-    background-size: 32px 32px;
-    pointer-events: none;
+    background: linear-gradient(to right,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,0.7) 20%,
+        transparent 60%);
 }
 
-/* Inner */
-.hero-inner {
+.hero-18-content {
     position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 24px 80px;
-    min-height: 100svh;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
     width: 100%;
 }
 
-/* Live badge */
-.hero-live {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.2s forwards;
-}
-.hero-live-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #ec4899;
-    box-shadow: 0 0 8px #ec4899;
-    animation: blink 1.2s infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
-.hero-live-text {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: #ec4899;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
+.hero-18-inner { max-width: 550px; }
 
-/* Title */
-.category-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(52px, 15vw, 84px);
-    line-height: 0.88;
+.hero-18-eyebrow {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #ec4899, #db2777);
     color: #fff;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.4s forwards;
-}
-.category-title .accent { color: #ec4899; }
-
-/* Ticker rows */
-.hero-ticker {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 24px;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.6s forwards;
-}
-.hero-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    border: 1px solid rgba(236,72,153,0.1);
-    border-radius: 4px;
-    background: rgba(236,72,153,0.02);
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.hero-row:hover {
-    background: rgba(236,72,153,0.08);
-    border-color: rgba(236,72,153,0.3);
-}
-.hero-row-name {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-}
-.hero-row-tag {
-    font-family: 'Space Mono', monospace;
+    border-radius: 6px;
     font-size: 11px;
-    color: #ec4899;
-}
-
-/* CTA */
-.hero-cta {
-    margin-top: 28px;
-    padding: 16px;
-    background: #ec4899;
-    color: #000;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    opacity: 0;
-    animation: fadeUp 0.5s 0.9s forwards;
-    transition: opacity 0.2s;
-}
-.hero-cta:hover { opacity: 0.85; }
-
-/* Stats */
-.hero-stats {
-    display: flex;
-    gap: 0;
-    margin-top: 24px;
-    opacity: 0;
-    animation: fadeUp 0.5s 1.1s forwards;
-}
-.stat {
-    flex: 1;
-    text-align: center;
-    padding: 12px 8px;
-    border: 1px solid rgba(236,72,153,0.1);
-    border-right: none;
-    background: rgba(236,72,153,0.02);
-}
-.stat:last-child { border-right: 1px solid rgba(236,72,153,0.1); }
-.stat-number {
-    display: block;
-    font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(18px, 4vw, 22px);
-    color: #ec4899;
-    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero-18-title {
+    font-size: clamp(56px, 10vw, 96px);
+    font-weight: 900;
+    color: #1a1a1a;
+    letter-spacing: -4px;
+    margin-bottom: 20px;
+    line-height: 0.95;
+}
+
+.hero-18-title-gradient {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-18-desc {
+    font-size: clamp(16px, 2.5vw, 19px);
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 36px;
+}
+
+.hero-18-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.hero-18-stat-box {
+    text-align: center;
+    padding: 20px 16px;
+    background: #fff;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.hero-18-stat-num {
+    display: block;
+    font-size: 32px;
+    font-weight: 900;
+    color: #1a1a1a;
     margin-bottom: 4px;
 }
-.stat-label {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 2px;
+
+.hero-18-stat-label {
+    font-size: 11px;
+    color: #999;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
-    to   { opacity:1; transform:translateY(0); }
+@media (max-width: 968px) {
+    .category-hero { margin-top: 70px; }
+    .hero-18-content { padding: 40px 24px; }
+    .hero-18-title { font-size: 56px; letter-spacing: -3px; }
+    .hero-18-desc { font-size: 16px; }
+    .hero-18-stat-num { font-size: 26px; }
+    .hero-18-stat-label { font-size: 10px; }
+    .hero-18-stat-box { padding: 14px 10px; }
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-    .category-hero{
-        min-height: 90svh;
-    }
-    .hero-inner { padding: 100px 20px 60px; }
-    .hero-live-text { font-size: 9px; letter-spacing: 2px; }
-    .hero-row { padding: 10px 14px; }
-    .hero-row-name { font-size: 12px; }
+@media (max-width: 640px) {
+    .hero-18-content { padding: 32px 16px; }
+    .hero-18-title { font-size: 42px; letter-spacing: -2px; }
+    .hero-18-eyebrow { font-size: 10px; padding: 5px 12px; }
+    .hero-18-desc { font-size: 14px; margin-bottom: 24px; }
+    .hero-18-stats-grid { gap: 10px; }
+    .hero-18-stat-box { padding: 12px 8px; }
+    .hero-18-stat-num { font-size: 22px; }
+    .hero-18-stat-label { font-size: 9px; }
 }
+
 @media (max-width: 375px) {
-    .hero-inner { padding-top: 90px; }
-    .stat-number { font-size: 16px; }
-    .stat-label { font-size: 8px; letter-spacing: 1px; }
-    .hero-cta { font-size: 13px; padding: 14px; }
+    .category-hero { margin-top: 65px; }
+    .hero-18-title { font-size: 34px; letter-spacing: -2px; }
+    .hero-18-inner { max-width: 60%; }
+    .hero-18-desc { font-size: 13px; margin-bottom: 20px; }
+    .hero-18-stat-num { font-size: 18px; }
 }
-@media (max-width: 320px) {
-    .stat-number { font-size: 14px; }
-    .stat-label { font-size: 7px; letter-spacing: 0; }
-    .hero-row-name { font-size: 11px; }
-    .hero-row-tag { font-size: 10px; }
-}
-
-@media (max-width: 300px) {
-    .stat-number { font-size: 13px; }
-    .hero-cta { font-size: 12px; }
-}
-@media (max-width: 340px) {
-    .category-title { font-size: 42px; }
+body.dark-mode .hero-18-bg::after {
+    background: linear-gradient(to right,
+        rgba(10,10,10,1) 0%,
+        rgba(10,10,10,0.8) 20%,
+        transparent 60%);
 }
 
-@media (max-width: 320px) {
-    .category-title { font-size: 38px; }
+@media (max-width: 968px) {
+    body.dark-mode .hero-18-bg::after {
+        background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(10,10,10,0.9) 80%,
+            rgba(10,10,10,1) 100%);
+    }
 }
 
-@media (max-width: 300px) {
-    .category-title { font-size: 34px; }
-}
-:root {
-    --accent: #0d9488;
-    --accent-rgb: 13,148,136;
-    --bg: #f0fdfa;
-    --title-color: #042f2e;
-    --grid: rgba(13,148,136,0.04);
-    --row-border: rgba(13,148,136,0.1);
-    --row-hover: rgba(13,148,136,0.08);
-    --row-hover-border: rgba(13,148,136,0.3);
-    --row-bg: rgba(13,148,136,0.02);
-    --stat-border: rgba(13,148,136,0.1);
-    --stat-bg: rgba(13,148,136,0.02);
-}
-.category-hero { background: var(--bg); }
-.hero-grid { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); }
-.hero-live-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-.hero-live-text { color: var(--accent); }
-.category-title { color: var(--title-color); }
-.category-title .accent { color: var(--accent); }
-.hero-row { border-color: var(--row-border); background: var(--row-bg); }
-.hero-row:hover { background: var(--row-hover); border-color: var(--row-hover-border); }
-.hero-row-name { color: rgba(4,47,46,0.7); }
-.hero-row-tag { color: var(--accent); }
-.hero-cta { background: var(--accent); color: #fff; }
-.stat { border-color: var(--stat-border); background: var(--stat-bg); }
-.stat:last-child { border-color: var(--stat-border); }
-.stat-number { color: var(--accent); }
-.stat-label { color: rgba(4,47,46,0.35); }
+body.dark-mode .hero-18-title { color: #e0e0e0; }
+body.dark-mode .hero-18-desc { color: #aaa; }
+body.dark-mode .hero-18-stat-box { background: #1a1a1a; border-color: #2a2a2a; }
+body.dark-mode .hero-18-stat-num { color: #e0e0e0; }
+body.dark-mode .hero-18-stat-label { color: #888; }
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
@@ -799,56 +729,41 @@
 
 
  
-    <!-- STUNNING HERO -->
+    
+<!-- STUNNING HERO -->
 <section class="category-hero">
-    <div class="hero-grid"></div>
 
-    <div class="hero-inner">
-        <div class="hero-live">
-            <div class="hero-live-dot"></div>
-            <span class="hero-live-text">Baked Fresh Daily</span>
-        </div>
+    <div class="hero-18-bg">
+        <img src="" alt="Cakes" loading="eager" id="heroBgImage">
+    </div>
 
-        <h1 class="category-title">
-            FRESH<br>BAKED<br><span class="accent">CAKES</span>
-        </h1>
-
-        <div class="hero-ticker">
-            <div class="hero-row">
-                <span class="hero-row-name">🎂 Chocolate Cake</span>
-                <span class="hero-row-tag">Bestseller ↑</span>
-            </div>
-            <div class="hero-row">
-                <span class="hero-row-name">🍰 Red Velvet</span>
-                <span class="hero-row-tag">New ✦</span>
-            </div>
-            <div class="hero-row">
-                <span class="hero-row-name">🧁 Cupcakes</span>
-                <span class="hero-row-tag">Popular ↑</span>
-            </div>
-        </div>
-
-        <button class="hero-cta" onclick="document.getElementById('productsGrid').scrollIntoView({behavior:'smooth'})">
-            EXPLORE CAKES →
-        </button>
-
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number" id="productCount">0</span>
-                <span class="stat-label">Products</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Eggless</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4.9★</span>
-                <span class="stat-label">Rated</span>
+    <div class="hero-18-content">
+        <div class="hero-18-inner">
+            <div class="hero-18-eyebrow">Fresh Baked Daily</div>
+            <h1 class="hero-18-title">
+                <span class="hero-18-title-gradient">Dreamy</span><br>Cakes
+            </h1>
+            <p class="hero-18-desc">
+                Handcrafted cakes for every occasion — birthdays, anniversaries, and everyday celebrations. Made fresh, delivered with love.
+            </p>
+            <div class="hero-18-stats-grid">
+                <div class="hero-18-stat-box">
+                    <span class="hero-18-stat-num" id="productCount">0</span>
+                    <span class="hero-18-stat-label">Cakes</span>
+                </div>
+                <div class="hero-18-stat-box">
+                    <span class="hero-18-stat-num">100%</span>
+                    <span class="hero-18-stat-label">Fresh</span>
+                </div>
+                <div class="hero-18-stat-box">
+                    <span class="hero-18-stat-num">4.9★</span>
+                    <span class="hero-18-stat-label">Rated</span>
+                </div>
             </div>
         </div>
     </div>
-</section>
 
+</section>
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
         <div class="container">
@@ -1377,6 +1292,29 @@ const CURRENT_CATEGORY = 'cakes';
       if (noProducts) noProducts.style.display = 'block';
     }
 }
+// ============================================
+// AUTO HERO BG IMAGE FILLER
+// ============================================
+function fillHeroBgImage() {
+    const catProducts = (window.products || []).filter(p =>
+        Array.isArray(p.categories) && p.categories.includes(CURRENT_CATEGORY)
+    );
+    if (!catProducts.length) return;
+
+    // Get first image of first product that has images
+    const img = catProducts.find(p => p.images && p.images.length > 0);
+    if (!img) return;
+
+    document.getElementById('heroBgImage').src = img.images[0];
+}
+
+(function waitForHeroBg() {
+    if (window.products && window.products.length > 0) {
+        fillHeroBgImage();
+    } else {
+        setTimeout(waitForHeroBg, 100);
+    }
+})();
 </script>
 
 

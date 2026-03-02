@@ -174,167 +174,199 @@
         margin-top: 65px;  
     }
 }
-
 .category-hero {
     position: relative;
-    min-height: 100svh;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    background: #0f0a04;
-    overflow: hidden;
-    margin-top: 0;
-    padding: 0;
-}
-
-/* Film grain */
-.hero-grain {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-    opacity: 0.5;
-}
-
-/* Vignette */
-.hero-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
-    pointer-events: none;
-}
-
-/* Inner */
-.hero-inner {
-    position: relative;
-    z-index: 2;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: #0a0600;
+    margin-top: 80px;
+    overflow: hidden;
+}
+
+.hero-24-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(217,119,6,0.1) 0%, transparent 60%);
+}
+
+.hero-24-content {
+    position: relative;
+    z-index: 10;
     text-align: center;
-    padding: 120px 26px 80px;
-    min-height: 100svh;
+    padding: 60px 24px 40px;
     width: 100%;
 }
 
-/* Badge */
-.hero-badge {
-    display: inline-block;
-    border: 1px solid rgba(245,158,11,0.4);
-    padding: 5px 16px;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(245,158,11,0.7);
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeIn 0.8s 0.2s forwards;
-}
-
-/* Title */
-.category-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: clamp(56px, 15vw, 88px);
-    color: #fef3c7;
-    line-height: 0.92;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
-}
-.category-title em {
-    font-style: italic;
+.hero-24-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 50px;
     color: #f59e0b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
 }
 
-/* Ornament */
-.hero-ornament {
-    color: rgba(245,158,11,0.4);
-    font-size: 18px;
-    letter-spacing: 10px;
-    margin: 18px 0;
-    opacity: 0;
-    animation: fadeIn 0.8s 0.6s forwards;
+.hero-24-eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #f59e0b;
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
 }
 
-/* Quote */
-.hero-quote {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: rgba(254,243,199,0.4);
-    line-height: 1.7;
-    max-width: 280px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.8s forwards;
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
 }
 
-/* Tab filters */
-.hero-tabs {
+.hero-24-title {
+    font-size: clamp(72px, 15vw, 160px);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -6px;
+    line-height: 0.85;
+    margin-bottom: 32px;
+    text-shadow: 0 0 80px rgba(245,158,11,0.3);
+}
+
+.hero-24-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-24-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+}
+
+.hero-24-stats {
     display: flex;
-    gap: 6px;
-    margin-top: 28px;
     justify-content: center;
+    align-items: center;
+    gap: 0;
     flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 1s forwards;
 }
-.hero-tab {
-    padding: 7px 13px;
-    border: 1px solid rgba(245,158,11,0.2);
-    color: rgba(254,243,199,0.4);
+
+.hero-24-stat {
+    padding: 0 40px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-24-stat:last-child { border-right: none; }
+
+.hero-24-stat-num {
+    display: block;
+    font-size: 40px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.hero-24-stat-label {
     font-size: 11px;
-    font-family: 'Space Mono', monospace;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.hero-tab:hover {
-    border-color: #f59e0b;
-    color: #fde68a;
-    background: rgba(245,158,11,0.08);
-}
-.hero-tab.active {
-    border-color: #f59e0b;
-    color: #fde68a;
-    background: rgba(245,158,11,0.08);
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
 
-@keyframes fadeIn {
-    from { opacity:0; }
-    to   { opacity:1; }
-}
-@keyframes fadeUp {
-    from { opacity:0; transform:translateY(26px); }
-    to   { opacity:1; transform:translateY(0); }
+/* Marquee Strip */
+.hero-24-marquee-wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid rgba(245,158,11,0.2);
+    border-bottom: 1px solid rgba(245,158,11,0.2);
+    background: rgba(245,158,11,0.06);
+    padding: 14px 0;
+    margin-top: auto;
 }
 
-/* MOBILE */
+.hero-24-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 18s linear infinite;
+}
+
+.hero-24-marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.hero-24-marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-24-marquee-item span {
+    color: #f59e0b;
+    font-size: 18px;
+}
+
+.hero-24-marquee-dot {
+    width: 4px;
+    height: 4px;
+    background: rgba(245,158,11,0.5);
+    border-radius: 50%;
+}
+
 @media (max-width: 768px) {
-    .hero-inner { padding: 100px 22px 60px; }
-    .hero-badge { font-size: 8px; letter-spacing: 3px; }
-    .hero-quote { font-size: 14px; }
-    .hero-tab { font-size: 10px; padding: 6px 11px; }
+    .category-hero { min-height: 70vh; margin-top: 70px; }
+    .hero-24-content { padding: 40px 20px 32px; }
+    .hero-24-title { letter-spacing: -3px; margin-bottom: 24px; }
+    .hero-24-stat { padding: 0 20px; }
+    .hero-24-stat-num { font-size: 28px; }
+    .hero-24-stat-label { font-size: 9px; }
+    .hero-24-sub { margin-bottom: 32px; }
 }
+
 @media (max-width: 375px) {
-    .hero-inner { padding-top: 90px; }
-    .hero-quote { font-size: 13px; max-width: 240px; }
-    .hero-tab { font-size: 9px; padding: 5px 9px; }
-    .hero-ornament { font-size: 15px; letter-spacing: 7px; }
+    .category-hero { margin-top: 65px; }
+    .hero-24-title { letter-spacing: -2px; }
+    .hero-24-stat { padding: 0 14px; }
+    .hero-24-stat-num { font-size: 22px; }
+    .hero-24-eyebrow { font-size: 10px; padding: 6px 14px; }
 }
-@media (max-width: 340px) {
-    .category-title { font-size: 46px; }
-}
-@media (max-width: 320px) {
-    .category-title { font-size: 42px; }
-    .hero-tab { font-size: 8px; padding: 5px 8px; }
-    .hero-quote { font-size: 12px; }
-    .hero-badge { font-size: 7px; letter-spacing: 2px; padding: 4px 12px; }
-}
-@media (max-width: 300px) {
-    .category-title { font-size: 38px; }
-    .hero-tab { font-size: 8px; padding: 4px 7px; }
-}
+.category-hero { background: #020c18; }
+.hero-24-bg { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56,189,248,0.15) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 80% 100%, rgba(2,132,199,0.1) 0%, transparent 60%); }
+.hero-24-eyebrow { border-color: rgba(56,189,248,0.3); color: #38bdf8; }
+.hero-24-eyebrow::before { background: #38bdf8; }
+.hero-24-title { text-shadow: 0 0 80px rgba(56,189,248,0.3); }
+.hero-24-title em { background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-24-marquee-wrap { border-color: rgba(56,189,248,0.2); background: rgba(56,189,248,0.06); }
+.hero-24-marquee-item span { color: #38bdf8; }
+.hero-24-marquee-dot { background: rgba(56,189,248,0.5); }
 
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
@@ -719,28 +751,63 @@
 
     <!-- STUNNING HERO -->
 <section class="category-hero">
-    <div class="hero-grain"></div>
-    <div class="hero-vignette"></div>
 
-    <div class="hero-inner">
-        <div class="hero-badge">★ Traditional Sweet Shop ★</div>
+    <div class="hero-24-bg"></div>
 
-        <h1 class="category-title">
-            Pure<br><em>Desi</em><br>Mithai
+    <div class="hero-24-content">
+        <div class="hero-24-eyebrow">Sweet Collection</div>
+        <h1 class="hero-24-title">
+            <em>Mithai</em><br>House
         </h1>
-
-        <div class="hero-ornament">✦ ✦ ✦</div>
-
-        <p class="hero-quote">"Made with love, ghee and generations of tradition."</p>
-
-        <div class="hero-tabs">
-            <span class="hero-tab active">Barfi</span>
-            <span class="hero-tab">Ladoo</span>
-            <span class="hero-tab">Halwa</span>
-            <span class="hero-tab">Khoya</span>
+        <p class="hero-24-sub">
+            Handcrafted Indian sweets made fresh daily — from classic Gulab Jamun to rich Kaju Katli
+        </p>
+        <div class="hero-24-stats">
+            <div class="hero-24-stat">
+                <span class="hero-24-stat-num" id="productCount">0</span>
+                <span class="hero-24-stat-label">Sweets</span>
+            </div>
+            <div class="hero-24-stat">
+                <span class="hero-24-stat-num">100%</span>
+                <span class="hero-24-stat-label">Fresh</span>
+            </div>
+            <div class="hero-24-stat">
+                <span class="hero-24-stat-num">4.9★</span>
+                <span class="hero-24-stat-label">Rated</span>
+            </div>
         </div>
     </div>
+
+    <!-- Marquee Strip -->
+    <div class="hero-24-marquee-wrap">
+        <div class="hero-24-marquee-track">
+            <!-- First copy -->
+            <div class="hero-24-marquee-item"><span>🍬</span> Gulab Jamun <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🟡</span> Kaju Katli <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🧡</span> Motichoor Ladoo <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍮</span> Rasgulla <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🟤</span> Barfi <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍯</span> Halwa <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🌸</span> Peda <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>💛</span> Imarti <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍬</span> Jalebi <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>✨</span> Ghewar <div class="hero-24-marquee-dot"></div></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="hero-24-marquee-item"><span>🍬</span> Gulab Jamun <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🟡</span> Kaju Katli <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🧡</span> Motichoor Ladoo <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍮</span> Rasgulla <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🟤</span> Barfi <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍯</span> Halwa <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🌸</span> Peda <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>💛</span> Imarti <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>🍬</span> Jalebi <div class="hero-24-marquee-dot"></div></div>
+            <div class="hero-24-marquee-item"><span>✨</span> Ghewar <div class="hero-24-marquee-dot"></div></div>
+        </div>
+    </div>
+
 </section>
+
 
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
