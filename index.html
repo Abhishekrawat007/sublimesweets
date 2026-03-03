@@ -1097,60 +1097,60 @@ body.search-active .products-section {
     </div>
 
       
- <div class="hero-slider" id="heroSlider">
-        <!-- Base slide -->
-        <div class="slide-base" id="slideBase"></div>
+<div class="hero-slider" id="heroSlider">
 
-        <!-- Fragment container -->
-        <div class="fragment-container" id="fragmentContainer"></div>
-
-        <!-- Content overlay -->
-        <div class="slide-content">
-            <div class="content-wrapper" id="contentWrapper">
-                <div class="premium-badge">
-                    <div class="pulse-dot"></div>
-                    <span class="badge-text">Premium Collection</span>
-                </div>
-                
-                <h1 class="slide-title" id="slideTitle"></h1>
-                <p class="slide-subtitle" id="slideSubtitle"></p>
-                
-              <div class="cta-buttons">
-    <a href="#productsGrid" class="btn btn-primary smooth-scroll">
-        <span id="ctaText">Shop Now</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-    </a>
-    <a href="menu.html" class="btn btn-secondary">
-        <span>Explore Menu</span>
-    </a>
-</div>
-            </div>
+    <!-- ✅ REPLACE: slide-base + fragment-container with this prism block -->
+    <div class="prism-slider-bg" id="prismSliderBg">
+        <!-- Desktop slides -->
+        <div class="prism-hero hero-desktop">
+            <section class="hero-section hero-28" data-hero="28" id="prismDesktop">
+                <!-- slides injected by JS -->
+            </section>
         </div>
-
-        <!-- Navigation -->
-        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-        <button class="nav-arrow next" id="nextBtn" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
-
-        <!-- Indicators -->
-        <div class="slide-indicators" id="indicators"></div>
-
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator">
-            <span class="scroll-text">SCROLL</span>
-            <div class="scroll-line"></div>
+        <!-- Mobile slides -->
+        <div class="prism-hero hero-mobile">
+            <section class="hero-section hero-28" data-hero="28" id="prismMobile">
+                <!-- slides injected by JS -->
+            </section>
         </div>
     </div>
+
+    <!-- ✅ KEEP everything below exactly as-is -->
+    <div class="slide-content">
+        <div class="content-wrapper" id="contentWrapper">
+            <div class="premium-badge">
+                <div class="pulse-dot"></div>
+                <span class="badge-text">Premium Collection</span>
+            </div>
+            <h1 class="slide-title" id="slideTitle"></h1>
+            <p class="slide-subtitle" id="slideSubtitle"></p>
+            <div class="cta-buttons">
+                <a href="#productsGrid" class="btn btn-primary smooth-scroll">
+                    <span id="ctaText">Shop Now</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+                <a href="menu.html" class="btn btn-secondary"><span>Explore Menu</span></a>
+            </div>
+        </div>
+    </div>
+
+    <button class="nav-arrow prev" id="prevBtn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="nav-arrow next" id="nextBtn" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <div class="slide-indicators" id="indicators"></div>
+
+    <div class="scroll-indicator">
+        <span class="scroll-text">SCROLL</span>
+        <div class="scroll-line"></div>
+    </div>
+</div>
 
   
     
