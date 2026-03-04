@@ -117,23 +117,23 @@ body.search-active .products-section {
 
 
 #r5{
-  --gd:#f0ece4;--gd2:#ffffff;
-  --bg2:#000000;--bg3:#080808;--bg4:#101010;
-  --tx:#f0ece4;--tx2:#686460;--tx3:#2c2a28;
-  --br:rgba(255,255,255,.05);--br2:rgba(255,255,255,.10);
-  --inp:rgba(255,255,255,.03);--ibd:rgba(255,255,255,.08);--if:rgba(255,255,255,.06);
-  --ph:rgba(255,255,255,.18);
+  --e:cubic-bezier(.4,0,.2,1);
+  --gd:#c09848;--gd2:#dab860;
+  --bg2:#0a0a0a;--bg3:#101010;--bg4:#171717;
+  --tx:#eee8df;--tx2:#706860;--tx3:#32302e;
+  --br:rgba(255,255,255,.06);--br2:rgba(255,255,255,.11);
+  --inp:rgba(255,255,255,.04);--ibd:rgba(255,255,255,.09);--if:rgba(255,255,255,.07);
+  --ph:rgba(255,255,255,.2);
 }
+
 body:not(.dark-mode) #r5{
-  --gd:#1a3a6a;--gd2:#2a5090;
-  --bg2:#0c1828;--bg3:#101e30;--bg4:#162438;
-  --tx:#d8e4f4;--tx2:#8098b8;--tx3:#3a5070;
-  --br:rgba(180,210,255,.07);--br2:rgba(180,210,255,.13);
-  --inp:rgba(180,210,255,.04);--ibd:rgba(180,210,255,.10);--if:rgba(180,210,255,.07);
-  --ph:rgba(200,225,255,.22);
+  --gd:#82601c;--gd2:#a27628;
+  --bg2:#ede8de;--bg3:#e3dcd2;--bg4:#d6cfc5;
+  --tx:#111010;--tx2:#635849;--tx3:#a59488;
+  --br:rgba(0,0,0,.06);--br2:rgba(0,0,0,.11);
+  --inp:rgba(0,0,0,.03);--ibd:rgba(0,0,0,.09);--if:rgba(0,0,0,.05);
+  --ph:rgba(0,0,0,.27);
 }
-
-
 
 #r5{
   background:var(--bg2);
@@ -404,6 +404,23 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
 #resToast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 #resToast.error{background:#dc2626;}
 @media(max-width:480px){#resToast{font-size:11px;padding:10px 20px;white-space:nowrap;}}
+
+body:not(.dark-mode) #r5{
+   --gd:#e8d8b8;--gd2:#f8ecca;
+  --bg2:#180408;--bg3:#200810;--bg4:#280c18;
+  --tx:#f0e8d8;--tx2:#c090a0;--tx3:#806070;
+  --br:rgba(255,220,240,.07);--br2:rgba(255,220,240,.13);
+  --inp:rgba(255,220,240,.04);--ibd:rgba(255,220,240,.10);--if:rgba(255,220,240,.07);
+  --ph:rgba(255,230,245,.22);
+}
+#r5{
+  --gd:#e8d8b8;--gd2:#f8ecca;
+  --bg2:#0c0408;--bg3:#140810;--bg4:#1c0c18;
+  --tx:#f0e8d8;--tx2:#806070;--tx3:#382030;
+  --br:rgba(255,220,240,.05);--br2:rgba(255,220,240,.10);
+  --inp:rgba(255,220,240,.03);--ibd:rgba(255,220,240,.08);--if:rgba(255,220,240,.06);
+  --ph:rgba(255,230,245,.18);
+}
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
