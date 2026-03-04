@@ -115,7 +115,7 @@ body.search-active .products-section {
     }
 }
 
-/* DEFAULT (dark — matches your site default) */
+
 #r5{
   --e:cubic-bezier(.4,0,.2,1);
   --gd:#c09848;--gd2:#dab860;
@@ -126,7 +126,6 @@ body.search-active .products-section {
   --ph:rgba(255,255,255,.2);
 }
 
-/* LIGHT MODE */
 body:not(.dark-mode) #r5{
   --gd:#82601c;--gd2:#a27628;
   --bg2:#ede8de;--bg3:#e3dcd2;--bg4:#d6cfc5;
@@ -264,6 +263,7 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
 #r5 .ec-name{
   font-family:'Cormorant Garamond',serif;
   font-size:18px;font-weight:600;margin-bottom:3px;color:var(--tx);
+  transition:color .25s;
 }
 #r5 .exp-card.on .ec-name{color:var(--gd);}
 
@@ -272,12 +272,15 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
   color:var(--tx3);margin-bottom:10px;font-family:'DM Sans',sans-serif;
 }
 
-#r5 .ec-price{
-  font-family:'Jost',sans-serif;font-weight:700;
-  font-size:19px;letter-spacing:-1px;color:var(--tx);line-height:1;
+/* FEATURE LINE — replaces price */
+#r5 .ec-feat{
+  font-family:'DM Sans',sans-serif;
+  font-size:10px;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--tx3);line-height:1.6;
+  transition:color .25s;
 }
-#r5 .exp-card.on .ec-price{color:var(--gd);}
-#r5 .ec-price span{font-size:11px;font-weight:400;color:var(--tx2);letter-spacing:0;}
+#r5 .exp-card.on .ec-feat{color:var(--gd);}
 
 #r5 .ec-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;}
 #r5 .ec-tag{
@@ -311,6 +314,7 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
   display:flex;align-items:center;justify-content:space-between;
   background:var(--bg4);border:1px solid var(--br2);
   border-radius:6px;padding:12px 14px;margin-bottom:16px;
+  gap:12px;
 }
 #r5 .r5-exp-strip-name{
   font-family:'Cormorant Garamond',serif;
@@ -320,13 +324,13 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
   font-size:10px;letter-spacing:1px;text-transform:uppercase;
   color:var(--tx3);margin-top:2px;font-family:'DM Sans',sans-serif;
 }
-#r5 .r5-exp-strip-price{
-  font-family:'Jost',sans-serif;font-weight:700;
-  font-size:17px;color:var(--gd);letter-spacing:-0.5px;text-align:right;
-}
-#r5 .r5-exp-strip-price span{
-  display:block;font-size:9px;font-weight:400;
-  color:var(--tx3);letter-spacing:1px;text-transform:uppercase;
+/* feature text on strip right side */
+#r5 .r5-exp-strip-feat{
+  font-family:'DM Sans',sans-serif;
+  font-size:9px;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gd);text-align:right;
+  line-height:1.6;flex-shrink:0;max-width:140px;
 }
 
 /* ── RESTAURANT INFO CARD ── */
@@ -1053,7 +1057,7 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
   <!-- EXPERIENCE CARDS -->
   <div class="exp-scroll fi d1">
 
-    <div class="exp-card on" onclick="selExp(this,'Chef\'s Table','2–8 Guests · Open Kitchen','₹2,200')">
+    <div class="exp-card on" onclick="selExp(this,'Chef\'s Table','2–8 Guests · Open Kitchen','Intimate · Live Cooking · 8 Covers Max')">
       <div class="ec-img">
         <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=75" alt="Chef's Table" loading="lazy">
         <div class="ec-badge">Selected</div>
@@ -1061,16 +1065,16 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
       <div class="ec-body">
         <div class="ec-name">Chef's Table</div>
         <div class="ec-cap">2–8 Guests · Open Kitchen</div>
-        <div class="ec-price">₹2,200 <span>per cover</span></div>
+        <div class="ec-feat">Intimate · Live Cooking · 8 Covers Max</div>
         <div class="ec-tags">
-          <span class="ec-tag">Live Cooking</span>
+          <span class="ec-tag">Live Fire</span>
           <span class="ec-tag">Premium</span>
           <span class="ec-tag">AC</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-card" onclick="selExp(this,'Rooftop Terrace','4–20 Guests · Open Air','₹1,600')">
+    <div class="exp-card" onclick="selExp(this,'Rooftop Terrace','4–20 Guests · Open Air','Open Sky · City Skyline · Evening Only')">
       <div class="ec-img">
         <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=75" alt="Rooftop Terrace" loading="lazy">
         <div class="ec-badge">Selected</div>
@@ -1078,16 +1082,16 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
       <div class="ec-body">
         <div class="ec-name">Rooftop Terrace</div>
         <div class="ec-cap">4–20 Guests · Open Air</div>
-        <div class="ec-price">₹1,600 <span>per cover</span></div>
+        <div class="ec-feat">Open Sky · City Skyline · Evening Only</div>
         <div class="ec-tags">
           <span class="ec-tag">City View</span>
-          <span class="ec-tag">Evening</span>
+          <span class="ec-tag">Sunset</span>
           <span class="ec-tag">Veg Friendly</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-card" onclick="selExp(this,'Garden Seating','2–12 Guests · Al Fresco','₹1,200')">
+    <div class="exp-card" onclick="selExp(this,'Garden Seating','2–12 Guests · Al Fresco','Al Fresco · Natural Light · All Day')">
       <div class="ec-img">
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=75" alt="Garden Seating" loading="lazy">
         <div class="ec-badge">Selected</div>
@@ -1095,16 +1099,16 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
       <div class="ec-body">
         <div class="ec-name">Garden Seating</div>
         <div class="ec-cap">2–12 Guests · Al Fresco</div>
-        <div class="ec-price">₹1,200 <span>per cover</span></div>
+        <div class="ec-feat">Al Fresco · Natural Light · All Day</div>
         <div class="ec-tags">
-          <span class="ec-tag">Natural Light</span>
+          <span class="ec-tag">Outdoor</span>
           <span class="ec-tag">Family</span>
           <span class="ec-tag">Casual</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-card" onclick="selExp(this,'Private Dining','10–30 Guests · Exclusive','₹2,800')">
+    <div class="exp-card" onclick="selExp(this,'Private Dining','10–30 Guests · Exclusive','Fully Private · Custom Menu · Events')">
       <div class="ec-img">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=75" alt="Private Dining" loading="lazy">
         <div class="ec-badge">Selected</div>
@@ -1112,16 +1116,16 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
       <div class="ec-body">
         <div class="ec-name">Private Dining</div>
         <div class="ec-cap">10–30 Guests · Exclusive</div>
-        <div class="ec-price">₹2,800 <span>per cover</span></div>
+        <div class="ec-feat">Fully Private · Custom Menu · Events</div>
         <div class="ec-tags">
-          <span class="ec-tag">Events</span>
+          <span class="ec-tag">Exclusive</span>
           <span class="ec-tag">Corporate</span>
           <span class="ec-tag">AC</span>
         </div>
       </div>
     </div>
 
-    <div class="exp-card" onclick="selExp(this,'Main Hall','2–50 Guests · Classic Dining','₹1,000')">
+    <div class="exp-card" onclick="selExp(this,'Main Hall','2–50 Guests · Classic Dining','Full Menu · Walk-ins Welcome · All Day')">
       <div class="ec-img">
         <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=75" alt="Main Hall" loading="lazy">
         <div class="ec-badge">Selected</div>
@@ -1129,7 +1133,7 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
       <div class="ec-body">
         <div class="ec-name">Main Hall</div>
         <div class="ec-cap">2–50 Guests · Classic Dining</div>
-        <div class="ec-price">₹1,000 <span>per cover</span></div>
+        <div class="ec-feat">Full Menu · Walk-ins Welcome · All Day</div>
         <div class="ec-tags">
           <span class="ec-tag">Full Menu</span>
           <span class="ec-tag">All Occasions</span>
@@ -1153,9 +1157,7 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
           <div class="r5-exp-strip-name" id="expStripName">Chef's Table</div>
           <div class="r5-exp-strip-cap" id="expStripCap">2–8 Guests · Open Kitchen</div>
         </div>
-        <div class="r5-exp-strip-price" id="expStripPrice">
-          ₹2,200<span>per cover</span>
-        </div>
+        <div class="r5-exp-strip-feat" id="expStripFeat">Intimate · Live Cooking · 8 Covers Max</div>
       </div>
 
       <form class="fstack" id="reservationForm" novalidate>
@@ -1259,12 +1261,12 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
 document.getElementById('resDate').setAttribute('min', new Date().toISOString().split('T')[0]);
 
 /* ── EXPERIENCE CARD SELECTION ── */
-function selExp(el, name, cap, price) {
+function selExp(el, name, cap, feat) {
   document.querySelectorAll('#r5 .exp-card').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
   document.getElementById('expStripName').textContent = name;
   document.getElementById('expStripCap').textContent = cap;
-  document.getElementById('expStripPrice').innerHTML = price + '<span>per cover</span>';
+  document.getElementById('expStripFeat').textContent = feat;
 }
 window.selExp = selExp;
 
@@ -1286,13 +1288,13 @@ function genResId() {
 /* ── FORM SUBMIT ── */
 document.getElementById('reservationForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const name     = document.getElementById('resName').value.trim();
-  const phone    = document.getElementById('resPhone').value.trim();
-  const email    = document.getElementById('resEmail').value.trim();
-  const guests   = document.getElementById('resGuests').value;
-  const date     = document.getElementById('resDate').value;
-  const time     = document.getElementById('resTime').value;
-  const special  = document.getElementById('resRequests').value.trim();
+  const name       = document.getElementById('resName').value.trim();
+  const phone      = document.getElementById('resPhone').value.trim();
+  const email      = document.getElementById('resEmail').value.trim();
+  const guests     = document.getElementById('resGuests').value;
+  const date       = document.getElementById('resDate').value;
+  const time       = document.getElementById('resTime').value;
+  const special    = document.getElementById('resRequests').value.trim();
   const experience = document.getElementById('expStripName').textContent;
 
   if (!name)  { showToast('⚠️ Please enter your name.', true); return; }
@@ -1352,7 +1354,7 @@ document.getElementById('reservationForm').addEventListener('submit', async func
 /* ── FADE IN OBSERVER ── */
 const fo = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: .05 });
+}, { threshold:.05 });
 document.querySelectorAll('#r5 .fi').forEach(el => fo.observe(el));
 
 })();
