@@ -390,6 +390,20 @@ body:not(.dark-mode) #r5 .fl select option{background:#e3dcd2;color:#111010;}
 #r5 .fi.in{opacity:1;transform:none;}
 #r5 .fi.d1{transition-delay:.09s;}
 #r5 .fi.d2{transition-delay:.18s;}
+#resToast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:#16a34a;color:#fff;
+  padding:13px 26px;border-radius:50px;
+  font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;
+  z-index:9999;
+  transition:transform .4s cubic-bezier(.175,.885,.32,1.275),opacity .4s;
+  opacity:0;pointer-events:none;
+  max-width:90vw;text-align:center;
+}
+#resToast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+#resToast.error{background:#dc2626;}
+@media(max-width:480px){#resToast{font-size:11px;padding:10px 20px;white-space:nowrap;}}
 </style>
  <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
