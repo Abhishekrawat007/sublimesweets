@@ -1319,7 +1319,7 @@ document.getElementById('reservationForm').addEventListener('submit', async func
   const btn = document.getElementById('resSubmitBtn');
   btn.disabled = true; btn.textContent = '⏳ Confirming…';
 
-  const payload = { reservationId, name, phone, email, guests, date, time, specialRequests: special, occasion: experience };
+const payload = { reservationId, name, phone, email, guests, date, time, specialRequests: special };
 
   try {
     const [tgRes, saveRes] = await Promise.all([
