@@ -1,427 +1,174 @@
-/* ============================================
-   🌟 ULTRA-LIGHTWEIGHT CATEGORY SECTION
-   Minimal CSS - Maximum Performance
-   ============================================ */
 
-/* ============================================
-   CSS VARIABLES
-   ============================================ */
-:root {
-    --section-bg: #f8f9fa;
-    --card-bg: #ffffff;
-    --card-border: #e0e0e0;
-    --text-color: #1a1a1a;
-    --accent: #ff6b6b;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.cat-sec7-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --accent: #3b82f6;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
-.sublime-navbar.dark-mode ~ .categories-section {
-    --section-bg: #1a1a1a;
-    --card-bg: #2a2a2a;
-    --card-border: #3a3a3a;
-    --text-color: #ffffff;
+.cat-sec7-wrapper.dark-mode {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --bg-card: #1a1a1a;
+    --text-primary: #f9fafb;
+    --text-secondary: #9ca3af;
+    --border-color: #2a2a2a;
+    --accent: #60a5fa;
+    --shadow: rgba(0, 0, 0, 0.5);
 }
 
-/* ============================================
-   MAIN SECTION
-   ============================================ */
-.categories-section {
-    padding: 60px 20px 40px 20px;
-    background: var(--section-bg);
-    max-width: 1400px;
+/* ── SECTION ── */
+.cat-sec7-section {
+    padding: 80px 20px;
+    background: var(--bg-secondary);
+}
+
+.cat-sec7-section .container {
+    max-width: 1600px;
     margin: 0 auto;
 }
 
-/* ============================================
-   SECTION TITLE
-   ============================================ */
-.section-title {
-    font-size: clamp(40px, 6vw, 64px);
-    font-weight: 900;
-    color: var(--text-color);
-    margin-bottom: 50px;
+.cat-sec7-wrapper .section-header {
     text-align: center;
-    letter-spacing: -1px;
+    margin-bottom: 30px;
 }
 
-/* ============================================
-   CATEGORIES GRID - 3 COLUMNS
-   ============================================ */
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+.cat-sec7-wrapper .section-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* ============================================
-   CATEGORY CARD - MINIMAL STYLING
-   ============================================ */
-.category-card {
-    background: var(--card-bg);
+.cat-sec7-wrapper .section-subtitle {
+    font-size: clamp(16px, 2vw, 18px);
+    color: var(--text-secondary);
+}
+
+/* ── PINTEREST GRID ── */
+.cat-sec7-wrapper .pinterest-grid {
+    columns: 4 280px;
+    column-gap: 20px;
+}
+
+/* ── PINTEREST ITEM ── */
+.cat-sec7-wrapper .pinterest-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
     border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid var(--card-border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Lightweight hover - slight lift + shadow */
-.category-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.category-card:active {
-    transform: translateY(-2px);
-}
-
-/* ============================================
-   PRODUCT IMAGE - SINGLE IMAGE
-   ============================================ */
-.category-products {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
-    padding: 0;
-    border-radius: 20px 20px 0 0;
-    aspect-ratio: 1;
-    overflow: hidden;
 }
 
-.product-item {
-    display: none !important;
+/* Varying heights via padding-bottom trick — exactly mirrors the old Unsplash h= values */
+.cat-sec7-wrapper .pinterest-item:nth-child(1) { padding-bottom: 150%; } /* was h=600 on w=400 */
+.cat-sec7-wrapper .pinterest-item:nth-child(2) { padding-bottom: 125%; } /* was h=500 */
+.cat-sec7-wrapper .pinterest-item:nth-child(3) { padding-bottom: 175%; } /* was h=700 */
+.cat-sec7-wrapper .pinterest-item:nth-child(4) { padding-bottom: 137%; } /* was h=550 */
+.cat-sec7-wrapper .pinterest-item:nth-child(5) { padding-bottom: 112%; } /* was h=450 */
+.cat-sec7-wrapper .pinterest-item:nth-child(6) { padding-bottom: 150%; } /* was h=600 */
+.cat-sec7-wrapper .pinterest-item:nth-child(7) { padding-bottom: 130%; } /* was h=520 */
+.cat-sec7-wrapper .pinterest-item:nth-child(8) { padding-bottom: 162%; } /* was h=650 */
+
+.cat-sec7-wrapper .pinterest-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px var(--shadow);
+    border-color: var(--accent);
 }
 
-.product-item:nth-child(2) {
-    display: flex !important;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1;
-}
-
-.product-item:nth-child(2) img {
+/* Image fills the padded box absolutely */
+.cat-sec7-wrapper .pinterest-item .item-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.2s ease;
+    display: block;
+    transition: transform 0.6s ease;
 }
 
-/* Subtle image fade on hover */
-.category-card:hover .product-item:nth-child(2) img {
-    opacity: 0.9;
+.cat-sec7-wrapper .pinterest-item:hover .item-image {
+    transform: scale(1.08);
 }
 
-/* ============================================
-   CARD FOOTER - SIMPLE
-   ============================================ */
-.category-footer {
-    padding: 20px 24px;
-    background: var(--card-bg);
-    border-radius: 0 0 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--card-border);
+/* Overlay — always visible */
+.cat-sec7-wrapper .pinterest-item .item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 55%);
+    opacity: 1;
+    z-index: 1;
 }
 
-/* ============================================
-   CATEGORY TITLE - PLAIN TEXT
-   ============================================ */
-.category-title {
-    font-size: 18px;
+/* Content — always visible, sits at bottom */
+.cat-sec7-wrapper .pinterest-item .item-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    z-index: 2;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+}
+
+.cat-sec7-wrapper .pinterest-item:hover .item-content {
+    transform: translateY(-8px);
+}
+
+.cat-sec7-wrapper .pinterest-item .item-title {
+    font-size: 20px;
     font-weight: 700;
-    color: var(--text-color);
-    letter-spacing: -0.5px;
-    transition: color 0.2s ease;
+    color: #fff;
+    margin-bottom: 6px;
 }
 
-/* Title color change on hover */
-.category-card:hover .category-title {
-    color: var(--accent);
+.cat-sec7-wrapper .pinterest-item .item-count {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-/* ============================================
-   VIEW ALL BUTTON - SIMPLE
-   ============================================ */
-.view-all-btn {
-    padding: 10px 20px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: opacity 0.2s ease;
-}
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+    .cat-sec7-section { padding: 60px 16px; }
 
-.view-all-btn:hover {
-    opacity: 0.9;
-}
+    .cat-sec7-wrapper .section-header { margin-bottom: 40px; }
 
-.view-all-btn:active {
-    opacity: 0.7;
-}
+    .cat-sec7-wrapper .pinterest-grid {
+        columns: 2 150px;
+        column-gap: 12px;
+    }
 
-/* ============================================
-   📱 RESPONSIVE BREAKPOINTS
-   ============================================ */
-
-/* TABLET: 601px - 900px */
-@media (min-width: 601px) and (max-width: 900px) {
-    .categories-section {
-        padding: 50px 18px 35px 18px;
-    }
-    
-    .section-title {
-        font-size: 38px;
-        margin-bottom: 40px;
-    }
-    
-    .categories-grid {
-        gap: 20px;
-    }
-    
-    .category-footer {
-        padding: 16px 18px;
-    }
-    
-    .category-title {
-        font-size: 16px;
-    }
-    
-    .view-all-btn {
-        padding: 8px 16px;
-        font-size: 11px;
-    }
-}
-
-/* MOBILE: 481px - 600px */
-@media (min-width: 481px) and (max-width: 600px) {
-    .categories-section {
-        padding: 45px 15px 30px 15px;
-    }
-    
-    .section-title {
-        font-size: 34px;
-        margin-bottom: 35px;
-    }
-    
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-    }
-    
-    .category-card {
-        border-radius: 18px;
-    }
-    
-    .category-products {
-        border-radius: 18px 18px 0 0;
-    }
-    
-    .category-footer {
-        padding: 14px 14px;
-        border-radius: 0 0 18px 18px;
-    }
-    
-    .category-title {
-        font-size: 14px;
-    }
-    
-    .view-all-btn {
-        padding: 7px 14px;
-        font-size: 10px;
-        gap: 5px;
-    }
-    
-    .view-all-btn svg {
-        width: 13px;
-        height: 13px;
-    }
-}
-
-/* MOBILE: Below 480px */
-@media (max-width: 480px) {
-    .categories-section {
-        padding: 25px 12px 20px 12px;
-    }
-    
-    .section-title {
-        font-size: 32px;
-        margin-bottom: 18px;
-        letter-spacing: -1.5px;
-    }
-    
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-    }
-    
-    .category-card {
-        border-radius: 20px;
-    }
-    
-    .category-products {
-        border-radius: 20px 20px 0 0;
-        aspect-ratio: 0.65;
-        min-height: 140px;
-    }
-    
-    /* Show FIRST image on mobile */
-    .product-item {
-        display: none !important;
-    }
-    
-    .product-item:first-child {
-        display: flex !important;
-        width: 100%;
-        height: 100%;
-    }
-    
-    .product-item:first-child img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .category-footer {
-        padding: 16px 12px;
-        flex-direction: column;
-        gap: 0;
-        border-radius: 0 0 20px 20px;
-    }
-    
-    .view-all-btn {
-        display: none !important;
-    }
-    
-    .category-title {
-        font-size: 16px;
-        font-weight: 900;
-        text-align: center;
-        width: 100%;
-        letter-spacing: -0.4px;
-        line-height: 1.3;
-    }
-    
-    /* Mobile tap feedback */
-    .category-card:active {
-        transform: scale(0.98);
-        opacity: 0.9;
-    }
-}
-
-/* SMALLER MOBILE: 361px - 400px */
-@media (max-width: 400px) {
-    .categories-section {
-        padding: 22px 10px 18px 10px;
-    }
-    
-    .section-title {
-        font-size: 30px;
-        margin-bottom: 16px;
-    }
-    
-    .categories-grid {
-        gap: 10px;
-    }
-    
-    .category-card {
-        border-radius: 18px;
-    }
-    
-    .category-products {
-        border-radius: 18px 18px 0 0;
-        min-height: 120px;
-    }
-    
-    .category-footer {
-        padding: 14px 10px;
-        border-radius: 0 0 18px 18px;
-    }
-    
-    .category-title {
-        font-size: 14px;
-        font-weight: 800;
-    }
-}
-
-/* ULTRA TINY: Below 360px */
-@media (max-width: 360px) {
-    .categories-section {
-        padding: 20px 8px 16px 8px;
-    }
-    
-    .section-title {
-        font-size: 28px;
-        margin-bottom: 14px;
-    }
-    
-    .categories-grid {
-        gap: 9px;
-    }
-    
-    .category-card {
+    .cat-sec7-wrapper .pinterest-item {
+        margin-bottom: 12px;
         border-radius: 16px;
     }
-    
-    .category-products {
-        border-radius: 16px 16px 0 0;
-        min-height: 110px;
-    }
-    
-    .category-footer {
-        padding: 13px 8px;
-        border-radius: 0 0 16px 16px;
-    }
-    
-    .category-title {
-        font-size: 13px;
-    }
 }
-
-/* ============================================
-   💻 LAPTOP / DESKTOP OPTIMIZATION
-   ============================================ */
-@media (min-width: 1024px) {
-    .categories-section {
-        max-width: 1200px;
-        padding: 40px 20px 30px;
+@media (max-width: 768px) {
+    .cat-sec7-wrapper .section-header {
+    
+        margin-bottom: 16px;
     }
-
-    .categories-section .section-title {
-        font-size: clamp(34px, 4.5vw, 50px) !important;
-        margin-bottom: 40px;
-        letter-spacing: -2px;
-    }
-
-    .categories-grid {
-        gap: 20px;
-    }
-
-    .category-card {
-        border-radius: 20px;
-    }
-
-    .category-products {
-        aspect-ratio: 0.85;
-    }
-
-    .category-footer {
-        padding: 14px 18px;
-    }
-
-    .category-title {
-        font-size: 16px;
-    }
-
-    .view-all-btn {
-        padding: 8px 16px;
-        font-size: 11px;
-        letter-spacing: 0.8px;
+    .cat-sec7-wrapper .section-title {
+        margin-bottom: 4px;
+        margin-top: -30px !important;
     }
 }
