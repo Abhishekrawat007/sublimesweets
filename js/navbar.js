@@ -22,12 +22,10 @@ function initGlobalToast() {
 
         container.appendChild(toast);
 
-        // trigger animation
         requestAnimationFrame(() => {
             toast.classList.add('visible');
         });
 
-        // auto-remove after 2.5s
         setTimeout(() => {
             toast.classList.remove('visible');
             setTimeout(() => toast.remove(), 250);
@@ -52,7 +50,6 @@ const mobileMenu = document.getElementById('mobileMenu');
 const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
 const closeMenu = document.getElementById('closeMenu');
 
-// Cache menu items for staggered animation
 let mobileMenuItems = [];
 if (mobileMenu) {
     mobileMenuItems = mobileMenu.querySelectorAll('.mobile-menu-item, .dark-mode-toggle');
@@ -60,8 +57,6 @@ if (mobileMenu) {
 
 function openMobileMenu() {
     if (!hamburger || !mobileMenu || !mobileMenuOverlay) return;
-
-    // Prevent double-open spam
     if (mobileMenu.classList.contains('active')) return;
 
     hamburger.classList.add('active');
@@ -71,16 +66,13 @@ function openMobileMenu() {
     document.body.classList.add('mobile-menu-open');
     document.body.style.overflow = 'hidden';
 
-    // 🔥 Staggered reveal of menu items
     if (mobileMenuItems && mobileMenuItems.length) {
         mobileMenuItems.forEach((item, index) => {
             item.classList.remove('menu-item-show');
-
-            // Use requestAnimationFrame to start nice & smooth
             requestAnimationFrame(() => {
                 setTimeout(() => {
                     item.classList.add('menu-item-show');
-                }, 70 + index * 35); // base delay + stagger
+                }, 70 + index * 35);
             });
         });
     }
@@ -94,30 +86,19 @@ function closeMobileMenu() {
     document.body.classList.remove('mobile-menu-open');
     document.body.style.overflow = '';
 
-    // Reset menu items so next open animates again
     if (mobileMenuItems && mobileMenuItems.length) {
         mobileMenuItems.forEach(item => {
             item.classList.remove('menu-item-show');
         });
     }
 }
-// expose so HTML onclick can call it
 window.closeMobileMenu = closeMobileMenu;
-// -----------------------------
-// Defensive: clear goToProducts for any link that navigates to index
-// Put this inside bindNavbarEvents() after mobile menu handlers
-// -----------------------------
-// -----------------------------
-// Defensive: clear goToProducts when user clicks Home / Index links
-// -----------------------------
-
 
 if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
     hamburger.addEventListener('click', openMobileMenu);
     closeMenu.addEventListener('click', closeMobileMenu);
     mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 }
-
 
     // SUBMENU TOGGLE
     window.toggleSubmenu = function(id) {
@@ -144,7 +125,6 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
     const desktopSearchInput = document.getElementById('desktopSearchInput');
     const searchIconInside = document.querySelector('.search-icon-inside');
 
-      // Are we on the main product listing page?
     const path = window.location.pathname;
     const isProductHome =
         path.endsWith("index.html") ||
@@ -152,7 +132,7 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         path === "" ||
         path.endsWith("/index");
 
-      function openSearchModal() {
+    function openSearchModal() {
         if (!searchModal) return;
         searchModal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -168,36 +148,28 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         document.body.style.overflow = '';
     }
 
-    // Open modal (mobile search icon)
     if (searchBtn) {
         searchBtn.addEventListener('click', function() {
-            // If we are NOT on index → set flag and redirect
             if (!isProductHome) {
                 sessionStorage.setItem('pendingSearchModal', '1');
                 window.location.href = 'index.html';
                 return;
             }
-            // On index → just open it
             openSearchModal();
         });
     }
 
-
-    // Close button
    if (searchCloseBtn) {
     searchCloseBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         closeSearchModal();
-      if (window.productManager) {
-    window.productManager.renderProducts();
-    // Re-setup scroll observer after render
-    window.productManager.setupScrollObserver();
-}
+        if (window.productManager) {
+            window.productManager.renderProducts();
+            window.productManager.setupScrollObserver();
+        }
     });
 }
 
-
-    // Click outside content → close
     if (searchModal) {
         searchModal.addEventListener('click', function(e) {
             if (e.target === searchModal) {
@@ -206,23 +178,18 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         });
     }
 
-        // Search tags → set value + trigger search
     document.querySelectorAll('.search-tag').forEach(tag => {
         tag.addEventListener('click', function() {
             if (!searchInput) return;
 
             const term = this.textContent.trim();
             searchInput.value = term;
-   
-             document.querySelectorAll('.search-tag.selected').forEach(t => t.classList.remove('selected'));
-             this.classList.add('selected');
+
+            document.querySelectorAll('.search-tag.selected').forEach(t => t.classList.remove('selected'));
+            this.classList.add('selected');
             if (isProductHome) {
-                // On index: just filter products
                 triggerMobileSearch();
-                // you can decide whether to close modal or not
-                // closeSearchModal();
             } else {
-                // On other pages: store term and go to index once
                 if (!term) return;
                 sessionStorage.setItem("redirectSearchTerm", term);
                 window.location.href = "index.html";
@@ -230,30 +197,22 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         });
     });
 
-
-
-       // Live product search on typing (MOBILE MODAL)
     if (searchInput) {
         searchInput.addEventListener('input', function() {
             if (isProductHome) {
-                // Only live-filter on index page
                 triggerMobileSearch();
             }
-            // On other pages, typing alone does nothing yet (wait for Enter/icon)
         });
 
-        // Press Enter → search
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const term = searchInput.value.trim();
                 if (!term) return;
 
                 if (isProductHome) {
-                    // Just search on this page
                     triggerMobileSearch();
-                    closeSearchModal(); // optional
+                    closeSearchModal();
                 } else {
-                    // Store once and redirect to index
                     sessionStorage.setItem("redirectSearchTerm", term);
                     window.location.href = "index.html";
                 }
@@ -261,7 +220,6 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         });
     }
 
-    // 🔍 Clicking the icon inside input → same as pressing Enter
     if (searchIconInside && searchInput) {
         searchIconInside.addEventListener('click', function () {
             const term = searchInput.value.trim();
@@ -269,7 +227,7 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
 
             if (isProductHome) {
                 triggerMobileSearch();
-                closeSearchModal(); // optional
+                closeSearchModal();
             } else {
                 sessionStorage.setItem("redirectSearchTerm", term);
                 window.location.href = "index.html";
@@ -277,9 +235,7 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         });
     }
 
-      // 💻 DESKTOP SEARCH BAR (top-right navbar)
     if (desktopSearchInput) {
-        // On non-index pages: focus = go to index + open modal
         desktopSearchInput.addEventListener('focus', function() {
             if (!isProductHome) {
                 sessionStorage.setItem('pendingSearchModal', '1');
@@ -287,14 +243,12 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
             }
         });
 
-        // Live filter while typing ONLY on index
         desktopSearchInput.addEventListener('input', function() {
             if (isProductHome) {
                 triggerDesktopSearch();
             }
         });
 
-        // Press Enter → search ONLY on index
         desktopSearchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 if (!isProductHome) return;
@@ -303,12 +257,8 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         });
     }
 
-
-    // 🔍 Actual search logic
-     // 🔍 SHARED product search logic (used by mobile + desktop)
-// 🔍 SHARED product search logic (used by mobile + desktop)
 function performProductSearch(query) {
-     if (!isProductHome) return; // only search on index page
+    if (!isProductHome) return;
 
     if (!window.productManager || !Array.isArray(window.productManager.products)) {
         return;
@@ -317,7 +267,6 @@ function performProductSearch(query) {
     const allProducts = window.productManager.products;
     const q = (query || '').toLowerCase().trim();
 
-    // 🔥 HERE: toggle full-page search mode
     if (!q) {
         document.body.classList.remove('search-active');
     } else {
@@ -336,26 +285,21 @@ function performProductSearch(query) {
     }
 
     window.productManager.renderProducts(filtered);
-  smoothScrollToProducts();
+    smoothScrollToProducts();
 
     const countEl = document.getElementById('productCount');
     if (countEl) countEl.textContent = filtered.length;
 }
-      // Only handle redirect term on index page
+
     if (isProductHome) {
         const redirectTerm = sessionStorage.getItem("redirectSearchTerm");
         if (redirectTerm) {
             performProductSearch(redirectTerm);
-
             if (searchInput) searchInput.value = redirectTerm;
             if (desktopSearchInput) desktopSearchInput.value = redirectTerm;
-
-            // ✅ Clear it so it doesn't stick on refresh
             sessionStorage.removeItem("redirectSearchTerm");
         }
     }
-
-
 
     function triggerMobileSearch() {
         if (!searchInput) return;
@@ -375,36 +319,29 @@ function performProductSearch(query) {
         }
     }
 
-
-    // CART SIDEBAR
+    // CART SIDEBAR — delegated to cart-sidebar.js (V2 Teal Card)
     const cartBtn = document.getElementById('cartBtn');
     const cartSidebar = document.getElementById('cartSidebar');
-    const closeCart = document.getElementById('closeCart');
+    const closeCartEl = document.getElementById('closeCart');
 
-    if (cartBtn && cartSidebar && closeCart) {
+    if (cartBtn) {
         cartBtn.addEventListener('click', function() {
-            cartSidebar.classList.add('active');
-            if (mobileMenuOverlay) mobileMenuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            if (typeof window.openCart === 'function') window.openCart();
         });
-
-        closeCart.addEventListener('click', closeCartSidebar);
-        
-        if (mobileMenuOverlay) {
-            mobileMenuOverlay.addEventListener('click', function() {
-                if (cartSidebar && cartSidebar.classList.contains('active')) {
-                    closeCartSidebar();
-                }
-            });
-        }
+    }
+    if (closeCartEl) {
+        closeCartEl.addEventListener('click', closeCartSidebar);
+    }
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', function() {
+            if (cartSidebar && cartSidebar.classList.contains('active')) {
+                closeCartSidebar();
+            }
+        });
     }
 
     function closeCartSidebar() {
-        if (cartSidebar) cartSidebar.classList.remove('active');
-        if (mobileMenu && !mobileMenu.classList.contains('active') && mobileMenuOverlay) {
-            mobileMenuOverlay.classList.remove('active');
-        }
-        document.body.style.overflow = '';
+        if (typeof window.closeCart === 'function') window.closeCart();
     }
 
     // DARK MODE TOGGLE
@@ -412,7 +349,6 @@ function performProductSearch(query) {
     const mobileDarkToggle = document.getElementById('mobileDarkToggle');
     const darkModeBtn = document.getElementById('darkModeBtn');
 
-    // Check saved theme on page load
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         if (navbar) navbar.classList.add('dark-mode');
@@ -421,7 +357,6 @@ function performProductSearch(query) {
         updateDarkModeIcon(true);
     }
 
-    // Mobile dark mode toggle
     if (mobileDarkToggle) {
         mobileDarkToggle.addEventListener('click', function() {
             if (navbar) navbar.classList.toggle('dark-mode');
@@ -433,7 +368,6 @@ function performProductSearch(query) {
         });
     }
 
-    // Desktop dark mode button
     if (darkModeBtn) {
         darkModeBtn.addEventListener('click', function() {
             if (navbar) navbar.classList.toggle('dark-mode');
@@ -445,7 +379,6 @@ function performProductSearch(query) {
         });
     }
 
-    // Update dark mode icon
     function updateDarkModeIcon(isDark) {
         if (darkModeBtn) {
             const sunIcon = darkModeBtn.querySelector('.sun-icon');
@@ -473,15 +406,12 @@ function performProductSearch(query) {
         try {
             const data = localStorage.getItem('wishlist');
             wishlist = data ? JSON.parse(data) : [];
-            if (!Array.isArray(wishlist)) {
-                wishlist = [];
-            }
+            if (!Array.isArray(wishlist)) wishlist = [];
         } catch (e) {
             wishlist = [];
         }
 
         const count = wishlist.length;
-
         if (count > 0) {
             wishlistCountBadge.textContent = count;
             wishlistCountBadge.style.display = 'flex';
@@ -491,10 +421,7 @@ function performProductSearch(query) {
         }
     }
 
-    // Expose globally so product-card.js can call it
     window.updateWishlistBadge = syncWishlistBadgeFromStorage;
-
-    // Initialize on page load
     syncWishlistBadgeFromStorage();
 
     if (wishlistBtn) {
@@ -503,7 +430,7 @@ function performProductSearch(query) {
         });
     }
 
-        // ===========================
+    // ===========================
     // 🛒 CART BADGE (GLOBAL)
     // ===========================
     const cartCountBadge = document.getElementById('cartCount');
@@ -520,7 +447,6 @@ function performProductSearch(query) {
             cart = [];
         }
 
-        // Count TOTAL QUANTITY across cart
         const totalQty = cart.reduce((sum, item) => {
             const q = Number(item.quantity) || 0;
             return sum + q;
@@ -535,10 +461,7 @@ function performProductSearch(query) {
         }
     }
 
-    // Expose globally so other scripts can call it
     window.updateCartBadge = syncCartBadgeFromStorage;
-
-    // Initialize on page load
     syncCartBadgeFromStorage();
 
     // DESKTOP RESPONSIVE
@@ -620,27 +543,23 @@ function performProductSearch(query) {
             }
         });
     });
-    // auto-close mobile menu when clicking normal mobile links (skip submenu toggles)
-document.querySelectorAll('.mobile-menu .mobile-menu-link').forEach(a => {
-  const onclick = a.getAttribute('onclick') || '';
-  if (!onclick.includes('toggleSubmenu')) {
-    a.addEventListener('click', () => { closeMobileMenu(); });
-  }
-});
 
-
+    document.querySelectorAll('.mobile-menu .mobile-menu-link').forEach(a => {
+        const onclick = a.getAttribute('onclick') || '';
+        if (!onclick.includes('toggleSubmenu')) {
+            a.addEventListener('click', () => { closeMobileMenu(); });
+        }
+    });
 }
 
 function highlightNavigation() {
   const slug = sessionStorage.getItem('activeParentCategory') || null;
 
-  // helper to clear
   document.querySelectorAll('.desktop-menu-link, .mobile-menu-link, .bottom-nav-item').forEach(el => {
     el.classList.remove('active');
   });
 
   if (!slug) {
-    // default: highlight Home (index)
     const homeDesktop = document.querySelector('.desktop-menu-link[href*="index"], .desktop-menu-link[href="/"], .desktop-menu-link.home');
     const homeBottom = document.querySelector('.bottom-nav-item[data-page="home"], .bottom-nav-item[href*="index"]');
     if (homeDesktop) homeDesktop.classList.add('active');
@@ -648,22 +567,17 @@ function highlightNavigation() {
     return;
   }
 
-  // Try to match by href filename slug (mithai.html => mithai)
-  // and also by data-page attributes if you use them.
   const normalized = slug.toLowerCase();
 
-  // match desktop links
   const desktopLinks = Array.from(document.querySelectorAll('.desktop-menu-link, .mobile-menu-link'));
   for (const a of desktopLinks) {
     const href = a.getAttribute('href') || '';
-    // remove path and extension -> 'mithai' from '/mithai.html' or 'category/mithai'
     const name = href.split('/').pop().split('.').shift().toLowerCase();
     if (name === normalized || (a.textContent || '').toLowerCase().trim() === normalized) {
       a.classList.add('active');
     }
   }
 
-  // match bottom nav by data-page or href
   const bottomMatches = document.querySelectorAll('.bottom-nav-item');
   bottomMatches.forEach(btn => {
     const dp = btn.getAttribute('data-page') || '';
@@ -674,12 +588,8 @@ function highlightNavigation() {
   });
 }
 
-// Run on load
 document.addEventListener('DOMContentLoaded', highlightNavigation);
-
-// Run when user presses browser back/forward
 window.addEventListener('popstate', highlightNavigation);
-
 window.addEventListener("DOMContentLoaded", highlightNavigation);
 window.addEventListener("popstate", highlightNavigation);
 
