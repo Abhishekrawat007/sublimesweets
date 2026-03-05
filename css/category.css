@@ -15,7 +15,7 @@
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
-.cat-sec7-wrapper.dark-mode {
+body.dark-mode .cat-sec7-wrapper {
     --bg-primary: #0a0a0a;
     --bg-secondary: #141414;
     --bg-card: #1a1a1a;
