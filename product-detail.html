@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/product-card.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cartbar.css">
     <style>
         :root {
             --primary: #ff6b6b;
@@ -1234,7 +1235,7 @@ body.dark-mode .product-rating-small .star-icon.empty {
 </head>
 <body>
 <!-- NAVBAR START -->
- <!-- MAIN NAVBAR -->
+<!-- MAIN NAVBAR -->
     <nav class="sublime-navbar" id="navbar">
         <div class="navbar-container">
             <!-- LEFT SECTION -->
@@ -1244,10 +1245,9 @@ body.dark-mode .product-rating-small .star-icon.empty {
                     <span></span>
                     <span></span>
                 </button>
-                <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
-                    <span class="logo-icon">🍰</span>
-                    <span>Sublime Sweets</span>
-                </a>
+            <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+    <img src="images/sublimesweets1.png" alt="Sublime Sweets" class="navbar-logo-img">
+</a>
             </div>
 
           <!-- DESKTOP MENU -->
@@ -1372,8 +1372,7 @@ body.dark-mode .product-rating-small .star-icon.empty {
                     </svg>
                 </button>
 
-                
-            <!-- WISHLIST -->
+                <!-- WISHLIST -->
 <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="window.location.href='wishlist.html'">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -1397,7 +1396,6 @@ body.dark-mode .product-rating-small .star-icon.empty {
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
                   <span class="badge" id="cartCount"></span>
-
                 </button>
             </div>
         </div>
@@ -1409,10 +1407,9 @@ body.dark-mode .product-rating-small .star-icon.empty {
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
-                <span class="logo-icon">🍰</span>
-                <span>Sublime Sweets</span>
-            </a>
+          <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+    <img src="images/sublimesweets1.png" alt="Sublime Sweets" class="mobile-logo">
+</a>
             <button class="close-btn" id="closeMenu" aria-label="Close Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1429,17 +1426,13 @@ body.dark-mode .product-rating-small .star-icon.empty {
 </a>
             </div>
 
-          
-           
-  <!-- All Products (mobile) -->
+           <!-- All Products (mobile) -->
 <div class="mobile-menu-item">
 <a href="index.html#productsGrid" class="mobile-menu-link" >
   <span><span class="menu-icon">📦</span> All Products</span>
 </a>
-
 </div>
 
-          
 <!-- CATEGORIES -->
 <div class="mobile-menu-item">
     <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('categories'); return false;">
@@ -1487,7 +1480,6 @@ body.dark-mode .product-rating-small .star-icon.empty {
             <a href="cakes.html" class="mobile-submenu-item" onclick="setActiveCategory('cakes')">
                 <span class="submenu-emoji">🎂</span> Cakes
             </a>
-
             <a href="pastry.html" class="mobile-submenu-item" onclick="setActiveCategory('pastries')">
                 <span class="submenu-emoji">🥐</span> Pastries
             </a>
@@ -1570,41 +1562,46 @@ body.dark-mode .product-rating-small .star-icon.empty {
         </div>
         <div class="search-suggestions-label">Popular Searches</div>
         <div class="search-suggestions">
-  <span class="search-tag">Samosa</span>
-                <span class="search-tag">Chocolate Cake</span>
-                <span class="search-tag">Mithai</span>
-                <span class="search-tag">Momo</span>
-                <span class="search-tag">Gulab Jamun</span>
-                <span class="search-tag">Bread</span>
-                <span class="search-tag">Dry Fruits</span>
-                <span class="search-tag">Milk</span>
-            </div>
+            <span class="search-tag">Samosa</span>
+            <span class="search-tag">Chocolate Cake</span>
+            <span class="search-tag">Mithai</span>
+            <span class="search-tag">Momo</span>
+            <span class="search-tag">Gulab Jamun</span>
+            <span class="search-tag">Bread</span>
+            <span class="search-tag">Dry Fruits</span>
+            <span class="search-tag">Milk</span>
         </div>
     </div>
-    <!-- CART SIDEBAR -->
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3 class="cart-title">Shopping Cart</h3>
-            <button class="close-btn" id="closeCart" aria-label="Close Cart">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
+</div>
 
-        <div class="cart-content" id="cartContent">
-            <!-- Sample Cart Items -->
-        </div>
-
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span style="color: var(--accent);">₹0</span>
-            </div>
-           <button class="checkout-btn" onclick="window.location.href='cart.html'">Proceed to Checkout</button>
-        </div>
+    <!-- CART SIDEBAR V2 - TEAL CARD -->
+<!-- ============================================
+     CART SIDEBAR - DESIGN V2
+     "Teal Card" — circular product image,
+     green tag badges, blue price, delete btn,
+     teal header accent
+     ============================================ -->
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3 class="cart-title">Shopping Cart <span class="cart-count-badge" id="cartCountBadgeInSidebar">0</span></h3>
+        <button class="close-btn" id="closeCart" aria-label="Close Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
     </div>
+
+    <div class="cart-content" id="cartContent"></div>
+
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span>₹0</span>
+        </div>
+        <button class="checkout-btn" onclick="window.location.href='cart.html'">Proceed to Checkout</button>
+    </div>
+</div>
 <!-- NAVBAR END -->
 
 
@@ -2225,6 +2222,7 @@ body.dark-mode .video-modal-content {
     <script src="js/product.js"></script>
     <script src="js/product-card3.js"></script>
     <script src="js/product-detail-script.js"></script>
+    <script src="js/cartsidebar.js"></script>
     <script src="js/bottom-bar.js"></script>
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
