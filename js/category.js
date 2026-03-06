@@ -173,20 +173,11 @@
 
     document.addEventListener('DOMContentLoaded', tryPatch);
 
-    // ✅ Android back button fix (bfcache)
-    // When user presses back on Android, browser restores page from cache.
-    // DOMContentLoaded does NOT fire — but pageshow does, with e.persisted = true
+    // ✅ Android back button fix
+    // Force reload when page is restored from bfcache
     window.addEventListener('pageshow', function (e) {
         if (e.persisted) {
-            attempts = 0;
-            if (window.productManager) {
-                patchCartV4(window.productManager);
-                window.productManager.syncCartUI();
-            } else {
-                tryPatch();
-            }
-            if (window.updateCartBadge) window.updateCartBadge();
-            if (window.updateWishlistBadge) window.updateWishlistBadge();
+            window.location.reload();
         }
     });
 
