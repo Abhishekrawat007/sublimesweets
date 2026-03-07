@@ -1,11 +1,10 @@
 /* ============================================
-   SEARCH MODAL V2 — "SPOTLIGHT"
-   Appear: blade cuts across screen from center
-   Light: pure white bar, soft shadow void
-   Dark: deep black, red ember glow
-   No suggestions visible by default — appear
-   only after typing stops (results driven)
-   Lightweight — zero imports
+   SEARCH MODAL V3 — "FROSTED TICKER"
+   Appear: slides in from RIGHT as a tall panel
+   Light: frosted white, peach-pink glow
+   Dark: #0a0a0a deep glass, hot pink accent
+   Scanning line animation on input focus
+   Zero external imports
    ============================================ */
 
 /* ── BACKDROP ─────────────────────────────── */
@@ -13,15 +12,15 @@
     position: fixed;
     inset: 0;
     z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px) saturate(140%);
-    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
     padding: 0;
 }
 
@@ -30,119 +29,133 @@
     visibility: visible;
 }
 
-/* ── SPOTLIGHT BAR — the whole modal ─────── */
+/* ── PANEL ────────────────────────────────── */
 .search-modal-content {
     position: relative;
-    width: 100%;
-    max-width: 680px;
-    background: #ffffff;
-    border-radius: 0;
-    border: none;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    box-shadow:
-        0 0 0 100vw rgba(0,0,0,0),
-        0 20px 80px rgba(0,0,0,0.22),
-        0 2px 0 rgba(255,107,107,0.5);
+    width: 420px;
+    max-width: 92vw;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border-left: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: -20px 0 80px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
     padding: 0;
     box-sizing: border-box;
-    transform: scaleX(0.85) translateY(-8px);
-    transform-origin: center center;
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(100%);
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
     overflow: hidden;
-    /* Blade effect — extends full width on active */
-    margin: 0 20px;
-    border-radius: 14px;
 }
 
 .search-modal.active .search-modal-content {
-    transform: scaleX(1) translateY(0);
+    transform: translateX(0);
 }
 
-/* ── RED ACCENT LINE on bottom ───────────── */
-.search-modal-content::after {
+/* ── NOISE TEXTURE OVERLAY ────────────────── */
+.search-modal-content::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        #ff6b6b 30%,
-        #ff8e53 60%,
-        transparent 100%
-    );
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
 }
 
-.search-modal.active .search-modal-content::after {
-    transform: scaleX(1);
-}
-
-/* ── HEADER — sits above input ────────────── */
+/* ── HEADER ───────────────────────────────── */
 .search-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 22px 0;
+    padding: 28px 28px 0;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
 }
 
 .search-modal-title {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: rgba(0,0,0,0.25);
+    color: rgba(0, 0, 0, 0.25);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* ── CLOSE BUTTON ─────────────────────────── */
 .search-close-btn {
     position: static;
-    width: 28px;
-    height: 28px;
-    border: none;
-    background: transparent;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.04);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    color: rgba(0,0,0,0.3);
-    transition: all 0.15s ease;
+    border-radius: 10px;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
     flex-shrink: 0;
-    padding: 0;
 }
 
 .search-close-btn svg {
-    stroke: rgba(0,0,0,0.3);
-    transition: stroke 0.15s ease;
+    stroke: rgba(0, 0, 0, 0.4);
+    transition: stroke 0.2s ease;
 }
 
 .search-close-btn:hover {
-    background: rgba(255,107,107,0.1);
+    background: #ff2d6b;
+    border-color: #ff2d6b;
     transform: none;
 }
 
 .search-close-btn:hover svg {
-    stroke: #ff6b6b;
+    stroke: #fff;
 }
 
 .search-close-btn:active {
-    transform: scale(0.9);
+    transform: scale(0.92);
 }
 
 /* ── INPUT WRAPPER ────────────────────────── */
 .search-input-wrapper {
     position: relative;
-    margin: 0;
-    padding: 12px 22px 18px;
-    width: 100%;
+    margin: 32px 28px 0;
+    width: auto;
     box-sizing: border-box;
     display: block;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+/* ── SCANNING LINE ANIMATION ──────────────── */
+@keyframes scan {
+    0%   { transform: scaleX(0); opacity: 0; }
+    15%  { transform: scaleX(1); opacity: 1; }
+    85%  { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(0); opacity: 0; }
+}
+
+.search-input-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff2d6b, #ff8c42, #ff2d6b);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 1px;
+}
+
+.search-input-wrapper:focus-within::after {
+    transform: scaleX(1);
+    animation: scan 2.5s ease-in-out infinite;
 }
 
 /* ── INPUT ────────────────────────────────── */
@@ -150,27 +163,29 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 8px 44px 8px 0;
+    padding: 10px 40px 14px 0;
     border: none;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
     border-radius: 0;
-    font-size: 26px;
+    font-size: 28px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 300;
+    font-weight: 200;
     background: transparent;
     color: #0d0d0d;
     outline: none;
     letter-spacing: -0.5px;
-    box-shadow: none;
-    transition: none;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease;
+    line-height: 1.2;
 }
 
 .search-input::placeholder {
-    color: rgba(0,0,0,0.18);
-    font-weight: 300;
+    color: rgba(0, 0, 0, 0.15);
+    font-weight: 200;
 }
 
 .search-input:focus {
-    border: none !important;
+    border-color: transparent !important;
     box-shadow: none !important;
     background: transparent !important;
 }
@@ -178,174 +193,225 @@
 /* ── SEARCH ICON ──────────────────────────── */
 .search-icon-inside {
     position: absolute;
-    right: 22px;
+    right: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
     pointer-events: auto;
     cursor: pointer;
-    color: rgba(0,0,0,0.2);
+    color: rgba(0, 0, 0, 0.15);
     opacity: 1;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease;
     filter: none;
 }
 
 .search-icon-inside:hover {
-    color: #ff6b6b !important;
-    transform: translateY(-50%) scale(1.1) !important;
+    color: #ff2d6b !important;
+    transform: translateY(-60%) scale(1.1) !important;
     filter: none !important;
 }
 
-/* ── SUGGESTIONS — shown as subtle chips ─── */
+/* ── SUGGESTIONS LABEL ────────────────────── */
 .search-suggestions-label {
-    display: none; /* hidden by default */
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.2);
+    margin: 36px 28px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
 }
 
+/* ── TAGS ─────────────────────────────────── */
 .search-suggestions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 0 22px 18px;
+    gap: 9px;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
 }
 
 .search-tag {
-    padding: 5px 14px;
-    background: transparent;
-    border: 1px solid rgba(0,0,0,0.12);
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.07);
     border-radius: 100px;
-    font-size: 12px;
+    font-size: 13px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    color: rgba(0,0,0,0.45);
+    color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    transition: all 0.18s ease;
+    transition: all 0.2s ease;
     letter-spacing: 0.1px;
 }
 
 .search-tag:hover {
-    background: #ff6b6b;
+    background: #ff2d6b;
     color: #fff;
-    border-color: #ff6b6b;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+    border-color: #ff2d6b;
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(255, 45, 107, 0.3);
 }
 
-.search-tag.selected {
-    background: #ff6b6b !important;
+.search-tag.selected,
+.search-tag:active {
+    background: #ff2d6b !important;
     color: #fff !important;
-    border-color: #ff6b6b !important;
+    border-color: #ff2d6b !important;
+    box-shadow: 0 4px 16px rgba(255, 45, 107, 0.3) !important;
+}
+
+/* ── BOTTOM DECORATIVE NUMBER ─────────────── */
+.search-modal-content::after {
+    content: '⌘';
+    position: absolute;
+    bottom: 32px;
+    right: 28px;
+    font-size: 48px;
+    color: rgba(0, 0, 0, 0.04);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    pointer-events: none;
+    z-index: 0;
+    line-height: 1;
 }
 
 /* ══════════════════════════════════════════
    DARK MODE
 ══════════════════════════════════════════ */
 .sublime-navbar.dark-mode ~ .search-modal {
-    background: rgba(0, 0, 0, 0.82);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    background: #111111 !important;
-    border-top-color: rgba(255,255,255,0.04) !important;
-    border-bottom-color: rgba(255,255,255,0.04) !important;
-    box-shadow:
-        0 20px 80px rgba(0,0,0,0.6),
-        0 2px 0 rgba(255,107,107,0.4) !important;
+    background: rgba(10, 10, 10, 0.96) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.06) !important;
+    box-shadow: -20px 0 80px rgba(0, 0, 0, 0.5) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-modal-title {
-    color: rgba(255,255,255,0.2) !important;
+    color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-close-btn svg {
-    stroke: rgba(255,255,255,0.25) !important;
+    stroke: rgba(255, 255, 255, 0.3) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
-    background: rgba(255,107,107,0.12) !important;
+    background: #ff2d6b !important;
+    border-color: #ff2d6b !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover svg {
-    stroke: #ff6b6b !important;
+    stroke: #fff !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input {
     color: #f0f0f0 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
     background: transparent !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input::placeholder {
-    color: rgba(255,255,255,0.12) !important;
+    color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input:focus {
-    border: none !important;
+    border-color: transparent !important;
     box-shadow: none !important;
-    background: transparent !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-icon-inside {
-    color: rgba(255,255,255,0.18) !important;
+    color: rgba(255, 255, 255, 0.12) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-icon-inside:hover {
-    color: #ff6b6b !important;
+    color: #ff2d6b !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-suggestions-label {
+    color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-tag {
-    border-color: rgba(255,255,255,0.1) !important;
-    color: rgba(255,255,255,0.3) !important;
-    background: transparent !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.07) !important;
+    color: rgba(255, 255, 255, 0.35) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-tag:hover {
-    background: #ff6b6b !important;
-    border-color: #ff6b6b !important;
+    background: #ff2d6b !important;
+    border-color: #ff2d6b !important;
     color: #fff !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-tag.selected {
-    background: #ff6b6b !important;
-    border-color: #ff6b6b !important;
+    background: #ff2d6b !important;
+    border-color: #ff2d6b !important;
     color: #fff !important;
 }
 
-/* ══════════════════════════════════════════
-   MOBILE
-══════════════════════════════════════════ */
-@media (max-width: 480px) {
-    .search-modal {
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 70px;
-    }
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content::after {
+    color: rgba(255, 255, 255, 0.03);
+}
 
+/* ══════════════════════════════════════════
+   MOBILE — full width panel from right
+══════════════════════════════════════════ */
+@media (max-width: 600px) {
     .search-modal-content {
-        margin: 0;
-        border-radius: 0 0 16px 16px;
-        transform: scaleX(1) translateY(-100%);
         width: 100%;
         max-width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.6);
+        transform: translateY(100%);
+        box-shadow: 0 -20px 80px rgba(0, 0, 0, 0.12);
     }
 
     .search-modal.active .search-modal-content {
-        transform: scaleX(1) translateY(0);
+        transform: translateY(0);
+    }
+
+    .search-modal {
+        align-items: flex-end;
+        justify-content: stretch;
+    }
+
+    .search-modal-content {
+        height: auto;
+        min-height: 55%;
+        max-height: 75%;
+        border-radius: 24px 24px 0 0;
     }
 
     .search-input {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .search-modal-header {
-        padding: 14px 18px 0;
+        padding: 22px 22px 0;
     }
 
     .search-input-wrapper {
-        padding: 10px 18px 14px;
+        margin: 24px 22px 0;
+    }
+
+    .search-suggestions-label {
+        margin: 28px 22px 12px;
     }
 
     .search-suggestions {
-        padding: 0 18px 16px;
+        padding: 0 22px 32px;
     }
 
-    .search-icon-inside {
-        right: 18px;
+    .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 -20px 80px rgba(0, 0, 0, 0.5) !important;
     }
 }

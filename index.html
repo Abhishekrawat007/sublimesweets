@@ -784,9 +784,8 @@ body.search-active #r5 {
         </div>
     </div>
 
-    <!-- SEARCH MODAL -->
-<!-- SEARCH MODAL V2 — "SPOTLIGHT" -->
-<!-- Replace your existing search modal block in navbar.html -->
+  <!-- SEARCH MODAL V3 — "FROSTED TICKER" -->
+<!-- Slides in from RIGHT on desktop, rises from BOTTOM on mobile -->
 <!-- All IDs identical — navbar.js works untouched -->
 
 <div class="search-modal" id="searchModal">
@@ -794,9 +793,9 @@ body.search-active #r5 {
 
         <!-- HEADER -->
         <div class="search-modal-header">
-            <span class="search-modal-title">Sublime Sweets</span>
+            <span class="search-modal-title">Search</span>
             <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -819,7 +818,8 @@ body.search-active #r5 {
             </svg>
         </div>
 
-        <!-- QUICK PICKS — subtle chips, no label -->
+        <!-- SUGGESTIONS -->
+        <div class="search-suggestions-label">Popular</div>
         <div class="search-suggestions">
             <span class="search-tag">Samosa</span>
             <span class="search-tag">Chocolate Cake</span>
