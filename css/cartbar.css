@@ -149,8 +149,8 @@
 /* Delete button - top LEFT of item (as in screenshot ✕) */
 .v4-item-del {
     position: absolute !important;
-    top: 12px !important;
-    left: 0 !important;
+    top: 4px !important;
+    left: 6px !important;
     width: 20px !important;
     height: 20px !important;
     border: none !important;
@@ -342,15 +342,20 @@
     text-decoration: none !important;
 }
 .v4-continue-btn:hover { color: #111827 !important; }
-
-/* === DARK MODE === */
-.sublime-navbar.dark-mode ~ .cart-sidebar { background: #1a1a1a !important; }
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-header { background: #1a1a1a !important; border-bottom-color: #2a2a2a !important; }
+/* Dark mode override - must be last to win */
+.sublime-navbar.dark-mode ~ .cart-sidebar,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-header,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content,
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer {
+    background: #1a1a1a !important;
+}
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-title { color: #f9fafb !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-count-badge { background: #f9fafb !important; color: #111827 !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-header { border-bottom-color: #2a2a2a !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-header .close-btn svg { stroke: #9ca3af !important; }
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-content { background: #1a1a1a !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-cart-item { border-bottom-color: #2a2a2a !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-item-img { border: 1px solid #374151 !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-cart-item { background: #2a2a2a !important; border-bottom-color: #374151 !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-item-name { color: #f9fafb !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-item-variant { color: #9ca3af !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-item-price { color: #f9fafb !important; }
@@ -358,9 +363,10 @@
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-qty-btn { background: #2a2a2a !important; color: #f9fafb !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-qty-btn:hover { background: #374151 !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v4-qty-num { color: #f9fafb !important; border-color: #374151 !important; }
-.sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer { background: #1a1a1a !important; border-top-color: #2a2a2a !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-total { color: #f9fafb !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-total span:last-child { color: #f9fafb !important; }
-.sublime-navbar.dark-mode ~ .cart-sidebar .v4-info-banner { background: #1e3a5f !important; border-color: #1e40af !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-shipping-note { color: #6b7280 !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .checkout-btn { background: #f9fafb !important; color: #111827 !important; }
-.sublime-navbar.dark-mode ~ .cart-sidebar .checkout-btn:hover { background: #e5e7eb !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-continue-btn { color: #6b7280 !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-info-banner { background: #1e3a5f !important; border-color: #1e40af !important; }
+.sublime-navbar.dark-mode ~ .cart-sidebar .v4-info-text { color: #93c5fd !important; }
