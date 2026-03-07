@@ -333,13 +333,13 @@
     .search-modal {
         align-items: flex-start;
         padding: 0;
-        padding-top: 70px; /* below navbar */
+        padding-top: 70px;
     }
 
     .search-modal-content {
         max-width: 100%;
-        border-radius: 0 0 20px 20px;
-        padding: 20px 18px 24px;
+        border-radius: 0 0 24px 24px;
+        padding: 22px 20px 28px;
         transform: scale(1) translateY(-100%);
         box-shadow:
             0 0 0 1px rgba(255, 255, 255, 0.5) inset,
@@ -350,28 +350,19 @@
         transform: scale(1) translateY(0);
     }
 
-    /* Input stays visible above keyboard */
-    .search-input {
-        font-size: 16px; /* prevents iOS zoom */
+    .search-modal-title {
+        font-size: 16px;
     }
 
-    .search-modal-title {
-        font-size: 15px;
+    .search-input {
+        font-size: 16px;
     }
 
     .search-tag {
         font-size: 12px;
         padding: 6px 13px;
     }
-
-    /* Hide suggestions when keyboard is likely open (input focused) */
-    .search-input:focus ~ * .search-suggestions,
-    .search-input-wrapper:focus-within ~ .search-suggestions-label,
-    .search-input-wrapper:focus-within ~ .search-suggestions {
-        display: none;
-    }
 }
-
 @media (max-width: 480px) {
     .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
         box-shadow:
