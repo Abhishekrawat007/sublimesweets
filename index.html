@@ -783,56 +783,43 @@ body.search-active #r5 {
             </div>
         </div>
     </div>
-
-  <!-- SEARCH MODAL V3 — "FROSTED TICKER" -->
-<!-- Slides in from RIGHT on desktop, rises from BOTTOM on mobile -->
+<!-- SEARCH MODAL V4 — "THE DROP" -->
+<!-- Unfurls directly below navbar — no slide, no scale -->
 <!-- All IDs identical — navbar.js works untouched -->
 
 <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
+        <div class="search-modal-inner">
 
-        <!-- HEADER -->
-        <div class="search-modal-header">
-            <span class="search-modal-title">Search</span>
-            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
+            <!-- HEADER -->
+            <div class="search-modal-header">
+                <span class="search-modal-title">What are you looking for?</span>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- INPUT -->
+            <div class="search-input-wrapper">
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Samosa, Cake, Mithai…"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
                 </svg>
-            </button>
-        </div>
+            </div>
 
-        <!-- INPUT -->
-        <div class="search-input-wrapper">
-            <input
-                type="text"
-                class="search-input"
-                placeholder="What are you craving?"
-                id="searchInput"
-                autocomplete="off"
-            >
-            <svg class="search-icon-inside" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-            </svg>
         </div>
-
-        <!-- SUGGESTIONS -->
-        <div class="search-suggestions-label">Popular</div>
-        <div class="search-suggestions">
-            <span class="search-tag">Samosa</span>
-            <span class="search-tag">Chocolate Cake</span>
-            <span class="search-tag">Mithai</span>
-            <span class="search-tag">Momo</span>
-            <span class="search-tag">Gulab Jamun</span>
-            <span class="search-tag">Bread</span>
-            <span class="search-tag">Dry Fruits</span>
-            <span class="search-tag">Milk</span>
-        </div>
-
     </div>
 </div>
-
     <!-- CART SIDEBAR V2 - TEAL CARD -->
 <!-- ============================================
      CART SIDEBAR - DESIGN V2

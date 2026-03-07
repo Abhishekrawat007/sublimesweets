@@ -136,19 +136,17 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         if (!searchModal) return;
         searchModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-      
+        if (searchInput) {
+            setTimeout(() => searchInput.focus(), 150);
+        }
     }
 
-   function closeSearchModal() {
-    if (!searchModal) return;
-    const content = searchModal.querySelector('.search-modal-content');
-    if (content) content.style.transform = 'translateX(100%)';
-    setTimeout(() => {
-        searchModal.classList.remove('active');
-        if (content) content.style.transform = '';
-    }, 320);
-    document.body.style.overflow = '';
-}
+    function closeSearchModal() {
+        if (searchModal) {
+            searchModal.classList.remove('active');
+        }
+        document.body.style.overflow = '';
+    }
 
     if (searchBtn) {
         searchBtn.addEventListener('click', function() {

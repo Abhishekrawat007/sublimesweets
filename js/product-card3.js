@@ -148,72 +148,101 @@ class ProductCardManager {
     badgeRowHTML += `<div class="info-badge rating-badge rating-stars">${starsHTML}</div>
       </div>`;
     
-    card.innerHTML = `
-      <div class="product-card-image" data-product-id="${product.id}">
-        <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
-        <div class="discount-badge">${defaultVariant.discount} OFF</div>
-        <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
+   // Priority badge logic
+const priorityCategories = ['bestseller', 'trending', 'new', 'fire', 'killer', 'hot'];
+let displayBadge = '';
+
+if (product.categories && Array.isArray(product.categories)) {
+  const priorityBadge = product.categories.find(cat => priorityCategories.includes(cat.toLowerCase()));
+  if (priorityBadge) {
+    displayBadge = priorityBadge;
+  } else {
+    const regularBadge = product.categories.find(cat => !priorityCategories.includes(cat.toLowerCase()));
+    if (regularBadge) {
+      displayBadge = regularBadge;
+    }
+  }
+}
+
+card.innerHTML = `
+  <div class="product-card-image" data-product-id="${product.id}">
+    <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
+    <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
           <svg viewBox="0 0 24 24" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </button>
       </div>
       
-      <div class="product-card-info">
-        <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
-        
-        ${badgeRowHTML}
-        
-        <div class="product-price-section">
-          <span class="price-new">₹${defaultVariant.newPrice}</span>
-          <span class="price-old">₹${defaultVariant.oldPrice}</span>
-          <span class="price-discount">${defaultVariant.discount} off</span>
-        </div>
-            ${isOutOfStock ? '' : `
-  <button class="size-select-btn" data-product-id="${product.id}">
-    <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
-    <span class="arrow-down">▼</span>
-  </button>
-`}
-        
+    <div class="product-card-info">
+  ${displayBadge ? `<span class="brutal-category">${displayBadge}</span>` : ''}
+  
+  <h3 class="brutal-title product-card-name" data-product-id="${product.id}">${product.name}</h3>
+  
+  <div class="brutal-stats">
+    <div class="brutal-stat">
+      <div class="brutal-stat-value">${defaultVariant.size}</div>
+      <div class="brutal-stat-label">Weight</div>
+    </div>
+    <div class="brutal-stat">
+      <div class="brutal-stat-value">${product.rating}★</div>
+      <div class="brutal-stat-label">Rating</div>
+    </div>
+    <div class="brutal-stat">
+      <div class="brutal-stat-value">${defaultVariant.discount}</div>
+      <div class="brutal-stat-label">Off</div>
+    </div>
+  </div>
+  
+  <div class="brutal-price-section">
+    <div class="brutal-price">₹${defaultVariant.newPrice}</div>
+    <div class="brutal-save-badge">SAVE ₹${defaultVariant.oldPrice - defaultVariant.newPrice}</div>
+  </div>
 
-        ${isOutOfStock ? `
-          <button class="out-of-stock-btn" disabled>
-            Out of Stock
-          </button>
-        ` : (() => {
-          const variantIndex = product.defaultVariant || 0;
-          const flavor = (product.flavors && product.flavors.length > 0) ? product.flavors[0] : '';
-          const cartQty = cartItem ? cartItem.quantity : 0;
-          const showQty = cartQty > 0;
+  ${isOutOfStock ? '' : `
+    <button class="size-select-btn" data-product-id="${product.id}">
+      <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
+      <span class="arrow-down">▼</span>
+    </button>
+  `}
 
-          return `
-            <div 
-              class="quantity-controls ${showQty ? 'active' : ''}" 
-              data-product-id="${product.id}" 
-              data-variant="${variantIndex}" 
-              data-flavor="${flavor}"
-              style="display: ${showQty ? 'flex' : 'none'}"
-            >
-              <button class="qty-btn minus">−</button>
-              <span class="qty-count">${cartQty || 1}</span>
-              <button class="qty-btn plus">+</button>
-            </div>
+  ${isOutOfStock ? `
+    <button class="out-of-stock-btn" disabled>
+      Out of Stock
+    </button>
+  ` : (() => {
+    const variantIndex = product.defaultVariant || 0;
+    const flavor = (product.flavors && product.flavors.length > 0) ? product.flavors[0] : '';
+    const cartQty = cartItem ? cartItem.quantity : 0;
+    const showQty = cartQty > 0;
 
-            <button 
-              class="add-to-cart-btn" 
-              data-product-id="${product.id}" 
-              data-variant="${variantIndex}" 
-              data-flavor="${flavor}"
-              style="display: ${showQty ? 'none' : 'block'}"
-            >
-              Add to Cart
-            </button>
-          `;
-        })()}
-
+    return `
+      <div 
+        class="quantity-controls ${showQty ? 'active' : ''}" 
+        data-product-id="${product.id}" 
+        data-variant="${variantIndex}" 
+        data-flavor="${flavor}"
+        style="display: ${showQty ? 'flex' : 'none'}"
+      >
+        <button class="qty-btn minus">−</button>
+        <span class="qty-count">${cartQty || 1}</span>
+        <button class="qty-btn plus">+</button>
       </div>
+
+      <button 
+        class="add-to-cart-btn" 
+        data-product-id="${product.id}" 
+        data-variant="${variantIndex}" 
+        data-flavor="${flavor}"
+        style="display: ${showQty ? 'none' : 'block'}"
+      >
+        Add to Cart
+      </button>
     `;
+  })()}
+
+</div>
+`;;
     
     this.attachCardListeners(card, product);
     return card;
@@ -234,18 +263,6 @@ class ProductCardManager {
     name.addEventListener('click', () => {
       window.location.href = `product-detail.html?id=${product.id}`;
     });
-
-    // Info section click - go to product detail (except buttons)
-const infoSection = card.querySelector('.product-card-info');
-infoSection.addEventListener('click', (e) => {
-  // If NOT clicking buttons, go to product page
-  if (!e.target.closest('.size-select-btn') && 
-      !e.target.closest('.add-to-cart-btn') && 
-      !e.target.closest('.quantity-controls') &&
-      !e.target.closest('.out-of-stock-btn')) {
-    window.location.href = `product-detail.html?id=${product.id}`;
-  }
-});
 
     // Wishlist button
     const wishlistBtn = card.querySelector('.wishlist-btn');
@@ -519,42 +536,26 @@ sizeOptions.innerHTML = '';
   }
 
   // Update card display with new variant
-  updateCardDisplay(card, product, variantIndex) {
-    const variant = product.variants[variantIndex];
-    
-    // Update discount badge
-    const discountBadge = card.querySelector('.discount-badge');
-    discountBadge.textContent = `${variant.discount} OFF`;
-    
-    // Update size badge in badge row
-    const sizeBadge = card.querySelector('.size-badge');
-    if (sizeBadge) {
-      sizeBadge.textContent = variant.size;
-    }
-    
-    // Update prices
-    const priceNew = card.querySelector('.price-new');
-    const priceOld = card.querySelector('.price-old');
-    const priceDiscount = card.querySelector('.price-discount');
-    
-    priceNew.textContent = `₹${variant.newPrice}`;
-    priceOld.textContent = `₹${variant.oldPrice}`;
-    priceDiscount.textContent = `${variant.discount} off`;
-    
-    // Update size button
-    const sizeBtn = card.querySelector('.size-select-btn span:first-child');
-    if (sizeBtn) {
-      sizeBtn.textContent = variant.size;
-    }
-    
-    // Update flavor badge if product has flavors
-    if (this.selectedFlavor) {
-      const flavorBadge = card.querySelector('.flavor-badge');
-      if (flavorBadge) {
-        flavorBadge.textContent = this.selectedFlavor;
-      }
-    }
-  }
+ updateCardDisplay(card, product, variantIndex) {
+  const variant = product.variants[variantIndex];
+  
+  // Update stats box - size (first stat)
+  const statValues = card.querySelectorAll('.brutal-stat-value');
+  if (statValues[0]) statValues[0].textContent = variant.size;
+  if (statValues[2]) statValues[2].textContent = variant.discount;
+  
+  // Update price
+  const priceEl = card.querySelector('.brutal-price');
+  if (priceEl) priceEl.textContent = `₹${variant.newPrice}`;
+  
+  // Update save badge (calculate savings)
+  const saveBadge = card.querySelector('.brutal-save-badge');
+  if (saveBadge) saveBadge.textContent = `SAVE ₹${variant.oldPrice - variant.newPrice}`;
+  
+  // Update size button
+  const sizeBtn = card.querySelector('.size-select-btn span:first-child');
+  if (sizeBtn) sizeBtn.textContent = variant.size;
+}
 
   // Add to cart
   addToCart(productId, variantIndex, flavor) {
@@ -724,10 +725,10 @@ if (hasCustomMessage) {
   }
 
   // Render the cart sidebar content from this.cart
-  // Render the cart sidebar content from this.cart
- renderCartSidebar() {
+  renderCartSidebar() {
     /* delegated to cart-sidebar.js */
 }
+
 
   adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
     const item = this.cart.find(i =>
