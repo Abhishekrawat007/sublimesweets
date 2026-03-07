@@ -289,13 +289,16 @@ class ProductCardManager {
     let isNowSaved;
 
     if (index > -1) {
+      // remove from wishlist
       this.wishlist.splice(index, 1);
       isNowSaved = false;
     } else {
+      // add to wishlist
       this.wishlist.push(productId);
       isNowSaved = true;
     }
 
+    // 🔁 Update ALL product-card hearts for this product
     const allCardButtons = document.querySelectorAll(
       `.wishlist-btn[data-product-id="${productId}"]`
     );
@@ -304,6 +307,7 @@ class ProductCardManager {
       else b.classList.remove('saved');
     });
 
+    // ❤️ Update product-detail heart ONLY if it's for the same product
     const detailBtn = document.getElementById('detailWishlistBtn');
     if (detailBtn) {
       const detailId = detailBtn.dataset.productId;
@@ -320,7 +324,9 @@ class ProductCardManager {
         }
       }
     }
+   
 
+    // ✅ Save + update navbar badge
     localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
     if (typeof window.updateWishlistBadge === 'function') {
       window.updateWishlistBadge();
@@ -340,43 +346,49 @@ class ProductCardManager {
     const flavorSection = document.getElementById('flavorSection');
     const flavorOptions = document.getElementById('flavorOptions');
 
-    modalName.textContent = product.name;
+   // Set product name
+modalName.textContent = product.name;
 
-    const messageSection = document.getElementById('messageSection');
-    const messageInput = document.getElementById('customMessageInput');
-    const charCount = document.getElementById('charCount');
+// ✅ ADD CUSTOM MESSAGE BOX FOR CAKES
+// ✅ ADD CUSTOM MESSAGE BOX FOR CAKES
+const messageSection = document.getElementById('messageSection');
+const messageInput = document.getElementById('customMessageInput');
+const charCount = document.getElementById('charCount');
 
-    const hasCustomMessage = product.variants.some(v => v.customMessage === true);
-    if (hasCustomMessage) {
-      messageSection.style.display = 'block';
-      
-      const existingCartItem = this.cart.find(item => 
-        item.productId === product.id && 
-        item.customMessage
-      );
-      
-      if (existingCartItem && existingCartItem.customMessage) {
-        messageInput.value = existingCartItem.customMessage;
-        charCount.textContent = `${existingCartItem.customMessage.length}/100`;
-      } else {
-        messageInput.value = '';
-        charCount.textContent = '0/100';
-      }
-      
-      messageInput.addEventListener('input', () => {
-        const count = messageInput.value.length;
-        charCount.textContent = `${count}/100`;
-        
-        if (count > 100) {
-          messageInput.value = messageInput.value.slice(0, 100);
-          charCount.textContent = '100/100';
-        }
-      });
-    } else {
-      messageSection.style.display = 'none';
-    }
+const hasCustomMessage = product.variants.some(v => v.customMessage === true);
+if (hasCustomMessage) {
+  messageSection.style.display = 'block';
+  
+  // ✅ RESTORE SAVED MESSAGE IF IT EXISTS
+  const existingCartItem = this.cart.find(item => 
+    item.productId === product.id && 
+    item.customMessage
+  );
+  
+  if (existingCartItem && existingCartItem.customMessage) {
+    messageInput.value = existingCartItem.customMessage;
+    charCount.textContent = `${existingCartItem.customMessage.length}/100`;
+  } else {
+    messageInput.value = ''; // Clear if no saved message
+    charCount.textContent = '0/100';
+  }
+  
+  // Character counter
+ messageInput.addEventListener('input', () => {
+  const count = messageInput.value.length;
+  charCount.textContent = `${count}/100`;
+  
+  if (count > 100) {
+    messageInput.value = messageInput.value.slice(0, 100);
+    charCount.textContent = '100/100';
+  }
+});
+} else {
+  messageSection.style.display = 'none';
+}
 
-    sizeOptions.innerHTML = '';
+// Render size options
+sizeOptions.innerHTML = '';
     product.variants.forEach((variant, index) => {
       const isSelected = index === (product.defaultVariant || 0);
       const option = document.createElement('div');
@@ -403,8 +415,10 @@ class ProductCardManager {
       sizeOptions.appendChild(option);
     });
 
+    // Set initial selected variant
     this.selectedVariantIndex = product.defaultVariant || 0;
 
+    // Render flavor options (only if product has flavors)
     if (product.flavors && product.flavors.length > 0) {
       flavorSection.style.display = 'block';
       flavorOptions.innerHTML = '';
@@ -429,12 +443,14 @@ class ProductCardManager {
         flavorOptions.appendChild(option);
       });
       
+      // Set initial flavor
       this.selectedFlavor = product.flavors[0];
     } else {
       flavorSection.style.display = 'none';
       this.selectedFlavor = null;
     }
 
+    // Show modal
     modal.classList.add('active');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -461,6 +477,7 @@ class ProductCardManager {
     const cancelBtn = document.getElementById('cancelBtn');
     const applyBtn = document.getElementById('applyBtn');
 
+    // If modal elements are not present on this page, skip modal wiring.
     if (!closeBtn || !overlay || !cancelBtn || !applyBtn) {
       console.log('setupModalListeners: modal elements not found — skipping modal listeners.');
       return;
@@ -493,14 +510,17 @@ class ProductCardManager {
   updateCardDisplay(card, product, variantIndex) {
     const variant = product.variants[variantIndex];
     
+    // Update discount badge
     const discountBadge = card.querySelector('.discount-badge');
     discountBadge.textContent = `${variant.discount} OFF`;
     
+    // Update size badge in badge row
     const sizeBadge = card.querySelector('.size-badge');
     if (sizeBadge) {
       sizeBadge.textContent = variant.size;
     }
     
+    // Update prices
     const priceNew = card.querySelector('.price-new');
     const priceOld = card.querySelector('.price-old');
     const priceDiscount = card.querySelector('.price-discount');
@@ -509,11 +529,13 @@ class ProductCardManager {
     priceOld.textContent = `₹${variant.oldPrice}`;
     priceDiscount.textContent = `${variant.discount} off`;
     
+    // Update size button
     const sizeBtn = card.querySelector('.size-select-btn span:first-child');
     if (sizeBtn) {
       sizeBtn.textContent = variant.size;
     }
     
+    // Update flavor badge if product has flavors
     if (this.selectedFlavor) {
       const flavorBadge = card.querySelector('.flavor-badge');
       if (flavorBadge) {
@@ -532,34 +554,37 @@ class ProductCardManager {
 
     if (existingItem) {
       existingItem.quantity++;
-    } else {
-      const cartItem = {
-        productId,
-        variantIndex,
-        flavor,
-        quantity: 1
-      };
-      
-      const product = this.products.find(p => String(p.id) === String(productId));
-      const hasCustomMessage = product && product.variants.some(v => v.customMessage === true);
+  } else {
+  const cartItem = {
+    productId,
+    variantIndex,
+    flavor,
+    quantity: 1
+  };
+  
+  // ✅ ADD CUSTOM MESSAGE IF IT'S A CAKE
+  const product = this.products.find(p => String(p.id) === String(productId));
+ const hasCustomMessage = product && product.variants.some(v => v.customMessage === true);
 
-      if (hasCustomMessage) {
-        const messageInput = document.getElementById('customMessageInput');
-        if (messageInput && messageInput.value.trim()) {
-          cartItem.customMessage = messageInput.value.trim();
-        }
-      }
-      
-      this.cart.push(cartItem);
+if (hasCustomMessage) {
+  const messageInput = document.getElementById('customMessageInput');
+    if (messageInput && messageInput.value.trim()) {
+      cartItem.customMessage = messageInput.value.trim();
     }
+  }
+  
+  this.cart.push(cartItem);
+}
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
+    // 🔁 Tell product-detail page to refresh (if it's open)
     if (typeof window.syncDetailQuantityFromCart === 'function') {
       window.syncDetailQuantityFromCart();
     }
 
+    // 💬 Toast feedback on add
     const product = this.products.find(p => String(p.id) === String(productId));
     if (product && window.showToast) {
       const variant = product.variants[variantIndex];
@@ -609,6 +634,7 @@ class ProductCardManager {
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
+    // 🔁 Also sync product-detail if we're on that page
     if (typeof window.syncDetailQuantityFromCart === 'function') {
       window.syncDetailQuantityFromCart();
     }
@@ -657,14 +683,18 @@ class ProductCardManager {
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
+    // 🔁 Sync product-detail too
     if (typeof window.syncDetailQuantityFromCart === 'function') {
       window.syncDetailQuantityFromCart();
     }
   }
 
+  // Update cart count (if you have a cart counter in navbar)
+  // Update only the navbar cart badge and control visibility
   updateCartCount() {
     const totalItems = this.cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
 
+    // Prefer #cartCount, fallback to any .badge inside #cartBtn
     let cartCountElement = document.getElementById('cartCount');
     if (!cartCountElement) {
       cartCountElement = document.querySelector('#cartBtn .badge');
@@ -674,17 +704,102 @@ class ProductCardManager {
 
     if (totalItems > 0) {
       cartCountElement.textContent = totalItems;
-      cartCountElement.style.display = 'flex';
+      cartCountElement.style.display = 'flex';  // show badge
     } else {
       cartCountElement.textContent = '';
-      cartCountElement.style.display = 'none';
+      cartCountElement.style.display = 'none';  // completely hide badge
     }
   }
 
-  // renderCartSidebar — neutralized by cart-bot
-  // Now handled by cart-v2/cart-sidebar.js
+  // Render the cart sidebar content from this.cart
   renderCartSidebar() {
-    /* delegated — do not add logic here */
+    const cartContent = document.getElementById('cartContent');
+    const totalEl = document.querySelector('.cart-total span:last-child');
+
+    if (!cartContent || !totalEl) return;
+
+    cartContent.innerHTML = '';
+
+    // 🔴 Clean any 0/negative quantity items before rendering
+    this.cart = this.cart.filter(item =>
+      item &&
+      item.productId &&
+      typeof item.quantity === 'number' &&
+      item.quantity > 0
+    );
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    
+    if (!this.cart.length) {
+      cartContent.innerHTML = `
+        <div class="empty-cart-message">
+          Your cart is empty.
+        </div>
+      `;
+      totalEl.textContent = '₹0';
+      return;
+    }
+
+    let total = 0;
+
+    this.cart.forEach(item => {
+      const product = this.products.find(p => String(p.id) === String(item.productId));
+      if (!product) return;
+
+      const variant = product.variants[item.variantIndex] || product.variants[0];
+      const price = Number(variant.newPrice) || 0;
+      const qty = item.quantity || 0;
+      const lineTotal = price * qty;
+      total += lineTotal;
+
+      const cartItemDiv = document.createElement('div');
+      cartItemDiv.className = 'cart-item';
+      cartItemDiv.dataset.productId = product.id;
+      cartItemDiv.dataset.variantIndex = item.variantIndex;
+      cartItemDiv.dataset.flavor = item.flavor || '';
+
+      cartItemDiv.innerHTML = `
+  <div class="cart-item-image">
+    <img src="${product.images[0]}" alt="${product.name}">
+  </div>
+  <div class="cart-item-details">
+    <div class="cart-item-name">
+      ${product.name}
+      ${variant.size ? ` (${variant.size})` : ''}
+      ${item.flavor ? ` - ${item.flavor}` : ''}
+    </div>
+    ${item.customMessage ? `<div class="cart-item-message">💬 "${item.customMessage}"</div>` : ''}
+    <div class="cart-item-price">₹${price}</div>
+          <div class="cart-item-quantity">
+            <button class="qty-btn cart-minus">-</button>
+            <span class="cart-qty" style="color: var(--nav-text); font-weight: 600;">${qty}</span>
+            <button class="qty-btn cart-plus">+</button>
+          </div>
+        </div>
+      `;
+
+      cartContent.appendChild(cartItemDiv);
+    });
+
+    totalEl.textContent = '₹' + total;
+
+    // Attach plus/minus handlers for sidebar items
+    cartContent.querySelectorAll('.cart-item').forEach(cartItemDiv => {
+      const productId = cartItemDiv.dataset.productId;
+      const variantIndex = parseInt(cartItemDiv.dataset.variantIndex);
+      const flavor = cartItemDiv.dataset.flavor || null;
+
+      const qtySpan = cartItemDiv.querySelector('.cart-qty');
+      const minusBtn = cartItemDiv.querySelector('.cart-minus');
+      const plusBtn = cartItemDiv.querySelector('.cart-plus');
+
+      minusBtn.addEventListener('click', () => {
+        this.adjustQuantityFromSidebar(productId, variantIndex, flavor, -1);
+      });
+
+      plusBtn.addEventListener('click', () => {
+        this.adjustQuantityFromSidebar(productId, variantIndex, flavor, +1);
+      });
+    });
   }
 
   adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
@@ -697,6 +812,7 @@ class ProductCardManager {
     const product = this.products.find(p => String(p.id) === String(productId));
 
     if (!item && delta > 0) {
+      // new item from sidebar
       this.cart.push({
         productId,
         variantIndex,
@@ -734,12 +850,16 @@ class ProductCardManager {
     }
 
     localStorage.setItem('cart', JSON.stringify(this.cart));
+
+    // 🔁 Navbar badge + sidebar UI
     this.syncCartUI();
 
+    // 🔁 Sync product-detail main section (THIS is what was missing)
     if (typeof window.syncDetailQuantityFromCart === 'function') {
       window.syncDetailQuantityFromCart();
     }
 
+    // Sync product-card UI on grid
     const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
     if (card) {
       const qtyControls = card.querySelector('.quantity-controls');
@@ -773,6 +893,7 @@ class ProductCardManager {
   syncCartUI() {
     this.updateCartCount();
     this.renderCartSidebar();
+    // 🔁 Also notify navbar's global badge helper, if it exists
     if (typeof window.updateCartBadge === 'function') {
       window.updateCartBadge();
     }
@@ -795,14 +916,17 @@ renderProducts(productsToRender = this.products) {
 
     if (noResults) noResults.style.display = 'none';
 
+    // ✅ STORE the products we're actually rendering
     this.currentRenderList = productsToRender;
 
+    // Render first 20 only
     const initial = productsToRender.slice(0, 20);
     initial.forEach(product => {
       const card = this.generateProductCard(product);
       grid.appendChild(card);
     });
 
+    // Background load rest
     if (productsToRender.length > 20) {
       let index = 20;
       const loadChunk = () => {
@@ -817,6 +941,7 @@ renderProducts(productsToRender = this.products) {
 
       setTimeout(loadChunk, 1000);
     } else {
+      // If 20 or less, mark all as loaded
       this.loadedProducts = productsToRender;
     }
   }
@@ -829,6 +954,7 @@ renderProducts(productsToRender = this.products) {
       entries.forEach(entry => {
         if (entry.isIntersecting && this.loadedProducts && this.currentRenderList) {
           const currentCards = grid.children.length;
+          // ✅ Use currentRenderList instead of loadedProducts
           const nextBatch = this.currentRenderList.slice(currentCards, currentCards + 10);
           
           nextBatch.forEach(p => {
@@ -836,6 +962,7 @@ renderProducts(productsToRender = this.products) {
             grid.appendChild(card);
           });
           
+          // Re-observe new last card
           setTimeout(() => {
             const newLast = grid.lastElementChild;
             if (newLast) observer.observe(newLast);
@@ -850,19 +977,23 @@ renderProducts(productsToRender = this.products) {
     }, 1000);
   }
 
+  // Smart filter - check all variants for price match
   filterByPriceRange(minPrice, maxPrice) {
     const filtered = [];
     
     this.products.forEach(product => {
+      // Check if any variant falls in the price range
       const matchingVariants = product.variants.filter(v => 
         v.newPrice >= minPrice && v.newPrice <= maxPrice
       );
       
       if (matchingVariants.length > 0) {
+        // Find the cheapest matching variant
         const cheapestVariant = matchingVariants.reduce((min, v) => 
           v.newPrice < min.newPrice ? v : min
         );
         
+        // Create a modified product with the cheapest variant as default
         const modifiedProduct = {
           ...product,
           defaultVariant: product.variants.indexOf(cheapestVariant)
@@ -875,6 +1006,7 @@ renderProducts(productsToRender = this.products) {
     return filtered;
   }
 
+  // Filter by category (only using `categories` array now)
   filterByCategory(category) {
     if (category === 'all') {
       return this.products;
@@ -890,6 +1022,10 @@ renderProducts(productsToRender = this.products) {
 // DESIGN VARIATION SWITCHER
 // ============================================
 
+/**
+ * Apply design variation to all product cards
+ * @param {string} design - Design class
+ */
 function applyProductCardDesign(design) {
     const validDesigns = [
         'circular-profile',
@@ -907,12 +1043,14 @@ function applyProductCardDesign(design) {
         return;
     }
     
+    // Remove all design classes
     const cards = document.querySelectorAll('.product-card');
     cards.forEach(card => {
         validDesigns.forEach(d => card.classList.remove(d));
         card.classList.add(design);
     });
     
+    // Also apply to modal
     const modal = document.getElementById('sizeFlavorModal');
     if (modal) {
         validDesigns.forEach(d => modal.classList.remove(`${d}-modal`));
@@ -920,37 +1058,64 @@ function applyProductCardDesign(design) {
     }
     
     console.log(`✅ Applied ${design} design to ${cards.length} product cards`);
+    
+    // Save preference
     localStorage.setItem('productCardDesign', design);
 }
 
+/**
+ * Set custom button colors
+ * @param {string} primaryColor - Add to Cart button color
+ * @param {string} secondaryColor - Size Select button color (optional)
+ * @param {string} accentColor - Discount badge color (optional)
+ */
 function setCardColors(primaryColor, secondaryColor, accentColor) {
     document.documentElement.style.setProperty('--card-primary', primaryColor);
     document.documentElement.style.setProperty('--card-secondary', secondaryColor || primaryColor);
     document.documentElement.style.setProperty('--card-accent', accentColor || primaryColor);
     
     localStorage.setItem('cardPrimaryColor', primaryColor);
-    if (secondaryColor) localStorage.setItem('cardSecondaryColor', secondaryColor);
-    if (accentColor) localStorage.setItem('cardAccentColor', accentColor);
+    if (secondaryColor) {
+        localStorage.setItem('cardSecondaryColor', secondaryColor);
+    }
+    if (accentColor) {
+        localStorage.setItem('cardAccentColor', accentColor);
+    }
     
     console.log(`✅ Colors: Primary=${primaryColor}, Secondary=${secondaryColor || primaryColor}, Accent=${accentColor || primaryColor}`);
 }
 
+/**
+ * Load saved colors
+ */
 function loadSavedColors() {
     const primary = localStorage.getItem('cardPrimaryColor');
     const secondary = localStorage.getItem('cardSecondaryColor');
     const accent = localStorage.getItem('cardAccentColor');
     
-    if (primary) document.documentElement.style.setProperty('--card-primary', primary);
-    if (secondary) document.documentElement.style.setProperty('--card-secondary', secondary);
-    if (accent) document.documentElement.style.setProperty('--card-accent', accent);
+    if (primary) {
+        document.documentElement.style.setProperty('--card-primary', primary);
+    }
+    if (secondary) {
+        document.documentElement.style.setProperty('--card-secondary', secondary);
+    }
+    if (accent) {
+        document.documentElement.style.setProperty('--card-accent', accent);
+    }
 }
 
+/**
+ * Load saved design preference on page load
+ */
 function loadSavedDesign() {
     const savedDesign = localStorage.getItem('productCardDesign');
-    if (savedDesign) applyProductCardDesign(savedDesign);
+    if (savedDesign) {
+        applyProductCardDesign(savedDesign);
+    }
     loadSavedColors();
 }
 
+// Initialize on DOM ready
 function waitForProductsReady(timeout = 3000) {
   return new Promise(resolve => {
     if (window.products && Array.isArray(window.products)) return resolve();
@@ -963,7 +1128,7 @@ function waitForProductsReady(timeout = 3000) {
       waited += 100;
       if (waited >= timeout) {
         clearInterval(iv);
-        return resolve();
+        return resolve(); // proceed anyway
       }
     }, 100);
   });
@@ -972,8 +1137,9 @@ function waitForProductsReady(timeout = 3000) {
 document.addEventListener('DOMContentLoaded', async () => {
   await waitForProductsReady(3000);
 
+  // Only initialize ProductCardManager on pages that actually have product/cart DOM.
   const needsManager = document.getElementById('productsGrid') ||
-                       document.getElementById('productTitle') ||
+                       document.getElementById('productTitle') || // detail page marker
                        document.getElementById('cartSidebar') ||
                        document.getElementById('sizeFlavorModal') ||
                        document.getElementById('relatedGrid');
@@ -984,9 +1150,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('ProductCardManager skipped: no product DOM on this page.');
   }
   
+  // Load saved design preference
   loadSavedDesign();
 });
 
+// Export for use in other scripts
 if (typeof window !== 'undefined') {
   window.ProductCardManager = ProductCardManager;
   window.generateStarsHTML = generateStarsHTML;
