@@ -1,20 +1,19 @@
 // ============================================
-// CART SIDEBAR JS - V4
-// Clean white design matching screenshot
+// CART SIDEBAR JS - DESIGN V2
+// "Teal Card" — circular image, green tags,
+// blue price, teal header, delete button
 // ============================================
 
-(function () {
-
-    document.addEventListener('DOMContentLoaded', function () {
-        window.openCart = function () {
+(function() {
+    function patchCartV2(manager) {
+        window.openCart = function() {
             const sidebar = document.getElementById('cartSidebar');
             const overlay = document.getElementById('mobileMenuOverlay');
             if (sidebar) sidebar.classList.add('active');
             if (overlay) overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         };
-
-        window.closeCart = function () {
+        window.closeCart = function() {
             const sidebar = document.getElementById('cartSidebar');
             const mobileMenu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('mobileMenuOverlay');
@@ -24,12 +23,10 @@
             }
             document.body.style.overflow = '';
         };
-    });
 
-    function patchCartV4(manager) {
-
+        // Add removeItem if not present
         if (!manager.removeItem) {
-            manager.removeItem = function (idx) {
+            manager.removeItem = function(idx) {
                 const item = this.cart[idx];
                 if (!item) return;
                 const { productId, variantIndex, flavor } = item;
@@ -46,15 +43,14 @@
                     }
                 }
                 this.syncCartUI();
-                if (window.showToast) window.showToast('Removed', 'info');
+                if (window.showToast) window.showToast('Item removed', 'info');
             };
         }
 
-        manager.renderCartSidebar = function () {
+        manager.renderCartSidebar = function() {
             const cartContent = document.getElementById('cartContent');
             const totalEl = document.querySelector('.cart-total span:last-child');
             const badge = document.getElementById('cartCountBadgeInSidebar');
-            const emptyState = document.getElementById('emptyCartState');
 
             if (badge) {
                 badge.textContent = this.cart.reduce((s, i) => s + (i.quantity || 0), 0);
@@ -67,118 +63,96 @@
             );
             localStorage.setItem('cart', JSON.stringify(this.cart));
 
+            cartContent.innerHTML = '';
+
             if (!this.cart.length) {
-                if (emptyState) {
-                    emptyState.style.display = 'flex';
-                } else {
-                    cartContent.innerHTML = `
-                        <div class="v4-empty-state">
-                            <div class="v4-empty-icon">🛒</div>
-                            <h3 class="v4-empty-title">Your cart is empty</h3>
-                            <p class="v4-empty-text">Add some items to get started!</p>
-                            <a href="index.html#productsGrid"
-                               onclick="window.closeCart && window.closeCart();"
-                               class="v4-shop-btn">Continue Shopping</a>
-                        </div>`;
-                }
+                cartContent.innerHTML = `
+                    <div style="display:flex;flex-direction:column;align-items:center;padding:80px 20px;text-align:center;">
+                        <div style="font-size:80px;opacity:0.2;">🛒</div>
+                        <h3 style="margin:16px 0 8px;font-size:18px;color:#1f2937;">Cart is empty</h3>
+                        <p style="color:#6b7280;margin-bottom:20px;">Start adding items!</p>
+                        <a href="index.html" onclick="window.closeCart && window.closeCart();"
+                           style="padding:12px 24px;background:#14b8a6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
+                           Shop Now
+                        </a>
+                    </div>`;
                 totalEl.textContent = '₹0';
-                const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-                if (checkoutBtn) checkoutBtn.innerHTML = '🛒 Checkout ₹0';
                 return;
             }
 
-            if (emptyState) emptyState.style.display = 'none';
-            cartContent.innerHTML = '';
-
             let total = 0;
-
-            this.cart.forEach((item) => {
+            this.cart.forEach((item, idx) => {
                 const product = this.products.find(p => String(p.id) === String(item.productId));
                 if (!product) return;
-
                 const variant = product.variants[item.variantIndex] || product.variants[0];
                 const price = Number(variant.newPrice) || 0;
                 const qty = item.quantity || 0;
                 total += price * qty;
 
                 const div = document.createElement('div');
-                div.className = 'v4-cart-item';
+                div.className = 'cart-item';
                 div.dataset.productId = product.id;
                 div.dataset.variantIndex = item.variantIndex;
                 div.dataset.flavor = item.flavor || '';
 
                 div.innerHTML = `
-                    <button class="v4-item-del" title="Remove">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                    <img src="${product.images[0]}" class="v4-item-img" alt="${product.name}">
-                    <div class="v4-item-info">
-                        <div class="v4-item-top-row">
-                            <div class="v4-item-name">${product.name}</div>
-                            <div class="v4-item-price">₹${(price * qty).toLocaleString('en-IN')}</div>
+                    <img src="${product.images[0]}" class="cart-card-img" alt="${product.name}">
+                    <div class="cart-card-info">
+                        <div class="cart-card-name">
+                            ${product.name}${variant.size ? ` (${variant.size})` : ''}
                         </div>
-                        ${variant.size || item.flavor ? `<div class="v4-item-variant">${variant.size || ''}${item.flavor ? ' • ' + item.flavor : ''}</div>` : ''}
-                        ${item.customMessage ? `<div class="v4-item-msg">💬 ${item.customMessage}</div>` : ''}
-                        <div class="v4-qty-wrap">
-                            <button class="v4-qty-btn v4-minus">−</button>
-                            <span class="v4-qty-num">${qty}</span>
-                            <button class="v4-qty-btn v4-plus">+</button>
+                        ${item.flavor ? `<div class="cart-card-tag">🌶️ ${item.flavor}</div>` : ''}
+                        ${item.customMessage ? `<div class="cart-card-tag">💬 ${item.customMessage}</div>` : ''}
+                        <div class="cart-card-bottom">
+                           <div class="cart-card-price">₹${(price * qty).toLocaleString('en-IN')}</div>
+                            <div class="cart-card-qty">
+                                <button class="cart-qty-btn cart-minus">−</button>
+                                <span>${qty}</span>
+                                <button class="cart-qty-btn cart-plus">+</button>
+                            </div>
                         </div>
-                    </div>`;
+                    </div>
+                    <button class="cart-card-del" data-idx="${idx}" title="Remove">🗑️</button>`;
 
                 cartContent.appendChild(div);
             });
 
-            totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+            totalEl.textContent = '₹' + total;
 
-            const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-            if (checkoutBtn) checkoutBtn.innerHTML = `🛒 Checkout ₹${total.toLocaleString('en-IN')}`;
-
-            cartContent.querySelectorAll('.v4-cart-item').forEach(div => {
+            // Attach handlers
+            cartContent.querySelectorAll('.cart-item').forEach(div => {
                 const pid = div.dataset.productId;
                 const vi = parseInt(div.dataset.variantIndex);
                 const fl = div.dataset.flavor || null;
-
-                div.querySelector('.v4-minus').addEventListener('click', () =>
+                div.querySelector('.cart-minus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, -1));
-                div.querySelector('.v4-plus').addEventListener('click', () =>
+                div.querySelector('.cart-plus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, +1));
-                div.querySelector('.v4-item-del').addEventListener('click', () => {
-                    const idx = this.cart.findIndex(i =>
-                        String(i.productId) === String(pid) &&
-                        i.variantIndex === vi &&
-                        i.flavor === fl
-                    );
-                    if (idx > -1) this.removeItem(idx);
+            });
+            // Delete buttons - re-bind with closure on current cart state
+            cartContent.querySelectorAll('.cart-card-del').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.idx);
+                    this.removeItem(idx);
                 });
             });
         };
 
-        console.log('✅ Cart V4 patched');
+        console.log('✅ Cart V2 (Teal Card) patched');
     }
 
-    let attempts = 0;
     function tryPatch() {
         if (window.productManager) {
-            patchCartV4(window.productManager);
+            patchCartV2(window.productManager);
             window.productManager.syncCartUI();
-        } else if (attempts < 50) {
-            attempts++;
+        } else {
             setTimeout(tryPatch, 100);
         }
     }
+ document.addEventListener('DOMContentLoaded', tryPatch);
 
-    document.addEventListener('DOMContentLoaded', tryPatch);
-
-    // ✅ Android back button fix
-    // Force reload when page is restored from bfcache
-    window.addEventListener('pageshow', function (e) {
-        if (e.persisted) {
-            window.location.reload();
-        }
-    });
+window.addEventListener('pageshow', function(e) {
+    if (e.persisted) window.location.reload();
+});
 
 })();
