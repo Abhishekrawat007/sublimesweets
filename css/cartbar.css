@@ -81,7 +81,7 @@
     position: static !important;
     transition: all 0.2s ease !important;
 }
-.cart-header .close-btn svg { stroke: rgba(212,175,110,0.4) !important; width: 13px !important; height: 13px !important; }
+.cart-header .close-btn svg { stroke: rgba(212,175,110,0.85) !important; width: 13px !important; height: 13px !important; }
 .cart-header .close-btn:hover {
     background: rgba(212,175,110,0.1) !important;
     border-color: #d4af6e !important;
@@ -398,8 +398,9 @@
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .v9-qty-btn:hover { background: #8b6914 !important; border-color: #8b6914 !important; color: #fff !important; }
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .v9-qty-num { color: #1c1408 !important; border-color: rgba(139,105,20,0.2) !important; }
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .v9-item-del { background: rgba(0,0,0,0.35) !important; }
+
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .cart-footer { background: rgba(0,0,0,0.04) !important; border-top-color: rgba(139,105,20,0.15) !important; }
-.sublime-navbar:not(.dark-mode) ~ .cart-sidebar .cart-total { color: rgba(139,105,20,0.4) !important; }
+.sublime-navbar:not(.dark-mode) ~ .cart-sidebar .cart-total { color: rgba(139,105,20,0.75) !important; }
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .cart-total span:last-child { color: #8b6914 !important; }
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .v9-shipping-note { color: #ccc !important; }
 .sublime-navbar:not(.dark-mode) ~ .cart-sidebar .checkout-btn { border-color: #8b6914 !important; color: #8b6914 !important; }
