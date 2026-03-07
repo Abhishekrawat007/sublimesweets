@@ -412,3 +412,11 @@
         box-shadow: 0 -20px 80px rgba(0, 0, 0, 0.5) !important;
     }
 }
+.search-modal-content.typing {
+    padding-bottom: 16px;
+}
+
+.search-modal-content.typing .search-suggestions,
+.search-modal-content.typing .search-suggestions-label {
+    display: none;
+}

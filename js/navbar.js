@@ -226,10 +226,19 @@ function closeSearchModal() {
 
     if (searchInput) {
         searchInput.addEventListener('input', function() {
-            if (isProductHome) {
-                triggerMobileSearch();
-            }
-        });
+    if (isProductHome) {
+        triggerMobileSearch();
+    }
+    // Hide suggestions on mobile while typing
+    if (window.innerWidth <= 480) {
+        const content = document.querySelector('.search-modal-content');
+        if (this.value.trim()) {
+            content.classList.add('typing');
+        } else {
+            content.classList.remove('typing');
+        }
+    }
+});
 
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
