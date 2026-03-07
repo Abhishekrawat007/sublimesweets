@@ -136,15 +136,44 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         if (!searchModal) return;
         searchModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-      
+      // Add this JS to navbar.js inside your openSearchModal function area:
+function handleVisualViewport() {
+    if (!searchModal || !searchModal.classList.contains('active')) return;
+    if (window.innerWidth > 480) return;
+
+    const content = searchModal.querySelector('.search-modal-content');
+    if (!content) return;
+
+    const viewportHeight = window.visualViewport.height;
+    const viewportOffsetTop = window.visualViewport.offsetTop;
+
+    content.style.bottom = 'auto';
+    content.style.top = (viewportOffsetTop + viewportHeight - content.offsetHeight) + 'px';
+    content.style.position = 'fixed';
+    content.style.left = '0';
+    content.style.right = '0';
+}
+
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleVisualViewport);
+    window.visualViewport.addEventListener('scroll', handleVisualViewport);
+}
     }
 
-    function closeSearchModal() {
-        if (searchModal) {
-            searchModal.classList.remove('active');
+   
+// And when modal closes, reset the position:
+function closeSearchModal() {
+    if (searchModal) {
+        searchModal.classList.remove('active');
+        // Reset position
+        const content = searchModal.querySelector('.search-modal-content');
+        if (content) {
+            content.style.top = '';
+            content.style.position = '';
         }
-        document.body.style.overflow = '';
     }
+    document.body.style.overflow = '';
+}
 
     if (searchBtn) {
         searchBtn.addEventListener('click', function() {
