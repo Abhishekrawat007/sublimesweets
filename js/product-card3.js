@@ -148,27 +148,52 @@ class ProductCardManager {
     badgeRowHTML += `<div class="info-badge rating-badge rating-stars">${starsHTML}</div>
       </div>`;
     
-    card.innerHTML = `
-      <div class="product-card-image" data-product-id="${product.id}">
-        <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
-        <div class="discount-badge">${defaultVariant.discount} OFF</div>
-        <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
+   // Priority badge logic
+const priorityCategories = ['bestseller', 'trending', 'new', 'fire', 'killer', 'hot'];
+let displayBadge = '';
+
+if (product.categories && Array.isArray(product.categories)) {
+  const priorityBadge = product.categories.find(cat => priorityCategories.includes(cat.toLowerCase()));
+  if (priorityBadge) {
+    displayBadge = priorityBadge;
+  } else {
+    const regularBadge = product.categories.find(cat => !priorityCategories.includes(cat.toLowerCase()));
+    if (regularBadge) {
+      displayBadge = regularBadge;
+    }
+  }
+}
+
+card.innerHTML = `
+  <div class="product-card-image" data-product-id="${product.id}">
+    <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
+    <button class="wishlist-btn ${isInWishlist ? 'saved' : ''}" data-product-id="${product.id}">
           <svg viewBox="0 0 24 24" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </button>
       </div>
       
-      <div class="product-card-info">
-        <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
-        
-        ${badgeRowHTML}
-        
-        <div class="product-price-section">
-          <span class="price-new">₹${defaultVariant.newPrice}</span>
-          <span class="price-old">₹${defaultVariant.oldPrice}</span>
-          <span class="price-discount">${defaultVariant.discount} off</span>
-        </div>
+     <div class="product-card-info">
+  ${displayBadge ? `<span class="neuro-tag">${displayBadge}</span>` : ''}
+  
+  <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
+  
+  ${product.description ? `<p class="neuro-description">${product.description}</p>` : ''}
+  
+  <div class="neuro-meta">
+    <div class="neuro-rating-box">
+      ${starsHTML}
+      <span style="font-size: 13px; font-weight: 600; color: #5a5a5a;">${product.rating}</span>
+    </div>
+    <div class="neuro-stock">In Stock</div>
+  </div>
+  
+  <div class="product-price-section">
+    <span class="price-new">₹${defaultVariant.newPrice}</span>
+    <span class="price-old">₹${defaultVariant.oldPrice}</span>
+     <span class="price-discount">${defaultVariant.discount} off</span>
+  </div>
             ${isOutOfStock ? '' : `
   <button class="size-select-btn" data-product-id="${product.id}">
     <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
@@ -507,42 +532,24 @@ sizeOptions.innerHTML = '';
   }
 
   // Update card display with new variant
-  updateCardDisplay(card, product, variantIndex) {
-    const variant = product.variants[variantIndex];
-    
-    // Update discount badge
-    const discountBadge = card.querySelector('.discount-badge');
-    discountBadge.textContent = `${variant.discount} OFF`;
-    
-    // Update size badge in badge row
-    const sizeBadge = card.querySelector('.size-badge');
-    if (sizeBadge) {
-      sizeBadge.textContent = variant.size;
-    }
-    
-    // Update prices
-    const priceNew = card.querySelector('.price-new');
-    const priceOld = card.querySelector('.price-old');
-    const priceDiscount = card.querySelector('.price-discount');
-    
-    priceNew.textContent = `₹${variant.newPrice}`;
-    priceOld.textContent = `₹${variant.oldPrice}`;
-    priceDiscount.textContent = `${variant.discount} off`;
-    
-    // Update size button
-    const sizeBtn = card.querySelector('.size-select-btn span:first-child');
-    if (sizeBtn) {
-      sizeBtn.textContent = variant.size;
-    }
-    
-    // Update flavor badge if product has flavors
-    if (this.selectedFlavor) {
-      const flavorBadge = card.querySelector('.flavor-badge');
-      if (flavorBadge) {
-        flavorBadge.textContent = this.selectedFlavor;
-      }
-    }
+ updateCardDisplay(card, product, variantIndex) {
+  const variant = product.variants[variantIndex];
+  
+  // Update prices (with null checks)
+  const priceNew = card.querySelector('.price-new');
+  const priceOld = card.querySelector('.price-old');
+  const priceDiscount = card.querySelector('.price-discount');
+  
+  if (priceNew) priceNew.textContent = `₹${variant.newPrice}`;
+  if (priceOld) priceOld.textContent = `₹${variant.oldPrice}`;
+  if (priceDiscount) priceDiscount.textContent = `${variant.discount} off`;
+  
+  // Update size button
+  const sizeBtn = card.querySelector('.size-select-btn span:first-child');
+  if (sizeBtn) {
+    sizeBtn.textContent = variant.size;
   }
+}
 
   // Add to cart
   addToCart(productId, variantIndex, flavor) {
@@ -712,96 +719,9 @@ if (hasCustomMessage) {
   }
 
   // Render the cart sidebar content from this.cart
-  renderCartSidebar() {
-    const cartContent = document.getElementById('cartContent');
-    const totalEl = document.querySelector('.cart-total span:last-child');
-
-    if (!cartContent || !totalEl) return;
-
-    cartContent.innerHTML = '';
-
-    // 🔴 Clean any 0/negative quantity items before rendering
-    this.cart = this.cart.filter(item =>
-      item &&
-      item.productId &&
-      typeof item.quantity === 'number' &&
-      item.quantity > 0
-    );
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    
-    if (!this.cart.length) {
-      cartContent.innerHTML = `
-        <div class="empty-cart-message">
-          Your cart is empty.
-        </div>
-      `;
-      totalEl.textContent = '₹0';
-      return;
-    }
-
-    let total = 0;
-
-    this.cart.forEach(item => {
-      const product = this.products.find(p => String(p.id) === String(item.productId));
-      if (!product) return;
-
-      const variant = product.variants[item.variantIndex] || product.variants[0];
-      const price = Number(variant.newPrice) || 0;
-      const qty = item.quantity || 0;
-      const lineTotal = price * qty;
-      total += lineTotal;
-
-      const cartItemDiv = document.createElement('div');
-      cartItemDiv.className = 'cart-item';
-      cartItemDiv.dataset.productId = product.id;
-      cartItemDiv.dataset.variantIndex = item.variantIndex;
-      cartItemDiv.dataset.flavor = item.flavor || '';
-
-      cartItemDiv.innerHTML = `
-  <div class="cart-item-image">
-    <img src="${product.images[0]}" alt="${product.name}">
-  </div>
-  <div class="cart-item-details">
-    <div class="cart-item-name">
-      ${product.name}
-      ${variant.size ? ` (${variant.size})` : ''}
-      ${item.flavor ? ` - ${item.flavor}` : ''}
-    </div>
-    ${item.customMessage ? `<div class="cart-item-message">💬 "${item.customMessage}"</div>` : ''}
-    <div class="cart-item-price">₹${price}</div>
-          <div class="cart-item-quantity">
-            <button class="qty-btn cart-minus">-</button>
-            <span class="cart-qty" style="color: var(--nav-text); font-weight: 600;">${qty}</span>
-            <button class="qty-btn cart-plus">+</button>
-          </div>
-        </div>
-      `;
-
-      cartContent.appendChild(cartItemDiv);
-    });
-
-    totalEl.textContent = '₹' + total;
-
-    // Attach plus/minus handlers for sidebar items
-    cartContent.querySelectorAll('.cart-item').forEach(cartItemDiv => {
-      const productId = cartItemDiv.dataset.productId;
-      const variantIndex = parseInt(cartItemDiv.dataset.variantIndex);
-      const flavor = cartItemDiv.dataset.flavor || null;
-
-      const qtySpan = cartItemDiv.querySelector('.cart-qty');
-      const minusBtn = cartItemDiv.querySelector('.cart-minus');
-      const plusBtn = cartItemDiv.querySelector('.cart-plus');
-
-      minusBtn.addEventListener('click', () => {
-        this.adjustQuantityFromSidebar(productId, variantIndex, flavor, -1);
-      });
-
-      plusBtn.addEventListener('click', () => {
-        this.adjustQuantityFromSidebar(productId, variantIndex, flavor, +1);
-      });
-    });
-  }
-
+ renderCartSidebar() {
+    /* delegated to cart-sidebar.js */
+}
   adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
     const item = this.cart.find(i =>
       String(i.productId) === String(productId) &&
