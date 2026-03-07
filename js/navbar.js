@@ -136,9 +136,7 @@ if (hamburger && mobileMenu && mobileMenuOverlay && closeMenu) {
         if (!searchModal) return;
         searchModal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        if (searchInput) {
-            setTimeout(() => searchInput.focus(), 150);
-        }
+      
     }
 
     function closeSearchModal() {
