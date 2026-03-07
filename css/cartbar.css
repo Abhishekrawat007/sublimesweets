@@ -370,3 +370,14 @@
 .sublime-navbar.dark-mode ~ .cart-sidebar .v11-item-del svg { stroke: #f5f5f0 !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-footer { background: #080808 !important; }
 .sublime-navbar.dark-mode ~ .cart-sidebar .v11-shipping-note { color: rgba(255,255,255,0.15) !important; }
+/* Hide badge on small screens */
+@media (max-width: 410px) {
+    .cart-count-badge { display: none !important; }
+}
+
+/* Dark mode badge — black text on lime is hard to read, flip it */
+.sublime-navbar.dark-mode ~ .cart-sidebar .cart-count-badge {
+    background: #b8f542 !important;
+    color: #0d0d0d !important;
+    font-weight: 800 !important;
+}
