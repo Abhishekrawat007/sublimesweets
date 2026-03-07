@@ -17,7 +17,7 @@
     z-index: 10002 !important;
     display: flex !important;
     flex-direction: column !important;
-    box-shadow: -20px 0 80px rgba(0,0,0,0.6) !important;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.25) !important;
     overflow: hidden !important;
     border-left: 1px solid #1e1e1e !important;
 }
