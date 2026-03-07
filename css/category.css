@@ -175,3 +175,22 @@ body.dark-mode .cat-sec7-wrapper {
 body.search-active .cat-sec7-wrapper {
     display: none;
 }
+@media (max-width: 345px) {
+    .cat-sec7-wrapper .pinterest-grid {
+        columns: 2;
+        column-gap: 8px;
+    }
+    .cat-sec7-wrapper .pinterest-item {
+        margin-bottom: 8px;
+        border-radius: 12px;
+    }
+}
+@media (max-width: 320px) {
+    .cat-sec7-wrapper .pinterest-item .item-count {
+        display: none;
+    }
+    .cat-sec7-wrapper .pinterest-item .item-title {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+}

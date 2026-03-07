@@ -1,7 +1,7 @@
 // ============================================
-// CART SIDEBAR JS - V5
-// "Dark Luxury" — charcoal + gold, serif title
-// All classes prefixed v5- to avoid conflicts
+// CART SIDEBAR JS - V6
+// "Frosted Editorial" — ink black, blush, mono price
+// All classes prefixed v6- to avoid conflicts
 // ============================================
 
 (function () {
@@ -27,7 +27,7 @@
         };
     });
 
-    function patchCartV5(manager) {
+    function patchCartV6(manager) {
 
         if (!manager.removeItem) {
             manager.removeItem = function (idx) {
@@ -73,18 +73,18 @@
                     emptyState.style.display = 'flex';
                 } else {
                     cartContent.innerHTML = `
-                        <div class="v5-empty-state">
-                            <div class="v5-empty-icon">🛒</div>
-                            <h3 class="v5-empty-title">Your bag is empty</h3>
-                            <p class="v5-empty-text">Add something exquisite</p>
+                        <div class="v6-empty-state">
+                            <div class="v6-empty-icon">🛍️</div>
+                            <h3 class="v6-empty-title">Your bag is empty</h3>
+                            <p class="v6-empty-text">Nothing here yet.</p>
                             <a href="index.html#productsGrid"
                                onclick="window.closeCart && window.closeCart();"
-                               class="v5-shop-btn">Explore</a>
+                               class="v6-shop-btn">Browse</a>
                         </div>`;
                 }
                 totalEl.textContent = '₹0';
                 const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-                if (checkoutBtn) checkoutBtn.textContent = 'Checkout — ₹0';
+                if (checkoutBtn) checkoutBtn.textContent = 'Checkout  ₹0';
                 return;
             }
 
@@ -103,34 +103,32 @@
                 total += price * qty;
 
                 const div = document.createElement('div');
-                div.className = 'v5-cart-item';
+                div.className = 'v6-cart-item';
                 div.dataset.productId = product.id;
                 div.dataset.variantIndex = item.variantIndex;
                 div.dataset.flavor = item.flavor || '';
 
                 div.innerHTML = `
-                    <div class="v5-item-img-wrap">
-                        <img src="${product.images[0]}" class="v5-item-img" alt="${product.name}">
-                        <button class="v5-item-del" title="Remove">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="v5-item-info">
-                        <div class="v5-item-name">${product.name}</div>
-                        ${variant.size || item.flavor ? `<div class="v5-item-variant">${variant.size || ''}${item.flavor ? ' · ' + item.flavor : ''}</div>` : ''}
-                        ${item.customMessage ? `<div class="v5-item-msg">✦ ${item.customMessage}</div>` : ''}
-                        <div class="v5-item-bottom">
-                            <div class="v5-item-price">₹${(price * qty).toLocaleString('en-IN')}</div>
-                            <div class="v5-qty-wrap">
-                                <button class="v5-qty-btn v5-minus">−</button>
-                                <span class="v5-qty-num">${qty}</span>
-                                <button class="v5-qty-btn v5-plus">+</button>
+                    <img src="${product.images[0]}" class="v6-item-img" alt="${product.name}">
+                    <div class="v6-item-info">
+                        <div class="v6-item-name">${product.name}</div>
+                        ${variant.size || item.flavor ? `<div class="v6-item-variant">${variant.size || ''}${item.flavor ? ' · ' + item.flavor : ''}</div>` : ''}
+                        ${item.customMessage ? `<div class="v6-item-msg">${item.customMessage}</div>` : ''}
+                        <div class="v6-item-bottom">
+                            <div class="v6-item-price">₹${(price * qty).toLocaleString('en-IN')}</div>
+                            <div class="v6-qty-wrap">
+                                <button class="v6-qty-btn v6-minus">−</button>
+                                <span class="v6-qty-num">${qty}</span>
+                                <button class="v6-qty-btn v6-plus">+</button>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    <button class="v6-item-del" title="Remove">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>`;
 
                 cartContent.appendChild(div);
             });
@@ -138,19 +136,18 @@
             totalEl.textContent = '₹' + total.toLocaleString('en-IN');
 
             const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-            if (checkoutBtn) checkoutBtn.textContent = `Checkout — ₹${total.toLocaleString('en-IN')}`;
+            if (checkoutBtn) checkoutBtn.textContent = `Checkout  ₹${total.toLocaleString('en-IN')}`;
 
-            // Attach handlers
-            cartContent.querySelectorAll('.v5-cart-item').forEach(div => {
+            cartContent.querySelectorAll('.v6-cart-item').forEach(div => {
                 const pid = div.dataset.productId;
                 const vi = parseInt(div.dataset.variantIndex);
                 const fl = div.dataset.flavor || null;
 
-                div.querySelector('.v5-minus').addEventListener('click', () =>
+                div.querySelector('.v6-minus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, -1));
-                div.querySelector('.v5-plus').addEventListener('click', () =>
+                div.querySelector('.v6-plus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, +1));
-                div.querySelector('.v5-item-del').addEventListener('click', () => {
+                div.querySelector('.v6-item-del').addEventListener('click', () => {
                     const idx = this.cart.findIndex(i =>
                         String(i.productId) === String(pid) &&
                         i.variantIndex === vi &&
@@ -161,13 +158,13 @@
             });
         };
 
-        console.log('✅ Cart V5 patched');
+        console.log('✅ Cart V6 patched');
     }
 
     let attempts = 0;
     function tryPatch() {
         if (window.productManager) {
-            patchCartV5(window.productManager);
+            patchCartV6(window.productManager);
             window.productManager.syncCartUI();
         } else if (attempts < 50) {
             attempts++;
