@@ -787,34 +787,49 @@ body.search-active #r5 {
 <!-- Unfurls directly below navbar — no slide, no scale -->
 <!-- All IDs identical — navbar.js works untouched -->
 
+<!-- SEARCH MODAL V6 — "THE RITUAL" -->
+<!-- All IDs identical — navbar.js untouched -->
+
+<!-- SEARCH MODAL V7 — "SPOTLIGHT" -->
+<!-- Fullscreen cinematic takeover -->
+<!-- All IDs identical — navbar.js untouched -->
+
 <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
         <div class="search-modal-inner">
 
-            <!-- HEADER -->
             <div class="search-modal-header">
-                <span class="search-modal-title">What are you looking for?</span>
-                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                <span class="search-modal-title">What can we find for you?</span>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
                     </svg>
                 </button>
             </div>
 
-            <!-- INPUT -->
             <div class="search-input-wrapper">
                 <input
                     type="text"
                     class="search-input"
-                    placeholder="Samosa, Cake, Mithai…"
                     id="searchInput"
+                    placeholder="Cake, Mithai, Samosa…"
                     autocomplete="off"
                 >
-                <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
+                <svg class="search-icon-inside" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
                 </svg>
+            </div>
+
+            <span class="search-suggestions-label">Popular Searches</span>
+            <div class="search-suggestions">
+                <span class="search-tag">Chocolate Cake</span>
+                <span class="search-tag">Gulab Jamun</span>
+                <span class="search-tag">Samosa</span>
+                <span class="search-tag">Barfi</span>
+                <span class="search-tag">Rasgulla</span>
+                <span class="search-tag">Pastry</span>
             </div>
 
         </div>
