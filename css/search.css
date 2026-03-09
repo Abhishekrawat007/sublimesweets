@@ -11,7 +11,7 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 9998;
-    background: rgba(8, 8, 8, 0);
+   background: rgba(236, 245, 238, 0);
     transition: background 0.4s ease;
     pointer-events: none;
     display: flex;
@@ -20,7 +20,7 @@
 }
 
 .search-modal.active {
-    background: rgba(8, 8, 8, 0.96);
+   background: rgba(236, 245, 238, 0.98);
     pointer-events: auto;
 }
 
@@ -220,13 +220,11 @@
    LIGHT MODE — inverted for light navbar
 ══════════════════════════════════════════ */
 .sublime-navbar:not(.dark-mode) ~ .search-modal {
-    background: rgba(8, 8, 8, 0);
+    background: rgba(245, 240, 228, 0);
 }
-
 .sublime-navbar:not(.dark-mode) ~ .search-modal.active {
-    background: rgba(8, 8, 8, 0.96);
+    background: rgba(236, 245, 238, 0.98)!important;
 }
-
 /* ══════════════════════════════════════════
    DARK MODE — same look, slightly deeper
 ══════════════════════════════════════════ */
@@ -259,4 +257,44 @@
         font-size: 12px !important;
         padding: 8px 14px !important;
     }
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-modal-title {
+    color: rgba(0,0,0,0.3) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input {
+    color: #1a1a1a !important;
+    caret-color: #ff3b6b !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input::placeholder {
+    color: rgba(0,0,0,0.2) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input-wrapper {
+    border-bottom-color: rgba(0,0,0,0.12) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input-wrapper:focus-within {
+    border-bottom-color: rgba(0,0,0,0.4) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-suggestions-label {
+    color: rgba(0,0,0,0.25) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-tag {
+    background: rgba(0,0,0,0.05) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+    color: rgba(0,0,0,0.5) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-close-btn {
+    border-color: rgba(0,0,0,0.15) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-close-btn svg {
+    stroke: rgba(0,0,0,0.4) !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-close-btn:hover {
+    background: #1a1a1a !important;
+    border-color: #1a1a1a !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-close-btn:hover svg {
+    stroke: #fff !important;
+}
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-icon-inside {
+    color: rgba(0,0,0,0.2) !important;
 }
