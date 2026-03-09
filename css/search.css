@@ -321,3 +321,9 @@
         height: 28px !important;
     }
 }
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input {
+    border: none !important;
+    background: none!important;
+    box-shadow: none !important;
+}
