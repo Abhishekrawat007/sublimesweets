@@ -814,48 +814,59 @@ body.search-active #r5 {
 <!-- Burnt wood dark. Ember sweep. Amber glow. -->
 <!-- All IDs identical — navbar.js untouched -->
 
-<<!-- SEARCH MODAL — "HAVELI" -->
+<!-- SEARCH MODAL — "HAVELI" -->
 <!-- Same IDs, same structure. Just stunning now. -->
+<!-- SEARCH MODAL — "RAAT" -->
+<!-- Night market. Ember neon. Pure black. -->
+<!-- Same IDs — navbar.js untouched -->
+<!-- SEARCH MODAL — "MARIGOLD" -->
+<!-- Forest green. Marigold gold. Wedding elegance. -->
+<!-- Same IDs — navbar.js untouched -->
+
+<!-- SEARCH MODAL — "PATANG" -->
+<!-- Spine is a real div — guaranteed to work -->
+<!-- searchInput, searchCloseBtn IDs untouched -->
 
 <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
 
-        <div class="search-modal-header">
-            <h3 class="search-modal-title">Search Products</h3>
-            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
+        <!-- SAFFRON SPINE -->
+        <div class="patang-spine">KHOJO</div>
+
+        <!-- BODY -->
+        <div class="patang-body">
+
+            <div class="search-modal-header">
+                <h3 class="search-modal-title">Search</h3>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="search-input-wrapper">
+                <input type="text" class="search-input" placeholder="Search sweets, snacks, mithai…" id="searchInput" autocomplete="off">
+                <svg class="search-icon-inside" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
                 </svg>
-            </button>
-        </div>
+            </div>
 
-        <div class="search-input-wrapper">
-            <input
-                type="text"
-                class="search-input"
-                placeholder="Search sweets, snacks, mithai…"
-                id="searchInput"
-                autocomplete="off"
-            >
-            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-            </svg>
-        </div>
+            <div class="search-suggestions-label">Popular Searches</div>
+            <div class="search-suggestions">
+                <span class="search-tag">Samosa</span>
+                <span class="search-tag">Chocolate Cake</span>
+                <span class="search-tag">Mithai</span>
+                <span class="search-tag">Momo</span>
+                <span class="search-tag">Gulab Jamun</span>
+                <span class="search-tag">Bread</span>
+                <span class="search-tag">Dry Fruits</span>
+                <span class="search-tag">Milk</span>
+            </div>
 
-        <div class="search-suggestions-label">Popular Searches</div>
-        <div class="search-suggestions">
-            <span class="search-tag">Samosa</span>
-            <span class="search-tag">Chocolate Cake</span>
-            <span class="search-tag">Mithai</span>
-            <span class="search-tag">Momo</span>
-            <span class="search-tag">Gulab Jamun</span>
-            <span class="search-tag">Bread</span>
-            <span class="search-tag">Dry Fruits</span>
-            <span class="search-tag">Milk</span>
         </div>
-
     </div>
 </div>
     <!-- CART SIDEBAR V2 - TEAL CARD -->
