@@ -285,7 +285,7 @@ function performProductSearch(query) {
     }
 
     window.productManager.renderProducts(filtered);
-   
+    smoothScrollToProducts();
 
     const countEl = document.getElementById('productCount');
     if (countEl) countEl.textContent = filtered.length;
