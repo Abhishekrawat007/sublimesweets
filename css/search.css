@@ -1,46 +1,51 @@
 /* ============================================
-   SEARCH MODAL V8 — "TAKEOVER BAR"
-   Replaces navbar on open — same height, same
-   position. Slides down over navbar smoothly.
-   Clean borders, premium typography, zero bulk.
+   SEARCH MODAL V9 — "CLEAN BAR"
+   Limeroad-inspired: replaces navbar on open
+   Back/close left, input center, search right
+   No pills, no suggestions, just pure search
+   Light: white | Dark: #111
    ============================================ */
 
-/* ── MODAL WRAPPER — sits exactly over navbar ── */
+/* ── MODAL ──────────────────────────────────── */
 .search-modal {
-    position: fixed;
-    top: -80px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 56px;
-    z-index: 10002;
-    pointer-events: none;
-    transition: top 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: stretch;
-    background: transparent;
+    position: fixed !important;
+    top: -70px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10002 !important;
+    background: transparent !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+    padding: 0 !important;
+    display: block !important;
+    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .search-modal.active {
-    top: 0;
-    pointer-events: auto;
+    top: 0 !important;
+    pointer-events: auto !important;
 }
 
-/* ── BAR — the actual search navbar ────────── */
+/* ── BAR ────────────────────────────────────── */
 .search-modal-content {
     position: relative !important;
     width: 100% !important;
     max-width: 100% !important;
-    height: 100% !important;
+    height: 70px !important;
     background: #ffffff !important;
     border: none !important;
-    border-bottom: 2px solid #111111 !important;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10) !important;
+    border-bottom: 1.5px solid rgba(0,0,0,0.1) !important;
+   box-shadow: none !important;
     border-radius: 0 !important;
-    padding: 0 !important;
+    padding: 0 16px !important;
     margin: 0 !important;
     display: flex !important;
     align-items: center !important;
+    gap: 12px !important;
     box-sizing: border-box !important;
     overflow: visible !important;
     max-height: none !important;
@@ -48,50 +53,64 @@
     transition: none !important;
 }
 
-/* ── INNER ──────────────────────────────────── */
+/* ── HIDE EVERYTHING WE DON'T NEED ─────────── */
 .search-modal-inner {
-    display: flex !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 100% !important;
-    padding: 0 20px !important;
-    gap: 12px !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
+    display: contents !important;
 }
 
-/* ── HEADER — hidden, label not needed ──────── */
 .search-modal-header {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    flex-shrink: 0 !important;
+    display: contents !important;
 }
 
-.search-modal-header .search-modal-title {
+.search-modal-title {
     display: none !important;
 }
 
-/* ── SEARCH ICON LEFT ───────────────────────── */
-.search-icon-inside {
-    position: static !important;
-    transform: none !important;
-    flex-shrink: 0 !important;
-    color: #111111 !important;
-    cursor: pointer !important;
-    transition: color 0.2s ease !important;
-    top: auto !important;
-    bottom: auto !important;
-    right: auto !important;
-    filter: none !important;
-    opacity: 1 !important;
+.search-suggestions-label {
+    display: none !important;
 }
 
-.search-icon-inside:hover {
-    color: #e8192c !important;
-    transform: scale(1.1) !important;
-    filter: none !important;
+.search-suggestions {
+    display: none !important;
+}
+
+/* ── CLOSE BUTTON — left side ───────────────── */
+.search-modal .search-close-btn {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    width: 38px !important;
+    height: 38px !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    transition: background 0.2s ease !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+    order: -1 !important;
+    transform: none !important;
+    color: #111 !important;
+}
+
+.search-modal .search-close-btn svg {
+    stroke: #111111 !important;
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+.search-modal .search-close-btn:hover {
+    background: rgba(0,0,0,0.06) !important;
+    transform: none !important;
+    border: none !important;
+}
+
+.search-modal .search-close-btn:hover svg {
+    stroke: #e8192c !important;
 }
 
 /* ── INPUT WRAPPER ──────────────────────────── */
@@ -100,9 +119,15 @@
     position: relative !important;
     display: flex !important;
     align-items: center !important;
-    height: 100% !important;
+    height: 42px !important;
     margin: 0 !important;
     border-bottom: none !important;
+    background: #f5f5f5 !important;
+    border-radius: 10px !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+    width: auto !important;
+    max-width: none !important;
 }
 
 .search-input-wrapper::before,
@@ -119,127 +144,52 @@
     padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
     background: transparent !important;
     color: #111111 !important;
     outline: none !important;
-    letter-spacing: 0.1px !important;
     box-shadow: none !important;
     line-height: 1 !important;
     caret-color: #e8192c !important;
+    letter-spacing: 0 !important;
 }
 
 .search-input::placeholder {
-    color: rgba(0,0,0,0.25) !important;
-    font-weight: 400 !important;
+    color: rgba(0,0,0,0.3) !important;
 }
 
 .search-input:focus {
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
+    border-color: transparent !important;
 }
 
-/* ── DIVIDER before close ───────────────────── */
-.search-modal-inner::after {
-    content: '' !important;
-    width: 1px !important;
-    height: 28px !important;
-    background: rgba(0,0,0,0.12) !important;
-    flex-shrink: 0 !important;
-}
-
-/* ── CLOSE BUTTON ───────────────────────────── */
-.search-close-btn {
+/* ── SEARCH ICON — right side ───────────────── */
+.search-icon-inside {
     position: static !important;
-    margin-top:7px !important;
-    width: 36px !important;
-    height: 36px !important;
-    border: 1.5px solid rgba(0,0,0,0.15) !important;
-    background: transparent !important;
-    cursor: pointer !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    transition: all 0.2s ease !important;
-    flex-shrink: 0 !important;
-    padding: 0 !important;
-}
-
-.search-close-btn svg {
-    stroke: rgba(0,0,0,0.4) !important;
-    transition: stroke 0.2s ease !important;
-}
-
-.search-close-btn:hover {
-    background: #111 !important;
-    border-color: #111 !important;
-    transform: rotate(90deg) !important;
-}
-
-.search-close-btn:hover svg {
-    stroke: #fff !important;
-}
-
-/* ── SUGGESTIONS — pill row below bar ──────── */
-.search-suggestions-label {
-    display: none !important;
-}
-
-.search-suggestions {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    display: none !important;
-    flex-wrap: nowrap !important;
-    gap: 8px !important;
-    padding: 10px 20px !important;
-    background: #ffffff !important;
-    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
-    overflow-x: auto !important;
-    scrollbar-width: none !important;
-    box-sizing: border-box !important;
-    pointer-events: auto !important;
-}
-
-.search-suggestions::-webkit-scrollbar {
-    display: none !important;
-}
-
-.search-tag {
-    padding: 6px 14px !important;
-    background: transparent !important;
-    border: 1px solid rgba(0,0,0,0.12) !important;
-    border-radius: 100px !important;
-    font-size: 12px !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-    color: rgba(0,0,0,0.5) !important;
-    cursor: pointer !important;
-    transition: all 0.18s ease !important;
-    white-space: nowrap !important;
-    flex-shrink: 0 !important;
-    letter-spacing: 0.2px !important;
-}
-
-.search-tag:hover {
-    background: #111 !important;
-    border-color: #111 !important;
-    color: #fff !important;
     transform: none !important;
-    box-shadow: none !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    flex-shrink: 0 !important;
+    color: rgba(0,0,0,0.35) !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease !important;
+    filter: none !important;
+    opacity: 1 !important;
+    width: 20px !important;
+    height: 20px !important;
+    order: 999 !important;
 }
 
-.search-tag.selected,
-.search-tag:active {
-    background: #e8192c !important;
-    border-color: #e8192c !important;
-    color: #fff !important;
+.search-icon-inside:hover {
+    color: #e8192c !important;
+    transform: none !important;
+    filter: none !important;
 }
 
 /* ══════════════════════════════════════════
@@ -247,8 +197,13 @@
 ══════════════════════════════════════════ */
 .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
     background: #111111 !important;
-    border-bottom: 2px solid rgba(255,255,255,0.15) !important;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4) !important;
+    border-bottom: 1.5px solid rgba(255,255,255,0.06) !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+    border: none !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input-wrapper {
+    background: #222222 !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input {
@@ -256,76 +211,50 @@
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input::placeholder {
-    color: rgba(255,255,255,0.2) !important;
+    color: rgba(255,255,255,0.25) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn svg {
+    stroke: rgba(255,255,255,0.7) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
+    background: rgba(255,255,255,0.08) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover svg {
+    stroke: #e8192c !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-icon-inside {
-    color: rgba(255,255,255,0.7) !important;
+    color: rgba(255,255,255,0.35) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-icon-inside:hover {
     color: #e8192c !important;
 }
 
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-inner::after {
-    background: rgba(255,255,255,0.1) !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn {
-    border-color: rgba(255,255,255,0.15) !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn svg {
-    stroke: rgba(255,255,255,0.5) !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
-    background: #fff !important;
-    border-color: #fff !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover svg {
-    stroke: #111 !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-suggestions {
-    background: #111111 !important;
-    border-bottom-color: rgba(255,255,255,0.06) !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-tag {
-    border-color: rgba(255,255,255,0.12) !important;
-    color: rgba(255,255,255,0.4) !important;
-}
-
-.sublime-navbar.dark-mode ~ .search-modal .search-tag:hover {
-    background: #fff !important;
-    border-color: #fff !important;
-    color: #111 !important;
-}
-
-
 /* ══════════════════════════════════════════
-   DESKTOP — match taller navbar
+   DESKTOP
 ══════════════════════════════════════════ */
 @media (min-width: 1235px) {
     .search-modal {
-        height: 80px;
-        top: -80px;
+        height: 80px !important;
+        top: -80px !important;
     }
 
-    .search-input {
-        font-size: 18px !important;
-    }
-
-    .search-modal-inner {
-        padding: 0 32px !important;
+    .search-modal-content {
+        height: 80px !important;
+        padding: 0 24px !important;
         gap: 16px !important;
     }
 
-    .search-suggestions {
-        padding: 10px 32px !important;
+    .search-input-wrapper {
+        height: 46px !important;
+    }
+
+    .search-input {
+        font-size: 16px !important;
     }
 }
 
@@ -334,68 +263,22 @@
 ══════════════════════════════════════════ */
 @media (max-width: 600px) {
     .search-modal {
-        height: 60px;
-        top: -60px;
+        height: 70px !important;
+        top: -70px !important;
     }
 
-    .search-input {
-        font-size: 15px !important;
+    .search-modal-content {
+        height: 70px !important;
+        padding: 0 12px !important;
+        gap: 8px !important;
     }
 
-    .search-modal-inner {
-        padding: 0 14px !important;
-        gap: 10px !important;
-    }
-
-    .search-suggestions {
-        padding: 8px 14px !important;
-        gap: 6px !important;
-    }
-
-    .search-tag {
-        font-size: 11px !important;
-        padding: 5px 12px !important;
+    .search-input-wrapper {
+        height: 38px !important;
     }
 
     .search-close-btn {
-        width: 30px !important;
-        height: 30px !important;
+        width: 32px !important;
+        height: 32px !important;
     }
-}
-/* ── KILL navbar.css overrides ───────────── */
-.search-modal {
-    opacity: 1 !important;
-    visibility: visible !important;
-    padding-top: 0 !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    top: -80px !important;
-    bottom: auto !important;
-    height: 54px !important;
-    background: transparent !important;
-}
-
-.search-modal.active {
-    top: 0 !important;
-    background: transparent !important;
-}
-.search-modal.active .search-modal-content {
-    transform: none !important;
-}
-.search-modal.active .search-suggestions {
-    display: flex !important;
-}
-
-.search-modal.active ~ * #productList,
-.search-modal.active ~ * .products-grid,
-.search-modal.active ~ * .product-grid {
-    pointer-events: auto !important;
-}
-
-body.search-active {
-    overflow: auto !important;
-}
-.sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    border: none !important;
-    border-bottom: 2px solid rgba(255,255,255,0.06) !important;
 }

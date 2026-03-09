@@ -799,16 +799,25 @@ body.search-active #r5 {
 <!-- SEARCH MODAL V8 — "TAKEOVER BAR" -->
 <!-- Slides down over navbar — same height, same position -->
 <!-- All IDs identical — navbar.js untouched -->
+<!-- SEARCH MODAL V9 — "CLEAN BAR" -->
+<!-- Replaces navbar on open — Limeroad style -->
+<!-- Close left, input center, search icon right -->
+<!-- All IDs identical — navbar.js untouched -->
 
 <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
         <div class="search-modal-inner">
 
-            <!-- SEARCH ICON LEFT -->
-            <svg class="search-icon-inside" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.35-4.35"/>
-            </svg>
+            <!-- CLOSE — left arrow -->
+            <div class="search-modal-header">
+                <span class="search-modal-title"></span>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+            </div>
 
             <!-- INPUT -->
             <div class="search-input-wrapper">
@@ -821,31 +830,13 @@ body.search-active #r5 {
                 >
             </div>
 
-            <!-- CLOSE -->
-            <div class="search-modal-header">
-                <span class="search-modal-title"></span>
-                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </button>
-            </div>
+            <!-- SEARCH ICON — right -->
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
 
         </div>
-
-        <!-- SUGGESTION TAGS — scrollable pill row -->
-        <div class="search-suggestions">
-            <span class="search-tag">Chocolate Cake</span>
-            <span class="search-tag">Gulab Jamun</span>
-            <span class="search-tag">Samosa</span>
-            <span class="search-tag">Barfi</span>
-            <span class="search-tag">Rasgulla</span>
-            <span class="search-tag">Pastry</span>
-            <span class="search-tag">Ladoo</span>
-            <span class="search-tag">Jalebi</span>
-        </div>
-
     </div>
 </div>
     <!-- CART SIDEBAR V2 - TEAL CARD -->
