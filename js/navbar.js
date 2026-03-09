@@ -64,7 +64,7 @@ function openMobileMenu() {
     mobileMenuOverlay.classList.add('active');
 
     document.body.classList.add('mobile-menu-open');
-    document.body.style.overflow = 'hidden';
+   
 
     if (mobileMenuItems && mobileMenuItems.length) {
         mobileMenuItems.forEach((item, index) => {
