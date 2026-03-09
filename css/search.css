@@ -1,9 +1,9 @@
 /* ============================================
-   SEARCH MODAL V11 — "NOIR"
-   Jet black bar. Crimson line. White text.
-   Editorial luxury — Zara meets The Row.
-   No pills. No clutter. Just pure intent.
-   One transition. Lightweight. Unforgettable.
+   SEARCH MODAL V12 — "EMBER"
+   Burnt wood dark. Ember sweep on open.
+   Amber glow on focus. Flame dot left.
+   Like opening a luxury Indian sweet box.
+   Warm. Rich. Alive. Nothing like it.
    ============================================ */
 
 /* ── MODAL ──────────────────────────────────── */
@@ -36,16 +36,16 @@
     width: 100% !important;
     max-width: 100% !important;
     height: 72px !important;
-    background: #0a0a0a !important;
+    background: #1C0A00 !important;
     border: none !important;
-    border-bottom: 1.5px solid #C8102E !important;
+    border-bottom: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 20px !important;
     margin: 0 !important;
     display: flex !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 14px !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
     max-height: none !important;
@@ -53,29 +53,46 @@
     transition: none !important;
 }
 
-/* ── CRIMSON PULSE on open ──────────────────── */
-@keyframes crimson-pulse {
-    0%   { opacity: 0; transform: scaleX(0); }
-    40%  { opacity: 1; transform: scaleX(1); }
-    70%  { opacity: 1; }
-    100% { opacity: 0.6; transform: scaleX(1); }
+/* ── EMBER SWEEP — fires across on open ─────── */
+@keyframes ember-sweep {
+    0%   { transform: translateX(-100%); opacity: 0.6; }
+    60%  { transform: translateX(0%);    opacity: 0.15; }
+    100% { transform: translateX(100%);  opacity: 0; }
 }
 
 .search-modal-content::before {
     content: '' !important;
     position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 1.5px !important;
-    background: #C8102E !important;
-    transform-origin: left !important;
+    inset: 0 !important;
+    background: linear-gradient(
+        105deg,
+        transparent 0%,
+        rgba(255, 140, 0, 0.18) 40%,
+        rgba(255, 200, 80, 0.28) 55%,
+        rgba(255, 140, 0, 0.18) 70%,
+        transparent 100%
+    ) !important;
+    transform: translateX(-100%) !important;
     pointer-events: none !important;
-    z-index: 1 !important;
+    z-index: 0 !important;
 }
 
 .search-modal.active .search-modal-content::before {
-    animation: crimson-pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    animation: ember-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards !important;
+}
+
+/* ── AMBER BOTTOM GLOW LINE ─────────────────── */
+.search-modal-content::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, #FF6B00, #FFB347, #FF6B00) !important;
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
 }
 
 /* ── INNER ──────────────────────────────────── */
@@ -105,49 +122,64 @@
     display: none !important;
 }
 
-/* ── CLOSE — sharp square ───────────────────── */
+/* ── CLOSE BUTTON ───────────────────────────── */
 .search-modal .search-close-btn {
     position: static !important;
     top: auto !important;
     right: auto !important;
-    width: 32px !important;
-    height: 32px !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    background: transparent !important;
+    width: 36px !important;
+    height: 36px !important;
+    border: 1px solid rgba(255,140,0,0.25) !important;
+    background: rgba(255,140,0,0.06) !important;
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border-radius: 4px !important;
-    transition: all 0.2s ease !important;
+    border-radius: 50% !important;
+    transition: all 0.22s ease !important;
     flex-shrink: 0 !important;
     padding: 0 !important;
     order: -1 !important;
     transform: none !important;
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 .search-modal .search-close-btn svg {
-    stroke: rgba(255,255,255,0.6) !important;
-    width: 14px !important;
-    height: 14px !important;
+    stroke: rgba(255,180,80,0.8) !important;
+    width: 16px !important;
+    height: 16px !important;
     flex-shrink: 0 !important;
     transition: stroke 0.2s ease !important;
 }
 
 .search-modal .search-close-btn:hover {
-    background: #C8102E !important;
-    border-color: #C8102E !important;
+    background: rgba(255,140,0,0.15) !important;
+    border-color: rgba(255,140,0,0.5) !important;
     transform: none !important;
 }
 
 .search-modal .search-close-btn:hover svg {
-    stroke: #ffffff !important;
+    stroke: #FFB347 !important;
 }
 
-/* ── THIN VERTICAL RULE ─────────────────────── */
-.search-modal-content .search-close-btn + .search-input-wrapper::before {
+/* ── FLAME DOT ──────────────────────────────── */
+.search-modal .search-close-btn::after {
     content: '' !important;
-    display: none !important;
+    position: absolute !important;
+    top: -3px !important;
+    right: -3px !important;
+    width: 7px !important;
+    height: 7px !important;
+    background: #FF6B00 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 6px #FF6B00 !important;
+    animation: flame-flicker 2s ease-in-out infinite !important;
+}
+
+@keyframes flame-flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(0.85); }
 }
 
 /* ── INPUT WRAPPER ──────────────────────────── */
@@ -156,18 +188,40 @@
     position: relative !important;
     display: flex !important;
     align-items: center !important;
-    height: 100% !important;
+    height: 44px !important;
     margin: 0 !important;
-    border-bottom: none !important;
     width: auto !important;
     max-width: none !important;
     box-sizing: border-box !important;
     padding: 0 !important;
+    border-bottom: 1px solid rgba(255,140,0,0.2) !important;
+    transition: border-color 0.3s ease !important;
+    z-index: 2 !important;
 }
 
-.search-input-wrapper::before,
-.search-input-wrapper::after {
+.search-input-wrapper:focus-within {
+    border-bottom-color: rgba(255,140,0,0.7) !important;
+}
+
+.search-input-wrapper::before {
     display: none !important;
+}
+
+/* ── AMBER TRACE on focus ───────────────────── */
+.search-input-wrapper::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -1px !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 1px !important;
+    background: linear-gradient(90deg, #FF6B00, #FFD700, #FF6B00) !important;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: block !important;
+}
+
+.search-input-wrapper:focus-within::after {
+    width: 100% !important;
 }
 
 /* ── INPUT ──────────────────────────────────── */
@@ -179,33 +233,24 @@
     padding: 0 !important;
     border: none !important;
     border-radius: 0 !important;
-    font-size: 17px !important;
-    font-family: 'Georgia', 'Times New Roman', serif !important;
+    font-size: 16px !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
     font-weight: 400 !important;
-    font-style: normal !important;
+    font-style: italic !important;
     background: transparent !important;
-    color: #ffffff !important;
+    color: #FFE4B5 !important;
     outline: none !important;
     box-shadow: none !important;
     line-height: 1 !important;
-    caret-color: #C8102E !important;
-    letter-spacing: 0.5px !important;
-}
-
-/* ── ANIMATED PLACEHOLDER ───────────────────── */
-@keyframes placeholder-fade {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-.search-modal.active .search-input::placeholder {
-    animation: placeholder-fade 0.6s ease 0.3s both !important;
+    caret-color: #FF6B00 !important;
+    letter-spacing: 0.3px !important;
+    z-index: 2 !important;
+    position: relative !important;
 }
 
 .search-input::placeholder {
-    color: rgba(255,255,255,0.2) !important;
+    color: rgba(255,180,80,0.3) !important;
     font-style: italic !important;
-    letter-spacing: 0.3px !important;
 }
 
 .search-input:focus {
@@ -213,30 +258,10 @@
     box-shadow: none !important;
     background: transparent !important;
     border-color: transparent !important;
+    outline: none !important;
 }
 
-/* ── LABEL that appears on focus ────────────── */
-.search-input-wrapper::after {
-    content: 'SEARCH' !important;
-    display: block !important;
-    position: absolute !important;
-    right: 0 !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 9px !important;
-    font-weight: 700 !important;
-    letter-spacing: 3px !important;
-    color: rgba(255,255,255,0.12) !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-    pointer-events: none !important;
-    transition: color 0.3s ease !important;
-}
-
-.search-input-wrapper:focus-within::after {
-    color: #C8102E !important;
-}
-
-/* ── SEARCH ICON right ──────────────────────── */
+/* ── SEARCH ICON ────────────────────────────── */
 .search-icon-inside {
     position: static !important;
     transform: none !important;
@@ -244,7 +269,7 @@
     right: auto !important;
     bottom: auto !important;
     flex-shrink: 0 !important;
-    color: rgba(255,255,255,0.2) !important;
+    color: rgba(255,140,0,0.35) !important;
     cursor: pointer !important;
     transition: color 0.2s ease !important;
     filter: none !important;
@@ -252,28 +277,58 @@
     width: 20px !important;
     height: 20px !important;
     order: 999 !important;
+    z-index: 2 !important;
+    position: relative !important;
 }
 
 .search-icon-inside:hover {
-    color: #C8102E !important;
+    color: #FFB347 !important;
     transform: none !important;
     filter: none !important;
 }
 
 /* ══════════════════════════════════════════
-   LIGHT MODE — inverted, still editorial
+   LIGHT MODE — same ember dark bar always
 ══════════════════════════════════════════ */
 .sublime-navbar:not(.dark-mode) ~ .search-modal .search-modal-content {
-    background: #0a0a0a !important;
+    background: #1C0A00 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 /* ══════════════════════════════════════════
-   DARK MODE — same look, even deeper
+   DARK MODE — deeper ember
 ══════════════════════════════════════════ */
 .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    background: #050505 !important;
-    border-bottom: 1.5px solid #C8102E !important;
+    background: #110600 !important;
+    border: none !important;
     box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #FFE4B5 !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 /* ══════════════════════════════════════════
@@ -288,12 +343,15 @@
     .search-modal-content {
         height: 80px !important;
         padding: 0 32px !important;
-        gap: 20px !important;
+        gap: 18px !important;
     }
 
     .search-input {
-        font-size: 20px !important;
-        letter-spacing: 0.8px !important;
+        font-size: 18px !important;
+    }
+
+    .search-input-wrapper {
+        height: 50px !important;
     }
 }
 
@@ -302,28 +360,26 @@
 ══════════════════════════════════════════ */
 @media (max-width: 600px) {
     .search-modal {
-        height: 74px !important;
-        top: -74px !important;
+        height: 75px !important;
+        top: -75px !important;
     }
 
     .search-modal-content {
-        height: 74px !important;
+        height: 75px !important;
         padding: 0 14px !important;
-        gap: 12px !important;
+        gap: 10px !important;
     }
 
     .search-input {
         font-size: 15px !important;
     }
 
-    .search-modal .search-close-btn {
-        width: 28px !important;
-        height: 28px !important;
+    .search-input-wrapper {
+        height: 40px !important;
     }
-}
 
-.sublime-navbar.dark-mode ~ .search-modal .search-input {
-    border: none !important;
-    background: none!important;
-    box-shadow: none !important;
+    .search-modal .search-close-btn {
+        width: 30px !important;
+        height: 30px !important;
+    }
 }
