@@ -1,385 +1,358 @@
 /* ============================================
-   SEARCH MODAL V12 — "EMBER"
-   Burnt wood dark. Ember sweep on open.
-   Amber glow on focus. Flame dot left.
-   Like opening a luxury Indian sweet box.
-   Warm. Rich. Alive. Nothing like it.
+   SEARCH MODAL — "HAVEILI"
+   Grand Indian boutique aesthetic.
+   Cream warmth. Terracotta fire. Serif soul.
+   Override for navbar.css search modal.
+   Zero heavy CSS. Maximum soul.
    ============================================ */
 
-/* ── MODAL ──────────────────────────────────── */
+/* ── BACKDROP ───────────────────────────────── */
 .search-modal {
-    position: fixed !important;
-    top: -72px !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: auto !important;
-    width: 100% !important;
-    height: 72px !important;
-    z-index: 10002 !important;
-    background: transparent !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: none !important;
-    padding: 0 !important;
-    display: block !important;
-    transition: top 0.38s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    background: rgba(15, 8, 3, 0.75) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    padding-top: 80px !important;
+    align-items: flex-start !important;
 }
 
-.search-modal.active {
-    top: 0 !important;
-    pointer-events: auto !important;
-}
-
-/* ── BAR ────────────────────────────────────── */
+/* ── MODAL PANEL ────────────────────────────── */
 .search-modal-content {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 72px !important;
-    background: #1C0A00 !important;
+    background: #FBF6EE !important;
+    border-radius: 0 0 24px 24px !important;
     border: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    padding: 0 20px !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 14px !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-    max-height: none !important;
-    transform: none !important;
-    transition: none !important;
+    border-top: 3.5px solid transparent !important;
+    border-image: linear-gradient(90deg, #C84B31 0%, #FF6B00 40%, #FFB347 70%, #C84B31 100%) 1 !important;
+    box-shadow:
+        0 32px 80px rgba(15, 8, 3, 0.35),
+        0 8px 24px rgba(200, 75, 49, 0.12) !important;
+    width: 92% !important;
+    max-width: 580px !important;
+    padding: 28px 28px 24px !important;
+    transform: translateY(-20px) !important;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    position: relative !important;
+    overflow: visible !important;
 }
 
-/* ── EMBER SWEEP — fires across on open ─────── */
-@keyframes ember-sweep {
-    0%   { transform: translateX(-100%); opacity: 0.6; }
-    60%  { transform: translateX(0%);    opacity: 0.15; }
-    100% { transform: translateX(100%);  opacity: 0; }
+.search-modal.active .search-modal-content {
+    transform: translateY(0) !important;
 }
 
+/* ── DECORATIVE CORNER DOT ──────────────────── */
 .search-modal-content::before {
     content: '' !important;
     position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(
-        105deg,
-        transparent 0%,
-        rgba(255, 140, 0, 0.18) 40%,
-        rgba(255, 200, 80, 0.28) 55%,
-        rgba(255, 140, 0, 0.18) 70%,
-        transparent 100%
-    ) !important;
-    transform: translateX(-100%) !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
+    top: -3.5px !important;
+    left: -1px !important;
+    width: 10px !important;
+    height: 10px !important;
+    background: #C84B31 !important;
+    border-radius: 0 0 4px 0 !important;
 }
 
-.search-modal.active .search-modal-content::before {
-    animation: ember-sweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards !important;
-}
-
-/* ── AMBER BOTTOM GLOW LINE ─────────────────── */
 .search-modal-content::after {
     content: '' !important;
     position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, #FF6B00, #FFB347, #FF6B00) !important;
-    opacity: 0.5 !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
+    top: -3.5px !important;
+    right: -1px !important;
+    width: 10px !important;
+    height: 10px !important;
+    background: #C84B31 !important;
+    border-radius: 0 0 0 4px !important;
 }
 
-/* ── INNER ──────────────────────────────────── */
-.search-modal-inner {
-    display: contents !important;
-}
-
-/* ── HIDE UNNEEDED ──────────────────────────── */
+/* ── HEADER ─────────────────────────────────── */
 .search-modal-header {
-    display: contents !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
 }
 
+/* ── TITLE ──────────────────────────────────── */
 .search-modal-title {
-    display: none !important;
+    font-family: Georgia, 'Times New Roman', serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    color: #C84B31 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
 }
 
-.search-suggestions-label {
-    display: none !important;
-}
-
-.search-suggestions {
-    display: none !important;
-}
-
-.search-modal-inner::before,
-.search-modal-inner::after {
-    display: none !important;
+/* replace emoji with a thin line accent */
+.search-modal-title::before {
+    content: '' !important;
+    display: inline-block !important;
+    width: 28px !important;
+    height: 1.5px !important;
+    background: linear-gradient(90deg, #C84B31, #FF6B00) !important;
+    border-radius: 2px !important;
+    flex-shrink: 0 !important;
 }
 
 /* ── CLOSE BUTTON ───────────────────────────── */
-.search-modal .search-close-btn {
+.search-close-btn {
     position: static !important;
     top: auto !important;
     right: auto !important;
-    width: 36px !important;
-    height: 36px !important;
-    border: 1px solid rgba(255,140,0,0.25) !important;
-    background: rgba(255,140,0,0.06) !important;
-    cursor: pointer !important;
+    width: 34px !important;
+    height: 34px !important;
+    border: 1.5px solid rgba(200, 75, 49, 0.2) !important;
+    background: transparent !important;
+    border-radius: 8px !important;
+    color: rgba(200, 75, 49, 0.5) !important;
+    transition: all 0.2s ease !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border-radius: 50% !important;
-    transition: all 0.22s ease !important;
+    cursor: pointer !important;
     flex-shrink: 0 !important;
-    padding: 0 !important;
-    order: -1 !important;
-    transform: none !important;
-    position: relative !important;
-    z-index: 2 !important;
 }
 
-.search-modal .search-close-btn svg {
-    stroke: rgba(255,180,80,0.8) !important;
+.search-close-btn svg {
+    stroke: currentColor !important;
     width: 16px !important;
     height: 16px !important;
-    flex-shrink: 0 !important;
-    transition: stroke 0.2s ease !important;
 }
 
-.search-modal .search-close-btn:hover {
-    background: rgba(255,140,0,0.15) !important;
-    border-color: rgba(255,140,0,0.5) !important;
+.search-close-btn:hover {
+    background: #C84B31 !important;
+    border-color: #C84B31 !important;
+    color: #ffffff !important;
     transform: none !important;
-}
-
-.search-modal .search-close-btn:hover svg {
-    stroke: #FFB347 !important;
-}
-
-/* ── FLAME DOT ──────────────────────────────── */
-.search-modal .search-close-btn::after {
-    content: '' !important;
-    position: absolute !important;
-    top: -3px !important;
-    right: -3px !important;
-    width: 7px !important;
-    height: 7px !important;
-    background: #FF6B00 !important;
-    border-radius: 50% !important;
-    box-shadow: 0 0 6px #FF6B00 !important;
-    animation: flame-flicker 2s ease-in-out infinite !important;
-}
-
-@keyframes flame-flicker {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.6; transform: scale(0.85); }
 }
 
 /* ── INPUT WRAPPER ──────────────────────────── */
 .search-input-wrapper {
-    flex: 1 !important;
     position: relative !important;
-    display: flex !important;
-    align-items: center !important;
-    height: 44px !important;
-    margin: 0 !important;
-    width: auto !important;
-    max-width: none !important;
-    box-sizing: border-box !important;
-    padding: 0 !important;
-    border-bottom: 1px solid rgba(255,140,0,0.2) !important;
-    transition: border-color 0.3s ease !important;
-    z-index: 2 !important;
-}
-
-.search-input-wrapper:focus-within {
-    border-bottom-color: rgba(255,140,0,0.7) !important;
-}
-
-.search-input-wrapper::before {
-    display: none !important;
-}
-
-/* ── AMBER TRACE on focus ───────────────────── */
-.search-input-wrapper::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -1px !important;
-    left: 0 !important;
-    width: 0 !important;
-    height: 1px !important;
-    background: linear-gradient(90deg, #FF6B00, #FFD700, #FF6B00) !important;
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    display: block !important;
-}
-
-.search-input-wrapper:focus-within::after {
-    width: 100% !important;
+    margin-bottom: 22px !important;
+    margin-top: 0 !important;
 }
 
 /* ── INPUT ──────────────────────────────────── */
 .search-input {
-    display: block !important;
     width: 100% !important;
-    height: 100% !important;
-    box-sizing: border-box !important;
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
+    padding: 14px 48px 14px 18px !important;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(200, 75, 49, 0.15) !important;
+    border-radius: 12px !important;
+    font-family: Georgia, serif !important;
     font-size: 16px !important;
-    font-family: Georgia, 'Times New Roman', serif !important;
-    font-weight: 400 !important;
     font-style: italic !important;
-    background: transparent !important;
-    color: #FFE4B5 !important;
+    color: #2A1208 !important;
     outline: none !important;
-    box-shadow: none !important;
-    line-height: 1 !important;
-    caret-color: #FF6B00 !important;
-    letter-spacing: 0.3px !important;
-    z-index: 2 !important;
-    position: relative !important;
+    box-shadow:
+        inset 0 2px 6px rgba(200, 75, 49, 0.04),
+        0 2px 8px rgba(0,0,0,0.04) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+    caret-color: #C84B31 !important;
+    box-sizing: border-box !important;
 }
 
 .search-input::placeholder {
-    color: rgba(255,180,80,0.3) !important;
+    color: rgba(42, 18, 8, 0.28) !important;
     font-style: italic !important;
 }
 
 .search-input:focus {
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    border-color: transparent !important;
-    outline: none !important;
+    border-color: rgba(200, 75, 49, 0.5) !important;
+    box-shadow:
+        inset 0 2px 6px rgba(200, 75, 49, 0.04),
+        0 4px 20px rgba(200, 75, 49, 0.12) !important;
+    background: #ffffff !important;
 }
 
 /* ── SEARCH ICON ────────────────────────────── */
 .search-icon-inside {
-    position: static !important;
-    transform: none !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    flex-shrink: 0 !important;
-    color: rgba(255,140,0,0.35) !important;
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: rgba(200, 75, 49, 0.4) !important;
     cursor: pointer !important;
-    transition: color 0.2s ease !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    pointer-events: auto !important;
     filter: none !important;
     opacity: 1 !important;
-    width: 20px !important;
-    height: 20px !important;
-    order: 999 !important;
-    z-index: 2 !important;
-    position: relative !important;
+    stroke: currentColor !important;
 }
 
 .search-icon-inside:hover {
-    color: #FFB347 !important;
-    transform: none !important;
+    color: #C84B31 !important;
+    transform: translateY(-50%) scale(1.1) !important;
     filter: none !important;
 }
 
-/* ══════════════════════════════════════════
-   LIGHT MODE — same ember dark bar always
-══════════════════════════════════════════ */
-.sublime-navbar:not(.dark-mode) ~ .search-modal .search-modal-content {
-    background: #1C0A00 !important;
-    border: none !important;
-    box-shadow: none !important;
+/* ── POPULAR SEARCHES LABEL ─────────────────── */
+.search-suggestions-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    color: rgba(42, 18, 8, 0.35) !important;
+    margin-bottom: 14px !important;
 }
 
-.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input {
-    border: none !important;
+/* ── SUGGESTION PILLS ───────────────────────── */
+.search-suggestions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.search-tag {
+    padding: 7px 16px !important;
     background: transparent !important;
-    box-shadow: none !important;
+    border: 1.5px solid rgba(200, 75, 49, 0.2) !important;
+    border-radius: 20px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: rgba(42, 18, 8, 0.65) !important;
+    cursor: pointer !important;
+    transition: all 0.22s ease !important;
+    letter-spacing: 0.2px !important;
 }
 
-.sublime-navbar:not(.dark-mode) ~ .search-modal .search-input:focus {
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
+.search-tag:hover {
+    background: #C84B31 !important;
+    border-color: #C84B31 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 14px rgba(200, 75, 49, 0.3) !important;
+}
+
+.search-tag.selected {
+    background: #C84B31 !important;
+    border-color: #C84B31 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(200, 75, 49, 0.3) !important;
 }
 
 /* ══════════════════════════════════════════
-   DARK MODE — deeper ember
+   DARK MODE
 ══════════════════════════════════════════ */
+.sublime-navbar.dark-mode ~ .search-modal {
+    background: rgba(5, 2, 1, 0.85) !important;
+}
+
 .sublime-navbar.dark-mode ~ .search-modal .search-modal-content {
-    background: #110600 !important;
+    background: #1A0B04 !important;
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.7),
+        0 8px 24px rgba(200, 75, 49, 0.15) !important;
     border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
+    border-top: 3.5px solid transparent !important;
+    border-image: linear-gradient(90deg, #C84B31 0%, #FF6B00 40%, #FFB347 70%, #C84B31 100%) 1 !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content::before,
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-content::after {
+    background: #C84B31 !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-modal-title {
+    color: #FF8C5A !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn {
+    border-color: rgba(255, 140, 90, 0.2) !important;
+    color: rgba(255, 140, 90, 0.5) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-close-btn:hover {
+    background: #C84B31 !important;
+    border-color: #C84B31 !important;
+    color: #ffffff !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    background: #2A1208 !important;
+    border-color: rgba(255, 140, 90, 0.15) !important;
     color: #FFE4B5 !important;
+    box-shadow: none !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-input::placeholder {
+    color: rgba(255, 228, 181, 0.25) !important;
 }
 
 .sublime-navbar.dark-mode ~ .search-modal .search-input:focus {
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
+    border-color: rgba(200, 75, 49, 0.5) !important;
+    box-shadow: 0 4px 20px rgba(200, 75, 49, 0.15) !important;
+    background: #2A1208 !important;
 }
 
-/* ══════════════════════════════════════════
-   DESKTOP
-══════════════════════════════════════════ */
-@media (min-width: 1235px) {
+.sublime-navbar.dark-mode ~ .search-modal .search-icon-inside {
+    color: rgba(255, 140, 90, 0.4) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-icon-inside:hover {
+    color: #FF8C5A !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-suggestions-label {
+    color: rgba(255, 228, 181, 0.25) !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-tag {
+    border-color: rgba(255, 140, 90, 0.18) !important;
+    color: rgba(255, 228, 181, 0.5) !important;
+    background: transparent !important;
+}
+
+.sublime-navbar.dark-mode ~ .search-modal .search-tag:hover,
+.sublime-navbar.dark-mode ~ .search-modal .search-tag.selected {
+    background: #C84B31 !important;
+    border-color: #C84B31 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(200, 75, 49, 0.4) !important;
+}
+
+/* ── ANIMATE IN PILLS ───────────────────────── */
+@keyframes pill-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.search-modal.active .search-tag:nth-child(1) { animation: pill-rise 0.3s ease 0.15s both; }
+.search-modal.active .search-tag:nth-child(2) { animation: pill-rise 0.3s ease 0.20s both; }
+.search-modal.active .search-tag:nth-child(3) { animation: pill-rise 0.3s ease 0.25s both; }
+.search-modal.active .search-tag:nth-child(4) { animation: pill-rise 0.3s ease 0.30s both; }
+.search-modal.active .search-tag:nth-child(5) { animation: pill-rise 0.3s ease 0.35s both; }
+.search-modal.active .search-tag:nth-child(6) { animation: pill-rise 0.3s ease 0.38s both; }
+.search-modal.active .search-tag:nth-child(7) { animation: pill-rise 0.3s ease 0.41s both; }
+.search-modal.active .search-tag:nth-child(8) { animation: pill-rise 0.3s ease 0.44s both; }
+
+/* ── MOBILE ──────────────────────────────────── */
+@media (max-width: 480px) {
     .search-modal {
-        height: 80px !important;
-        top: -80px !important;
+        padding-top: 70px !important;
+        align-items: flex-start !important;
     }
 
     .search-modal-content {
-        height: 80px !important;
-        padding: 0 32px !important;
-        gap: 18px !important;
-    }
-
-    .search-input {
-        font-size: 18px !important;
-    }
-
-    .search-input-wrapper {
-        height: 50px !important;
-    }
-}
-
-/* ══════════════════════════════════════════
-   MOBILE
-══════════════════════════════════════════ */
-@media (max-width: 600px) {
-    .search-modal {
-        height: 75px !important;
-        top: -75px !important;
-    }
-
-    .search-modal-content {
-        height: 75px !important;
-        padding: 0 14px !important;
-        gap: 10px !important;
+        width: 96% !important;
+        padding: 22px 18px 20px !important;
+        border-radius: 0 0 20px 20px !important;
     }
 
     .search-input {
         font-size: 15px !important;
+        padding: 12px 44px 12px 16px !important;
     }
 
-    .search-input-wrapper {
-        height: 40px !important;
+    .search-modal-title {
+        font-size: 11px !important;
+        letter-spacing: 2px !important;
     }
 
-    .search-modal .search-close-btn {
-        width: 30px !important;
-        height: 30px !important;
+    .search-tag {
+        font-size: 12px !important;
+        padding: 6px 14px !important;
     }
 }
