@@ -325,16 +325,16 @@
 ══════════════════════════════════════════ */
 @media (max-width: 600px) {
     .search-modal {
-        height: 64px !important;
-        top: -64px !important;
+        height: 72px !important;
+        top: -72px !important;
     }
 
     .search-modal-content {
-        height: 64px !important;
+        height: 72px !important;
     }
 
     .search-modal .search-close-btn {
-        height: 64px !important;
+        height: 72px !important;
         width: 48px !important;
     }
 
