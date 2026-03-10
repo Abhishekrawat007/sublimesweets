@@ -2162,7 +2162,7 @@ body.dark-mode .video-modal-content {
      Paste just before </body>
      ============================================================ -->
 
-<div class="sticky-cta-bar hidden" id="stickyCTABar">
+<div class="sticky-cta-bar" id="stickyCTABar">
     <div class="sticky-product-info">
         <span class="sticky-product-name" id="stickyProductName">Loading...</span>
         <span class="sticky-product-price" id="stickyProductPrice">₹0</span>
@@ -2196,23 +2196,20 @@ body {
     padding-bottom: 72px !important;
 }
 
-/* ── FIX: action-buttons always a row ───────────── */
+/* ── PAGE buttons: stacked full width like original ── */
 .action-buttons {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: column !important;
     gap: 12px !important;
     margin-bottom: 28px !important;
-    align-items: stretch !important;
 }
 
 .add-wrapper {
-    flex: 1 !important;
-    min-width: 0 !important;
+    width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
 }
 
-/* Add to Cart full width, JS can still hide it — no display !important */
 #addToCartBtn {
     width: 100% !important;
     justify-content: center !important;
@@ -2220,22 +2217,8 @@ body {
     box-sizing: border-box !important;
 }
 
-/* Buy Now — flex:1 takes equal space, align-self stretch
-   so it matches Add to Cart height always */
 #buyNowBtn {
-    flex: 1 !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* Equal height for both buttons */
-#addToCartBtn, #buyNowBtn {
-    min-height: 56px !important;
-}
-
-/* Qty bar same height as the button so Buy Now never stretches */
-#qtyBar {
-    min-height: 56px !important;
+    width: 100% !important;
     box-sizing: border-box !important;
 }
 
@@ -2461,11 +2444,27 @@ body {
     function initObserver() {
         var target = document.querySelector('.action-buttons');
         if (!target) return;
-        new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                bar.classList.toggle('hidden', e.isIntersecting);
-            });
-        }, { threshold: 0.2 }).observe(target);
+
+        var doneForever = false;
+
+        function updateBar() {
+            if (doneForever) return;
+            var rect = target.getBoundingClientRect();
+            var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            var isAbove   = rect.bottom < 0;
+
+            if (isAbove) {
+                bar.classList.add('hidden');
+                doneForever = true;
+            } else if (isVisible) {
+                bar.classList.add('hidden');
+            } else {
+                bar.classList.remove('hidden');
+            }
+        }
+
+        window.addEventListener('scroll', updateBar, { passive: true });
+        updateBar();
     }
 
     if (sAddBtn) {
