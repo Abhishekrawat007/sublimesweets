@@ -2157,7 +2157,7 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 <!-- ============================================================
-     STICKY CTA BAR — V7 SHAHENSHAH MUGHAL
+     STICKY CTA BAR — V8 RAAT KI RANI BOTANICAL
      Paste just before </body>, after all existing script tags
      ============================================================ -->
 
@@ -2168,9 +2168,8 @@ body.dark-mode .video-modal-content {
     </div>
     <div class="sticky-actions">
         <button class="sticky-add-btn" id="stickyAddToCartBtn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
             <span id="stickyAddLabel">Add to Cart</span>
@@ -2185,29 +2184,32 @@ body.dark-mode .video-modal-content {
 </div>
 
 <style>
-html, body {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-}
-
+html, body { overflow-x: hidden !important; max-width: 100% !important; }
 body { padding-bottom: 72px !important; }
 
-/* ── STICKY BAR ── */
 .sticky-cta-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    width: 100%;
-    box-sizing: border-box;
+    width: 100%; box-sizing: border-box;
     z-index: 900;
-    background: #1A0F0A;
-    border-top: 3px solid #C4651A;
-    padding: 10px 16px;
+    background: #0A0A12;
+    border-top: 2px solid #C9A96E;
+    padding: 10px 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     height: 72px;
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+}
+
+/* Subtle violet left glow */
+.sticky-cta-bar::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #7B4F8E, transparent);
 }
 
 .sticky-cta-bar.hidden {
@@ -2217,98 +2219,81 @@ body { padding-bottom: 72px !important; }
 }
 
 .sticky-product-info {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    flex: 1; min-width: 0; overflow: hidden;
+    display: flex; flex-direction: column; gap: 2px;
 }
 
 .sticky-product-name {
-    font-family: 'Lato', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #E8C99A;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: #A89878;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .sticky-product-price {
-    font-family: 'Gulzar', serif;
-    font-size: 20px;
-    font-weight: 400;
-    color: #C4651A;
-    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px; font-weight: 700;
+    color: #C9A96E; line-height: 1;
 }
 
 .sticky-actions {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-shrink: 0;
+    display: flex; flex-direction: row;
+    gap: 10px; flex-shrink: 0;
 }
 
-/* ADD TO CART — outlined terracotta */
+/* ADD TO CART — gold outline with fill sweep */
 .sticky-add-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    padding: 0 20px;
-    height: 50px;
-    border: 2px solid #C4651A;
-    background: transparent;
-    color: #E8C99A;
-    font-family: 'Lato', sans-serif;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.18s, color 0.18s;
-    border-radius: 0;
-    box-sizing: border-box;
-    /* Arch top */
-    clip-path: polygon(0% 10%, 15% 2%, 50% 0%, 85% 2%, 100% 10%, 100% 100%, 0% 100%);
+    display: flex; align-items: center; justify-content: center;
+    gap: 7px; padding: 0 20px; height: 50px;
+    border: 1px solid #C9A96E;
+    background: transparent; color: #C9A96E;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+    border-radius: 2px; box-sizing: border-box;
+    position: relative; overflow: hidden;
 }
 
-.sticky-add-btn:hover { background: rgba(196,101,26,0.2); }
+.sticky-add-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: #C9A96E;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 0;
+}
+.sticky-add-btn:hover::before { transform: translateX(0); }
+.sticky-add-btn:hover { color: #0A0A12; }
+.sticky-add-btn svg, .sticky-add-btn span { position: relative; z-index: 1; }
 
 .sticky-add-btn.in-cart {
-    border-color: #3D6B2A;
-    color: #7DB860;
+    border-color: #4D7A5D;
+    color: #4D7A5D;
 }
+.sticky-add-btn.in-cart::before { background: #4D7A5D; }
+.sticky-add-btn.in-cart:hover { color: #0A0A12; }
 
-/* BUY NOW — filled rust */
+/* BUY NOW — violet fill sweep */
 .sticky-buy-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    padding: 0 20px;
-    height: 50px;
-    border: 2px solid #8B3A2A;
-    background: #8B3A2A;
-    color: #F5ECD7;
-    font-family: 'Lato', sans-serif;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.18s;
-    border-radius: 0;
-    box-sizing: border-box;
-    clip-path: polygon(0% 10%, 15% 2%, 50% 0%, 85% 2%, 100% 10%, 100% 100%, 0% 100%);
+    display: flex; align-items: center; justify-content: center;
+    gap: 7px; padding: 0 20px; height: 50px;
+    border: 1px solid #7B4F8E;
+    background: #7B4F8E; color: #F0E6D3;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.18s, border-color 0.18s;
+    border-radius: 2px; box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover { background: #C4651A; border-color: #C4651A; }
+.sticky-buy-btn:hover { background: #9B6FAE; border-color: #9B6FAE; }
 
 /* ── MOBILE ≤520px ── */
 @media (max-width: 520px) {
@@ -2316,24 +2301,16 @@ body { padding-bottom: 72px !important; }
     .sticky-product-info { display: none; }
     .sticky-actions { width: 100%; height: 100%; gap: 0; }
 
-    .sticky-add-btn,
-    .sticky-buy-btn {
-        flex: 1;
-        width: 0;
-        height: 100%;
-        padding: 0 10px;
-        font-size: 10px;
-        letter-spacing: 0.08em;
-        clip-path: none;
-        border-top: none;
-        border-bottom: none;
+    .sticky-add-btn, .sticky-buy-btn {
+        flex: 1; width: 0; height: 100%;
+        padding: 0 10px; font-size: 11px;
+        border-top: none; border-bottom: none; border-radius: 0;
     }
 
     .sticky-add-btn {
         border-left: none;
-        border-right: 1px solid rgba(196,101,26,0.4);
+        border-right: 1px solid rgba(201,169,110,0.3);
     }
-
     .sticky-buy-btn { border-right: none; }
 }
 </style>
@@ -2348,39 +2325,27 @@ body { padding-bottom: 72px !important; }
     var sBuyBtn = document.getElementById('stickyBuyNowBtn');
     if (!bar) return;
 
-    /* ── sync name + price ── */
     function sync() {
-        var n  = document.getElementById('productTitle');
-        var p  = document.getElementById('currentPrice');
+        var n = document.getElementById('productTitle');
+        var p = document.getElementById('currentPrice');
         var sn = document.getElementById('stickyProductName');
         var sp = document.getElementById('stickyProductPrice');
         if (n && sn && n.textContent.trim())  sn.textContent = n.textContent.trim();
         if (p && sp && p.textContent.trim())  sp.textContent = p.textContent.trim();
     }
 
-    /* ── watch qty bar — "Add to Cart" ↔ "Go to Cart" ── */
     function watchQtyBar() {
         var qb = document.getElementById('qtyBar');
         if (!qb || !sLabel || !sAddBtn) return;
-
         function updateState() {
             var inCart = qb.style.display !== 'none' && qb.style.display !== '';
             sLabel.textContent = inCart ? 'Go to Cart' : 'Add to Cart';
             sAddBtn.classList.toggle('in-cart', inCart);
         }
-
-        new MutationObserver(updateState).observe(qb, {
-            attributes: true, attributeFilter: ['style']
-        });
+        new MutationObserver(updateState).observe(qb, { attributes: true, attributeFilter: ['style'] });
         updateState();
     }
 
-    /* ── scroll logic: show/hide based on real buttons position ──
-       RULES:
-       - buttons on screen        → hide sticky
-       - buttons above viewport   → hide sticky (scrolled past going down)
-       - buttons below viewport   → show sticky (not reached yet OR scrolled back up above them)
-    ── */
     function initScroll() {
         var target = document.querySelector('.action-buttons');
         if (!target) return;
@@ -2389,7 +2354,6 @@ body { padding-bottom: 72px !important; }
             var rect = target.getBoundingClientRect();
             var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
             var isAbove   = rect.bottom < 0;
-
             if (isVisible || isAbove) {
                 bar.classList.add('hidden');
             } else {
@@ -2401,17 +2365,12 @@ body { padding-bottom: 72px !important; }
         updateBar();
     }
 
-    /* ── button delegates ── */
     if (sAddBtn) {
         sAddBtn.addEventListener('click', function () {
             var qb = document.getElementById('qtyBar');
             var inCart = qb && qb.style.display !== 'none' && qb.style.display !== '';
-            if (inCart) {
-                window.location.href = 'cart.html';
-            } else {
-                var ab = document.getElementById('addToCartBtn');
-                if (ab) ab.click();
-            }
+            if (inCart) { window.location.href = 'cart.html'; }
+            else { var ab = document.getElementById('addToCartBtn'); if (ab) ab.click(); }
         });
     }
 
@@ -2422,28 +2381,20 @@ body { padding-bottom: 72px !important; }
         });
     }
 
-    /* ── watch DOM for product load ── */
     function watchDOM() {
-        var mo  = new MutationObserver(sync);
+        var mo = new MutationObserver(sync);
         var opt = { childList: true, subtree: true, characterData: true };
-        var t   = document.getElementById('productTitle');
-        var p   = document.getElementById('currentPrice');
+        var t = document.getElementById('productTitle');
+        var p = document.getElementById('currentPrice');
         if (t) mo.observe(t, opt);
         if (p) mo.observe(p, opt);
     }
 
-    function init() {
-        sync();
-        initScroll();
-        watchQtyBar();
-        watchDOM();
-    }
+    function init() { sync(); initScroll(); watchQtyBar(); watchDOM(); }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    } else { init(); }
 })();
 </script>
 </body>

@@ -1,65 +1,67 @@
 /* ============================================================
-   SUBLIME SWEETS — DESIGN V7
-   "SHAHENSHAH" — The Emperor's Sweet Court
-   Royal Mughal × Warm Earthy
-   Fonts: Gulzar (display) + Lato (body)
-   Palette: Deep Rust × Terracotta × Sand Gold × Parchment × Chai Brown
-   No box-shadow. No backdrop-filter. Pure imperial CSS.
+   SUBLIME SWEETS — DESIGN V8
+   "RAAT KI RANI" — Night Queen Botanical
+   100-year-old Lucknow perfumery × Herbarium specimen sheets
+   Fonts: Playfair Display (display) + DM Sans (body)
+   Palette: Midnight Ink × Aged Gold × Deep Violet × Botanical Green × Paper Cream
+   No box-shadow. No backdrop-filter. Pure botanical CSS.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Gulzar&family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ============================================================
-   ROOT — MUGHAL COLOR SYSTEM
+   ROOT — NIGHT BOTANICAL COLOR SYSTEM
    ============================================================ */
 :root {
-    --chai:        #1A0F0A;   /* Deep chai brown — darkest */
-    --chai-mid:    #2C1A10;   /* Mid dark surface */
-    --chai-light:  #3D2518;   /* Card surface dark */
-    --rust:        #8B3A2A;   /* Deep rust — hero accent */
-    --rust-mid:    #C4651A;   /* Terracotta — secondary accent */
-    --rust-light:  #D4845A;   /* Light terracotta */
-    --sand:        #E8C99A;   /* Sand gold — warm highlight */
-    --sand-light:  #F0DDB8;   /* Pale sand */
-    --parchment:   #F5ECD7;   /* Parchment cream — lightest */
-    --parchment-mid: #EDE0C4; /* Mid parchment */
-    --parchment-deep: #D4C4A0;/* Deep parchment border */
-    --success:     #3D6B2A;
+    --ink:          #0A0A12;
+    --ink-mid:      #12121E;
+    --ink-light:    #1A1A2E;
+    --indigo:       #1E1E3A;
+    --indigo-mid:   #2A2A4E;
+    --gold:         #C9A96E;
+    --gold-light:   #E2C98E;
+    --gold-pale:    #F0DFB8;
+    --violet:       #7B4F8E;
+    --violet-light: #9B6FAE;
+    --green:        #2D5A3D;
+    --green-light:  #4D7A5D;
+    --paper:        #F0E6D3;
+    --paper-mid:    #E8D8BC;
+    --paper-deep:   #D4C09A;
+    --cream:        #FAF6EE;
 
-    --text:        #1A0F0A;
-    --text-muted:  #6B4030;
-    --text-faint:  #B09070;
+    --text:         #F0E6D3;
+    --text-muted:   #A89878;
+    --text-faint:   #584838;
+    --success:      #4D7A5D;
 
-    /* Light mode bg */
-    --bg:          #F5ECD7;
-    --card-bg:     #FFFFFF;
-    --border:      #D4C4A0;
+    /* dark-first design */
+    --bg:           #0A0A12;
+    --card-bg:      #12121E;
+    --border:       #2A2A4E;
 
-    --font-display: 'Gulzar', Georgia, serif;
-    --font-body:    'Lato', system-ui, sans-serif;
-
-    --radius-sm: 0px;
-    --radius-md: 0px;
-    --radius-lg: 0px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
 
     --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     --sticky-h: 72px;
 }
 
 /* ============================================================
-   DARK MODE
+   LIGHT MODE override
    ============================================================ */
-body.dark-mode {
-    --bg:             #1A0F0A;
-    --card-bg:        #2C1A10;
-    --border:         #3D2518;
-    --text:           #F5ECD7;
-    --text-muted:     #C4A070;
-    --text-faint:     #6B4030;
-    --parchment:      #2C1A10;
-    --parchment-mid:  #3D2518;
-    --parchment-deep: #4D3020;
-    --sand-light:     #3D2518;
+body:not(.dark-mode) {
+    --bg:        #F0E6D3;
+    --card-bg:   #FAF6EE;
+    --border:    #D4C09A;
+    --text:      #0A0A12;
+    --text-muted:#584838;
+    --text-faint:#A89878;
+    --ink:       #F0E6D3;
+    --ink-mid:   #FAF6EE;
+    --ink-light: #E8D8BC;
+    --indigo:    #E8D8BC;
+    --indigo-mid:#D4C09A;
 }
 
 /* ============================================================
@@ -78,34 +80,16 @@ body {
 }
 
 /* ============================================================
-   MUGHAL JALI BACKGROUND — pure CSS marble screen pattern
+   BOTANICAL INK ATMOSPHERE — dark blobs bleeding at corners
    ============================================================ */
-body::before {
+body.dark-mode::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            rgba(139,58,42,0.035) 0px,
-            rgba(139,58,42,0.035) 1px,
-            transparent 1px,
-            transparent 32px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            rgba(139,58,42,0.035) 0px,
-            rgba(139,58,42,0.035) 1px,
-            transparent 1px,
-            transparent 32px
-        ),
-        repeating-linear-gradient(
-            45deg,
-            rgba(196,101,26,0.02) 0px,
-            rgba(196,101,26,0.02) 1px,
-            transparent 1px,
-            transparent 22px
-        );
+    background:
+        radial-gradient(ellipse 60% 50% at -10% -10%, rgba(123,79,142,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 110% 110%, rgba(45,90,61,0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(30,30,58,0.4) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
 }
@@ -122,75 +106,50 @@ body > * { position: relative; z-index: 1; }
 }
 
 /* ============================================================
-   MUGHAL ORNAMENT MIXIN — reusable crescent rule
-   ============================================================ */
-.mughal-rule {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    color: var(--rust-mid);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    margin: 20px 0;
-}
-
-.mughal-rule::before,
-.mughal-rule::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--rust), transparent);
-}
-
-/* ============================================================
-   BREADCRUMB — parchment strip
+   BREADCRUMB — herbarium label strip
    ============================================================ */
 .breadcrumb {
     display: flex;
     align-items: center;
     gap: 10px;
     font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 40px;
-    padding: 12px 20px;
-    background: var(--parchment-mid);
-    border-left: 4px solid var(--rust);
-    border-right: 4px solid var(--rust);
+    margin-bottom: 44px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
     position: relative;
 }
 
+/* Specimen number */
 .breadcrumb::before {
-    content: '☽';
-    color: var(--rust-mid);
-    font-size: 14px;
+    content: 'No. 001';
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--gold);
+    margin-right: 8px;
+    white-space: nowrap;
 }
 
-.breadcrumb::after {
-    content: '☾';
-    color: var(--rust-mid);
-    font-size: 14px;
-    margin-left: auto;
-}
-
-.breadcrumb a { color: var(--rust); text-decoration: none; font-weight: 900; }
-.breadcrumb a:hover { color: var(--rust-mid); }
+.breadcrumb a { color: var(--gold); text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { color: var(--gold-light); }
 
 /* ============================================================
    MAIN LAYOUT
    ============================================================ */
 .product-main {
     display: grid;
-    grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
-    gap: 60px;
+    grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+    gap: 72px;
     align-items: start;
 }
 
 /* ============================================================
-   IMAGE GALLERY — Mughal arch frame
+   IMAGE GALLERY — torn herbarium specimen sheet
    ============================================================ */
 .image-gallery {
     display: flex;
@@ -204,85 +163,94 @@ body > * { position: relative; z-index: 1; }
 
 .main-image-wrapper {
     position: relative;
-    padding: 0;
 }
 
-/* Arch top frame — terracotta border with arch clip */
 .main-image-container {
     position: relative;
     width: 100%;
     height: 560px;
     overflow: hidden;
-    background: var(--parchment-mid);
-    border: 3px solid var(--rust);
-    border-bottom: none;
-    /* Mughal pointed arch top via clip-path */
+    background: var(--ink-mid);
+    /* Diagonal torn-paper slash — herbarium specimen sheet */
     clip-path: polygon(
-        0% 8%,
-        4% 4%,
-        50% 0%,
-        96% 4%,
+        0% 0%,
+        92% 0%,
         100% 8%,
         100% 100%,
-        0% 100%
+        8% 100%,
+        0% 92%
     );
+    border: none;
     margin-bottom: 0;
 }
 
-/* Corner rust squares — palace window corners */
-.main-image-wrapper::before,
+/* Gold corner accent lines */
+.main-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 48px; height: 48px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+    z-index: 5;
+}
+
 .main-image-wrapper::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--rust);
+    bottom: 80px; right: 0;
+    width: 48px; height: 48px;
+    border-bottom: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
     z-index: 5;
 }
-.main-image-wrapper::before { top: 0; left: 0; }
-.main-image-wrapper::after  { top: 0; right: 0; }
 
 .main-image {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.6s ease;
     pointer-events: auto !important;
     user-select: none;
     -webkit-user-drag: none;
 }
 
-/* DISCOUNT BADGE — tassel hanging tag */
+.main-image:hover { transform: scale(1.02); }
+
+/* DISCOUNT BADGE — wax seal */
 .discount-badge {
     position: absolute;
-    top: 0;
-    left: 24px;
-    background: var(--rust);
-    color: var(--parchment);
-    padding: 10px 14px 20px;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    z-index: 6;
-    /* Pointed bottom — tassel */
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
-    min-width: 64px;
+    top: 20px;
+    right: 28px;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--violet);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 700;
     text-align: center;
+    line-height: 1.2;
+    z-index: 6;
+    border: 2px solid var(--gold);
+    outline: 1px solid var(--violet-light);
+    outline-offset: 3px;
 }
 
-/* WISHLIST — arch-top circular feel */
+/* WISHLIST — botanical circle */
 .wishlist-btn-detail {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 48px;
-    height: 48px;
-    background: var(--parchment);
-    border: 2px solid var(--rust);
-    border-radius: 50% 50% 0 0;
+    top: 20px;
+    left: 20px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(10,10,18,0.7);
+    border: 1px solid var(--gold);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -291,63 +259,47 @@ body > * { position: relative; z-index: 1; }
     z-index: 6;
 }
 
-.wishlist-btn-detail:hover { background: var(--rust); }
-.wishlist-btn-detail:hover svg { stroke: var(--parchment); }
-.wishlist-btn-detail:hover svg path { stroke: var(--parchment); }
+.wishlist-btn-detail:hover { background: var(--violet); border-color: var(--violet-light); }
+.wishlist-btn-detail svg { width: 19px; height: 19px; stroke: var(--gold); fill: none; transition: all 0.2s; }
+.wishlist-btn-detail svg path { fill: none; stroke: var(--gold); transition: fill 0.2s, stroke 0.2s; }
+.wishlist-btn-detail.saved { background: var(--violet); }
+.wishlist-btn-detail.saved svg path { fill: var(--paper); stroke: var(--paper); }
 
-.wishlist-btn-detail svg {
-    width: 20px; height: 20px;
-    stroke: var(--rust); fill: none;
-    transition: all 0.2s;
-}
+body:not(.dark-mode) .wishlist-btn-detail { background: rgba(240,230,211,0.85); }
 
-.wishlist-btn-detail svg path {
-    fill: none; stroke: var(--rust);
-    transition: fill 0.2s, stroke 0.2s;
-}
-
-.wishlist-btn-detail.saved { background: var(--rust); }
-.wishlist-btn-detail.saved svg path { fill: var(--parchment); stroke: var(--parchment); }
-
-body.dark-mode .wishlist-btn-detail {
-    background: var(--chai-mid);
-    border-color: var(--rust);
-}
-
-/* SLIDE BUTTONS — arch shaped */
+/* SLIDE BUTTONS */
 .slideshow-controls {
     position: absolute;
-    top: 50%;
-    width: 100%;
+    bottom: 80px; right: 0;
     display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    top: auto;
+    transform: none;
+    width: auto;
+    left: auto;
     z-index: 6;
 }
 
 .slide-btn {
-    width: 44px;
-    height: 52px;
-    background: var(--parchment);
-    border: 2px solid var(--rust);
-    border-radius: 50% 50% 0 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(10,10,18,0.8);
+    border: 1px solid var(--gold);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    color: var(--rust);
-    font-weight: 900;
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 700;
     transition: all var(--transition);
 }
 
-.slide-btn:hover {
-    background: var(--rust);
-    color: var(--parchment);
-}
+.slide-btn:hover { background: var(--gold); color: var(--ink); }
 
-/* THUMBNAIL ROW — stone floor tiles */
+/* THUMBNAIL ROW — specimen strip */
 .thumbnail-column {
     display: flex;
     flex-direction: row;
@@ -356,51 +308,48 @@ body.dark-mode .wishlist-btn-detail {
     overflow-y: hidden;
     width: 100%;
     min-width: 0;
-    background: var(--rust);
-    border: 3px solid var(--rust);
-    border-top: none;
+    background: var(--ink-mid);
+    border-top: 2px solid var(--gold);
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: var(--rust-mid) var(--parchment-mid);
+    scrollbar-color: var(--gold) var(--ink-light);
 }
 
 .thumbnail {
-    width: 88px;
-    height: 80px;
+    width: 84px; height: 76px;
     overflow: hidden;
     cursor: pointer;
     border: none;
-    border-right: 1px solid var(--rust);
+    border-right: 1px solid var(--ink-light);
     transition: all var(--transition);
     flex-shrink: 0;
-    background: var(--parchment-mid);
+    background: var(--ink-mid);
     position: relative;
 }
 
 .thumbnail img {
     width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.7;
-    transition: opacity var(--transition);
+    opacity: 0.5;
+    filter: sepia(0.3);
+    transition: all var(--transition);
 }
 
-.thumbnail:hover img { opacity: 1; }
-.thumbnail.active img { opacity: 1; }
+.thumbnail:hover img { opacity: 0.85; filter: sepia(0); }
+.thumbnail.active img { opacity: 1; filter: sepia(0); }
 
-/* Active — sand top bar */
 .thumbnail.active::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    background: var(--sand);
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
 }
 
-.thumbnail.video-thumb { position: relative; }
 .thumbnail.video-thumb .play-icon {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; color: var(--sand);
+    font-size: 20px; color: var(--gold);
     pointer-events: none;
 }
 
@@ -413,132 +362,132 @@ body.dark-mode .wishlist-btn-detail {
 /* ============================================================
    PRODUCT INFO
    ============================================================ */
-.product-info { padding-top: 4px; }
+.product-info { padding-top: 0; }
+
+/* Specimen catalog number — massive ghost */
+.product-info::before {
+    content: 'S-08';
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.04;
+    position: absolute;
+    top: -20px;
+    right: 0;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.product-info { position: relative; }
 
 /* PRODUCT TITLE */
 .product-title {
     font-family: var(--font-display);
-    font-size: clamp(28px, 3.5vw, 48px);
-    font-weight: 400;   /* Gulzar is naturally heavy */
-    letter-spacing: 0.02em;
-    line-height: 1.25;
+    font-style: italic;
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
     color: var(--text);
-    margin-bottom: 0;
+    margin-bottom: 6px;
 }
 
-/* Terracotta arch ornament below title */
+/* Gold botanical underline — hand-drawn feel */
 .product-title::after {
-    content: '❖';
+    content: '';
     display: block;
-    text-align: center;
-    font-size: 18px;
-    color: var(--rust-mid);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
     margin-top: 14px;
-    letter-spacing: 0.5em;
 }
 
 /* RATING */
 .product-rating {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 18px;
-    margin-bottom: 28px;
-    padding: 10px 0;
-    border-top: 1px solid var(--parchment-deep);
-    border-bottom: 1px solid var(--parchment-deep);
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 32px;
 }
 
 .stars { display: inline-flex; align-items: center; gap: 3px; }
-.star-icon { width: 17px; height: 17px; flex-shrink: 0; }
-.star-icon.full { fill: var(--rust-mid); color: var(--rust-mid); }
-.star-icon.half { color: var(--rust-mid); }
-.star-icon.empty { stroke: var(--parchment-deep); fill: none; }
-body.dark-mode .star-icon.empty { stroke: var(--chai-light); }
+.star-icon { width: 16px; height: 16px; flex-shrink: 0; }
+.star-icon.full { fill: var(--gold); color: var(--gold); }
+.star-icon.half { color: var(--gold); }
+.star-icon.empty { stroke: var(--border); fill: none; }
 
 .rating-text {
-    font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
     color: var(--text-faint);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    font-style: italic;
 }
 
 /* ============================================================
-   PRICE SECTION — parchment proclamation scroll
+   PRICE SECTION — antique shop ledger entry
    ============================================================ */
 .price-section {
-    background: var(--parchment-mid);
-    border: 2px solid var(--rust);
-    border-left: 6px solid var(--rust);
-    padding: 24px 28px;
+    padding: 0 0 28px 0;
+    border-bottom: 1px dashed var(--border);
     margin-bottom: 32px;
     position: relative;
-    text-align: center;
 }
 
-/* Arch cutouts top corners */
-.price-section::before {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px;
-    width: 24px; height: 24px;
-    background: var(--bg);
-    border-radius: 0 0 100% 0;
-}
-
+/* Vine dashed separator */
 .price-section::after {
-    content: '';
+    content: '· · · · · · · · · · · · · · · · · · · · · · · · · · · ·';
     position: absolute;
-    top: -2px; right: -2px;
-    width: 24px; height: 24px;
-    background: var(--bg);
-    border-radius: 0 0 0 100%;
-}
-
-body.dark-mode .price-section::before,
-body.dark-mode .price-section::after {
-    background: var(--bg);
+    bottom: -10px;
+    left: 0; right: 0;
+    font-size: 12px;
+    color: var(--gold);
+    opacity: 0.3;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
 }
 
 .current-price {
     font-family: var(--font-display);
-    font-size: clamp(52px, 7vw, 76px);
-    font-weight: 400;
-    color: var(--rust);
-    line-height: 0.9;
+    font-style: italic;
+    font-size: clamp(60px, 8vw, 88px);
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 0.85;
     display: block;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.02em;
 }
 
 .original-price {
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-faint);
     text-decoration: line-through;
     font-weight: 300;
-    margin-left: 10px;
+    margin-left: 8px;
     letter-spacing: 0.04em;
+    font-style: italic;
 }
 
 .you-save {
-    display: inline-block;
-    margin-top: 10px;
-    background: var(--rust);
-    color: var(--parchment);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: var(--green-light);
     font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 5px 18px;
-    clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
 }
 
-body.dark-mode .price-section {
-    background: var(--chai-mid);
-    border-color: var(--rust);
-}
+.you-save::before { content: '◉'; font-size: 8px; color: var(--green-light); }
 
 /* ============================================================
    OPTION SECTIONS
@@ -546,30 +495,15 @@ body.dark-mode .price-section {
 .option-section {
     margin-bottom: 28px;
     padding-bottom: 24px;
-    border-bottom: 1px solid var(--parchment-deep);
-    position: relative;
+    border-bottom: 1px dashed var(--border);
 }
-
-.option-section::after {
-    content: '❖';
-    position: absolute;
-    bottom: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    color: var(--rust-mid);
-    background: var(--bg);
-    padding: 0 8px;
-}
-
-body.dark-mode .option-section::after { background: var(--bg); }
 
 .option-label {
-    font-family: var(--font-body);
-    font-weight: 900;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.08em;
     color: var(--text-muted);
     margin-bottom: 14px;
     display: flex;
@@ -577,74 +511,73 @@ body.dark-mode .option-section::after { background: var(--bg); }
     gap: 10px;
 }
 
-.option-label::before {
-    content: '☽';
-    color: var(--rust-mid);
-    font-size: 12px;
+.option-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
 }
 
 .option-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 8px;
 }
 
-/* SIZE BUTTONS — arch-top tiles */
+/* SIZE BUTTONS — botanical specimen tags */
 .option-btn {
-    padding: 14px 10px 12px;
-    border: 2px solid var(--parchment-deep);
-    background: var(--parchment-mid);
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    background: var(--card-bg);
     cursor: pointer;
     transition: all var(--transition);
-    text-align: center;
+    text-align: left;
     font-family: var(--font-body);
-    font-weight: 700;
+    font-weight: 500;
     color: var(--text-muted);
+    border-radius: 2px;
     position: relative;
-    /* Arch top via clip-path */
-    clip-path: polygon(
-        0% 6%,
-        10% 2%,
-        50% 0%,
-        90% 2%,
-        100% 6%,
-        100% 100%,
-        0% 100%
-    );
+}
+
+.option-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transform: translateY(-50%);
+    transition: height var(--transition);
 }
 
 .option-btn:hover {
-    border-color: var(--rust-mid);
-    background: var(--sand-light);
-    color: var(--rust);
+    border-color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,169,110,0.06);
+    color: var(--text);
 }
+
+.option-btn:hover::before { height: 60%; }
 
 .option-btn.active {
-    background: var(--rust);
-    border-color: var(--rust);
-    color: var(--parchment);
+    border-color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,169,110,0.1);
+    color: var(--gold);
 }
 
-body.dark-mode .option-btn {
-    background: var(--chai-light);
-    border-color: var(--chai-light);
+.option-btn.active::before { height: 100%; }
+
+body:not(.dark-mode) .option-btn {
+    background: var(--paper-mid);
+    border-color: var(--paper-deep);
     color: var(--text-muted);
-}
-body.dark-mode .option-btn:hover {
-    background: var(--chai-mid);
-    border-color: var(--rust-mid);
-    color: var(--sand);
-}
-body.dark-mode .option-btn.active {
-    background: var(--rust);
-    border-color: var(--rust);
-    color: var(--parchment);
 }
 
 .option-size {
     display: block;
     font-size: 10px;
-    font-weight: 900;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: inherit;
@@ -653,8 +586,9 @@ body.dark-mode .option-btn.active {
 .option-price {
     display: block;
     font-family: var(--font-display);
+    font-style: italic;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 700;
     margin-top: 4px;
     color: inherit;
 }
@@ -665,42 +599,43 @@ body.dark-mode .option-btn.active {
 }
 
 .flavor-btn {
-    padding: 10px 10px;
-    border: 2px solid var(--parchment-deep);
-    background: var(--parchment-mid);
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    background: var(--card-bg);
     cursor: pointer;
     font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
     color: var(--text-muted);
     transition: all var(--transition);
-    clip-path: polygon(0% 6%, 10% 2%, 50% 0%, 90% 2%, 100% 6%, 100% 100%, 0% 100%);
+    border-radius: 2px;
 }
 
 .flavor-btn:hover {
-    border-color: var(--rust-mid);
-    background: var(--sand-light);
-    color: var(--rust);
+    border-color: var(--violet);
+    border-left-color: var(--violet);
+    color: var(--text);
+    background: rgba(123,79,142,0.08);
 }
 
 .flavor-btn.active {
-    background: var(--rust);
-    border-color: var(--rust);
-    color: var(--parchment);
+    border-color: var(--violet);
+    border-left-color: var(--violet);
+    background: rgba(123,79,142,0.12);
+    color: var(--violet-light);
 }
 
-body.dark-mode .flavor-btn { background: var(--chai-light); border-color: var(--chai-light); color: var(--text-muted); }
-body.dark-mode .flavor-btn:hover { border-color: var(--rust-mid); background: var(--chai-mid); color: var(--sand); }
-body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(--rust); color: var(--parchment); }
+body:not(.dark-mode) .flavor-btn { background: var(--paper-mid); border-color: var(--paper-deep); }
 
 /* CUSTOM MESSAGE */
 #customMessageInput {
     width: 100%;
     padding: 14px 16px;
-    border: 2px solid var(--parchment-deep);
-    background: var(--parchment-mid);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--violet);
+    background: var(--card-bg);
     color: var(--text);
     font-family: var(--font-body);
     font-size: 14px;
@@ -708,11 +643,12 @@ body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(-
     min-height: 80px;
     outline: none;
     transition: border-color var(--transition);
-    border-radius: 0;
+    border-radius: 2px;
+    font-style: italic;
 }
 
-#customMessageInput:focus { border-color: var(--rust); }
-#customMessageInput::placeholder { color: var(--text-faint); font-style: italic; }
+#customMessageInput:focus { border-color: var(--gold); border-left-color: var(--gold); }
+#customMessageInput::placeholder { color: var(--text-faint); }
 
 /* ============================================================
    STOCK STATUS
@@ -729,9 +665,9 @@ body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(-
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 16px;
-    background: transparent;
-    border: 1px solid rgba(61,107,42,0.3);
+    padding: 6px 14px;
+    border: 1px solid rgba(77,122,93,0.4);
+    border-radius: 2px;
     width: fit-content;
     margin-bottom: 0;
 }
@@ -739,44 +675,41 @@ body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(-
 .stock-status span {
     font-family: var(--font-body);
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--success);
 }
 
 .stock-dot {
-    width: 7px; height: 7px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
     background: var(--success);
-    border-radius: 0;
     animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 #watchVideoBtn {
     flex-shrink: 0;
-    padding: 7px 18px;
-    border: 1px solid var(--parchment-deep);
+    padding: 6px 16px;
+    border: 1px solid var(--border);
     background: transparent;
     color: var(--text-muted);
     font-family: var(--font-body);
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all var(--transition);
-    border-radius: 0;
+    border-radius: 2px;
 }
 
-#watchVideoBtn:hover { border-color: var(--rust); color: var(--rust); }
+#watchVideoBtn:hover { border-color: var(--gold); color: var(--gold); }
 
 /* ============================================================
-   ACTION BUTTONS — imperial proclamation style
+   ACTION BUTTONS — botanical apothecary jars
    ============================================================ */
 .action-buttons {
     display: flex;
@@ -791,41 +724,42 @@ body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(-
     flex-direction: column;
 }
 
-/* PRIMARY — deep rust filled */
 .btn-primary {
     width: 100%;
     padding: 18px 24px;
-    border: 2px solid var(--rust);
-    background: var(--rust);
-    color: var(--parchment);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     cursor: pointer;
     transition: all var(--transition);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 0;
+    border-radius: 2px;
     position: relative;
     overflow: hidden;
 }
 
-/* Sand shimmer sweep on hover */
+/* Fill sweep left to right */
 .btn-primary::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(245,236,215,0.2), transparent);
-    transition: left 0.4s ease;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
 }
 
-.btn-primary:hover::before { left: 150%; }
-.btn-primary:hover { background: var(--rust-mid); border-color: var(--rust-mid); }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { color: var(--ink); }
+.btn-primary > * { position: relative; z-index: 1; }
+.btn-primary span { position: relative; z-index: 1; }
 
 #addToCartBtn {
     width: 100%;
@@ -834,57 +768,63 @@ body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(-
     align-items: center;
 }
 
-/* SECONDARY — parchment with rust border */
 .btn-secondary {
-    flex: 1;
+    width: 100%;
     padding: 18px 24px;
-    border: 2px solid var(--rust);
+    border: 1px solid var(--violet);
     background: transparent;
-    color: var(--rust);
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    color: var(--violet-light);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     cursor: pointer;
     transition: all var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0;
-    width: 100%;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-secondary:hover {
-    background: var(--rust);
-    color: var(--parchment);
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--violet);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
 }
 
-/* QTY BAR — sandstone inlay */
+.btn-secondary:hover::before { transform: translateX(0); }
+.btn-secondary:hover { color: var(--paper); }
+.btn-secondary span { position: relative; z-index: 1; }
+
+/* QTY BAR — apothecary measure */
 #qtyBar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--parchment-mid);
-    padding: 10px 16px;
-    border: 2px solid var(--rust);
-}
-
-body.dark-mode #qtyBar {
-    background: var(--chai-mid);
-    border-color: var(--rust);
+    background: transparent;
+    padding: 8px 0;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    padding: 8px 16px;
 }
 
 .qty-btn {
-    width: 44px; height: 44px;
-    background: var(--rust);
-    border: none;
-    border-radius: 50% 50% 0 0;
+    width: 42px; height: 42px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--parchment);
+    color: var(--gold);
     cursor: pointer;
     font-size: 22px;
     font-weight: 300;
@@ -892,41 +832,39 @@ body.dark-mode #qtyBar {
     transition: all var(--transition);
 }
 
-.qty-btn:hover { background: var(--rust-mid); }
+.qty-btn:hover { background: var(--gold); color: var(--ink); }
 .qty-btn:active { opacity: 0.8; }
 
 .qty-display {
     flex: 1;
     text-align: center;
     font-family: var(--font-display);
-    font-size: 30px;
-    font-weight: 400;
-    color: var(--rust);
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
 }
 
 /* ============================================================
-   DESCRIPTION — proclamation scroll
+   DESCRIPTION — apothecary label
    ============================================================ */
 .description-section {
-    background: var(--parchment-mid);
-    border: 2px solid var(--rust);
-    border-top: 6px solid var(--rust);
-    padding: 28px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    padding: 24px;
     margin-top: 8px;
-}
-
-body.dark-mode .description-section {
-    background: var(--chai-mid);
-    border-color: var(--rust);
+    border-radius: 2px;
+    position: relative;
 }
 
 .description-title {
     font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 14px;
-    color: var(--rust);
-    letter-spacing: 0.04em;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--gold);
 }
 
 .description-content {
@@ -934,158 +872,120 @@ body.dark-mode .description-section {
     color: var(--text-muted);
     line-height: 1.9;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 /* ============================================================
-   RELATED SECTION — darbar announcement
+   RELATED SECTION — specimen catalog
    ============================================================ */
-.related-section { margin-top: 72px; }
+.related-section { margin-top: 80px; position: relative; }
 
 .section-title {
     font-family: var(--font-display);
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 400;
-    text-align: center;
-    color: var(--rust);
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    text-align: left;
+    color: var(--text);
     background: none;
     -webkit-text-fill-color: initial;
     -webkit-background-clip: initial;
-    margin-bottom: 8px;
-    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 16px;
 }
 
-.section-title::before { content: '☽'; color: var(--rust-mid); font-size: 20px; flex-shrink: 0; }
-.section-title::after  { content: '☾'; color: var(--rust-mid); font-size: 20px; flex-shrink: 0; }
-
-/* Sub-rule below title */
-.related-section::before {
-    content: '❖ ─── ❖ ─── ❖';
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: var(--rust-mid);
-    letter-spacing: 0.3em;
-    margin-bottom: 28px;
-    opacity: 0.7;
+/* Ghost catalog number */
+.section-title::before {
+    content: '08.';
+    font-size: 0.5em;
+    color: var(--gold);
+    opacity: 0.5;
+    font-weight: 400;
 }
 
 .related-grid {
     display: grid;
-    gap: 2px;
+    gap: 16px;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    background: var(--parchment-deep);
 }
 
 /* ============================================================
    STAR RATINGS SMALL
    ============================================================ */
 .product-rating-small {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    margin: 6px 0;
+    display: flex; align-items: center; gap: 3px; margin: 6px 0;
 }
+.product-rating-small .star-icon { width: 13px; height: 13px; }
+.product-rating-small .star-icon.full { fill: var(--gold); color: var(--gold); }
+.product-rating-small .star-icon.half { color: var(--gold); }
+.product-rating-small .star-icon.empty { stroke: var(--border); fill: none; }
+.rating-count { font-size: 11px; color: var(--text-faint); font-weight: 400; }
 
-.product-rating-small .star-icon { width: 14px; height: 14px; }
-.product-rating-small .star-icon.full { fill: var(--rust-mid); color: var(--rust-mid); }
-.product-rating-small .star-icon.half { color: var(--rust-mid); }
-.product-rating-small .star-icon.empty { stroke: var(--parchment-deep); fill: none; }
-body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--chai-light); }
-
-.rating-count {
-    font-size: 12px;
-    color: var(--text-faint);
-    font-weight: 400;
-}
-
-/* RELATED QTY */
 .related-grid .quantity-controls { padding: 3px 8px !important; gap: 0 !important; min-height: 32px !important; }
-.related-grid .qty-btn { width: 28px !important; height: 28px !important; font-size: 16px !important; border-radius: 50% 50% 0 0 !important; }
+.related-grid .qty-btn { width: 28px !important; height: 28px !important; font-size: 16px !important; border-radius: 50% !important; }
 .related-grid .qty-count { font-size: 13px !important; min-width: 20px !important; }
 
 /* ============================================================
-   IMAGE LOADING
+   IMAGE LOADING + ANIMATION
    ============================================================ */
 #mainImage, #discountBadge { opacity: 0; transition: opacity 0.3s ease; }
 #mainImage.loaded, #discountBadge.loaded { opacity: 1; }
 @keyframes slideIn { from { opacity: 0.5; } to { opacity: 1; } }
 .main-image.changing { animation: slideIn 0.22s ease; }
 
-/* ============================================================
-   IMAGE SCROLL FIX
-   ============================================================ */
-.main-image-container {
-    touch-action: pan-y !important;
-    overscroll-behavior: auto !important;
-}
-
-.main-image {
-    touch-action: pan-y !important;
-    pointer-events: none !important;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
+/* IMAGE SCROLL FIX */
+.main-image-container { touch-action: pan-y !important; overscroll-behavior: auto !important; }
+.main-image { touch-action: pan-y !important; pointer-events: none !important; user-select: none; -webkit-user-drag: none; }
 .main-image-container .wishlist-btn-detail,
 .main-image-container .slideshow-controls,
 .main-image-container .slide-btn,
-.main-image-container .discount-badge {
-    pointer-events: auto !important;
-}
+.main-image-container .discount-badge { pointer-events: auto !important; }
 
 /* ============================================================
-   RESPONSIVE — TABLET
+   RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
-    .product-main { grid-template-columns: 1fr; gap: 36px; }
+    .product-main { grid-template-columns: 1fr; gap: 40px; }
     .image-gallery { position: static; }
     .main-image-container { height: 460px; }
     .related-section { margin-top: 48px; }
+    .product-info::before { display: none; }
 }
 
-/* ============================================================
-   RESPONSIVE — MOBILE
-   ============================================================ */
 @media (max-width: 768px) {
     .container { padding: 20px 16px; }
-    .product-title { font-size: 26px; }
-    .current-price { font-size: 52px; }
+    .product-title { font-size: 28px; }
+    .current-price { font-size: 60px; }
     .main-image-container { height: 360px; }
-    .thumbnail { width: 72px; height: 64px; }
-    .slide-btn { width: 38px; height: 46px; font-size: 14px; }
+    .thumbnail { width: 72px; height: 66px; }
+    .slide-btn { width: 36px; height: 36px; font-size: 13px; }
     .star-icon { width: 15px; height: 15px; }
+    .slideshow-controls { bottom: 70px; }
 }
 
-/* ============================================================
-   RESPONSIVE — SMALL MOBILE
-   ============================================================ */
 @media (max-width: 480px) {
     .main-image-container { height: 300px; }
-    .thumbnail { width: 64px; height: 58px; }
-    .discount-badge { font-size: 10px; padding: 8px 12px 18px; }
-    .wishlist-btn-detail { width: 42px; height: 42px; }
+    .thumbnail { width: 66px; height: 60px; }
+    .discount-badge { width: 56px; height: 56px; font-size: 11px; top: 14px; right: 18px; }
+    .wishlist-btn-detail { width: 42px; height: 42px; top: 14px; left: 14px; }
+    .slideshow-controls { bottom: 64px; }
 }
 
-/* ============================================================
-   320px
-   ============================================================ */
 @media (max-width: 320px) {
     .container { padding: 10px 10px; }
     .main-image-container { height: 240px; }
-    .price-section { padding: 16px !important; margin-bottom: 14px !important; }
+    .price-section { margin-bottom: 14px !important; }
     .option-section { margin-bottom: 10px !important; }
     .action-buttons { gap: 8px !important; margin-bottom: 10px !important; }
     .btn-primary, .btn-secondary { padding: 14px !important; }
     .description-section { padding: 14px !important; }
 }
 
-/* ============================================================
-   RELATED GRID FULL BLEED MOBILE
-   ============================================================ */
 @media (min-width: 230px) and (max-width: 510px) {
     .related-grid {
         width: 100vw !important;
