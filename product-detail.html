@@ -2228,6 +2228,106 @@ body.dark-mode .video-modal-content {
     <script src="js/bottom-bar.js"></script>
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
+<!-- ============================================================
+     STICKY CTA BAR — Art Deco V6
+     PASTE THIS just before </body> in product-detail.html
+     After all existing <script> tags
+     ============================================================ -->
 
+<!-- 1. STICKY BAR HTML — paste just before the closing </body> tag -->
+<div class="sticky-cta-bar hidden" id="stickyCTABar">
+    <div class="sticky-product-info">
+        <span class="sticky-product-name" id="stickyProductName">Loading...</span>
+        <span class="sticky-product-price" id="stickyProductPrice">₹0</span>
+    </div>
+    <div class="sticky-actions">
+        <button class="sticky-add-btn" id="stickyAddToCartBtn">Add to Cart</button>
+        <button class="sticky-buy-btn" id="stickyBuyNowBtn">Buy Now →</button>
+    </div>
+</div>
+
+<!-- 2. STANDALONE STICKY JS — paste after the HTML above -->
+<script>
+(function () {
+    'use strict';
+
+    const bar       = document.getElementById('stickyCTABar');
+    const ctaWrap   = document.getElementById('addToCartBtn');   // the real Add to Cart
+    const qtyBar    = document.getElementById('qtyBar');
+
+    // Mirror product name + price into sticky bar
+    function syncStickyInfo() {
+        const name  = document.getElementById('productTitle');
+        const price = document.getElementById('currentPrice');
+        const sName  = document.getElementById('stickyProductName');
+        const sPrice = document.getElementById('stickyProductPrice');
+        if (name  && sName)  sName.textContent  = name.textContent  || 'Product';
+        if (price && sPrice) sPrice.textContent = price.textContent || '₹0';
+    }
+
+    // Watch the real action buttons area
+    // When they are visible → hide sticky bar
+    // When they scroll out → show sticky bar
+    function initObserver() {
+        const target = document.querySelector('.action-buttons');
+        if (!target || !bar) return;
+
+        const observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        // Real buttons visible — hide sticky bar
+                        bar.classList.add('hidden');
+                    } else {
+                        // Real buttons out of view — show sticky bar
+                        bar.classList.remove('hidden');
+                    }
+                });
+            },
+            {
+                threshold: 0.3   // trigger when 30% of buttons visible
+            }
+        );
+
+        observer.observe(target);
+    }
+
+    // Sticky Add to Cart — delegates to real button
+    document.getElementById('stickyAddToCartBtn')?.addEventListener('click', function () {
+        const realAdd = document.getElementById('addToCartBtn');
+        if (realAdd) realAdd.click();
+    });
+
+    // Sticky Buy Now — delegates to real button
+    document.getElementById('stickyBuyNowBtn')?.addEventListener('click', function () {
+        const realBuy = document.getElementById('buyNowBtn');
+        if (realBuy) realBuy.click();
+    });
+
+    // Init when DOM + product data ready
+    function init() {
+        syncStickyInfo();
+        initObserver();
+
+        // Re-sync when product loads (price/title set by product-detail-script.js)
+        // Watch for changes on the title element
+        const titleEl = document.getElementById('productTitle');
+        const priceEl = document.getElementById('currentPrice');
+
+        if (titleEl) {
+            new MutationObserver(syncStickyInfo).observe(titleEl, { childList: true, subtree: true, characterData: true });
+        }
+        if (priceEl) {
+            new MutationObserver(syncStickyInfo).observe(priceEl, { childList: true, subtree: true, characterData: true });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 </body>
 </html>
