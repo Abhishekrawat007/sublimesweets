@@ -2445,20 +2445,21 @@ body {
         var target = document.querySelector('.action-buttons');
         if (!target) return;
 
-        var doneForever = false;
-
         function updateBar() {
-            if (doneForever) return;
             var rect = target.getBoundingClientRect();
+            // buttons are anywhere on screen
             var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-            var isAbove   = rect.bottom < 0;
+            // buttons are strictly above viewport (scrolled past going down)
+            var isAbove = rect.bottom < 0;
 
-            if (isAbove) {
+            if (isVisible) {
+                // on screen — hide sticky
                 bar.classList.add('hidden');
-                doneForever = true;
-            } else if (isVisible) {
+            } else if (isAbove) {
+                // scrolled past going down — hide sticky
                 bar.classList.add('hidden');
             } else {
+                // below viewport (not reached) OR scrolled back up above them — show sticky
                 bar.classList.remove('hidden');
             }
         }
