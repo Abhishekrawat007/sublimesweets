@@ -1839,97 +1839,6 @@ body.dark-mode .video-modal-content {
 </style>
 
 
-<!-- Categories Modal -->
-<div class="categories-modal-overlay" id="categoriesModalOverlay"></div>
-<div class="categories-modal" id="categoriesModal">
-  <div class="modal-handle"></div>
-
-  <div class="modal-header">
-    <h2>Shop by Category</h2>
-    <button class="modal-close-btn" id="closeCategoriesModal" onclick="closeCategoriesModal()">
-      <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-  </div>
-
-  <div class="modal-content">
-    <div class="categories-modal-grid">
-      <!-- Mithai -->
-      <a href="/mithai.html" class="category-modal-item" onclick="setActiveCategory('mithai')">
-        <div class="category-modal-image">
-          <img src="images/gpt4.webp" alt="Mithai">
-        </div>
-        <span class="category-modal-name">Mithai</span>
-      </a>
-
-      <!-- Snacks -->
-      <a href="/snacks.webp" class="category-modal-item" onclick="setActiveCategory('snacks')">
-        <div class="category-modal-image">
-          <img src="images/gpt2.webp" alt="Snacks">
-        </div>
-        <span class="category-modal-name">Snacks</span>
-      </a>
-
-      <!-- Dairy -->
-      <a href="/dairy.html" class="category-modal-item" onclick="setActiveCategory('dairy')">
-        <div class="category-modal-image">
-          <img src="images/dairy.webp" alt="Dairy">
-        </div>
-        <span class="category-modal-name">Dairy</span>
-      </a>
-
-      <!-- Street Foods -->
-      <a href="/streetfood.html" class="category-modal-item" onclick="setActiveCategory('streetfood')">
-        <div class="category-modal-image">
-          <img src="images/gpt3.webp" alt="Street Food">
-        </div>
-        <span class="category-modal-name">Street Foods</span>
-      </a>
-
-      <!-- Main Course -->
-      <a href="/maincourse.html" class="category-modal-item" onclick="setActiveCategory('maincourse')">
-        <div class="category-modal-image">
-          <img src="images/gpt1.webp" alt="Main Course">
-        </div>
-        <span class="category-modal-name">Main Course</span>
-      </a>
-
-      <!-- Dry Fruits -->
-      <a href="/dryfruits.html" class="category-modal-item" onclick="setActiveCategory('dryfruits')">
-        <div class="category-modal-image">
-          <img src="images/dryfruits.webp" alt="Dry Fruits">
-        </div>
-        <span class="category-modal-name">Dry Fruits</span>
-      </a>
-
-      <!-- Cakes -->
-      <a href="/cakes.html" class="category-modal-item" onclick="setActiveCategory('cakes')">
-        <div class="category-modal-image">
-          <img src="images/gpt8.webp" alt="Cakes">
-        </div>
-        <span class="category-modal-name">Cakes</span>
-      </a>
-
-      <!-- Pastries -->
-      <a href="/pastry.html" class="category-modal-item" onclick="setActiveCategory('pastries')">
-        <div class="category-modal-image">
-          <img src="images/gpt6.webp" alt="Pastries">
-        </div>
-        <span class="category-modal-name">Pastries</span>
-      </a>
-
-      <!-- Ice Cream -->
-      <a href="/icecreams.html" class="category-modal-item" onclick="setActiveCategory('icecreams')">
-        <div class="category-modal-image">
-          <img src="images/Butterscotch-Ice-Cream-8.webp" alt="Ice Cream">
-        </div>
-        <span class="category-modal-name">Ice Creams</span>
-      </a>
-    </div>
-  </div>
-</div>
 
 <!-- BOTTOM-BAR END -->
 <!-- FOOTER START -->
@@ -2157,8 +2066,8 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 
-      <!-- ============================================================
-     STICKY CTA BAR — V8 RAAT KI RANI BOTANICAL
+  <!-- ============================================================
+     STICKY CTA BAR — V9 CHANDI BAZAAR
      Paste just before </body>, after all existing script tags
      ============================================================ -->
 
@@ -2169,48 +2078,36 @@ body.dark-mode .video-modal-content {
     </div>
     <div class="sticky-actions">
         <button class="sticky-add-btn" id="stickyAddToCartBtn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
-            <span id="stickyAddLabel">Add to Cart</span>
+            <span id="stickyAddLabel">ADD TO CART</span>
         </button>
         <button class="sticky-buy-btn" id="stickyBuyNowBtn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM11 6l6 6-6 6 1.41 1.41L19.83 12 12.41 4.59z"/>
-            </svg>
-            <span>Buy Now</span>
+            <span>BUY NOW</span>
         </button>
     </div>
 </div>
 
 <style>
 html, body { overflow-x: hidden !important; max-width: 100% !important; }
-body { padding-bottom: 72px !important; }
+body { padding-bottom: 68px !important; }
 
 .sticky-cta-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     width: 100%; box-sizing: border-box;
     z-index: 900;
-    background: #0A0A12;
-    border-top: 2px solid #C9A96E;
+    background: #1A1A1A;
+    border-top: 4px solid #E8D42E;
     padding: 10px 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 14px;
-    height: 72px;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
-}
-
-/* Subtle violet left glow */
-.sticky-cta-bar::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, #7B4F8E, transparent);
+    height: 68px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .sticky-cta-bar.hidden {
@@ -2221,105 +2118,80 @@ body { padding-bottom: 72px !important; }
 
 .sticky-product-info {
     flex: 1; min-width: 0; overflow: hidden;
-    display: flex; flex-direction: column; gap: 2px;
+    display: flex; flex-direction: column; gap: 1px;
 }
 
 .sticky-product-name {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: #A89878;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #888888;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .sticky-product-price {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 22px; font-weight: 700;
-    color: #C9A96E; line-height: 1;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; font-weight: 400;
+    color: #E8D42E; line-height: 1;
+    letter-spacing: 0.04em;
 }
 
 .sticky-actions {
     display: flex; flex-direction: row;
-    gap: 10px; flex-shrink: 0;
+    gap: 8px; flex-shrink: 0;
 }
 
-/* ADD TO CART — gold outline with fill sweep */
 .sticky-add-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 7px; padding: 0 20px; height: 50px;
-    border: 1px solid #C9A96E;
-    background: transparent; color: #C9A96E;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.04em;
+    gap: 8px; padding: 0 20px; height: 48px;
+    border: 2px solid #E8D42E;
+    background: transparent; color: #E8D42E;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 0.1em;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.25s, color 0.25s;
-    border-radius: 2px; box-sizing: border-box;
-    position: relative; overflow: hidden;
+    transition: background 0.15s, color 0.15s;
+    border-radius: 0; box-sizing: border-box;
 }
 
-.sticky-add-btn::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: #C9A96E;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    z-index: 0;
-}
-.sticky-add-btn:hover::before { transform: translateX(0); }
-.sticky-add-btn:hover { color: #0A0A12; }
-.sticky-add-btn svg, .sticky-add-btn span { position: relative; z-index: 1; }
+.sticky-add-btn:hover { background: #E8D42E; color: #1A1A1A; }
 
 .sticky-add-btn.in-cart {
-    border-color: #4D7A5D;
-    color: #4D7A5D;
+    border-color: #1A7A3A;
+    color: #1A7A3A;
 }
-.sticky-add-btn.in-cart::before { background: #4D7A5D; }
-.sticky-add-btn.in-cart:hover { color: #0A0A12; }
+.sticky-add-btn.in-cart:hover { background: #1A7A3A; color: #fff; }
 
-/* BUY NOW — violet fill sweep */
 .sticky-buy-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 7px; padding: 0 20px; height: 50px;
-    border: 1px solid #7B4F8E;
-    background: #7B4F8E; color: #F0E6D3;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 13px; font-weight: 700;
-    letter-spacing: 0.04em;
+    gap: 8px; padding: 0 20px; height: 48px;
+    border: 2px solid #D42B2B;
+    background: #D42B2B; color: #ffffff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; letter-spacing: 0.1em;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.18s, border-color 0.18s;
-    border-radius: 2px; box-sizing: border-box;
+    transition: background 0.15s, border-color 0.15s;
+    border-radius: 0; box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover { background: #9B6FAE; border-color: #9B6FAE; }
+.sticky-buy-btn:hover { background: #B01E1E; border-color: #B01E1E; }
 
-/* ── MOBILE ≤520px ── */
 @media (max-width: 520px) {
-    .sticky-cta-bar { padding: 0; gap: 0; height: 58px; }
+    .sticky-cta-bar { padding: 0; gap: 0; height: 56px; }
     .sticky-product-info { display: none; }
     .sticky-actions { width: 100%; height: 100%; gap: 0; }
-
     .sticky-add-btn, .sticky-buy-btn {
         flex: 1; width: 0; height: 100%;
-        padding: 0 10px; font-size: 11px;
+        padding: 0 10px; font-size: 18px !important;
         border-top: none; border-bottom: none; border-radius: 0;
     }
-
-    .sticky-add-btn {
-        border-left: none;
-        border-right: 1px solid rgba(201,169,110,0.3);
-    }
-    .sticky-buy-btn { border-right: none; }
+    .sticky-add-btn { border-left: none; border-right: 2px solid #E8D42E; }
+    .sticky-buy-btn { border-right: none; border-left: none; }
 }
 </style>
 
 <script>
 (function () {
     'use strict';
-
     var bar     = document.getElementById('stickyCTABar');
     var sLabel  = document.getElementById('stickyAddLabel');
     var sAddBtn = document.getElementById('stickyAddToCartBtn');
@@ -2340,7 +2212,7 @@ body { padding-bottom: 72px !important; }
         if (!qb || !sLabel || !sAddBtn) return;
         function updateState() {
             var inCart = qb.style.display !== 'none' && qb.style.display !== '';
-            sLabel.textContent = inCart ? 'Go to Cart' : 'Add to Cart';
+            sLabel.textContent = inCart ? 'GO TO CART' : 'ADD TO CART';
             sAddBtn.classList.toggle('in-cart', inCart);
         }
         new MutationObserver(updateState).observe(qb, { attributes: true, attributeFilter: ['style'] });
@@ -2350,18 +2222,13 @@ body { padding-bottom: 72px !important; }
     function initScroll() {
         var target = document.querySelector('.action-buttons');
         if (!target) return;
-
         function updateBar() {
             var rect = target.getBoundingClientRect();
             var isVisible = rect.top < window.innerHeight && rect.bottom > 0;
             var isAbove   = rect.bottom < 0;
-            if (isVisible || isAbove) {
-                bar.classList.add('hidden');
-            } else {
-                bar.classList.remove('hidden');
-            }
+            if (isVisible || isAbove) { bar.classList.add('hidden'); }
+            else { bar.classList.remove('hidden'); }
         }
-
         window.addEventListener('scroll', updateBar, { passive: true });
         updateBar();
     }
@@ -2392,10 +2259,8 @@ body { padding-bottom: 72px !important; }
     }
 
     function init() { sync(); initScroll(); watchQtyBar(); watchDOM(); }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else { init(); }
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+    else { init(); }
 })();
 </script>
 </body>
