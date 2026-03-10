@@ -263,7 +263,10 @@ body > * { position: relative; z-index: 1; }
 .wishlist-btn-detail svg { width: 19px; height: 19px; stroke: var(--gold); fill: none; transition: all 0.2s; }
 .wishlist-btn-detail svg path { fill: none; stroke: var(--gold); transition: fill 0.2s, stroke 0.2s; }
 .wishlist-btn-detail.saved { background: var(--violet); }
-.wishlist-btn-detail.saved svg path { fill: var(--paper); stroke: var(--paper); }
+.wishlist-btn-detail.saved svg path {
+    fill: #E53935 !important;
+    stroke: #E53935 !important;
+}
 
 body:not(.dark-mode) .wishlist-btn-detail { background: rgba(240,230,211,0.85); }
 
@@ -800,8 +803,12 @@ body:not(.dark-mode) .flavor-btn { background: var(--paper-mid); border-color: v
 }
 
 .btn-secondary:hover::before { transform: translateX(0); }
-.btn-secondary:hover { color: var(--paper); }
+.btn-secondary:hover { color: blue; }
 .btn-secondary span { position: relative; z-index: 1; }
+
+.btn-secondary::before {
+    display: none !important;
+}
 
 /* QTY BAR — apothecary measure */
 #qtyBar {
@@ -996,3 +1003,12 @@ body:not(.dark-mode) .flavor-btn { background: var(--paper-mid); border-color: v
     }
     .related-section { padding: 0 !important; margin-top: 32px !important; overflow: visible !important; }
 }
+.slide-btn {
+    z-index: 7 !important;
+}
+
+    .main-image-wrapper::before,
+    .main-image-wrapper::after {
+        display: none;
+    }
+    
