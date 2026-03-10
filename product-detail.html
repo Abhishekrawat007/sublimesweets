@@ -2157,9 +2157,9 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 <!-- ============================================================
-     STICKY CTA BAR — FINAL FIXED VERSION
-     Paste this entire block at the bottom of product-detail.html
-     just before </body>, replacing the old sticky snippet
+     STICKY CTA BAR — ALL FIXES INCLUDED
+     Replace entire old sticky snippet with this
+     Paste just before </body>
      ============================================================ -->
 
 <div class="sticky-cta-bar hidden" id="stickyCTABar">
@@ -2174,7 +2174,7 @@ body.dark-mode .video-modal-content {
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
-            <span>Add to Cart</span>
+            <span id="stickyAddLabel">Add to Cart</span>
         </button>
         <button class="sticky-buy-btn" id="stickyBuyNowBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
@@ -2186,22 +2186,21 @@ body.dark-mode .video-modal-content {
 </div>
 
 <style>
-/* ============================================================
-   OVERFLOW FIX — prevents navbar horizontal scroll
-   ============================================================ */
+/* ── PREVENT HORIZONTAL SCROLL ─────────────────── */
 html, body {
     overflow-x: hidden !important;
     max-width: 100% !important;
 }
 
-/* ============================================================
-   FIX: action-buttons must ALWAYS be a row, never column
-   This overrides the media query in the original CSS
-   ============================================================ */
+body {
+    padding-bottom: 72px !important;
+}
+
+/* ── FIX: action-buttons always a row ───────────── */
 .action-buttons {
     display: flex !important;
-    flex-direction: row !important;   /* FORCE row — never column */
-    gap: 10px !important;
+    flex-direction: row !important;
+    gap: 12px !important;
     margin-bottom: 28px !important;
     align-items: stretch !important;
 }
@@ -2213,27 +2212,40 @@ html, body {
     flex-direction: column !important;
 }
 
+/* Add to Cart full width, JS can still hide it — no display !important */
 #addToCartBtn {
     width: 100% !important;
-    display: flex !important;
     justify-content: center !important;
     align-items: center !important;
+    box-sizing: border-box !important;
 }
 
+/* Buy Now — flex:1 takes equal space, align-self stretch
+   so it matches Add to Cart height always */
 #buyNowBtn {
     flex: 1 !important;
     min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 
-/* ============================================================
-   STICKY BAR — fixed, never causes overflow
-   ============================================================ */
+/* Equal height for both buttons */
+#addToCartBtn, #buyNowBtn {
+    min-height: 56px !important;
+}
+
+/* Qty bar same height as the button so Buy Now never stretches */
+#qtyBar {
+    min-height: 56px !important;
+    box-sizing: border-box !important;
+}
+
+/* ── STICKY BAR ─────────────────────────────────── */
 .sticky-cta-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    width: 100%;           /* explicit width, no overflow */
+    width: 100%;
     box-sizing: border-box;
     z-index: 900;
     background: var(--noir, #1C1710);
@@ -2243,7 +2255,7 @@ html, body {
     flex-direction: row;
     align-items: center;
     gap: 12px;
-    height: 68px;
+    height: 70px;
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
 }
 
@@ -2253,19 +2265,18 @@ html, body {
     pointer-events: none;
 }
 
-/* ── Left: product info ── */
 .sticky-product-info {
     flex: 1;
     min-width: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    overflow: hidden;
+    gap: 2px;
 }
 
 .sticky-product-name {
     font-family: 'Cinzel', serif;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -2277,66 +2288,34 @@ html, body {
 
 .sticky-product-price {
     font-family: 'Cinzel', serif;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
     color: #E8CC6A;
-    letter-spacing: 0.03em;
     line-height: 1;
 }
 
-/* ── Right: action buttons — ALWAYS a row ── */
 .sticky-actions {
     display: flex;
-    flex-direction: row;     /* always row */
-    gap: 0;
+    flex-direction: row;
+    gap: 10px;
     flex-shrink: 0;
 }
 
-/* ADD TO CART */
+/* ADD TO CART — outline, no yellow fill on click */
 .sticky-add-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 7px;
     padding: 0 20px;
-    height: 46px;
+    height: 48px;
     border: 2px solid var(--gold, #D4AF37);
-    border-right: none;      /* merged border with buy now */
     background: transparent;
     color: var(--gold, #D4AF37);
     font-family: 'Cinzel', serif;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.18s, color 0.18s;
-    border-radius: 0;
-    box-sizing: border-box;
-}
-
-.sticky-add-btn:hover,
-.sticky-add-btn:active {
-    background: var(--gold, #D4AF37);
-    color: var(--noir, #1C1710);
-}
-
-/* BUY NOW */
-.sticky-buy-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 0 20px;
-    height: 46px;
-    border: 2px solid var(--gold, #D4AF37);
-    background: var(--gold, #D4AF37);
-    color: var(--noir, #1C1710);
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
@@ -2345,51 +2324,77 @@ html, body {
     box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover,
-.sticky-buy-btn:active {
-    background: #E8CC6A;
-    border-color: #E8CC6A;
+.sticky-add-btn:hover { background: rgba(212,175,55,0.12); }
+
+/* Go to Cart state — green */
+.sticky-add-btn.in-cart {
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+.sticky-add-btn.in-cart:hover { background: rgba(76,175,80,0.1); }
+
+/* BUY NOW */
+.sticky-buy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 20px;
+    height: 48px;
+    border: 2px solid var(--gold, #D4AF37);
+    background: var(--gold, #D4AF37);
+    color: var(--noir, #1C1710);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s;
+    border-radius: 0;
+    box-sizing: border-box;
 }
 
-/* ── MOBILE: product info hides, buttons go 50/50 ── */
+.sticky-buy-btn:hover { background: #E8CC6A; border-color: #E8CC6A; }
+
+/* ── MOBILE ≤520px ── */
 @media (max-width: 520px) {
     .sticky-cta-bar {
-        padding: 10px 0;
+        padding: 0;
         gap: 0;
+        height: 56px;
     }
 
-    .sticky-product-info {
-        display: none;  /* hide name/price, give all space to buttons */
-    }
+    .sticky-product-info { display: none; }
 
     .sticky-actions {
         width: 100%;
-        flex: 1;
+        height: 100%;
+        gap: 0;
     }
 
     .sticky-add-btn,
     .sticky-buy-btn {
-        flex: 1;         /* true 50% each */
-        width: 0;        /* flex basis 0 so content doesn't bias size */
-        padding: 0 8px;
-        font-size: 9px;
-        height: 48px;
-        letter-spacing: 0.08em;
+        flex: 1;
+        width: 0;
+        height: 100%;
+        padding: 0 10px;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        border-top: none;
+        border-bottom: none;
     }
 
     .sticky-add-btn {
-        border-right: 1px solid rgba(212,175,55,0.4);
         border-left: none;
-        border-bottom: none;
+        border-right: 1px solid rgba(212,175,55,0.35);
     }
 
-    .sticky-buy-btn {
-        border-right: none;
-        border-bottom: none;
-    }
+    .sticky-buy-btn { border-right: none; }
 }
 
-/* ── IMAGE SCROLL FIX ── */
+/* ── IMAGE SCROLL FIX ───────────────────────────── */
 .main-image-container {
     touch-action: pan-y !important;
     overscroll-behavior: auto !important;
@@ -2408,82 +2413,94 @@ html, body {
 .main-image-container .discount-badge {
     pointer-events: auto !important;
 }
-
-/* ── body padding so content doesn't hide behind sticky bar ── */
-body {
-    padding-bottom: 72px !important;
-}
 </style>
 
 <script>
 (function () {
     'use strict';
 
-    var bar = document.getElementById('stickyCTABar');
+    var bar     = document.getElementById('stickyCTABar');
+    var sLabel  = document.getElementById('stickyAddLabel');
+    var sAddBtn = document.getElementById('stickyAddToCartBtn');
+    var sBuyBtn = document.getElementById('stickyBuyNowBtn');
     if (!bar) return;
 
-    /* sync product title + price into sticky bar */
     function sync() {
-        var n = document.getElementById('productTitle');
-        var p = document.getElementById('currentPrice');
+        var n  = document.getElementById('productTitle');
+        var p  = document.getElementById('currentPrice');
         var sn = document.getElementById('stickyProductName');
         var sp = document.getElementById('stickyProductPrice');
-        if (n && sn && n.textContent.trim()) sn.textContent = n.textContent.trim();
-        if (p && sp && p.textContent.trim()) sp.textContent = p.textContent.trim();
+        if (n && sn && n.textContent.trim())  sn.textContent = n.textContent.trim();
+        if (p && sp && p.textContent.trim())  sp.textContent = p.textContent.trim();
     }
 
-    /* show/hide sticky bar based on real buttons visibility */
+    /* watch qty bar display — if visible, product is in cart */
+    function watchQtyBar() {
+        var qb = document.getElementById('qtyBar');
+        if (!qb || !sLabel || !sAddBtn) return;
+
+        function updateState() {
+            var inCart = qb.style.display !== 'none' && qb.style.display !== '';
+            if (inCart) {
+                sLabel.textContent = 'Go to Cart';
+                sAddBtn.classList.add('in-cart');
+            } else {
+                sLabel.textContent = 'Add to Cart';
+                sAddBtn.classList.remove('in-cart');
+            }
+        }
+
+        new MutationObserver(updateState).observe(qb, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+
+        updateState(); /* run once on init */
+    }
+
     function initObserver() {
         var target = document.querySelector('.action-buttons');
         if (!target) return;
-        var io = new IntersectionObserver(function(entries) {
+        new IntersectionObserver(function(entries) {
             entries.forEach(function(e) {
-                if (e.isIntersecting) {
-                    bar.classList.add('hidden');
-                } else {
-                    bar.classList.remove('hidden');
-                }
+                bar.classList.toggle('hidden', e.isIntersecting);
             });
-        }, { threshold: 0.2 });
-        io.observe(target);
+        }, { threshold: 0.2 }).observe(target);
     }
 
-    /* sticky add to cart delegates to real button */
-    var sAdd = document.getElementById('stickyAddToCartBtn');
-    if (sAdd) {
-        sAdd.addEventListener('click', function() {
+    if (sAddBtn) {
+        sAddBtn.addEventListener('click', function() {
             var qb = document.getElementById('qtyBar');
-            var ab = document.getElementById('addToCartBtn');
-            if (qb && qb.style.display !== 'none') {
-                qb.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else if (ab) {
-                ab.click();
+            var inCart = qb && qb.style.display !== 'none' && qb.style.display !== '';
+            if (inCart) {
+                window.location.href = 'cart.html';
+            } else {
+                var ab = document.getElementById('addToCartBtn');
+                if (ab) ab.click();
             }
         });
     }
 
-    /* sticky buy now delegates to real button */
-    var sBuy = document.getElementById('stickyBuyNowBtn');
-    if (sBuy) {
-        sBuy.addEventListener('click', function() {
+    if (sBuyBtn) {
+        sBuyBtn.addEventListener('click', function() {
             var rb = document.getElementById('buyNowBtn');
             if (rb) rb.click();
         });
     }
 
-    /* watch for product data to load and update sticky info */
     function watchDOM() {
-        var mo = new MutationObserver(sync);
-        var opts = { childList: true, subtree: true, characterData: true };
-        var t = document.getElementById('productTitle');
-        var p = document.getElementById('currentPrice');
-        if (t) mo.observe(t, opts);
-        if (p) mo.observe(p, opts);
+        var mo  = new MutationObserver(sync);
+        var opt = { childList: true, subtree: true, characterData: true };
+        var t   = document.getElementById('productTitle');
+        var p   = document.getElementById('currentPrice');
+        if (t) mo.observe(t, opt);
+        if (p) mo.observe(p, opt);
     }
 
     function init() {
         sync();
         initObserver();
+        watchQtyBar();
         watchDOM();
     }
 
