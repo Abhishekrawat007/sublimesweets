@@ -1339,4 +1339,5 @@ body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--text-faint
    TOUCH + SCROLL
    ============================================================ */
 .main-image-container * { -webkit-tap-highlight-color: transparent; }
-.main-image-container { overscroll-behavior-y: contain; touch-action: auto !important; }
+
+.main-image { pointer-events: none !important; touch-action: pan-y !important; }
