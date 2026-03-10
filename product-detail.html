@@ -2157,55 +2157,93 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 <!-- ============================================================
-     STICKY CTA BAR — Art Deco V6 FIXED
-     - Meesho-style cart + arrow icons on buttons
-     - Image scroll fix included
-     PASTE just before </body>, after all existing <script> tags
+     STICKY CTA BAR — FINAL FIXED VERSION
+     Paste this entire block at the bottom of product-detail.html
+     just before </body>, replacing the old sticky snippet
      ============================================================ -->
 
-<!-- STICKY BAR HTML -->
 <div class="sticky-cta-bar hidden" id="stickyCTABar">
     <div class="sticky-product-info">
         <span class="sticky-product-name" id="stickyProductName">Loading...</span>
         <span class="sticky-product-price" id="stickyProductPrice">₹0</span>
     </div>
     <div class="sticky-actions">
-        <!-- Add to Cart — cart icon like Meesho -->
         <button class="sticky-add-btn" id="stickyAddToCartBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
-            Add to Cart
+            <span>Add to Cart</span>
         </button>
-        <!-- Buy Now — double arrow like Meesho -->
         <button class="sticky-buy-btn" id="stickyBuyNowBtn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                 <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM11 6l6 6-6 6 1.41 1.41L19.83 12 12.41 4.59z"/>
             </svg>
-            Buy Now
+            <span>Buy Now</span>
         </button>
     </div>
 </div>
 
 <style>
-/* ── STICKY BAR LAYOUT ───────────────────────────── */
+/* ============================================================
+   OVERFLOW FIX — prevents navbar horizontal scroll
+   ============================================================ */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+
+/* ============================================================
+   FIX: action-buttons must ALWAYS be a row, never column
+   This overrides the media query in the original CSS
+   ============================================================ */
+.action-buttons {
+    display: flex !important;
+    flex-direction: row !important;   /* FORCE row — never column */
+    gap: 10px !important;
+    margin-bottom: 28px !important;
+    align-items: stretch !important;
+}
+
+.add-wrapper {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#addToCartBtn {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+#buyNowBtn {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+/* ============================================================
+   STICKY BAR — fixed, never causes overflow
+   ============================================================ */
 .sticky-cta-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    width: 100%;           /* explicit width, no overflow */
+    box-sizing: border-box;
     z-index: 900;
     background: var(--noir, #1C1710);
     border-top: 2px solid var(--gold, #D4AF37);
     padding: 10px 16px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 12px;
     height: 68px;
-    outline: 1px solid rgba(212,175,55,0.25);
-    outline-offset: -5px;
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
 }
 
@@ -2215,13 +2253,14 @@ body.dark-mode .video-modal-content {
     pointer-events: none;
 }
 
-/* Product mini info */
+/* ── Left: product info ── */
 .sticky-product-info {
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 1px;
+    overflow: hidden;
 }
 
 .sticky-product-name {
@@ -2245,144 +2284,134 @@ body.dark-mode .video-modal-content {
     line-height: 1;
 }
 
-/* Actions row */
+/* ── Right: action buttons — ALWAYS a row ── */
 .sticky-actions {
     display: flex;
-    gap: 10px;
+    flex-direction: row;     /* always row */
+    gap: 0;
     flex-shrink: 0;
 }
 
-/* ADD TO CART — outline gold, cart icon */
+/* ADD TO CART */
 .sticky-add-btn {
     display: flex;
     align-items: center;
-    gap: 7px;
-    padding: 11px 18px;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 20px;
+    height: 46px;
     border: 2px solid var(--gold, #D4AF37);
+    border-right: none;      /* merged border with buy now */
     background: transparent;
     color: var(--gold, #D4AF37);
     font-family: 'Cinzel', serif;
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.18s, color 0.18s;
-    outline: 1px solid var(--gold, #D4AF37);
-    outline-offset: -5px;
     border-radius: 0;
+    box-sizing: border-box;
 }
 
-.sticky-add-btn:hover {
+.sticky-add-btn:hover,
+.sticky-add-btn:active {
     background: var(--gold, #D4AF37);
     color: var(--noir, #1C1710);
 }
 
-.sticky-add-btn svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-}
-
-/* BUY NOW — filled gold, double arrow icon */
+/* BUY NOW */
 .sticky-buy-btn {
     display: flex;
     align-items: center;
-    gap: 7px;
-    padding: 11px 18px;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 20px;
+    height: 46px;
     border: 2px solid var(--gold, #D4AF37);
     background: var(--gold, #D4AF37);
     color: var(--noir, #1C1710);
     font-family: 'Cinzel', serif;
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
-    transition: background 0.18s, border-color 0.18s;
-    outline: 1px solid rgba(28,23,16,0.3);
-    outline-offset: -5px;
+    transition: background 0.18s;
     border-radius: 0;
+    box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover {
+.sticky-buy-btn:hover,
+.sticky-buy-btn:active {
     background: #E8CC6A;
     border-color: #E8CC6A;
 }
 
-.sticky-buy-btn svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-}
+/* ── MOBILE: product info hides, buttons go 50/50 ── */
+@media (max-width: 520px) {
+    .sticky-cta-bar {
+        padding: 10px 0;
+        gap: 0;
+    }
 
-/* Mobile — true 50/50 split */
-@media (max-width: 480px) {
-    .sticky-product-info { display: none; }
-
-    .sticky-cta-bar { padding: 10px 12px; gap: 0; }
+    .sticky-product-info {
+        display: none;  /* hide name/price, give all space to buttons */
+    }
 
     .sticky-actions {
         width: 100%;
-        gap: 0;
-        display: flex;
+        flex: 1;
     }
 
     .sticky-add-btn,
     .sticky-buy-btn {
-        flex: 1;
-        width: 0;        /* prevents text from stretching button beyond 50% */
-        min-width: 0;
-        justify-content: center;
-        padding: 13px 6px;
+        flex: 1;         /* true 50% each */
+        width: 0;        /* flex basis 0 so content doesn't bias size */
+        padding: 0 8px;
         font-size: 9px;
+        height: 48px;
         letter-spacing: 0.08em;
-        white-space: nowrap;
-        overflow: hidden;
-        gap: 5px;
     }
 
     .sticky-add-btn {
-        border-right: 1px solid rgba(212,175,55,0.3); /* divider between */
+        border-right: 1px solid rgba(212,175,55,0.4);
+        border-left: none;
+        border-bottom: none;
+    }
+
+    .sticky-buy-btn {
+        border-right: none;
+        border-bottom: none;
     }
 }
 
-@media (max-width: 340px) {
-    /* tiny screens — icon only */
-    .sticky-add-btn svg,
-    .sticky-buy-btn svg { width: 20px; height: 20px; }
-}
-
-/* ── IMAGE SCROLL FIX ───────────────────────────── */
-/*
-   THE FIX: remove pointer-events block and let touch
-   pass through the image container naturally.
-   The image should NEVER block page scroll.
-*/
+/* ── IMAGE SCROLL FIX ── */
 .main-image-container {
-    /* Allow native scroll to pass through */
-    touch-action: pan-y !important;      /* vertical scroll always works */
+    touch-action: pan-y !important;
     overscroll-behavior: auto !important;
-    -webkit-overflow-scrolling: auto !important;
-    pointer-events: auto;
 }
 
 .main-image {
-    /* Image itself must not capture scroll */
     touch-action: pan-y !important;
-    pointer-events: none !important;     /* KEY FIX — image doesn't eat touch */
+    pointer-events: none !important;
     user-select: none;
     -webkit-user-drag: none;
 }
 
-/* Buttons inside image container still need pointer events */
 .main-image-container .wishlist-btn-detail,
-.main-image-container .slide-btn,
 .main-image-container .slideshow-controls,
+.main-image-container .slide-btn,
 .main-image-container .discount-badge {
     pointer-events: auto !important;
+}
+
+/* ── body padding so content doesn't hide behind sticky bar ── */
+body {
+    padding-bottom: 72px !important;
 }
 </style>
 
@@ -2390,73 +2419,72 @@ body.dark-mode .video-modal-content {
 (function () {
     'use strict';
 
-    const bar = document.getElementById('stickyCTABar');
+    var bar = document.getElementById('stickyCTABar');
+    if (!bar) return;
 
-    /* ── Sync product name + price into sticky bar ── */
-    function syncStickyInfo() {
-        const nameEl  = document.getElementById('productTitle');
-        const priceEl = document.getElementById('currentPrice');
-        const sName   = document.getElementById('stickyProductName');
-        const sPrice  = document.getElementById('stickyProductPrice');
-        if (nameEl  && sName  && nameEl.textContent.trim())
-            sName.textContent  = nameEl.textContent.trim();
-        if (priceEl && sPrice && priceEl.textContent.trim())
-            sPrice.textContent = priceEl.textContent.trim();
+    /* sync product title + price into sticky bar */
+    function sync() {
+        var n = document.getElementById('productTitle');
+        var p = document.getElementById('currentPrice');
+        var sn = document.getElementById('stickyProductName');
+        var sp = document.getElementById('stickyProductPrice');
+        if (n && sn && n.textContent.trim()) sn.textContent = n.textContent.trim();
+        if (p && sp && p.textContent.trim()) sp.textContent = p.textContent.trim();
     }
 
-    /* ── IntersectionObserver — watch real action buttons ── */
+    /* show/hide sticky bar based on real buttons visibility */
     function initObserver() {
-        const target = document.querySelector('.action-buttons');
-        if (!target || !bar) return;
-
-        const io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    bar.classList.add('hidden');    // real buttons visible → hide sticky
+        var target = document.querySelector('.action-buttons');
+        if (!target) return;
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    bar.classList.add('hidden');
                 } else {
-                    bar.classList.remove('hidden'); // scrolled past → show sticky
+                    bar.classList.remove('hidden');
                 }
             });
-        }, { threshold: 0.3 });
-
+        }, { threshold: 0.2 });
         io.observe(target);
     }
 
-    /* ── Sticky buttons delegate to real buttons ── */
-    document.getElementById('stickyAddToCartBtn')
-        ?.addEventListener('click', function () {
-            // If qty bar is showing, scroll to it instead
-            const qtyBar = document.getElementById('qtyBar');
-            const addBtn = document.getElementById('addToCartBtn');
-            if (qtyBar && qtyBar.style.display !== 'none') {
-                qtyBar.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else if (addBtn) {
-                addBtn.click();
+    /* sticky add to cart delegates to real button */
+    var sAdd = document.getElementById('stickyAddToCartBtn');
+    if (sAdd) {
+        sAdd.addEventListener('click', function() {
+            var qb = document.getElementById('qtyBar');
+            var ab = document.getElementById('addToCartBtn');
+            if (qb && qb.style.display !== 'none') {
+                qb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else if (ab) {
+                ab.click();
             }
         });
-
-    document.getElementById('stickyBuyNowBtn')
-        ?.addEventListener('click', function () {
-            const realBuy = document.getElementById('buyNowBtn');
-            if (realBuy) realBuy.click();
-        });
-
-    /* ── MutationObserver — sync when product-detail-script.js
-          updates the title/price after product data loads ── */
-    function watchForProductLoad() {
-        const titleEl = document.getElementById('productTitle');
-        const priceEl = document.getElementById('currentPrice');
-        const mo = new MutationObserver(syncStickyInfo);
-        const opts = { childList: true, subtree: true, characterData: true };
-        if (titleEl) mo.observe(titleEl, opts);
-        if (priceEl) mo.observe(priceEl, opts);
     }
 
-    /* ── Init ── */
+    /* sticky buy now delegates to real button */
+    var sBuy = document.getElementById('stickyBuyNowBtn');
+    if (sBuy) {
+        sBuy.addEventListener('click', function() {
+            var rb = document.getElementById('buyNowBtn');
+            if (rb) rb.click();
+        });
+    }
+
+    /* watch for product data to load and update sticky info */
+    function watchDOM() {
+        var mo = new MutationObserver(sync);
+        var opts = { childList: true, subtree: true, characterData: true };
+        var t = document.getElementById('productTitle');
+        var p = document.getElementById('currentPrice');
+        if (t) mo.observe(t, opts);
+        if (p) mo.observe(p, opts);
+    }
+
     function init() {
-        syncStickyInfo();
+        sync();
         initObserver();
-        watchForProductLoad();
+        watchDOM();
     }
 
     if (document.readyState === 'loading') {
