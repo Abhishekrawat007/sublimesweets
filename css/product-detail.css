@@ -1,77 +1,65 @@
 /* ============================================================
-   SUBLIME SWEETS — DESIGN V6
-   Aesthetic: Art Deco — The Grand Mithai Palace
-   Fonts: Cinzel (display) + Raleway (body)
-   Palette: Deep Noir × Champagne Gold × Ivory × Burgundy
-   Geometric. Symmetrical. 1920s Opulence.
-   No box-shadow, no backdrop-filter. Pure CSS grandeur.
+   SUBLIME SWEETS — DESIGN V7
+   "SHAHENSHAH" — The Emperor's Sweet Court
+   Royal Mughal × Warm Earthy
+   Fonts: Gulzar (display) + Lato (body)
+   Palette: Deep Rust × Terracotta × Sand Gold × Parchment × Chai Brown
+   No box-shadow. No backdrop-filter. Pure imperial CSS.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gulzar&family=Lato:wght@300;400;700;900&display=swap');
 
 /* ============================================================
-   ROOT — ART DECO COLOR SYSTEM
+   ROOT — MUGHAL COLOR SYSTEM
    ============================================================ */
 :root {
-    --noir:           #1C1710;   /* Deep warm black */
-    --noir-mid:       #2C2418;   /* Slightly lighter noir */
-    --noir-light:     #3D3220;   /* Card surfaces in dark */
-    --gold:           #D4AF37;   /* Champagne gold — the hero */
-    --gold-light:     #E8CC6A;   /* Lighter gold for hover */
-    --gold-pale:      #F5ECC8;   /* Pale gold tint */
-    --gold-faint:     #FAF4E0;   /* Near-white warm gold */
-    --ivory:          #F8F3E8;   /* Warm ivory bg */
-    --ivory-mid:      #EDE4D0;   /* Mid ivory — card bg */
-    --ivory-deep:     #D9CCAA;   /* Deep ivory — borders */
-    --burgundy:       #8B1A1A;   /* Deep burgundy accent */
-    --burgundy-light: #A52020;
-    --text:           #1C1710;   /* Deep noir for text */
-    --text-muted:     #6B5C3E;   /* Warm brown muted */
-    --text-faint:     #B5A080;   /* Faint warm text */
-    --success:        #2D6B3E;
+    --chai:        #1A0F0A;   /* Deep chai brown — darkest */
+    --chai-mid:    #2C1A10;   /* Mid dark surface */
+    --chai-light:  #3D2518;   /* Card surface dark */
+    --rust:        #8B3A2A;   /* Deep rust — hero accent */
+    --rust-mid:    #C4651A;   /* Terracotta — secondary accent */
+    --rust-light:  #D4845A;   /* Light terracotta */
+    --sand:        #E8C99A;   /* Sand gold — warm highlight */
+    --sand-light:  #F0DDB8;   /* Pale sand */
+    --parchment:   #F5ECD7;   /* Parchment cream — lightest */
+    --parchment-mid: #EDE0C4; /* Mid parchment */
+    --parchment-deep: #D4C4A0;/* Deep parchment border */
+    --success:     #3D6B2A;
 
-    --shadow: none;
-    --shadow-lg: none;
+    --text:        #1A0F0A;
+    --text-muted:  #6B4030;
+    --text-faint:  #B09070;
 
-    /* Override legacy vars */
-    --primary:        #D4AF37;
-    --primary-dark:   #B8960A;
-    --secondary:      #8B1A1A;
-    --bg:             #F8F3E8;
-    --card-bg:        #FFFFFF;
-    --text-light:     #6B5C3E;
-    --border:         #D9CCAA;
+    /* Light mode bg */
+    --bg:          #F5ECD7;
+    --card-bg:     #FFFFFF;
+    --border:      #D4C4A0;
 
-    --font-display: 'Cinzel', Georgia, serif;
-    --font-body:    'Raleway', system-ui, sans-serif;
+    --font-display: 'Gulzar', Georgia, serif;
+    --font-body:    'Lato', system-ui, sans-serif;
 
-    --radius-sm:  0px;
-    --radius-md:  0px;
-    --radius-lg:  0px;
-    --radius-xl:  0px;
-    --radius-pill: 0px;
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
 
-    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Sticky bar height — used for body padding */
-    --sticky-h: 76px;
+    --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    --sticky-h: 72px;
 }
 
 /* ============================================================
-   DARK MODE — Deep Noir full
+   DARK MODE
    ============================================================ */
 body.dark-mode {
-    --ivory:          #1C1710;
-    --ivory-mid:      #2C2418;
-    --ivory-deep:     #3D3220;
-    --gold-faint:     #2A2010;
-    --gold-pale:      #2A2010;
-    --text:           #F5ECC8;
-    --text-muted:     #C4A870;
-    --text-faint:     #6B5030;
-    --bg:             #1C1710;
-    --card-bg:        #2C2418;
-    --border:         #3D3220;
+    --bg:             #1A0F0A;
+    --card-bg:        #2C1A10;
+    --border:         #3D2518;
+    --text:           #F5ECD7;
+    --text-muted:     #C4A070;
+    --text-faint:     #6B4030;
+    --parchment:      #2C1A10;
+    --parchment-mid:  #3D2518;
+    --parchment-deep: #4D3020;
+    --sand-light:     #3D2518;
 }
 
 /* ============================================================
@@ -81,16 +69,16 @@ body.dark-mode {
 
 body {
     font-family: var(--font-body);
-    background: var(--ivory);
+    background: var(--bg);
     color: var(--text);
     padding-top: 80px;
-    padding-bottom: var(--sticky-h); /* space for sticky bar */
-    transition: background var(--transition), color var(--transition);
+    padding-bottom: var(--sticky-h);
     -webkit-font-smoothing: antialiased;
+    transition: background var(--transition), color var(--transition);
 }
 
 /* ============================================================
-   ART DECO DIAMOND WALLPAPER — pure CSS pattern, zero weight
+   MUGHAL JALI BACKGROUND — pure CSS marble screen pattern
    ============================================================ */
 body::before {
     content: '';
@@ -98,18 +86,25 @@ body::before {
     inset: 0;
     background-image:
         repeating-linear-gradient(
-            45deg,
-            rgba(212,175,55,0.04) 0px,
-            rgba(212,175,55,0.04) 1px,
+            0deg,
+            rgba(139,58,42,0.035) 0px,
+            rgba(139,58,42,0.035) 1px,
             transparent 1px,
-            transparent 28px
+            transparent 32px
         ),
         repeating-linear-gradient(
-            -45deg,
-            rgba(212,175,55,0.04) 0px,
-            rgba(212,175,55,0.04) 1px,
+            90deg,
+            rgba(139,58,42,0.035) 0px,
+            rgba(139,58,42,0.035) 1px,
             transparent 1px,
-            transparent 28px
+            transparent 32px
+        ),
+        repeating-linear-gradient(
+            45deg,
+            rgba(196,101,26,0.02) 0px,
+            rgba(196,101,26,0.02) 1px,
+            transparent 1px,
+            transparent 22px
         );
     pointer-events: none;
     z-index: 0;
@@ -127,62 +122,75 @@ body > * { position: relative; z-index: 1; }
 }
 
 /* ============================================================
-   BREADCRUMB — engraved label strip
+   MUGHAL ORNAMENT MIXIN — reusable crescent rule
+   ============================================================ */
+.mughal-rule {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--rust-mid);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    margin: 20px 0;
+}
+
+.mughal-rule::before,
+.mughal-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rust), transparent);
+}
+
+/* ============================================================
+   BREADCRUMB — parchment strip
    ============================================================ */
 .breadcrumb {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 44px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--gold);
+    margin-bottom: 40px;
+    padding: 12px 20px;
+    background: var(--parchment-mid);
+    border-left: 4px solid var(--rust);
+    border-right: 4px solid var(--rust);
     position: relative;
 }
 
-/* Gold diamond tick */
 .breadcrumb::before {
-    content: '◆';
-    font-size: 8px;
-    color: var(--gold);
+    content: '☽';
+    color: var(--rust-mid);
+    font-size: 14px;
 }
 
 .breadcrumb::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--ivory-deep);
+    content: '☾';
+    color: var(--rust-mid);
+    font-size: 14px;
+    margin-left: auto;
 }
 
-.breadcrumb a {
-    color: var(--gold);
-    text-decoration: none;
-    font-weight: 700;
-    transition: color var(--transition);
-}
-
-.breadcrumb a:hover { color: var(--gold-light); }
+.breadcrumb a { color: var(--rust); text-decoration: none; font-weight: 900; }
+.breadcrumb a:hover { color: var(--rust-mid); }
 
 /* ============================================================
    MAIN LAYOUT
    ============================================================ */
 .product-main {
     display: grid;
-    grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
-    gap: 64px;
+    grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
+    gap: 60px;
     align-items: start;
 }
 
 /* ============================================================
-   IMAGE GALLERY — geometric corner bracket frame
+   IMAGE GALLERY — Mughal arch frame
    ============================================================ */
 .image-gallery {
     display: flex;
@@ -196,64 +204,43 @@ body > * { position: relative; z-index: 1; }
 
 .main-image-wrapper {
     position: relative;
-    margin-bottom: 0;
-    padding: 12px;   /* space for corner brackets */
+    padding: 0;
 }
 
-/* Gold corner brackets — Art Deco photo mount */
+/* Arch top frame — terracotta border with arch clip */
+.main-image-container {
+    position: relative;
+    width: 100%;
+    height: 560px;
+    overflow: hidden;
+    background: var(--parchment-mid);
+    border: 3px solid var(--rust);
+    border-bottom: none;
+    /* Mughal pointed arch top via clip-path */
+    clip-path: polygon(
+        0% 8%,
+        4% 4%,
+        50% 0%,
+        96% 4%,
+        100% 8%,
+        100% 100%,
+        0% 100%
+    );
+    margin-bottom: 0;
+}
+
+/* Corner rust squares — palace window corners */
 .main-image-wrapper::before,
 .main-image-wrapper::after {
     content: '';
     position: absolute;
-    width: 28px;
-    height: 28px;
-    border-color: var(--gold);
-    border-style: solid;
+    width: 20px;
+    height: 20px;
+    background: var(--rust);
     z-index: 5;
 }
-
-.main-image-wrapper::before {
-    top: 0; left: 0;
-    border-width: 2px 0 0 2px;
-}
-
-.main-image-wrapper::after {
-    bottom: 0; right: 0;
-    border-width: 0 2px 2px 0;
-}
-
-/* Extra corners via inner wrapper pseudo */
-.main-image-container::before,
-.main-image-container::after {
-    content: '';
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    border-color: var(--gold);
-    border-style: solid;
-    z-index: 5;
-}
-
-.main-image-container::before {
-    top: -12px; right: -12px;
-    border-width: 2px 2px 0 0;
-}
-
-.main-image-container::after {
-    bottom: -12px; left: -12px;
-    border-width: 0 0 2px 2px;
-}
-
-.main-image-container {
-    position: relative;
-    width: 100%;
-    height: 540px;
-    border-radius: 0;
-    overflow: hidden;
-    background: var(--ivory-mid);
-    margin-bottom: 0;
-    border: 1px solid var(--ivory-deep);
-}
+.main-image-wrapper::before { top: 0; left: 0; }
+.main-image-wrapper::after  { top: 0; right: 0; }
 
 .main-image {
     width: 100%;
@@ -266,39 +253,36 @@ body > * { position: relative; z-index: 1; }
     -webkit-user-drag: none;
 }
 
-/* DISCOUNT BADGE — vertical marquee ribbon */
+/* DISCOUNT BADGE — tassel hanging tag */
 .discount-badge {
     position: absolute;
     top: 0;
-    left: 0;
-    background: var(--burgundy);
-    color: var(--gold-pale);
-    padding: 10px 12px;
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    left: 24px;
+    background: var(--rust);
+    color: var(--parchment);
+    padding: 10px 14px 20px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     z-index: 6;
-    writing-mode: horizontal-tb;
-    border-bottom: 2px solid var(--gold);
-    border-right: 2px solid var(--gold);
-    min-width: 60px;
+    /* Pointed bottom — tassel */
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+    min-width: 64px;
     text-align: center;
 }
 
-/* WISHLIST — geometric square */
+/* WISHLIST — arch-top circular feel */
 .wishlist-btn-detail {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 52px;
-    height: 52px;
-    border-radius: 0;
-    background: var(--ivory);
-    border: none;
-    border-left: 2px solid var(--gold);
-    border-bottom: 2px solid var(--gold);
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: var(--parchment);
+    border: 2px solid var(--rust);
+    border-radius: 50% 50% 0 0;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -307,75 +291,63 @@ body > * { position: relative; z-index: 1; }
     z-index: 6;
 }
 
-.wishlist-btn-detail:hover { background: var(--gold); }
-.wishlist-btn-detail:hover svg { stroke: var(--noir); }
-.wishlist-btn-detail:hover svg path { stroke: var(--noir); }
+.wishlist-btn-detail:hover { background: var(--rust); }
+.wishlist-btn-detail:hover svg { stroke: var(--parchment); }
+.wishlist-btn-detail:hover svg path { stroke: var(--parchment); }
 
 .wishlist-btn-detail svg {
-    width: 20px;
-    height: 20px;
-    stroke: var(--gold);
-    fill: none;
+    width: 20px; height: 20px;
+    stroke: var(--rust); fill: none;
     transition: all 0.2s;
 }
 
 .wishlist-btn-detail svg path {
-    fill: none;
-    stroke: var(--gold);
+    fill: none; stroke: var(--rust);
     transition: fill 0.2s, stroke 0.2s;
 }
 
-.wishlist-btn-detail.saved {
-    background: var(--burgundy);
-}
-
-.wishlist-btn-detail.saved svg path {
-    fill: var(--gold-pale);
-    stroke: var(--gold-pale);
-}
+.wishlist-btn-detail.saved { background: var(--rust); }
+.wishlist-btn-detail.saved svg path { fill: var(--parchment); stroke: var(--parchment); }
 
 body.dark-mode .wishlist-btn-detail {
-    background: var(--noir-mid);
-    border-color: var(--gold);
+    background: var(--chai-mid);
+    border-color: var(--rust);
 }
 
-/* SLIDE CONTROLS — engraved square buttons */
+/* SLIDE BUTTONS — arch shaped */
 .slideshow-controls {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    padding: 0;
-    top: auto;
-    transform: none;
+    justify-content: space-between;
+    padding: 0 16px;
+    transform: translateY(-50%);
     z-index: 6;
 }
 
 .slide-btn {
-    width: 52px;
-    height: 48px;
-    border-radius: 0;
-    background: var(--noir);
-    border: none;
-    border-top: 2px solid var(--gold);
-    border-left: 1px solid var(--gold);
+    width: 44px;
+    height: 52px;
+    background: var(--parchment);
+    border: 2px solid var(--rust);
+    border-radius: 50% 50% 0 0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--gold);
+    font-size: 16px;
+    color: var(--rust);
+    font-weight: 900;
     transition: all var(--transition);
 }
 
 .slide-btn:hover {
-    background: var(--gold);
-    color: var(--noir);
+    background: var(--rust);
+    color: var(--parchment);
 }
 
-/* THUMBNAIL ROW */
+/* THUMBNAIL ROW — stone floor tiles */
 .thumbnail-column {
     display: flex;
     flex-direction: row;
@@ -384,105 +356,85 @@ body.dark-mode .wishlist-btn-detail {
     overflow-y: hidden;
     width: 100%;
     min-width: 0;
-    padding: 0;
-    background: var(--ivory-mid);
-    border: 1px solid var(--ivory-deep);
-    border-top: 2px solid var(--gold);
+    background: var(--rust);
+    border: 3px solid var(--rust);
+    border-top: none;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: var(--gold) var(--ivory-deep);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .thumbnail-column::-webkit-scrollbar { height: 2px; }
-    .thumbnail-column::-webkit-scrollbar-track { background: var(--ivory-deep); }
-    .thumbnail-column::-webkit-scrollbar-thumb { background: var(--gold); }
+    scrollbar-color: var(--rust-mid) var(--parchment-mid);
 }
 
 .thumbnail {
-    width: 80px;
-    height: 72px;
-    border-radius: 0;
+    width: 88px;
+    height: 80px;
     overflow: hidden;
     cursor: pointer;
     border: none;
-    border-right: 1px solid var(--ivory-deep);
+    border-right: 1px solid var(--rust);
     transition: all var(--transition);
     flex-shrink: 0;
-    background: var(--ivory-mid);
+    background: var(--parchment-mid);
     position: relative;
 }
 
 .thumbnail img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.75;
+    opacity: 0.7;
     transition: opacity var(--transition);
 }
 
 .thumbnail:hover img { opacity: 1; }
 .thumbnail.active img { opacity: 1; }
 
-/* Gold bottom bar on active */
+/* Active — sand top bar */
 .thumbnail.active::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gold);
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--sand);
 }
 
-.thumbnail.video-thumb { position: relative; overflow: hidden; }
+.thumbnail.video-thumb { position: relative; }
 .thumbnail.video-thumb .play-icon {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: var(--gold);
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--sand);
     pointer-events: none;
 }
 
 .main-image-container iframe#mainVideoIframe,
 .main-image-container video#mainVideoTag {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
 }
 
 /* ============================================================
    PRODUCT INFO
    ============================================================ */
-.product-info { padding-top: 8px; }
+.product-info { padding-top: 4px; }
 
-/* PRODUCT TITLE — Cinzel all-caps grandeur */
+/* PRODUCT TITLE */
 .product-title {
     font-family: var(--font-display);
-    font-size: clamp(22px, 3.2vw, 40px);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    line-height: 1.2;
-    margin-bottom: 0;
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 400;   /* Gulzar is naturally heavy */
+    letter-spacing: 0.02em;
+    line-height: 1.25;
     color: var(--text);
-    text-transform: uppercase;
+    margin-bottom: 0;
 }
 
-/* Gold double-rule ornament below title */
+/* Terracotta arch ornament below title */
 .product-title::after {
-    content: '';
+    content: '❖';
     display: block;
-    width: 100%;
-    height: 6px;
-    margin-top: 16px;
-    background:
-        linear-gradient(var(--gold), var(--gold)) center/100% 1px no-repeat,
-        linear-gradient(var(--ivory-deep), var(--ivory-deep)) center/100% 1px no-repeat;
-    background-position: center 1px, center 5px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--rust-mid);
+    margin-top: 14px;
+    letter-spacing: 0.5em;
 }
 
 /* RATING */
@@ -490,128 +442,102 @@ body.dark-mode .wishlist-btn-detail {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 22px;
+    margin-top: 18px;
     margin-bottom: 28px;
+    padding: 10px 0;
+    border-top: 1px solid var(--parchment-deep);
+    border-bottom: 1px solid var(--parchment-deep);
 }
 
-.stars {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-}
-
-.star-icon { width: 16px; height: 16px; flex-shrink: 0; }
-.star-icon.full { fill: var(--gold); color: var(--gold); }
-.star-icon.half { color: var(--gold); }
-.star-icon.empty { stroke: var(--ivory-deep); fill: none; }
-body.dark-mode .star-icon.empty { stroke: var(--text-faint); }
+.stars { display: inline-flex; align-items: center; gap: 3px; }
+.star-icon { width: 17px; height: 17px; flex-shrink: 0; }
+.star-icon.full { fill: var(--rust-mid); color: var(--rust-mid); }
+.star-icon.half { color: var(--rust-mid); }
+.star-icon.empty { stroke: var(--parchment-deep); fill: none; }
+body.dark-mode .star-icon.empty { stroke: var(--chai-light); }
 
 .rating-text {
     font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
     color: var(--text-faint);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 /* ============================================================
-   PRICE SECTION — centred symmetrical gold block
+   PRICE SECTION — parchment proclamation scroll
    ============================================================ */
 .price-section {
-    background: var(--noir);
-    padding: 28px 32px;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 36px;
-    text-align: center;
+    background: var(--parchment-mid);
+    border: 2px solid var(--rust);
+    border-left: 6px solid var(--rust);
+    padding: 24px 28px;
+    margin-bottom: 32px;
     position: relative;
-    /* Double border inset — engraved stationery */
-    outline: 1px solid var(--gold);
-    outline-offset: -6px;
+    text-align: center;
 }
 
-/* Top and bottom gold rules */
+/* Arch cutouts top corners */
 .price-section::before {
-    content: '◆';
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    font-size: 12px;
-    color: var(--gold);
-    opacity: 0.6;
+    top: -2px; left: -2px;
+    width: 24px; height: 24px;
+    background: var(--bg);
+    border-radius: 0 0 100% 0;
 }
 
 .price-section::after {
-    content: '◆';
+    content: '';
     position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 12px;
-    color: var(--gold);
-    opacity: 0.6;
+    top: -2px; right: -2px;
+    width: 24px; height: 24px;
+    background: var(--bg);
+    border-radius: 0 0 0 100%;
+}
+
+body.dark-mode .price-section::before,
+body.dark-mode .price-section::after {
+    background: var(--bg);
 }
 
 .current-price {
     font-family: var(--font-display);
-    font-size: clamp(44px, 6vw, 68px);
-    font-weight: 900;
-    color: var(--gold);
+    font-size: clamp(52px, 7vw, 76px);
+    font-weight: 400;
+    color: var(--rust);
     line-height: 0.9;
-    letter-spacing: 0.02em;
     display: block;
+    letter-spacing: 0.01em;
 }
 
 .original-price {
     font-family: var(--font-body);
-    font-size: 16px;
-    color: rgba(212, 175, 55, 0.4);
+    font-size: 18px;
+    color: var(--text-faint);
     text-decoration: line-through;
     font-weight: 300;
     margin-left: 10px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
 }
 
 .you-save {
     display: inline-block;
     margin-top: 10px;
-    color: var(--noir);
-    background: var(--gold);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 10px;
+    background: var(--rust);
+    color: var(--parchment);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    padding: 5px 16px;
-    border-radius: 0;
+    padding: 5px 18px;
+    clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
 }
 
 body.dark-mode .price-section {
-    background: var(--noir-mid);
-}
-
-/* ============================================================
-   ART DECO SECTION ORNAMENT
-   ============================================================ */
-.deco-rule {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    color: var(--gold);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-}
-
-.deco-rule::before,
-.deco-rule::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.4;
+    background: var(--chai-mid);
+    border-color: var(--rust);
 }
 
 /* ============================================================
@@ -619,29 +545,28 @@ body.dark-mode .price-section {
    ============================================================ */
 .option-section {
     margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--ivory-deep);
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--parchment-deep);
     position: relative;
 }
 
-/* Diamond ornament at section end */
 .option-section::after {
-    content: '◆';
+    content: '❖';
     position: absolute;
-    bottom: -7px;
+    bottom: -9px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 8px;
-    color: var(--gold);
-    background: var(--ivory);
-    padding: 0 6px;
+    font-size: 10px;
+    color: var(--rust-mid);
+    background: var(--bg);
+    padding: 0 8px;
 }
 
 body.dark-mode .option-section::after { background: var(--bg); }
 
 .option-label {
-    font-family: var(--font-display);
-    font-weight: 500;
+    font-family: var(--font-body);
+    font-weight: 900;
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -652,7 +577,11 @@ body.dark-mode .option-section::after { background: var(--bg); }
     gap: 10px;
 }
 
-.option-label::before { content: '◈'; color: var(--gold); font-size: 10px; }
+.option-label::before {
+    content: '☽';
+    color: var(--rust-mid);
+    font-size: 12px;
+}
 
 .option-grid {
     display: grid;
@@ -660,79 +589,63 @@ body.dark-mode .option-section::after { background: var(--bg); }
     gap: 8px;
 }
 
-/* SIZE BUTTONS — geometric engraved tiles */
+/* SIZE BUTTONS — arch-top tiles */
 .option-btn {
-    padding: 14px 12px;
-    border: 1px solid var(--ivory-deep);
-    border-radius: 0;
-    background: var(--ivory-mid);
+    padding: 14px 10px 12px;
+    border: 2px solid var(--parchment-deep);
+    background: var(--parchment-mid);
     cursor: pointer;
     transition: all var(--transition);
     text-align: center;
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-muted);
     position: relative;
-    overflow: hidden;
-}
-
-/* Gold corner tick on hover */
-.option-btn::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 0; height: 0;
-    border-style: solid;
-    border-width: 8px 8px 0 0;
-    border-color: transparent transparent transparent transparent;
-    transition: border-color var(--transition);
+    /* Arch top via clip-path */
+    clip-path: polygon(
+        0% 6%,
+        10% 2%,
+        50% 0%,
+        90% 2%,
+        100% 6%,
+        100% 100%,
+        0% 100%
+    );
 }
 
 .option-btn:hover {
-    border-color: var(--gold);
-    background: var(--gold-faint);
-    color: var(--text);
-}
-
-.option-btn:hover::before {
-    border-color: var(--gold) transparent transparent transparent;
+    border-color: var(--rust-mid);
+    background: var(--sand-light);
+    color: var(--rust);
 }
 
 .option-btn.active {
-    background: var(--noir);
-    border-color: var(--gold);
-    color: var(--gold);
-    outline: 1px solid var(--gold);
-    outline-offset: -4px;
-}
-
-.option-btn.active::before {
-    border-color: var(--gold) transparent transparent transparent;
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--parchment);
 }
 
 body.dark-mode .option-btn {
-    background: var(--noir-light);
-    border-color: var(--noir-light);
+    background: var(--chai-light);
+    border-color: var(--chai-light);
     color: var(--text-muted);
 }
-
 body.dark-mode .option-btn:hover {
-    background: var(--noir-mid);
-    border-color: var(--gold);
-    color: var(--text);
+    background: var(--chai-mid);
+    border-color: var(--rust-mid);
+    color: var(--sand);
 }
-
 body.dark-mode .option-btn.active {
-    background: var(--noir-mid);
-    border-color: var(--gold);
-    color: var(--gold);
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--parchment);
 }
 
 .option-size {
     display: block;
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 900;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: inherit;
 }
@@ -740,9 +653,9 @@ body.dark-mode .option-btn.active {
 .option-price {
     display: block;
     font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 4px;
     color: inherit;
 }
 
@@ -752,53 +665,53 @@ body.dark-mode .option-btn.active {
 }
 
 .flavor-btn {
-    padding: 10px 12px;
-    border-radius: 0;
-    border: 1px solid var(--ivory-deep);
-    background: var(--ivory-mid);
+    padding: 10px 10px;
+    border: 2px solid var(--parchment-deep);
+    background: var(--parchment-mid);
     cursor: pointer;
     font-family: var(--font-body);
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     text-align: center;
     color: var(--text-muted);
     transition: all var(--transition);
+    clip-path: polygon(0% 6%, 10% 2%, 50% 0%, 90% 2%, 100% 6%, 100% 100%, 0% 100%);
 }
 
 .flavor-btn:hover {
-    border-color: var(--gold);
-    background: var(--gold-faint);
-    color: var(--text);
+    border-color: var(--rust-mid);
+    background: var(--sand-light);
+    color: var(--rust);
 }
 
 .flavor-btn.active {
-    background: var(--noir);
-    border-color: var(--gold);
-    color: var(--gold);
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--parchment);
 }
 
-body.dark-mode .flavor-btn { background: var(--noir-light); border-color: var(--noir-light); color: var(--text-muted); }
-body.dark-mode .flavor-btn:hover { border-color: var(--gold); background: var(--noir-mid); color: var(--text); }
-body.dark-mode .flavor-btn.active { background: var(--noir-mid); border-color: var(--gold); color: var(--gold); }
+body.dark-mode .flavor-btn { background: var(--chai-light); border-color: var(--chai-light); color: var(--text-muted); }
+body.dark-mode .flavor-btn:hover { border-color: var(--rust-mid); background: var(--chai-mid); color: var(--sand); }
+body.dark-mode .flavor-btn.active { background: var(--rust); border-color: var(--rust); color: var(--parchment); }
 
 /* CUSTOM MESSAGE */
 #customMessageInput {
     width: 100%;
     padding: 14px 16px;
-    border: 1px solid var(--ivory-deep);
-    border-radius: 0;
-    font-size: 14px;
+    border: 2px solid var(--parchment-deep);
+    background: var(--parchment-mid);
+    color: var(--text);
     font-family: var(--font-body);
+    font-size: 14px;
     resize: vertical;
     min-height: 80px;
-    background: var(--ivory-mid);
-    color: var(--text);
-    transition: border-color var(--transition);
     outline: none;
+    transition: border-color var(--transition);
+    border-radius: 0;
 }
 
-#customMessageInput:focus { border-color: var(--gold); }
+#customMessageInput:focus { border-color: var(--rust); }
 #customMessageInput::placeholder { color: var(--text-faint); font-style: italic; }
 
 /* ============================================================
@@ -816,28 +729,26 @@ body.dark-mode .flavor-btn.active { background: var(--noir-mid); border-color: v
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 0;
     padding: 7px 16px;
     background: transparent;
-    border-radius: 0;
+    border: 1px solid rgba(61,107,42,0.3);
     width: fit-content;
-    border: 1px solid rgba(45, 107, 62, 0.3);
+    margin-bottom: 0;
 }
 
 .stock-status span {
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--success);
 }
 
 .stock-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 0;
+    width: 7px; height: 7px;
     background: var(--success);
+    border-radius: 0;
     animation: pulse 2s infinite;
 }
 
@@ -849,68 +760,72 @@ body.dark-mode .flavor-btn.active { background: var(--noir-mid); border-color: v
 #watchVideoBtn {
     flex-shrink: 0;
     padding: 7px 18px;
-    border: 1px solid var(--ivory-deep);
-    border-radius: 0;
+    border: 1px solid var(--parchment-deep);
     background: transparent;
     color: var(--text-muted);
-    font-family: var(--font-display);
-    font-size: 9px;
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all var(--transition);
+    border-radius: 0;
 }
 
-#watchVideoBtn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
+#watchVideoBtn:hover { border-color: var(--rust); color: var(--rust); }
 
 /* ============================================================
-   ACTION BUTTONS — engraved double-border stationery
+   ACTION BUTTONS — imperial proclamation style
    ============================================================ */
 .action-buttons {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
     margin-bottom: 28px;
 }
 
 .add-wrapper {
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-/* PRIMARY — noir with gold inset border */
+/* PRIMARY — deep rust filled */
 .btn-primary {
-    flex: 1;
     width: 100%;
     padding: 18px 24px;
-    border: 2px solid var(--gold);
-    border-radius: 0;
-    background: var(--noir);
-    color: var(--gold);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    border: 2px solid var(--rust);
+    background: var(--rust);
+    color: var(--parchment);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all var(--transition);
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 0;
     position: relative;
-    outline: 1px solid var(--gold);
-    outline-offset: -6px;
+    overflow: hidden;
 }
 
-.btn-primary:hover {
-    background: var(--gold);
-    color: var(--noir);
-    transform: translateY(-2px);
+/* Sand shimmer sweep on hover */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245,236,215,0.2), transparent);
+    transition: left 0.4s ease;
 }
+
+.btn-primary:hover::before { left: 150%; }
+.btn-primary:hover { background: var(--rust-mid); border-color: var(--rust-mid); }
 
 #addToCartBtn {
     width: 100%;
@@ -919,176 +834,150 @@ body.dark-mode .flavor-btn.active { background: var(--noir-mid); border-color: v
     align-items: center;
 }
 
-#addToCartLabel { flex: 0 0 auto; text-align: center; }
-
-/* SECONDARY — ivory with burgundy border */
+/* SECONDARY — parchment with rust border */
 .btn-secondary {
     flex: 1;
     padding: 18px 24px;
-    border: 2px solid var(--burgundy);
-    border-radius: 0;
+    border: 2px solid var(--rust);
     background: transparent;
-    color: var(--burgundy);
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    color: var(--rust);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: 1px solid var(--burgundy);
-    outline-offset: -6px;
+    border-radius: 0;
+    width: 100%;
 }
 
 .btn-secondary:hover {
-    background: var(--burgundy);
-    color: var(--gold-pale);
-    transform: translateY(-2px);
+    background: var(--rust);
+    color: var(--parchment);
 }
 
-/* QTY BAR — flanked by em-dash style */
+/* QTY BAR — sandstone inlay */
 #qtyBar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--ivory-mid);
+    background: var(--parchment-mid);
     padding: 10px 16px;
-    border-radius: 0;
-    border: 1px solid var(--gold);
-    outline: 1px solid var(--ivory-deep);
-    outline-offset: -5px;
+    border: 2px solid var(--rust);
 }
 
 body.dark-mode #qtyBar {
-    background: var(--noir-mid);
-    border-color: var(--gold);
+    background: var(--chai-mid);
+    border-color: var(--rust);
 }
 
 .qty-btn {
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: 1px solid var(--gold);
-    border-radius: 0;
+    width: 44px; height: 44px;
+    background: var(--rust);
+    border: none;
+    border-radius: 50% 50% 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gold);
+    color: var(--parchment);
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 300;
-    font-family: var(--font-body);
     user-select: none;
     transition: all var(--transition);
 }
 
-.qty-btn:hover {
-    background: var(--gold);
-    color: var(--noir);
-}
-
+.qty-btn:hover { background: var(--rust-mid); }
 .qty-btn:active { opacity: 0.8; }
 
 .qty-display {
     flex: 1;
     text-align: center;
     font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.04em;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--rust);
 }
 
 /* ============================================================
-   DESCRIPTION — noir card with gold rule
+   DESCRIPTION — proclamation scroll
    ============================================================ */
 .description-section {
-    background: var(--noir);
-    padding: 28px 28px;
-    border-radius: 0;
-    border: 1px solid var(--gold);
-    outline: 1px solid var(--noir-light);
-    outline-offset: -5px;
-    margin-bottom: 0;
+    background: var(--parchment-mid);
+    border: 2px solid var(--rust);
+    border-top: 6px solid var(--rust);
+    padding: 28px;
     margin-top: 8px;
+}
+
+body.dark-mode .description-section {
+    background: var(--chai-mid);
+    border-color: var(--rust);
 }
 
 .description-title {
     font-family: var(--font-display);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 14px;
-    color: var(--gold);
+    color: var(--rust);
+    letter-spacing: 0.04em;
 }
 
 .description-content {
     font-family: var(--font-body);
-    color: rgba(212, 175, 55, 0.6);
-    line-height: 1.85;
+    color: var(--text-muted);
+    line-height: 1.9;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* ============================================================
-   RELATED PRODUCTS — symmetrical Cinzel heading
+   RELATED SECTION — darbar announcement
    ============================================================ */
-.related-section {
-    margin-top: 80px;
-}
+.related-section { margin-top: 72px; }
 
 .section-title {
     font-family: var(--font-display);
-    font-size: clamp(16px, 2.5vw, 26px);
-    font-weight: 700;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 400;
     text-align: center;
-    color: var(--text);
+    color: var(--rust);
     background: none;
     -webkit-text-fill-color: initial;
     -webkit-background-clip: initial;
-    margin-bottom: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.section-title::before,
-.section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.5;
-}
+.section-title::before { content: '☽'; color: var(--rust-mid); font-size: 20px; flex-shrink: 0; }
+.section-title::after  { content: '☾'; color: var(--rust-mid); font-size: 20px; flex-shrink: 0; }
 
-/* Sub-ornament below title */
-.related-section > .section-title + .related-grid {
-    margin-top: 32px;
-}
-
+/* Sub-rule below title */
 .related-section::before {
-    content: '◆ ◇ ◆';
+    content: '❖ ─── ❖ ─── ❖';
     display: block;
     text-align: center;
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 0.4em;
-    margin-bottom: 32px;
-    opacity: 0.6;
+    font-size: 12px;
+    color: var(--rust-mid);
+    letter-spacing: 0.3em;
+    margin-bottom: 28px;
+    opacity: 0.7;
 }
 
 .related-grid {
     display: grid;
-    gap: 1px;
+    gap: 2px;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    background: var(--ivory-deep);
+    background: var(--parchment-deep);
 }
 
 /* ============================================================
@@ -1101,22 +990,21 @@ body.dark-mode #qtyBar {
     margin: 6px 0;
 }
 
-.product-rating-small .star-icon { width: 13px; height: 13px; flex-shrink: 0; }
-.product-rating-small .star-icon.full { fill: var(--gold); color: var(--gold); }
-.product-rating-small .star-icon.half { color: var(--gold); }
-.product-rating-small .star-icon.empty { stroke: var(--ivory-deep); fill: none; }
-body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--text-faint); }
+.product-rating-small .star-icon { width: 14px; height: 14px; }
+.product-rating-small .star-icon.full { fill: var(--rust-mid); color: var(--rust-mid); }
+.product-rating-small .star-icon.half { color: var(--rust-mid); }
+.product-rating-small .star-icon.empty { stroke: var(--parchment-deep); fill: none; }
+body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--chai-light); }
 
 .rating-count {
-    font-family: var(--font-body);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-faint);
     font-weight: 400;
 }
 
 /* RELATED QTY */
 .related-grid .quantity-controls { padding: 3px 8px !important; gap: 0 !important; min-height: 32px !important; }
-.related-grid .qty-btn { width: 28px !important; height: 28px !important; font-size: 16px !important; border-radius: 0 !important; }
+.related-grid .qty-btn { width: 28px !important; height: 28px !important; font-size: 16px !important; border-radius: 50% 50% 0 0 !important; }
 .related-grid .qty-count { font-size: 13px !important; min-width: 20px !important; }
 
 /* ============================================================
@@ -1128,139 +1016,35 @@ body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--text-faint
 .main-image.changing { animation: slideIn 0.22s ease; }
 
 /* ============================================================
-   ★ STICKY BOTTOM BAR — Art Deco, matches page design
+   IMAGE SCROLL FIX
    ============================================================ */
-.sticky-cta-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 900;
-    background: var(--noir);
-    border-top: 2px solid var(--gold);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: var(--sticky-h);
-
-    /* Double border inset — Art Deco engraved */
-    outline: 1px solid rgba(212,175,55,0.3);
-    outline-offset: -5px;
-
-    /* Smooth show/hide */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s ease;
+.main-image-container {
+    touch-action: pan-y !important;
+    overscroll-behavior: auto !important;
 }
 
-/* Hidden state — slides down */
-.sticky-cta-bar.hidden {
-    transform: translateY(100%);
-    opacity: 0;
-    pointer-events: none;
+.main-image {
+    touch-action: pan-y !important;
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-/* Product mini info in sticky bar */
-.sticky-product-info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.sticky-product-name {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.sticky-product-price {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--gold-light);
-    letter-spacing: 0.04em;
-    line-height: 1;
-}
-
-/* Sticky CTA buttons */
-.sticky-actions {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.sticky-add-btn {
-    padding: 13px 22px;
-    border: 1.5px solid var(--gold);
-    border-radius: 0;
-    background: transparent;
-    color: var(--gold);
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all var(--transition);
-    white-space: nowrap;
-    outline: 1px solid var(--gold);
-    outline-offset: -5px;
-}
-
-.sticky-add-btn:hover {
-    background: var(--gold);
-    color: var(--noir);
-}
-
-.sticky-buy-btn {
-    padding: 13px 22px;
-    border: 1.5px solid var(--gold);
-    border-radius: 0;
-    background: var(--gold);
-    color: var(--noir);
-    font-family: var(--font-display);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all var(--transition);
-    white-space: nowrap;
-    outline: 1px solid var(--noir-light);
-    outline-offset: -5px;
-}
-
-.sticky-buy-btn:hover {
-    background: var(--gold-light);
-    border-color: var(--gold-light);
-}
-
-/* Diamond ornaments flanking sticky bar content */
-.sticky-cta-bar::before {
-    content: '◆';
-    font-size: 8px;
-    color: var(--gold);
-    opacity: 0.4;
-    flex-shrink: 0;
+.main-image-container .wishlist-btn-detail,
+.main-image-container .slideshow-controls,
+.main-image-container .slide-btn,
+.main-image-container .discount-badge {
+    pointer-events: auto !important;
 }
 
 /* ============================================================
    RESPONSIVE — TABLET
    ============================================================ */
 @media (max-width: 1024px) {
-    .product-main { grid-template-columns: 1fr; gap: 40px; }
+    .product-main { grid-template-columns: 1fr; gap: 36px; }
     .image-gallery { position: static; }
     .main-image-container { height: 460px; }
     .related-section { margin-top: 48px; }
-    .main-image-wrapper { padding: 10px; }
 }
 
 /* ============================================================
@@ -1268,61 +1052,39 @@ body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--text-faint
    ============================================================ */
 @media (max-width: 768px) {
     .container { padding: 20px 16px; }
-    .product-title { font-size: 22px; }
-    .current-price { font-size: 48px; }
-    .action-buttons { flex-direction: column; }
+    .product-title { font-size: 26px; }
+    .current-price { font-size: 52px; }
     .main-image-container { height: 360px; }
-    .product-info { padding-top: 0; }
-    .thumbnail { width: 68px; height: 60px; }
-    .star-icon { width: 14px; height: 14px; }
-    .slide-btn { width: 44px; height: 40px; font-size: 13px; }
-    .main-image-wrapper { padding: 8px; }
-    .main-image-wrapper::before,
-    .main-image-wrapper::after { width: 20px; height: 20px; }
-    .main-image-container::before,
-    .main-image-container::after { width: 20px; height: 20px; }
-
-    .sticky-cta-bar { padding: 10px 14px; gap: 10px; }
-    .sticky-product-name { font-size: 10px; }
-    .sticky-product-price { font-size: 16px; }
-    .sticky-add-btn, .sticky-buy-btn { padding: 12px 14px; font-size: 9px; }
-
-    .main-image-container iframe#mainVideoIframe,
-    .main-image-container video#mainVideoTag { object-fit: contain; }
+    .thumbnail { width: 72px; height: 64px; }
+    .slide-btn { width: 38px; height: 46px; font-size: 14px; }
+    .star-icon { width: 15px; height: 15px; }
 }
 
 /* ============================================================
    RESPONSIVE — SMALL MOBILE
    ============================================================ */
 @media (max-width: 480px) {
-    .main-image-container { height: 290px; }
-    .thumbnail { width: 62px; height: 56px; }
-    .discount-badge { font-size: 9px; padding: 8px 10px; }
-    .wishlist-btn-detail { width: 44px; height: 44px; }
-    .wishlist-btn-detail svg { width: 18px; height: 18px; }
-    .sticky-product-info { display: none; }  /* more room for buttons on tiny screens */
-    .sticky-cta-bar::before { display: none; }
-    .sticky-add-btn, .sticky-buy-btn { flex: 1; text-align: center; justify-content: center; }
-    .sticky-actions { width: 100%; }
+    .main-image-container { height: 300px; }
+    .thumbnail { width: 64px; height: 58px; }
+    .discount-badge { font-size: 10px; padding: 8px 12px 18px; }
+    .wishlist-btn-detail { width: 42px; height: 42px; }
 }
 
 /* ============================================================
-   VERY SMALL (≤320px)
+   320px
    ============================================================ */
 @media (max-width: 320px) {
     .container { padding: 10px 10px; }
-    .main-image-container { height: 230px; }
-    .main-image-wrapper { padding: 6px; }
-    .product-title { margin-bottom: 8px !important; }
-    .price-section { padding: 18px !important; margin-bottom: 14px !important; }
-    .option-section { margin-bottom: 10px !important; padding-bottom: 10px !important; }
+    .main-image-container { height: 240px; }
+    .price-section { padding: 16px !important; margin-bottom: 14px !important; }
+    .option-section { margin-bottom: 10px !important; }
     .action-buttons { gap: 8px !important; margin-bottom: 10px !important; }
     .btn-primary, .btn-secondary { padding: 14px !important; }
-    .description-section { padding: 16px !important; }
+    .description-section { padding: 14px !important; }
 }
 
 /* ============================================================
-   RELATED GRID — FULL BLEED MOBILE
+   RELATED GRID FULL BLEED MOBILE
    ============================================================ */
 @media (min-width: 230px) and (max-width: 510px) {
     .related-grid {
@@ -1334,10 +1096,3 @@ body.dark-mode .product-rating-small .star-icon.empty { stroke: var(--text-faint
     }
     .related-section { padding: 0 !important; margin-top: 32px !important; overflow: visible !important; }
 }
-
-/* ============================================================
-   TOUCH + SCROLL
-   ============================================================ */
-.main-image-container * { -webkit-tap-highlight-color: transparent; }
-
-.main-image { pointer-events: none !important; touch-action: pan-y !important; }
