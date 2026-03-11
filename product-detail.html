@@ -2065,9 +2065,8 @@ body.dark-mode .video-modal-content {
    
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
-
-  <!-- ============================================================
-     STICKY CTA BAR — V9 CHANDI BAZAAR
+<!-- ============================================================
+     STICKY CTA BAR — V10 SHEESH MAHAL
      Paste just before </body>, after all existing script tags
      ============================================================ -->
 
@@ -2078,36 +2077,45 @@ body.dark-mode .video-modal-content {
     </div>
     <div class="sticky-actions">
         <button class="sticky-add-btn" id="stickyAddToCartBtn">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
             </svg>
-            <span id="stickyAddLabel">ADD TO CART</span>
+            <span id="stickyAddLabel">Add to Cart</span>
         </button>
         <button class="sticky-buy-btn" id="stickyBuyNowBtn">
-            <span>BUY NOW</span>
+            <span>Buy Now</span>
         </button>
     </div>
 </div>
 
 <style>
 html, body { overflow-x: hidden !important; max-width: 100% !important; }
-body { padding-bottom: 68px !important; }
+body { padding-bottom: 72px !important; }
 
 .sticky-cta-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     width: 100%; box-sizing: border-box;
     z-index: 900;
-    background: #1A1A1A;
-    border-top: 4px solid #E8D42E;
-    padding: 10px 20px;
+    background: #FEFCF8;
+    border-top: 1px solid #C8A882;
+    padding: 12px 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 14px;
-    height: 68px;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    gap: 16px;
+    height: 72px;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+}
+
+/* Champagne top accent line */
+.sticky-cta-bar::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C8A882 30%, #8B6F47 50%, #C8A882 70%, transparent);
 }
 
 .sticky-cta-bar.hidden {
@@ -2122,70 +2130,75 @@ body { padding-bottom: 68px !important; }
 }
 
 .sticky-product-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px; font-weight: 800;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: #888888;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: #B8A090;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .sticky-product-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px; font-weight: 400;
-    color: #E8D42E; line-height: 1;
-    letter-spacing: 0.04em;
+    font-family: 'Tenor Sans', serif;
+    font-size: 24px; font-weight: 400;
+    color: #8B6F47; line-height: 1;
+    letter-spacing: 0.06em;
 }
 
 .sticky-actions {
     display: flex; flex-direction: row;
-    gap: 8px; flex-shrink: 0;
+    gap: 10px; flex-shrink: 0;
 }
 
+/* ADD TO CART — champagne flat */
 .sticky-add-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 0 20px; height: 48px;
-    border: 2px solid #E8D42E;
-    background: transparent; color: #E8D42E;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 0.1em;
+    gap: 8px; padding: 0 22px; height: 48px;
+    border: 1px solid #C8A882;
+    background: #F0E4D4; color: #8B6F47;
+    font-family: 'Tenor Sans', serif;
+    font-size: 13px; letter-spacing: 0.16em;
+    text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
     border-radius: 0; box-sizing: border-box;
 }
 
-.sticky-add-btn:hover { background: #E8D42E; color: #1A1A1A; }
+.sticky-add-btn:hover { background: #2C1810; color: #DFC5A8; border-color: #2C1810; }
 
 .sticky-add-btn.in-cart {
-    border-color: #1A7A3A;
-    color: #1A7A3A;
+    background: #F0E4D4;
+    border-color: #4A7C59;
+    color: #4A7C59;
 }
-.sticky-add-btn.in-cart:hover { background: #1A7A3A; color: #fff; }
+.sticky-add-btn.in-cart:hover { background: #4A7C59; color: #fff; border-color: #4A7C59; }
 
+/* BUY NOW — walnut pill */
 .sticky-buy-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 0 20px; height: 48px;
-    border: 2px solid #D42B2B;
-    background: #D42B2B; color: #ffffff;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 0.1em;
+    gap: 8px; padding: 0 22px; height: 48px;
+    border: 1px solid #2C1810;
+    background: #2C1810; color: #DFC5A8;
+    font-family: 'Tenor Sans', serif;
+    font-size: 13px; letter-spacing: 0.16em;
+    text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.15s, border-color 0.15s;
-    border-radius: 0; box-sizing: border-box;
+    transition: background 0.2s, border-color 0.2s;
+    border-radius: 999px; box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover { background: #B01E1E; border-color: #B01E1E; }
+.sticky-buy-btn:hover { background: #8B6F47; border-color: #8B6F47; color: #fff; }
 
 @media (max-width: 520px) {
-    .sticky-cta-bar { padding: 0; gap: 0; height: 56px; }
+    .sticky-cta-bar { padding: 0; gap: 0; height: 58px; }
     .sticky-product-info { display: none; }
     .sticky-actions { width: 100%; height: 100%; gap: 0; }
     .sticky-add-btn, .sticky-buy-btn {
         flex: 1; width: 0; height: 100%;
-        padding: 0 10px; font-size: 18px !important;
-        border-top: none; border-bottom: none; border-radius: 0;
+        padding: 0 10px; font-size: 12px;
+        border-top: none; border-bottom: none;
     }
-    .sticky-add-btn { border-left: none; border-right: 2px solid #E8D42E; }
-    .sticky-buy-btn { border-right: none; border-left: none; }
+    .sticky-add-btn { border-left: none; border-right: 1px solid #C8A882; border-radius: 0; }
+    .sticky-buy-btn { border-right: none; border-left: none; border-radius: 0; }
 }
 </style>
 
@@ -2212,7 +2225,7 @@ body { padding-bottom: 68px !important; }
         if (!qb || !sLabel || !sAddBtn) return;
         function updateState() {
             var inCart = qb.style.display !== 'none' && qb.style.display !== '';
-            sLabel.textContent = inCart ? 'GO TO CART' : 'ADD TO CART';
+            sLabel.textContent = inCart ? 'Go to Cart' : 'Add to Cart';
             sAddBtn.classList.toggle('in-cart', inCart);
         }
         new MutationObserver(updateState).observe(qb, { attributes: true, attributeFilter: ['style'] });
