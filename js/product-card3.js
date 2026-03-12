@@ -68,7 +68,6 @@ class ProductCardManager {
         typeof item.quantity === 'number' &&
         item.quantity > 0
       );
-      
       localStorage.setItem('cart', JSON.stringify(this.cart));
 
       if (!Array.isArray(this.cart)) {
@@ -175,75 +174,71 @@ card.innerHTML = `
         </button>
       </div>
       
-    <div class="product-card-info">
-  ${displayBadge ? `<span class="brutal-category">${displayBadge}</span>` : ''}
+     <div class="product-card-info">
+  ${displayBadge ? `<span class="neuro-tag">${displayBadge}</span>` : ''}
   
-  <h3 class="brutal-title product-card-name" data-product-id="${product.id}">${product.name}</h3>
+  <h3 class="product-card-name" data-product-id="${product.id}">${product.name}</h3>
   
-  <div class="brutal-stats">
-    <div class="brutal-stat">
-      <div class="brutal-stat-value">${defaultVariant.size}</div>
-      <div class="brutal-stat-label">Weight</div>
+  ${product.description ? `<p class="neuro-description">${product.description}</p>` : ''}
+  
+  <div class="neuro-meta">
+    <div class="neuro-rating-box">
+      ${starsHTML}
+      <span style="font-size: 13px; font-weight: 600; color: #5a5a5a;">${product.rating}</span>
     </div>
-    <div class="brutal-stat">
-      <div class="brutal-stat-value">${product.rating}★</div>
-      <div class="brutal-stat-label">Rating</div>
-    </div>
-    <div class="brutal-stat">
-      <div class="brutal-stat-value">${defaultVariant.discount}</div>
-      <div class="brutal-stat-label">Off</div>
-    </div>
+    <div class="neuro-stock">In Stock</div>
   </div>
   
-  <div class="brutal-price-section">
-    <div class="brutal-price">₹${defaultVariant.newPrice}</div>
-    <div class="brutal-save-badge">SAVE ₹${defaultVariant.oldPrice - defaultVariant.newPrice}</div>
+  <div class="product-price-section">
+    <span class="price-new">₹${defaultVariant.newPrice}</span>
+    <span class="price-old">₹${defaultVariant.oldPrice}</span>
+     <span class="price-discount">${defaultVariant.discount} off</span>
   </div>
+            ${isOutOfStock ? '' : `
+  <button class="size-select-btn" data-product-id="${product.id}">
+    <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
+    <span class="arrow-down">▼</span>
+  </button>
+`}
+        
 
-  ${isOutOfStock ? '' : `
-    <button class="size-select-btn" data-product-id="${product.id}">
-      <span>${product.variants.some(v => v.customMessage === true) ? 'Customize' : defaultVariant.size}</span>
-      <span class="arrow-down">▼</span>
-    </button>
-  `}
+        ${isOutOfStock ? `
+          <button class="out-of-stock-btn" disabled>
+            Out of Stock
+          </button>
+        ` : (() => {
+          const variantIndex = product.defaultVariant || 0;
+          const flavor = (product.flavors && product.flavors.length > 0) ? product.flavors[0] : '';
+          const cartQty = cartItem ? cartItem.quantity : 0;
+          const showQty = cartQty > 0;
 
-  ${isOutOfStock ? `
-    <button class="out-of-stock-btn" disabled>
-      Out of Stock
-    </button>
-  ` : (() => {
-    const variantIndex = product.defaultVariant || 0;
-    const flavor = (product.flavors && product.flavors.length > 0) ? product.flavors[0] : '';
-    const cartQty = cartItem ? cartItem.quantity : 0;
-    const showQty = cartQty > 0;
+          return `
+            <div 
+              class="quantity-controls ${showQty ? 'active' : ''}" 
+              data-product-id="${product.id}" 
+              data-variant="${variantIndex}" 
+              data-flavor="${flavor}"
+              style="display: ${showQty ? 'flex' : 'none'}"
+            >
+              <button class="qty-btn minus">−</button>
+              <span class="qty-count">${cartQty || 1}</span>
+              <button class="qty-btn plus">+</button>
+            </div>
 
-    return `
-      <div 
-        class="quantity-controls ${showQty ? 'active' : ''}" 
-        data-product-id="${product.id}" 
-        data-variant="${variantIndex}" 
-        data-flavor="${flavor}"
-        style="display: ${showQty ? 'flex' : 'none'}"
-      >
-        <button class="qty-btn minus">−</button>
-        <span class="qty-count">${cartQty || 1}</span>
-        <button class="qty-btn plus">+</button>
+            <button 
+              class="add-to-cart-btn" 
+              data-product-id="${product.id}" 
+              data-variant="${variantIndex}" 
+              data-flavor="${flavor}"
+              style="display: ${showQty ? 'none' : 'block'}"
+            >
+              Add to Cart
+            </button>
+          `;
+        })()}
+
       </div>
-
-      <button 
-        class="add-to-cart-btn" 
-        data-product-id="${product.id}" 
-        data-variant="${variantIndex}" 
-        data-flavor="${flavor}"
-        style="display: ${showQty ? 'none' : 'block'}"
-      >
-        Add to Cart
-      </button>
     `;
-  })()}
-
-</div>
-`;;
     
     this.attachCardListeners(card, product);
     return card;
@@ -540,22 +535,20 @@ sizeOptions.innerHTML = '';
  updateCardDisplay(card, product, variantIndex) {
   const variant = product.variants[variantIndex];
   
-  // Update stats box - size (first stat)
-  const statValues = card.querySelectorAll('.brutal-stat-value');
-  if (statValues[0]) statValues[0].textContent = variant.size;
-  if (statValues[2]) statValues[2].textContent = variant.discount;
+  // Update prices (with null checks)
+  const priceNew = card.querySelector('.price-new');
+  const priceOld = card.querySelector('.price-old');
+  const priceDiscount = card.querySelector('.price-discount');
   
-  // Update price
-  const priceEl = card.querySelector('.brutal-price');
-  if (priceEl) priceEl.textContent = `₹${variant.newPrice}`;
-  
-  // Update save badge (calculate savings)
-  const saveBadge = card.querySelector('.brutal-save-badge');
-  if (saveBadge) saveBadge.textContent = `SAVE ₹${variant.oldPrice - variant.newPrice}`;
+  if (priceNew) priceNew.textContent = `₹${variant.newPrice}`;
+  if (priceOld) priceOld.textContent = `₹${variant.oldPrice}`;
+  if (priceDiscount) priceDiscount.textContent = `${variant.discount} off`;
   
   // Update size button
   const sizeBtn = card.querySelector('.size-select-btn span:first-child');
-  if (sizeBtn) sizeBtn.textContent = variant.size;
+  if (sizeBtn) {
+    sizeBtn.textContent = variant.size;
+  }
 }
 
   // Add to cart
@@ -589,7 +582,7 @@ if (hasCustomMessage) {
   
   this.cart.push(cartItem);
 }
-sessionStorage.setItem('cartUpdated', 'true');
+
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -644,7 +637,7 @@ sessionStorage.setItem('cartUpdated', 'true');
       cartItem.quantity++;
       qtyCountElement.textContent = cartItem.quantity;
     }
-sessionStorage.setItem('cartUpdated', 'true');
+
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -693,7 +686,7 @@ sessionStorage.setItem('cartUpdated', 'true');
     } else {
       qtyCountElement.textContent = cartItem.quantity;
     }
-sessionStorage.setItem('cartUpdated', 'true');
+
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -726,11 +719,9 @@ sessionStorage.setItem('cartUpdated', 'true');
   }
 
   // Render the cart sidebar content from this.cart
-  renderCartSidebar() {
+ renderCartSidebar() {
     /* delegated to cart-sidebar.js */
 }
-
-
   adjustQuantityFromSidebar(productId, variantIndex, flavor, delta) {
     const item = this.cart.find(i =>
       String(i.productId) === String(productId) &&
@@ -777,7 +768,7 @@ sessionStorage.setItem('cartUpdated', 'true');
         }
       }
     }
-sessionStorage.setItem('cartUpdated', 'true');
+
     localStorage.setItem('cart', JSON.stringify(this.cart));
 
     // 🔁 Navbar badge + sidebar UI
