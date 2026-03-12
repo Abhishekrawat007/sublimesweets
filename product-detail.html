@@ -2066,7 +2066,7 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 <!-- ============================================================
-     STICKY CTA BAR — V11 VANYA BOTANICAL
+     STICKY CTA BAR — V12 SOLKORN
      Paste just before </body>
      ============================================================ -->
 
@@ -2089,30 +2089,31 @@ body.dark-mode .video-modal-content {
 
 <style>
 html, body { overflow-x: hidden !important; max-width: 100% !important; }
-body { padding-bottom: 68px !important; }
+body { padding-bottom: 64px !important; }
 
 .sticky-cta-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     width: 100%; box-sizing: border-box;
     z-index: 900;
-    background: #FAF7F2;
-    border-top: 1px solid #DDD5C5;
-    padding: 10px 32px;
+    background: #FAF8F3;
+    border-top: 1px solid #E0D8CC;
+    padding: 10px 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
-    height: 68px;
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+    gap: 24px;
+    height: 64px;
+    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s ease;
 }
 
 .sticky-cta-bar::before {
     content: '';
     position: absolute;
-    top: -2px; left: 0; right: 0;
+    top: -1px; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #8A9E7E 30%, #5C7A52 50%, #8A9E7E 70%, transparent);
+    background: linear-gradient(90deg, transparent 0%, #D4821A 20%, #E8A84A 50%, #D4821A 80%, transparent 100%);
+    opacity: 0.5;
 }
 
 .sticky-cta-bar.hidden {
@@ -2123,76 +2124,78 @@ body { padding-bottom: 68px !important; }
 
 .sticky-product-info {
     flex: 1; min-width: 0;
-    display: flex; flex-direction: column; gap: 2px;
+    display: flex; align-items: baseline; gap: 14px;
     overflow: hidden;
 }
 
 .sticky-product-name {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 9px; font-weight: 400;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: #B0A090;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 9px; font-weight: 300;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: #A89E90;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .sticky-product-price {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; font-weight: 400;
-    color: #3D5C38; line-height: 1;
-    letter-spacing: -0.01em;
+    font-family: 'Cormorant', serif;
+    font-size: 26px; font-weight: 300;
+    color: #1C1916; line-height: 1;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
 }
 
 .sticky-actions {
     display: flex; flex-direction: row;
-    gap: 8px; flex-shrink: 0;
+    gap: 0; flex-shrink: 0;
 }
 
 .sticky-add-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 7px; padding: 0 20px; height: 44px;
-    border: 1px solid #8A9E7E;
-    background: #8A9E7E; color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+    gap: 8px; padding: 0 24px; height: 44px;
+    border: 1px solid #1C1916;
+    background: #1C1916; color: #FAF8F3;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
     text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.25s, border-color 0.25s;
-    border-radius: 4px; box-sizing: border-box;
+    transition: background 0.28s, border-color 0.28s, color 0.28s;
+    border-radius: 0; box-sizing: border-box;
+    border-right: none;
 }
 
-.sticky-add-btn:hover { background: #3D5C38; border-color: #3D5C38; }
+.sticky-add-btn:hover { background: #D4821A; border-color: #D4821A; }
 
 .sticky-add-btn.in-cart {
-    background: #FAF7F2; color: #3D5C38;
-    border-color: #3D5C38;
+    background: #FAF8F3; color: #D4821A;
+    border-color: #D4821A; border-right: none;
 }
-.sticky-add-btn.in-cart:hover { background: #3D5C38; color: #fff; }
+.sticky-add-btn.in-cart:hover { background: #D4821A; color: #fff; }
 
 .sticky-buy-btn {
     display: flex; align-items: center; justify-content: center;
-    padding: 0 20px; height: 44px;
-    border: 1px solid #C8903A;
-    background: transparent; color: #C8903A;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+    padding: 0 24px; height: 44px;
+    border: 1px solid #D4821A;
+    background: transparent; color: #D4821A;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
     text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.2s, color 0.2s;
-    border-radius: 4px; box-sizing: border-box;
+    transition: background 0.28s, color 0.28s;
+    border-radius: 0; box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover { background: #C8903A; color: #fff; }
+.sticky-buy-btn:hover { background: #D4821A; color: #fff; }
 
 @media (max-width: 520px) {
     .sticky-cta-bar { padding: 0; gap: 0; height: 56px; }
     .sticky-product-info { display: none; }
-    .sticky-actions { width: 100%; height: 100%; gap: 0; }
+    .sticky-actions { width: 100%; height: 100%; }
     .sticky-add-btn, .sticky-buy-btn {
         flex: 1; width: 0; height: 100%;
-        padding: 0 10px; font-size: 10px;
-        border-radius: 0; border-top: none; border-bottom: none;
+        padding: 0 10px; font-size: 9px;
+        border-top: none; border-bottom: none;
     }
-    .sticky-add-btn { border-left: none; border-right: 1px solid #DDD5C5; }
+    .sticky-add-btn { border-left: none; border-right: 1px solid #E0D8CC; }
     .sticky-buy-btn { border-left: none; border-right: none; }
 }
 </style>
