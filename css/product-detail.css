@@ -224,8 +224,8 @@ body {
 /* WISHLIST */
 .wishlist-btn-detail {
     position: absolute;
-    bottom: 100px;
-    left: 28px;
+    top: 28px;
+    right: 28px;
     width: 44px; height: 44px;
     border-radius: 50%;
     background: rgba(245,240,232,0.88);
@@ -873,7 +873,7 @@ body {
     .slide-btn { width: 32px; height: 32px; font-size: 12px; }
     .thumbnail { width: 48px; height: 48px; }
     .discount-badge { top: 16px; left: 16px; font-size: 9px; padding: 4px 10px; }
-    .wishlist-btn-detail { bottom: 82px; left: 16px; width: 38px; height: 38px; }
+    .wishlist-btn-detail { top: 16px; right: 16px; width: 38px; height: 38px; }
     .related-section { padding: 0 12px; margin-top: 36px; }
 }
 
@@ -882,7 +882,7 @@ body {
     .thumbnail-column { padding: 8px 12px; }
     .thumbnail { width: 42px; height: 42px; }
     .discount-badge { font-size: 8px; padding: 4px 8px; top: 12px; left: 12px; }
-    .wishlist-btn-detail { bottom: 76px; left: 12px; width: 36px; height: 36px; }
+    .wishlist-btn-detail { top: 12px; right: 12px; width: 36px; height: 36px; }
     .slide-btn { width: 30px; height: 30px; font-size: 11px; }
     .section-title::after { display: none; }
 }
