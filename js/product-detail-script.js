@@ -920,6 +920,7 @@ function upsertCartQuantity() {
     
     pm.cart.push(cartItem);
 }
+sessionStorage.setItem('cartUpdated', 'true');
 
     localStorage.setItem('cart', JSON.stringify(pm.cart));
     if (typeof pm.syncCartUI === 'function') {
@@ -941,6 +942,7 @@ function removeFromCartCurrentVariant() {
           item.variantIndex === selectedVariantIndex &&
           item.flavor === selectedFlavor)
     );
+sessionStorage.setItem('cartUpdated', 'true');
 
     localStorage.setItem('cart', JSON.stringify(pm.cart));
     if (typeof pm.syncCartUI === 'function') {
