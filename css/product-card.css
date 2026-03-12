@@ -247,28 +247,7 @@ div.product-card {
 }
 .product-card:hover .product-card-image::before { opacity: 1; }
 
-/* Vertical edition marker — top-left ink strip */
-.product-card .product-card-image::after {
-  content: 'NO.' attr(data-edition);
-  position: absolute;
-  top: 14px; left: 14px;
-  font-family: var(--font-ui);
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--a);
-  padding: 4px 8px;
-  z-index: 4;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: all var(--ease);
-}
-.product-card:hover .product-card-image::after {
-  opacity: 1;
-  transform: translateX(0);
-}
+
 
 /* ── WISHLIST ────────────────────────────── */
 .product-card .wishlist-btn {
