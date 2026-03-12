@@ -167,9 +167,12 @@ div.product-card {
 @media (max-width: 550px) {
   .products-grid .product-card,
   div.product-card {
-    border-bottom: 1px solid var(--line-md) !important;
+    margin: 0 !important;
+    padding: 0 !important;
     box-shadow: none !important;
+    border-width: 0 !important;
     border-radius: 0 !important;
+    border-bottom: 1px solid var(--line-md) !important;
   }
 }
 
@@ -1083,4 +1086,15 @@ body.dark-mode .modal-apply-btn:hover { background: var(--a-2); }
   .modal-footer-product { padding: 14px 20px !important; gap: 8px !important; }
   .modal-cancel-btn,
   .modal-apply-btn      { padding: 12px !important; font-size: 11px !important; min-height: 42px !important; }
+}
+
+/* ── Desktop card-info padding ───────────── */
+@media (min-width: 768px) {
+  .product-card-info { padding: 18px 18px 20px !important; }
+  .quantity-controls { border-left: 1px solid var(--line-md) !important; border-right: 1px solid var(--line-md) !important; }
+}
+
+@media (min-width: 235px) and (max-width: 767px) {
+  .product-card-info { padding: 10px 11px 12px !important; }
+  .quantity-controls { border-left: 1px solid var(--line-md) !important; border-right: 1px solid var(--line-md) !important; }
 }
