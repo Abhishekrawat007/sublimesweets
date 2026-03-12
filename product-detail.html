@@ -2066,7 +2066,7 @@ body.dark-mode .video-modal-content {
      <script src="js/nav-sync.js"></script>
       <script src="js/footer.js" ></script>
 <!-- ============================================================
-     STICKY CTA BAR — V12 SOLKORN
+     STICKY CTA BAR — V13 GULMOHAR
      Paste just before </body>
      ============================================================ -->
 
@@ -2089,31 +2089,39 @@ body.dark-mode .video-modal-content {
 
 <style>
 html, body { overflow-x: hidden !important; max-width: 100% !important; }
-body { padding-bottom: 64px !important; }
+body { padding-bottom: 68px !important; }
 
 .sticky-cta-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     width: 100%; box-sizing: border-box;
     z-index: 900;
-    background: #FAF8F3;
-    border-top: 1px solid #E0D8CC;
-    padding: 10px 40px;
+    background: #FDF9F5;
+    border-top: 1px solid #E0D4C4;
+    padding: 10px 36px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 24px;
-    height: 64px;
-    transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s ease;
+    gap: 20px;
+    height: 68px;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
 }
 
+/* Brass gradient top line */
 .sticky-cta-bar::before {
     content: '';
     position: absolute;
     top: -1px; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #D4821A 20%, #E8A84A 50%, #D4821A 80%, transparent 100%);
-    opacity: 0.5;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #B8873A 15%,
+        #D4A84A 40%,
+        #B8873A 60%,
+        #D4A84A 80%,
+        transparent 100%
+    );
+    opacity: 0.6;
 }
 
 .sticky-cta-bar.hidden {
@@ -2124,79 +2132,93 @@ body { padding-bottom: 64px !important; }
 
 .sticky-product-info {
     flex: 1; min-width: 0;
-    display: flex; align-items: baseline; gap: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
     overflow: hidden;
 }
 
 .sticky-product-name {
-    font-family: 'Epilogue', sans-serif;
-    font-size: 9px; font-weight: 300;
-    letter-spacing: 0.28em; text-transform: uppercase;
-    color: #A89E90;
+    font-family: 'Nunito', sans-serif;
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: #A89888;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .sticky-product-price {
-    font-family: 'Cormorant', serif;
-    font-size: 26px; font-weight: 300;
-    color: #1C1916; line-height: 1;
-    letter-spacing: -0.02em;
-    flex-shrink: 0;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px; font-weight: 400;
+    font-style: italic;
+    color: #2C4A35; line-height: 1;
 }
 
 .sticky-actions {
     display: flex; flex-direction: row;
-    gap: 0; flex-shrink: 0;
+    gap: 10px; flex-shrink: 0;
 }
 
+/* ADD TO CART */
 .sticky-add-btn {
     display: flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 0 24px; height: 44px;
-    border: 1px solid #1C1916;
-    background: #1C1916; color: #FAF8F3;
-    font-family: 'Epilogue', sans-serif;
-    font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
+    gap: 8px; padding: 0 22px; height: 46px;
+    border: 1px solid #2C4A35;
+    background: #2C4A35; color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
     text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.28s, border-color 0.28s, color 0.28s;
-    border-radius: 0; box-sizing: border-box;
-    border-right: none;
+    transition: background 0.3s, border-color 0.3s;
+    border-radius: 10px; box-sizing: border-box;
+    position: relative; overflow: hidden;
 }
 
-.sticky-add-btn:hover { background: #D4821A; border-color: #D4821A; }
+.sticky-add-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(184,135,58,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.sticky-add-btn:hover { background: #3D6B4A; border-color: #3D6B4A; }
+.sticky-add-btn:hover::after { left: 150%; }
 
 .sticky-add-btn.in-cart {
-    background: #FAF8F3; color: #D4821A;
-    border-color: #D4821A; border-right: none;
+    background: #FDF9F5; color: #2C4A35;
+    border-color: #2C4A35;
 }
-.sticky-add-btn.in-cart:hover { background: #D4821A; color: #fff; }
+.sticky-add-btn.in-cart:hover { background: #2C4A35; color: #fff; }
 
+/* BUY NOW */
 .sticky-buy-btn {
     display: flex; align-items: center; justify-content: center;
-    padding: 0 24px; height: 44px;
-    border: 1px solid #D4821A;
-    background: transparent; color: #D4821A;
-    font-family: 'Epilogue', sans-serif;
-    font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
+    padding: 0 22px; height: 46px;
+    border: 1px solid #B8873A;
+    background: transparent; color: #B8873A;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
     text-transform: uppercase;
     cursor: pointer; white-space: nowrap;
-    transition: background 0.28s, color 0.28s;
-    border-radius: 0; box-sizing: border-box;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 10px; box-sizing: border-box;
 }
 
-.sticky-buy-btn:hover { background: #D4821A; color: #fff; }
+.sticky-buy-btn:hover { background: #B8873A; color: #fff; }
 
 @media (max-width: 520px) {
-    .sticky-cta-bar { padding: 0; gap: 0; height: 56px; }
+    .sticky-cta-bar { padding: 0; gap: 0; height: 58px; }
     .sticky-product-info { display: none; }
-    .sticky-actions { width: 100%; height: 100%; }
+    .sticky-actions { width: 100%; height: 100%; gap: 0; }
     .sticky-add-btn, .sticky-buy-btn {
         flex: 1; width: 0; height: 100%;
-        padding: 0 10px; font-size: 9px;
+        padding: 0 10px; font-size: 10px;
+        border-radius: 0;
         border-top: none; border-bottom: none;
     }
-    .sticky-add-btn { border-left: none; border-right: 1px solid #E0D8CC; }
+    .sticky-add-btn { border-left: none; border-right: 1px solid #E0D4C4; }
     .sticky-buy-btn { border-left: none; border-right: none; }
+    .sticky-add-btn::after { display: none; }
 }
 </style>
 
@@ -2210,8 +2232,8 @@ body { padding-bottom: 64px !important; }
     if (!bar) return;
 
     function sync() {
-        var n = document.getElementById('productTitle');
-        var p = document.getElementById('currentPrice');
+        var n  = document.getElementById('productTitle');
+        var p  = document.getElementById('currentPrice');
         var sn = document.getElementById('stickyProductName');
         var sp = document.getElementById('stickyProductPrice');
         if (n && sn && n.textContent.trim())  sn.textContent = n.textContent.trim();
@@ -2261,10 +2283,10 @@ body { padding-bottom: 64px !important; }
     }
 
     function watchDOM() {
-        var mo = new MutationObserver(sync);
+        var mo  = new MutationObserver(sync);
         var opt = { childList: true, subtree: true, characterData: true };
-        var t = document.getElementById('productTitle');
-        var p = document.getElementById('currentPrice');
+        var t   = document.getElementById('productTitle');
+        var p   = document.getElementById('currentPrice');
         if (t) mo.observe(t, opt);
         if (p) mo.observe(p, opt);
     }
