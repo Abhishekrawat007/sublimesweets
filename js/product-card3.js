@@ -68,6 +68,7 @@ class ProductCardManager {
         typeof item.quantity === 'number' &&
         item.quantity > 0
       );
+      
       localStorage.setItem('cart', JSON.stringify(this.cart));
 
       if (!Array.isArray(this.cart)) {
@@ -588,7 +589,7 @@ if (hasCustomMessage) {
   
   this.cart.push(cartItem);
 }
-
+sessionStorage.setItem('cartUpdated', 'true');
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -643,7 +644,7 @@ if (hasCustomMessage) {
       cartItem.quantity++;
       qtyCountElement.textContent = cartItem.quantity;
     }
-
+sessionStorage.setItem('cartUpdated', 'true');
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -692,7 +693,7 @@ if (hasCustomMessage) {
     } else {
       qtyCountElement.textContent = cartItem.quantity;
     }
-
+sessionStorage.setItem('cartUpdated', 'true');
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.syncCartUI();
 
@@ -776,7 +777,7 @@ if (hasCustomMessage) {
         }
       }
     }
-
+sessionStorage.setItem('cartUpdated', 'true');
     localStorage.setItem('cart', JSON.stringify(this.cart));
 
     // 🔁 Navbar badge + sidebar UI

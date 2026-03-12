@@ -181,9 +181,12 @@
 
     document.addEventListener('DOMContentLoaded', tryPatch);
 
-    // Android back button fix (bfcache)
-    window.addEventListener('pageshow', function (e) {
-        if (e.persisted) window.location.reload();
-    });
-
+  // Android back button fix (bfcache)
+// Only reload if cart was actually modified on the previous page
+window.addEventListener('pageshow', function (e) {
+    if (e.persisted && sessionStorage.getItem('cartUpdated')) {
+        sessionStorage.removeItem('cartUpdated');
+        window.location.reload();
+    }
+});
 })();
