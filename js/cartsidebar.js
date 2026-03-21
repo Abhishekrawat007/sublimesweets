@@ -1,8 +1,7 @@
 // ============================================
-// CART SIDEBAR JS - V11
-// "Ivory Voltage" — ivory, electric lime,
-// Syne single-font, tasting-menu layout
-// All classes prefixed v11- to avoid conflicts
+// CART SIDEBAR JS - V5
+// "Dark Luxury" — charcoal + gold, serif title
+// All classes prefixed v5- to avoid conflicts
 // ============================================
 
 (function () {
@@ -28,7 +27,7 @@
         };
     });
 
-    function patchCartV11(manager) {
+    function patchCartV5(manager) {
 
         if (!manager.removeItem) {
             manager.removeItem = function (idx) {
@@ -74,18 +73,18 @@
                     emptyState.style.display = 'flex';
                 } else {
                     cartContent.innerHTML = `
-                        <div class="v11-empty-state">
-                            <div class="v11-empty-icon">🛍️</div>
-                            <h3 class="v11-empty-title">Cart is empty</h3>
-                            <p class="v11-empty-text">Add something great.</p>
+                        <div class="v5-empty-state">
+                            <div class="v5-empty-icon">🛒</div>
+                            <h3 class="v5-empty-title">Your bag is empty</h3>
+                            <p class="v5-empty-text">Add something exquisite</p>
                             <a href="index.html#productsGrid"
                                onclick="window.closeCart && window.closeCart();"
-                               class="v11-shop-btn">Browse</a>
+                               class="v5-shop-btn">Explore</a>
                         </div>`;
                 }
                 totalEl.textContent = '₹0';
                 const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-                if (checkoutBtn) checkoutBtn.textContent = 'Checkout';
+                if (checkoutBtn) checkoutBtn.textContent = 'Checkout — ₹0';
                 return;
             }
 
@@ -103,38 +102,34 @@
                 const qty = item.quantity || 0;
                 total += price * qty;
 
-                // Build meta string with dot separators
-                const metaParts = [];
-                if (variant.size) metaParts.push(variant.size);
-                if (item.flavor) metaParts.push(item.flavor);
-                const metaStr = metaParts.join(' · ');
-
                 const div = document.createElement('div');
-                div.className = 'v11-cart-item';
+                div.className = 'v5-cart-item';
                 div.dataset.productId = product.id;
                 div.dataset.variantIndex = item.variantIndex;
                 div.dataset.flavor = item.flavor || '';
 
                 div.innerHTML = `
-                    <img src="${product.images[0]}" class="v11-item-img" alt="${product.name}">
-                    <div class="v11-item-info">
-                        <div class="v11-item-name">${product.name}</div>
-                        ${metaStr ? `<div class="v11-item-meta">${metaStr}</div>` : ''}
-                        ${item.customMessage ? `<div class="v11-item-msg">${item.customMessage}</div>` : ''}
-                        <div class="v11-item-price">₹${(price * qty).toLocaleString('en-IN')}</div>
-                    </div>
-                    <div class="v11-item-controls">
-                        <div class="v11-qty-wrap">
-                            <button class="v11-qty-btn v11-plus">+</button>
-                            <span class="v11-qty-num">${qty}</span>
-                            <button class="v11-qty-btn v11-minus">−</button>
-                        </div>
-                        <button class="v11-item-del" title="Remove">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="v5-item-img-wrap">
+                        <img src="${product.images[0]}" class="v5-item-img" alt="${product.name}">
+                        <button class="v5-item-del" title="Remove">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                         </button>
+                    </div>
+                    <div class="v5-item-info">
+                        <div class="v5-item-name">${product.name}</div>
+                        ${variant.size || item.flavor ? `<div class="v5-item-variant">${variant.size || ''}${item.flavor ? ' · ' + item.flavor : ''}</div>` : ''}
+                        ${item.customMessage ? `<div class="v5-item-msg">✦ ${item.customMessage}</div>` : ''}
+                        <div class="v5-item-bottom">
+                            <div class="v5-item-price">₹${(price * qty).toLocaleString('en-IN')}</div>
+                            <div class="v5-qty-wrap">
+                                <button class="v5-qty-btn v5-minus">−</button>
+                                <span class="v5-qty-num">${qty}</span>
+                                <button class="v5-qty-btn v5-plus">+</button>
+                            </div>
+                        </div>
                     </div>`;
 
                 cartContent.appendChild(div);
@@ -143,18 +138,19 @@
             totalEl.textContent = '₹' + total.toLocaleString('en-IN');
 
             const checkoutBtn = document.querySelector('.cart-sidebar .checkout-btn');
-            if (checkoutBtn) checkoutBtn.textContent = `Checkout  ₹${total.toLocaleString('en-IN')}`;
+            if (checkoutBtn) checkoutBtn.textContent = `Checkout — ₹${total.toLocaleString('en-IN')}`;
 
-            cartContent.querySelectorAll('.v11-cart-item').forEach(div => {
+            // Attach handlers
+            cartContent.querySelectorAll('.v5-cart-item').forEach(div => {
                 const pid = div.dataset.productId;
                 const vi = parseInt(div.dataset.variantIndex);
                 const fl = div.dataset.flavor || null;
 
-                div.querySelector('.v11-minus').addEventListener('click', () =>
+                div.querySelector('.v5-minus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, -1));
-                div.querySelector('.v11-plus').addEventListener('click', () =>
+                div.querySelector('.v5-plus').addEventListener('click', () =>
                     this.adjustQuantityFromSidebar(pid, vi, fl, +1));
-                div.querySelector('.v11-item-del').addEventListener('click', () => {
+                div.querySelector('.v5-item-del').addEventListener('click', () => {
                     const idx = this.cart.findIndex(i =>
                         String(i.productId) === String(pid) &&
                         i.variantIndex === vi &&
@@ -164,7 +160,7 @@
                 });
             });
         };
-  const originalSyncCartUI = manager.syncCartUI?.bind(manager);
+          const originalSyncCartUI = manager.syncCartUI?.bind(manager);
 
     manager.syncCartUI = function() {
         if (originalSyncCartUI) originalSyncCartUI();
@@ -177,13 +173,14 @@
             badge.style.display = total > 0 ? 'flex' : 'none';
         }
     };
-        console.log('✅ Cart V11 patched');
+
+        console.log('✅ Cart V5 patched');
     }
 
     let attempts = 0;
     function tryPatch() {
         if (window.productManager) {
-            patchCartV11(window.productManager);
+            patchCartV5(window.productManager);
             window.productManager.syncCartUI();
         } else if (attempts < 50) {
             attempts++;
@@ -193,9 +190,8 @@
 
     document.addEventListener('DOMContentLoaded', tryPatch);
 
-  // Android back button fix (bfcache)
-// Only reload if cart was actually modified on the previous page
-window.addEventListener('pageshow', function (e) {
+    // Android back button fix (bfcache)
+ window.addEventListener('pageshow', function (e) {
     if (window.productManager) {
         try {
             const stored = localStorage.getItem('cart');
@@ -207,4 +203,5 @@ window.addEventListener('pageshow', function (e) {
     }
     sessionStorage.removeItem('cartUpdated');
 });
+
 })();
