@@ -1664,3 +1664,452 @@ body.dark-mode .navbar-logo-img,
 body.dark-mode .mobile-logo {
   filter: brightness(0) invert(1) !important;
 }
+/* ============================================================
+   SUBLIME SWEETS — MOBILE MENU
+   Navy × Yellow × DM Sans — matches product card palette
+   ============================================================ */
+
+/* === MOBILE MENU SHELL === */
+.mobile-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 85% !important;
+    max-width: 400px !important;
+    height: 100vh !important;
+    background: #ffffff !important;
+    z-index: 10002 !important;
+    overflow-y: auto !important;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.15) !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    will-change: transform !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.mobile-menu.active {
+    transform: translateX(0) !important;
+}
+
+body.dark-mode .mobile-menu {
+    background: #1a1a1a !important;
+}
+
+/* === HEADER — navy gradient === */
+.mobile-menu-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 16px 20px !important;
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    border-bottom: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    flex-shrink: 0 !important;
+}
+
+/* Gold hairline at bottom of header */
+.mobile-menu-header::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent, #F8D800, #FFB300, transparent) !important;
+    pointer-events: none !important;
+}
+
+/* Logo in header — invert to show on dark bg */
+.mobile-menu-header .navbar-logo img,
+.mobile-menu-header .mobile-logo {
+    filter: brightness(0) invert(1) !important;
+    opacity: 0.92 !important;
+}
+
+/* Close button in header */
+.mobile-menu-header .close-btn {
+    width: 32px !important;
+    height: 32px !important;
+    background: rgba(255,255,255,0.10) !important;
+    border: 1px solid rgba(255,255,255,0.20) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.mobile-menu-header .close-btn svg {
+    stroke: rgba(255,255,255,0.8) !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.mobile-menu-header .close-btn:hover {
+    background: rgba(248,216,0,0.18) !important;
+    border-color: #F8D800 !important;
+    transform: rotate(90deg) !important;
+}
+
+.mobile-menu-header .close-btn:hover svg {
+    stroke: #F8D800 !important;
+}
+
+/* === CONTENT AREA === */
+.mobile-menu-content {
+    padding: 12px 14px 80px !important;
+    background: transparent !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+}
+
+body.dark-mode .mobile-menu-content {
+    background: transparent !important;
+}
+
+/* === MENU ITEMS === */
+.mobile-menu-item {
+    margin-bottom: 3px !important;
+}
+
+/* === MENU LINKS === */
+.mobile-menu-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 13px 14px !important;
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+    letter-spacing: 0.2px !important;
+    border: none !important;
+    width: 100% !important;
+    text-align: left !important;
+}
+
+body.dark-mode .mobile-menu-link {
+    color: #e0e0e0 !important;
+}
+
+.mobile-menu-link::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 3px !important;
+    background: linear-gradient(180deg, #141E30, #F8D800) !important;
+    transform: scaleY(0) !important;
+    transition: transform 0.2s ease !important;
+    border-radius: 0 2px 2px 0 !important;
+}
+
+.mobile-menu-link:hover {
+    background: rgba(20,30,48,0.06) !important;
+    color: #141E30 !important;
+    transform: translateX(4px) !important;
+}
+
+.mobile-menu-link:hover::before {
+    transform: scaleY(1) !important;
+}
+
+body.dark-mode .mobile-menu-link:hover {
+    background: rgba(248,216,0,0.08) !important;
+    color: #F8D800 !important;
+}
+
+/* Active state */
+.mobile-menu-link.active {
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(20,30,48,0.22) !important;
+}
+
+.mobile-menu-link.active::before { display: none !important; }
+
+.mobile-menu-link.active span,
+.mobile-menu-link.active .menu-icon {
+    color: #ffffff !important;
+}
+
+/* Arrow icon */
+.arrow-icon {
+    font-size: 11px !important;
+    color: #aaa !important;
+    transition: transform 0.25s ease !important;
+    flex-shrink: 0 !important;
+}
+
+body.dark-mode .arrow-icon { color: #666 !important; }
+
+/* === MENU ICON === */
+.menu-icon {
+    margin-right: 10px !important;
+    font-size: 17px !important;
+    flex-shrink: 0 !important;
+}
+
+/* === SUBMENU === */
+.mobile-submenu {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.35s ease !important;
+    padding-left: 14px !important;
+}
+
+.mobile-submenu.active {
+    max-height: 2000px !important;
+}
+
+.mobile-submenu-item {
+    padding: 11px 14px !important;
+    color: #444 !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+    margin: 2px 0 !important;
+    cursor: pointer !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+}
+
+.mobile-submenu-item:hover {
+    background: rgba(20,30,48,0.06) !important;
+    color: #141E30 !important;
+    transform: translateX(4px) !important;
+}
+
+body.dark-mode .mobile-submenu-item {
+    color: #aaa !important;
+}
+
+body.dark-mode .mobile-submenu-item:hover {
+    background: rgba(248,216,0,0.08) !important;
+    color: #F8D800 !important;
+}
+
+.submenu-emoji {
+    font-size: 16px !important;
+    min-width: 22px !important;
+    flex-shrink: 0 !important;
+}
+
+/* === DIVIDER LINE between sections === */
+.mobile-menu-content > .mobile-menu-item + .mobile-menu-item {
+    border-top: none !important;
+}
+
+/* Subtle separator before special items */
+.mobile-menu-item:has(.mobile-menu-link[onclick*="yourorders"]) {
+    margin-top: 8px !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #f0f0f0 !important;
+}
+
+body.dark-mode .mobile-menu-item:has(.mobile-menu-link[onclick*="yourorders"]) {
+    border-top-color: #2a2a2a !important;
+}
+
+/* === DARK MODE TOGGLE ROW === */
+.dark-mode-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 13px 14px !important;
+    background: rgba(20,30,48,0.04) !important;
+    border-radius: 10px !important;
+    margin-top: 10px !important;
+    border: 1px solid rgba(20,30,48,0.08) !important;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: rgba(255,255,255,0.04) !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+.dark-mode-label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+}
+
+body.dark-mode .dark-mode-label {
+    color: #e0e0e0 !important;
+}
+
+/* Toggle switch */
+.toggle-switch {
+    position: relative !important;
+    width: 46px !important;
+    height: 24px !important;
+    background: #d0d0d0 !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    box-shadow: none !important;
+    flex-shrink: 0 !important;
+}
+
+.toggle-switch.active {
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+    border-color: #141E30 !important;
+}
+
+body.dark-mode .toggle-switch {
+    background: #3a3a3a !important;
+}
+
+body.dark-mode .toggle-switch.active {
+    background: linear-gradient(135deg, #F8D800, #FFB300) !important;
+}
+
+.toggle-slider {
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: white !important;
+    border-radius: 50% !important;
+    transition: transform 0.3s ease !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18) !important;
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(22px) !important;
+}
+
+/* === ENTRANCE ANIMATION === */
+.mobile-menu-item,
+.dark-mode-toggle {
+    opacity: 0 !important;
+    transform: translateY(6px) !important;
+    transition: opacity 0.22s ease-out, transform 0.22s ease-out !important;
+}
+
+.mobile-menu.active .mobile-menu-item.menu-item-show,
+.mobile-menu.active .dark-mode-toggle.menu-item-show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* === SCROLLBAR === */
+.mobile-menu::-webkit-scrollbar {
+    width: 3px !important;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+    background: rgba(20,30,48,0.12) !important;
+    border-radius: 2px !important;
+}
+
+body.dark-mode .mobile-menu::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12) !important;
+}
+
+/* === MOBILE OVERLAY === */
+.mobile-menu-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0,0,0,0.55) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+    z-index: 10001 !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+/* === CONTENT AREA === */
+.mobile-menu-content {
+    padding: 16px 16px 100px !important;  /* was 12px 14px */
+}
+
+/* === MENU ITEMS === */
+.mobile-menu-item {
+    margin-bottom: 4px !important;  /* was 3px */
+}
+
+/* === MENU LINKS === */
+.mobile-menu-link {
+    padding: 16px 16px !important;  /* was 13px 14px */
+    font-size: 16px !important;     /* was 14px */
+}
+
+/* === SUBMENU LINKS === */
+.mobile-submenu {
+    padding-left: 16px !important;  /* was 14px */
+}
+
+.mobile-submenu-item {
+    padding: 14px 16px !important;  /* was 11px 14px */
+    font-size: 15px !important;     /* was 13px */
+    margin: 4px 0 !important;       /* was 2px */
+}
+
+/* === DARK MODE TOGGLE ROW === */
+.dark-mode-toggle {
+    padding: 16px !important;       /* was 13px 14px */
+    margin-top: 14px !important;    /* was 10px */
+}
+
+.dark-mode-label {
+    font-size: 16px !important;     /* was 14px */
+    gap: 12px !important;           /* was 10px */
+}
+
+/* === MENU ICON === */
+.menu-icon {
+    margin-right: 12px !important;  /* was 10px */
+    font-size: 20px !important;     /* was 17px */
+}
+/* Mobile navbar — subtle navy accent to connect with menu header */
+@media (max-width: 1234px) {
+    .sublime-navbar {
+        border-bottom: 2px solid transparent !important;
+        border-image: linear-gradient(90deg, transparent, #141E30, #F8D800, #141E30, transparent) 1 !important;
+    }
+
+    body.dark-mode .sublime-navbar {
+        border-image: linear-gradient(90deg, transparent, #F8D800, #FFB300, #F8D800, transparent) 1 !important;
+    }
+}
