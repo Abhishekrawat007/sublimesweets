@@ -701,3 +701,268 @@ body.dark-mode .filter-section-title {
     font-weight: 600;
     color: #666;
 }
+
+
+/* change this for changing colors */
+/* ============================================================
+   MOBILE FILTER — Navy × Yellow palette patch
+   ============================================================ */
+
+/* === Filter bar === */
+.mobile-filter-bar {
+    background: #ffffff !important;
+    border-top-color: #e8e8e8 !important;
+    border-bottom-color: #e8e8e8 !important;
+}
+
+body.dark-mode .mobile-filter-bar {
+    background: #1a1a1a !important;
+    border-top-color: #2a2a2a !important;
+    border-bottom-color: #2a2a2a !important;
+}
+
+/* === Filter buttons === */
+
+
+body.dark-mode .filter-btn {
+    color: #e0e0e0 !important;
+    border-right-color: #2a2a2a !important;
+}
+
+.filter-btn:active {
+    background: rgba(20,30,48,0.05) !important;
+}
+
+body.dark-mode .filter-btn:active {
+    background: rgba(248,216,0,0.05) !important;
+}
+
+/* Active filter button */
+.filter-btn.active {
+    color: #141E30 !important;
+}
+
+body.dark-mode .filter-btn.active {
+    color: #F8D800 !important;
+}
+
+/* === Modal header — navy gradient === */
+.modal-header {
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+    border-radius: 20px 20px 0 0 !important;
+}
+
+body.dark-mode .modal-header {
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+}
+
+/* Gold hairline at bottom of modal header */
+.modal-header::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent, #F8D800, #FFB300, transparent) !important;
+    pointer-events: none !important;
+}
+
+.modal-header {
+    position: relative !important;
+}
+
+.modal-header h3 {
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 2.5px !important;
+    color: #ffffff !important;
+    text-transform: uppercase !important;
+}
+
+/* Close button in modal header */
+.close-modal {
+    background: rgba(255,255,255,0.10) !important;
+    border: 1px solid rgba(255,255,255,0.20) !important;
+    color: rgba(255,255,255,0.8) !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    backdrop-filter: none !important;
+}
+
+.close-modal:active {
+    background: rgba(248,216,0,0.18) !important;
+    border-color: #F8D800 !important;
+    transform: scale(0.95) !important;
+}
+
+/* === Modal footer buttons === */
+.clear-btn {
+    background: transparent !important;
+    border: 1.5px solid #141E30 !important;
+    color: #141E30 !important;
+    border-radius: 10px !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+.clear-btn:hover {
+    background: rgba(20,30,48,0.05) !important;
+}
+
+.clear-btn:active {
+    background: rgba(20,30,48,0.08) !important;
+}
+
+body.dark-mode .clear-btn {
+    border-color: #F8D800 !important;
+    color: #F8D800 !important;
+}
+
+body.dark-mode .clear-btn:active {
+    background: rgba(248,216,0,0.08) !important;
+}
+
+.done-btn,
+.apply-btn {
+    background: linear-gradient(to right, #141E30 50%, #243B55 50%) !important;
+    background-size: 200% 100% !important;
+    background-position: right center !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+    font-weight: 700 !important;
+    transition: background-position 0.32s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.2s ease !important;
+    box-shadow: 0 4px 14px rgba(20,30,48,0.20) !important;
+}
+
+.done-btn:hover,
+.apply-btn:hover {
+    background-position: left center !important;
+    box-shadow: 0 6px 18px rgba(20,30,48,0.28) !important;
+}
+
+.done-btn:active,
+.apply-btn:active {
+    transform: scale(0.98) !important;
+}
+
+body.dark-mode .done-btn,
+body.dark-mode .apply-btn {
+    background: linear-gradient(to right, #F8D800 50%, #FFB300 50%) !important;
+    background-size: 200% 100% !important;
+    background-position: right center !important;
+    color: #141E30 !important;
+    box-shadow: 0 4px 14px rgba(248,216,0,0.20) !important;
+}
+
+body.dark-mode .done-btn:hover,
+body.dark-mode .apply-btn:hover {
+    box-shadow: 0 6px 18px rgba(248,216,0,0.28) !important;
+}
+
+/* === Radio buttons — navy === */
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile {
+    border-color: #141E30 !important;
+}
+
+.radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile::after {
+    background: #141E30 !important;
+}
+
+.radio-option-mobile input[type="radio"]:checked ~ .radio-label-mobile {
+    color: #141E30 !important;
+}
+
+body.dark-mode .radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile {
+    border-color: #F8D800 !important;
+}
+
+body.dark-mode .radio-option-mobile input[type="radio"]:checked + .radio-custom-mobile::after {
+    background: #F8D800 !important;
+}
+
+body.dark-mode .radio-option-mobile input[type="radio"]:checked ~ .radio-label-mobile {
+    color: #F8D800 !important;
+}
+
+/* === Checkboxes — navy === */
+.checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile {
+    border-color: #141E30 !important;
+    background: #141E30 !important;
+}
+
+.checkbox-option-mobile input[type="checkbox"]:checked ~ .checkbox-label-mobile {
+    color: #141E30 !important;
+}
+
+body.dark-mode .checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile {
+    border-color: #F8D800 !important;
+    background: #F8D800 !important;
+}
+
+body.dark-mode .checkbox-option-mobile input[type="checkbox"]:checked + .checkbox-custom-mobile::after {
+    color: #141E30 !important;
+}
+
+body.dark-mode .checkbox-option-mobile input[type="checkbox"]:checked ~ .checkbox-label-mobile {
+    color: #F8D800 !important;
+}
+
+/* === Category search input === */
+.category-search-mobile:focus {
+    outline: none !important;
+    border-color: #141E30 !important;
+    box-shadow: 0 0 0 3px rgba(20,30,48,0.08) !important;
+}
+
+body.dark-mode .category-search-mobile:focus {
+    border-color: #F8D800 !important;
+    box-shadow: 0 0 0 3px rgba(248,216,0,0.08) !important;
+}
+
+/* === Price input focus === */
+.price-input-wrapper:focus-within {
+    border-color: #141E30 !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(20,30,48,0.08) !important;
+}
+
+body.dark-mode .price-input-wrapper:focus-within {
+    border-color: #F8D800 !important;
+    background: #2a2a2a !important;
+    box-shadow: 0 0 0 3px rgba(248,216,0,0.08) !important;
+}
+
+/* === Modal scrollbar === */
+.modal-content::-webkit-scrollbar-thumb {
+    background: rgba(20,30,48,0.15) !important;
+}
+
+body.dark-mode .modal-content::-webkit-scrollbar-thumb {
+    background: rgba(248,216,0,0.15) !important;
+}
+
+/* === Bottom modal dark mode bg === */
+body.dark-mode .bottom-modal {
+    background: #1a1a1a !important;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: #2a2a2a !important;
+}
+
+body.dark-mode .radio-option-mobile {
+    border-bottom-color: #2a2a2a !important;
+}
+
+body.dark-mode .checkbox-option-mobile {
+    border-bottom-color: #2a2a2a !important;
+}

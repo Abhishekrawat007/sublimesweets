@@ -508,3 +508,117 @@ body.dark-mode .categories-modal .modal-close-btn:hover {
   background: #4b5563 !important;
   color: #f9fafb !important;
 }
+/* ============================================================
+   BOTTOM NAV — Navy × Yellow palette patch
+   ============================================================ */
+
+/* === Nav container — subtle navy top border === */
+.bottom-nav-container {
+    background: rgba(255,255,255,0.97) !important;
+    border-top: 1px solid #e8e8e8 !important;
+    box-shadow: 0 -2px 12px rgba(20,30,48,0.06) !important;
+}
+
+body.dark-mode .bottom-nav-container {
+    background: rgba(20,20,20,0.97) !important;
+    border-top: 1px solid rgba(248,216,0,0.15) !important;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4) !important;
+}
+
+/* === Icon wrapper default — navy tint === */
+.nav-icon-wrapper {
+    background: rgba(20,30,48,0.06) !important;
+}
+
+body.dark-mode .nav-icon-wrapper {
+    background: rgba(248,216,0,0.08) !important;
+}
+
+.nav-icon-wrapper svg {
+    color: #666 !important;
+}
+
+body.dark-mode .nav-icon-wrapper svg {
+    color: #888 !important;
+}
+
+/* === Labels === */
+.nav-label {
+    color: #666 !important;
+    font-family: 'DM Sans', system-ui, sans-serif !important;
+}
+
+body.dark-mode .nav-label {
+    color: #888 !important;
+}
+
+/* === Ripple — navy instead of red === */
+.bottom-nav-item::before {
+    background: radial-gradient(circle, rgba(20,30,48,0.2) 0%, transparent 70%) !important;
+}
+
+/* === Active state — navy icon, gold label === */
+.bottom-nav-item.active .nav-icon-wrapper {
+    background: linear-gradient(135deg, #141E30, #243B55) !important;
+    box-shadow: 0 6px 18px rgba(20,30,48,0.28) !important;
+}
+
+.bottom-nav-item.active .nav-icon-wrapper svg {
+    color: #F8D800 !important;
+}
+
+.bottom-nav-item.active .nav-label {
+    color: #141E30 !important;
+    font-weight: 700 !important;
+}
+
+body.dark-mode .bottom-nav-item.active .nav-icon-wrapper {
+    background: linear-gradient(135deg, #F8D800, #FFB300) !important;
+    box-shadow: 0 6px 18px rgba(248,216,0,0.25) !important;
+}
+
+body.dark-mode .bottom-nav-item.active .nav-icon-wrapper svg {
+    color: #141E30 !important;
+}
+
+body.dark-mode .bottom-nav-item.active .nav-label {
+    color: #F8D800 !important;
+}
+
+/* === Active indicator dot — gold === */
+.nav-indicator {
+    background: linear-gradient(135deg, #141E30, #F8D800) !important;
+    box-shadow: 0 0 8px rgba(20,30,48,0.4) !important;
+}
+
+body.dark-mode .nav-indicator {
+    background: linear-gradient(135deg, #F8D800, #FFB300) !important;
+    box-shadow: 0 0 8px rgba(248,216,0,0.4) !important;
+}
+
+/* === Hover state — navy instead of red === */
+.bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+    background: rgba(20,30,48,0.10) !important;
+    box-shadow: 0 4px 12px rgba(20,30,48,0.10) !important;
+}
+
+.bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+    color: #141E30 !important;
+}
+
+.bottom-nav-item:hover:not(.active) .nav-label {
+    color: #141E30 !important;
+}
+
+body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper {
+    background: rgba(248,216,0,0.12) !important;
+    box-shadow: 0 4px 12px rgba(248,216,0,0.10) !important;
+}
+
+body.dark-mode .bottom-nav-item:hover:not(.active) .nav-icon-wrapper svg {
+    color: #F8D800 !important;
+}
+
+body.dark-mode .bottom-nav-item:hover:not(.active) .nav-label {
+    color: #F8D800 !important;
+}
