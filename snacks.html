@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/snacks.html">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -23,6 +22,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="web-app-manifest-512x512.png">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/product-card.css">
+    <link rel="stylesheet" href="css/cartbar.css">
     <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>
@@ -39,8 +39,164 @@
         /* ============================================
            ULTRA PREMIUM CATEGORY HERO 
         ============================================ */
-   
-
+        .category-hero {
+            position: relative;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+              background: linear-gradient(135deg, #ff9a9e 0%, #f76b1c 100%);
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        /* Animated gradient overlay */
+        .hero-gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 40%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        /* Floating shapes */
+        .hero-shapes {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: -30px;
+            animation-delay: -10s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 80px 24px;
+        }
+        /* Premium badge */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 28px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        .hero-badge span:first-child {
+            font-size: 20px;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Main title */
+        .category-title {
+            font-size: clamp(52px, 10vw, 88px);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            line-height: 1;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Subtitle */
+        .category-subtitle {
+            font-size: clamp(18px, 3vw, 22px);
+            color: rgba(255,255,255,0.95);
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 56px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        .stat {
+            text-align: center;
+            padding: 0 16px;
+        }
+        .stat-number {
+            display: block;
+            font-size: clamp(38px, 6vw, 48px);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .stat-label {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
         /* ============================================
            PRODUCTS SECTION - USES YOUR EXISTING CARDS
         ============================================ */
@@ -175,183 +331,12 @@
         margin-top: 65px;  
     }
 }
-
-/* ============================================
-   DESIGN 23 — SPLIT COLLAGE HERO
-============================================ */
-.category-hero {
-    position: relative;
-    min-height: 80vh;
-    display: flex;
-    margin-top: 80px;
-    overflow: hidden;
-}
-
-.hero-12-left {
-    flex: 1.2;
-    position: relative;
-    overflow: hidden;
-    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
-}
-
-.hero-12-collage {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 4px;
-}
-
-.hero-12-img {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-12-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.hero-12-img:hover img { transform: scale(1.1); }
-
-.hero-12-left-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg,
-        rgba(202,138,4,0.35) 0%,
-        rgba(234,88,12,0.35) 100%);
-}
-
-.hero-12-right {
-    flex: 0.8;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    padding: 60px 60px 60px 120px;
-    position: relative;
-}
-
-.hero-12-content { max-width: 600px; }
-
-.hero-12-eyebrow {
-    display: inline-block;
-    padding: 8px 20px;
-    background: linear-gradient(135deg, #facc15, #ea580c);
-    color: #0a0a0a;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-}
-
-.hero-12-title {
-    font-size: clamp(48px, 9vw, 100px);
-    font-weight: 900;
-    color: #1a1a1a;
-    letter-spacing: -3px;
-    margin-bottom: 20px;
-    line-height: 0.95;
-}
-
-.hero-12-title span {
-    display: block;
-    background: linear-gradient(135deg, #facc15, #ea580c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-12-desc {
-    font-size: clamp(15px, 2vw, 18px);
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-
-.hero-12-stats-wrap {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.hero-12-stat-box {
-    text-align: center;
-    padding: 20px 12px;
-    background: linear-gradient(135deg, #f8f9fa, #fff);
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    border: 1px solid #f0f0f0;
-}
-
-.hero-12-stat-num {
-    display: block;
-    font-size: 32px;
-    font-weight: 900;
-    background: linear-gradient(135deg, #facc15, #ea580c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 4px;
-}
-
-.hero-12-stat-label {
-    font-size: 10px;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-/* MOBILE — left takes more space than right */
-@media (max-width: 968px) {
-    .category-hero { flex-direction: column; min-height: auto; margin-top: 70px; }
-    .hero-12-left { clip-path: none; flex: none; height: 45vh; width: 100%; order: 1; }
-    .hero-12-right { flex: none; width: 100%; padding: 40px 32px; order: 2; }
-    .hero-12-title { font-size: 48px; letter-spacing: -2px; margin-bottom: 16px; }
-    .hero-12-desc { font-size: 15px; margin-bottom: 28px; }
-    .hero-12-stats-wrap { gap: 16px; }
-    .hero-12-stat-box { padding: 16px 10px; }
-    .hero-12-stat-num { font-size: 26px; }
-}
-
-@media (max-width: 640px) {
-    .hero-12-left { height: 40vh; }
-    .hero-12-right { padding: 32px 20px; }
-    .hero-12-eyebrow { padding: 6px 14px; font-size: 11px; margin-bottom: 16px; }
-    .hero-12-title { font-size: 38px; letter-spacing: -2px; }
-    .hero-12-desc { font-size: 14px; margin-bottom: 24px; }
-    .hero-12-stats-wrap { gap: 10px; }
-    .hero-12-stat-box { padding: 12px 8px; border-radius: 10px; }
-    .hero-12-stat-num { font-size: 22px; }
-    .hero-12-stat-label { font-size: 9px; letter-spacing: 0.5px; }
-}
-
-@media (max-width: 375px) {
-    .category-hero { margin-top: 65px; }
-    .hero-12-left { height: 35vh; }
-    .hero-12-right { padding: 28px 16px; }
-    .hero-12-title { font-size: 32px; margin-bottom: 10px; }
-    .hero-12-desc { font-size: 13px; margin-bottom: 20px; }
-    .hero-12-stat-num { font-size: 18px; }
-    .hero-12-stat-label { font-size: 8px; }
-}
-
-/* Dark mode */
-body.dark-mode .hero-12-right { background: #0a0a0a; }
-body.dark-mode .hero-12-title { color: #e0e0e0; }
-body.dark-mode .hero-12-desc { color: #aaa; }
-body.dark-mode .hero-12-stat-box { background: linear-gradient(135deg, #1a1a1a, #0f0f0f); border-color: #2a2a2a; }
-body.dark-mode .hero-12-stat-label { color: #888; }  </style>
-    
+    </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
 <body>
 <!-- NAVBAR START -->
+ <!-- MAIN NAVBAR -->
 <!-- MAIN NAVBAR -->
     <nav class="sublime-navbar" id="navbar">
         <div class="navbar-container">
@@ -692,15 +677,8 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
         </div>
     </div>
 </div>
-
-    <!-- CART SIDEBAR V2 - TEAL CARD -->
-<!-- ============================================
-     CART SIDEBAR - DESIGN V2
-     "Teal Card" — circular product image,
-     green tag badges, blue price, delete btn,
-     teal header accent
-     ============================================ -->
-   <div class="cart-sidebar" id="cartSidebar">
+ 
+ <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3 class="cart-title">Shopping Cart <span class="cart-count-badge" id="cartCountBadgeInSidebar">0</span></h3>
             <button class="close-btn" id="closeCart" aria-label="Close Cart">
@@ -734,52 +712,43 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
 
 
     <!-- STUNNING HERO -->
-<!-- STUNNING HERO -->
-<section class="category-hero">
-
-    <!-- Left - Image Collage (filled by JS) -->
-    <div class="hero-12-left">
-        <div class="hero-12-collage">
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
-            <div class="hero-12-img"><img src="" alt="Snacks" loading="eager"></div>
+    <section class="category-hero">
+        <div class="hero-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
-        <div class="hero-12-left-overlay"></div>
-    </div>
+        <div class="hero-gradient-overlay"></div>
+        
+        <div class="hero-content">
+          <div class="hero-badge">
+    <span>🍿</span>
+    <span>Crunchy Snack Collection</span>
+</div>
 
-    <!-- Right - Content -->
-    <div class="hero-12-right">
-        <div class="hero-12-content">
-            <div class="hero-12-eyebrow">Chatpata Collection</div>
-            <h1 class="hero-12-title">
-                Crispy<br>
-                <span>Snacks</span>
-            </h1>
-            <p class="hero-12-desc">
-                Crunchy, chatpata and totally irresistible bites — from classic namkeen to premium imported chips, all under one roof.
-            </p>
-            <div class="hero-12-stats-wrap">
-                <div class="hero-12-stat-box">
-                    <span class="hero-12-stat-num" id="productCount">0</span>
-                    <span class="hero-12-stat-label">Products</span>
+<h1 class="category-title">Snacks & Drinks</h1>
+
+<p class="category-subtitle">
+    Crispy, masaledar snacks perfect for every chai break – from classic namkeen to modern bites, freshly prepared for your cravings.
+</p>
+
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="productCount">0</span>
+                    <span class="stat-label">Products</span>
                 </div>
-                <div class="hero-12-stat-box">
-                    <span class="hero-12-stat-num">100%</span>
-                    <span class="hero-12-stat-label">Fresh</span>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Fresh</span>
                 </div>
-                <div class="hero-12-stat-box">
-                    <span class="hero-12-stat-num">4.8★</span>
-                    <span class="hero-12-stat-label">Rated</span>
+                <div class="stat">
+                    <span class="stat-number">4.5★</span>
+                    <span class="stat-label">Rated</span>
                 </div>
             </div>
         </div>
-    </div>
-
-</section>
-
+    </section>
 
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
@@ -1060,7 +1029,7 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
       <div class="footer-column">
         <div class="footer-brand">
           <div class="footer-logo">
-            <span class="logo-icon">🍰</span>
+       
             <span class="logo-text">Sublime Sweets</span>
           </div>
           <p class="footer-tagline">Delivering happiness, one bite at a time. Fresh, authentic Indian sweets and snacks delivered to your doorstep.</p>
@@ -1104,12 +1073,9 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
         <ul class="footer-links">
           <li><a href="index.html">🏠 Home</a></li>
           <li><a href="about.html">ℹ️ About Us</a></li>
-          <li><a href="products.html">🍬 Our Menu</a></li>
+          <li><a href="menu.html">🍬 Our Menu</a></li>
           <li><a href="contact.html">📞 Contact Us</a></li>
-          <li><a href="track-order.html">📦 Track Order</a></li>
-          <li><a href="faq.html">❓ FAQs</a></li>
-          <li><a href="blog.html">📝 Blog</a></li>
-          <li><a href="careers.html">💼 Careers</a></li>
+          <li><a href="yourorders.html">📦 Track Order</a></li>
         </ul>
       </div>
 
@@ -1117,14 +1083,15 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
       <div class="footer-column">
         <h3 class="footer-heading">Categories</h3>
         <ul class="footer-links">
-          <li><a href="products.html?category=mithai">🍯 Mithai & Sweets</a></li>
-          <li><a href="products.html?category=street-food">🌮 Street Food</a></li>
-          <li><a href="products.html?category=bakery">🍰 Bakery & Cakes</a></li>
-          <li><a href="products.html?category=snacks">🍿 Snacks & Namkeen</a></li>
-          <li><a href="products.html?category=dairy">🥛 Dairy Products</a></li>
-          <li><a href="products.html?category=dry-fruits">🌰 Dry Fruits</a></li>
-          <li><a href="products.html?category=beverages">☕ Beverages</a></li>
-          <li><a href="products.html?category=combos">🎁 Gift Combos</a></li>
+          <li><a href="mithai.html">🍯 Mithai & Sweets</a></li>
+          <li><a href="streetfood.html">🌮 Street Food</a></li>
+          <li><a href="cakes.html">🍰 Bakery & Cakes</a></li>
+          <li><a href="snacks.html">🍿 Snacks & Drinks</a></li>
+          <li><a href="dairy.html">🥛 Dairy Products</a></li>
+          <li><a href="dryfruits.html">🌰 Dry Fruits</a></li>
+          <li><a href="pastry.html">🍰 Pastry</a></li>
+           <li><a href="icecreams.html">🍦 Ice Creams</a></li>
+          <li><a href="maincourse.html">🍛 Main Course</a></li>
         </ul>
       </div>
 
@@ -1144,8 +1111,7 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
             <div class="contact-icon">📞</div>
             <div class="contact-details">
               <strong>Phone</strong>
-              <p><a href="tel:+911234567890">+91 123 456 7890</a></p>
-              <p><a href="tel:+911234567891">+91 123 456 7891</a></p>
+              <p><a href="tel:+911234567890">+91 8937973753</a></p>
             </div>
           </div>
           
@@ -1244,13 +1210,13 @@ body.dark-mode .hero-12-stat-label { color: #888; }  </style>
     <script src="js/product.js"  defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/product-card3.js" defer></script>
+    <script src="js/cartsidebar.js"></script>
      <script src="js/nav-sync.js"></script>
     <script src="js/footer.js" defer></script>
 
     
     <script src="js/bottom-bar.js"></script>
-<script>
-const CURRENT_CATEGORY = 'snacks';
+<script>const CURRENT_CATEGORY = 'snacks';
 
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -1305,62 +1271,8 @@ const CURRENT_CATEGORY = 'snacks';
       if (grid) grid.style.display = 'none';
       if (noProducts) noProducts.style.display = 'block';
     }
-}
-// ============================================
-// AUTO COLLAGE IMAGE FILLER
-// ============================================
-function fillHeroCollage() {
-    const catProducts = (window.products || []).filter(p =>
-        Array.isArray(p.categories) && p.categories.includes(CURRENT_CATEGORY)
-    );
+}</script>
 
-    if (!catProducts.length) return;
-
-    // Build pool cycling through image indexes
-    const pool = [];
-    let idx = 0;
-
-    while (pool.length < 6) {
-        let added = false;
-        for (let p of catProducts) {
-            if (p.images && p.images[idx]) {
-                pool.push(p.images[idx]);
-                if (pool.length === 6) break;
-                added = true;
-            }
-        }
-        idx++;
-        if (!added) break;
-    }
-
-    // If still less than 6, repeat from beginning
-    if (pool.length > 0) {
-        let i = 0;
-        while (pool.length < 6) {
-            pool.push(pool[i % pool.length]);
-            i++;
-        }
-    }
-
-    // Fill collage slots
-    const imgs = document.querySelectorAll('.hero-12-img img');
-    imgs.forEach((img, i) => {
-        if (pool[i]) {
-            img.src = pool[i];
-            img.alt = 'Snacks';
-        }
-    });
-}
-
-// Run after products are ready
-(function waitForCollage() {
-    if (window.products && window.products.length > 0) {
-        fillHeroCollage();
-    } else {
-        setTimeout(waitForCollage, 100);
-    }
-})();
-</script>
 
 
 </body>

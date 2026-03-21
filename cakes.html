@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sublimesweets.netlify.app/cakes.html">
- <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <!-- Favicon for most browsers -->
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -23,6 +22,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="web-app-manifest-512x512.png">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/product-card.css">
+    <link rel="stylesheet" href="css/cartbar.css">
     <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>
@@ -39,7 +39,164 @@
         /* ============================================
            ULTRA PREMIUM CATEGORY HERO 
         ============================================ */
-      
+        .category-hero {
+            position: relative;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #b993d6 0%, #f7a35c 100%);
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        /* Animated gradient overlay */
+        .hero-gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 40%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        /* Floating shapes */
+        .hero-shapes {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: -30px;
+            animation-delay: -10s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 80px 24px;
+        }
+        /* Premium badge */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 28px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        .hero-badge span:first-child {
+            font-size: 20px;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Main title */
+        .category-title {
+            font-size: clamp(52px, 10vw, 88px);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            line-height: 1;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Subtitle */
+        .category-subtitle {
+            font-size: clamp(18px, 3vw, 22px);
+            color: rgba(255,255,255,0.95);
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 56px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        .stat {
+            text-align: center;
+            padding: 0 16px;
+        }
+        .stat-number {
+            display: block;
+            font-size: clamp(38px, 6vw, 48px);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .stat-label {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
         /* ============================================
            PRODUCTS SECTION - USES YOUR EXISTING CARDS
         ============================================ */
@@ -184,175 +341,13 @@
         margin-top: 60px;  
     }
 }
-
-/* ============================================
-   DESIGN 25 — EDITORIAL IMAGE HERO
-============================================ */
-.category-hero {
-    position: relative;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    margin-top: 80px;
-    overflow: hidden;
-}
-
-.hero-18-bg {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 55%;
-}
-
-.hero-18-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.hero-18-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right,
-        rgba(255,255,255,1) 0%,
-        rgba(255,255,255,0.7) 20%,
-        transparent 60%);
-}
-
-.hero-18-content {
-    position: relative;
-    z-index: 10;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 24px;
-    width: 100%;
-}
-
-.hero-18-inner { max-width: 550px; }
-
-.hero-18-eyebrow {
-    display: inline-block;
-    padding: 6px 16px;
-    background: linear-gradient(135deg, #ec4899, #db2777);
-    color: #fff;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-}
-
-.hero-18-title {
-    font-size: clamp(56px, 10vw, 96px);
-    font-weight: 900;
-    color: #1a1a1a;
-    letter-spacing: -4px;
-    margin-bottom: 20px;
-    line-height: 0.95;
-}
-
-.hero-18-title-gradient {
-    background: linear-gradient(135deg, #ec4899, #db2777);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-18-desc {
-    font-size: clamp(16px, 2.5vw, 19px);
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 36px;
-}
-
-.hero-18-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.hero-18-stat-box {
-    text-align: center;
-    padding: 20px 16px;
-    background: #fff;
-    border: 2px solid #f0f0f0;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.hero-18-stat-num {
-    display: block;
-    font-size: 32px;
-    font-weight: 900;
-    color: #1a1a1a;
-    margin-bottom: 4px;
-}
-
-.hero-18-stat-label {
-    font-size: 11px;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-@media (max-width: 968px) {
-    .category-hero { margin-top: 70px; }
-    .hero-18-content { padding: 40px 24px; }
-    .hero-18-title { font-size: 56px; letter-spacing: -3px; }
-    .hero-18-desc { font-size: 16px; }
-    .hero-18-stat-num { font-size: 26px; }
-    .hero-18-stat-label { font-size: 10px; }
-    .hero-18-stat-box { padding: 14px 10px; }
-}
-
-@media (max-width: 640px) {
-    .hero-18-content { padding: 32px 16px; }
-    .hero-18-title { font-size: 42px; letter-spacing: -2px; }
-    .hero-18-eyebrow { font-size: 10px; padding: 5px 12px; }
-    .hero-18-desc { font-size: 14px; margin-bottom: 24px; }
-    .hero-18-stats-grid { gap: 10px; }
-    .hero-18-stat-box { padding: 12px 8px; }
-    .hero-18-stat-num { font-size: 22px; }
-    .hero-18-stat-label { font-size: 9px; }
-}
-
-@media (max-width: 375px) {
-    .category-hero { margin-top: 65px; }
-    .hero-18-title { font-size: 34px; letter-spacing: -2px; }
-    .hero-18-inner { max-width: 60%; }
-    .hero-18-desc { font-size: 13px; margin-bottom: 20px; }
-    .hero-18-stat-num { font-size: 18px; }
-}
-body.dark-mode .hero-18-bg::after {
-    background: linear-gradient(to right,
-        rgba(10,10,10,1) 0%,
-        rgba(10,10,10,0.8) 20%,
-        transparent 60%);
-}
-
-@media (max-width: 968px) {
-    body.dark-mode .hero-18-bg::after {
-        background: linear-gradient(to bottom,
-            transparent 0%,
-            rgba(10,10,10,0.9) 80%,
-            rgba(10,10,10,1) 100%);
-    }
-}
-
-body.dark-mode .hero-18-title { color: #e0e0e0; }
-body.dark-mode .hero-18-desc { color: #aaa; }
-body.dark-mode .hero-18-stat-box { background: #1a1a1a; border-color: #2a2a2a; }
-body.dark-mode .hero-18-stat-num { color: #e0e0e0; }
-body.dark-mode .hero-18-stat-label { color: #888; }
     </style>
     <link rel="stylesheet" href="css/bottom-bar.css">
 </head>
 <body>
 <!-- NAVBAR START -->
  <!-- MAIN NAVBAR -->
+  <!-- MAIN NAVBAR -->
     <nav class="sublime-navbar" id="navbar">
         <div class="navbar-container">
             <!-- LEFT SECTION -->
@@ -362,10 +357,9 @@ body.dark-mode .hero-18-stat-label { color: #888; }
                     <span></span>
                     <span></span>
                 </button>
-                <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
-                    <span class="logo-icon">🍰</span>
-                    <span>Sublime Sweets</span>
-                </a>
+            <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+    <img src="images/sublimesweets1.png" alt="Sublime Sweets" class="navbar-logo-img">
+</a>
             </div>
 
           <!-- DESKTOP MENU -->
@@ -490,8 +484,7 @@ body.dark-mode .hero-18-stat-label { color: #888; }
                     </svg>
                 </button>
 
-                
-            <!-- WISHLIST -->
+                <!-- WISHLIST -->
 <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist" onclick="window.location.href='wishlist.html'">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -515,7 +508,6 @@ body.dark-mode .hero-18-stat-label { color: #888; }
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
                   <span class="badge" id="cartCount"></span>
-
                 </button>
             </div>
         </div>
@@ -527,10 +519,9 @@ body.dark-mode .hero-18-stat-label { color: #888; }
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
-                <span class="logo-icon">🍰</span>
-                <span>Sublime Sweets</span>
-            </a>
+          <a href="/" class="navbar-logo" onclick="setActiveCategory('home')">
+    <img src="images/sublimesweets1.png" alt="Sublime Sweets" class="mobile-logo">
+</a>
             <button class="close-btn" id="closeMenu" aria-label="Close Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -547,17 +538,13 @@ body.dark-mode .hero-18-stat-label { color: #888; }
 </a>
             </div>
 
-          
-           
-  <!-- All Products (mobile) -->
+           <!-- All Products (mobile) -->
 <div class="mobile-menu-item">
 <a href="index.html#productsGrid" class="mobile-menu-link" >
   <span><span class="menu-icon">📦</span> All Products</span>
 </a>
-
 </div>
 
-          
 <!-- CATEGORIES -->
 <div class="mobile-menu-item">
     <a href="#" class="mobile-menu-link" onclick="toggleSubmenu('categories'); return false;">
@@ -605,7 +592,6 @@ body.dark-mode .hero-18-stat-label { color: #888; }
             <a href="cakes.html" class="mobile-submenu-item" onclick="setActiveCategory('cakes')">
                 <span class="submenu-emoji">🎂</span> Cakes
             </a>
-
             <a href="pastry.html" class="mobile-submenu-item" onclick="setActiveCategory('pastries')">
                 <span class="submenu-emoji">🥐</span> Pastries
             </a>
@@ -666,43 +652,45 @@ body.dark-mode .hero-18-stat-label { color: #888; }
             </div>
         </div>
     </div>
-
-    <!-- SEARCH MODAL -->
-<div class="search-modal" id="searchModal">
+    <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
-        <div class="search-modal-header">
-            <h3 class="search-modal-title">🔍 Search Products</h3>
-            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-        <div class="search-input-wrapper">
-            <input type="text" class="search-input" placeholder="Search for products, categories..." id="searchInput" autofocus>
-            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-            </svg>
-        </div>
-        <div class="search-suggestions-label">Popular Searches</div>
-        <div class="search-suggestions">
-  <span class="search-tag">Samosa</span>
-                <span class="search-tag">Chocolate Cake</span>
-                <span class="search-tag">Mithai</span>
-                <span class="search-tag">Momo</span>
-                <span class="search-tag">Gulab Jamun</span>
-                <span class="search-tag">Bread</span>
-                <span class="search-tag">Dry Fruits</span>
-                <span class="search-tag">Milk</span>
+        <div class="search-modal-inner">
+
+            <!-- CLOSE — white arrow on saffron slash -->
+            <div class="search-modal-header">
+                <span class="search-modal-title"></span>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
             </div>
+
+            <!-- INPUT -->
+            <div class="search-input-wrapper">
+                <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="Search for sweets, snacks…"
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- SEARCH ICON right -->
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+
         </div>
     </div>
-    <!-- CART SIDEBAR -->
-    <div class="cart-sidebar" id="cartSidebar">
+</div>
+ 
+ <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
-            <h3 class="cart-title">Shopping Cart</h3>
+            <h3 class="cart-title">Shopping Cart <span class="cart-count-badge" id="cartCountBadgeInSidebar">0</span></h3>
             <button class="close-btn" id="closeCart" aria-label="Close Cart">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -720,7 +708,11 @@ body.dark-mode .hero-18-stat-label { color: #888; }
                 <span>Total:</span>
                 <span style="color: var(--accent);">₹0</span>
             </div>
-           <button class="checkout-btn" onclick="window.location.href='cart.html'">Proceed to Checkout</button>
+          
+           
+            <button class="checkout-btn" onclick="window.location.href='cart.html'">🛒 Checkout ₹X</button>
+            
+         
         </div>
     </div>
 <!-- NAVBAR END -->
@@ -729,41 +721,44 @@ body.dark-mode .hero-18-stat-label { color: #888; }
 
 
  
-    
-<!-- STUNNING HERO -->
-<section class="category-hero">
+    <!-- STUNNING HERO -->
+    <section class="category-hero">
+        <div class="hero-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-gradient-overlay"></div>
+        
+        <div class="hero-content">
+           <div class="hero-badge">
+    <span>🎂</span>
+    <span>Celebration Cakes</span>
+</div>
 
-    <div class="hero-18-bg">
-        <img src="" alt="Cakes" loading="eager" id="heroBgImage">
-    </div>
+<h1 class="category-title">Cakes</h1>
 
-    <div class="hero-18-content">
-        <div class="hero-18-inner">
-            <div class="hero-18-eyebrow">Fresh Baked Daily</div>
-            <h1 class="hero-18-title">
-                <span class="hero-18-title-gradient">Dreamy</span><br>Cakes
-            </h1>
-            <p class="hero-18-desc">
-                Handcrafted cakes for every occasion — birthdays, anniversaries, and everyday celebrations. Made fresh, delivered with love.
-            </p>
-            <div class="hero-18-stats-grid">
-                <div class="hero-18-stat-box">
-                    <span class="hero-18-stat-num" id="productCount">0</span>
-                    <span class="hero-18-stat-label">Cakes</span>
+<p class="category-subtitle">
+    Rich, moist cakes crafted with premium ingredients – perfect for birthdays, anniversaries and every sweet celebration.
+</p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="productCount">0</span>
+                    <span class="stat-label">Products</span>
                 </div>
-                <div class="hero-18-stat-box">
-                    <span class="hero-18-stat-num">100%</span>
-                    <span class="hero-18-stat-label">Fresh</span>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Fresh</span>
                 </div>
-                <div class="hero-18-stat-box">
-                    <span class="hero-18-stat-num">4.9★</span>
-                    <span class="hero-18-stat-label">Rated</span>
+                <div class="stat">
+                    <span class="stat-number">4.8★</span>
+                    <span class="stat-label">Rated</span>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-</section>
     <!-- PRODUCTS SECTION - Uses your product-card.css -->
     <section class="products-section">
         <div class="container">
@@ -1018,6 +1013,7 @@ body.dark-mode .hero-18-stat-label { color: #888; }
      ULTRA-PREMIUM FOOTER - 5 COLUMN LAYOUT
      ============================================ -->
 
+
 <footer class="premium-footer">
   <!-- Newsletter Bar (Above Footer) -->
   <div class="newsletter-bar">
@@ -1045,7 +1041,7 @@ body.dark-mode .hero-18-stat-label { color: #888; }
       <div class="footer-column">
         <div class="footer-brand">
           <div class="footer-logo">
-            <span class="logo-icon">🍰</span>
+       
             <span class="logo-text">Sublime Sweets</span>
           </div>
           <p class="footer-tagline">Delivering happiness, one bite at a time. Fresh, authentic Indian sweets and snacks delivered to your doorstep.</p>
@@ -1089,12 +1085,9 @@ body.dark-mode .hero-18-stat-label { color: #888; }
         <ul class="footer-links">
           <li><a href="index.html">🏠 Home</a></li>
           <li><a href="about.html">ℹ️ About Us</a></li>
-          <li><a href="products.html">🍬 Our Menu</a></li>
+          <li><a href="menu.html">🍬 Our Menu</a></li>
           <li><a href="contact.html">📞 Contact Us</a></li>
-          <li><a href="track-order.html">📦 Track Order</a></li>
-          <li><a href="faq.html">❓ FAQs</a></li>
-          <li><a href="blog.html">📝 Blog</a></li>
-          <li><a href="careers.html">💼 Careers</a></li>
+          <li><a href="yourorders.html">📦 Track Order</a></li>
         </ul>
       </div>
 
@@ -1102,14 +1095,15 @@ body.dark-mode .hero-18-stat-label { color: #888; }
       <div class="footer-column">
         <h3 class="footer-heading">Categories</h3>
         <ul class="footer-links">
-          <li><a href="products.html?category=mithai">🍯 Mithai & Sweets</a></li>
-          <li><a href="products.html?category=street-food">🌮 Street Food</a></li>
-          <li><a href="products.html?category=bakery">🍰 Bakery & Cakes</a></li>
-          <li><a href="products.html?category=snacks">🍿 Snacks & Namkeen</a></li>
-          <li><a href="products.html?category=dairy">🥛 Dairy Products</a></li>
-          <li><a href="products.html?category=dry-fruits">🌰 Dry Fruits</a></li>
-          <li><a href="products.html?category=beverages">☕ Beverages</a></li>
-          <li><a href="products.html?category=combos">🎁 Gift Combos</a></li>
+          <li><a href="mithai.html">🍯 Mithai & Sweets</a></li>
+          <li><a href="streetfood.html">🌮 Street Food</a></li>
+          <li><a href="cakes.html">🍰 Bakery & Cakes</a></li>
+          <li><a href="snacks.html">🍿 Snacks & Drinks</a></li>
+          <li><a href="dairy.html">🥛 Dairy Products</a></li>
+          <li><a href="dryfruits.html">🌰 Dry Fruits</a></li>
+          <li><a href="pastry.html">🍰 Pastry</a></li>
+           <li><a href="icecreams.html">🍦 Ice Creams</a></li>
+          <li><a href="maincourse.html">🍛 Main Course</a></li>
         </ul>
       </div>
 
@@ -1129,8 +1123,7 @@ body.dark-mode .hero-18-stat-label { color: #888; }
             <div class="contact-icon">📞</div>
             <div class="contact-details">
               <strong>Phone</strong>
-              <p><a href="tel:+911234567890">+91 123 456 7890</a></p>
-              <p><a href="tel:+911234567891">+91 123 456 7891</a></p>
+              <p><a href="tel:+911234567890">+91 8937973753</a></p>
             </div>
           </div>
           
@@ -1230,6 +1223,7 @@ body.dark-mode .hero-18-stat-label { color: #888; }
     <script src="js/navbar.js" defer></script>
     <script src="js/search-router.js" defer></script>
     <script src="js/product-card3.js" defer></script>
+    <script src="js/cartsidebar.js" defer></script>
     <script src="js/bottom-bar.js"></script>
      <script src="js/nav-sync.js"></script>
     <script src="js/footer.js" defer></script>
@@ -1292,29 +1286,6 @@ const CURRENT_CATEGORY = 'cakes';
       if (noProducts) noProducts.style.display = 'block';
     }
 }
-// ============================================
-// AUTO HERO BG IMAGE FILLER
-// ============================================
-function fillHeroBgImage() {
-    const catProducts = (window.products || []).filter(p =>
-        Array.isArray(p.categories) && p.categories.includes(CURRENT_CATEGORY)
-    );
-    if (!catProducts.length) return;
-
-    // Get first image of first product that has images
-    const img = catProducts.find(p => p.images && p.images.length > 0);
-    if (!img) return;
-
-    document.getElementById('heroBgImage').src = img.images[0];
-}
-
-(function waitForHeroBg() {
-    if (window.products && window.products.length > 0) {
-        fillHeroBgImage();
-    } else {
-        setTimeout(waitForHeroBg, 100);
-    }
-})();
 </script>
 
 

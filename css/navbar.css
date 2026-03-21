@@ -1637,3 +1637,30 @@
 .sublime-navbar.dark-mode ~ .cart-sidebar .cart-content::-webkit-scrollbar-thumb {
     background: rgba(255,255,255,0.2);
 }
+/* In navbar.css — replace ALL .sublime-navbar.dark-mode ~ .mobile-menu rules */
+
+body.dark-mode .mobile-menu,
+body.dark-mode .mobile-menu-header,
+body.dark-mode .mobile-menu-content {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .mobile-menu .mobile-menu-link,
+body.dark-mode .mobile-menu .mobile-submenu-item,
+body.dark-mode .mobile-menu .dark-mode-label {
+  color: #ffffff !important;
+}
+
+body.dark-mode .mobile-menu .mobile-menu-link:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+
+body.dark-mode .mobile-menu .mobile-menu-header {
+  background: rgba(26,26,26,0.9) !important;
+  border-bottom-color: rgba(255,107,107,0.2) !important;
+}
+body.dark-mode .navbar-logo-img,
+body.dark-mode .mobile-logo {
+  filter: brightness(0) invert(1) !important;
+}

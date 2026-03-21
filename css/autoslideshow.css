@@ -635,3 +635,12 @@ body.dark-mode .indicator:not(.active):hover {
     .hero-28 .prism-section:nth-child(2) { top: 150px !important; }
     .hero-28 .prism-section:nth-child(3) { top: 300px !important; }
 }
+/* Content hidden by default, shown when ready */
+.content-wrapper {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.content-wrapper.content-visible {
+  opacity: 1;
+}

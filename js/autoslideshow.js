@@ -77,24 +77,23 @@ function goToSlide(index) {
 
     const prismSlides = getPrismSlides();
 
-    // Fade out content
-    contentWrapper.classList.add('fade-out');
+    // Hide content immediately
+    contentWrapper.classList.remove('fade-out', 'content-visible');
 
-    // Remove active from current
     prismSlides[currentSlide].classList.remove('active');
 
-    // Short delay so strips fly out before new ones fly in
     setTimeout(() => {
         prismSlides[index].classList.add('active');
         currentSlide = index;
         updateIndicators();
         updateContent(index);
 
+        // Show content after strips finish landing
         setTimeout(() => {
-            contentWrapper.classList.remove('fade-out');
+            contentWrapper.classList.add('content-visible');
             isAnimating = false;
             resetAutoPlay();
-        }, 600); // content fades back in after strips land
+        }, 1500); // strips take ~1.5s to fully land
 
     }, 300);
 }
@@ -145,6 +144,10 @@ function init() {
 
     updateContent(0);
     startAutoPlay();
+        setTimeout(() => {
+        contentWrapper.classList.add('content-visible');
+    }, 1800);
+
 }
 
 // ============================================
