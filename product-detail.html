@@ -1542,36 +1542,38 @@ body.dark-mode .product-rating-small .star-icon.empty {
             </div>
         </div>
     </div>
-
-    <!-- SEARCH MODAL -->
-<div class="search-modal" id="searchModal">
+    <div class="search-modal" id="searchModal">
     <div class="search-modal-content">
-        <div class="search-modal-header">
-            <h3 class="search-modal-title">🔍 Search Products</h3>
-            <button class="search-close-btn" id="searchCloseBtn" aria-label="Close Search">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-        <div class="search-input-wrapper">
-            <input type="text" class="search-input" placeholder="Search for products, categories..." id="searchInput" autofocus>
-            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
+        <div class="search-modal-inner">
+
+            <!-- CLOSE — white arrow on saffron slash -->
+            <div class="search-modal-header">
+                <span class="search-modal-title"></span>
+                <button class="search-close-btn" id="searchCloseBtn" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"/>
+                        <path d="M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- INPUT -->
+            <div class="search-input-wrapper">
+                <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="Search for sweets, snacks…"
+                    autocomplete="off"
+                >
+            </div>
+
+            <!-- SEARCH ICON right -->
+            <svg class="search-icon-inside" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
             </svg>
-        </div>
-        <div class="search-suggestions-label">Popular Searches</div>
-        <div class="search-suggestions">
-            <span class="search-tag">Samosa</span>
-            <span class="search-tag">Chocolate Cake</span>
-            <span class="search-tag">Mithai</span>
-            <span class="search-tag">Momo</span>
-            <span class="search-tag">Gulab Jamun</span>
-            <span class="search-tag">Bread</span>
-            <span class="search-tag">Dry Fruits</span>
-            <span class="search-tag">Milk</span>
+
         </div>
     </div>
 </div>
@@ -1583,27 +1585,33 @@ body.dark-mode .product-rating-small .star-icon.empty {
      green tag badges, blue price, delete btn,
      teal header accent
      ============================================ -->
-<div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-        <h3 class="cart-title">Shopping Cart <span class="cart-count-badge" id="cartCountBadgeInSidebar">0</span></h3>
-        <button class="close-btn" id="closeCart" aria-label="Close Cart">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-
-    <div class="cart-content" id="cartContent"></div>
-
-    <div class="cart-footer">
-        <div class="cart-total">
-            <span>Total:</span>
-            <span>₹0</span>
+   <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title">Shopping Cart <span class="cart-count-badge" id="cartCountBadgeInSidebar">0</span></h3>
+            <button class="close-btn" id="closeCart" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
         </div>
-        <button class="checkout-btn" onclick="window.location.href='cart.html'">Proceed to Checkout</button>
+
+        <div class="cart-content" id="cartContent">
+            <!-- Sample Cart Items -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span style="color: var(--accent);">₹0</span>
+            </div>
+          
+           
+            <button class="checkout-btn" onclick="window.location.href='cart.html'">🛒 Checkout ₹X</button>
+            
+         
+        </div>
     </div>
-</div>
 <!-- NAVBAR END -->
 
 

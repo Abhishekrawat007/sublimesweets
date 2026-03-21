@@ -164,7 +164,19 @@
                 });
             });
         };
+  const originalSyncCartUI = manager.syncCartUI?.bind(manager);
 
+    manager.syncCartUI = function() {
+        if (originalSyncCartUI) originalSyncCartUI();
+        this.renderCartSidebar();
+        
+        const badge = document.getElementById('cartCount');
+        if (badge) {
+            const total = this.cart.reduce((s, i) => s + (Number(i.quantity) || 0), 0);
+            badge.textContent = total > 0 ? String(total) : '';
+            badge.style.display = total > 0 ? 'flex' : 'none';
+        }
+    };
         console.log('✅ Cart V11 patched');
     }
 
@@ -186,7 +198,10 @@
 window.addEventListener('pageshow', function (e) {
     if (e.persisted && sessionStorage.getItem('cartUpdated')) {
         sessionStorage.removeItem('cartUpdated');
-        window.location.reload();
+        // Don't reload — just re-sync cart UI
+        if (window.productManager) {
+            window.productManager.syncCartUI();
+        }
     }
 });
 })();
