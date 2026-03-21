@@ -196,12 +196,15 @@
   // Android back button fix (bfcache)
 // Only reload if cart was actually modified on the previous page
 window.addEventListener('pageshow', function (e) {
-    if (e.persisted && sessionStorage.getItem('cartUpdated')) {
-        sessionStorage.removeItem('cartUpdated');
-        // Don't reload — just re-sync cart UI
-        if (window.productManager) {
-            window.productManager.syncCartUI();
+    if (window.productManager) {
+        try {
+            const stored = localStorage.getItem('cart');
+            window.productManager.cart = stored ? JSON.parse(stored) : [];
+        } catch(err) {
+            window.productManager.cart = [];
         }
+        window.productManager.syncCartUI();
     }
+    sessionStorage.removeItem('cartUpdated');
 });
 })();
